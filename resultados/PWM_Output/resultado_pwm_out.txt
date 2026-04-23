@@ -1,0 +1,23 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_pwm_out.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.211s
+GOTO program processing time: 0.014s
+Starting Bounded Model Checking
+Symex completed in: 0.003s (211 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.002s (removed 151 assignments)
+Generated 58 VCC(s), 12 remaining after simplification (60 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 81605
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.014s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.073s
+BMC program time: 0.090s
+
+VERIFICATION SUCCESSFUL

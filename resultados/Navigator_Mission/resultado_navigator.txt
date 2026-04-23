@@ -1,0 +1,38 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_navigator_mission.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.214s
+GOTO program processing time: 0.014s
+Starting Bounded Model Checking
+Unwinding loop 17 iteration 1   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 2   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 3   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 4   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 5   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 6   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 7   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 8   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 9   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 10   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 11   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 12   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 13   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 17 iteration 14   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Not unwinding loop 17 iteration 15   file test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Symex completed in: 0.005s (336 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 163 assignments)
+Generated 68 VCC(s), 34 remaining after simplification (173 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 82296
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.010s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.056s
+BMC program time: 0.071s
+
+VERIFICATION SUCCESSFUL

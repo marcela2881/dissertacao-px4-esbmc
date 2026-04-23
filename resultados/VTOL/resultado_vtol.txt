@@ -1,0 +1,23 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with systemlibc
+Parsing resultados/VTOL/test_vtol_type.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 2.137s
+GOTO program processing time: 0.036s
+Starting Bounded Model Checking
+WARNING: no body for function piecewise_construct_t#
+WARNING: no body for function __ESBMC_pthread_start_main_hook
+Symex completed in: 0.007s (762 assignments)
+Caching time: 0.002s (removed 32 assertions)
+Slicing time: 0.000s (removed 527 assignments)
+Generated 143 VCC(s), 111 remaining after simplification (203 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 88798
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.165s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 10.414s
+BMC program time: 10.588s
+
+VERIFICATION SUCCESSFUL
