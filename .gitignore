@@ -1,0 +1,51 @@
+# ============================================================================
+# .gitignore - Repositório da dissertação
+# ============================================================================
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Binários compilados
+*.o
+*.obj
+*.a
+*.so
+*.exe
+*.out
+
+# Arquivos temporários do ESBMC
+*.goto
+*.bin
+*.smt2
+*.log
+
+# Arquivos de backup
+*.bak
+*.tmp
+*.old
+
+# Arquivos Python (caso use scripts Python no futuro)
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# Node modules (caso use para alguma ferramenta)
+node_modules/
+
+# Arquivos pessoais que não devem entrar
+*.pdf
+*.docx
+*.xlsx
+anotacoes/
+notas_pessoais/
