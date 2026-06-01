@@ -1,0 +1,57 @@
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing test_bmi088_cbmc.cpp
+Converting
+Type-checking test_bmi088_cbmc
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Runtime Symex: 0.00299436s
+size of program expression: 109 steps
+simple slicing removed 7 assignments
+Generated 6 VCC(s), 6 remaining after simplification
+Runtime Postprocess Equation: 1.1328e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00344479s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 1.802e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+3880 variables, 11306 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.00501349s
+Runtime decision procedure: 0.00848692s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+3880 variables, 7883 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 9.1805e-05s
+Runtime decision procedure: 9.6574e-05s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+3880 variables, 7880 clauses
+SAT checker inconsistent: instance is UNSATISFIABLE
+Runtime Solver: 1.341e-06s
+Runtime decision procedure: 3.732e-06s
+
+** Results:
+test_bmi088_cbmc.cpp function combine
+[combine.overflow.1] line 12 arithmetic overflow on signed shl in (signed int)msb << 8u: SUCCESS
+
+test_bmi088_cbmc.cpp function main
+[main.assertion.1] line 30 assertion temperature >= -40.0f && temperature <= 85.0f: FAILURE
+[main.assertion.2] line 35 assertion count <= FIFO_SIZE: FAILURE
+
+test_bmi088_cbmc.cpp function updateTemperature
+[updateTemperature.overflow.1] line 16 arithmetic overflow on signed * in (signed int)temp_msb * 8: SUCCESS
+[updateTemperature.overflow.2] line 16 arithmetic overflow on signed + in (signed int)temp_msb * 8 + (signed int)temp_lsb / 32: SUCCESS
+[updateTemperature.overflow.3] line 17 arithmetic overflow on signed - in (signed int)Temp_uint11 - 2048: SUCCESS
+
+** 2 of 6 failed (3 iterations)
+VERIFICATION FAILED
