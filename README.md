@@ -17,7 +17,7 @@ projeto SAGRES de monitoramento ambiental na Amazônia.
 
 Este trabalho propõe e avalia uma metodologia de verificação formal para firmware de sistemas
 críticos, baseada em *Bounded Model Checking* (BMC) com o verificador ESBMC. O PX4 Autopilot
-v1.16 é utilizado como estudo de caso, com 12 módulos verificados e aproximadamente 1.219
+o commit 8be2590c15 (ramo main) é utilizado como estudo de caso, com 12 módulos verificados e aproximadamente 1.219
 condições de verificação (VCCs) analisadas.
 
 ## Resultados
@@ -74,13 +74,12 @@ e *assertions*, e a saída completa do ESBMC, incluindo o contraexemplo nos caso
 |---|---|
 | Verificador (campanha consolidada) | ESBMC v8.1.0 (64-bit, x86_64 Linux) |
 | Verificador (achados originais) | ESBMC v7.10.0 |
-| Solver padrão | Z3 v4.8.12 |
-| Solver do GPS e do IMU | Boolector 3.2.4 |
+| Solver (todos os módulos) | Boolector 3.2.4 |
 | Verificação cruzada | CBMC 5.95.1 |
 | Sistema operacional | Ubuntu 24.04 LTS |
 | Hardware | Intel Core i7-13700K · 64 GB RAM |
 | Linguagem alvo | C/C++17 |
-| Firmware alvo | PX4 Autopilot v1.16 (*commit* `8be2590c15`, 04/06/2026) |
+| Firmware alvo | PX4 Autopilot (ramo `main`, *commit* `8be2590c15`, 04/06/2026) |
 
 Os contraexemplos do BMI088 e do GPS foram originalmente reportados sob ESBMC v7.10.0
 (Issues #26865 e #26866); os tempos abaixo foram remedidos sob a configuração da campanha em
@@ -94,16 +93,16 @@ Tempos reportados como **mediana de três execuções**.
 |---|---|---|---|---|---|
 | IMU BMI088 | violação | n/a | 10 | Boolector | n/a |
 | GPS uBlox | violação | n/a | 10 | Boolector | 64,9 s |
-| MAVLink Parser | sem violação | 161 | 300 | Z3 | 49,2 s |
-| Expo RC | sem violação | 325 | 10 | Z3 | 4,9 s |
-| Battery Monitor | sem violação | 78 | 10 | Z3 | 6,7 s |
-| PWM Output | sem violação | 58 | 10 | Z3 | 0,2 s |
-| RC Update | sem violação | 91 | 10 | Z3 | 9,5 s |
-| Navigator/Mission | sem violação | 68 | 15 | Z3 | 0,1 s |
-| EKF2 Covariance | sem violação | 96 | 10 | Z3 | 12,2 s |
-| Magnetômetro | sem violação | 82 | 10 | Z3 | 6,6 s |
-| Barômetro | sem violação | 117 | 10 | Z3 | 0,4 s |
-| VTOL | sem violação | 143 | 10 | Z3 | 4,0 s |
+| MAVLink Parser | sem violação | 161 | 300 | Boolector | 49,2 s |
+| Expo RC | sem violação | 325 | 10 | Boolector | 4,9 s |
+| Battery Monitor | sem violação | 78 | 10 | Boolector | 6,7 s |
+| PWM Output | sem violação | 58 | 10 | Boolector | 0,2 s |
+| RC Update | sem violação | 91 | 10 | Boolector | 9,5 s |
+| Navigator/Mission | sem violação | 68 | 15 | Boolector | 0,1 s |
+| EKF2 Covariance | sem violação | 96 | 10 | Boolector | 12,2 s |
+| Magnetômetro | sem violação | 82 | 10 | Boolector | 6,6 s |
+| Barômetro | sem violação | 117 | 10 | Boolector | 0,4 s |
+| VTOL | sem violação | 143 | 10 | Boolector | 4,0 s |
 | **Total** | **10 sem violação, 2 com violação** | **1.219** | — | — | **≈160 s** |
 
 As contagens de VCC excluem IMU e GPS, que interrompem a execução na primeira violação, e
@@ -138,7 +137,7 @@ Autopilot using Bounded Model Checking*. Em avaliação.
 
 ## Referências
 
-- PX4 Autopilot — https://github.com/PX4/PX4-Autopilot (v1.16)
+- PX4 Autopilot — https://github.com/PX4/PX4-Autopilot (commit 8be2590c15, ramo main)
 - ESBMC — https://github.com/esbmc/esbmc
 - CBMC — https://github.com/diffblue/cbmc
 - *Fork* com integração contínua — https://github.com/marcela2881/PX4-Autopilot
