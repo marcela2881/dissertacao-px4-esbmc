@@ -17,8 +17,7 @@ projeto SAGRES de monitoramento ambiental na Amazônia.
 
 Este trabalho propõe e avalia uma metodologia de verificação formal para firmware de sistemas
 críticos, baseada em *Bounded Model Checking* (BMC) com o verificador ESBMC. O PX4 Autopilot
-o commit 8be2590c15 (ramo main) é utilizado como estudo de caso, com 12 módulos verificados e aproximadamente 1.219
-condições de verificação (VCCs) analisadas.
+o commit 8be2590c15 (ramo main) é utilizado como estudo de caso, com 12 módulos verificados (10 sem violação até o limite, 2 com violação).
 
 ## Resultados
 
@@ -89,26 +88,26 @@ v8.1.0.
 
 Tempos reportados como **mediana de três execuções**.
 
-| Módulo | Desfecho | VCCs | Unwind | Solver | Tempo |
-|---|---|---|---|---|---|
-| IMU BMI088 | violação | n/a | 10 | Boolector | n/a |
-| GPS uBlox | violação | n/a | 10 | Boolector | 64,9 s |
-| MAVLink Parser | sem violação | 161 | 300 | Boolector | 49,2 s |
-| Expo RC | sem violação | 325 | 10 | Boolector | 4,9 s |
-| Battery Monitor | sem violação | 78 | 10 | Boolector | 6,7 s |
-| PWM Output | sem violação | 58 | 10 | Boolector | 0,2 s |
-| RC Update | sem violação | 91 | 10 | Boolector | 9,5 s |
-| Navigator/Mission | sem violação | 68 | 15 | Boolector | 0,1 s |
-| EKF2 Covariance | sem violação | 96 | 10 | Boolector | 12,2 s |
-| Magnetômetro | sem violação | 82 | 10 | Boolector | 6,6 s |
-| Barômetro | sem violação | 117 | 10 | Boolector | 0,4 s |
-| VTOL | sem violação | 143 | 10 | Boolector | 4,0 s |
-| **Total** | **10 sem violação, 2 com violação** | **1.219** | — | — | **≈160 s** |
+| Módulo | Desfecho | Unwind | Solver | Tempo |
+|---|---|---|---|---|
+| IMU BMI088 | violação | 10 | Boolector | n/a |
+| GPS uBlox | violação | 10 | Boolector | 64,9 s |
+| MAVLink Parser | sem violação | 300 | Boolector | 49,2 s |
+| Expo RC | sem violação | 10 | Boolector | 4,9 s |
+| Battery Monitor | sem violação | 10 | Boolector | 6,7 s |
+| PWM Output | sem violação | 10 | Boolector | 0,2 s |
+| RC Update | sem violação | 10 | Boolector | 9,5 s |
+| Navigator/Mission | sem violação | 15 | Boolector | 0,1 s |
+| EKF2 Covariance | sem violação | 10 | Boolector | 12,2 s |
+| Magnetômetro | sem violação | 10 | Boolector | 6,6 s |
+| Barômetro | sem violação | 10 | Boolector | 0,4 s |
+| VTOL | sem violação | 10 | Boolector | 4,0 s |
+| **Total** | **10 sem violação, 2 com violação** | — | — | **≈94 s** (≈159 s com GPS) |
 
-As contagens de VCC excluem IMU e GPS, que interrompem a execução na primeira violação, e
-misturam limites de desenrolamento distintos — não são diretamente comparáveis entre si. O
-VTOL foi verificado com `--no-library`, o que reduz as VCCs de 17.611 para 143 e, portanto,
-cobre proporcionalmente menos propriedades.
+IMU e GPS interrompem a execução na primeira violação, por isso o tempo total considera
+os dez módulos concluídos (≈94 s; ≈159 s com o GPS). O VTOL foi verificado com `--no-library`,
+o que deixa sem verificação as checagens internas da biblioteca. As contagens de VCC de cada
+execução estão na linha `Generated N VCC(s)` dos logs em `medianas_logs/`.
 
 ## Verificação cruzada e do *patch*
 
