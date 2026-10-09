@@ -1,0 +1,34 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Navigator_Mission/test_navigator_mission.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.448s
+GOTO program processing time: 0.021s
+Starting Bounded Model Checking
+Unwinding loop 32 iteration 1   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 2   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 3   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 4   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 5   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 6   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 7   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 8   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 9   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 10   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 11   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 12   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 13   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Unwinding loop 32 iteration 14   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Not unwinding loop 32 iteration 15   file resultados/Navigator_Mission/test_navigator_mission.cpp line 118 column 5 function get_next_position_items
+Symex completed in: 0.013s (350 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.002s (removed 177 assignments)
+Generated 50 VCC(s), 33 remaining after simplification (173 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.003s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 0.035s
+BMC program time: 0.051s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

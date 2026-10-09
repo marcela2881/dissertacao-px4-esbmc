@@ -1,0 +1,4 @@
+ESBMC version 8.2.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/EKF2_Covariance/test_ekf2_covariance.cpp
+Converting

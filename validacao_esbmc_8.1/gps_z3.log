@@ -1,0 +1,590 @@
+ESBMC version 8.2.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/GPS/test_gps_driver.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.471s
+GOTO program processing time: 0.003s
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 24 iteration 1   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 2   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 3   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 4   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 5   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 6   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 7   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 8   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 24 iteration 9   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 24 iteration 10   file /home/marcela-rodrigues/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Symex completed in: 2.569s (5126 assignments)
+Caching time: 0.049s (removed 0 assertions)
+Slicing time: 0.041s (removed 1513 assignments)
+Generated 4463 VCC(s), 1117 remaining after simplification (3613 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 2.408s
+Solving with solver Z3 v4.8.12
+ERROR: Timed out
+Command exited with non-zero status 1
+	Command being timed: "esbmc resultados/GPS/test_gps_driver.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver z3 --timeout 600s"
+	User time (seconds): 598.36
+	System time (seconds): 1.83
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:00.38
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 830800
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 236240
+	Voluntary context switches: 294
+	Involuntary context switches: 1203
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

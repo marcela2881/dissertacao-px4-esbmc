@@ -1,0 +1,56 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/IMU_BMI088/test_bmi088_imu.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.820s
+GOTO program processing time: 0.051s
+Starting Bounded Model Checking
+Symex completed in: 0.007s (147 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 123 assignments)
+Generated 27 VCC(s), 10 remaining after simplification (24 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.006s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.272s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 120 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temp_msb = 63 (00111111)
+
+State 3 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 121 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temp_lsb = 95 (01011111)
+
+State 7 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 42 column 5 function updateTemperature thread 0
+----------------------------------------------------
+  Temp_uint11 = 506 (00000001 11111010)
+
+State 8 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 48 column 9 function updateTemperature thread 0
+----------------------------------------------------
+  Temp_int11 = 506 (00000001 11111010)
+
+State 11 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 51 column 5 function updateTemperature thread 0
+----------------------------------------------------
+  temperature = 8.625000e+1f (01000010 10101100 10000000 00000000)
+
+State 12 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 123 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temperature = 8.625000e+1f (01000010 10101100 10000000 00000000)
+
+State 13 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 126 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+Violated property:
+  file resultados/IMU_BMI088/test_bmi088_imu.cpp line 126 column 5 function test_temperature_calculation
+  assertion temperature >= -40.0f && temperature <= 85.0f
+  temperature >= -40.000000f && temperature <= 85.000000f
+
+
+VERIFICATION FAILED
