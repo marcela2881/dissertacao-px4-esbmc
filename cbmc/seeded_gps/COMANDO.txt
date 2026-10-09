@@ -1,0 +1,2 @@
+CBMC 5.95.1. Para u em 2 3 5 (e 10, que não terminou em 30 min com 11,8 GB):
+cbmc test_gps_cbmc_fair.cpp --unwind $u --no-unwinding-assertions --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check
