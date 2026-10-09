@@ -5,13 +5,14 @@ Converting
 WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
 WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
 Generating GOTO Program
-GOTO program creation time: 0.489s
-GOTO program processing time: 0.023s
+GOTO program creation time: 1.544s
+GOTO program processing time: 0.080s
 Starting Bounded Model Checking
-Symex completed in: 0.007s (279 assignments)
+Symex completed in: 0.017s (279 assignments)
 Caching time: 0.000s (removed 0 assertions)
-Slicing time: 0.000s (removed 124 assignments)
+Slicing time: 0.003s (removed 124 assignments)
 Generated 63 VCC(s), 37 remaining after simplification (155 assignments)
 Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
-Encoding to solver time: 0.002s
+Encoding to solver time: 0.003s
 Solving with solver Z3 v4.13.3
+ERROR: Timed out
