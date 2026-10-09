@@ -1,0 +1,19 @@
+EVIDENCIA: dumpGpsData nao e coberto por testes unitarios PX4 - Thu Jul  9 00:06:12 -04 2026
+
+### 1. Ocorrencias de dumpGpsData:
+src/drivers/gps/gps.cpp:303:	void dumpGpsData(const uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_to_gps_device);
+src/drivers/gps/gps.cpp:428:				gps->dumpGpsData((uint8_t *)data1, (size_t)num_read, gps_dump_comm_mode_t::Full, false);
+src/drivers/gps/gps.cpp:435:			gps->dumpGpsData((uint8_t *)data1, (size_t)data2, gps_dump_comm_mode_t::Full, true);
+src/drivers/gps/gps.cpp:457:		gps->dumpGpsData((uint8_t *)data1, (size_t)data2, gps_dump_comm_mode_t::RTCM, false);
+src/drivers/gps/gps.cpp:660:	dumpGpsData(data, len, gps_dump_comm_mode_t::Full, true);
+src/drivers/gps/gps.cpp:727:void GPS::dumpGpsData(const uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_to_gps_device)
+
+### 2. Testes que incluem o driver gps.cpp (vazio=nenhum):
+
+### 3. Testes que instanciam GPS:: (vazio=nenhum):
+
+### 4. Unico teste no diretorio do driver:
+src/drivers/gps/devices/gps-parser-test.cpp
+
+### 5. Esse teste menciona dumpGpsData?
+NAO menciona dumpGpsData
