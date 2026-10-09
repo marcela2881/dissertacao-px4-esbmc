@@ -1,0 +1,125 @@
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing test_gps_cbmc_fair.cpp
+Converting
+Type-checking test_gps_cbmc_fair
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop dumpGpsData(ptr_unsigned_char,unsigned_int,ptr_struct_tag(identifier=tag-gps_dump_s)).0 iteration 1 file test_gps_cbmc_fair.cpp line 16 function dumpGpsData thread 0
+Unwinding loop dumpGpsData(ptr_unsigned_char,unsigned_int,ptr_struct_tag(identifier=tag-gps_dump_s)).0 iteration 2 file test_gps_cbmc_fair.cpp line 16 function dumpGpsData thread 0
+Not unwinding loop dumpGpsData(ptr_unsigned_char,unsigned_int,ptr_struct_tag(identifier=tag-gps_dump_s)).0 iteration 3 file test_gps_cbmc_fair.cpp line 16 function dumpGpsData thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Runtime Symex: 0.0283869s
+size of program expression: 289 steps
+simple slicing removed 11 assignments
+Generated 217 VCC(s), 68 remaining after simplification
+Runtime Postprocess Equation: 3.152e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.437862s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 17.3704s
+Solving with MiniSAT 2.2.1 with simplifier
+6491240 variables, 38803448 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 101.338s
+Runtime decision procedure: 101.776s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+6491240 variables, 22174894 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 16.1622s
+Runtime decision procedure: 16.1623s
+
+** Results:
+<builtin-library-memcpy> function memcpy
+[memcpy.pointer.1] line 33 same object violation in (const char *)(const void *)data >= (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.1] line 33 pointer relation: pointer NULL in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.2] line 33 pointer relation: pointer invalid in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.3] line 33 pointer relation: deallocated dynamic object in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.4] line 33 pointer relation: dead object in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.5] line 33 pointer relation: pointer outside object bounds in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.6] line 33 pointer relation: invalid integer address in (const char *)(const void *)data: SUCCESS
+[memcpy.pointer_arithmetic.7] line 33 pointer relation: pointer NULL in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.8] line 33 pointer relation: deallocated dynamic object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.9] line 33 pointer relation: dead object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.10] line 33 pointer relation: pointer outside object bounds in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.11] line 33 pointer relation: invalid integer address in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer.2] line 34 same object violation in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) >= (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.12] line 34 pointer relation: pointer NULL in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.13] line 34 pointer relation: deallocated dynamic object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.14] line 34 pointer relation: dead object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.15] line 34 pointer relation: pointer outside object bounds in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.16] line 34 pointer relation: invalid integer address in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.17] line 34 pointer relation: pointer NULL in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.18] line 34 pointer relation: pointer invalid in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.19] line 34 pointer relation: deallocated dynamic object in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.20] line 34 pointer relation: dead object in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.21] line 34 pointer relation: pointer outside object bounds in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+[memcpy.pointer_arithmetic.22] line 34 pointer relation: invalid integer address in (const char *)(const void *)data + (signed long int)(size_t)write_len: SUCCESS
+
+test_gps_cbmc_fair.cpp function dumpGpsData
+[dumpGpsData.overflow.1] line 18 arithmetic overflow on signed - in 200 - (signed int)dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.1] line 18 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.2] line 18 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.3] line 18 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.4] line 18 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.5] line 18 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.6] line 18 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.7] line 21 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.8] line 21 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.9] line 21 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.10] line 21 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.11] line 21 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.12] line 21 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.13] line 21 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.14] line 21 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.15] line 21 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.16] line 21 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.17] line 21 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.18] line 21 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.19] line 21 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.20] line 21 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.21] line 21 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.22] line 21 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.23] line 21 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.24] line 21 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.25] line 21 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.26] line 21 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.27] line 21 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.28] line 21 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.29] line 21 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.30] line 21 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.precondition_instance.1] line 21 memcpy src/dst overlap: SUCCESS
+[dumpGpsData.precondition_instance.2] line 21 memcpy source region readable: SUCCESS
+[dumpGpsData.precondition_instance.3] line 21 memcpy destination region writeable: FAILURE
+[dumpGpsData.overflow.2] line 23 arithmetic overflow on unsigned + in (unsigned int)dump_data->len + write_len: SUCCESS
+[dumpGpsData.pointer_dereference.31] line 23 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.32] line 23 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.33] line 23 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.34] line 23 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.35] line 23 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.36] line 23 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[dumpGpsData.overflow.3] line 24 arithmetic overflow on unsigned - in len - write_len: SUCCESS
+[dumpGpsData.pointer_dereference.37] line 25 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.38] line 25 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.39] line 25 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.40] line 25 dereference failure: dead object in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.41] line 25 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[dumpGpsData.pointer_dereference.42] line 25 dereference failure: invalid integer address in dump_data->len: SUCCESS
+
+test_gps_cbmc_fair.cpp function main
+[main.assertion.1] line 38 assertion dump_buffer.len <= GPS_DUMP_DATA_SIZE: SUCCESS
+
+** 1 of 73 failed (2 iterations)
+VERIFICATION FAILED
+
+real	2m2.409s
+user	1m54.473s
+sys	0m7.840s
