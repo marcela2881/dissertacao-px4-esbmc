@@ -1,0 +1,19 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Battery_Monitor/test_battery.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.516s
+GOTO program processing time: 0.021s
+Starting Bounded Model Checking
+Symex completed in: 0.012s (296 assignments)
+Caching time: 0.002s (removed 0 assertions)
+Slicing time: 0.000s (removed 148 assignments)
+Generated 49 VCC(s), 32 remaining after simplification (148 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.017s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 1.427s
+BMC program time: 1.456s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

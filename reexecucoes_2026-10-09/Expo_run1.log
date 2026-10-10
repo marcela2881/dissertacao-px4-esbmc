@@ -1,0 +1,19 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Expo_RC/test_expo_mathlib.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.448s
+GOTO program processing time: 0.020s
+Starting Bounded Model Checking
+Symex completed in: 0.016s (306 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.002s (removed 207 assignments)
+Generated 278 VCC(s), 50 remaining after simplification (99 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.031s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 3.637s
+BMC program time: 3.683s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

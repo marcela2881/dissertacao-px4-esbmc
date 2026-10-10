@@ -1,0 +1,49 @@
+ESBMC version 7.10.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/IMU_BMI088/test_bmi088_imu.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.519s
+GOTO program processing time: 0.048s
+Starting Bounded Model Checking
+Symex completed in: 0.016s (307 assignments)
+Slicing time: 0.003s (removed 130 assignments)
+Generated 115 VCC(s), 88 remaining after simplification (177 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.009s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.298s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 245 column 5 function main thread 0
+----------------------------------------------------
+  test_choice = 2 (00000000 00000000 00000000 00000010)
+
+State 4 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 138 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_0 = 128 (10000000)
+
+State 5 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 139 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_1 = 227 (11100011)
+
+State 6 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 61 column 5 function fifoReadCount thread 0
+----------------------------------------------------
+  FIFO_LENGTH_1_MASKED = 35 (00100011)
+
+State 8 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 141 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  count = 9088 (00100011 10000000)
+
+State 9 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+Violated property:
+  file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation
+  assertion count <= FIFO_SIZE
+  (unsigned long int)count <= FIFO_SIZE
+
+
+VERIFICATION FAILED

@@ -1,0 +1,19 @@
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Barometer/test_barometer.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.442s
+GOTO program processing time: 0.021s
+Starting Bounded Model Checking
+Symex completed in: 0.012s (268 assignments)
+Caching time: 0.002s (removed 1 assertions)
+Slicing time: 0.000s (removed 147 assignments)
+Generated 93 VCC(s), 34 remaining after simplification (120 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.009s
+Solving with solver Bitwuzla 0.9.0
+Runtime decision procedure: 0.212s
+BMC program time: 0.234s
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.4.0 64-bit x86_64 linux

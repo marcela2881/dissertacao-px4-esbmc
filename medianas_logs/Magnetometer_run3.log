@@ -1,19 +1,22 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
 Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
 Parsing resultados/Magnetometer/test_vehicle_magnetometer.cpp
 Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
 Generating GOTO Program
-GOTO program creation time: 0.475s
-GOTO program processing time: 0.026s
+GOTO program creation time: 0.192s
+GOTO program processing time: 0.010s
 Starting Bounded Model Checking
-Symex completed in: 0.011s (236 assignments)
+Symex completed in: 0.003s (222 assignments)
 Caching time: 0.000s (removed 0 assertions)
-Slicing time: 0.000s (removed 136 assignments)
+Slicing time: 0.000s (removed 122 assignments)
 Generated 50 VCC(s), 29 remaining after simplification (100 assignments)
+No solver specified; defaulting to Boolector
 Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
-Encoding to solver time: 0.017s
-Solving with solver Bitwuzla 0.9.0
-Runtime decision procedure: 6.446s
-BMC program time: 6.474s
+Encoding to solver time: 0.007s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 6.621s
+BMC program time: 6.630s
 
 VERIFICATION SUCCESSFUL
-ESBMC version 8.4.0 64-bit x86_64 linux

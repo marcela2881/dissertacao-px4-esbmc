@@ -1,155 +1,413 @@
-# Verificação Formal de Módulos Críticos do PX4 Autopilot usando ESBMC
+# 🌎 Conversando com o IBGE pela internet: teste de integração
 
-Repositório de artefatos da dissertação de mestrado desenvolvida no Programa de Pós-Graduação
-em Engenharia Elétrica (PPGEE) da Universidade Federal do Amazonas (UFAM), no âmbito do
-projeto SAGRES de monitoramento ambiental na Amazônia.
+> Hoje vocês vão escrever um programa que **conversa pela internet** com um
+> servidor do IBGE (sim, aquele do Censo!), pega informações de lá e
+> **verifica** se chegou o que a gente esperava. Isso se chama
+> **teste de integração**. 🧪
+>
+> Siga este tutorial na ordem, **sem pular passo**. Se alguma coisa
+> aparecer diferente, levante a mão e chame a professora. 🙋
 
-**Autora:** Marcela Alves Rodrigues
-**Orientador:** Prof. Dr. Lucas Carvalho Cordeiro (University of Manchester / UFAM)
-**Coorientador:** Prof. Dr. José Reginaldo Hughes de Carvalho (UFAM)
-**Instituição:** Universidade Federal do Amazonas — PPGEE · **Ano:** 2026
-
-**DOI do artefato:** [10.5281/zenodo.23272289](https://doi.org/10.5281/zenodo.23272289)
-
-(versão v1.1-sbesc; todas as versões: [10.5281/zenodo.21401958](https://doi.org/10.5281/zenodo.21401958))
 ---
 
-## Sobre o trabalho
+## 🤔 O que é um "teste de integração"?
 
-Este trabalho propõe e avalia uma metodologia de verificação formal para firmware de sistemas
-críticos, baseada em *Bounded Model Checking* (BMC) com o verificador ESBMC. O PX4 Autopilot
-o commit 8be2590c15 (ramo main) é utilizado como estudo de caso, com 12 módulos verificados (10 sem violação até o limite, 2 com violação).
+Na aula passada vocês fizeram um programa que **funcionava sozinho** — só somava números. Não dependia de ninguém pra nada.
 
-## Resultados
+Hoje é diferente. O programa de hoje precisa **falar com outro computador** (um servidor do IBGE, do outro lado do Brasil). Quando o seu programa depende de outro sistema, a gente precisa testar essa **conversa** — ou seja, essa **integração**.
 
-**Resultado principal.** Dez dos doze módulos, cobrindo as principais classes de entrada não
-confiável — barramentos seriais de sensores, enlace de rádio e telemetria, atuação, estimação
-e lógica de missão — verificam-se livres de violações de segurança de memória e de *overflow*
-até o limite de desenrolamento.
+Um teste de integração responde a perguntas como:
 
-**Resultado secundário.** A campanha produziu três contraexemplos, que a triagem resolveu de
-três formas distintas:
+- ✅ O servidor está respondendo?
+- ✅ Ele devolveu o que a gente pediu?
+- ✅ O formato da resposta é o que a gente esperava?
+- ✅ Os dados fazem sentido? (Tem mesmo 5 regiões? Tem mesmo 27 estados?)
 
-| Achado | Módulo | Classificação | Desfecho |
-|---|---|---|---|
-| *Underflow* sem sinal em `dumpGpsData()` | GPS uBlox | CWE-191 → CWE-119 | **Violação alcançável no modelo.** Reportada na [Issue #26866](https://github.com/PX4/PX4-Autopilot/issues/26866); guarda acolhida upstream como endurecimento defensivo (PR #27576). Alcançabilidade no alvo em aberto. |
-| Contador do FIFO (`count = 8704`) | IMU BMI088 | CWE-190 / CWE-787 | **Falso positivo.** Refutado no *replay* contra o driver de produção não instrumentado, que protege a leitura em três níveis. O candidato surgiu porque o *harness* omitia essas guardas. |
-| Temperatura fora da faixa (86,25 °C) | IMU BMI088 | CWE-20 | **Recusado upstream.** [Issue #26865](https://github.com/PX4/PX4-Autopilot/issues/26865) e PR #27575 fechados pelos mantenedores. Mantido como nota de projeto, sem consequência de segurança confirmada. |
+Se qualquer uma dessas coisas falhar, o teste **dispara um erro** e a gente fica sabendo na hora. Vocês vão ver isso funcionando hoje.
 
-> **Nota metodológica.** Os achados são **violações alcançáveis no modelo**, não defeitos
-> confirmados em produção. Um contraexemplo estabelece alcançabilidade dentro do modelo
-> analisado; estabelecer alcançabilidade *on-target* exigiria demonstrar que os valores podem
-> ser produzidos pelo hardware e pela pilha de software reais. Por isso a triagem e a revisão
-> pela comunidade são partes integrantes da metodologia, e não etapas acessórias.
+---
 
-## Estrutura do repositório
+## 🛠️ PARTE 0 — Antes de começar: instalando tudo
+
+A gente vai precisar de **Python**, **VS Code** e uma biblioteca extra chamada **`requests`**, que serve pra Python conseguir falar pela internet.
+
+> 💡 **Se o computador da escola já tem tudo instalado, pulem direto pra PARTE 1!**
+
+### 🔍 Como saber se já está tudo instalado
+
+**0.1.** Abra o **Prompt de Comando**: aperte a tecla **Windows**, digite `cmd` e aperte **Enter**.
+
+**0.2.** Digite e aperte Enter:
 
 ```
-.
-├── README.md            (este arquivo)
-├── REPRODUCAO.md        (instruções de instalação e execução)
-├── LICENSE
-├── resultados/          (harnesses e logs do ESBMC, por módulo)
-│   ├── Barometer/           test_barometer.cpp · resultado_barometer.txt
-│   ├── Battery_Monitor/
-│   ├── EKF2_Covariance/
-│   ├── Expo_RC/
-│   ├── GPS/                 violação alcançável no modelo — Issue #26866
-│   ├── IMU_BMI088/          falso positivo (FIFO) + observação recusada (temperatura)
-│   ├── Magnetometer/
-│   ├── MAVLink/
-│   ├── Navigator_Mission/
-│   ├── PWM_Output/
-│   ├── RC_Update/
-│   └── VTOL/
-└── cbmc/                (harnesses CBMC, verificação do patch e checagem no ArduPilot)
+python --version
 ```
 
-Cada subpasta de `resultados/` contém o *harness* de verificação, com *stubs*, *assumptions*
-e *assertions*, e a saída completa do ESBMC, incluindo o contraexemplo nos casos de violação.
+- ✅ Mostrou uma versão (tipo `Python 3.12.0`)? Pode pular pra **0.6** (instalar a biblioteca `requests`).
+- ❌ Disse `não é reconhecido como comando interno...`? Continuem o tutorial.
 
-## Ambiente de verificação
+**Pra VS Code:** procurem "Visual Studio Code" no menu Iniciar. Se aparecer, está instalado.
 
-| Componente | Versão |
+### 🐍 Instalando o Python (só se ainda não tem)
+
+**0.3.** Aperte **Windows**, digite **`powershell`** e aperte **Enter**.
+
+**0.4.** Cole este comando e aperte Enter:
+
+```
+winget install Python.Python.3.12
+```
+
+**0.5.** Autorize a janela de permissão ("Sim") e espere o `Successfully installed`. ⏱️ Demora uns 2-3 minutos.
+
+> ⚠️ **Importante:** depois de instalar, **feche o PowerShell** e abra um **novo** Prompt de Comando. Terminais não enxergam programas que foram instalados enquanto estavam abertos.
+
+### 📦 Instalando a biblioteca `requests`
+
+A biblioteca `requests` é o que vai permitir que o Python **converse com a internet**. Ela não vem com o Python por padrão, então a gente instala separado.
+
+**0.6.** Em um Prompt de Comando **novo** (depois de instalar o Python), cole:
+
+```
+pip install requests
+```
+
+> 💡 `pip` é o "instalador de bibliotecas" do Python. Funciona parecido com o `winget` mas só pra coisas do Python.
+
+**0.7.** Vai aparecer uma barra de progresso e depois algo tipo:
+
+```
+Successfully installed requests-2.32.0 ...
+```
+
+✅ **Apareceu `Successfully installed`?** Pode seguir pra PARTE 1!
+
+### 💻 Instalando o Visual Studio Code (só se ainda não tem)
+
+**0.8.** No PowerShell:
+
+```
+winget install Microsoft.VisualStudioCode
+```
+
+Autorize e espere terminar.
+
+### 🆘 Problemas comuns na instalação
+
+| Problema | Solução |
 |---|---|
-| Verificador (campanha consolidada) | ESBMC v8.1.0 (64-bit, x86_64 Linux) |
-| Verificador (achados originais) | ESBMC v7.10.0 |
-| Solver (todos os módulos) | Boolector 3.2.4 |
-| Verificação cruzada | CBMC 5.95.1 |
-| Sistema operacional | Ubuntu 24.04 LTS |
-| Hardware | Intel Core i7-13700K · 64 GB RAM |
-| Linguagem alvo | C/C++17 |
-| Firmware alvo | PX4 Autopilot (ramo `main`, *commit* `8be2590c15`, 04/06/2026) |
+| `pip não é reconhecido` | O Python não foi instalado direito ou vocês esqueceram de fechar e abrir o terminal. |
+| `pip install requests` dá erro de rede | Internet da escola pode estar bloqueando. Chame a professora. |
+| `python não é reconhecido` mesmo depois de instalar | Esqueceram de **fechar e abrir o terminal**. |
+| Pediu senha de administrador | Chame a professora. |
 
-Os contraexemplos do BMI088 e do GPS foram originalmente reportados sob ESBMC v7.10.0
-(Issues #26865 e #26866); os tempos abaixo foram remedidos sob a configuração da campanha em
-v8.1.0.
+---
 
-## Resumo dos resultados
+## 📥 PARTE 1 — Pegar o material no Google Classroom
 
-Tempos reportados como **mediana de três execuções**.
+**1.1.** Abra o **Google Classroom** no navegador.
 
-| Módulo | Desfecho | Unwind | Solver | Tempo |
-|---|---|---|---|---|
-| IMU BMI088 | violação | 10 | Boolector | n/a |
-| GPS uBlox | violação | 10 | Boolector | 64,9 s |
-| MAVLink Parser | sem violação | 300 | Boolector | 49,2 s |
-| Expo RC | sem violação | 10 | Boolector | 4,9 s |
-| Battery Monitor | sem violação | 10 | Boolector | 6,7 s |
-| PWM Output | sem violação | 10 | Boolector | 0,2 s |
-| RC Update | sem violação | 10 | Boolector | 9,5 s |
-| Navigator/Mission | sem violação | 15 | Boolector | 0,1 s |
-| EKF2 Covariance | sem violação | 10 | Boolector | 12,2 s |
-| Magnetômetro | sem violação | 10 | Boolector | 6,6 s |
-| Barômetro | sem violação | 10 | Boolector | 0,4 s |
-| VTOL | sem violação | 10 | Boolector | 4,0 s |
-| **Total** | **10 sem violação, 2 com violação** | — | — | **≈94 s** (≈159 s com GPS) |
+**1.2.** Entre na turma e procure a atividade de hoje.
 
-IMU e GPS interrompem a execução na primeira violação, por isso o tempo total considera
-os dez módulos concluídos (≈94 s; ≈159 s com o GPS). O VTOL foi verificado com `--no-library`,
-o que deixa sem verificação as checagens internas da biblioteca. As contagens de VCC de cada
-execução estão na linha `Generated N VCC(s)` dos logs em `medianas_logs/`.
+**1.3.** Clique no arquivo `.zip` anexado pra baixar.
 
-## Verificação cruzada e do *patch*
+**1.4.** O arquivo vai cair em **Downloads**.
 
-O CBMC 5.95.1 foi executado sobre os mesmos *harnesses*, com opções equivalentes. Para o GPS,
-ambas as ferramentas sinalizam a violação, mas a reportam como propriedades formalmente
-distintas: o ESBMC como *underflow* de inteiro sem sinal (CWE-191) e o CBMC como escrita fora
-dos limites em `memcpy` (CWE-787). São as duas faces do mesmo defeito, e a divergência decorre
-do tratamento da conversão com e sem sinal na subtração. **Isso não constitui confirmação
-independente de alcançabilidade**: sob a mesma pré-condição, a concordância corrobora apenas a
-codificação do problema.
+---
 
-Sobre o *patch*, o *harness* sem correção levanta sete violações de VCC ao longo do caminho do
-*underflow*. Aplicada a correção, o CBMC reporta 0/7 e o ESBMC com Boolector reporta
-`VERIFICATION SUCCESSFUL`. A guarda rejeita a condição exercitada pelo *harness*, não a
-ausência de outros caminhos além do limite.
+## 📂 PARTE 2 — Preparar a pasta no computador
 
-## Como reproduzir
+**2.1.** Abra o **Explorador de Arquivos** (pastinha amarela na barra de baixo).
 
-Consulte [`REPRODUCAO.md`](REPRODUCAO.md).
+**2.2.** Vá em **Downloads**.
 
-## Publicação associada
+**2.3.** Encontre o `.zip` baixado.
 
-Artigo submetido ao XVI Simpósio Brasileiro de Engenharia de Sistemas Computacionais
-(SBESC 2026), trilha de artigo completo — *Formal Verification of Critical Modules in the PX4
-Autopilot using Bounded Model Checking*. Em avaliação.
+**2.4.** Clique com o **botão direito** → **"Extrair Tudo..."** → **"Extrair"**.
 
-## Referências
+**2.5.** Entre na pasta extraída. Você deve ver **diretamente estes 2 arquivos**:
 
-- PX4 Autopilot — https://github.com/PX4/PX4-Autopilot (commit 8be2590c15, ramo main)
-- ESBMC — https://github.com/esbmc/esbmc
-- CBMC — https://github.com/diffblue/cbmc
-- *Fork* com integração contínua — https://github.com/marcela2881/PX4-Autopilot
-- PPGEE/UFAM — https://www.ppgee.ufam.edu.br
+```
+📄 README.md
+📄 teste_api.py
+```
 
-## Licença
+> ⚠️ **Se aparecer uma pasta dentro da pasta** (em vez dos arquivos), entre nessa pasta de dentro.
 
-Os artefatos deste repositório (*harnesses* `.cpp` e logs) são disponibilizados sob licença MIT
-para fins acadêmicos e de reprodutibilidade. O PX4 Autopilot e o ESBMC seguem suas próprias
-licenças, BSD-3-Clause e Apache-2.0 respectivamente.
+---
 
-## Contato
+## 💻 PARTE 3 — Abrir a pasta no VS Code
 
-Marcela Alves Rodrigues — [@marcela2881](https://github.com/marcela2881)
-Prof. Dr. Lucas Carvalho Cordeiro — SSVLab, University of Manchester
+**3.1.** Abra o **Visual Studio Code**.
+
+**3.2.** Menu **"File"** → **"Open Folder..."**.
+
+**3.3.** Navegue até **Downloads** → clique uma vez na pasta que você extraiu.
+
+**3.4.** Clique em **"Selecionar Pasta"**.
+
+**3.5.** Se perguntar *"Do you trust the authors..."*, clique em **"Yes, I trust the authors"**.
+
+**3.6.** Você deve ver no canto **esquerdo**:
+
+```
+📁 PASTA-DA-AULA
+   📄 README.md
+   📄 teste_api.py
+```
+
+---
+
+## ⌨️ PARTE 4 — Abrir o terminal dentro do VS Code
+
+**4.1.** Menu **"Terminal"** → **"New Terminal"**.
+
+> 💡 *Atalho: `Ctrl` + `'`*
+
+**4.2.** Um painel preto abre embaixo, mostrando o caminho da pasta. **Se aparecer o nome da pasta no final, está certo!** ✅
+
+---
+
+## 👀 PARTE 5 — Olhar o código com calma
+
+**5.1.** Na lista da esquerda, clique em **`teste_api.py`**.
+
+**5.2.** Reparem nas coisas novas (que a aula passada não tinha):
+
+- 🆕 `import requests` → a gente está usando uma biblioteca pra falar com a internet
+- 🆕 `requests.get(url)` → essa linha **faz a chamada na internet** e espera a resposta
+- 🆕 `resposta.status_code` → um número que o servidor devolve. `200` = "deu tudo certo"
+- 🆕 `resposta.json()` → transforma a resposta (que vem em texto) em uma lista do Python
+- 🆕 `assert ...` → essa palavrinha é **a alma do teste de integração**
+
+> 🔑 **`assert` significa "afirme que isto é verdade"**. Se for verdade, o programa continua tranquilo. Se não for, o programa **PARA na hora** e mostra o erro.
+>
+> Exemplo:
+> ```python
+> assert len(regioes) == 5, "Esperava 5 regiões!"
+> ```
+> Quer dizer: "afirme que recebemos 5 regiões. Se não recebeu, grita pra mim."
+
+**5.3.** Reparem que o programa faz **3 testes diferentes**:
+
+1. Buscar as **5 regiões** do Brasil (resposta bem pequena)
+2. Buscar os **27 estados** (resposta média)
+3. Buscar **todos os ~5570 municípios** (resposta GRANDE)
+
+A gente vai descobrir uma coisa interessante sobre essa diferença de tamanho. 👀
+
+---
+
+## 🚀 PARTE 6 — Rodar o programa
+
+**6.1.** Voltem pro terminal.
+
+**6.2.** ✅ **Confirmação rápida:** digite `dir` e aperte Enter. Os arquivos `README.md` e `teste_api.py` precisam aparecer.
+
+- ❌ Não apareceu? Está na pasta errada — **chame a professora**. 🙋
+
+**6.3.** Agora rode:
+
+```
+python teste_api.py
+```
+
+**6.4.** Vai aparecer várias linhas no terminal. No final, algo parecido com:
+
+```
+=======================================================
+TESTE: Buscar as 5 regioes do Brasil
+URL : https://servicodados.ibge.gov.br/api/v1/localidades/regioes
+=======================================================
+Tempo gasto..: 187.45 ms
+Status code..: 200
+Quantidade...: 5 regioes
+Nomes........: ['Norte', 'Nordeste', 'Sudeste', 'Sul', 'Centro-Oeste']
+Todos os asserts passaram! :)
+
+[... e por aí vai, com os outros 2 testes ...]
+
+=======================================================
+RESUMO DOS TEMPOS
+=======================================================
+  5 regioes.........:   187.45 ms
+  27 estados........:   234.12 ms
+  5570 municipios...:  1845.30 ms
+
+Buscar municipios foi 9.8x mais lento que buscar regioes.
+
+PARABENS! Todos os testes de integracao passaram. :)
+```
+
+**6.5.** **Anotem os 3 tempos** que apareceram no SEU computador (no caderno ou num papel).
+
+**6.6.** Rodem o programa **mais 2 vezes** (seta ↑ no terminal e Enter) e anotem os tempos das outras tentativas.
+
+> 💡 Os tempos variam **muito** entre uma execução e outra. A gente vai falar sobre isso já já.
+
+---
+
+## 🤔 PARTE 7 — Mas e os asserts? Como saber que estão funcionando?
+
+Apareceu "Todos os asserts passaram!" — beleza, mas como provar que eles **realmente verificam** alguma coisa? Vamos quebrar o teste **de propósito** pra ver.
+
+**7.1.** Abram o `teste_api.py` no VS Code.
+
+**7.2.** Encontrem esta linha (ali no Teste 1):
+
+```python
+assert len(regioes) == 5, f"Esperava 5 regioes, recebeu {len(regioes)}"
+```
+
+**7.3.** Mudem o `5` pra `7` (uma mentira de propósito):
+
+```python
+assert len(regioes) == 7, f"Esperava 5 regioes, recebeu {len(regioes)}"
+```
+
+**7.4.** **Salvem** (`Ctrl + S`).
+
+**7.5.** Rodem de novo:
+
+```
+python teste_api.py
+```
+
+**7.6.** O programa **vai quebrar** mostrando algo tipo:
+
+```
+AssertionError: Esperava 5 regioes, recebeu 5
+```
+
+🎉 **Isso é ótimo!** Quer dizer que o teste **está funcionando**. Ele percebeu que a realidade (5 regiões) não bateu com o que a gente afirmou (7).
+
+**7.7.** Voltem o `7` pro `5` e salvem de novo. Confirmem rodando — tem que voltar a passar tudo.
+
+> 🔑 **Lição:** um teste só vale se ele **consegue falhar** quando alguma coisa está errada. Um teste que sempre passa, não importa o que aconteça, não testa nada.
+
+---
+
+## ⏱️ PARTE 8 — Por que o tempo varia tanto?
+
+Olhem os tempos que vocês anotaram. Provavelmente algo assim:
+
+| Endpoint | Tentativa 1 | Tentativa 2 | Tentativa 3 |
+|---|---|---|---|
+| 5 regiões | ____ ms | ____ ms | ____ ms |
+| 27 estados | ____ ms | ____ ms | ____ ms |
+| ~5570 municípios | ____ ms | ____ ms | ____ ms |
+
+### Perguntas pra discutir
+
+1. **Qual foi mais lento, sempre?** (Provavelmente municípios.)
+2. **Por quê?** O Python ficou "mais lento" no terceiro caso? 🤔
+3. **Os tempos variaram bastante entre as 3 tentativas?**
+
+### A resposta
+
+Na aula passada, o computador estava fazendo a conta **sozinho**. Tudo o que importava era o quanto a linguagem era rápida.
+
+Hoje é **completamente diferente**. Olhem o que acontece quando vocês rodam `python teste_api.py`:
+
+```
+[seu computador]  →  rede da escola  →  internet do Brasil  →  
+                                              ↓
+                                       servidor do IBGE
+                                              ↓
+                                      ele procura os dados
+                                              ↓
+[seu computador]  ←  rede da escola  ←  internet do Brasil  ←
+```
+
+O Python só fica **esperando** essa volta toda. Praticamente o tempo todo, o **gargalo não é a linguagem** — é a internet e o tamanho da resposta.
+
+**Por isso:**
+- 🟢 **5 regiões** = resposta com pouca coisa = volta rapidinho
+- 🟡 **27 estados** = resposta um pouquinho maior = um pouco mais lento
+- 🔴 **5570 municípios** = resposta ENORME (alguns megabytes!) = bem mais lento
+
+### Por que os tempos variam entre tentativas?
+
+Várias coisas mudam de uma execução pra outra:
+
+- 🌐 A internet pode estar mais ou menos congestionada
+- 🖥️ O servidor do IBGE pode estar atendendo muita gente naquele segundo
+- 💾 Pode ser que da segunda vez a resposta esteja "cacheada" (guardada em algum lugar do caminho) e venha mais rápido
+
+> 🔑 **Lição:** quando seu programa depende de **outras coisas pela internet**, o tempo não é só "culpa" da linguagem. Tem muita coisa fora do seu controle.
+
+---
+
+## 💡 PARTE 9 — Recapitulando: o que é um teste de integração?
+
+Hoje vocês não fizeram só "um programa que chama uma API". Vocês fizeram um **teste de integração** porque:
+
+| Ingrediente | Como apareceu no nosso programa |
+|---|---|
+| Conversa com um sistema externo | `requests.get(...)` chama o servidor do IBGE |
+| Verifica o que voltou | `assert resposta.status_code == 200` |
+| Verifica o formato | `assert len(regioes) == 5` |
+| Verifica que os dados fazem sentido | `assert "Sudeste" in nomes_regioes` |
+| Falha de forma clara quando algo dá errado | Vocês viram isso na PARTE 7 |
+
+Empresas grandes (Nubank, iFood, Magalu...) rodam **milhares** desses testes automaticamente, várias vezes por dia, pra garantir que os sistemas continuam conversando direito uns com os outros.
+
+---
+
+## 🎯 PARTE 10 — Desafios extras (se sobrar tempo)
+
+### 🎯 Desafio 1 — Buscar só os estados do Nordeste
+
+Olhem a documentação:
+👉 https://servicodados.ibge.gov.br/api/docs/localidades
+
+Existe um endpoint pra buscar só os estados de uma região específica. Tentem descobrir qual é, e adicionem um quarto teste no programa que:
+
+1. Busca só os estados do Nordeste
+2. Verifica com `assert` que recebeu **exatamente 9 estados**
+3. Verifica que **"Pernambuco"** está na lista
+
+### 🎯 Desafio 2 — Quebrar mais asserts pra ver o que acontece
+
+Inventem 3 mentiras diferentes nos asserts (tipo: "esperava 100 municípios", "Sudeste virou Sudoeste") e rodem cada uma. Anotem que mensagem de erro cada uma gera.
+
+> 💡 Saber **ler mensagens de erro** é uma das habilidades mais úteis que vocês podem desenvolver em programação.
+
+### 🎯 Desafio 3 — Testar uma URL que não existe
+
+Mudem uma das URLs pra algo errado de propósito, tipo:
+
+```python
+url = f"{URL_BASE}/cidades-fantasmas"
+```
+
+O que acontece? O `status_code` vira `200` ou outro número? Vejam qual.
+
+> 🔍 Códigos que vocês podem encontrar: `200` (OK), `404` (não existe), `500` (erro do servidor), `503` (servidor fora do ar)
+
+---
+
+## 🆘 Problemas comuns
+
+| Problema | Solução |
+|---|---|
+| `ModuleNotFoundError: No module named 'requests'` | Esqueceram de rodar `pip install requests`. Voltem ao passo 0.6. |
+| `python não é reconhecido` | Tentem `python3 teste_api.py`. |
+| `ConnectionError` ou `Timeout` | Internet da escola está com problema, ou o IBGE está fora do ar. Tentem de novo daqui a pouco. |
+| Um `assert` falhou que não era pra falhar | Pode ser que o IBGE mudou alguma coisa (raro, mas acontece). **Chame a professora.** |
+| `can't open file 'teste_api.py'` | O terminal está na pasta errada. Digite `dir` pra conferir. |
+| Tempos super diferentes do que aparece nos exemplos | Normal! Depende muito da internet da escola. O importante é a **proporção** entre os 3 testes no SEU computador. |
+
+---
+
+## ✅ Resumo
+
+Hoje vocês:
+
+- 🌎 Fizeram um programa que **conversa com um servidor pela internet**
+- ✅ Aprenderam a **verificar** se a resposta veio certinha (com `assert`)
+- 💥 Quebraram um assert de propósito pra ter certeza que o teste funciona
+- ⏱️ Mediram os tempos e descobriram que **o tamanho da resposta importa MUITO**
+- 🧠 Entenderam o conceito de **teste de integração**: testar a conversa entre seu programa e outro sistema
+
+Bom trabalho! 🚀

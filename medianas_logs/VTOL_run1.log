@@ -1,21 +1,22 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
 Target: 64-bit little-endian x86_64-unknown-linux with systemlibc
 Parsing resultados/VTOL/test_vtol_type.cpp
 Converting
 Generating GOTO Program
-GOTO program creation time: 3.428s
-GOTO program processing time: 0.062s
+GOTO program creation time: 2.120s
+GOTO program processing time: 0.027s
 Starting Bounded Model Checking
 WARNING: no body for function piecewise_construct_t#
 WARNING: no body for function __ESBMC_pthread_start_main_hook
-Symex completed in: 0.011s (734 assignments)
-Caching time: 0.002s (removed 32 assertions)
-Slicing time: 0.002s (removed 532 assignments)
+Symex completed in: 0.006s (729 assignments)
+Caching time: 0.000s (removed 32 assertions)
+Slicing time: 0.002s (removed 527 assignments)
 Generated 110 VCC(s), 78 remaining after simplification (170 assignments)
+No solver specified; defaulting to Boolector
 Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
-Encoding to solver time: 0.158s
-Solving with solver Bitwuzla 0.9.0
-Runtime decision procedure: 3.526s
-BMC program time: 3.695s
+Encoding to solver time: 0.019s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 3.911s
+BMC program time: 3.935s
 
 VERIFICATION SUCCESSFUL
-ESBMC version 8.4.0 64-bit x86_64 linux
