@@ -9,8 +9,7 @@ projeto SAGRES de monitoramento ambiental na Amazônia.
 **Coorientador:** Prof. Dr. José Reginaldo Hughes de Carvalho (UFAM)
 **Instituição:** Universidade Federal do Amazonas — PPGEE · **Ano:** 2026
 
-**DOI do artefato:** [10.5281/zenodo.21401959](https://doi.org/10.5281/zenodo.21401959)
-
+**DOI do artefato:** [10.5281/zenodo.23272289](https://doi.org/10.5281/zenodo.23272289) (versão v1.1-sbesc; todas as versões: [10.5281/zenodo.21401958](https://doi.org/10.5281/zenodo.21401958))
 ---
 
 ## Sobre o trabalho
