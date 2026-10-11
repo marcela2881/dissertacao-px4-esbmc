@@ -1,0 +1,168 @@
+# data: 2026-10-11T16:25:28Z  maquina: nuvem  host: vm
+# cpu: Intel(R) Xeon(R) Processor @ 2.10GHz  nucleos: 4  mem: 15 GB
+# versao: 5.95.1 (cbmc-5.95.1)
+# comando: cbmc test_gps_prod_sem_invariante.cpp --pointer-check --bounds-check  (timeout 1800s)
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing test_gps_prod_sem_invariante.cpp
+Converting
+Type-checking test_gps_prod_sem_invariante
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Runtime Symex: 0.0228033s
+size of program expression: 143 steps
+simple slicing removed 18 assignments
+Generated 123 VCC(s), 8 remaining after simplification
+Runtime Postprocess Equation: 4.0183e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.0479721s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 0.369368s
+Solving with MiniSAT 2.2.1 with simplifier
+328012 variables, 1230188 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 1.47335s
+Runtime decision procedure: 1.52169s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+328012 variables, 8843 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 0.00526297s
+Runtime decision procedure: 0.00534764s
+
+** Results:
+<builtin-library-memcpy> function memcpy
+[memcpy.pointer.1] line 33 same object violation in (const char *)(const void *)*data >= (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.1] line 33 pointer relation: pointer NULL in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.2] line 33 pointer relation: pointer invalid in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.3] line 33 pointer relation: deallocated dynamic object in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.4] line 33 pointer relation: dead object in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.5] line 33 pointer relation: pointer outside object bounds in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.6] line 33 pointer relation: invalid integer address in (const char *)(const void *)*data: SUCCESS
+[memcpy.pointer_arithmetic.7] line 33 pointer relation: pointer NULL in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.8] line 33 pointer relation: deallocated dynamic object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.9] line 33 pointer relation: dead object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.10] line 33 pointer relation: pointer outside object bounds in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.11] line 33 pointer relation: invalid integer address in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) + (signed long int)write_len: SUCCESS
+[memcpy.pointer.2] line 34 same object violation in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len) >= (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.12] line 34 pointer relation: pointer NULL in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.13] line 34 pointer relation: deallocated dynamic object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.14] line 34 pointer relation: dead object in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.15] line 34 pointer relation: pointer outside object bounds in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.16] line 34 pointer relation: invalid integer address in (const char *)(void *)(dump_data->data + (signed long int)dump_data->len): SUCCESS
+[memcpy.pointer_arithmetic.17] line 34 pointer relation: pointer NULL in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.18] line 34 pointer relation: pointer invalid in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.19] line 34 pointer relation: deallocated dynamic object in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.20] line 34 pointer relation: dead object in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.21] line 34 pointer relation: pointer outside object bounds in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+[memcpy.pointer_arithmetic.22] line 34 pointer relation: invalid integer address in (const char *)(const void *)*data + (signed long int)write_len: SUCCESS
+
+prod_common.h function loop_body
+[loop_body.pointer_dereference.1] line 29 dereference failure: pointer NULL in *len: SUCCESS
+[loop_body.pointer_dereference.2] line 29 dereference failure: pointer invalid in *len: SUCCESS
+[loop_body.pointer_dereference.3] line 29 dereference failure: deallocated dynamic object in *len: SUCCESS
+[loop_body.pointer_dereference.4] line 29 dereference failure: dead object in *len: SUCCESS
+[loop_body.pointer_dereference.5] line 29 dereference failure: pointer outside object bounds in *len: SUCCESS
+[loop_body.pointer_dereference.6] line 29 dereference failure: invalid integer address in *len: SUCCESS
+[loop_body.pointer_dereference.7] line 31 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.8] line 31 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.9] line 31 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.10] line 31 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.11] line 31 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.12] line 31 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.13] line 35 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.14] line 35 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.15] line 35 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.16] line 35 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.17] line 35 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.18] line 35 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.19] line 35 dereference failure: pointer NULL in *data: SUCCESS
+[loop_body.pointer_dereference.20] line 35 dereference failure: pointer invalid in *data: SUCCESS
+[loop_body.pointer_dereference.21] line 35 dereference failure: deallocated dynamic object in *data: SUCCESS
+[loop_body.pointer_dereference.22] line 35 dereference failure: dead object in *data: SUCCESS
+[loop_body.pointer_dereference.23] line 35 dereference failure: pointer outside object bounds in *data: SUCCESS
+[loop_body.pointer_dereference.24] line 35 dereference failure: invalid integer address in *data: SUCCESS
+[loop_body.pointer_dereference.25] line 35 dereference failure: pointer NULL in *data: SUCCESS
+[loop_body.pointer_dereference.26] line 35 dereference failure: pointer invalid in *data: SUCCESS
+[loop_body.pointer_dereference.27] line 35 dereference failure: deallocated dynamic object in *data: SUCCESS
+[loop_body.pointer_dereference.28] line 35 dereference failure: dead object in *data: SUCCESS
+[loop_body.pointer_dereference.29] line 35 dereference failure: pointer outside object bounds in *data: SUCCESS
+[loop_body.pointer_dereference.30] line 35 dereference failure: invalid integer address in *data: SUCCESS
+[loop_body.pointer_dereference.31] line 35 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.32] line 35 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.33] line 35 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.34] line 35 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.35] line 35 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.36] line 35 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.37] line 35 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.38] line 35 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.39] line 35 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.40] line 35 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.41] line 35 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.42] line 35 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.43] line 35 dereference failure: pointer NULL in *data: SUCCESS
+[loop_body.pointer_dereference.44] line 35 dereference failure: pointer invalid in *data: SUCCESS
+[loop_body.pointer_dereference.45] line 35 dereference failure: deallocated dynamic object in *data: SUCCESS
+[loop_body.pointer_dereference.46] line 35 dereference failure: dead object in *data: SUCCESS
+[loop_body.pointer_dereference.47] line 35 dereference failure: pointer outside object bounds in *data: SUCCESS
+[loop_body.pointer_dereference.48] line 35 dereference failure: invalid integer address in *data: SUCCESS
+[loop_body.pointer_dereference.49] line 35 dereference failure: pointer NULL in *data: SUCCESS
+[loop_body.pointer_dereference.50] line 35 dereference failure: pointer invalid in *data: SUCCESS
+[loop_body.pointer_dereference.51] line 35 dereference failure: deallocated dynamic object in *data: SUCCESS
+[loop_body.pointer_dereference.52] line 35 dereference failure: dead object in *data: SUCCESS
+[loop_body.pointer_dereference.53] line 35 dereference failure: pointer outside object bounds in *data: SUCCESS
+[loop_body.pointer_dereference.54] line 35 dereference failure: invalid integer address in *data: SUCCESS
+[loop_body.pointer_dereference.55] line 35 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.56] line 35 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.57] line 35 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.58] line 35 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.59] line 35 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.60] line 35 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.precondition_instance.1] line 35 memcpy src/dst overlap: SUCCESS
+[loop_body.precondition_instance.2] line 35 memcpy source region readable: SUCCESS
+[loop_body.precondition_instance.3] line 35 memcpy destination region writeable: FAILURE
+[loop_body.pointer_dereference.61] line 36 dereference failure: pointer NULL in *data: SUCCESS
+[loop_body.pointer_dereference.62] line 36 dereference failure: pointer invalid in *data: SUCCESS
+[loop_body.pointer_dereference.63] line 36 dereference failure: deallocated dynamic object in *data: SUCCESS
+[loop_body.pointer_dereference.64] line 36 dereference failure: dead object in *data: SUCCESS
+[loop_body.pointer_dereference.65] line 36 dereference failure: pointer outside object bounds in *data: SUCCESS
+[loop_body.pointer_dereference.66] line 36 dereference failure: invalid integer address in *data: SUCCESS
+[loop_body.pointer_dereference.67] line 37 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.68] line 37 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.69] line 37 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.70] line 37 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.71] line 37 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.72] line 37 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.73] line 38 dereference failure: pointer NULL in *len: SUCCESS
+[loop_body.pointer_dereference.74] line 38 dereference failure: pointer invalid in *len: SUCCESS
+[loop_body.pointer_dereference.75] line 38 dereference failure: deallocated dynamic object in *len: SUCCESS
+[loop_body.pointer_dereference.76] line 38 dereference failure: dead object in *len: SUCCESS
+[loop_body.pointer_dereference.77] line 38 dereference failure: pointer outside object bounds in *len: SUCCESS
+[loop_body.pointer_dereference.78] line 38 dereference failure: invalid integer address in *len: SUCCESS
+[loop_body.pointer_dereference.79] line 40 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.80] line 40 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.81] line 40 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.82] line 40 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.83] line 40 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.84] line 40 dereference failure: invalid integer address in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.85] line 45 dereference failure: pointer NULL in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.86] line 45 dereference failure: pointer invalid in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.87] line 45 dereference failure: deallocated dynamic object in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.88] line 45 dereference failure: dead object in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.89] line 45 dereference failure: pointer outside object bounds in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.90] line 45 dereference failure: invalid integer address in dump_data->timestamp: SUCCESS
+[loop_body.pointer_dereference.91] line 47 dereference failure: pointer NULL in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.92] line 47 dereference failure: pointer invalid in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.93] line 47 dereference failure: deallocated dynamic object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.94] line 47 dereference failure: dead object in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.95] line 47 dereference failure: pointer outside object bounds in dump_data->len: SUCCESS
+[loop_body.pointer_dereference.96] line 47 dereference failure: invalid integer address in dump_data->len: SUCCESS
+
+** 1 of 123 failed (2 iterations)
+VERIFICATION FAILED
+# exit: 10  parede: 1.722494251 s
