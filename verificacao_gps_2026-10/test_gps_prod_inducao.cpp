@@ -12,10 +12,10 @@
 int main() {
     struct gps_dump_s dump;
     dump.len = nondet_uint8_t();
-    __CPROVER_assume(dump.len < sizeof(dump.data));          // hipotese de inducao I
+    ASSUME(dump.len < sizeof(dump.data));          // hipotese de inducao I
 
     size_t len = nondet_size_t();
-    __CPROVER_assume(len > 0 && len <= 4096);                  // origem: buffer do chamador
+    ASSUME(len > 0 && len <= 4096);                  // origem: buffer do chamador
     static uint8_t src[4096];                                  // buffer do chamador, >= len
     const uint8_t *data = src;
 

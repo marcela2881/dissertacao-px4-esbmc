@@ -8,7 +8,7 @@ int main() {
     dump.len = nondet_uint8_t();                               // SEM hipotese I
 
     size_t len = nondet_size_t();
-    __CPROVER_assume(len > 0 && len <= 4096);
+    ASSUME(len > 0 && len <= 4096);
     static uint8_t src[4096];                                  // buffer do chamador, >= len
     const uint8_t *data = src;
 

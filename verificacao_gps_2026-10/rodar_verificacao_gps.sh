@@ -37,7 +37,7 @@ run() { # grupo ferramenta binario arquivo flags...
 # --- 4.2: producao (79 bytes), prova indutiva; sem laco => sem desenrolamento
 for f in test_gps_prod_inducao.cpp test_gps_prod_sem_invariante.cpp; do
   run prod cbmc  "$CBMC"  "$f" --pointer-check --bounds-check
-  run prod esbmc "$ESBMC" "$f" --default-solver boolector
+  run prod esbmc "$ESBMC" "$f" --unwind 80 --default-solver boolector   # unwinding assertions ligadas (padrao)
 done
 
 # --- 4.1 (a): ESBMC no MESMO harness da Tabela II (test_gps_driver.cpp),

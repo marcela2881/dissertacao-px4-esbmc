@@ -32,6 +32,7 @@ análise de código. Aqui o argumento é verificado formalmente.
 | `test_gps_patch_fair.cpp` | **4.1.** Mesmo `main`, com a guarda do PR #27576 (forma de `cbmc/test_gps_patch.cpp`: `int available`, zera `len` e interrompe) |
 | `test_gps_patch_v2.cpp` | **4.1.** Mesmo `main`, com a guarda na forma pedida pelo mantenedor (zera `len` no topo do laço e segue) |
 | `test_gps_driver_patch_pr.cpp`, `test_gps_driver_patch_v2.cpp` | **4.1, ESBMC.** Cópias de `resultados/GPS/test_gps_driver.cpp` (harness da Tabela II), alteradas **só** no laço de `dumpGpsData()`. Diferença: `diff --strip-trailing-cr`. As linhas do traço deslocam +2 (cabeçalho) |
+| `logs/nuvem/validacao_build/` | Logs da validação do build do ESBMC contra julho |
 | `rodar_verificacao_gps.sh` | Roda tudo e grava os logs com cabeçalho (data, máquina, CPU, versão, comando) e o tempo de parede |
 
 ## Base da indução (4.2)
@@ -47,18 +48,42 @@ Com base e passo, o invariante vale para qualquer número de iterações e chama
 sem limite de desenrolamento. O `memcpy` fica dentro dos limites porque é checado
 no passo.
 
-## Resultados (nuvem, CBMC 5.95.1, 11/10/2026)
+## Resultados (nuvem, 11/10/2026: ESBMC 8.1.0 + Boolector 3.2.4 e CBMC 5.95.1)
 
-| Harness | Configuração | Veredito | Propriedades |
+O ESBMC foi compilado a partir da tag `v8.1` com Boolector 3.2.4, porque o
+binário de release não estava acessível pela nuvem. **Validação do build:** rodando
+os harnesses de julho, ele reproduz exatamente os logs de `medianas_logs/`:
+Barometer 93, IMU 120 (`count = 9088`), Navigator 50, PWM 38 e GPS 4463 VCCs
+(`input_len = 10`, `.len = 207`). Logs em `logs/nuvem/validacao_build/` e
+`logs/nuvem/t2_test_gps_driver_esbmc_u10_r1.log`.
+
+### 4.1: patch, mesmas condições com e sem patch
+
+| Ferramenta / harness | Sem patch | Patch do PR #27576 | Patch v2 (mantenedor) |
 |---|---|---|---|
-| `test_gps_prod_inducao` | `--pointer-check --bounds-check` | SUCCESSFUL | 0 de 124 |
-| `test_gps_prod_sem_invariante` | idem | **FAILED** (`memcpy destination region writeable`; `dump.len=128`, `len=77`) | 1 de 123 |
-| `test_gps_fair_sem_patch` | unwind 2 (flags de `cbmc/seeded_gps/COMANDO.txt`) | **FAILED** (`memcpy destination region writeable`) | 1 de 73 |
-| `test_gps_patch_fair` | unwind 2 | SUCCESSFUL | 0 de 73 |
-| `test_gps_patch_v2` | unwind 2 | SUCCESSFUL | 0 de 79 |
+| ESBMC, harness da Tabela II, flags da Tabela II (`--unwind 10 --no-unwinding-assertions --overflow-check`) | **FAILED** (4463 VCCs; 10/207, igual a julho) | SUCCESSFUL (3453 VCCs) | SUCCESSFUL (4760 VCCs) |
+| CBMC, janela justa `len >= 190`, unwind 2 | **FAILED** (1 de 73) | SUCCESSFUL (0 de 73) | SUCCESSFUL (0 de 79) |
+| CBMC, idem, unwind 3 | **FAILED** (1 de 73) | SUCCESSFUL (0 de 73) | SUCCESSFUL (0 de 79) |
+| CBMC, idem, unwind 5 | **FAILED** (1 de 73) | SUCCESSFUL (0 de 73) | SUCCESSFUL (0 de 79) |
 
-Unwind 3 e 5 e o ESBMC 8.1 + Boolector 3.2.4: em andamento. Esta tabela vai ser
-atualizada.
+Escopo: são verificações **limitadas** (unwind 10 no ESBMC; 2, 3 e 5 no CBMC; sem
+unwinding assertions, como na Tabela II). Mostram que, sob as mesmas
+pré-condições, a guarda elimina a violação que o harness sem patch exibe. Não
+provam a ausência de outros caminhos além do limite.
+
+### 4.2: driver de produção (79 bytes), prova indutiva
+
+| Harness | CBMC | ESBMC (`--unwind 80`, unwinding assertions **ligadas**) |
+|---|---|---|
+| `test_gps_prod_inducao` | SUCCESSFUL (0 de 124) | SUCCESSFUL (447 VCCs) |
+| `test_gps_prod_sem_invariante` (controle) | **FAILED** (`dump.len=128`) | **FAILED** (`dereference failure: Access to object out of bounds`, `.len=146`) |
+
+Aqui o resultado **não é limitado**. O harness não tem laço próprio, e o único
+laço (o modelo de `memcpy` do ESBMC, até 79 bytes) é coberto pelo unwind 80, com
+a assertion de desenrolamento ligada. Com a base (`memset`) e a premissa de
+escritor único, o invariante `len < 79` vale em toda execução do driver real.
+Logo, o estado que viola o harness da Tabela II (`len = 207`) é inalcançável na
+produção. É o argumento do mantenedor, agora verificado.
 
 ## Como rodar no iartes
 

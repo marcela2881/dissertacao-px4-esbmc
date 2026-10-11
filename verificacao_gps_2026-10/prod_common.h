@@ -7,6 +7,9 @@
 #include <string.h>
 #include <stdint.h>
 #include <stddef.h>
+// Assuncao portavel: CBMC e ESBMC aceitam a forma SV-COMP __VERIFIER_assume.
+extern "C" void __VERIFIER_assume(int);
+#define ASSUME(c) __VERIFIER_assume(c)
 uint8_t nondet_uint8_t();
 size_t nondet_size_t();
 bool nondet_bool();
