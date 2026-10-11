@@ -1,0 +1,22 @@
+# data: 2026-10-11T18:04:07Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/Navigator_Mission/test_navigator_mission.cpp --unwind 15 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Navigator_Mission/test_navigator_mission.cpp
+resultados/Navigator_Mission/test_navigator_mission.cpp:77:10: error: use of undeclared identifier 'isfinite'; did you mean 'std::isfinite'?
+   77 |     if (!isfinite(distance_to_wp) || distance_to_wp < 0.0f) return 0;
+      |          ^~~~~~~~
+      |          std::isfinite
+/esbmc-vfs/cpp/cmath:301:10: note: 'std::isfinite' declared here
+  301 | CIMPORT3(isfinite);
+      |          ^
+resultados/Navigator_Mission/test_navigator_mission.cpp:78:10: error: use of undeclared identifier 'isfinite'; did you mean 'std::isfinite'?
+   78 |     if (!isfinite(acceptance_radius) || acceptance_radius <= 0.0f) return 0;
+      |          ^~~~~~~~
+      |          std::isfinite
+/esbmc-vfs/cpp/cmath:301:10: note: 'std::isfinite' declared here
+  301 | CIMPORT3(isfinite);
+      |          ^
+ERROR: PARSING ERROR
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 6

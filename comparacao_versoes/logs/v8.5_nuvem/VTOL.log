@@ -1,0 +1,120 @@
+# data: 2026-10-11T18:04:15Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/VTOL/test_vtol_type.cpp --unwind 10 --no-library --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with systemlibc
+Parsing resultados/VTOL/test_vtol_type.cpp
+Converting
+WARNING: no definition for external symbol __ESBMC_alloc declared at file esbmc_intrinsics.h line 17 column 1
+WARNING: no definition for external symbol __ESBMC_is_dynamic declared at file esbmc_intrinsics.h line 20 column 1
+WARNING: no definition for external symbol __ESBMC_alloc_size declared at file esbmc_intrinsics.h line 23 column 1
+WARNING: no definition for external symbol __ESBMC_rounding_mode declared at file esbmc_intrinsics.h line 55 column 1
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+Generating GOTO Program
+GOTO program creation time: 4.268s
+GOTO program processing time: 0.100s
+Starting Bounded Model Checking
+WARNING: no body for function piecewise_construct_t#
+WARNING: no body for function __ESBMC_pthread_start_main_hook
+Symex completed in: 0.023s (844 assignments)
+Caching time: 0.001s (removed 32 assertions)
+Slicing time: 0.002s (removed 565 assignments)
+Generated 110 VCC(s), 78 remaining after simplification (247 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.056s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 7.063s
+BMC program time: 7.146s
+
+** Results:
+/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/ext/numeric_traits.h
+  PASSED       [global.arithmetic-overflow.1]                             line  161  arithmetic overflow on add
+  PASSED       [global.arithmetic-overflow.2]                             line  161  arithmetic overflow on div
+  PASSED       [global.arithmetic-overflow.3]                             line  161  arithmetic overflow on mul
+/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/limits
+  PASSED       [global.arithmetic-overflow.4]                             line  468  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.5]                             line  469  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.6]                             line  473  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.7]                             line  535  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.8]                             line  536  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.9]                             line  605  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.10]                            line  607  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.11]                            line  678  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.12]                            line  679  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.13]                            line  684  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.14]                            line  810  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.15]                            line  811  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.16]                            line  813  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.17]                            line  871  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.18]                            line  872  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.19]                            line  874  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.20]                            line  935  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.21]                            line  936  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.22]                            line 1002  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.23]                            line 1004  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.24]                            line 1075  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.25]                            line 1076  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.26]                            line 1142  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.27]                            line 1144  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.28]                            line 1214  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.29]                            line 1215  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.30]                            line 1281  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.31]                            line 1283  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.32]                            line 1354  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.33]                            line 1356  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.34]                            line 1424  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.35]                            line 1426  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.36]                            line 1637  arithmetic overflow on div
+  PASSED       [global.arithmetic-overflow.37]                            line 1637  arithmetic overflow on mul
+  PASSED       [global.arithmetic-overflow.38]                            line 1637  arithmetic overflow on sub
+  PASSED       [global.arithmetic-overflow.39]                            line 1688  arithmetic overflow on add
+  PASSED       [global.arithmetic-overflow.40]                            line 1688  arithmetic overflow on div
+  PASSED       [global.arithmetic-overflow.41]                            line 1688  arithmetic overflow on mul
+  PASSED       [global.arithmetic-overflow.42]                            line 1702  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.43]                            line 1703  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.44]                            line 1763  arithmetic overflow on add
+  PASSED       [global.arithmetic-overflow.45]                            line 1763  arithmetic overflow on div
+  PASSED       [global.arithmetic-overflow.46]                            line 1763  arithmetic overflow on mul
+  PASSED       [global.arithmetic-overflow.47]                            line 1777  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.48]                            line 1778  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.49]                            line 1838  arithmetic overflow on add
+  PASSED       [global.arithmetic-overflow.50]                            line 1838  arithmetic overflow on div
+  PASSED       [global.arithmetic-overflow.51]                            line 1838  arithmetic overflow on mul
+  PASSED       [global.arithmetic-overflow.52]                            line 1852  arithmetic overflow on neg
+  PASSED       [global.arithmetic-overflow.53]                            line 1853  arithmetic overflow on neg
+/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/tr1/gamma.tcc, function __bernoulli_series
+  PASSED       [__bernoulli_series.arithmetic-overflow.1]                 line   81  arithmetic overflow on floating-point ieee_div
+resultados/VTOL/test_vtol_type.cpp, function get_front_transition_time_factor
+  PASSED       [get_front_transition_time_factor.arithmetic-overflow.1]   line   25  arithmetic overflow on floating-point ieee_div
+  PASSED       [get_front_transition_time_factor.arithmetic-overflow.2]   line   26  arithmetic overflow on floating-point ieee_mul
+resultados/VTOL/test_vtol_type.cpp, function get_transition_airspeed
+  PASSED       [get_transition_airspeed.arithmetic-overflow.1]            line   34  arithmetic overflow on floating-point ieee_div
+  PASSED       [get_transition_airspeed.arithmetic-overflow.2]            line   38  arithmetic overflow on floating-point ieee_mul
+resultados/VTOL/test_vtol_type.cpp, function is_front_transition_altitude_loss
+  PASSED       [is_front_transition_altitude_loss.arithmetic-overflow.1]  line   57  arithmetic overflow on floating-point ieee_sub
+resultados/VTOL/test_vtol_type.cpp, function test_altitude_loss_detection
+  PASSED       [test_altitude_loss_detection.assertion.1]                 line  130  assertion result == 0 || result == 1
+  PASSED       [test_altitude_loss_detection.assertion.2]                 line  131  assertion result == 0
+  PASSED       [test_altitude_loss_detection.assertion.3]                 line  132  assertion result == 0
+resultados/VTOL/test_vtol_type.cpp, function test_transition_airspeed_positive
+  PASSED       [test_transition_airspeed_positive.assertion.1]            line   82  assertion airspeed >= 0.0f
+  PASSED       [test_transition_airspeed_positive.assertion.2]            line   83  assertion !isnan(airspeed)
+  PASSED       [test_transition_airspeed_positive.arithmetic-overflow.1]  line   84  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_transition_airspeed_positive.assertion.3]            line   84  assertion airspeed >= arsp_trans * 0.7f
+  PASSED       [test_transition_airspeed_positive.arithmetic-overflow.2]  line   85  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_transition_airspeed_positive.assertion.4]            line   85  assertion airspeed <= arsp_trans * 1.5f
+resultados/VTOL/test_vtol_type.cpp, function test_transition_dt_bounds
+  PASSED       [test_transition_dt_bounds.assertion.1]                    line  113  assertion dt >= TRANSITION_DT_MIN
+  PASSED       [test_transition_dt_bounds.assertion.2]                    line  114  assertion dt <= TRANSITION_DT_MAX
+  PASSED       [test_transition_dt_bounds.assertion.3]                    line  115  assertion !isnan(dt)
+  PASSED       [test_transition_dt_bounds.assertion.4]                    line  116  assertion dt > 0.0f
+resultados/VTOL/test_vtol_type.cpp, function test_transition_time_factor_positive
+  PASSED       [test_transition_time_factor_positive.assertion.1]         line   65  assertion factor > 0.0f
+  PASSED       [test_transition_time_factor_positive.assertion.2]         line   66  assertion !isnan(factor)
+  PASSED       [test_transition_time_factor_positive.assertion.3]         line   67  assertion !isinf(factor)
+  PASSED       [test_transition_time_factor_positive.assertion.4]         line   68  assertion factor >= 0.5f && factor <= 3.0f
+
+** 0 of 76 properties failed, 76 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0

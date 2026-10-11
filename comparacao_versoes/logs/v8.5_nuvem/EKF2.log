@@ -1,0 +1,93 @@
+# data: 2026-10-11T17:59:14Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/EKF2_Covariance/test_ekf2_covariance.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/EKF2_Covariance/test_ekf2_covariance.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.426s
+GOTO program processing time: 0.029s
+Starting Bounded Model Checking
+Symex completed in: 0.010s (294 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 139 assignments)
+Generated 63 VCC(s), 37 remaining after simplification (155 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.018s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 32.993s
+BMC program time: 33.023s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                             line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                             line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                             line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                             line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                             line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                             line  20  arithmetic overflow on floating-point ieee_mul
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function compute_ekf_dt
+  PASSED       [compute_ekf_dt.arithmetic-overflow.1]                     line  89  arithmetic overflow on floating-point ieee_add
+  PASSED       [compute_ekf_dt.arithmetic-overflow.2]                     line  89  arithmetic overflow on floating-point ieee_mul
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function compute_quat_tilt_var
+  PASSED       [compute_quat_tilt_var.arithmetic-overflow.1]              line 100  arithmetic overflow on floating-point ieee_mul
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function compute_quat_yaw_var
+  PASSED       [compute_quat_yaw_var.arithmetic-overflow.1]               line 106  arithmetic overflow on floating-point ieee_mul
+  PASSED       [compute_quat_yaw_var.arithmetic-overflow.2]               line 108  arithmetic overflow on floating-point ieee_mul
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function constrain_state_var
+  PASSED       [constrain_state_var.arithmetic-overflow.1]                line  51  arithmetic overflow on floating-point ieee_mul
+  PASSED       [constrain_state_var.arithmetic-overflow.2]                line  52  arithmetic overflow on floating-point ieee_add
+  PASSED       [constrain_state_var.arithmetic-overflow.3]                line  53  arithmetic overflow on floating-point ieee_div
+  PASSED       [constrain_state_var.arithmetic-overflow.4]                line  54  arithmetic overflow on floating-point ieee_mul
+  PASSED       [constrain_state_var.arithmetic-overflow.5]                line  54  arithmetic overflow on floating-point ieee_sub
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function constrain_var_limit_ratio
+  PASSED       [constrain_var_limit_ratio.arithmetic-overflow.1]          line  68  arithmetic overflow on neg
+  PASSED       [constrain_var_limit_ratio.arithmetic-overflow.2]          line  74  arithmetic overflow on floating-point ieee_div
+  PASSED       [constrain_var_limit_ratio.object-out-of-bounds.1]         line  78  dereference failure: Access to object out of bounds
+  PASSED       [constrain_var_limit_ratio.assertion.1]                    line  78  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [constrain_var_limit_ratio.object-out-of-bounds.2]         line  79  dereference failure: Access to object out of bounds
+  PASSED       [constrain_var_limit_ratio.assertion.2]                    line  79  dereference failure: Incorrect alignment when accessing data object
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function limit_heading_variance
+  PASSED       [limit_heading_variance.arithmetic-overflow.1]             line 117  arithmetic overflow on floating-point ieee_mul
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function test_covariance_diagonal_positive
+  PASSED       [test_covariance_diagonal_positive.arithmetic-overflow.1]  line 137  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_covariance_diagonal_positive.assertion.1]            line 142  assertion result >= 0.0f
+  PASSED       [test_covariance_diagonal_positive.assertion.2]            line 145  assertion !isnan(result)
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function test_ekf_dt_positive
+  PASSED       [test_ekf_dt_positive.assertion.1]                         line 206  assertion dt >= 0.0f
+  PASSED       [test_ekf_dt_positive.assertion.2]                         line 209  assertion !isnan(dt)
+  PASSED       [test_ekf_dt_positive.assertion.3]                         line 212  assertion dt > 0.0f
+  PASSED       [test_ekf_dt_positive.assertion.4]                         line 215  assertion dt <= 0.1f
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function test_heading_variance_bounded
+  PASSED       [test_heading_variance_bounded.arithmetic-overflow.1]      line 267  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_heading_variance_bounded.assertion.1]                line 270  assertion limited <= max_var
+  PASSED       [test_heading_variance_bounded.assertion.2]                line 273  assertion limited >= 0.0f
+  PASSED       [test_heading_variance_bounded.assertion.3]                line 276  assertion !isnan(limited)
+  PASSED       [test_heading_variance_bounded.arithmetic-overflow.2]      line 279  arithmetic overflow on floating-point ieee_add
+  PASSED       [test_heading_variance_bounded.assertion.4]                line 279  assertion limited <= heading_var + 1e-6f
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function test_quat_covariance_positive
+  PASSED       [test_quat_covariance_positive.arithmetic-overflow.1]      line 236  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_quat_covariance_positive.assertion.1]                line 236  assertion tilt_var >= 0.01f * 0.01f
+  PASSED       [test_quat_covariance_positive.assertion.2]                line 239  assertion tilt_var >= 0.0f
+  PASSED       [test_quat_covariance_positive.assertion.3]                line 242  assertion yaw_var >= 0.0f
+  PASSED       [test_quat_covariance_positive.assertion.4]                line 245  assertion !isnan(yaw_var)
+  PASSED       [test_quat_covariance_positive.assertion.5]                line 248  assertion tilt_var <= VAR_QUAT_MAX
+  PASSED       [test_quat_covariance_positive.assertion.6]                line 249  assertion yaw_var <= VAR_QUAT_MAX
+resultados/EKF2_Covariance/test_ekf2_covariance.cpp, function test_variance_ratio_ordering
+  PASSED       [test_variance_ratio_ordering.assertion.1]                 line 175  assertion result == 0
+  PASSED       [test_variance_ratio_ordering.assertion.2]                 line 178  assertion limited_min <= limited_max
+  PASSED       [test_variance_ratio_ordering.assertion.3]                 line 181  assertion limited_min >= min_var
+  PASSED       [test_variance_ratio_ordering.assertion.4]                 line 182  assertion limited_max <= max_var
+  PASSED       [test_variance_ratio_ordering.assertion.5]                 line 185  assertion limited_min >= 0.0f
+  PASSED       [test_variance_ratio_ordering.assertion.6]                 line 186  assertion limited_max >= 0.0f
+
+** 0 of 49 properties failed, 49 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0

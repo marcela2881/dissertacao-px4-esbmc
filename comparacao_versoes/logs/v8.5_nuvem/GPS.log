@@ -1,0 +1,645 @@
+# data: 2026-10-11T17:59:54Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/GPS/test_gps_driver.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/GPS/test_gps_driver.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.197s
+GOTO program processing time: 0.002s
+Starting Bounded Model Checking
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 9 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 9 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 9 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 9 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 1   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 2   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 3   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 4   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 5   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 6   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 7   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 8   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 9 iteration 9   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Unwinding loop 5 iteration 1   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 2   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 3   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 4   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 5   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 6   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 7   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 8   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Unwinding loop 5 iteration 9   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 5 iteration 10   file /esbmc-vfs/libc/library/string.c line 284 column 3 function __memcpy_impl
+Not unwinding loop 9 iteration 10   file resultados/GPS/test_gps_driver.cpp line 66 column 5 function dumpGpsData
+Symex completed in: 1.119s (5080 assignments)
+Caching time: 0.008s (removed 0 assertions)
+Slicing time: 0.050s (removed 1584 assignments)
+Generated 4263 VCC(s), 1067 remaining after simplification (3596 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 1.935s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 149.268s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file resultados/GPS/test_gps_driver.cpp line 224 column 5 function main thread 0
+----------------------------------------------------
+  test_choice = 3 (00000000 00000000 00000000 00000011)
+
+State 63 file resultados/GPS/test_gps_driver.cpp line 179 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  input_len = 1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+State 66 file resultados/GPS/test_gps_driver.cpp line 183 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  input_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+
+State 67 file resultados/GPS/test_gps_driver.cpp line 185 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  dump_buffer.len = { .data={ 0, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, .len=224,
+    .instance=0, .anon_pad#3=281474976710655, .timestamp=0xFFFFFFFFFFFFFFFF }
+
+State 73 file /esbmc-vfs/libc/library/string.c line 286 column 5 function __memcpy_impl thread 0
+----------------------------------------------------
+Violated property:
+  file /esbmc-vfs/libc/library/string.c line 286 column 5 function __memcpy_impl
+  dereference failure: Access to object out of bounds
+  CWE: CWE-125, CWE-787, CWE-823
+
+
+** Results:
+resultados/GPS/test_gps_driver.cpp, function dumpGpsData
+  PASSED       [dumpGpsData.object-out-of-bounds.1]                        line  63  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.1]                                   line  63  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [dumpGpsData.arithmetic-overflow.1]                         line  70  arithmetic overflow on sub
+  PASSED       [dumpGpsData.object-out-of-bounds.2]                        line  70  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.2]                                   line  70  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [dumpGpsData.arithmetic-overflow.2]                         line  71  arithmetic overflow on sub
+  PASSED       [dumpGpsData.object-out-of-bounds.3]                        line  71  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.3]                                   line  71  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [dumpGpsData.object-out-of-bounds.4]                        line  75  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.4]                                   line  75  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [dumpGpsData.object-out-of-bounds.5]                        line  79  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.5]                                   line  79  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [dumpGpsData.object-out-of-bounds.6]                        line  83  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.6]                                   line  83  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [dumpGpsData.arithmetic-overflow.3]                         line  86  arithmetic overflow on shl
+  PASSED       [dumpGpsData.object-out-of-bounds.7]                        line  86  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.7]                                   line  86  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [dumpGpsData.object-out-of-bounds.8]                        line  90  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.8]                                   line  90  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [dumpGpsData.object-out-of-bounds.9]                        line  94  dereference failure: Access to object out of bounds
+  PASSED       [dumpGpsData.assertion.9]                                   line  94  dereference failure: Incorrect alignment when accessing data object
+resultados/GPS/test_gps_driver.cpp, function test_gps_real_bit_operation
+  NOT CHECKED  [test_gps_real_bit_operation.arithmetic-overflow.1]         line 181  arithmetic overflow on add
+  NOT CHECKED  [test_gps_real_bit_operation.arithmetic-overflow.2]         line 186  arithmetic overflow on sub
+  NOT CHECKED  [test_gps_real_bit_operation.assertion.1]                   line 195  assertion dump_buffer.len == 0 || dump_buffer.len <= GPS_DUMP_DATA_SIZE || (dump_buffer.len & 0x7F) <= GPS_DUMP_DATA_SIZE
+resultados/GPS/test_gps_driver.cpp, function test_gps_real_buffer_bounds
+  NOT CHECKED  [test_gps_real_buffer_bounds.assertion.1]                   line 125  assertion dump_buffer.len <= GPS_DUMP_DATA_SIZE
+resultados/GPS/test_gps_driver.cpp, function test_gps_real_full_buffer_edge_case
+  NOT CHECKED  [test_gps_real_full_buffer_edge_case.assertion.1]           line 219  assertion dump_buffer.len <= GPS_DUMP_DATA_SIZE
+resultados/GPS/test_gps_driver.cpp, function test_gps_real_loop_termination
+  PASSED       [test_gps_real_loop_termination.assertion.1]                line 171  assertion true
+resultados/GPS/test_gps_driver.cpp, function test_gps_real_underflow_protection
+  NOT CHECKED  [test_gps_real_underflow_protection.arithmetic-overflow.1]  line 142  arithmetic overflow on sub
+  NOT CHECKED  [test_gps_real_underflow_protection.assertion.1]            line 149  assertion dump_buffer.len <= GPS_DUMP_DATA_SIZE
+/esbmc-vfs/libc/library/string.c, function __memcpy_impl
+  FAILED       [__memcpy_impl.object-out-of-bounds.1]                      line 286  dereference failure: Access to object out of bounds
+  PASSED       [__memcpy_impl.assertion.1]                                 line 286  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [__memcpy_impl.array-bounds-violated.1]                     line 286  dereference failure: array bounds violated
+
+** 1 of 32 properties failed, 21 passed, 10 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 1

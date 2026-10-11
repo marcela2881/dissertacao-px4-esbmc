@@ -1,0 +1,72 @@
+# data: 2026-10-11T17:59:01Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/Battery_Monitor/test_battery.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Battery_Monitor/test_battery.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.428s
+GOTO program processing time: 0.032s
+Starting Bounded Model Checking
+Symex completed in: 0.009s (297 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 149 assignments)
+Generated 49 VCC(s), 32 remaining after simplification (148 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.013s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 12.818s
+BMC program time: 12.841s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                       line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                       line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                       line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                       line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                       line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                       line  20  arithmetic overflow on floating-point ieee_mul
+resultados/Battery_Monitor/test_battery.cpp, function computeScale
+  PASSED       [computeScale.arithmetic-overflow.1]                 line  70  arithmetic overflow on floating-point ieee_div
+resultados/Battery_Monitor/test_battery.cpp, function determineFaults
+  PASSED       [determineFaults.arithmetic-overflow.1]              line  55  arithmetic overflow on floating-point ieee_mul
+  PASSED       [determineFaults.arithmetic-overflow.2]              line  56  arithmetic overflow on shl
+  PASSED       [determineFaults.arithmetic-overflow.3]              line  60  arithmetic overflow on shl
+resultados/Battery_Monitor/test_battery.cpp, function sumDischarged
+  PASSED       [sumDischarged.arithmetic-overflow.1]                line  84  arithmetic overflow on floating-point ieee_add
+  PASSED       [sumDischarged.arithmetic-overflow.2]                line  85  arithmetic overflow on floating-point ieee_div
+  PASSED       [sumDischarged.arithmetic-overflow.3]                line  85  arithmetic overflow on floating-point ieee_mul
+  PASSED       [sumDischarged.arithmetic-overflow.4]                line  86  arithmetic overflow on floating-point ieee_add
+resultados/Battery_Monitor/test_battery.cpp, function test_discharged_mah_non_negative
+  PASSED       [test_discharged_mah_non_negative.assertion.1]       line 195  assertion result >= discharged_mah
+  PASSED       [test_discharged_mah_non_negative.assertion.2]       line 198  assertion result >= 0.0f
+resultados/Battery_Monitor/test_battery.cpp, function test_over_temperature_fault
+  PASSED       [test_over_temperature_fault.arithmetic-overflow.1]  line 147  arithmetic overflow on shl
+  PASSED       [test_over_temperature_fault.assertion.1]            line 147  assertion faults & (1 << FAULT_OVER_TEMPERATURE)
+  PASSED       [test_over_temperature_fault.arithmetic-overflow.2]  line 152  arithmetic overflow on shl
+  PASSED       [test_over_temperature_fault.assertion.2]            line 152  assertion !(faults & (1 << FAULT_OVER_TEMPERATURE))
+resultados/Battery_Monitor/test_battery.cpp, function test_overvoltage_fault
+  PASSED       [test_overvoltage_fault.arithmetic-overflow.1]       line 214  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_overvoltage_fault.arithmetic-overflow.2]       line 219  arithmetic overflow on shl
+  PASSED       [test_overvoltage_fault.assertion.1]                 line 219  assertion faults & (1 << FAULT_SPIKES)
+  PASSED       [test_overvoltage_fault.arithmetic-overflow.3]       line 224  arithmetic overflow on shl
+  PASSED       [test_overvoltage_fault.assertion.2]                 line 224  assertion !(faults & (1 << FAULT_SPIKES))
+resultados/Battery_Monitor/test_battery.cpp, function test_scale_bounds
+  PASSED       [test_scale_bounds.assertion.1]                      line 170  assertion scale >= 1.0f
+  PASSED       [test_scale_bounds.assertion.2]                      line 173  assertion scale <= 1.3f
+  PASSED       [test_scale_bounds.assertion.3]                      line 176  assertion !isnan(scale)
+resultados/Battery_Monitor/test_battery.cpp, function test_warning_threshold_order
+  PASSED       [test_warning_threshold_order.assertion.1]           line 111  assertion w == WARNING_NONE || w == WARNING_LOW || w == WARNING_CRITICAL || w == WARNING_EMERGENCY
+  PASSED       [test_warning_threshold_order.assertion.2]           line 118  assertion w == WARNING_EMERGENCY
+  PASSED       [test_warning_threshold_order.assertion.3]           line 123  assertion w == WARNING_NONE
+
+** 0 of 31 properties failed, 31 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0

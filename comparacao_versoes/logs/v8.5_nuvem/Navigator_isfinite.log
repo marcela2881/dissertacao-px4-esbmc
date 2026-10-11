@@ -1,0 +1,77 @@
+# comando: esbmc comparacao_versoes/navigator_v85_isfinite.cpp --unwind 15 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+ESBMC version 8.5.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing comparacao_versoes/navigator_v85_isfinite.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.457s
+GOTO program processing time: 0.031s
+Starting Bounded Model Checking
+Unwinding loop 32 iteration 1   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 2   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 3   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 4   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 5   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 6   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 7   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 8   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 9   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 10   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 11   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 12   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 13   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Unwinding loop 32 iteration 14   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Not unwinding loop 32 iteration 15   file comparacao_versoes/navigator_v85_isfinite.cpp line 122 column 5 function get_next_position_items
+Symex completed in: 0.013s (355 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 178 assignments)
+Generated 50 VCC(s), 33 remaining after simplification (177 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.273s
+BMC program time: 0.290s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                       line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                       line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                       line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                       line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                       line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                       line  20  arithmetic overflow on floating-point ieee_mul
+comparacao_versoes/navigator_v85_isfinite.cpp, function get_next_position_items
+  PASSED       [get_next_position_items.arithmetic-overflow.1]      line 123  arithmetic overflow on add
+comparacao_versoes/navigator_v85_isfinite.cpp, function test_mission_index_bounds
+  PASSED       [test_mission_index_bounds.assertion.1]              line 151  assertion result == 0
+  PASSED       [test_mission_index_bounds.assertion.2]              line 156  assertion result == 0
+  PASSED       [test_mission_index_bounds.assertion.3]              line 161  assertion result == 1
+comparacao_versoes/navigator_v85_isfinite.cpp, function test_next_item_index_bounds
+  PASSED       [test_next_item_index_bounds.assertion.1]            line 265  assertion found <= max_items
+  PASSED       [test_next_item_index_bounds.assertion.2]            line 268  assertion found >= 0
+  PASSED       [test_next_item_index_bounds.assertion.3]            line 272  assertion found == 0
+  PASSED       [test_next_item_index_bounds.arithmetic-overflow.1]  line 277  arithmetic overflow on sub
+  PASSED       [test_next_item_index_bounds.assertion.4]            line 277  assertion found <= (mission_count - start_index)
+comparacao_versoes/navigator_v85_isfinite.cpp, function test_next_waypoint_validity
+  PASSED       [test_next_waypoint_validity.assertion.1]            line 210  assertion next_valid == 0
+  PASSED       [test_next_waypoint_validity.assertion.2]            line 215  assertion next_valid == 0
+  PASSED       [test_next_waypoint_validity.assertion.3]            line 220  assertion next_valid == 0
+  PASSED       [test_next_waypoint_validity.assertion.4]            line 224  assertion next_valid == 0 || next_valid == 1
+comparacao_versoes/navigator_v85_isfinite.cpp, function test_no_save_while_armed
+  PASSED       [test_no_save_while_armed.assertion.1]               line 240  assertion can_save == 0
+  PASSED       [test_no_save_while_armed.assertion.2]               line 245  assertion can_save == 1
+comparacao_versoes/navigator_v85_isfinite.cpp, function test_takeoff_distance_valid
+  PASSED       [test_takeoff_distance_valid.assertion.1]            line 180  assertion need_move == 0 || need_move == 1
+  PASSED       [test_takeoff_distance_valid.assertion.2]            line 184  assertion need_move == 0
+  PASSED       [test_takeoff_distance_valid.assertion.3]            line 189  assertion need_move == 1
+
+** 0 of 24 properties failed, 24 passed
+WARNING: the unwinding bound cut a loop short while unwinding checks were disabled, so paths past the bound were assumed away rather than verified; this result holds only up to that bound
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux

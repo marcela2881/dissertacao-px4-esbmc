@@ -1,0 +1,101 @@
+# data: 2026-10-11T17:59:00Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/Barometer/test_barometer.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Barometer/test_barometer.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.452s
+GOTO program processing time: 0.044s
+Starting Bounded Model Checking
+Symex completed in: 0.015s (267 assignments)
+Caching time: 0.001s (removed 1 assertions)
+Slicing time: 0.001s (removed 148 assignments)
+Generated 93 VCC(s), 34 remaining after simplification (118 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.009s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.763s
+BMC program time: 0.790s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                         line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                         line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                         line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                         line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                         line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                         line  20  arithmetic overflow on floating-point ieee_mul
+resultados/Barometer/test_barometer.cpp, function correct_pressure
+  PASSED       [correct_pressure.arithmetic-overflow.1]               line  86  arithmetic overflow on floating-point ieee_sub
+resultados/Barometer/test_barometer.cpp, function reset_barometer
+  PASSED       [reset_barometer.object-out-of-bounds.1]               line  95  dereference failure: Access to object out of bounds
+  PASSED       [reset_barometer.assertion.1]                          line  95  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [reset_barometer.object-out-of-bounds.2]               line  96  dereference failure: Access to object out of bounds
+  PASSED       [reset_barometer.assertion.2]                          line  96  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [reset_barometer.object-out-of-bounds.3]               line  97  dereference failure: Access to object out of bounds
+  PASSED       [reset_barometer.assertion.3]                          line  97  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [reset_barometer.arithmetic-overflow.1]                line  98  arithmetic overflow on neg
+  PASSED       [reset_barometer.object-out-of-bounds.4]               line  98  dereference failure: Access to object out of bounds
+  PASSED       [reset_barometer.assertion.4]                          line  98  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [reset_barometer.object-out-of-bounds.5]               line  99  dereference failure: Access to object out of bounds
+  PASSED       [reset_barometer.assertion.5]                          line  99  dereference failure: Incorrect alignment when accessing data object
+resultados/Barometer/test_barometer.cpp, function set_calibration_index
+  PASSED       [set_calibration_index.object-out-of-bounds.1]         line  74  dereference failure: Access to object out of bounds
+  PASSED       [set_calibration_index.assertion.1]                    line  74  dereference failure: Incorrect alignment when accessing data object
+resultados/Barometer/test_barometer.cpp, function set_offset
+  PASSED       [set_offset.arithmetic-overflow.1]                     line  45  arithmetic overflow on floating-point ieee_sub
+  PASSED       [set_offset.object-out-of-bounds.1]                    line  45  dereference failure: Access to object out of bounds
+  PASSED       [set_offset.assertion.1]                               line  45  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [set_offset.object-out-of-bounds.2]                    line  47  dereference failure: Access to object out of bounds
+  PASSED       [set_offset.assertion.2]                               line  47  dereference failure: Incorrect alignment when accessing data object
+  PASSED       [set_offset.object-out-of-bounds.3]                    line  48  dereference failure: Access to object out of bounds
+  PASSED       [set_offset.assertion.3]                               line  48  dereference failure: Incorrect alignment when accessing data object
+resultados/Barometer/test_barometer.cpp, function test_calibration_index_bounds
+  PASSED       [test_calibration_index_bounds.arithmetic-overflow.1]  line 183  arithmetic overflow on neg
+  PASSED       [test_calibration_index_bounds.arithmetic-overflow.2]  line 186  arithmetic overflow on add
+  PASSED       [test_calibration_index_bounds.arithmetic-overflow.3]  line 186  arithmetic overflow on neg
+  PASSED       [test_calibration_index_bounds.assertion.1]            line 192  assertion result == 0
+  PASSED       [test_calibration_index_bounds.arithmetic-overflow.4]  line 193  arithmetic overflow on neg
+  PASSED       [test_calibration_index_bounds.assertion.2]            line 193  assertion baro.calibration_index == -1
+  PASSED       [test_calibration_index_bounds.assertion.3]            line 198  assertion result == 1
+  PASSED       [test_calibration_index_bounds.assertion.4]            line 199  assertion baro.calibration_index == (int8_t)index
+resultados/Barometer/test_barometer.cpp, function test_offset_acceptance
+  PASSED       [test_offset_acceptance.assertion.1]                   line 122  assertion result == 0
+  PASSED       [test_offset_acceptance.assertion.2]                   line 123  assertion baro.offset == old_offset
+  PASSED       [test_offset_acceptance.arithmetic-overflow.1]         line 127  arithmetic overflow on floating-point ieee_sub
+  PASSED       [test_offset_acceptance.assertion.3]                   line 129  assertion result == 0
+  PASSED       [test_offset_acceptance.assertion.4]                   line 134  assertion !isnan(baro.offset)
+  PASSED       [test_offset_acceptance.assertion.5]                   line 135  assertion !isinf(baro.offset)
+  PASSED       [test_offset_acceptance.assertion.6]                   line 140  assertion baro.calibration_count == 1
+  PASSED       [test_offset_acceptance.assertion.7]                   line 142  assertion baro.calibration_count == 0
+resultados/Barometer/test_barometer.cpp, function test_pressure_correction_valid
+  PASSED       [test_pressure_correction_valid.assertion.1]           line 224  assertion !isnan(corrected)
+  PASSED       [test_pressure_correction_valid.assertion.2]           line 227  assertion !isinf(corrected)
+  PASSED       [test_pressure_correction_valid.assertion.3]           line 230  assertion corrected >= 30000.0f && corrected <= 120000.0f
+resultados/Barometer/test_barometer.cpp, function test_priority_validation
+  PASSED       [test_priority_validation.arithmetic-overflow.1]       line 155  arithmetic overflow on neg
+  PASSED       [test_priority_validation.assertion.1]                 line 160  assertion result >= 0
+  PASSED       [test_priority_validation.assertion.2]                 line 161  assertion result <= 100
+  PASSED       [test_priority_validation.assertion.3]                 line 165  assertion result == priority
+  PASSED       [test_priority_validation.assertion.4]                 line 171  assertion result == DEFAULT_EXTERNAL_PRIORITY
+  PASSED       [test_priority_validation.assertion.5]                 line 173  assertion result == DEFAULT_PRIORITY
+resultados/Barometer/test_barometer.cpp, function test_reset_state_consistent
+  PASSED       [test_reset_state_consistent.arithmetic-overflow.1]    line 244  arithmetic overflow on modulus
+  PASSED       [test_reset_state_consistent.assertion.1]              line 249  assertion baro.offset == 0.0f
+  PASSED       [test_reset_state_consistent.assertion.2]              line 252  assertion baro.thermal_offset == 0.0f
+  PASSED       [test_reset_state_consistent.arithmetic-overflow.2]    line 255  arithmetic overflow on neg
+  PASSED       [test_reset_state_consistent.assertion.3]              line 255  assertion baro.calibration_index == -1
+  PASSED       [test_reset_state_consistent.assertion.4]              line 258  assertion baro.calibration_count == 0
+  PASSED       [test_reset_state_consistent.assertion.5]              line 261  assertion baro.priority >= 0 && baro.priority <= 100
+
+** 0 of 59 properties failed, 59 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0
