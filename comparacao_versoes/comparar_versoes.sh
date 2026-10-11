@@ -3,7 +3,7 @@
 # logs de julho (medianas_logs/, ESBMC 8.1.0 + Boolector 3.2.4).
 #
 # Uso (na raiz do repositorio):
-#   comparacao_versoes/comparar_versoes.sh <rotulo> <binario_esbmc>
+#   comparacao_versoes/comparar_versoes.sh <rotulo> <binario_esbmc> [timeout_shell_s] [timeout_esbmc]
 #   ex.: comparacao_versoes/comparar_versoes.sh v8.5_nuvem /opt/tools/esbmc-8.5/bin/esbmc
 #
 # Flags: as do artigo (comando padrao + ajustes de MAVLink, Navigator e VTOL),
@@ -13,9 +13,13 @@
 # os tempos nao.
 set -u
 ROT="${1:?rotulo}"; E="${2:?binario do esbmc}"; TO="${3:-1800}"
+# Timeout interno do ESBMC: 120s no artigo (iartes). Numa maquina mais lenta o
+# GPS (65 s no iartes) pode estourar; passe p.ex. 600s como 4o argumento.
+# Timeout = SEM VEREDITO, nunca "passou".
+ETO="${4:-120s}"
 cd "$(dirname "$0")/.."
 OUT="comparacao_versoes/logs/$ROT"; mkdir -p "$OUT"
-BASE=(--no-unwinding-assertions --overflow-check --default-solver boolector --timeout 120s)
+BASE=(--no-unwinding-assertions --overflow-check --default-solver boolector --timeout "$ETO")
 
 declare -A ARQ=(
   [Barometer]=resultados/Barometer/test_barometer.cpp
