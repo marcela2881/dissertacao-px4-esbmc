@@ -150,6 +150,10 @@ compila_roda() { # <nome_do_log> <esperado> <descricao> <flags> <fonte> -- args.
 	printf '%s\t%s\t%s\t%s\t%s\n' "$CAND" "$nome" "$esperado" "$obtido" "$desc" >> "$RES"
 }
 
+# vazamento de memoria nao e o que se testa aqui, e o LeakSanitizer falha
+# dentro de conteineres (podman/docker); por isso fica desligado
+export ASAN_OPTIONS="${ASAN_OPTIONS:-detect_leaks=0}"
+
 CHECKS_CBMC="--bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check"
 ASAN="-fsanitize=address -fno-omit-frame-pointer"
 UBSAN="-fsanitize=undefined -fno-sanitize-recover=all"
