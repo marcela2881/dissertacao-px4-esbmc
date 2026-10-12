@@ -1,0 +1,28 @@
+# PX4 local: bf6603b42b22bf69c3c187a8afcf2c42469e9932 Mon Oct 12 00:17:03 2026 +1100
+# base dos harnesses: 8be2590c1529517ccd54fbc09ae138402517baf4 Thu Jun 4 15:59:26 2026 +0000
+== src/lib/rc/sumd.cpp
+== src/drivers/telemetry/bst/bst.cpp
+e40501eba0 2026-09-29 Jacob Dahl refactor(msg): rename GPS to GNSS in messages, topics and sensor parameters (#24399)
+== src/drivers/ins/microstrain/MicroStrain.cpp
+e40501eba0 2026-09-29 Jacob Dahl refactor(msg): rename GPS to GNSS in messages, topics and sensor parameters (#24399)
+eb8f2f9b42 2026-09-28 Jacob Dahl refactor(ekf2): separate GNSS heading from position into independent topic (#27102)
+c9f5442402 2026-08-28 Jacob Dahl feat(sensors): classify sensors independently of bus topology (#28352)
+2809806c5b 2026-08-28 Saibernard refactor(lib): take AlphaFilter time parameters in microseconds (#28421)
+02c82831e0 2026-08-24 Jacob Dahl feat(gps): Galileo HAS mode, correction protocol reporting, GPSDrivers bump (#28335)
+e6df0597f0 2026-08-20 Hamish Willee fix(docs): Fix links in source (#28299)
+96e760a782 2026-07-02 Hamish Willee docs(docs): Fix almost all broken external links (#27790)
+== src/modules/logger/logger.cpp
+e6db1b3a14 2026-10-03 Julian Oes fix(various): issues found running SITL tests with sanitizers (#28943)
+e35171c3f9 2026-09-27 JC fix(logger): make logger off close the active log file (#28636)
+d537fd1ec9 2026-08-31 Jonas Perolini fix(perf): run perf_iterate_all callbacks without the list mutex (#28411)
+73a56a6a9b 2026-08-29 JC logger: fix mission log lifecycle for continuous modes (#28307)
+022d16a0d1 2026-02-18 Julian Oes fix(logger): fix TSAN issue
+3042f906ab 2026-06-23 Jukka Laitinen feat(uORB): Add an own type, orb_sub_t, for subscription handles (#27457)
+== src/modules/commander/HealthAndArmingChecks/Common.cpp
+== src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp
+ca1d36476a 2026-09-14 Julian Oes fix(commander): clamp num_events from arming_check_reply (#28598)
+6b2278eae9 2026-09-02 Phil fix(external-modes): track ext-mode-registrations by request_id to dedup (#28486)
+== src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp
+3acf7935a0 2026-09-16 Julian Oes fix(drivers/ft_technologies): bound the FT7 wind sensor parser buffers (#28600)
+== src/drivers/telemetry/iridiumsbd/IridiumSBD.cpp
+0c903d47d6 2026-09-16 Julian Oes fix(drivers/iridiumsbd): bound the TX buffer write against the bytes copied (#28599)

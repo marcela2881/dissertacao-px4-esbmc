@@ -1,0 +1,93 @@
+commit 3acf7935a0c00c7dea58f6c0d21d6a561a94be59
+Author: Julian Oes <julian@oes.ch>
+Date:   Wed Sep 16 11:02:40 2026 +1200
+
+    fix(drivers/ft_technologies): bound the FT7 wind sensor parser buffers (#28600)
+    
+    The parser indexes every one of its buffers with a counter that resets only on
+    a delimiter or end of line, so a sensor that sends neither writes past the end
+    of each of them.
+    
+    _readbuf is 30 bytes indexed by _byte_counter, which resets on '\n'. The four
+    field buffers, _raw_speed[5], _raw_angle[5], _raw_status[2] and
+    _raw_checksum[3], are indexed by _msg_byte_counter, which resets on ',', '=',
+    '*', '$' or '\r'. A response such as "$A,WVP=" followed by a long run of digits
+    walks off the speed buffer and into whatever follows it.
+    
+    Bound each write. The field buffers keep their last byte clear, since the
+    atoi() calls rely on the terminator the reset memset leaves behind.
+    
+    Those memsets also cleared _readbuf using sizeof(_linebuf), a different and
+    smaller array, so ten bytes of the previous message survived into the next and
+    fed the checksum. Use the right size.
+    
+    Reported by @kmm2003.
+    
+    Assisted-by: Claude:claude-opus-5[1m]
+    
+    Signed-off-by: Julian Oes <julian@oes.ch>
+
+diff --git a/src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp b/src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp
+index 43f74c50ad..03b6dada3c 100644
+--- a/src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp
++++ b/src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp
+@@ -158,8 +158,12 @@ int Ft7Technologies::collect()
+ 	for (int i = 0; i < ret; i++) {
+ 		// _px4_windsensor.update(timestamp_sample, (double)ret, 13.0f, _status);
+ 		// received a full message
+-		_readbuf[_byte_counter]  = readbuf[i];
+-		_byte_counter += 1;
++		// The counters below only reset on a delimiter or end of line, so a sensor that
++		// sends neither would otherwise walk off the end of each buffer.
++		if (_byte_counter < (int)sizeof(_readbuf)) {
++			_readbuf[_byte_counter] = readbuf[i];
++			_byte_counter += 1;
++		}
+ 
+ 
+ 		if (readbuf[i] == '\n') {
+@@ -193,8 +197,8 @@ int Ft7Technologies::collect()
+ 			_byte_counter = 0;
+ 			_msg_byte_counter = 0;
+ 			_checksum_counter = 0;
+-			memset(readbuf, 0, sizeof(_linebuf));
+-			memset(_readbuf, 0, sizeof(_linebuf));
++			memset(readbuf, 0, sizeof(readbuf));
++			memset(_readbuf, 0, sizeof(_readbuf));
+ 			memset(_raw_speed, 0, 5);
+ 			memset(_raw_angle, 0, 5);
+ 			memset(_raw_status, 0, 2);
+@@ -210,18 +214,29 @@ int Ft7Technologies::collect()
+ 
+ 			if (readbuf[i] != '.') {
+ 
++				// Each field is NUL-terminated by the memset on the previous message, so the
++				// last element has to stay clear for the atoi() calls above.
+ 				if (_msg_part_counter == 3) { // speed measurement
+-					_raw_speed[_msg_byte_counter] = readbuf[i];
++					if (_msg_byte_counter < (int)sizeof(_raw_speed) - 1) {
++						_raw_speed[_msg_byte_counter] = readbuf[i];
++					}
+ 
+ 				} else if (_msg_part_counter == 4) { // angle measurement
+-					_raw_angle[_msg_byte_counter] = readbuf[i];
++					if (_msg_byte_counter < (int)sizeof(_raw_angle) - 1) {
++						_raw_angle[_msg_byte_counter] = readbuf[i];
++					}
+ 
+ 				} else if (_msg_part_counter == 5) { // status
+-					_raw_status[_msg_byte_counter] = readbuf[i];
++					if (_msg_byte_counter < (int)sizeof(_raw_status) - 1) {
++						_raw_status[_msg_byte_counter] = readbuf[i];
++					}
+ 
+ 				} else if (_msg_part_counter == 6) { // checksum
+ 					_checksum_counter += 1;
+-					_raw_checksum[_msg_byte_counter] = readbuf[i];
++
++					if (_msg_byte_counter < (int)sizeof(_raw_checksum) - 1) {
++						_raw_checksum[_msg_byte_counter] = readbuf[i];
++					}
+ 
+ 				}
+ 

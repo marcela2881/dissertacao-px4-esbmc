@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-metadata><sourcecodelang>C</sourcecodelang><producer>ESBMC 8.1.0 incr</producer><specification>CHECK( LTL(G ! call(__VERIFIER_error())) )</specification><programfile>test_external_checks_events.cpp</programfile><programhash>d37ffb7e7d68ed3bdf03d05ed0abdc829b883ceefe80995a37fe1a7e9269f292</programhash><entryfunction>main</entryfunction><architecture>64bit</architecture><creationtime>2026-10-12T12:02:06</creationtime></test-metadata>

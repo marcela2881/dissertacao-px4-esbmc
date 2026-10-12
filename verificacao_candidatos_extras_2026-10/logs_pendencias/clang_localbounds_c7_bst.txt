@@ -1,0 +1,8 @@
+# 2026-10-12T12:02:55Z host=vm
+# cmd: clang++ -g -O0 -fsanitize=local-bounds replay_bst_probe_only.cpp && ./bst_lb   (ASan do clang indisponivel neste ambiente: falta libclang_rt.asan)
+/bin/bash: line 1:  1264 Illegal instruction     $T/bst_lb
+# exit: 132
+# gdb backtrace:
+Program received signal SIGILL, Illegal instruction.
+#0  bst_probe_real () at replay_bst_probe_only.cpp:134
+#1  0x00005555555551d4 in main () at replay_bst_probe_only.cpp:176

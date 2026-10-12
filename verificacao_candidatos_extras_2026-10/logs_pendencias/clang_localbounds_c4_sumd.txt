@@ -1,0 +1,7 @@
+# 2026-10-12T12:02:07Z host=vm cwd=/tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ANTIGO/rodada1
+# cmd: clang++ -fsanitize=local-bounds replay_sumd.cpp && ./sumd_lb
+length=32 sumd_data tem 64 posicoes (indices 0..63)
+Loop escreve ate rxlen <= length*2 = 64
+Tentando escrever em sumd_data[64] (ultimo invalido)...
+rxlen final=65
+# exit: 0
