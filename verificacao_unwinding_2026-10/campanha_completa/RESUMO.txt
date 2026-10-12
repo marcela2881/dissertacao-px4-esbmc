@@ -1,0 +1,4 @@
+Barometer     | VERIFICATION SUCCESSFUL   | 
+Battery       | VERIFICATION SUCCESSFUL   | 
+EKF2          | VERIFICATION SUCCESSFUL   | 
+Expo          | VERIFICATION SUCCESSFUL   | 
