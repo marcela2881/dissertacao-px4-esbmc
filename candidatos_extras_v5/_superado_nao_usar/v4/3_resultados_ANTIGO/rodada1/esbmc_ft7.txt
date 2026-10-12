@@ -1,0 +1,1280 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.091s
+GOTO program processing time: 0.002s
+Checking base case, k = 1
+Starting Bounded Model Checking
+Not unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (29 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 22 assignments)
+Generated 6 VCC(s), 2 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137918
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.009s
+No bug has been found in the base case
+Checking forward condition, k = 1
+Starting Bounded Model Checking
+Not unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (29 assignments)
+Slicing time: 0.000s (removed 22 assignments)
+Generated 5 VCC(s), 3 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137919
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 2
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (34 assignments)
+Caching time: 0.000s (removed 1 assertions)
+Slicing time: 0.000s (removed 23 assignments)
+Generated 12 VCC(s), 3 remaining after simplification (10 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137920
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+BMC program time: 0.010s
+No bug has been found in the base case
+Checking forward condition, k = 2
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (34 assignments)
+Slicing time: 0.000s (removed 23 assignments)
+Generated 9 VCC(s), 5 remaining after simplification (11 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137921
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 3
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (39 assignments)
+Caching time: 0.000s (removed 2 assertions)
+Slicing time: 0.000s (removed 24 assignments)
+Generated 18 VCC(s), 4 remaining after simplification (13 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137922
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 3
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (39 assignments)
+Slicing time: 0.000s (removed 24 assignments)
+Generated 13 VCC(s), 7 remaining after simplification (15 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137923
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+The forward condition is unable to prove the property
+Checking base case, k = 4
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (44 assignments)
+Caching time: 0.000s (removed 3 assertions)
+Slicing time: 0.000s (removed 25 assignments)
+Generated 24 VCC(s), 5 remaining after simplification (16 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137924
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 4
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (44 assignments)
+Slicing time: 0.000s (removed 25 assignments)
+Generated 17 VCC(s), 9 remaining after simplification (19 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137925
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+The forward condition is unable to prove the property
+Checking base case, k = 5
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (49 assignments)
+Caching time: 0.000s (removed 4 assertions)
+Slicing time: 0.000s (removed 26 assignments)
+Generated 30 VCC(s), 6 remaining after simplification (19 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137926
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 5
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (49 assignments)
+Slicing time: 0.000s (removed 26 assignments)
+Generated 21 VCC(s), 11 remaining after simplification (23 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137927
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 6
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (54 assignments)
+Caching time: 0.000s (removed 5 assertions)
+Slicing time: 0.000s (removed 27 assignments)
+Generated 36 VCC(s), 7 remaining after simplification (22 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137928
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 6
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (54 assignments)
+Slicing time: 0.000s (removed 27 assignments)
+Generated 25 VCC(s), 13 remaining after simplification (27 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137929
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+The forward condition is unable to prove the property
+Checking base case, k = 7
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (59 assignments)
+Caching time: 0.000s (removed 6 assertions)
+Slicing time: 0.000s (removed 28 assignments)
+Generated 42 VCC(s), 8 remaining after simplification (25 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137930
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.009s
+No bug has been found in the base case
+Checking forward condition, k = 7
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (59 assignments)
+Slicing time: 0.000s (removed 28 assignments)
+Generated 29 VCC(s), 15 remaining after simplification (31 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137931
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 8
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (64 assignments)
+Caching time: 0.000s (removed 7 assertions)
+Slicing time: 0.000s (removed 29 assignments)
+Generated 48 VCC(s), 9 remaining after simplification (28 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137932
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.006s
+BMC program time: 0.010s
+No bug has been found in the base case
+Checking forward condition, k = 8
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (64 assignments)
+Slicing time: 0.000s (removed 29 assignments)
+Generated 33 VCC(s), 17 remaining after simplification (35 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137933
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+The forward condition is unable to prove the property
+Checking base case, k = 9
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (69 assignments)
+Caching time: 0.000s (removed 8 assertions)
+Slicing time: 0.000s (removed 30 assignments)
+Generated 54 VCC(s), 10 remaining after simplification (31 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137934
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 9
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (69 assignments)
+Slicing time: 0.000s (removed 30 assignments)
+Generated 37 VCC(s), 19 remaining after simplification (39 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137935
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 10
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (74 assignments)
+Caching time: 0.000s (removed 9 assertions)
+Slicing time: 0.000s (removed 31 assignments)
+Generated 60 VCC(s), 11 remaining after simplification (34 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137936
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 10
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (74 assignments)
+Slicing time: 0.000s (removed 31 assignments)
+Generated 41 VCC(s), 21 remaining after simplification (43 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137937
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 11
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (79 assignments)
+Caching time: 0.000s (removed 10 assertions)
+Slicing time: 0.000s (removed 32 assignments)
+Generated 66 VCC(s), 12 remaining after simplification (37 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137938
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 11
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (79 assignments)
+Slicing time: 0.000s (removed 32 assignments)
+Generated 45 VCC(s), 23 remaining after simplification (47 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137939
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 12
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (84 assignments)
+Caching time: 0.000s (removed 11 assertions)
+Slicing time: 0.000s (removed 33 assignments)
+Generated 72 VCC(s), 13 remaining after simplification (40 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137940
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.003s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 12
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (84 assignments)
+Slicing time: 0.000s (removed 33 assignments)
+Generated 49 VCC(s), 25 remaining after simplification (51 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137941
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 13
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (89 assignments)
+Caching time: 0.000s (removed 12 assertions)
+Slicing time: 0.000s (removed 34 assignments)
+Generated 78 VCC(s), 14 remaining after simplification (43 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137942
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 13
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (89 assignments)
+Slicing time: 0.000s (removed 34 assignments)
+Generated 53 VCC(s), 27 remaining after simplification (55 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137943
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 14
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.003s (94 assignments)
+Caching time: 0.000s (removed 13 assertions)
+Slicing time: 0.000s (removed 35 assignments)
+Generated 84 VCC(s), 15 remaining after simplification (46 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137944
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 14
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (94 assignments)
+Slicing time: 0.000s (removed 35 assignments)
+Generated 57 VCC(s), 29 remaining after simplification (59 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137945
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 15
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (99 assignments)
+Caching time: 0.000s (removed 14 assertions)
+Slicing time: 0.002s (removed 36 assignments)
+Generated 90 VCC(s), 16 remaining after simplification (49 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137946
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 15
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (99 assignments)
+Slicing time: 0.000s (removed 36 assignments)
+Generated 61 VCC(s), 31 remaining after simplification (63 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137947
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 16
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (104 assignments)
+Caching time: 0.000s (removed 15 assertions)
+Slicing time: 0.000s (removed 37 assignments)
+Generated 96 VCC(s), 17 remaining after simplification (52 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137948
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.003s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.006s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 16
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (104 assignments)
+Slicing time: 0.002s (removed 37 assignments)
+Generated 65 VCC(s), 33 remaining after simplification (67 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137949
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 17
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (109 assignments)
+Caching time: 0.000s (removed 16 assertions)
+Slicing time: 0.002s (removed 38 assignments)
+Generated 102 VCC(s), 18 remaining after simplification (55 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137950
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.006s
+BMC program time: 0.011s
+No bug has been found in the base case
+Checking forward condition, k = 17
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.000s (109 assignments)
+Slicing time: 0.002s (removed 38 assignments)
+Generated 69 VCC(s), 35 remaining after simplification (71 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137951
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+The forward condition is unable to prove the property
+Checking base case, k = 18
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (114 assignments)
+Caching time: 0.000s (removed 17 assertions)
+Slicing time: 0.000s (removed 39 assignments)
+Generated 108 VCC(s), 19 remaining after simplification (58 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137952
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 18
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (114 assignments)
+Slicing time: 0.000s (removed 39 assignments)
+Generated 73 VCC(s), 37 remaining after simplification (75 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137953
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.003s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+The forward condition is unable to prove the property
+Checking base case, k = 19
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 19   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (119 assignments)
+Caching time: 0.000s (removed 18 assertions)
+Slicing time: 0.000s (removed 40 assignments)
+Generated 114 VCC(s), 20 remaining after simplification (61 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137954
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 19
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Not unwinding loop 24 iteration 19   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Symex completed in: 0.002s (119 assignments)
+Slicing time: 0.000s (removed 40 assignments)
+Generated 77 VCC(s), 39 remaining after simplification (79 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137955
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+The forward condition is unable to prove the property
+Checking base case, k = 20
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 24 iteration 19   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 103 column 2 function main
+Unwinding loop 23 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 19   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Not unwinding loop 23 iteration 20   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 1   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 2   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 3   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 4   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 5   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 6   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 7   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 8   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 9   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 10   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 11   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 12   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 13   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 14   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 15   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 16   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 17   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 18   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Unwinding loop 23 iteration 19   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Not unwinding loop 23 iteration 20   file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 58 column 2 function simulate_collect_call
+Symex completed in: 0.171s (3789 assignments)
+Caching time: 0.006s (removed 22 assertions)
+Slicing time: 0.007s (removed 1803 assignments)
+Generated 1661 VCC(s), 633 remaining after simplification (1964 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 137956
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.031s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.398s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 101 column 2 function main thread 0
+----------------------------------------------------
+  readbuf = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+
+State 3 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[0] = 13 (00001101)
+
+State 6 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[1] = 61 (00111101)
+
+State 9 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[2] = 44 (00101100)
+
+State 12 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[3] = 13 (00001101)
+
+State 15 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[4] = -118 (10001010)
+
+State 18 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[5] = 46 (00101110)
+
+State 21 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[6] = 42 (00101010)
+
+State 24 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[7] = 44 (00101100)
+
+State 27 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[8] = 42 (00101010)
+
+State 30 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[9] = 42 (00101010)
+
+State 33 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[10] = 42 (00101010)
+
+State 36 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[11] = 42 (00101010)
+
+State 39 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[12] = 44 (00101100)
+
+State 42 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[13] = 42 (00101010)
+
+State 45 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[14] = 44 (00101100)
+
+State 48 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[15] = 61 (00111101)
+
+State 51 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[16] = 36 (00100100)
+
+State 54 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[17] = -118 (10001010)
+
+State 57 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 104 column 16 function main thread 0
+----------------------------------------------------
+  readbuf[18] = -118 (10001010)
+
+State 60 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 111 column 2 function main thread 0
+----------------------------------------------------
+  ret1 = 12 (00000000 00000000 00000000 00001100)
+
+State 68 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 2 (00000000 00000000 00000000 00000010)
+
+State 70 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 2 (00000000 00000000 00000000 00000010)
+
+State 75 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 3 (00000000 00000000 00000000 00000011)
+
+State 77 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 3 (00000000 00000000 00000000 00000011)
+
+State 82 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 4 (00000000 00000000 00000000 00000100)
+
+State 84 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 4 (00000000 00000000 00000000 00000100)
+
+State 89 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 5 (00000000 00000000 00000000 00000101)
+
+State 93 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 93 column 5 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_byte_counter = 1 (00000000 00000000 00000000 00000001)
+
+State 98 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 6 (00000000 00000000 00000000 00000110)
+
+State 103 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 7 (00000000 00000000 00000000 00000111)
+
+State 105 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 5 (00000000 00000000 00000000 00000101)
+
+State 110 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 8 (00000000 00000000 00000000 00001000)
+
+State 112 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 6 (00000000 00000000 00000000 00000110)
+
+State 117 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 9 (00000000 00000000 00000000 00001001)
+
+State 119 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 7 (00000000 00000000 00000000 00000111)
+
+State 124 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 10 (00000000 00000000 00000000 00001010)
+
+State 126 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 8 (00000000 00000000 00000000 00001000)
+
+State 131 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 11 (00000000 00000000 00000000 00001011)
+
+State 133 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 9 (00000000 00000000 00000000 00001001)
+
+State 138 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 12 (00000000 00000000 00000000 00001100)
+
+State 140 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 10 (00000000 00000000 00000000 00001010)
+
+State 142 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 115 column 2 function main thread 0
+----------------------------------------------------
+  ret2 = 19 (00000000 00000000 00000000 00010011)
+
+State 148 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 13 (00000000 00000000 00000000 00001101)
+
+State 150 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 11 (00000000 00000000 00000000 00001011)
+
+State 155 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 14 (00000000 00000000 00000000 00001110)
+
+State 157 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 12 (00000000 00000000 00000000 00001100)
+
+State 162 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 15 (00000000 00000000 00000000 00001111)
+
+State 164 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 13 (00000000 00000000 00000000 00001101)
+
+State 169 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 16 (00000000 00000000 00000000 00010000)
+
+State 171 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 14 (00000000 00000000 00000000 00001110)
+
+State 176 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 17 (00000000 00000000 00000000 00010001)
+
+State 178 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 93 column 5 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_byte_counter = 1 (00000000 00000000 00000000 00000001)
+
+State 183 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 18 (00000000 00000000 00000000 00010010)
+
+State 188 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 19 (00000000 00000000 00000000 00010011)
+
+State 190 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 15 (00000000 00000000 00000000 00001111)
+
+State 195 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 20 (00000000 00000000 00000000 00010100)
+
+State 197 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 16 (00000000 00000000 00000000 00010000)
+
+State 202 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 21 (00000000 00000000 00000000 00010101)
+
+State 204 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 17 (00000000 00000000 00000000 00010001)
+
+State 209 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 22 (00000000 00000000 00000000 00010110)
+
+State 211 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 18 (00000000 00000000 00000000 00010010)
+
+State 216 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 23 (00000000 00000000 00000000 00010111)
+
+State 218 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 19 (00000000 00000000 00000000 00010011)
+
+State 223 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 24 (00000000 00000000 00000000 00011000)
+
+State 225 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 20 (00000000 00000000 00000000 00010100)
+
+State 230 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 25 (00000000 00000000 00000000 00011001)
+
+State 232 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 21 (00000000 00000000 00000000 00010101)
+
+State 237 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 26 (00000000 00000000 00000000 00011010)
+
+State 239 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 22 (00000000 00000000 00000000 00010110)
+
+State 244 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 27 (00000000 00000000 00000000 00011011)
+
+State 246 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 23 (00000000 00000000 00000000 00010111)
+
+State 251 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 28 (00000000 00000000 00000000 00011100)
+
+State 253 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 24 (00000000 00000000 00000000 00011000)
+
+State 258 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 29 (00000000 00000000 00000000 00011101)
+
+State 260 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 73 column 4 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_part_counter = 25 (00000000 00000000 00000000 00011001)
+
+State 265 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 62 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+  _byte_counter = 30 (00000000 00000000 00000000 00011110)
+
+State 267 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 93 column 5 function simulate_collect_call thread 0
+----------------------------------------------------
+  _msg_byte_counter = 1 (00000000 00000000 00000000 00000001)
+
+State 270 file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 61 column 3 function simulate_collect_call thread 0
+----------------------------------------------------
+Violated property:
+  file sessao_30jun2026/harnesses_sagres/test_ft7_technologies.cpp line 61 column 3 function simulate_collect_call
+  array bounds violated: array `_readbuf' upper bound
+  (signed long int)_byte_counter < 30
+
+
+VERIFICATION FAILED
+
+Bug found (k = 20)

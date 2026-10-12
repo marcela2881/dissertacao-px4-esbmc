@@ -1,0 +1,48 @@
+COMPARACAO DOS DOIS REPLAYS DO CANDIDATO 7 (bst.cpp)
+=====================================================
+
+asan_bst_codigo_real.txt   -> replay_bst_real.cpp    (ANTIGO — nao alcanca probe())
+asan_bst_probe_only.txt    -> replay_bst_probe_only.cpp (CORRIGIDO)
+
+O QUE MUDA
+----------
+O main() do replay_bst_real.cpp injetava o contraexemplo numa copia
+heap-alocada da struct ANTES de chamar bst_probe_real(). Essa escrita
+disparava o AddressSanitizer e abortava o processo. Resultado: o probe()
+verbatim do PX4 nunca executava, e o overflow registrado era o da struct
+sintetica do main.
+
+Confirmacao no log antigo: a pilha termina em
+  replay_bst_real.cpp:172 in main
+e a saida nao contem "Rodando probe() completo".
+
+No log corrigido a pilha traz:
+  #3 bst_probe_real ... replay_bst_probe_only.cpp:136
+  #4 main            ... replay_bst_probe_only.cpp:176
+com o objeto dev_info_reply em [48, 90) e acesso no offset 90.
+O frame e bst_probe_real(), nao main: o codigo real executou.
+
+COMO LER O DIAGNOSTICO
+----------------------
+O ASan flagra a LEITURA do %s no PX4_DEBUG correndo alem de dev_name, e nao
+a escrita em si. A escrita em dev_name[244] cai bem alem do objeto e o ASan nao a reporta
+diretamente (nao verificado se ela pula a redzone). Para fixar a escrita na
+linha exata, rodar com -fsanitize=local-bounds (ainda por fazer).
+
+PROVENIENCIA
+------------
+asan_bst_probe_only.txt foi gerado em /home/claude/work_pkg (ambiente da Claude, x86_64 Linux, g++), NAO no iartes. Repetir no iartes antes de citar.
+
+REPRODUCAO INDEPENDENTE
+-----------------------
+Em macOS 26.6 / aarch64 / Apple clang 21.0.0 o mesmo driver produziu
+stack-buffer-overflow com READ of size 37 e o mesmo objeto dev_info_reply
+em [48, 90). Nesta execucao (x86_64 Linux, g++) o READ e de size 34. A
+diferenca de tamanho decorre do layout de pilha de cada plataforma; a
+violacao e a mesma.
+
+POR QUE O ARQUIVO ANTIGO PERMANECE NO PACOTE
+--------------------------------------------
+Rastreabilidade. O replay_bst_real.cpp e o seu log estao depositados no
+Zenodo e citados no artigo; remove-los apagaria o registro do erro e da
+correcao. Para reproduzir o achado, use o replay_bst_probe_only.cpp.

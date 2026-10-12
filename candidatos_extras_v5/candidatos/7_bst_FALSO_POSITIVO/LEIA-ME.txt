@@ -1,0 +1,16 @@
+Candidato 7 — bst.cpp — FALSO POSITIVO (nao abrir issue)
+
+O BST::probe() do commit testado (8be2590c15) ja tinha duas guardas, vindas do
+commit e8e86a2e0f (marco de 2026, "validate reply length and dev_name_len
+before use"):
+    if (dev_info_reply.length >= sizeof(dev_info_reply)) { ... return -EIO; }
+    if (dev_info_reply.payload.dev_name_len >= sizeof(dev_info_reply.payload.dev_name))
+        dev_info_reply.payload.dev_name_len = sizeof(dev_info_reply.payload.dev_name) - 1;
+O harness antigo (harness_sem_guardas.cpp) e o replay antigo omitiam as duas.
+Guarda de producao omitida no harness = falso positivo.
+
+harness_sem_guardas.cpp / replay_sem_guardas.cpp : antigos, so para rastreio.
+harness_fiel.cpp : com as guardas e a resposta I2C inteira livre.
+
+Esperado: esbmc_sem_guardas FAILED (o erro do harness antigo);
+esbmc_fiel e cbmc_fiel SUCCESSFUL.

@@ -1,0 +1,11 @@
+# data:     2026-10-12T12:47:24Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/4_sumd/fontes
+# compilar: g++  -g -O0 -o efeito_18.bin replay.cpp
+# executar: ./efeito_18.bin 18
+# o que e:  sem sanitizador: max_chan_count=18 (como no RCInput)
+# --------------------------------------------------------------
+max_chan_count=18 ret=0 (0 = frame decoded) channel_count=18
+frame CRC16 = 0x9075 (high byte 0x90)
+channel 32 is not decoded with max_chan_count=18
+# codigo de saida: 0

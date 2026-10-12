@@ -1,0 +1,12 @@
+Candidato 6 — IridiumSBD.cpp — CORRIGIDO NO PX4 (nao abrir issue)
+
+Violacao real no 8be2590c15: a guarda de espaco compara com _packet_length,
+mas o memcpy copia buflen (cadeia causal corrigida, parecer A10).
+Corrigido no PX4 por 0c903d47d6 (PR #28599, 16/09/2026), relatado por outras pessoas.
+
+harness.cpp : v5 sem o assume que forcava o cenario (B9); payload_len, flags e
+              tamanho do fragmento livres. Inclui <sys/types.h> (sem -D ssize_t, B12).
+              -DCORRECAO_UPSTREAM aplica a correcao.
+replay.cpp  : ASan; recebe payload_len e second_buflen do log do ESBMC (B4).
+
+Esperado: esbmc/cbmc FAILED; *_correcao SUCCESSFUL; asan ASAN.

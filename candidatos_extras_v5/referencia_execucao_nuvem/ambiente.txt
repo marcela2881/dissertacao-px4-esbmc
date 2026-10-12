@@ -1,0 +1,9 @@
+data:      2026-10-12T12:45:55Z
+maquina:   vm
+sistema:   Linux vm 6.18.44-fc-v114 #1 SMP PREEMPT_DYNAMIC @0 x86_64 x86_64 x86_64 GNU/Linux
+esbmc:     /opt/tools/esbmc-8.1/bin/esbmc
+ESBMC version 8.1.0 64-bit x86_64 linux
+cbmc:      /usr/bin/cbmc
+5.95.1 (cbmc-5.95.1)
+compilador: /usr/bin/g++
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0

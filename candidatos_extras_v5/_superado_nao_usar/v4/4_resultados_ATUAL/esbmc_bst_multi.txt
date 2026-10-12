@@ -1,0 +1,97 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_bst_dev_name.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.089s
+GOTO program processing time: 0.000s
+Starting Bounded Model Checking
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 106 column 44 function bst_probe
+✓ PASSED: 'dereference failure: Access to object out of bounds' at file test_bst_dev_name.cpp line 106 column 44 function bst_probe
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 106 column 44 function bst_probe
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+✓ PASSED: 'dereference failure: Access to object out of bounds' at file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+Symex completed in: 0.002s (28 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 19 assignments)
+Generated 11 VCC(s), 3 remaining after simplification (9 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 11298
+Slicing time: 0.000s (removed 0 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 11299
+Solving claim 'assertion dev_info_reply.payload.dev_name_len <= 31 at file test_bst_dev_name.cpp line 122 column 5 function main' with solver 'z3 -in'
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.034s
+✗ FAILED: 'assertion dev_info_reply.payload.dev_name_len <= 31 at file test_bst_dev_name.cpp line 122 column 5 function main'
+
+[Counterexample]
+
+
+State 1 file test_bst_dev_name.cpp line 114 column 5 function main thread 0
+----------------------------------------------------
+  dev_info_reply = { .length = 0 }
+
+State 2 file test_bst_dev_name.cpp line 106 column 44 function bst_probe thread 0
+----------------------------------------------------
+  dev_info_reply::0->payload.dev_name_len = { .length=0, .type=0, .anon_pad$2=0, .payload=54, .crc=0,
+    .anon_pad$5=0 }
+
+State 3 file test_bst_dev_name.cpp line 109 column 5 function bst_probe thread 0
+----------------------------------------------------
+  dev_info_reply::0->payload.dev_name[(signed long int)(&dev_info_reply)->payload.dev_name_len] = ( BSTPacket_DeviceInfoReply { unsigned char length; unsigned char type; unsigned short int anon_pad$2;  BSTDeviceInfoReply { unsigned int hw_id; unsigned short int fw_id; unsigned char dev_name_len; signed char [32] dev_name; unsigned char anon_pad$4; }payload; unsigned char crc; unsigned _ExtInt(24) anon_pad$5; })(byte_update_little_endian((unsigned _ExtInt(384))({ .length=0, .type=0, .anon_pad$2=0, .payload={ .hw_id=0, .fw_id=0, .dev_name_len=54, .dev_name={ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, .anon_pad$4=0 }, .crc=0,
+    .anon_pad$5=0 }), (unsigned long int)((8 * (unsigned _ExtInt(67))((signed long int)dev_info_reply.payload.dev_name_len) + 88) / 8), 0))
+
+State 4 file test_bst_dev_name.cpp line 122 column 5 function main thread 0
+----------------------------------------------------
+Violated property:
+  file test_bst_dev_name.cpp line 122 column 5 function main
+  assertion dev_info_reply.payload.dev_name_len <= 31
+  (signed int)dev_info_reply.payload.dev_name_len <= 31
+
+Slicing time: 0.000s (removed 1 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 11300
+Solving claim 'dereference failure: Access to object out of bounds at file test_bst_dev_name.cpp line 109 column 5 function bst_probe' with solver 'z3 -in'
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.012s
+✗ FAILED: 'dereference failure: Access to object out of bounds at file test_bst_dev_name.cpp line 109 column 5 function bst_probe'
+
+[Counterexample]
+
+
+State 1 file test_bst_dev_name.cpp line 114 column 5 function main thread 0
+----------------------------------------------------
+  dev_info_reply = { .length = 0 }
+
+State 2 file test_bst_dev_name.cpp line 106 column 44 function bst_probe thread 0
+----------------------------------------------------
+  dev_info_reply::0->payload.dev_name_len = { .length=0, .type=0, .anon_pad$2=0, .payload=56, .crc=0,
+    .anon_pad$5=0 }
+
+State 3 file test_bst_dev_name.cpp line 109 column 5 function bst_probe thread 0
+----------------------------------------------------
+Violated property:
+  file test_bst_dev_name.cpp line 109 column 5 function bst_probe
+  dereference failure: Access to object out of bounds
+
+Slicing time: 0.000s (removed 5 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 11301
+Solving claim ' dereference failure: NULL pointer at file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 308 column 3 function memset' with solver 'z3 -in'
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.008s
+✓ PASSED: ' dereference failure: NULL pointer at file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 308 column 3 function memset'
+Properties: 11 verified ✓ 9 passed, ✗ 2 failed
+Solver: 'z3 -in' • Decision procedure total time: 0.054s • Avg: 0.005s/property
+
+VERIFICATION FAILED

@@ -1,0 +1,14 @@
+Candidato 3 — ft7_technologies.cpp — CORRIGIDO NO PX4 (nao abrir issue)
+
+Violacao real no 8be2590c15: _byte_counter e _msg_byte_counter so zeram em
+'\n' ou delimitador e indexam _readbuf[30] e _raw_*[2..5] sem limite.
+Corrigido no PX4 por 3acf7935a0 (PR #28600, 16/09/2026), relatado por outra pessoa.
+
+harness.cpp : -DCORRECAO_UPSTREAM aplica as guardas da correcao.
+replay.cpp  : chama o laco de collect() copiado do PX4, membros na ordem do .hpp (B8).
+              -DFIXED aplica as guardas da correcao.
+              Cenario 1: duas leituras de 19 bytes sem '\n'. Cenario 2: "$A,WVP=" + digitos.
+
+Esperado: esbmc/cbmc FAILED; *_correcao SUCCESSFUL; UBSan detecta nos dois
+cenarios e nao detecta com -DFIXED. O ASan nao detecta (escrita dentro do
+objeto), mas a saida mostra o membro vizinho _interval corrompido.

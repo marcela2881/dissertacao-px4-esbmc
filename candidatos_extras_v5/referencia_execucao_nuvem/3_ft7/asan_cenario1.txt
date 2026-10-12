@@ -1,0 +1,11 @@
+# data:     2026-10-12T12:47:04Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/3_ft7/fontes
+# compilar: g++ -fsanitize=address -fno-omit-frame-pointer -g -O0 -o asan_cenario1.bin replay.cpp
+# executar: ./asan_cenario1.bin 1
+# o que e:  ASan nao ve (escrita dentro do objeto); ver _interval corrompido na saida
+# --------------------------------------------------------------
+apos 1a chamada: _byte_counter=19
+apos 2a chamada: _byte_counter=38 (sizeof _readbuf = 30)
+_interval=88152 (inicial 100000)
+# codigo de saida: 0

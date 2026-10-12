@@ -1,0 +1,272 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.089s
+GOTO program processing time: 0.002s
+Checking base case, k = 1
+Starting Bounded Model Checking
+Not unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.002s (47 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 40 assignments)
+Generated 12 VCC(s), 2 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145144
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 1
+Starting Bounded Model Checking
+Not unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (46 assignments)
+Slicing time: 0.000s (removed 41 assignments)
+Generated 12 VCC(s), 2 remaining after simplification (5 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145145
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.015s
+The forward condition is unable to prove the property
+Checking base case, k = 2
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (49 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 42 assignments)
+Generated 18 VCC(s), 2 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145146
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.013s
+No bug has been found in the base case
+Checking forward condition, k = 2
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (48 assignments)
+Slicing time: 0.000s (removed 43 assignments)
+Generated 18 VCC(s), 2 remaining after simplification (5 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145147
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.012s
+The forward condition is unable to prove the property
+Checking base case, k = 3
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (51 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 44 assignments)
+Generated 24 VCC(s), 2 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145148
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 3
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (50 assignments)
+Slicing time: 0.000s (removed 45 assignments)
+Generated 24 VCC(s), 2 remaining after simplification (5 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145149
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.012s
+The forward condition is unable to prove the property
+Checking base case, k = 4
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.004s (53 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 46 assignments)
+Generated 30 VCC(s), 2 remaining after simplification (7 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145150
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.007s
+BMC program time: 0.012s
+No bug has been found in the base case
+Checking forward condition, k = 4
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.003s (52 assignments)
+Slicing time: 0.000s (removed 47 assignments)
+Generated 30 VCC(s), 2 remaining after simplification (5 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145151
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.011s
+The forward condition is unable to prove the property
+Checking base case, k = 5
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 5   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Symex completed in: 0.010s (153 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 114 assignments)
+Generated 158 VCC(s), 7 remaining after simplification (39 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145152
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.033s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.006s
+BMC program time: 0.049s
+No bug has been found in the base case
+Checking forward condition, k = 5
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 5   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Symex completed in: 0.010s (152 assignments)
+Slicing time: 0.000s (removed 119 assignments)
+Generated 158 VCC(s), 7 remaining after simplification (33 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145153
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.026s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.009s
+The forward condition is unable to prove the property
+Checking base case, k = 6
+Starting Bounded Model Checking
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 1   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Unwinding loop 25 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 25 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Not unwinding loop 23 iteration 6   file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 63 column 2 function process_external_reply
+Symex completed in: 0.010s (165 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 117 assignments)
+Generated 168 VCC(s), 11 remaining after simplification (48 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 145154
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.046s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.012s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 79 column 21 function main thread 0
+----------------------------------------------------
+  reply.num_events = { .timestamp=0, .request_id=0, .registration_id=0, .health_component_index=0,
+    .health_component_is_present=0, .health_component_warning=0,
+    .health_component_error=0, .can_arm_and_run=0,
+    .num_events=nondet_symbol(symex::nondet2), .events={ { .id = 0 }, { .id = 0 }, { .id = 0 }, { .id = 0 }, { .id = 0 } },
+    .anon_pad$10=0 }
+
+State 3 file sessao_30jun2026/harnesses_sagres/test_external_checks_events.cpp line 81 column 2 function main thread 0
+----------------------------------------------------
+  modes = 0 (00000000 00000000 00000000 00000000)
+
+State 9 file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 291 column 3 function memcpy thread 0
+----------------------------------------------------
+Violated property:
+  file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 291 column 3 function memcpy
+  dereference failure on memcpy: writing memory segment of size 18446744073709551615 with 4 bytes
+
+
+VERIFICATION FAILED
+
+Bug found (k = 6)

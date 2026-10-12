@@ -1,0 +1,73 @@
+# data:     2026-10-12T12:48:31Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/5_logger/fontes
+# comando:  cbmc sondagem_snprintf.c --unwind 12
+# o que e:  mesma sondagem no CBMC (so registro)
+# --------------------------------------------------------------
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing sondagem_snprintf.c
+Converting
+Type-checking sondagem_snprintf
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 2 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 3 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 4 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 5 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 6 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 7 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 8 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 9 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop main.0 iteration 10 file sondagem_snprintf.c line 20 function main thread 0
+Unwinding loop strlen.0 iteration 1 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 2 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 3 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 4 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 5 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 6 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 7 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 8 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 9 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 10 file <builtin-library-strlen> line 18 function strlen thread 0
+**** WARNING: no body for function snprintf
+Unwinding loop strlen.0 iteration 1 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 2 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 3 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 4 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 5 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 6 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 7 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 8 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 9 file <builtin-library-strlen> line 18 function strlen thread 0
+Unwinding loop strlen.0 iteration 10 file <builtin-library-strlen> line 18 function strlen thread 0
+Runtime Symex: 0.00576874s
+size of program expression: 182 steps
+simple slicing removed 5 assignments
+Generated 2 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 2.0452e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00231829s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.307e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+10775 variables, 551 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.00119832s
+Runtime decision procedure: 0.00357356s
+
+** Results:
+sondagem_snprintf.c function main
+[main.assertion.1] line 25 assertion strlen(name) == 10: SUCCESS
+[main.assertion.2] line 29 assertion r == (int)strlen(name): FAILURE
+
+** 1 of 2 failed (2 iterations)
+VERIFICATION FAILED
+# codigo de saida: 10

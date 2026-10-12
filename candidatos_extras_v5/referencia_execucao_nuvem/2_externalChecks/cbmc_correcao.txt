@@ -1,0 +1,346 @@
+# data:     2026-10-12T12:46:21Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/2_externalChecks/fontes
+# comando:  cbmc harness.cpp -DCORRECAO_UPSTREAM --unwind 260 --unwinding-assertions --object-bits 12 --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check
+# o que e:  harness com a correcao upstream
+# --------------------------------------------------------------
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing harness.cpp
+Converting
+Type-checking harness
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 12 object bits, 52 offset bits (user-specified)
+Starting Bounded Model Checking
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 1 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 2 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 3 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 4 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 5 file harness.cpp line 84 function process_external_reply thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 6 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 7 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 8 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 9 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 10 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 11 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 12 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 13 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 14 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 15 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 16 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 17 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 18 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 19 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 20 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 21 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 22 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 23 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 24 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 25 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 26 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 27 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 28 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 29 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 30 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 31 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 32 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 33 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 34 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 35 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 36 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 37 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 38 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 39 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 40 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 41 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 42 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 43 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 44 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 45 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 46 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 47 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 48 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 49 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 50 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 51 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 52 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 53 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 54 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 55 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 56 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 57 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 58 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 59 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 60 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 61 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 62 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 63 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 64 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 65 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 66 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 67 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 68 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 69 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 70 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 71 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 72 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 73 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 74 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 75 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 76 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 77 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 78 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 79 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 80 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 81 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 82 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 83 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 84 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 85 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 86 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 87 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 88 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 89 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 90 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 91 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 92 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 93 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 94 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 95 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 96 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 97 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 98 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 99 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 100 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 101 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 102 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 103 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 104 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 105 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 106 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 107 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 108 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 109 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 110 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 111 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 112 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 113 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 114 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 115 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 116 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 117 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 118 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 119 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 120 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 121 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 122 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 123 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 124 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 125 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 126 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 127 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 128 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 129 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 130 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 131 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 132 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 133 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 134 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 135 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 136 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 137 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 138 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 139 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 140 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 141 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 142 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 143 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 144 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 145 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 146 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 147 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 148 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 149 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 150 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 151 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 152 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 153 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 154 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 155 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 156 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 157 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 158 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 159 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 160 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 161 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 162 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 163 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 164 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 165 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 166 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 167 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 168 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 169 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 170 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 171 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 172 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 173 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 174 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 175 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 176 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 177 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 178 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 179 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 180 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 181 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 182 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 183 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 184 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 185 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 186 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 187 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 188 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 189 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 190 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 191 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 192 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 193 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 194 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 195 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 196 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 197 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 198 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 199 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 200 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 201 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 202 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 203 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 204 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 205 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 206 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 207 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 208 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 209 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 210 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 211 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 212 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 213 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 214 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 215 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 216 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 217 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 218 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 219 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 220 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 221 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 222 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 223 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 224 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 225 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 226 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 227 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 228 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 229 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 230 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 231 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 232 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 233 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 234 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 235 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 236 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 237 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 238 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 239 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 240 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 241 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 242 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 243 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 244 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 245 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 246 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 247 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 248 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 249 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 250 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 251 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 252 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 253 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 254 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 255 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 256 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 257 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 258 file harness.cpp line 84 function process_external_reply thread 0
+Unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 259 file harness.cpp line 84 function process_external_reply thread 0
+Not unwinding loop process_external_reply(ptr_struct_tag(identifier=tag-arming_check_reply_s),unsigned_int).0 iteration 260 file harness.cpp line 84 function process_external_reply thread 0
+Runtime Symex: 9.37384s
+size of program expression: 180480 steps
+simple slicing removed 145308 assignments
+Generated 8063 VCC(s), 1552 remaining after simplification
+Runtime Postprocess Equation: 0.107958s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.649676s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 5.936e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+130689 variables, 86078 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 0.151943s
+Runtime decision procedure: 0.824536s
+
+** Results:
+<builtin-library-memcpy> function memcpy
+[memcpy.pointer.1] line 33 same object violation in (const char *)(const void *)&modes >= (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.1] line 33 pointer relation: dead object in (const char *)(const void *)&modes: SUCCESS
+[memcpy.pointer_arithmetic.2] line 33 pointer relation: pointer NULL in (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.3] line 33 pointer relation: deallocated dynamic object in (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.4] line 33 pointer relation: dead object in (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.5] line 33 pointer relation: pointer outside object bounds in (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.6] line 33 pointer relation: invalid integer address in (const char *)(void *)reply->events[(signed long int)i].arguments + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer.2] line 34 same object violation in (const char *)(void *)reply->events[(signed long int)i].arguments >= (const char *)(const void *)&modes + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+[memcpy.pointer_arithmetic.7] line 34 pointer relation: pointer NULL in (const char *)(void *)reply->events[(signed long int)i].arguments: SUCCESS
+[memcpy.pointer_arithmetic.8] line 34 pointer relation: deallocated dynamic object in (const char *)(void *)reply->events[(signed long int)i].arguments: SUCCESS
+[memcpy.pointer_arithmetic.9] line 34 pointer relation: dead object in (const char *)(void *)reply->events[(signed long int)i].arguments: SUCCESS
+[memcpy.pointer_arithmetic.10] line 34 pointer relation: pointer outside object bounds in (const char *)(void *)reply->events[(signed long int)i].arguments: SUCCESS
+[memcpy.pointer_arithmetic.11] line 34 pointer relation: dead object in (const char *)(const void *)&modes + (signed long int)sizeof(uint32_t) /*4ul*/ : SUCCESS
+
+harness.cpp function ingest_reply
+[ingest_reply.pointer_dereference.1] line 64 dereference failure: pointer NULL in reply->num_events: SUCCESS
+[ingest_reply.pointer_dereference.2] line 64 dereference failure: pointer invalid in reply->num_events: SUCCESS
+[ingest_reply.pointer_dereference.3] line 64 dereference failure: deallocated dynamic object in reply->num_events: SUCCESS
+[ingest_reply.pointer_dereference.4] line 64 dereference failure: dead object in reply->num_events: SUCCESS
+[ingest_reply.pointer_dereference.5] line 64 dereference failure: pointer outside object bounds in reply->num_events: SUCCESS
+[ingest_reply.pointer_dereference.6] line 64 dereference failure: invalid integer address in reply->num_events: SUCCESS
+
+harness.cpp function main
+[main.precondition_instance.1] line 96 memset destination region writeable: SUCCESS
+
+harness.cpp function process_external_reply
+[process_external_reply.overflow.1] line 84 arithmetic overflow on signed + in i + 1: SUCCESS
+[process_external_reply.pointer_dereference.1] line 84 dereference failure: pointer NULL in reply->num_events: SUCCESS
+[process_external_reply.pointer_dereference.2] line 84 dereference failure: pointer invalid in reply->num_events: SUCCESS
+[process_external_reply.pointer_dereference.3] line 84 dereference failure: deallocated dynamic object in reply->num_events: SUCCESS
+[process_external_reply.pointer_dereference.4] line 84 dereference failure: dead object in reply->num_events: SUCCESS
+[process_external_reply.pointer_dereference.5] line 84 dereference failure: pointer outside object bounds in reply->num_events: SUCCESS
+[process_external_reply.pointer_dereference.6] line 84 dereference failure: invalid integer address in reply->num_events: SUCCESS
+[process_external_reply.unwind.0] line 84 unwinding assertion loop 0: SUCCESS
+[process_external_reply.assertion.1] line 86 assertion i < EVENTS_ARRAY_SIZE: SUCCESS
+[process_external_reply.precondition_instance.1] line 87 memcpy src/dst overlap: SUCCESS
+[process_external_reply.precondition_instance.2] line 87 memcpy source region readable: SUCCESS
+[process_external_reply.precondition_instance.3] line 87 memcpy destination region writeable: SUCCESS
+[process_external_reply.array_bounds.1] line 89 array.arming_check_reply_s::events dynamic object upper bound in reply->events[(signed long int)i]: SUCCESS
+[process_external_reply.pointer_dereference.7] line 89 dereference failure: pointer NULL in reply->events: SUCCESS
+[process_external_reply.pointer_dereference.8] line 89 dereference failure: pointer invalid in reply->events: SUCCESS
+[process_external_reply.pointer_dereference.9] line 89 dereference failure: deallocated dynamic object in reply->events: SUCCESS
+[process_external_reply.pointer_dereference.10] line 89 dereference failure: dead object in reply->events: SUCCESS
+[process_external_reply.pointer_dereference.11] line 89 dereference failure: pointer outside object bounds in reply->events: SUCCESS
+[process_external_reply.pointer_dereference.12] line 89 dereference failure: invalid integer address in reply->events: SUCCESS
+
+** 0 of 39 failed (1 iterations)
+VERIFICATION SUCCESSFUL
+# codigo de saida: 0

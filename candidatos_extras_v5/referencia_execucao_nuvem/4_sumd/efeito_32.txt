@@ -1,0 +1,11 @@
+# data:     2026-10-12T12:47:24Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/4_sumd/fontes
+# compilar: g++  -g -O0 -o efeito_32.bin replay.cpp
+# executar: ./efeito_32.bin 32
+# o que e:  sem sanitizador: efeito no canal 32 (max_chan_count=32, como no RCTest)
+# --------------------------------------------------------------
+max_chan_count=32 ret=0 (0 = frame decoded) channel_count=32
+frame CRC16 = 0x9075 (high byte 0x90)
+channel 32: decoded=530 expected=543 (low byte sent = 0xF8, CRC high byte = 0x90)
+# codigo de saida: 0

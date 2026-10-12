@@ -1,0 +1,308 @@
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing test_microstrain_port_v3.cpp
+Converting
+Type-checking test_microstrain_port_v3
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop microstrain_init_port().0 iteration 1 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 2 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 3 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 4 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 5 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 6 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 7 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 8 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 9 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 10 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 11 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 12 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 13 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 14 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 15 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 16 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 17 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 18 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 19 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 20 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 21 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 22 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 23 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 24 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 25 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 26 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 27 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 28 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 29 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 30 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 31 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 32 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 33 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 34 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 35 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 36 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 37 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 38 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 39 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 40 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 41 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 42 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 43 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 44 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 45 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 46 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 47 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 48 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 49 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 50 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 51 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 52 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 53 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 54 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 55 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 56 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 57 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 58 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 59 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 60 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 61 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 62 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 63 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 64 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 65 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 66 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 67 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 68 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 69 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 70 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 71 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 72 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 73 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 74 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 75 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 76 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 77 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 78 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 79 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 80 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 81 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 82 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 83 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 84 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 85 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 86 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 87 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 88 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 89 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 90 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 91 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 92 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 93 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 94 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 95 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 96 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 97 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 98 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 99 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 100 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 101 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 102 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 103 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 104 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 105 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 106 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 107 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 108 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 109 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 110 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 111 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 112 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 113 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 114 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 115 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 116 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 117 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 118 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 119 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 120 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 121 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 122 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 123 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 124 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 125 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 126 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 127 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 128 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 129 file test_microstrain_port_v3.cpp line 86 function microstrain_init_port thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 1 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 2 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 3 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 4 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 5 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 6 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 7 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 8 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 9 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 10 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 11 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 12 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 13 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 14 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 15 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 16 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 17 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 18 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 19 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 20 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 21 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 22 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 23 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 24 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 25 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 26 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 27 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 28 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 29 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 30 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 31 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 32 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 33 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 34 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 35 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 36 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 37 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 38 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 39 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 40 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 41 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 42 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 43 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 44 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 45 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 46 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 47 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 48 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 49 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 50 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 51 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 52 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 53 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 54 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 55 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 56 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 57 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 58 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 59 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 60 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 61 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 62 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 63 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 64 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 65 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 66 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 67 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 68 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 69 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 70 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 71 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 72 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 73 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 74 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 75 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 76 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 77 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 78 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 79 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 80 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 81 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 82 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 83 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 84 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 85 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 86 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 87 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 88 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 89 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 90 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 91 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 92 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 93 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 94 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 95 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 96 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 97 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 98 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 99 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 100 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 101 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 102 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 103 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 104 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 105 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 106 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 107 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 108 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 109 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 110 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 111 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 112 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 113 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 114 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 115 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 116 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 117 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 118 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 119 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 120 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 121 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 122 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 123 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 124 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 125 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 126 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 127 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 128 file test_microstrain_port_v3.cpp line 70 function strnlen_model thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Runtime Symex: 0.0225535s
+size of program expression: 1639 steps
+simple slicing removed 8 assignments
+Generated 391 VCC(s), 4 remaining after simplification
+Runtime Postprocess Equation: 5.1808e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00838062s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 0.00182651s
+Solving with MiniSAT 2.2.1 with simplifier
+27809 variables, 33115 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.012948s
+Runtime decision procedure: 0.02136s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+27809 variables, 9826 clauses
+SAT checker inconsistent: instance is UNSATISFIABLE
+Runtime Solver: 1.643e-06s
+Runtime decision procedure: 8.182e-06s
+
+** Results:
+test_microstrain_port_v3.cpp function microstrain_init_port
+[microstrain_init_port.overflow.1] line 86 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+[microstrain_init_port.array_bounds.1] line 87 array 'uart_port' upper bound in uart_port[(signed long int)i]: SUCCESS
+[microstrain_init_port.precondition_instance.1] line 94 memcpy src/dst overlap: SUCCESS
+[microstrain_init_port.precondition_instance.2] line 94 memcpy source region readable: SUCCESS
+[microstrain_init_port.precondition_instance.3] line 94 memcpy destination region writeable: SUCCESS
+[microstrain_init_port.assertion.1] line 100 assertion max_len < PORT_SIZE: FAILURE
+[microstrain_init_port.array_bounds.2] line 102 array '_port' upper bound in _port[(signed long int)max_len]: FAILURE
+
+test_microstrain_port_v3.cpp function strnlen_model
+[strnlen_model.overflow.1] line 71 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+
+** 2 of 8 failed (2 iterations)
+VERIFICATION FAILED

@@ -1,0 +1,308 @@
+# Conferencia dos trechos copiados nos harnesses
+# data: 2026-10-12T12:45:56Z  maquina: vm
+# commit testado: 8be2590c15 (2026-06-04)
+# main do dia:    3fc3b141d7 (2026-10-12)
+
+=== 1 Common: tamanho do buffer | msg/versioned/Event.msg | commit 8be2590c15 | grep: ORB_QUEUE_LENGTH
+12:uint8 ORB_QUEUE_LENGTH = 16
+
+=== 1 Common: tamanho do buffer | msg/versioned/Event.msg | commit 3fc3b141d7 | grep: ORB_QUEUE_LENGTH
+12:uint8 ORB_QUEUE_LENGTH = 16
+
+=== 1 Common: declaracao do buffer | src/modules/commander/HealthAndArmingChecks/Common.hpp | commit 8be2590c15 | grep: _event_buffer\[|EventBufferHeader \{
+308:	struct __attribute__((__packed__)) EventBufferHeader {
+365:	uint8_t _event_buffer[(event_s::ORB_QUEUE_LENGTH - 2) * (sizeof(EventBufferHeader) + 1 + 1 + 4)];
+
+=== 1 Common: declaracao do buffer | src/modules/commander/HealthAndArmingChecks/Common.hpp | commit 3fc3b141d7 | grep: _event_buffer\[|EventBufferHeader \{
+308:	struct __attribute__((__packed__)) EventBufferHeader {
+369:	uint8_t _event_buffer[(event_s::ORB_QUEUE_LENGTH - 2) * (sizeof(EventBufferHeader) + 1 + 1 + 4)];
+
+=== 2 externalChecks: laco e limite | src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp | commit 8be2590c15 | grep: num_events
+202:			for (int i = 0; i < reply.num_events; ++i) {
+253://			PX4_DEBUG("Registration id=%i: %i events", reply.registration_id, reply.num_events);
+
+=== 2 externalChecks: laco e limite | src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp | commit 3fc3b141d7 | grep: num_events
+215:			for (int i = 0; i < reply.num_events; ++i) {
+263:				// num_events is a uint8 arriving on an externally writable topic, while events is
+266:				static constexpr uint8_t max_num_events = sizeof(reply.events) / sizeof(reply.events[0]);
+268:				if (reply.num_events > max_num_events) {
+269:					reply.num_events = max_num_events;
+275://			PX4_DEBUG("Registration id=%i: %i events", reply.registration_id, reply.num_events);
+
+=== 3 ft7: laco de collect() | src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp | commit 8be2590c15 | linhas 158-175
+  158  	for (int i = 0; i < ret; i++) {
+  159  		// _px4_windsensor.update(timestamp_sample, (double)ret, 13.0f, _status);
+  160  		// received a full message
+  161  		_readbuf[_byte_counter]  = readbuf[i];
+  162  		_byte_counter += 1;
+  163  
+  164  
+  165  		if (readbuf[i] == '\n') {
+  166  
+  167  			_checksum = (uint32_t)atoi((char *)_raw_checksum);
+  168  			_hex_checksum = 0;
+  169  
+  170  			sensor_airflow_s sensor_airflow{};
+  171  			sensor_airflow.timestamp  = hrt_absolute_time();
+  172  			sensor_airflow.speed  = (float)atoi((char *)_raw_speed) / 10.0f;
+  173  			sensor_airflow.direction = ((float)atoi((char *)_raw_angle) - 180.0f) * M_PI_F / 180.0f;
+  174  			sensor_airflow.status = (uint8_t)atoi((char *)_raw_status);
+  175  
+
+=== 3 ft7: laco de collect() | src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp | commit 3fc3b141d7 | linhas 158-175
+  158  	for (int i = 0; i < ret; i++) {
+  159  		// _px4_windsensor.update(timestamp_sample, (double)ret, 13.0f, _status);
+  160  		// received a full message
+  161  		// The counters below only reset on a delimiter or end of line, so a sensor that
+  162  		// sends neither would otherwise walk off the end of each buffer.
+  163  		if (_byte_counter < (int)sizeof(_readbuf)) {
+  164  			_readbuf[_byte_counter] = readbuf[i];
+  165  			_byte_counter += 1;
+  166  		}
+  167  
+  168  
+  169  		if (readbuf[i] == '\n') {
+  170  
+  171  			_checksum = (uint32_t)atoi((char *)_raw_checksum);
+  172  			_hex_checksum = 0;
+  173  
+  174  			sensor_airflow_s sensor_airflow{};
+  175  			sensor_airflow.timestamp  = hrt_absolute_time();
+
+=== 3 ft7: tamanhos | src/drivers/wind_sensor/ft_technologies/ft7_technologies.hpp | commit 8be2590c15 | grep: _readbuf\[|_linebuf\[|_raw_
+79:	char 				_readbuf[30] {};
+83:	char				_linebuf[20] {};
+87:	char 				_raw_angle[5];
+88:	char 				_raw_speed[5];
+89:	char 				_raw_status[2];
+90:	char 				_raw_checksum[3];
+
+=== 3 ft7: tamanhos | src/drivers/wind_sensor/ft_technologies/ft7_technologies.hpp | commit 3fc3b141d7 | grep: _readbuf\[|_linebuf\[|_raw_
+79:	char 				_readbuf[30] {};
+83:	char				_linebuf[20] {};
+87:	char 				_raw_angle[5];
+88:	char 				_raw_speed[5];
+89:	char 				_raw_status[2];
+90:	char 				_raw_checksum[3];
+
+=== 4 sumd: escrita e condicao | src/lib/rc/sumd.cpp | commit 8be2590c15 | linhas 194-210
+  194  
+  195  	case SUMD_DECODE_STATE_GOT_LEN:
+  196  		_rxpacket.sumd_data[_rxlen] = byte;
+  197  
+  198  		if (_sumd) {
+  199  			_crc16 = sumd_crc16(_crc16, byte);
+  200  
+  201  		} else {
+  202  			_crc8 = sumd_crc8(_crc8, byte);
+  203  		}
+  204  
+  205  		_rxlen++;
+  206  
+  207  		if (_rxlen <= ((_rxpacket.length * 2))) {
+  208  			if (_debug) {
+  209  				printf(" SUMD_DECODE_STATE_GOT_DATA[%d]: %x\n", _rxlen - 2, byte) ;
+  210  			}
+
+=== 4 sumd: escrita e condicao | src/lib/rc/sumd.cpp | commit 3fc3b141d7 | linhas 194-210
+  194  
+  195  	case SUMD_DECODE_STATE_GOT_LEN:
+  196  		_rxpacket.sumd_data[_rxlen] = byte;
+  197  
+  198  		if (_sumd) {
+  199  			_crc16 = sumd_crc16(_crc16, byte);
+  200  
+  201  		} else {
+  202  			_crc8 = sumd_crc8(_crc8, byte);
+  203  		}
+  204  
+  205  		_rxlen++;
+  206  
+  207  		if (_rxlen <= ((_rxpacket.length * 2))) {
+  208  			if (_debug) {
+  209  				printf(" SUMD_DECODE_STATE_GOT_DATA[%d]: %x\n", _rxlen - 2, byte) ;
+  210  			}
+
+=== 4 sumd: tamanho do array | src/lib/rc/sumd.h | commit 8be2590c15 | grep: SUMD_MAX_CHANNELS|sumd_data\[
+48:#define SUMD_MAX_CHANNELS	32
+63:	uint8_t	sumd_data[SUMD_MAX_CHANNELS * 2];	///< ChannelData (High Byte/ Low Byte)
+
+=== 4 sumd: tamanho do array | src/lib/rc/sumd.h | commit 3fc3b141d7 | grep: SUMD_MAX_CHANNELS|sumd_data\[
+48:#define SUMD_MAX_CHANNELS	32
+63:	uint8_t	sumd_data[SUMD_MAX_CHANNELS * 2];	///< ChannelData (High Byte/ Low Byte)
+
+=== 4 sumd: chamadas e max_chan_count | src/drivers/rc_input/RCInput.cpp | commit 8be2590c15 | grep: sumd_decode\(|RC_INPUT_MAX_CHANNELS
+54:	for (unsigned i = 0; i < input_rc_s::RC_INPUT_MAX_CHANNELS; i++) {
+210:		    uint16_t raw_rc_values_local[input_rc_s::RC_INPUT_MAX_CHANNELS],
+217:	if (_input_rc.channel_count > input_rc_s::RC_INPUT_MAX_CHANNELS) {
+218:		_input_rc.channel_count = input_rc_s::RC_INPUT_MAX_CHANNELS;
+512:								&sbus_frame_drop, &frame_drops, input_rc_s::RC_INPUT_MAX_CHANNELS);
+554:							       &dsm_11_bit, &frame_drops, &dsm_rssi, input_rc_s::RC_INPUT_MAX_CHANNELS);
+599:										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS));
+654:						rc_updated = (OK == sumd_decode(_rcs_buf[i], &sumd_rssi, &rx_count,
+655:										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS, &sumd_failsafe));
+751:								input_rc_s::RC_INPUT_MAX_CHANNELS);
+804:								&_raw_rc_count, input_rc_s::RC_INPUT_MAX_CHANNELS);
+
+=== 4 sumd: chamadas e max_chan_count | src/drivers/rc_input/RCInput.cpp | commit 3fc3b141d7 | grep: sumd_decode\(|RC_INPUT_MAX_CHANNELS
+54:	for (unsigned i = 0; i < input_rc_s::RC_INPUT_MAX_CHANNELS; i++) {
+210:		    uint16_t raw_rc_values_local[input_rc_s::RC_INPUT_MAX_CHANNELS],
+217:	if (_input_rc.channel_count > input_rc_s::RC_INPUT_MAX_CHANNELS) {
+218:		_input_rc.channel_count = input_rc_s::RC_INPUT_MAX_CHANNELS;
+512:								&sbus_frame_drop, &frame_drops, input_rc_s::RC_INPUT_MAX_CHANNELS);
+554:							       &dsm_11_bit, &frame_drops, &dsm_rssi, input_rc_s::RC_INPUT_MAX_CHANNELS);
+599:										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS));
+654:						rc_updated = (OK == sumd_decode(_rcs_buf[i], &sumd_rssi, &rx_count,
+655:										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS, &sumd_failsafe));
+751:								input_rc_s::RC_INPUT_MAX_CHANNELS);
+804:								&_raw_rc_count, input_rc_s::RC_INPUT_MAX_CHANNELS);
+
+=== 5 logger: write_info_multiple | src/modules/logger/logger.cpp | commit 8be2590c15 | grep: key_len = snprintf|msg_size = sizeof\(msg\)|vlen < \(sizeof
+1849:					size_t msg_size = sizeof(msg) - sizeof(msg.format) + format_length;
+1933:	size_t msg_size = sizeof(msg) - sizeof(msg.message_name) + message_name_len;
+1951:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "char[%zu] %s", vlen, name);
+1952:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+1955:	if (vlen < (sizeof(msg) - msg_size)) {
+1977:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "char[%zu] %s", vlen, name);
+1978:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+1981:	if (vlen < (sizeof(msg) - msg_size)) {
+2023:		msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "uint8_t[%i] %s", read_length, name);
+2024:		size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2071:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, name);
+2072:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2259:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2260:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2342:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2343:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2412:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2413:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+
+=== 5 logger: write_info_multiple | src/modules/logger/logger.cpp | commit 3fc3b141d7 | grep: key_len = snprintf|msg_size = sizeof\(msg\)|vlen < \(sizeof
+1894:					size_t msg_size = sizeof(msg) - sizeof(msg.format) + format_length;
+1978:	size_t msg_size = sizeof(msg) - sizeof(msg.message_name) + message_name_len;
+1996:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "char[%zu] %s", vlen, name);
+1997:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2000:	if (vlen < (sizeof(msg) - msg_size)) {
+2022:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "char[%zu] %s", vlen, name);
+2023:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2026:	if (vlen < (sizeof(msg) - msg_size)) {
+2068:		msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "uint8_t[%i] %s", read_length, name);
+2069:		size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2116:	msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, name);
+2117:	size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2304:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2305:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2387:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2388:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+2457:			msg.key_len = snprintf(msg.key_value_str, sizeof(msg.key_value_str), "%s %s", type_str, param_name(param));
+2458:			size_t msg_size = sizeof(msg) - sizeof(msg.key_value_str) + msg.key_len;
+
+=== 5 logger: struct | src/modules/logger/messages.h | commit 8be2590c15 | grep: key_len;|key_value_str\[
+187: * Example: key_value_str[] = "char[5] sys_toolchain_ver9.4.0"
+193:	uint8_t key_len; ///<  Length of the 'key'
+194:	char key_value_str[255]; ///<  String with the key and value information
+208:	uint8_t key_len;      ///< Length of the 'key'
+209:	char key_value_str[1200]; ///< String with the key and value information
+246:	uint8_t key_len;
+247:	char key_value_str[255]; ///<  String with the key and value information
+279:	uint8_t key_len;
+280:	char key_value_str[255]; ///<  String with the key and value information
+
+=== 5 logger: struct | src/modules/logger/messages.h | commit 3fc3b141d7 | grep: key_len;|key_value_str\[
+187: * Example: key_value_str[] = "char[5] sys_toolchain_ver9.4.0"
+193:	uint8_t key_len; ///<  Length of the 'key'
+194:	char key_value_str[255]; ///<  String with the key and value information
+208:	uint8_t key_len;      ///< Length of the 'key'
+209:	char key_value_str[1200]; ///< String with the key and value information
+246:	uint8_t key_len;
+247:	char key_value_str[255]; ///<  String with the key and value information
+279:	uint8_t key_len;
+280:	char key_value_str[255]; ///<  String with the key and value information
+
+=== 6 IridiumSBD: guarda e subtracao | src/drivers/telemetry/iridiumsbd/IridiumSBD.cpp | commit 8be2590c15 | grep: _packet_length -= buflen|_packet_length < 0|space_left|SATCOM_TX_BUF_LEN - _tx_buf_write_idx
+280:			int count = SATCOM_TX_BUF_LEN - _tx_buf_write_idx + SATCOM_MAX_MESSAGE_LENGTH;
+670:	if (SATCOM_TX_BUF_LEN - _tx_buf_write_idx - _packet_length < 0) {
+676:	_packet_length -= buflen;
+964:	if (SATCOM_TX_BUF_LEN - _tx_buf_write_idx > 0) {
+
+=== 6 IridiumSBD: guarda e subtracao | src/drivers/telemetry/iridiumsbd/IridiumSBD.cpp | commit 3fc3b141d7 | grep: _packet_length -= buflen|_packet_length < 0|space_left|SATCOM_TX_BUF_LEN - _tx_buf_write_idx
+280:			int count = SATCOM_TX_BUF_LEN - _tx_buf_write_idx + SATCOM_MAX_MESSAGE_LENGTH;
+672:	const int space_left = SATCOM_TX_BUF_LEN - _tx_buf_write_idx;
+674:	if (space_left < (int)_packet_length || space_left < (int)buflen) {
+970:	if (SATCOM_TX_BUF_LEN - _tx_buf_write_idx > 0) {
+
+=== 7 bst: guardas no probe() | src/drivers/telemetry/bst/bst.cpp | commit 8be2590c15 | grep: dev_name_len|dev_info_reply.length >=
+84:	uint8_t dev_name_len;
+201:	if (dev_info_reply.length >= sizeof(dev_info_reply)) {
+214:	if (dev_info_reply.payload.dev_name_len >= sizeof(dev_info_reply.payload.dev_name)) {
+215:		dev_info_reply.payload.dev_name_len = sizeof(dev_info_reply.payload.dev_name) - 1;
+218:	dev_info_reply.payload.dev_name[dev_info_reply.payload.dev_name_len] = '\0';
+
+=== 7 bst: guardas no probe() | src/drivers/telemetry/bst/bst.cpp | commit 3fc3b141d7 | grep: dev_name_len|dev_info_reply.length >=
+84:	uint8_t dev_name_len;
+201:	if (dev_info_reply.length >= sizeof(dev_info_reply)) {
+214:	if (dev_info_reply.payload.dev_name_len >= sizeof(dev_info_reply.payload.dev_name)) {
+215:		dev_info_reply.payload.dev_name_len = sizeof(dev_info_reply.payload.dev_name) - 1;
+218:	dev_info_reply.payload.dev_name[dev_info_reply.payload.dev_name_len] = '\0';
+
+=== 8 MicroStrain: construtor | src/drivers/ins/microstrain/MicroStrain.cpp | commit 8be2590c15 | linhas 52-57
+   52  	memset(_port, '\0', sizeof(_port));
+   53  	const size_t max_len = math::min(sizeof(_port), strnlen(uart_port, sizeof(_port)));
+   54  	strncpy(_port, uart_port, max_len);
+   55  
+   56  	// Enforce null termination
+   57  	_port[max_len] = '\0';
+
+=== 8 MicroStrain: construtor | src/drivers/ins/microstrain/MicroStrain.cpp | commit 3fc3b141d7 | linhas 52-57
+   52  	memset(_port, '\0', sizeof(_port));
+   53  	const size_t max_len = math::min(sizeof(_port), strnlen(uart_port, sizeof(_port)));
+   54  	strncpy(_port, uart_port, max_len);
+   55  
+   56  	// Enforce null termination
+   57  	_port[max_len] = '\0';
+
+=== 8 MicroStrain: tamanho de _port | src/drivers/ins/microstrain/MicroStrain.hpp | commit 8be2590c15 | grep: _port\[
+240:	char _port[128];
+
+=== 8 MicroStrain: tamanho de _port | src/drivers/ins/microstrain/MicroStrain.hpp | commit 3fc3b141d7 | grep: _port\[
+242:	char _port[128];
+
+=== 8 MicroStrain: origem do nome da porta | src/drivers/ins/microstrain/MicroStrain.cpp | commit 8be2590c15 | grep: case 'd'|dev = myoptarg|new MicroStrain
+1944:		case 'd':
+1945:			dev = myoptarg;
+1963:	MicroStrain *instance = new MicroStrain(dev);
+
+=== 8 MicroStrain: origem do nome da porta | src/drivers/ins/microstrain/MicroStrain.cpp | commit 3fc3b141d7 | grep: case 'd'|dev = myoptarg|new MicroStrain
+1942:		case 'd':
+1943:			dev = myoptarg;
+1961:	MicroStrain *instance = new MicroStrain(dev);
+
+=== Commits que alteraram os arquivos depois de 8be2590c15
+--- src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp
+ca1d36476a 2026-09-14 Julian Oes fix(commander): clamp num_events from arming_check_reply (#28598)
+6b2278eae9 2026-09-02 Phil fix(external-modes): track ext-mode-registrations by request_id to dedup (#28486)
+--- src/drivers/wind_sensor/ft_technologies/ft7_technologies.cpp
+3acf7935a0 2026-09-16 Julian Oes fix(drivers/ft_technologies): bound the FT7 wind sensor parser buffers (#28600)
+--- src/lib/rc/sumd.cpp
+--- src/modules/logger/logger.cpp
+e6db1b3a14 2026-10-02 Julian Oes fix(various): issues found running SITL tests with sanitizers (#28943)
+e35171c3f9 2026-09-27 JC fix(logger): make logger off close the active log file (#28636)
+d537fd1ec9 2026-09-01 Jonas Perolini fix(perf): run perf_iterate_all callbacks without the list mutex (#28411)
+73a56a6a9b 2026-08-28 JC logger: fix mission log lifecycle for continuous modes (#28307)
+022d16a0d1 2026-07-02 Julian Oes fix(logger): fix TSAN issue
+3042f906ab 2026-06-23 Jukka Laitinen feat(uORB): Add an own type, orb_sub_t, for subscription handles (#27457)
+--- src/drivers/telemetry/iridiumsbd/IridiumSBD.cpp
+0c903d47d6 2026-09-16 Julian Oes fix(drivers/iridiumsbd): bound the TX buffer write against the bytes copied (#28599)
+--- src/drivers/telemetry/bst/bst.cpp
+e40501eba0 2026-09-29 Jacob Dahl refactor(msg): rename GPS to GNSS in messages, topics and sensor parameters (#24399)
+--- src/drivers/ins/microstrain/MicroStrain.cpp
+e40501eba0 2026-09-29 Jacob Dahl refactor(msg): rename GPS to GNSS in messages, topics and sensor parameters (#24399)
+eb8f2f9b42 2026-09-28 Jacob Dahl refactor(ekf2): separate GNSS heading from position into independent topic (#27102)
+c9f5442402 2026-08-28 Jacob Dahl feat(sensors): classify sensors independently of bus topology (#28352)
+2809806c5b 2026-08-28 Saibernard refactor(lib): take AlphaFilter time parameters in microseconds (#28421)
+02c82831e0 2026-08-24 Jacob Dahl feat(gps): Galileo HAS mode, correction protocol reporting, GPSDrivers bump (#28335)
+e6df0597f0 2026-08-20 Hamish Willee fix(docs): Fix links in source (#28299)
+96e760a782 2026-07-02 Hamish Willee docs(docs): Fix almost all broken external links (#27790)
+
+=== Commit que introduziu as guardas do bst
+e8e86a2e0f 2026-03-13 Ramon Roche fix(telemetry/bst): validate reply length and dev_name_len before use

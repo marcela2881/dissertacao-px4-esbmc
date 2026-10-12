@@ -1,0 +1,364 @@
+# data:     2026-10-12T12:48:30Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/5_logger/fontes
+# comando:  /opt/tools/esbmc-8.1/bin/esbmc harness.cpp -DMODELO_KEY_LEN_NONDET --unwind 10 --multi-property --overflow-check
+# o que e:  key_len livre: so a assercao do truncamento deve falhar (A7)
+# --------------------------------------------------------------
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing harness.cpp
+Converting
+WARNING: extern variable with id c:@stderr not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@stdout not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@stdin not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.238s
+GOTO program processing time: 0.003s
+Starting Bounded Model Checking
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 1   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 2   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 3   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 4   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 5   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 6   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 104 column 14 function main
+✓ PASSED: 'array bounds violated: array `value' lower bound' at file harness.cpp line 105 column 3 function main
+✓ PASSED: 'array bounds violated: array `value' upper bound' at file harness.cpp line 105 column 3 function main
+Unwinding loop 25 iteration 7   file harness.cpp line 103 column 2 function main
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 1   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 2   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 3   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 4   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 5   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 6   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 7 iteration 7   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 1   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 2   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 3   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 4   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 5   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 6   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 7   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: array bounds violated' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 8   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Unwinding loop 26 iteration 9   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+✓ PASSED: 'dereference failure: Incorrect alignment when accessing data object' at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+Not unwinding loop 26 iteration 10   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.016s (169 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 90 assignments)
+Generated 105 VCC(s), 23 remaining after simplification (79 assignments)
+No solver specified; defaulting to Boolector
+Slicing time: 0.000s (removed 15 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'assertion msg_size < sizeof(msg) at file harness.cpp line 85 column 3 function write_info_multiple' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.001s
+✓ PASSED: 'assertion msg_size < sizeof(msg) at file harness.cpp line 85 column 3 function write_info_multiple'
+Slicing time: 0.000s (removed 4 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'unwinding assertion loop 26 at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'unwinding assertion loop 26 at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl'
+Slicing time: 0.000s (removed 4 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: array bounds violated at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'dereference failure: array bounds violated at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 1 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 5 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: array bounds violated at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'dereference failure: array bounds violated at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 2 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.001s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 3 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.002s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.001s (removed 4 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.003s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 5 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.003s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.004s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.001s (removed 6 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.001s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.001s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.001s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.000s
+✓ PASSED: 'arithmetic overflow on add at file harness.cpp line 103 column 25 function main'
+Slicing time: 0.000s (removed 37 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'assertion ret_snprintf <= 255 at file harness.cpp line 70 column 2 function write_info_multiple' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.002s
+✗ FAILED: 'assertion ret_snprintf <= 255 at file harness.cpp line 70 column 2 function write_info_multiple'
+
+[Counterexample]
+
+
+State 1 file harness.cpp line 101 column 2 function main thread 0
+----------------------------------------------------
+  value = { 0, 0, 0, 0, 0, 0, 0, 0 }
+
+State 2 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[0] = 3 (00000011)
+
+State 4 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[1] = 3 (00000011)
+
+State 6 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[2] = -125 (10000011)
+
+State 8 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[3] = 3 (00000011)
+
+State 10 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[4] = 3 (00000011)
+
+State 12 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[5] = 3 (00000011)
+
+State 14 file harness.cpp line 104 column 14 function main thread 0
+----------------------------------------------------
+  value[6] = 3 (00000011)
+
+State 16 file harness.cpp line 67 column 2 function write_info_multiple thread 0
+----------------------------------------------------
+  ret_snprintf = 560 (00000000 00000000 00000010 00110000)
+
+State 18 file harness.cpp line 70 column 2 function write_info_multiple thread 0
+----------------------------------------------------
+Violated property:
+  file harness.cpp line 70 column 2 function write_info_multiple
+  assertion ret_snprintf <= 255
+  ret_snprintf <= 255
+
+Slicing time: 0.001s (removed 33 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'assertion msg_size <= sizeof(msg) at file harness.cpp line 80 column 2 function write_info_multiple' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.001s
+✓ PASSED: 'assertion msg_size <= sizeof(msg) at file harness.cpp line 80 column 2 function write_info_multiple'
+Slicing time: 0.000s (removed 10 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.002s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 9 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.002s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 8 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.002s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Slicing time: 0.000s (removed 7 assignments)
+No solver specified; defaulting to Boolector
+Solving claim 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl' with solver Boolector 3.2.4
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.001s
+✓ PASSED: 'dereference failure: Access to object out of bounds at file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl'
+Properties: 105 verified ✓ 104 passed, ✗ 1 failed
+Solver: Boolector 3.2.4 • Decision procedure total time: 0.037s • Avg: 0.000s/property
+
+VERIFICATION FAILED
+# codigo de saida: 1

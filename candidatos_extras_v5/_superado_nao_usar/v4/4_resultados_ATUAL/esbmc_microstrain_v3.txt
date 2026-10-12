@@ -1,0 +1,1009 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_microstrain_port_v3.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.094s
+GOTO program processing time: 0.002s
+Starting Bounded Model Checking
+Unwinding loop 24 iteration 1   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 2   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 3   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 4   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 5   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 6   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 7   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 8   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 9   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 10   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 11   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 12   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 13   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 14   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 15   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 16   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 17   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 18   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 19   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 20   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 21   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 22   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 23   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 24   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 25   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 26   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 27   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 28   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 29   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 30   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 31   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 32   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 33   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 34   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 35   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 36   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 37   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 38   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 39   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 40   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 41   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 42   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 43   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 44   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 45   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 46   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 47   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 48   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 49   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 50   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 51   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 52   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 53   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 54   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 55   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 56   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 57   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 58   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 59   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 60   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 61   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 62   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 63   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 64   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 65   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 66   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 67   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 68   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 69   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 70   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 71   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 72   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 73   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 74   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 75   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 76   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 77   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 78   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 79   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 80   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 81   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 82   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 83   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 84   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 85   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 86   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 87   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 88   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 89   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 90   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 91   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 92   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 93   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 94   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 95   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 96   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 97   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 98   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 99   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 100   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 101   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 102   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 103   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 104   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 105   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 106   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 107   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 108   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 109   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 110   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 111   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 112   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 113   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 114   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 115   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 116   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 117   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 118   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 119   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 120   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 121   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 122   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 123   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 124   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 125   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 126   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 127   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 128   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 24 iteration 129   file test_microstrain_port_v3.cpp line 86 column 5 function microstrain_init_port
+Unwinding loop 23 iteration 1   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 2   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 3   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 4   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 5   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 6   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 7   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 8   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 9   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 10   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 11   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 12   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 13   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 14   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 15   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 16   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 17   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 18   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 19   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 20   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 21   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 22   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 23   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 24   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 25   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 26   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 27   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 28   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 29   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 30   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 31   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 32   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 33   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 34   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 35   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 36   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 37   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 38   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 39   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 40   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 41   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 42   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 43   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 44   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 45   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 46   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 47   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 48   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 49   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 50   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 51   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 52   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 53   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 54   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 55   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 56   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 57   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 58   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 59   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 60   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 61   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 62   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 63   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 64   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 65   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 66   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 67   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 68   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 69   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 70   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 71   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 72   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 73   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 74   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 75   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 76   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 77   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 78   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 79   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 80   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 81   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 82   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 83   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 84   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 85   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 86   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 87   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 88   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 89   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 90   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 91   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 92   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 93   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 94   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 95   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 96   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 97   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 98   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 99   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 100   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 101   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 102   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 103   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 104   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 105   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 106   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 107   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 108   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 109   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 110   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 111   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 112   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 113   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 114   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 115   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 116   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 117   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 118   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 119   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 120   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 121   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 122   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 123   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 124   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 125   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 126   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 127   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 23 iteration 128   file test_microstrain_port_v3.cpp line 70 column 5 function strnlen_model
+Unwinding loop 26 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 7   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 8   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 9   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 10   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 11   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 12   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 13   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 14   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 15   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 16   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 17   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 18   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 19   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 20   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 21   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 22   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 23   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 24   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 25   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 26   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 27   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 28   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 29   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 30   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 31   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 32   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 33   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 34   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 35   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 36   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 37   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 38   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 39   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 40   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 41   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 42   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 43   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 44   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 45   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 46   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 47   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 48   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 49   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 50   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 51   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 52   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 53   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 54   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 55   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 56   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 57   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 58   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 59   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 60   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 61   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 62   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 63   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 64   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 65   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 66   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 67   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 68   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 69   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 70   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 71   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 72   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 73   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 74   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 75   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 76   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 77   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 78   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 79   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 80   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 81   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 82   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 83   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 84   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 85   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 86   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 87   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 88   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 89   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 90   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 91   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 92   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 93   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 94   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 95   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 96   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 97   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 98   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 99   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 100   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 101   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 102   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 103   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 104   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 105   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 106   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 107   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 108   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 109   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 110   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 111   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 112   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 113   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 114   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 115   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 116   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 117   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 118   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 119   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 120   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 121   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 122   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 123   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 124   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 125   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 126   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 127   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 128   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 129   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 130   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 131   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 132   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 133   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 134   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 135   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 136   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 137   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 138   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 139   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 140   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 141   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 142   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 143   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 144   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 145   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 146   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 147   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 148   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 149   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 150   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 151   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 152   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 153   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 154   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 155   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 156   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 157   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 158   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 159   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 160   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 161   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 162   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 163   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 164   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 165   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 166   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 167   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 168   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 169   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 170   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 171   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 172   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 173   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 174   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 175   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 176   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 177   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 178   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 179   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 180   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 181   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 182   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 183   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 184   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 185   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 186   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 187   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 188   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 189   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 190   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 191   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 192   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 193   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 194   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 195   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 196   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 197   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 198   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 26 iteration 199   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 26 iteration 200   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.083s (2154 assignments)
+Caching time: 0.011s (removed 129 assertions)
+Slicing time: 0.011s (removed 1285 assignments)
+Generated 1450 VCC(s), 148 remaining after simplification (740 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 10529
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.019s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 1.728s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[0] = 1 (00000001)
+
+State 3 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[1] = 1 (00000001)
+
+State 4 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[2] = 16 (00010000)
+
+State 5 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[3] = 32 (00100000)
+
+State 6 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[4] = 4 (00000100)
+
+State 7 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[5] = 32 (00100000)
+
+State 8 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[6] = 1 (00000001)
+
+State 9 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[7] = 1 (00000001)
+
+State 10 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[8] = 64 (01000000)
+
+State 11 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[9] = 2 (00000010)
+
+State 12 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[10] = 4 (00000100)
+
+State 13 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[11] = 32 (00100000)
+
+State 14 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[12] = 1 (00000001)
+
+State 15 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[13] = 1 (00000001)
+
+State 16 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[14] = 64 (01000000)
+
+State 17 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[15] = 1 (00000001)
+
+State 18 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[16] = 8 (00001000)
+
+State 19 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[17] = 32 (00100000)
+
+State 20 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[18] = 32 (00100000)
+
+State 21 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[19] = 32 (00100000)
+
+State 22 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[20] = 64 (01000000)
+
+State 23 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[21] = 32 (00100000)
+
+State 24 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[22] = 4 (00000100)
+
+State 25 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[23] = 8 (00001000)
+
+State 26 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[24] = 2 (00000010)
+
+State 27 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[25] = 2 (00000010)
+
+State 28 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[26] = 16 (00010000)
+
+State 29 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[27] = 4 (00000100)
+
+State 30 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[28] = 4 (00000100)
+
+State 31 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[29] = 16 (00010000)
+
+State 32 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[30] = 64 (01000000)
+
+State 33 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[31] = -128 (10000000)
+
+State 34 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[32] = 32 (00100000)
+
+State 35 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[33] = 32 (00100000)
+
+State 36 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[34] = 32 (00100000)
+
+State 37 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[35] = 1 (00000001)
+
+State 38 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[36] = 32 (00100000)
+
+State 39 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[37] = 1 (00000001)
+
+State 40 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[38] = -128 (10000000)
+
+State 41 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[39] = -128 (10000000)
+
+State 42 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[40] = 64 (01000000)
+
+State 43 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[41] = 16 (00010000)
+
+State 44 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[42] = 4 (00000100)
+
+State 45 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[43] = 16 (00010000)
+
+State 46 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[44] = 2 (00000010)
+
+State 47 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[45] = 16 (00010000)
+
+State 48 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[46] = 2 (00000010)
+
+State 49 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[47] = 8 (00001000)
+
+State 50 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[48] = 16 (00010000)
+
+State 51 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[49] = 8 (00001000)
+
+State 52 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[50] = 32 (00100000)
+
+State 53 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[51] = -128 (10000000)
+
+State 54 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[52] = 16 (00010000)
+
+State 55 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[53] = 1 (00000001)
+
+State 56 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[54] = -128 (10000000)
+
+State 57 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[55] = 4 (00000100)
+
+State 58 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[56] = 8 (00001000)
+
+State 59 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[57] = 64 (01000000)
+
+State 60 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[58] = 4 (00000100)
+
+State 61 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[59] = 8 (00001000)
+
+State 62 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[60] = 32 (00100000)
+
+State 63 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[61] = 8 (00001000)
+
+State 64 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[62] = 2 (00000010)
+
+State 65 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[63] = 8 (00001000)
+
+State 66 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[64] = 4 (00000100)
+
+State 67 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[65] = 16 (00010000)
+
+State 68 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[66] = 1 (00000001)
+
+State 69 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[67] = -128 (10000000)
+
+State 70 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[68] = 8 (00001000)
+
+State 71 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[69] = -128 (10000000)
+
+State 72 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[70] = 16 (00010000)
+
+State 73 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[71] = 16 (00010000)
+
+State 74 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[72] = 2 (00000010)
+
+State 75 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[73] = 32 (00100000)
+
+State 76 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[74] = 1 (00000001)
+
+State 77 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[75] = -128 (10000000)
+
+State 78 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[76] = 1 (00000001)
+
+State 79 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[77] = 8 (00001000)
+
+State 80 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[78] = 2 (00000010)
+
+State 81 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[79] = 1 (00000001)
+
+State 82 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[80] = 2 (00000010)
+
+State 83 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[81] = 4 (00000100)
+
+State 84 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[82] = 2 (00000010)
+
+State 85 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[83] = 4 (00000100)
+
+State 86 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[84] = 4 (00000100)
+
+State 87 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[85] = -128 (10000000)
+
+State 88 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[86] = 4 (00000100)
+
+State 89 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[87] = 64 (01000000)
+
+State 90 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[88] = 8 (00001000)
+
+State 91 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[89] = 16 (00010000)
+
+State 92 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[90] = 64 (01000000)
+
+State 93 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[91] = 4 (00000100)
+
+State 94 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[92] = 32 (00100000)
+
+State 95 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[93] = 2 (00000010)
+
+State 96 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[94] = 16 (00010000)
+
+State 97 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[95] = 1 (00000001)
+
+State 98 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[96] = 4 (00000100)
+
+State 99 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[97] = 16 (00010000)
+
+State 100 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[98] = 8 (00001000)
+
+State 101 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[99] = 1 (00000001)
+
+State 102 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[100] = 1 (00000001)
+
+State 103 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[101] = 64 (01000000)
+
+State 104 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[102] = 64 (01000000)
+
+State 105 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[103] = 16 (00010000)
+
+State 106 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[104] = 32 (00100000)
+
+State 107 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[105] = 4 (00000100)
+
+State 108 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[106] = 8 (00001000)
+
+State 109 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[107] = 16 (00010000)
+
+State 110 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[108] = 32 (00100000)
+
+State 111 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[109] = 1 (00000001)
+
+State 112 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[110] = 32 (00100000)
+
+State 113 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[111] = -128 (10000000)
+
+State 114 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[112] = 2 (00000010)
+
+State 115 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[113] = 64 (01000000)
+
+State 116 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[114] = -128 (10000000)
+
+State 117 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[115] = 4 (00000100)
+
+State 118 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[116] = 64 (01000000)
+
+State 119 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[117] = 16 (00010000)
+
+State 120 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[118] = 64 (01000000)
+
+State 121 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[119] = 1 (00000001)
+
+State 122 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[120] = -128 (10000000)
+
+State 123 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[121] = 8 (00001000)
+
+State 124 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[122] = 16 (00010000)
+
+State 125 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[123] = 16 (00010000)
+
+State 126 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[124] = 16 (00010000)
+
+State 127 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[125] = 1 (00000001)
+
+State 128 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[126] = 4 (00000100)
+
+State 129 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[127] = 64 (01000000)
+
+State 130 file test_microstrain_port_v3.cpp line 87 column 24 function microstrain_init_port thread 0
+----------------------------------------------------
+  uart_port[128] = 0 (00000000)
+
+State 131 file test_microstrain_port_v3.cpp line 91 column 5 function microstrain_init_port thread 0
+----------------------------------------------------
+  max_len = 128 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 10000000)
+
+State 132 file test_microstrain_port_v3.cpp line 100 column 5 function microstrain_init_port thread 0
+----------------------------------------------------
+Violated property:
+  file test_microstrain_port_v3.cpp line 100 column 5 function microstrain_init_port
+  assertion max_len < PORT_SIZE
+  max_len < 128
+
+
+VERIFICATION FAILED
