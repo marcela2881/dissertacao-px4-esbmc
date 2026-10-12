@@ -2,3 +2,11 @@ Barometer     | VERIFICATION SUCCESSFUL   |
 Battery       | VERIFICATION SUCCESSFUL   | 
 EKF2          | VERIFICATION SUCCESSFUL   | 
 Expo          | VERIFICATION SUCCESSFUL   | 
+GPS           | VERIFICATION FAILED       | unwinding assertion loop 24
+IMU_BMI088    | VERIFICATION FAILED       | assertion count <= FIFO_SIZE
+MAVLink       | VERIFICATION SUCCESSFUL   | 
+Magnetometer  | VERIFICATION SUCCESSFUL   | 
+Navigator     | VERIFICATION SUCCESSFUL   | 
+PWM           | VERIFICATION SUCCESSFUL   | 
+RC            | VERIFICATION SUCCESSFUL   | 
+VTOL          | VERIFICATION SUCCESSFUL   | 
