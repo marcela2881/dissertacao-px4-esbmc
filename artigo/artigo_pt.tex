@@ -105,46 +105,36 @@ reginaldo@icomp.ufam.edu.br}
 
 \begin{abstract}
 O firmware de piloto automático de VANTs em produção pode conter
-defeitos latentes que sobrevivem aos testes unitários, com
-consequências diretas para a segurança de voo em controladores sem
-MMU; a garantia de segurança exige evidência de ausência de defeitos,
-e não apenas relatos de bugs. Os esforços anteriores de verificação
-formal têm como alvo a lógica de missão ou pilotos automáticos de
-pesquisa, deixando o código de drivers em produção amplamente sem
-exame. Avaliamos uma metodologia de verificação em oito etapas,
-baseada em verificação de modelos limitada com o ESBMC
-(\textit{Efficient SMT-based Context-Bounded Model Checker}),
+defeitos latentes que sobrevivem a testes unitários, com impacto
+direto na segurança de voo em controladores sem MMU. A garantia de
+segurança exige evidência de ausência de defeitos, e não apenas
+relato de \textit{bugs}. Trabalhos anteriores de verificação formal
+focam em lógica de missão ou em pilotos de pesquisa, deixando drivers
+de produção sem exame. Avaliamos uma metodologia em oito etapas
+baseada em verificação de modelos limitada (BMC) com o ESBMC,
 \textit{stubs} de hardware escritos manualmente e asserções derivadas
-de \textit{datasheets}, em doze \textit{harnesses} derivados de
-trechos de doze módulos críticos para a segurança do PX4 Autopilot
-(ramo \texttt{main}, \textit{commit} \texttt{8be2590c15}), com a
-revisão da comunidade como parte da metodologia. O resultado principal
-é uma garantia limitada, em nível de modelo: os \textit{harnesses} de
-dez módulos, que abrangem classes representativas de entradas não
-confiáveis, são verificados livres de violações de segurança de
-memória e de \textit{overflow} até o limite de desdobramento
-(${\approx}94$\,s no total, sem a execução do GPS). O resultado
-secundário é a análise de três contraexemplos: um falso positivo no
-contador da FIFO (\textit{first-in, first-out}) do BMI088, refutado
-por inspeção do código-fonte; uma observação de temperatura do
-BMI088, recusada pelos mantenedores; e um \textit{underflow} de
-inteiro sem sinal no \textit{harness} do driver uBlox de GPS
-(\textit{Global Positioning System}), que se propaga para um
-\texttt{memcpy} fora dos limites em um caminho que nenhum teste
-unitário do PX4 exercita, proposto ao projeto original; o mantenedor
-do PX4 mostrou em seguida que ele é inalcançável no driver de
-produção e sugeriu tratar a verificação como um reforço defensivo.
-Os \textit{harnesses} expõem estados alcançáveis no modelo que o
-código de produção pode nunca alcançar; por isso, os contraexemplos
-precisam ser confrontados com o código de produção e com a
-comunidade. O ESBMC detecta a violação do GPS com o Boolector (o Z3
-não deu veredito dentro do tempo limite); o CBMC (\textit{C Bounded
-Model Checker}) a reporta apenas com um \textit{harness} posterior,
-semeado, e com um limite de desdobramento reduzido (seu
-\textit{harness} original retornou \textsc{verification
-successful}); assim, o achado é sensível à configuração da ferramenta
-e à pré-condição, o que é uma evidência relevante para a escolha do
-conjunto de ferramentas.
+de \textit{datasheets}. A metodologia foi aplicada a doze
+\textit{harnesses} derivados de módulos críticos do PX4 Autopilot
+(ramo \texttt{main}, \textit{commit} \texttt{8be2590c15}), com revisão
+da comunidade como parte do método. Como resultado principal,
+obtivemos garantia limitada em nível de modelo: os \textit{harnesses}
+de dez módulos, que abrangem classes representativas de entradas não
+confiáveis, foram verificados livres de violações de segurança de
+memória e de \textit{overflow} até o limite de desdobramento, em
+${\approx}94$\,s no total. Como resultado secundário, analisamos três
+contraexemplos: um falso positivo na FIFO do BMI088, refutado por
+inspeção; uma observação de temperatura do BMI088, recusada pelos
+mantenedores; e um \textit{underflow} no \textit{harness} do driver
+uBlox de GPS que leva a um \texttt{memcpy} fora dos limites em um
+caminho não exercitado por testes unitários. Propusemos uma correção
+ao projeto, mas o mantenedor mostrou que esse estado é inalcançável
+em produção e a classificou como reforço defensivo. Mostramos que
+\textit{harnesses} expõem estados alcançáveis no modelo, mas nem
+sempre no código de produção, o que exige confronto com o código e
+com a comunidade. O ESBMC detecta a violação do GPS com o Boolector
+(o Z3 não deu veredito no tempo limite), enquanto o CBMC só a reporta
+com um \textit{harness} semeado e um limite reduzido. Portanto, o
+achado é sensível à ferramenta e à pré-condição.
 \end{abstract}
 
 \begin{IEEEkeywords}
