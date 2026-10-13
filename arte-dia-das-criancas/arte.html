@@ -34,6 +34,9 @@ tr.tot td{background:#ffc61a !important;font-weight:800;font-size:23px;border:0}
 .pix .lb{color:#ff3d8b;font-weight:800;font-size:16px}
 .pix .k{font-weight:800;font-size:31px}
 .pix .t{font-size:17px;font-weight:700}.pix .t b{color:#ff3d8b}
+.acts{display:flex;justify-content:center;gap:14px;margin-top:14px}
+.acts span{background:rgba(255,255,255,.14);color:#fff;font-weight:700;font-size:19px;padding:6px 16px;border-radius:30px;font-family:Poppins,'Noto Color Emoji'}
+.prep{margin-top:6px;font-size:14px;font-weight:700;color:#fff;background:#ff3d8b;border-radius:20px;padding:3px 10px;display:inline-block}
 .foot{text-align:center;color:#fff;margin-top:22px}
 .foot .a{font-weight:800;font-size:22px}
 .foot .a b,.foot .r b{color:#ffc61a}
@@ -47,10 +50,11 @@ tr.tot td{background:#ffc61a !important;font-weight:800;font-size:23px;border:0}
   <div class="deco emo" style="right:74px;top:206px;font-size:54px">🍭</div>
   <h1>DIA DAS<small>CRIANÇAS</small></h1>
   <div class="sub">FESTINHA PARA A CRIANÇADA</div>
+  <div class="acts"><span>🎨 Atividades</span><span>🌭 Lanche</span><span>🤸 Brincadeiras</span></div>
   <div class="date">17-10-2026 · SÁBADO</div>
   <div class="cards">
     <div class="card"><div class="lb"><span class="emo">📍</span> LOCAL</div><div class="v" style="font-size:22px">Igreja de Todos<br>os Santos</div><div class="s">no espaço da igreja</div></div>
-    <div class="card"><div class="lb"><span class="emo">🕒</span> HORÁRIO</div><div class="v">15h às 17h</div><div class="s">sábado à tarde</div></div>
+    <div class="card"><div class="lb"><span class="emo">🕒</span> HORÁRIO</div><div class="v">15h às 17h30</div><div class="s">festinha</div><div class="prep">Preparação: 12h30 às 14h30</div></div>
     <div class="card"><div class="lb"><span class="emo">🧒</span> PÚBLICO ESTIMADO</div><div class="v">70</div><div class="s">crianças</div></div>
   </div>
   <table>
@@ -79,5 +83,5 @@ tr.tot td{background:#ffc61a !important;font-weight:800;font-size:23px;border:0}
 const cols=['#ffc61a','#ff3d8b','#1ec8c8','#3cc46b','#a45cf0'];
 for(const id of ['b1','b2']){const b=document.getElementById(id);for(let i=0;i<30;i++){const s=document.createElement('span');s.style.background=cols[i%5];b.appendChild(s)}}
 const w=document.querySelector('.wrap');
-[[180,30,10,'#1ec8c8'],[760,24,12,'#3cc46b'],[300,250,8,'#ff3d8b'],[640,262,9,'#a45cf0'],[120,150,7,'#ffc61a'],[830,170,8,'#ff3d8b'],[470,8,7,'#a45cf0']].forEach(([x,y,r,c])=>{const d=document.createElement('div');d.className='conf';Object.assign(d.style,{left:x+'px',top:y+'px',width:r*2+'px',height:r*2+'px',background:c});w.prepend(d)});
+[[180,30,10,'#1ec8c8'],[760,24,12,'#3cc46b'],[230,395,8,'#ff3d8b'],[720,400,9,'#a45cf0'],[120,150,7,'#ffc61a'],[830,170,8,'#ff3d8b'],[470,8,7,'#a45cf0']].forEach(([x,y,r,c])=>{const d=document.createElement('div');d.className='conf';Object.assign(d.style,{left:x+'px',top:y+'px',width:r*2+'px',height:r*2+'px',background:c});w.prepend(d)});
 </script></body></html>
