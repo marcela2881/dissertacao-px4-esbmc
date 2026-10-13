@@ -11,6 +11,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[brazil]{babel}
+\addto\captionsbrazil{\renewcommand{\figurename}{Fig.}}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
@@ -72,6 +73,7 @@
 
 \hypersetup{pdftitle={Verificação Formal de Módulos Críticos do PX4 Autopilot usando Verificação de Modelos Limitada},pdfauthor={Marcela Alves Rodrigues, Lucas C. Cordeiro, Jose Reginaldo H. de Carvalho}}
 \begin{document}
+\renewcommand{\IEEEkeywordsname}{Palavras-chave}
 
 \title{Verificação Formal de Módulos Críticos do PX4 Autopilot
        usando Verificação de Modelos Limitada\\
@@ -289,7 +291,7 @@ publicação--assinatura uORB (\textit{micro Object Request Broker})
 \node[ver] (gps) {Driver de GPS (u-blox)};
 \node[ver,above=3.4mm of gps] (imu) {Driver da IMU (BMI088)};
 \node[ver,below=3.4mm of gps] (rc) {Entrada de RC / módulo Expo};
-\node[bus,right=7mm of gps] (uorb) {\textbf{uORB}\\[-1pt]{\fontsize{6}{7}\selectfont barramento de mensagens}};
+\node[bus,right=7mm of gps] (uorb) {\textbf{uORB}\\[-1pt]{\fontsize{6}{7}\selectfont barramento\\de mensagens}};
 \node[mod,right=7mm of uorb] (fc) {Controle de voo};
 \node[mod,above=3.4mm of fc] (ekf) {EKF / estimador de estado};
 \node[ver,below=3.4mm of fc] (mav) {Módulo MAVLink};
@@ -446,6 +448,7 @@ da seleção (classe de entrada exercitada).}
 \label{tab:benchmarks}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}llrrl@{}}
 \toprule
 \textbf{Módulo} & \textbf{Caminho no PX4 (\texttt{src/})} & \textbf{Alvo} & \textbf{Harn.} & \textbf{Classe de entrada}\\
@@ -468,7 +471,7 @@ VTOL           & \texttt{modules/vtol\_att\_control} & 591 & 146 & Atuação \\
 \multicolumn{5}{l}{RC = radiocontrole; IMU = unidade de medição inercial;}\\
 \multicolumn{5}{l}{EKF2 = Filtro de Kalman Estendido 2; PWM = modulação por largura de pulso.}\\
 \multicolumn{5}{l}{Módulos selecionados pelo impacto na segurança e pela viabilidade dos \textit{stubs}.}
-\end{tabular}
+\end{tabular}}
 \end{table}
 A instrumentação de um módulo exige três artefatos escritos
 manualmente: um \textit{harness} de ponto de entrada, que aciona o
