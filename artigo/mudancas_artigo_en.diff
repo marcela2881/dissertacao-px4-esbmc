@@ -1,0 +1,130 @@
+--- original.tex	2026-10-13 20:17:46.206064875 +0000
++++ main.tex	2026-10-13 20:18:02.838178113 +0000
+@@ -135,7 +135,7 @@
+ (MMU)} under hard real-time constraints, and interfaces
+ with hardware that can fail~\cite{PX4_GitHub,Wanner2024}.
+ Traditional testing does not ensure these constraints, for example it can miss faults triggered by extreme sensor values
+-or unsigned-arithmetic edge cases~\cite{Khatiri2024}.For that, a software verifier must be used~\cite{Dijkstra1972}.
++or unsigned-arithmetic edge cases~\cite{Khatiri2024}. For that, a software verifier must be used~\cite{Dijkstra1972}.
+ 
+ Existing formal-verification efforts for autopilots target \textit{research
+ platforms} or \textit{mission-level logic}~\cite{Pollien2023,Bernardeschi2023},
+@@ -160,7 +160,13 @@
+ 
+ Our main original contributions are:
+ (i)~bounded, model-level verification evidence for harnesses of ten PX4 modules spanning representative untrusted-input classes;
+-(ii)~an eight-stage verification methodology with cross-tool validation and patch validation;
++(ii)~an eight-stage verification methodology with cross-tool validation and patch validation.
++The key addition of our methodology is the use of component datasheets
++as a source of specifications: beyond the implicit properties checked by
++the verifier, such as memory safety and arithmetic overflow, each harness
++includes assertions derived from the hardware datasheet, allowing the
++verifier to check whether the driver respects the physical limits of the
++sensor it handles.
+ %\entra{(iii)~a model-reachable memory-safety violation in the GPS~uBlox
+ %driver harness (\entra{Common Weakness Enumeration,} CWE-191,\ CWE-119, Issue~\#26866), proposed upstream with a guard (PR~\#27576) and subsequently shown unreachable in
+ %the production driver by the PX4 maintainer, who framed the guard as defensive hardening;}
+@@ -342,7 +348,7 @@
+ buffer-bounds property is specified at the \texttt{memcpy} (iii), ESBMC
+ yields a counterexample
+ \entra{(iv--v), which is filed
+-upstream (vi) as Issue~\#26866; the maintainer's review and our source
++upstream (vi) as Issue~\#26866~\cite{PX4_Issue26866}; the maintainer's review and our source
+ analysis of the driver's bounds-checking logic then show that the violating
+ state does not arise in production},
+ cross-checked with CBMC and re-verified on the patch (vii), and
+@@ -374,11 +380,11 @@
+ Expo RC        & \texttt{lib/mathlib/math}      & 303 & 129 & Radio input \\
+ Battery Mon.   & \texttt{lib/battery}           & 449 & 242 & Power sensor \\
+ PWM Output        & \texttt{drivers/pwm\_out}      & 337 & 208 & Actuation \\
+-RC Update      & \texttt{lib/rc}                & 769 & 253 & Radio input \\
++RC Update      & \texttt{modules/rc\_update}     & 769 & 253 & Radio input \\
+ Navigator      & \texttt{modules/navigator}     & 497 & 291 & Mission logic \\
+ EKF2 Cov.      & \texttt{modules/ekf2/EKF}      & 385 & 296 & State estim. \\
+ Magnetometer   & \texttt{modules/sensors}       & 792 & 239 & Serial sensor \\
+-Barometer      & \texttt{modules/sensors}       & 246 & 278 & Serial sensor \\
++Barometer      & \texttt{lib/sensor\_calibration} & 246 & 278 & Serial sensor \\
+ VTOL           & \texttt{modules/vtol\_att\_control} & 591 & 146 & Actuation \\
+ \bottomrule
+ \multicolumn{5}{l}{Tgt.=LoC of the PX4 source file(s) the harness excerpts (pinned commit);}\\
+@@ -416,7 +422,7 @@
+ values in the counterexample (\texttt{input\_len=10}, \texttt{dump\_buffer.len=207}),
+ which lead to the out-of-bounds \texttt{memcpy} shown in
+ Listing~\ref{lst:bug-gps}.}
+-Harness sources are in the artifact repository\footnote{\url{https://github.com/marcela2881/dissertacao-px4-esbmc}}\entra{, which contains the twelve test
++Harness sources are in the artifact repository~\cite{Artifact2026}\entra{, which contains the twelve test
+ harnesses (one \texttt{test\_*.cpp} file per module), raw ESBMC logs for every run reported here, CBMC
+ cross-validation scripts and logs, per-module command lines, and a
+ reproduction guide; it does not yet contain separate replay-driver
+@@ -510,7 +516,7 @@
+ bounded, model-level evidence is the campaign's primary outcome
+ (scope qualified in Section~\ref{sec:threats}).
+ The GPS~uBlox harness yielded the one violation
+-(Issue~\#26866); the BMI088 FIFO-counter candidate
++(Issue~\#26866~\cite{PX4_Issue26866}); the BMI088 FIFO-counter candidate
+ was a false positive on triage; the
+ temperature-range observation remains contested
+ (Section~\ref{subsec:case-imu}).
+@@ -572,8 +578,8 @@
+ To assess tool-specificity, we ran CBMC~5.95.1~\cite{Kroening2014}
+ with matching options (\texttt{--unwind~10},
+ overflow and bounds checks, no unwinding assertions) and the same
+-$120$\,s timeout, on the same harness for IMU~BMI088 (both tools agreed) and on a separate harness for GPS~uBlox. For GPS~uBlox,
+-under \corr{the later CBMC harness (added 2026-09-24; the original, with \texttt{len}~$<$~$200$, returned \textsc{verification successful} in Issue~\#26866, as its precondition excludes the violating states) with the} precondition \texttt{len}~$\geq$~$190$
++$120$\,s timeout, on a separate, reduced harness for IMU~BMI088 (both tools agreed) and on a separate harness for GPS~uBlox. For GPS~uBlox,
++under \corr{the later CBMC harness (added 2026-09-24; the original, with \texttt{len}~$<$~$200$, returned \textsc{verification successful} in Issue~\#26866~\cite{PX4_Issue26866}, as its precondition excludes the violating states) with the} precondition \texttt{len}~$\geq$~$190$
+ (\texttt{GPS\_DUMP\_DATA\_SIZE}$\,-\,$10, seeding the length field near
+ the buffer boundary\corr{; the ESBMC harness uses $-5$}), both tools flag a violation, but CBMC only at reduced bounds (\texttt{--unwind~2}, \texttt{3} and~\texttt{5}: unwritable \texttt{memcpy} destination); at \texttt{--unwind~10} it did not finish within a longer $30$\,min limit.
+ ESBMC reports an out-of-bounds access inside \texttt{memcpy}
+@@ -604,7 +610,7 @@
+ non-deterministic 8-bit inputs already span the sensor's 11-bit raw-value
+ range, so the assertion is exercised over the reachable register domain
+ rather than vacuously.}
+-Whether this is a defect is contested. \corr{In review of the upstream patch (PX4~PR~\#27575), a reviewer objected to clamping the value (``faking the number'') and asked what the sensor itself reports outside its operating range; a maintainer then closed the PR because it does not follow the pattern established in other drivers. Issue~\#26865 was closed automatically as not planned.}
++Whether this is a defect is contested. \corr{In review of the upstream patch (PX4~PR~\#27575~\cite{PX4_PR27575}), a reviewer objected to clamping the value (``faking the number'') and asked what the sensor itself reports outside its operating range; a maintainer then closed the PR because it does not follow the pattern established in other drivers. Issue~\#26865~\cite{PX4_Issue26865} was closed automatically as not planned.}
+ We
+ retain the observation only as a design note with \emph{no confirmed
+ safety consequence and no accepted remediation}, illustrating the
+@@ -668,7 +674,7 @@
+ established next, bounds the physical
+ impact.}
+ 
+-\entra{\corr{As the PX4 maintainer (mrpollo) showed in his review of PR~\#27576, and as source analysis then confirmed,} the production driver resolves this question
++\entra{\corr{As the PX4 maintainer (mrpollo) showed in the review of PR~\#27576~\cite{PX4_PR27576}, and as source analysis then confirmed,} the production driver resolves this question
+ negatively: the write loop clamps \texttt{write\_len} to the remaining
+ free space, so the fill level never exceeds the buffer before the record
+ is published and the field reset to zero. The violation is thus
+@@ -700,7 +706,7 @@
+ \end{lstlisting}
+ 
+ \paragraph{Patch verification}
+-On the patched harness, CBMC~5.95.1 reports $0/7$ failed properties (PR~\#27576; log in the artifact). This is a check of the proposed guard on the harness, not evidence about the production driver: the unpatched CBMC harness reports the same $0/7$ under the same bounded-length precondition, so the comparison does not isolate the guard's effect. ESBMC fails on the unpatched harness (Table~\ref{tab:results}); the artifact has no ESBMC log for the patched harness.
++On the patched harness, CBMC~5.95.1 reports $0/7$ failed properties (PR~\#27576~\cite{PX4_PR27576}; log in the artifact). This is a check of the proposed guard on the harness, not evidence about the production driver: the unpatched CBMC harness reports the same $0/7$ under the same bounded-length precondition, so the comparison does not isolate the guard's effect. ESBMC fails on the unpatched harness (Table~\ref{tab:results}); the artifact has no ESBMC log for the patched harness.
+ 
+ \subsection{Discussion}
+ \label{subsec:discussion}
+@@ -722,11 +728,11 @@
+ The same missing-range-validation observation (CWE-1284) appears in
+ ArduPilot's equivalent driver~\cite{ArduPilot}: running CBMC~5.95.1 against
+ \texttt{AP\_InertialSensor\_BMI088.cpp} (lines~383--385) reproduces it (ArduPilot
+-Issue~\#33272\footnote{\url{https://github.com/ArduPilot/ardupilot/issues/33272}}).
++Issue~\#33272~\cite{ArduPilot_Issue33272}).
+ \corr{An ArduPilot maintainer closed the issue, citing the datasheet's $-104$ to $150\,^\circ$C measurement range.} Both projects declined it; we report it only
+ as a consistency check.
+ A GitHub Actions workflow in a PX4
+-fork\footnote{\url{https://github.com/marcela2881/PX4-Autopilot}}
++fork~\cite{PX4_Fork}
+ runs the IMU and GPS harnesses on every push and pull request.
+ 
+ \section{Threats to Validity}
+@@ -768,8 +774,8 @@
+ classes, verified free of memory-safety and overflow violations up to
+ the bound (${\approx}94$\,s in total; ${\approx}159$\,s with GPS). ESBMC also surfaced a
+ memory-safety violation in the GPS uBlox driver harness
+-\entra{(Issue~\#26866), \corr{reproduced with CBMC under a seeded harness at a reduced bound} and proposed upstream
+-with a guard (PR~\#27576); the PX4 maintainer's review, confirmed by source analysis of the production
++\entra{(Issue~\#26866~\cite{PX4_Issue26866}), \corr{reproduced with CBMC under a seeded harness at a reduced bound} and proposed upstream
++with a guard (PR~\#27576~\cite{PX4_PR27576}); the PX4 maintainer's review, confirmed by source analysis of the production
+ driver, subsequently placed the violating state out of reach there and framed the guard as defensive hardening.}
+ \entra{The} BMI088 FIFO candidate was a false positive on
+ source inspection, and the temperature observation was declined.
