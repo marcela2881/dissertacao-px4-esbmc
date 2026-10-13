@@ -2,38 +2,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:wght@400;500;600;700;800&family=Noto+Color+Emoji&display=block" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{width:975px;background:#16224a;font-family:Poppins,'Noto Color Emoji',sans-serif;color:#1c2240}
+body{width:975px;background:#6a2fb5;font-family:Poppins,'Noto Color Emoji',sans-serif;color:#2b1647}
 .emo{font-family:'Noto Color Emoji'}
 .wrap{position:relative;padding:34px 40px 30px;overflow:hidden}
-.border{height:30px;background:#0f1836;display:flex;justify-content:space-around;align-items:center;padding:0 6px}
+.border{height:30px;background:#4a1d86;display:flex;justify-content:space-around;align-items:center;padding:0 6px}
 .border span{width:20px;height:14px;border-radius:3px}
 .conf{position:absolute;border-radius:50%;opacity:.9}
-h1{font-family:'Lilita One';text-align:center;line-height:.95;font-size:96px;color:#ffc61a;letter-spacing:2px;text-shadow:4px 5px 0 #e2332b;margin-top:6px}
-h1 small{display:block;font-size:66px;color:#fff;text-shadow:4px 5px 0 #2a9df4}
+h1{font-family:'Lilita One';text-align:center;line-height:.95;font-size:96px;color:#ffc61a;letter-spacing:2px;text-shadow:4px 5px 0 #ff3d8b;margin-top:6px}
+h1 small{display:block;font-size:66px;color:#fff;text-shadow:4px 5px 0 #1ec8c8}
 .sub{text-align:center;color:#fff;font-weight:800;font-size:28px;letter-spacing:1.5px;margin-top:16px}
-.date{display:table;margin:16px auto 0;background:#e2332b;color:#fff;font-weight:800;font-size:30px;padding:8px 30px;border-radius:8px;letter-spacing:1px}
+.date{display:table;margin:16px auto 0;background:#ff3d8b;color:#fff;font-weight:800;font-size:30px;padding:8px 30px;border-radius:8px;letter-spacing:1px}
 .deco{position:absolute;font-size:92px}
 .cards{display:flex;gap:16px;margin-top:30px}
-.card{flex:1;background:#fdf6e3;border-radius:10px;border-bottom:5px solid #ffc61a;text-align:center;padding:14px 10px 12px}
-.card .lb{color:#e2332b;font-weight:700;font-size:14px;letter-spacing:1.5px}
+.card{flex:1;background:#fffaf0;border-radius:10px;border-bottom:5px solid #1ec8c8;text-align:center;padding:14px 10px 12px}
+.card .lb{color:#ff3d8b;font-weight:700;font-size:14px;letter-spacing:1.5px}
 .card .v{font-weight:800;font-size:27px;line-height:1.15;margin-top:4px}
 .card .s{font-weight:600;font-size:16px;margin-top:2px}
 table{width:100%;border-collapse:collapse;margin-top:24px;border-radius:10px;overflow:hidden;font-size:21px}
-th{background:#ffc61a;text-align:left;padding:13px 22px;font-weight:800;font-size:20px}
+th{background:#1ec8c8;color:#fff;text-align:left;padding:13px 22px;font-weight:800;font-size:20px}
 th.r{text-align:right}
-td{padding:11px 22px;background:#fdf6e3;border-bottom:1px solid #eadfc2}
+td{padding:11px 22px;background:#fffaf0;border-bottom:1px solid #eadfc2}
 tr:nth-child(even) td{background:#f6edd3}
 td.val{text-align:right;font-weight:800;white-space:nowrap;width:170px}
 td.don{width:260px}
 td.don div{border-bottom:2px dashed #b9b19a;height:18px}
-tr.sec td{background:#1f2c5c !important;color:#ffc61a;font-weight:800;font-size:18px;letter-spacing:1.5px;padding:10px 22px}
+tr.sec td{background:#4a1d86 !important;color:#ffc61a;font-weight:800;font-size:18px;letter-spacing:1.5px;padding:10px 22px}
 tr.sec td em{font-style:normal;color:#fff;font-weight:600;letter-spacing:0;font-size:16px}
 tr.tot td{background:#ffc61a !important;font-weight:800;font-size:23px;border:0}
-.pix{margin-top:24px;background:#fdf6e3;border-radius:12px;border-left:10px solid #ffc61a;display:flex;align-items:center;gap:24px;padding:22px 30px}
+.pix{margin-top:24px;background:#fffaf0;border-radius:12px;border-left:10px solid #ff3d8b;display:flex;align-items:center;gap:24px;padding:22px 30px}
 .pix .h{font-size:60px}
-.pix .lb{color:#e2332b;font-weight:800;font-size:16px}
+.pix .lb{color:#ff3d8b;font-weight:800;font-size:16px}
 .pix .k{font-weight:800;font-size:31px}
-.pix .t{font-size:17px;font-weight:700}.pix .t b{color:#e2332b}
+.pix .t{font-size:17px;font-weight:700}.pix .t b{color:#ff3d8b}
 .foot{text-align:center;color:#fff;margin-top:22px}
 .foot .a{font-weight:800;font-size:22px}
 .foot .a b,.foot .r b{color:#ffc61a}
@@ -76,8 +76,8 @@ tr.tot td{background:#ffc61a !important;font-weight:800;font-size:23px;border:0}
 </div>
 <div class="border" id="b2"></div>
 <script>
-const cols=['#ffc61a','#e2332b','#2a9df4','#3cc46b','#a45cf0'];
+const cols=['#ffc61a','#ff3d8b','#1ec8c8','#3cc46b','#a45cf0'];
 for(const id of ['b1','b2']){const b=document.getElementById(id);for(let i=0;i<30;i++){const s=document.createElement('span');s.style.background=cols[i%5];b.appendChild(s)}}
 const w=document.querySelector('.wrap');
-[[180,30,10,'#2a9df4'],[760,24,12,'#3cc46b'],[300,250,8,'#e2332b'],[640,262,9,'#a45cf0'],[120,150,7,'#ffc61a'],[830,170,8,'#e2332b'],[470,8,7,'#a45cf0']].forEach(([x,y,r,c])=>{const d=document.createElement('div');d.className='conf';Object.assign(d.style,{left:x+'px',top:y+'px',width:r*2+'px',height:r*2+'px',background:c});w.prepend(d)});
+[[180,30,10,'#1ec8c8'],[760,24,12,'#3cc46b'],[300,250,8,'#ff3d8b'],[640,262,9,'#a45cf0'],[120,150,7,'#ffc61a'],[830,170,8,'#ff3d8b'],[470,8,7,'#a45cf0']].forEach(([x,y,r,c])=>{const d=document.createElement('div');d.className='conf';Object.assign(d.style,{left:x+'px',top:y+'px',width:r*2+'px',height:r*2+'px',background:c});w.prepend(d)});
 </script></body></html>
