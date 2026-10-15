@@ -41,7 +41,7 @@ comando completa.
 
 1. Não copiar código do PX4; usar os arquivos originais.
 2. Registrar a linha de comando em todo log (o script faz isso).
-3. Rodar cada teste **com** e **sem** `--unwinding-assertions` e relatar os dois.
+3. Rodar cada teste **com** asserções de desdobramento (padrão no ESBMC 8.1) e **sem** (`--no-unwinding-assertions`) e relatar os dois.
 4. Usar `__VERIFIER_assume` nos harnesses: ESBMC e CBMC aceitam, então a
    pré-condição é a mesma nas duas ferramentas.
 5. Pré-condições tiradas do próprio PX4 (module.yaml, parâmetros, chamadores),
@@ -54,4 +54,27 @@ comando completa.
 
 | Módulo | Harness | Compila com o código real | ESBMC | CBMC |
 |---|---|---|---|---|
-| pca9685_pwm_out | `harnesses/pca9685/` | ✅ (g++ C++17) | em teste | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
+| pca9685_pwm_out | `harnesses/pca9685/` | ✅ (g++ C++17) | ✅ aceita o código real (prova de conceito com Z3, logs `logs/poc_*`) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
+
+## Prova de conceito (15/10/2026) — ESBMC 8.1.0 compilado com Z3, ambiente de nuvem
+
+Só para validar a infraestrutura; **não são os resultados do artigo** (estes
+devem ser gerados na máquina de referência, com Boolector, 3 execuções).
+
+| Teste | Veredito | Tempo |
+|---|---|---|
+| T0 memória (updateRAW) | SUCCESSFUL | 0,56 s |
+| T1 DS2 (LEDn_OFF_H) | SUCCESSFUL | 0,03 s |
+| T2 DS3 (PRE_SCALE) | SUCCESSFUL | 9,3 s |
+| T3 DS1 (pulso → contagem 12 bits) | FAILED | 140,3 s |
+| T4 updateFreq sem pré-condição | FAILED | 6,6 s |
+
+Contraexemplos (dados brutos, **ainda não analisados**):
+- T3: `freq = 1524,39 Hz` (dentro da faixa do parâmetro), `divider = 3`,
+  `pulse = 1024 us` → `raw = 6400` (> 4096).
+- T4: `freq = -1,84e-40` (fora da faixa do parâmetro) → overflow de ponto
+  flutuante na divisão em `PCA9685.cpp:117`.
+
+Pendente (análise da pesquisadora): confrontar cada contraexemplo com o código de
+produção e com a documentação do parâmetro `PCA9685_PWM_FREQ` (que diz que
+frequências acima de 400 Hz só fazem sentido no modo duty-cycle).
