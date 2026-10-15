@@ -12,6 +12,9 @@
 #     --default-solver boolector --timeout 300s
 set -uo pipefail
 RUNS=${RUNS:-3}
+ESBMC=${ESBMC:-esbmc}   # caminho do ESBMC (ex.: ESBMC=~/esbmc/bin/esbmc)
+if ! command -v "$ESBMC" >/dev/null 2>&1; then
+  echo "ERRO: ESBMC não encontrado ($ESBMC). Instale ou defina ESBMC=/caminho/para/esbmc" >&2; exit 2; fi
 PX4_ROOT=${PX4_ROOT:?defina PX4_ROOT}
 label=$1; harness=$2; srcs=$3; incs=$4; shift 4
 here="$(cd "$(dirname "$0")" && pwd)"
@@ -22,14 +25,14 @@ inc_args=(); set -f; for t in $incs; do
   if [ "$t" = "-I" ]; then continue; fi; inc_args+=(-I "$PX4_ROOT/$t"); done; set +f
 inc_args+=(-I "$here/../stubs")
 
-cmd=(esbmc "$harness" "${src_args[@]}" "${inc_args[@]}" "$@")
+cmd=("$ESBMC" "$harness" "${src_args[@]}" "${inc_args[@]}" "$@")
 times=()
 for i in $(seq 1 "$RUNS"); do
   log="$logdir/${label}_run${i}.log"
   {
     echo "### data: $(date -Iseconds)"
     echo "### maquina: $(uname -srm); $(grep -m1 'model name' /proc/cpuinfo 2>/dev/null | cut -d: -f2)"
-    echo "### esbmc: $(esbmc --version 2>&1 | head -1)"
+    echo "### esbmc: $("$ESBMC" --version 2>&1 | head -1)"
     echo "### px4 commit: $(git -C "$PX4_ROOT" rev-parse HEAD 2>/dev/null || cat "$PX4_ROOT/.px4_commit" 2>/dev/null || echo desconhecido)"
     echo "### comando: ${cmd[*]}"
     echo

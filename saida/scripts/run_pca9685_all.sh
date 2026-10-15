@@ -4,7 +4,10 @@
 # Uso: ./run_pca9685_all.sh            (PX4 em ../px4; baixa se não existir)
 set -uo pipefail
 cd "$(dirname "$0")"
-[ -d ../px4/src ] || ./get_px4.sh ../px4
+ESBMC=${ESBMC:-esbmc}; export ESBMC
+command -v "$ESBMC" >/dev/null 2>&1 || { echo "ERRO: ESBMC não encontrado. Defina ESBMC=/caminho/para/esbmc"; exit 2; }
+"$ESBMC" --version
+[ -d ../px4/src/drivers ] || { rm -rf ../px4; ./get_px4.sh ../px4; }
 export PX4_ROOT=../px4
 H=../harnesses/pca9685/test_pca9685.cpp
 SRC="src/drivers/pca9685_pwm_out/PCA9685.cpp"
