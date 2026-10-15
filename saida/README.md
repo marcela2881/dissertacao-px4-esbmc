@@ -29,7 +29,7 @@ export PX4_ROOT=../px4
 
 # PCA9685, teste 1 (DS2), com asserções de desdobramento:
 ./run_esbmc.sh pca9685_T1_ua ../harnesses/pca9685/test_pca9685.cpp \
-  "src/drivers/pca9685_pwm_out/PCA9685.cpp" "src/drivers/pca9685_pwm_out" \
+  "" "src/drivers/pca9685_pwm_out" \
   -DTEST_CHOICE=1 --unwind 20 --unwinding-assertions --overflow-check \
   --default-solver boolector --timeout 300s
 ```

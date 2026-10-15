@@ -21,6 +21,7 @@ here="$(cd "$(dirname "$0")" && pwd)"
 logdir="$here/../logs"; mkdir -p "$logdir"
 
 src_args=(); for f in $srcs; do src_args+=("$PX4_ROOT/$f"); done
+[ ${#src_args[@]} -eq 0 ] && src_args=()
 inc_args=(); set -f; for t in $incs; do
   if [ "$t" = "-I" ]; then continue; fi; inc_args+=(-I "$PX4_ROOT/$t"); done; set +f
 inc_args+=(-I "$here/../stubs")

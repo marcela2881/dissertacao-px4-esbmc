@@ -10,7 +10,7 @@ command -v "$ESBMC" >/dev/null 2>&1 || { echo "ERRO: ESBMC não encontrado. Defi
 [ -d ../px4/src/drivers ] || { rm -rf ../px4; ./get_px4.sh ../px4; }
 export PX4_ROOT=../px4
 H=../harnesses/pca9685/test_pca9685.cpp
-SRC="src/drivers/pca9685_pwm_out/PCA9685.cpp"
+SRC=""   # o harness inclui o PCA9685.cpp original (unidade única)
 INC="src/drivers/pca9685_pwm_out"
 COMMON=(--unwind 70 --overflow-check --default-solver boolector --timeout 600s)
 for t in 0 1 2 3 4; do

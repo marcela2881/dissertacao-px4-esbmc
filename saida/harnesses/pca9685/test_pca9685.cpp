@@ -29,6 +29,10 @@
 #include <cmath>
 #include <cassert>
 #include "PCA9685.h"
+/* Inclui o PCA9685.cpp ORIGINAL do PX4 (sem cópia, sem alteração), para que o
+ * ESBMC receba uma única unidade de tradução. Passar os dois .cpp separados
+ * funcionou no ESBMC 8.1, mas no 8.5 gerou "main symbol `main' not found". */
+#include "PCA9685.cpp"
 
 uint8_t  g_last_send[STUB_I2C_MAX_SEND];
 unsigned g_last_send_len = 0;
