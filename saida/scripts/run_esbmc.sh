@@ -30,7 +30,7 @@ for i in $(seq 1 "$RUNS"); do
     echo "### data: $(date -Iseconds)"
     echo "### maquina: $(uname -srm); $(grep -m1 'model name' /proc/cpuinfo 2>/dev/null | cut -d: -f2)"
     echo "### esbmc: $(esbmc --version 2>&1 | head -1)"
-    echo "### px4 commit: $(git -C "$PX4_ROOT" rev-parse HEAD 2>/dev/null || echo desconhecido)"
+    echo "### px4 commit: $(git -C "$PX4_ROOT" rev-parse HEAD 2>/dev/null || cat "$PX4_ROOT/.px4_commit" 2>/dev/null || echo desconhecido)"
     echo "### comando: ${cmd[*]}"
     echo
   } > "$log"

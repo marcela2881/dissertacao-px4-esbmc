@@ -4,7 +4,7 @@
 # Uso: ./run_pca9685_all.sh            (PX4 em ../px4; baixa se não existir)
 set -uo pipefail
 cd "$(dirname "$0")"
-[ -d ../px4/.git ] || ./get_px4.sh ../px4
+[ -d ../px4/src ] || ./get_px4.sh ../px4
 export PX4_ROOT=../px4
 H=../harnesses/pca9685/test_pca9685.cpp
 SRC="src/drivers/pca9685_pwm_out/PCA9685.cpp"
