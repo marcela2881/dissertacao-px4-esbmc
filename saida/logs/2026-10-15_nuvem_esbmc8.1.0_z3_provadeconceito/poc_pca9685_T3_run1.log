@@ -1,0 +1,70 @@
+### data: 2026-10-15T10:32:41+00:00
+### maquina: Linux 6.18.44-fc-v114 x86_64;  Intel(R) Xeon(R) Processor @ 2.10GHz
+### esbmc: ESBMC version 8.1.0 64-bit x86_64 linux
+### px4 commit: desconhecido
+### comando: esbmc ../harnesses/pca9685/test_pca9685.cpp ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp -I ../px4/src/drivers/pca9685_pwm_out -I /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs -DTEST_CHOICE=3 --unwind 70 --overflow-check --timeout 300s
+
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing ../harnesses/pca9685/test_pca9685.cpp
+Parsing ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.500s
+GOTO program processing time: 0.032s
+Starting Bounded Model Checking
+Unwinding loop 17 iteration 1   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 2   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Symex completed in: 0.009s (236 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 182 assignments)
+Generated 77 VCC(s), 15 remaining after simplification (54 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 140.346s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file ../harnesses/pca9685/test_pca9685.cpp line 115 column 2 function test_pulse_to_raw thread 0
+----------------------------------------------------
+  dev = { .device::I2C@vtable_pointer=tmp$1.device::I2C@vtable_pointer, .currentFreq=0.000000f,
+    .anon_pad$2=0, .drv_pca9685_pwm::PCA9685@vtable_pointer=tmp$1.drv_pca9685_pwm::PCA9685@vtable_pointer,
+    .PCA9685Test@vtable_pointer=tmp$1.PCA9685Test@vtable_pointer }
+
+State 3 file ../harnesses/pca9685/test_pca9685.cpp line 116 column 2 function test_pulse_to_raw thread 0
+----------------------------------------------------
+  freq = 1.524390e+3f (01000100 10111110 10001100 01110111)
+
+State 9 file ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp line 117 column 2 function updateFreq thread 0
+----------------------------------------------------
+  divider = 3 (00000000 00000011)
+
+State 13 file ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp line 129 column 2 function updateFreq thread 0
+----------------------------------------------------
+  this->currentFreq = { .device::I2C@vtable_pointer=dev.device::I2C@vtable_pointer, .currentFreq=1.525879e+3f,
+    .anon_pad$2=0, .drv_pca9685_pwm::PCA9685@vtable_pointer=dev.drv_pca9685_pwm::PCA9685@vtable_pointer,
+    .PCA9685Test@vtable_pointer=dev.PCA9685Test@vtable_pointer }
+
+State 14 file ../harnesses/pca9685/test_pca9685.cpp line 120 column 2 function test_pulse_to_raw thread 0
+----------------------------------------------------
+  pulse = 1024 (00000100 00000000)
+
+State 20 file ../harnesses/pca9685/test_pca9685.cpp line 123 column 2 function test_pulse_to_raw thread 0
+----------------------------------------------------
+  raw = 6400 (00011001 00000000)
+
+State 21 file ../harnesses/pca9685/test_pca9685.cpp line 124 column 2 function test_pulse_to_raw thread 0
+----------------------------------------------------
+Violated property:
+  file ../harnesses/pca9685/test_pca9685.cpp line 124 column 2 function test_pulse_to_raw
+  assertion raw <= 4096
+  (signed int)raw <= 4096
+
+
+VERIFICATION FAILED

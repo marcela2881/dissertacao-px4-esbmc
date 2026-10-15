@@ -1,0 +1,46 @@
+### data: 2026-10-15T10:35:02+00:00
+### maquina: Linux 6.18.44-fc-v114 x86_64;  Intel(R) Xeon(R) Processor @ 2.10GHz
+### esbmc: ESBMC version 8.1.0 64-bit x86_64 linux
+### px4 commit: desconhecido
+### comando: esbmc ../harnesses/pca9685/test_pca9685.cpp ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp -I ../px4/src/drivers/pca9685_pwm_out -I /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs -DTEST_CHOICE=4 --unwind 70 --overflow-check --timeout 300s
+
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing ../harnesses/pca9685/test_pca9685.cpp
+Parsing ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.484s
+GOTO program processing time: 0.026s
+Starting Bounded Model Checking
+Unwinding loop 17 iteration 1   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 2   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Symex completed in: 0.008s (208 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 183 assignments)
+Generated 50 VCC(s), 10 remaining after simplification (25 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 6.618s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file ../harnesses/pca9685/test_pca9685.cpp line 135 column 2 function test_updateFreq_any thread 0
+----------------------------------------------------
+  freq = -1.837046e-40f (10000000 00000010 00000000 00011000)
+
+State 3 file ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp line 117 column 31 function updateFreq thread 0
+----------------------------------------------------
+Violated property:
+  file ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp line 117 column 31 function updateFreq
+  arithmetic overflow on floating-point ieee_div
+  !(isinf(IEEE_DIV(2.500000e+7f, freq::0)))
+
+
+VERIFICATION FAILED

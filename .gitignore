@@ -50,3 +50,4 @@ node_modules/
 anotacoes/
 notas_pessoais/
 saida/px4
+!saida/logs/**/*.log

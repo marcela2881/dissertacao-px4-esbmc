@@ -1,0 +1,1 @@
+Coloque aqui os logs da rodada de referência (fm07, ESBMC 8.5.0, Boolector).

@@ -18,7 +18,10 @@ if ! command -v "$ESBMC" >/dev/null 2>&1; then
 PX4_ROOT=${PX4_ROOT:?defina PX4_ROOT}
 label=$1; harness=$2; srcs=$3; incs=$4; shift 4
 here="$(cd "$(dirname "$0")" && pwd)"
-logdir="$here/../logs"; mkdir -p "$logdir"
+# pasta da rodada: LOGDIR (se definido) ou logs/<data>_<maquina>_esbmc<versão>
+ver=$("$ESBMC" --version 2>&1 | grep -oE "[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1)
+logdir=${LOGDIR:-"$here/../logs/$(date +%Y-%m-%d)_$(hostname -s)_esbmc${ver}"}
+mkdir -p "$logdir"
 
 src_args=(); for f in $srcs; do src_args+=("$PX4_ROOT/$f"); done
 [ ${#src_args[@]} -eq 0 ] && src_args=()

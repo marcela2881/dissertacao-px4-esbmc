@@ -7,6 +7,9 @@ cd "$(dirname "$0")"
 ESBMC=${ESBMC:-esbmc}; export ESBMC
 command -v "$ESBMC" >/dev/null 2>&1 || { echo "ERRO: ESBMC não encontrado. Defina ESBMC=/caminho/para/esbmc"; exit 2; }
 "$ESBMC" --version
+ver=$("$ESBMC" --version 2>&1 | grep -oE "[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1)
+export LOGDIR=${LOGDIR:-"$(pwd)/../logs/$(date +%Y-%m-%d)_$(hostname -s)_esbmc${ver}"}
+echo "Logs em: $LOGDIR"
 [ -d ../px4/src/drivers ] || { rm -rf ../px4; ./get_px4.sh ../px4; }
 export PX4_ROOT=../px4
 H=../harnesses/pca9685/test_pca9685.cpp

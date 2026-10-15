@@ -13,7 +13,9 @@ saida/
 ├── stubs/                                 # substitutos das dependências externas
 ├── scripts/get_px4.sh                     # baixa o PX4 no commit fixado
 ├── scripts/run_esbmc.sh                   # roda o ESBMC 3x e registra tudo no log
-└── logs/                                  # um log por execução
+├── scripts/run_pca9685_all.sh             # roda todos os testes do PCA9685
+├── scripts/empacotar_logs.sh              # compacta os logs para levar ao PC
+└── logs/<data>_<máquina>_esbmc<versão>/   # uma pasta por rodada
 ```
 
 ## Commit do PX4
@@ -96,5 +98,13 @@ frequências acima de 400 Hz só fazem sentido no modo duty-cycle).
 | T3 DS1 (pulso → contagem ≤ 4096) | **FAILED** — 21,730 s | **FAILED** — 21,780 s |
 | T4 updateFreq sem pré-condição | **FAILED** — 4,144 s | **FAILED** — 4,026 s |
 
-Os logs desta execução ficam na fm07 (`~/dissertacao-px4-esbmc/saida/logs/pca9685_T*`);
-falta copiá-los para o repositório. Análise dos contraexemplos: pendente (pesquisadora).
+Logs: `logs/2026-10-15_fm07_esbmc8.5.0/` (a copiar da fm07). Análise dos contraexemplos: pendente (pesquisadora).
+
+## Fluxo de trabalho: fm07 → PC → GitHub
+
+1. **fm07 (sem git):** rodar os testes. Cada rodada vai para
+   `logs/<data>_fm07_esbmc<versão>/`, sem sobrescrever as anteriores.
+2. **fm07:** `./scripts/empacotar_logs.sh` → cria `~/logs_saida_<data>.tar.gz`.
+3. **PC (WSL):** copiar o arquivo:
+   `scp p79642ma@fm07.cs.manchester.ac.uk:~/logs_saida_*.tar.gz ~/pesquisa-px4/`
+4. **PC:** extrair dentro do clone do repositório (`saida/`) e fazer `git add`, `commit`, `push`.

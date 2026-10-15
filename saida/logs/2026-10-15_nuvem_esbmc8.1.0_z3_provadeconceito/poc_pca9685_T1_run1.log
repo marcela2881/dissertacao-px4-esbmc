@@ -1,0 +1,35 @@
+### data: 2026-10-15T10:32:30+00:00
+### maquina: Linux 6.18.44-fc-v114 x86_64;  Intel(R) Xeon(R) Processor @ 2.10GHz
+### esbmc: ESBMC version 8.1.0 64-bit x86_64 linux
+### px4 commit: desconhecido
+### comando: esbmc ../harnesses/pca9685/test_pca9685.cpp ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp -I ../px4/src/drivers/pca9685_pwm_out -I /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs -DTEST_CHOICE=1 --unwind 70 --overflow-check --timeout 300s
+
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing ../harnesses/pca9685/test_pca9685.cpp
+Parsing ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.507s
+GOTO program processing time: 0.023s
+Starting Bounded Model Checking
+Unwinding loop 20 iteration 1   file ../px4/src/drivers/pca9685_pwm_out/PCA9685.cpp line 211 column 2 function writePWM
+Unwinding loop 17 iteration 1   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 2   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 3   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 4   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Unwinding loop 17 iteration 5   file /home/user/dissertacao-px4-esbmc/saida/scripts/../stubs/drivers/device/i2c.h line 46 column 3 function transfer
+Symex completed in: 0.011s (231 assignments)
+Caching time: 0.000s (removed 6 assertions)
+Slicing time: 0.000s (removed 186 assignments)
+Generated 108 VCC(s), 21 remaining after simplification (39 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 0.006s
+BMC program time: 0.027s
+
+VERIFICATION SUCCESSFUL
