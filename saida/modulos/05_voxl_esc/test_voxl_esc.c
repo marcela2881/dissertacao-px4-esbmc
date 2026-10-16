@@ -92,23 +92,22 @@ void test_parser_memory(void)
 }
 
 /* ---------------------------------------------------------------------------
- * V1 — P1: ida e volta (montar -> ler). Payload até PAYLOAD_MAX = 4 bytes
- * (cobre os pacotes de versão, LED e som; os de PWM/RPM têm 10).
- * Payload até 57 e até 10 estouraram 300 s na fm07 (16/10/2026): o CRC por
- * tabela com índice simbólico pesa no solver. Para tentar 10:
- * acrescentar -DPAYLOAD_MAX=10 em OPCOES (config.sh).
+ * V1 — P1: ida e volta (montar -> ler) para cada tamanho de payload de 0 a
+ * PAYLOAD_MAX = 10 bytes (o maior que o driver envia: PWM/RPM de 4 canais).
+ * O tamanho é percorrido com valores CONHECIDOS (0, 1, ..., 10) e os bytes do
+ * payload e o tipo são livres. Com tamanho simbólico o ESBMC desenrolava os
+ * laços do CRC até o limite global e estourava 300 s (fm07, 16/10/2026).
  * ------------------------------------------------------------------------- */
 #ifndef PAYLOAD_MAX
-#define PAYLOAD_MAX 4
+#define PAYLOAD_MAX 10
 #endif
-void test_roundtrip(void)
-{
-	uint8_t data[PAYLOAD_MAX];
-	uint8_t out[OUT_SIZE];
-	uint16_t n = nondet_uint16();
-	__VERIFIER_assume(n <= PAYLOAD_MAX);
 
-	for (int i = 0; i < PAYLOAD_MAX; i++) { data[i] = nondet_uint8(); }
+static void roundtrip(uint16_t n)
+{
+	uint8_t data[PAYLOAD_MAX + 1];
+	uint8_t out[OUT_SIZE];
+
+	for (int i = 0; i < PAYLOAD_MAX + 1; i++) { data[i] = nondet_uint8(); }
 
 	int32_t len = qc_esc_create_packet(nondet_uint8(), data, n, out, OUT_SIZE);
 	assert(len == n + 5);
@@ -117,9 +116,14 @@ void test_roundtrip(void)
 	qc_esc_packet_init(&p);
 	int16_t ret = ESC_NO_PACKET;
 
-	for (int i = 0; i < len; i++) { ret = qc_esc_packet_process_char(out[i], &p); }
+	for (int i = 0; i < n + 5; i++) { ret = qc_esc_packet_process_char(out[i], &p); }
 
 	assert(ret == len);                                   /* P1 */
+}
+
+void test_roundtrip(void)
+{
+	for (uint16_t n = 0; n <= PAYLOAD_MAX; n++) { roundtrip(n); }
 }
 
 /* ---------------------------------------------------------------------------
