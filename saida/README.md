@@ -136,11 +136,14 @@ Harness em C (`modulos/05_voxl_esc/test_voxl_esc.c`) que inclui os originais `qc
 
 | Teste | O que verifica | Pré-condição (origem) |
 |---|---|---|
-| V0 (T0) | leitor de pacotes com 70 bytes quaisquer: memória do `buffer[64]` | nenhuma |
-| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | payload ≤ 57 (limite do leitor) |
+| V0 (T0) | leitor de pacotes: de qualquer estado que satisfaz o invariante, 1 byte qualquer mantém o invariante (memória do `buffer[64]`; indução) | invariante do leitor (sobreaproximação) |
+| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | payload ≤ 10 (maior pacote enviado pelo driver) |
 | V2 (T2) | P2: comando de RPM enviado = pedido saturado, sem truncar nem inverter o sinal | nenhuma (qualquer int32) |
 | V3 (T3) | P3: comando PWM enviado em [-800, 800], sem inverter o sinal | nenhuma (qualquer int16) |
 | V4 (T4) | P4: bit de pedido de feedback só no canal `fb_id` | `fb_id` em [0, 3] (`_fb_idx` no driver) |
+
+Teste rápido na fm07 (16/10/2026, ESBMC 8.5.0 + Boolector): V2, V3 e V4 SUCCESSFUL; V0 (70 bytes
+em sequência) e V1 (payload até 57) deram *Timed out* em 300 s e foram reformulados como acima.
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 

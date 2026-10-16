@@ -40,7 +40,6 @@ uint16_t nondet_uint16(void);
 void     __VERIFIER_assume(int);   /* aceito pelo ESBMC e pelo CBMC */
 
 #define OUT_SIZE 128                /* Command::BUF_SIZE em voxl_esc.hpp */
-#define N_CHARS  70                 /* > 64 (buffer do leitor): cobre o reinício */
 
 static int16_t decode_i16(const uint8_t *out, int k)
 {
@@ -50,32 +49,56 @@ static int16_t decode_i16(const uint8_t *out, int k)
 }
 
 /* ---------------------------------------------------------------------------
- * V0 — Leitor de pacotes com bytes quaisquer vindos da UART: segurança de
- * memória (ponteiro bp dentro de buffer[64]). Propriedades automáticas do ESBMC.
+ * V0 — Leitor de pacotes com um byte qualquer vindo da UART: segurança de
+ * memória do buffer[64]. Em vez de uma sequência longa de bytes (que estourou
+ * o tempo), parte de QUALQUER estado que satisfaz o invariante do leitor e
+ * processa UM byte; se o invariante se mantém, vale para sequências de
+ * qualquer tamanho (indução). O invariante inclui estados talvez inalcançáveis
+ * (sobreaproximação): uma violação aqui ainda precisa ser confrontada com a
+ * produção (regra 7).
+ *   INV: len_received < 63, len_expected < 63 e
+ *        (len_received == 0  ou  bp == buffer + len_received)
  * ------------------------------------------------------------------------- */
+static int invariante(const EscPacket *p)
+{
+	return p->len_received < sizeof(p->buffer) - 1
+	       && p->len_expected < sizeof(p->buffer) - 1
+	       && (p->len_received == 0 || p->bp == p->buffer + p->len_received);
+}
+
 void test_parser_memory(void)
 {
 	EscPacket p;
-	qc_esc_packet_init(&p);
 
-	for (int i = 0; i < N_CHARS; i++) {
-		qc_esc_packet_process_char(nondet_uint8(), &p);
-		assert(p.len_received < sizeof(p.buffer));
-	}
+	for (unsigned i = 0; i < sizeof(p.buffer); i++) { p.buffer[i] = nondet_uint8(); }
+
+	p.len_received = nondet_uint8();
+	p.len_expected = nondet_uint8();
+	p.crc = nondet_uint16();
+	p.bp = p.buffer + p.len_received;
+	__VERIFIER_assume(invariante(&p));
+
+	qc_esc_packet_process_char(nondet_uint8(), &p);
+
+	assert(invariante(&p));
 }
 
 /* ---------------------------------------------------------------------------
- * V1 — P1: ida e volta (montar -> ler). Tamanho do payload limitado ao que o
- * leitor aceita (len_expected < 63 -> payload <= 57).
+ * V1 — P1: ida e volta (montar -> ler). Payload até PAYLOAD_MAX = 10 bytes,
+ * o maior que o driver envia (comandos PWM/RPM de 4 canais; voxl_esc.cpp).
+ * Com payload até 57 (limite do leitor) o teste estourou o tempo (fm07, 16/10/2026).
  * ------------------------------------------------------------------------- */
+#ifndef PAYLOAD_MAX
+#define PAYLOAD_MAX 10
+#endif
 void test_roundtrip(void)
 {
-	uint8_t data[57];
+	uint8_t data[PAYLOAD_MAX];
 	uint8_t out[OUT_SIZE];
 	uint16_t n = nondet_uint16();
-	__VERIFIER_assume(n <= 57);
+	__VERIFIER_assume(n <= PAYLOAD_MAX);
 
-	for (int i = 0; i < 57; i++) { data[i] = nondet_uint8(); }
+	for (int i = 0; i < PAYLOAD_MAX; i++) { data[i] = nondet_uint8(); }
 
 	int32_t len = qc_esc_create_packet(nondet_uint8(), data, n, out, OUT_SIZE);
 	assert(len == n + 5);
