@@ -58,7 +58,8 @@ comando completa, e termina com o código de saída do ESBMC.
 |---|---|---|---|---|
 | pca9685_pwm_out | `modulos/01_pca9685/` | ✅ (g++ C++17) | ✅ ESBMC 8.5.0 + Boolector na fm07 (15/10/2026) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
 | roboclaw | `modulos/02_roboclaw/` | ✅ (g++ C++17) | rodada de referência pendente (fm07, ESBMC 8.5, código original) | não testado |
-| voxl_esc (protocolo) | `modulos/05_voxl_esc/` | ✅ (gcc C11) | rodada de referência pendente (fm07) | não testado |
+| voxl_esc (protocolo) | `modulos/05_voxl_esc/` | ✅ (gcc C11) | rodada de referência pendente | não testado |
+| tap_esc (protocolo) | `modulos/06_tap_esc/` | ✅ (g++ C++17) | teste rápido pendente | não testado |
 
 ## RoboClaw (src/drivers/roboclaw)
 
@@ -164,6 +165,20 @@ causa: tamanho simbólico fazia o ESBMC desenrolar o CRC até o limite global; V
 tamanhos 0..10 com valores conhecidos — ainda *Timed out* (Boolector e Bitwuzla). Causa provável: P1 é
 uma checagem de equivalência entre dois cálculos de CRC (montagem × leitura byte a byte), difícil para
 SAT/SMT. V1 foi separado por tamanho (T1, T5–T8) para medir até onde a verificação alcança.
+
+## tap_esc — protocolo serial (src/drivers/tap_esc)
+
+Harness C++ (`modulos/06_tap_esc/test_tap_esc.cpp`) que inclui o original `tap_esc_common.cpp`.
+Stub novo: `stubs/fcntl.h` (o `<fcntl.h>` do sistema traz `struct iovec`, que conflita com o ESBMC 8.5).
+Recorte: a biblioteca do protocolo; a classe `TAP_ESC` não entra.
+
+| Teste | O que verifica | Pré-condição (origem) |
+|---|---|---|
+| T0 | TP1: `parse_tap_esc_feedback` com até 24 bytes quaisquer em qualquer posição do buffer circular (memória de `esc_feedback_buf` e `d.bytes`) | `head` < 128, `dat_cnt` ≤ 24; estado do leitor é `static` (parte de HEAD) |
+| T1 | TP1: `read_data_from_uart` mantém o invariante do buffer circular a partir de qualquer estado válido (indução) | `head`, `tail`, `dat_cnt` < 128 |
+| T2 | TP2: ida e volta `send_packet` → `parse_tap_esc_feedback` com `InfoRequest` (len 2) | dados livres |
+| T3 | `send_packet` com qualquer `len` < 100: memória (CRC em `d.bytes[len]`) | `len` < `sizeof(d)` (remetentes usam ≤ 16) |
+| T4 | TP2 com `EscbusTunePacket` (len 5) | dados livres |
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 

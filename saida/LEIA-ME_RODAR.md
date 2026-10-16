@@ -98,8 +98,8 @@ Subir para o git só no final, quando tudo estiver pronto (combinado).
 | `02_roboclaw` | driver UART RoboClaw | T0–T4 (R0–R4) | falta teste rápido |
 | `03_dshot` | DShot | — | em preparação |
 | `04_uavcan_actuators` | UAVCAN ESC/servo | — | em preparação |
-| `05_voxl_esc` | protocolo UART voxl_esc | T0–T4 (V0–V4) | falta teste rápido |
-| `06_tap_esc` | TAP ESC | — | em preparação |
+| `05_voxl_esc` | protocolo UART voxl_esc | T0–T8 (V0–V4; V1 por tamanho) | teste rápido em andamento |
+| `06_tap_esc` | protocolo serial TAP ESC | T0–T4 | falta teste rápido |
 | `07_px4io` | PX4IO | — | em preparação |
 | `08_mixer_module` | mixer_module | — | em preparação |
 | `09_control_allocation` | biblioteca control_allocation | — | em preparação |
