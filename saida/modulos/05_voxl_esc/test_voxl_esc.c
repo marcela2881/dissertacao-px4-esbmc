@@ -92,12 +92,14 @@ void test_parser_memory(void)
 }
 
 /* ---------------------------------------------------------------------------
- * V1 — P1: ida e volta (montar -> ler). Payload até PAYLOAD_MAX = 10 bytes,
- * o maior que o driver envia (comandos PWM/RPM de 4 canais; voxl_esc.cpp).
- * Com payload até 57 (limite do leitor) o teste estourou o tempo (fm07, 16/10/2026).
+ * V1 — P1: ida e volta (montar -> ler). Payload até PAYLOAD_MAX = 4 bytes
+ * (cobre os pacotes de versão, LED e som; os de PWM/RPM têm 10).
+ * Payload até 57 e até 10 estouraram 300 s na fm07 (16/10/2026): o CRC por
+ * tabela com índice simbólico pesa no solver. Para tentar 10:
+ * acrescentar -DPAYLOAD_MAX=10 em OPCOES (config.sh).
  * ------------------------------------------------------------------------- */
 #ifndef PAYLOAD_MAX
-#define PAYLOAD_MAX 10
+#define PAYLOAD_MAX 4
 #endif
 void test_roundtrip(void)
 {

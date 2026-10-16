@@ -129,6 +129,19 @@ frequências acima de 400 Hz só fazem sentido no modo duty-cycle).
 
 Logs: `logs/2026-10-15_fm07_esbmc8.5.0/` (a copiar da fm07). Análise dos contraexemplos: pendente (pesquisadora).
 
+### Teste rápido na fm07 (16/10/2026, ESBMC 8.5.0 + Boolector) — análise pendente (pesquisadora)
+
+1ª tentativa: PARSING ERROR (`redefinition of 'iovec'`: `<fcntl.h>` do sistema traz `struct iovec`,
+que o ESBMC 8.5 já define). Corrigido no stub, sem tocar no PX4.
+
+| Teste | Veredito | Violação | Leitura preliminar (a confirmar pela pesquisadora) |
+|---|---|---|---|
+| R0 | FAILED | `arithmetic overflow on shl` em `swapBytesInt32` (`Roboclaw.cpp:456`) | provável falso positivo da ferramenta: regra do C aplicada a código C++17 (PX4 usa `CMAKE_CXX_STANDARD 17`), onde o deslocamento é definido |
+| R1 | FAILED | byte de dados = 130 > 127 | **candidato**: contraexemplo `outputs[0] = 257` (RBCLW_FAIL permite até 257; em terminação o mixer repassa o failsafe sem limitar) |
+| R2 | SUCCESSFUL | — | na faixa normal [0, 254] o byte fica ≤ 127 |
+| R3 | FAILED | `select()` chamado após `write() = -1` | **candidato** (gravidade baixa): retorno de `write()` guardado em `size_t`, -1 vira SIZE_MAX e passa como sucesso |
+| R4 | FAILED | NaN em `sendSigned16Bit` | sem chamador no PX4: robustez de API, não alcançável em produção |
+
 ## voxl_esc — protocolo UART (src/drivers/actuators/voxl_esc)
 
 Harness em C (`modulos/05_voxl_esc/test_voxl_esc.c`) que inclui os originais `qc_esc_packet.c` e
@@ -137,13 +150,17 @@ Harness em C (`modulos/05_voxl_esc/test_voxl_esc.c`) que inclui os originais `qc
 | Teste | O que verifica | Pré-condição (origem) |
 |---|---|---|
 | V0 (T0) | leitor de pacotes: de qualquer estado que satisfaz o invariante, 1 byte qualquer mantém o invariante (memória do `buffer[64]`; indução) | invariante do leitor (sobreaproximação) |
-| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | payload ≤ 10 (maior pacote enviado pelo driver) |
+| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | payload ≤ 4 (versão, LED, som) |
 | V2 (T2) | P2: comando de RPM enviado = pedido saturado, sem truncar nem inverter o sinal | nenhuma (qualquer int32) |
 | V3 (T3) | P3: comando PWM enviado em [-800, 800], sem inverter o sinal | nenhuma (qualquer int16) |
 | V4 (T4) | P4: bit de pedido de feedback só no canal `fb_id` | `fb_id` em [0, 3] (`_fb_idx` no driver) |
 
 Teste rápido na fm07 (16/10/2026, ESBMC 8.5.0 + Boolector): V2, V3 e V4 SUCCESSFUL; V0 (70 bytes
 em sequência) e V1 (payload até 57) deram *Timed out* em 300 s e foram reformulados como acima.
+Segunda rodada rápida (10:00): V0 FAILED — contraexemplo mostrou erro **do invariante** (exigia
+`len_expected < 63` mesmo com o leitor ocioso; o leitor rejeita o tamanho mas mantém o valor, o que é
+inofensivo). Invariante corrigido -> V0 SUCCESSFUL (10:17, 0,685 s). V1 com payload até 10: *Timed out*;
+reduzido para 4.
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
