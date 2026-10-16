@@ -10,7 +10,16 @@
 #include <cmath>
 #include <climits>
 #include <unistd.h>
-#include <fcntl.h>
+/* <fcntl.h> NÃO é incluído: no Linux ele traz struct iovec (bits/fcntl-linux.h),
+ * que o ESBMC 8.5 já define internamente -> "redefinition of 'iovec'".
+ * Só o que os drivers usam (valores do Linux/x86-64): */
+#ifndef O_RDWR
+#define O_RDWR   02
+#endif
+#ifndef O_NOCTTY
+#define O_NOCTTY 0400
+#endif
+extern "C" int open(const char *path, int flags, ...);
 #include <err.h>
 #include "../px4_log.h"
 
