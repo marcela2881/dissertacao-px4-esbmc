@@ -75,6 +75,8 @@ void test_parser_memory(void)
 	p.len_received = nondet_uint8();
 	p.len_expected = nondet_uint8();
 	p.crc = nondet_uint16();
+	/* restringe ANTES de calcular bp (senão a própria conta sai do buffer) */
+	__VERIFIER_assume(p.len_received < sizeof(p.buffer) - 1);
 	p.bp = p.buffer + p.len_received;
 	__VERIFIER_assume(invariante(&p));
 
