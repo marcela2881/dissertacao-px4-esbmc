@@ -13,11 +13,14 @@ echo "Logs em: $LOGDIR"
 [ -d ../px4/src/drivers/roboclaw ] || { rm -rf ../px4; ./get_px4.sh ../px4; }
 export PX4_ROOT=../px4
 mkdir -p "$LOGDIR"
-# contorno de duas limitações do ESBMC (ver ../ferramenta/); diff registrado em cada log
-./normaliza_roboclaw.sh "$PX4_ROOT" "$LOGDIR/fonte_normalizada_roboclaw"
-export PRE_INC="$(cd "$LOGDIR/fonte_normalizada_roboclaw" && pwd)"
+# Código ORIGINAL por padrão (ESBMC 8.5 aceita, testado na fm07 em 16/10/2026).
+# NORMALIZAR=1 só para o ESBMC 8.1, que não aceita 2 construções (ver ../ferramenta/).
+if [ "${NORMALIZAR:-0}" = 1 ]; then
+  ./normaliza_roboclaw.sh "$PX4_ROOT" "$LOGDIR/fonte_normalizada_roboclaw"
+  export PRE_INC="$(cd "$LOGDIR/fonte_normalizada_roboclaw" && pwd)"
+fi
 H=../harnesses/roboclaw/test_roboclaw.cpp
-SRC=""   # o harness inclui o Roboclaw.cpp (unidade única; normalizado, ver acima)
+SRC=""   # o harness inclui o Roboclaw.cpp original (unidade única)
 INC="src/drivers/roboclaw"
 COMMON=(--function harness_main --unwind 20 --overflow-check --ub-shift-check --default-solver "${SOLVER:-boolector}" --timeout 600s)
 for t in 0 1 2 3 4; do

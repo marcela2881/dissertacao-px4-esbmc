@@ -60,7 +60,7 @@ comando completa.
 | Módulo | Harness | Compila com o código real | ESBMC | CBMC |
 |---|---|---|---|---|
 | pca9685_pwm_out | `harnesses/pca9685/` | ✅ (g++ C++17) | ✅ ESBMC 8.5.0 + Boolector na fm07 (15/10/2026) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
-| roboclaw | `harnesses/roboclaw/` | ✅ (g++ C++17) | ⚠️ só com normalização mínima (ver abaixo); rodada de referência pendente (fm07) | não testado |
+| roboclaw | `harnesses/roboclaw/` | ✅ (g++ C++17) | rodada de referência pendente (fm07, ESBMC 8.5, código original) | não testado |
 
 ## RoboClaw (src/drivers/roboclaw)
 
@@ -74,18 +74,20 @@ Testes (`harnesses/roboclaw/test_roboclaw.cpp`, entrada `--function harness_main
 | R3 | se `write()` devolve -1 (POSIX), o driver não deve seguir para `select()`/`read()` | — |
 | R4 | `setMotorDutyCycle()` com qualquer float (`--nan-check`); método sem chamador no PX4 | nenhuma |
 
-**Limitações do ESBMC encontradas (problemas da ferramenta, não do PX4)** — reprodutores em `ferramenta/`:
+**Limitações do ESBMC 8.1.0 encontradas (problemas da ferramenta, não do PX4)** — reprodutores em `ferramenta/`.
+Os itens 1 e 2 **já estão corrigidos no ESBMC 8.5.0** (testado na fm07 em 16/10/2026: os dois
+reprodutores dão `VERIFICATION SUCCESSFUL`), então a rodada oficial usa o código original, sem normalização.
 1. `UserDefinedLiteral` não suportado (`11_ms` em `initializeUART`): `CONVERSION ERROR` no 8.1.0.
 2. *Segmentation fault* na conversão quando a definição de um método usa `const float` no
    parâmetro e a declaração usa `float` (`sendUnsigned7Bit`). C++ válido.
 3. O nome `main` fica ambíguo porque o código original chama `ModuleBase::main()`; o harness
    usa `harness_main` como ponto de entrada.
 
-Contorno: `scripts/normaliza_roboclaw.sh` gera, a cada rodada, uma cópia do `Roboclaw.cpp` com
+Contorno (só para o 8.1, com `NORMALIZAR=1`): `scripts/normaliza_roboclaw.sh` gera, a cada rodada, uma cópia do `Roboclaw.cpp` com
 **só duas linhas trocadas** (`11_ms` → `(11 * 1000ULL)`; `const float data` → `float data`),
-ambas sem mudança de semântica. O diff vai para o cabeçalho de cada log. Isso é um desvio
-documentado da regra 1 — **decisão da pesquisadora** manter ou não (alternativa: testar se o
-ESBMC 8.5 já aceita os reprodutores e, se sim, rodar sem normalização).
+ambas sem mudança de semântica. O diff vai para o cabeçalho de cada log.
+4. No 8.1 com Z3, `--overflow-check`/`--ub-shift-check` geram fórmula inválida no Z3 ("bit-vector
+   size must be greater than zero"). A verificar no 8.5 com Boolector durante a rodada rápida.
 
 ## Prova de conceito (15/10/2026) — ESBMC 8.1.0 compilado com Z3, ambiente de nuvem
 
