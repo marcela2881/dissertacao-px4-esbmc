@@ -150,7 +150,7 @@ Harness em C (`modulos/05_voxl_esc/test_voxl_esc.c`) que inclui os originais `qc
 | Teste | O que verifica | Pré-condição (origem) |
 |---|---|---|
 | V0 (T0) | leitor de pacotes: de qualquer estado que satisfaz o invariante, 1 byte qualquer mantém o invariante (memória do `buffer[64]`; indução) | invariante do leitor (sobreaproximação) |
-| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | cada tamanho de payload de 0 a 10 (maior pacote enviado pelo driver), bytes livres |
+| V1 (T1, T5–T8) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC); um tamanho por teste: T1 = 0 e 1 byte, T5 = 2, T6 = 4, T7 = 6, T8 = 10 (maior do driver) | tamanho conhecido, bytes e tipo livres |
 | V2 (T2) | P2: comando de RPM enviado = pedido saturado, sem truncar nem inverter o sinal | nenhuma (qualquer int32) |
 | V3 (T3) | P3: comando PWM enviado em [-800, 800], sem inverter o sinal | nenhuma (qualquer int16) |
 | V4 (T4) | P4: bit de pedido de feedback só no canal `fb_id` | `fb_id` em [0, 3] (`_fb_idx` no driver) |
@@ -161,7 +161,9 @@ Segunda rodada rápida (10:00): V0 FAILED — contraexemplo mostrou erro **do in
 `len_expected < 63` mesmo com o leitor ocioso; o leitor rejeita o tamanho mas mantém o valor, o que é
 inofensivo). Invariante corrigido -> V0 SUCCESSFUL (10:17, 0,685 s). V1 com payload até 10 e até 4: *Timed out* —
 causa: tamanho simbólico fazia o ESBMC desenrolar o CRC até o limite global; V1 passou a percorrer os
-tamanhos 0..10 com valores conhecidos.
+tamanhos 0..10 com valores conhecidos — ainda *Timed out* (Boolector e Bitwuzla). Causa provável: P1 é
+uma checagem de equivalência entre dois cálculos de CRC (montagem × leitura byte a byte), difícil para
+SAT/SMT. V1 foi separado por tamanho (T1, T5–T8) para medir até onde a verificação alcança.
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
