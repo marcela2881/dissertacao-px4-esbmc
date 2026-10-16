@@ -45,9 +45,15 @@ for i in $(seq 1 "$RUNS"); do
     echo
   } > "$log"
   "${cmd[@]}" >> "$log" 2>&1
+  rc=$?
+  echo "### codigo de saida do esbmc: $rc" >> "$log"
   t=$(grep -aoE "BMC program time: [0-9.]+" "$log" | grep -aoE "[0-9.]+" | tail -1)
   [ -z "$t" ] && t=$(grep -aoE "Runtime decision procedure: [0-9.]+" "$log" | grep -aoE "[0-9.]+" | tail -1)
-  v=$(grep -aoE "VERIFICATION (SUCCESSFUL|FAILED)|Timed out|PARSING ERROR|CONVERSION ERROR" "$log" | tail -1)
+  v=$(grep -aoE "VERIFICATION (SUCCESSFUL|FAILED|UNKNOWN)|Timed out|PARSING ERROR|CONVERSION ERROR" "$log" | tail -1)
+  [ -z "$v" ] && v=$(grep -aoE "ERROR: .{0,60}" "$log" | head -1)
+  [ -z "$v" ] && [ "$rc" -eq 139 ] && v="TRAVOU (segmentation fault)"
+  [ -z "$v" ] && [ "$rc" -eq 134 ] && v="TRAVOU (abort)"
+  [ -z "$v" ] && [ "$rc" -eq 137 ] && v="MORTO (memoria?)"
   printf '  run %d: %ss  [%s]\n' "$i" "${t:-NA}" "${v:-sem veredito}"
   times+=("${t:-NA}")
 done

@@ -9,16 +9,18 @@ log, configuração de placa) são substituídas por stubs.
 
 ```
 saida/
-├── harnesses/<modulo>/test_<modulo>.cpp   # entradas não determinísticas + asserções
+├── LEIA-ME_RODAR.md                       # passo a passo para rodar na fm07
+├── rodar_modulo.sh                        # roda 1 módulo (modo rapido ou oficial)
+├── rodar_tudo.sh                          # roda todos os módulos
+├── modulos/<NN>_<modulo>/
+│   ├── test_<modulo>.cpp|.c               # entradas não determinísticas + asserções
+│   └── config.sh                          # pastas do PX4, testes e opções do ESBMC
 ├── stubs/                                 # substitutos das dependências externas
-├── scripts/get_px4.sh                     # baixa o PX4 no commit fixado
-├── scripts/run_esbmc.sh                   # roda o ESBMC 3x e registra tudo no log
-├── scripts/run_pca9685_all.sh             # roda todos os testes do PCA9685
-├── scripts/run_roboclaw_all.sh            # roda todos os testes do RoboClaw
-├── scripts/normaliza_roboclaw.sh          # contorno mínimo de 2 limitações do ESBMC (diff no log)
 ├── ferramenta/                            # reprodutores mínimos de problemas do ESBMC
+├── scripts/get_px4.sh                     # baixa o PX4 no commit fixado
+├── scripts/run_esbmc.sh                   # roda o ESBMC N vezes e registra tudo no log
 ├── scripts/empacotar_logs.sh              # compacta os logs para levar ao PC
-└── logs/<data>_<máquina>_esbmc<versão>/   # uma pasta por rodada
+└── logs/<data>_<máquina>_esbmc<versão>_<modo>/   # uma pasta por rodada
 ```
 
 ## Commit do PX4
@@ -27,20 +29,15 @@ saida/
 
 ## Como rodar
 
-```bash
-cd saida/scripts
-./get_px4.sh ../px4                       # uma vez
-export PX4_ROOT=../px4
+Ver `LEIA-ME_RODAR.md`. Resumo:
 
-# PCA9685, teste 1 (DS2), com asserções de desdobramento (padrão no ESBMC 8.x):
-./run_esbmc.sh pca9685_T1_ua ../harnesses/pca9685/test_pca9685.cpp \
-  "" "src/drivers/pca9685_pwm_out" \
-  -DTEST_CHOICE=1 --unwind 20 --overflow-check \
-  --default-solver boolector --timeout 300s
+```bash
+./rodar_modulo.sh roboclaw rapido     # 1 execução por teste (achar problema de ferramenta)
+./rodar_modulo.sh roboclaw oficial    # 3 execuções, com e sem asserções de desdobramento
 ```
 
 Cada log começa com: data, máquina, versão do ESBMC, commit do PX4 e a linha de
-comando completa.
+comando completa, e termina com o código de saída do ESBMC.
 
 ## Regras do protocolo (lições do artigo anterior)
 
@@ -59,12 +56,13 @@ comando completa.
 
 | Módulo | Harness | Compila com o código real | ESBMC | CBMC |
 |---|---|---|---|---|
-| pca9685_pwm_out | `harnesses/pca9685/` | ✅ (g++ C++17) | ✅ ESBMC 8.5.0 + Boolector na fm07 (15/10/2026) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
-| roboclaw | `harnesses/roboclaw/` | ✅ (g++ C++17) | rodada de referência pendente (fm07, ESBMC 8.5, código original) | não testado |
+| pca9685_pwm_out | `modulos/01_pca9685/` | ✅ (g++ C++17) | ✅ ESBMC 8.5.0 + Boolector na fm07 (15/10/2026) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
+| roboclaw | `modulos/02_roboclaw/` | ✅ (g++ C++17) | rodada de referência pendente (fm07, ESBMC 8.5, código original) | não testado |
+| voxl_esc (protocolo) | `modulos/05_voxl_esc/` | ✅ (gcc C11) | rodada de referência pendente (fm07) | não testado |
 
 ## RoboClaw (src/drivers/roboclaw)
 
-Testes (`harnesses/roboclaw/test_roboclaw.cpp`, entrada `--function harness_main`):
+Testes (`modulos/02_roboclaw/test_roboclaw.cpp`, entrada `--function harness_main`). No resumo, R0–R4 aparecem como T0–T4:
 
 | Teste | O que verifica | Pré-condição (origem) |
 |---|---|---|
@@ -83,9 +81,9 @@ reprodutores dão `VERIFICATION SUCCESSFUL`), então a rodada oficial usa o cód
 3. O nome `main` fica ambíguo porque o código original chama `ModuleBase::main()`; o harness
    usa `harness_main` como ponto de entrada.
 
-Contorno (só para o 8.1, com `NORMALIZAR=1`): `scripts/normaliza_roboclaw.sh` gera, a cada rodada, uma cópia do `Roboclaw.cpp` com
-**só duas linhas trocadas** (`11_ms` → `(11 * 1000ULL)`; `const float data` → `float data`),
-ambas sem mudança de semântica. O diff vai para o cabeçalho de cada log.
+Com o ESBMC 8.1, os itens 1 e 2 exigiam trocar 2 linhas do `Roboclaw.cpp` (sem mudar o
+significado); como o 8.5 aceita o código, essa troca não é usada (o script de normalização
+saiu do repositório; está no histórico do git, commit 49cfc6c).
 4. No 8.1 com Z3, `--overflow-check`/`--ub-shift-check` geram fórmula inválida no Z3 ("bit-vector
    size must be greater than zero"). A verificar no 8.5 com Boolector durante a rodada rápida.
 
@@ -130,6 +128,19 @@ frequências acima de 400 Hz só fazem sentido no modo duty-cycle).
 | T4 updateFreq sem pré-condição | **FAILED** — 4,144 s | **FAILED** — 4,026 s |
 
 Logs: `logs/2026-10-15_fm07_esbmc8.5.0/` (a copiar da fm07). Análise dos contraexemplos: pendente (pesquisadora).
+
+## voxl_esc — protocolo UART (src/drivers/actuators/voxl_esc)
+
+Harness em C (`modulos/05_voxl_esc/test_voxl_esc.c`) que inclui os originais `qc_esc_packet.c` e
+`crc16.c`; não precisa de stubs. Recorte: a biblioteca de pacotes; a classe `VoxlEsc` não entra.
+
+| Teste | O que verifica | Pré-condição (origem) |
+|---|---|---|
+| V0 (T0) | leitor de pacotes com 70 bytes quaisquer: memória do `buffer[64]` | nenhuma |
+| V1 (T1) | P1: pacote montado por `qc_esc_create_packet` é aceito pelo leitor (formato + CRC) | payload ≤ 57 (limite do leitor) |
+| V2 (T2) | P2: comando de RPM enviado = pedido saturado, sem truncar nem inverter o sinal | nenhuma (qualquer int32) |
+| V3 (T3) | P3: comando PWM enviado em [-800, 800], sem inverter o sinal | nenhuma (qualquer int16) |
+| V4 (T4) | P4: bit de pedido de feedback só no canal `fb_id` | `fb_id` em [0, 3] (`_fb_idx` no driver) |
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
