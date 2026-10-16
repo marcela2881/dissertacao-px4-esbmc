@@ -56,14 +56,20 @@ static int16_t decode_i16(const uint8_t *out, int k)
  * qualquer tamanho (indução). O invariante inclui estados talvez inalcançáveis
  * (sobreaproximação): uma violação aqui ainda precisa ser confrontada com a
  * produção (regra 7).
- *   INV: len_received < 63, len_expected < 63 e
- *        (len_received == 0  ou  bp == buffer + len_received)
+ *   INV: len_received < 63 e
+ *        (len_received == 0  ou  (bp == buffer + len_received e
+ *                                 (len_received < 2  ou  len_expected < 63)))
+ *   Versão anterior exigia len_expected < 63 sempre e falhou na fm07 (16/10/2026):
+ *   ao rejeitar um byte de tamanho >= 63 o leitor zera len_received mas mantém
+ *   len_expected; isso é inofensivo, pois len_expected só é usado depois que um
+ *   novo byte de tamanho válido o sobrescreve (erro do invariante, não do PX4).
  * ------------------------------------------------------------------------- */
 static int invariante(const EscPacket *p)
 {
 	return p->len_received < sizeof(p->buffer) - 1
-	       && p->len_expected < sizeof(p->buffer) - 1
-	       && (p->len_received == 0 || p->bp == p->buffer + p->len_received);
+	       && (p->len_received == 0
+		   || (p->bp == p->buffer + p->len_received
+		       && (p->len_received < 2 || p->len_expected < sizeof(p->buffer) - 1)));
 }
 
 void test_parser_memory(void)
