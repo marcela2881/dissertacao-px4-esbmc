@@ -25,7 +25,9 @@ mkdir -p "$logdir"
 
 src_args=(); for f in $srcs; do src_args+=("$PX4_ROOT/$f"); done
 [ ${#src_args[@]} -eq 0 ] && src_args=()
-inc_args=(); set -f; for t in $incs; do
+# PRE_INC (opcional): pasta com fonte normalizada, procurada ANTES do PX4 original
+inc_args=(); [ -n "${PRE_INC:-}" ] && inc_args+=(-I "$PRE_INC")
+set -f; for t in $incs; do
   if [ "$t" = "-I" ]; then continue; fi; inc_args+=(-I "$PX4_ROOT/$t"); done; set +f
 inc_args+=(-I "$here/../stubs")
 
@@ -38,6 +40,7 @@ for i in $(seq 1 "$RUNS"); do
     echo "### maquina: $(uname -srm); $(grep -m1 'model name' /proc/cpuinfo 2>/dev/null | cut -d: -f2)"
     echo "### esbmc: $("$ESBMC" --version 2>&1 | head -1)"
     echo "### px4 commit: $(git -C "$PX4_ROOT" rev-parse HEAD 2>/dev/null || cat "$PX4_ROOT/.px4_commit" 2>/dev/null || echo desconhecido)"
+    [ -n "${PRE_INC:-}" ] && { echo "### normalizacao (diff em relacao ao original):"; sed 's/^/###   /' "$PRE_INC/normalizacao.diff"; }
     echo "### comando: ${cmd[*]}"
     echo
   } > "$log"

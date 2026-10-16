@@ -14,6 +14,9 @@ saida/
 ├── scripts/get_px4.sh                     # baixa o PX4 no commit fixado
 ├── scripts/run_esbmc.sh                   # roda o ESBMC 3x e registra tudo no log
 ├── scripts/run_pca9685_all.sh             # roda todos os testes do PCA9685
+├── scripts/run_roboclaw_all.sh            # roda todos os testes do RoboClaw
+├── scripts/normaliza_roboclaw.sh          # contorno mínimo de 2 limitações do ESBMC (diff no log)
+├── ferramenta/                            # reprodutores mínimos de problemas do ESBMC
 ├── scripts/empacotar_logs.sh              # compacta os logs para levar ao PC
 └── logs/<data>_<máquina>_esbmc<versão>/   # uma pasta por rodada
 ```
@@ -29,10 +32,10 @@ cd saida/scripts
 ./get_px4.sh ../px4                       # uma vez
 export PX4_ROOT=../px4
 
-# PCA9685, teste 1 (DS2), com asserções de desdobramento:
+# PCA9685, teste 1 (DS2), com asserções de desdobramento (padrão no ESBMC 8.x):
 ./run_esbmc.sh pca9685_T1_ua ../harnesses/pca9685/test_pca9685.cpp \
   "" "src/drivers/pca9685_pwm_out" \
-  -DTEST_CHOICE=1 --unwind 20 --unwinding-assertions --overflow-check \
+  -DTEST_CHOICE=1 --unwind 20 --overflow-check \
   --default-solver boolector --timeout 300s
 ```
 
@@ -57,6 +60,32 @@ comando completa.
 | Módulo | Harness | Compila com o código real | ESBMC | CBMC |
 |---|---|---|---|---|
 | pca9685_pwm_out | `harnesses/pca9685/` | ✅ (g++ C++17) | ✅ ESBMC 8.5.0 + Boolector na fm07 (15/10/2026) | ❌ o frontend C++ do CBMC 5.95.1 não aceita `override = default` nem `uint16_t inline` no PCA9685.h |
+| roboclaw | `harnesses/roboclaw/` | ✅ (g++ C++17) | ⚠️ só com normalização mínima (ver abaixo); rodada de referência pendente (fm07) | não testado |
+
+## RoboClaw (src/drivers/roboclaw)
+
+Testes (`harnesses/roboclaw/test_roboclaw.cpp`, entrada `--function harness_main`):
+
+| Teste | O que verifica | Pré-condição (origem) |
+|---|---|---|
+| R0 | `readEncoder()`: memória, CRC, deslocamentos (`--ub-shift-check`), divisão por `RBCLW_COUNTS_REV` | endereço 128..135, counts ≥ 1 (module.yaml) |
+| R1 | RC1: byte de dados dos comandos 0/1/4/5 ≤ 127 (manual Basicmicro, **página a conferir**) | outputs em [0, 257] (min/max/disarmed/failsafe do module.yaml) |
+| R2 | igual a R1, só faixa normal do mixer | outputs em [0, 254] |
+| R3 | se `write()` devolve -1 (POSIX), o driver não deve seguir para `select()`/`read()` | — |
+| R4 | `setMotorDutyCycle()` com qualquer float (`--nan-check`); método sem chamador no PX4 | nenhuma |
+
+**Limitações do ESBMC encontradas (problemas da ferramenta, não do PX4)** — reprodutores em `ferramenta/`:
+1. `UserDefinedLiteral` não suportado (`11_ms` em `initializeUART`): `CONVERSION ERROR` no 8.1.0.
+2. *Segmentation fault* na conversão quando a definição de um método usa `const float` no
+   parâmetro e a declaração usa `float` (`sendUnsigned7Bit`). C++ válido.
+3. O nome `main` fica ambíguo porque o código original chama `ModuleBase::main()`; o harness
+   usa `harness_main` como ponto de entrada.
+
+Contorno: `scripts/normaliza_roboclaw.sh` gera, a cada rodada, uma cópia do `Roboclaw.cpp` com
+**só duas linhas trocadas** (`11_ms` → `(11 * 1000ULL)`; `const float data` → `float data`),
+ambas sem mudança de semântica. O diff vai para o cabeçalho de cada log. Isso é um desvio
+documentado da regra 1 — **decisão da pesquisadora** manter ou não (alternativa: testar se o
+ESBMC 8.5 já aceita os reprodutores e, se sim, rodar sem normalização).
 
 ## Prova de conceito (15/10/2026) — ESBMC 8.1.0 compilado com Z3, ambiente de nuvem
 
