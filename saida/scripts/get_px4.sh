@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 # Baixa o PX4-Autopilot no commit fixado do estudo (sem modificar nada).
-# Funciona com git OU, se não houver git, com curl/wget (arquivo .tar.gz do commit).
+# Usa o arquivo .tar.gz do commit (um único download, que é RETOMADO se a
+# conexão cair; o clone com git falhou no meio em conexão instável).
 # Uso: ./get_px4.sh [destino]   (padrão: ../px4)
 set -euo pipefail
 COMMIT=8be2590c1529517ccd54fbc09ae138402517baf4
 DEST=${1:-"$(dirname "$0")/../px4"}
-if command -v git >/dev/null 2>&1; then
-  if [ ! -d "$DEST/.git" ]; then
-    git clone --filter=blob:none --no-checkout https://github.com/PX4/PX4-Autopilot.git "$DEST"
+URL="https://github.com/PX4/PX4-Autopilot/archive/$COMMIT.tar.gz"
+TGZ="${TMPDIR:-/tmp}/px4_$COMMIT.tar.gz"
+ok=0
+for tentativa in 1 2 3 4 5; do
+  echo "Baixando o PX4 (tentativa $tentativa) ..."
+  if command -v curl >/dev/null 2>&1; then
+    curl -L --retry 3 -C - -o "$TGZ" "$URL" && ok=1
+  else
+    wget -c -O "$TGZ" "$URL" && ok=1
   fi
-  git -C "$DEST" checkout -q "$COMMIT"
-else
-  URL="https://github.com/PX4/PX4-Autopilot/archive/$COMMIT.tar.gz"
-  mkdir -p "$DEST"
-  if command -v curl >/dev/null 2>&1; then curl -L "$URL" -o /tmp/px4_$COMMIT.tar.gz
-  else wget -O /tmp/px4_$COMMIT.tar.gz "$URL"; fi
-  tar -xzf /tmp/px4_$COMMIT.tar.gz -C "$DEST" --strip-components=1
-  rm -f /tmp/px4_$COMMIT.tar.gz
-  echo "$COMMIT" > "$DEST/.px4_commit"     # registro do commit (sem git)
-fi
+  [ "$ok" = 1 ] && gzip -t "$TGZ" 2>/dev/null && break
+  ok=0; sleep 5
+done
+[ "$ok" = 1 ] || { echo "ERRO: download do PX4 falhou; rode de novo (o download continua de onde parou)"; exit 1; }
+rm -rf "$DEST"; mkdir -p "$DEST"
+tar -xzf "$TGZ" -C "$DEST" --strip-components=1
+rm -f "$TGZ"
+echo "$COMMIT" > "$DEST/.px4_commit"     # registro do commit
 echo "PX4 em $DEST, commit $COMMIT"

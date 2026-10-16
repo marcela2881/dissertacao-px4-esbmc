@@ -31,7 +31,7 @@ SOLVER=${SOLVER:-boolector}
 
 # PX4 no commit fixado
 [ -L px4 ] && [ ! -e px4 ] && rm -f px4   # link quebrado vindo de outra máquina
-[ -d px4/src ] || ./scripts/get_px4.sh "$raiz/px4" || { echo "ERRO ao baixar o PX4"; exit 3; }
+[ -d px4/src ] && [ -f px4/.px4_commit ] || ./scripts/get_px4.sh "$raiz/px4" || { echo "ERRO ao baixar o PX4"; exit 3; }
 export PX4_ROOT="$raiz/px4"
 
 ver=$("$ESBMC" --version 2>&1 | grep -oE "[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1)
