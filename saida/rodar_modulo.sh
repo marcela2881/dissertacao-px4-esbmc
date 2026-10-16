@@ -30,6 +30,7 @@ export ESBMC
 SOLVER=${SOLVER:-boolector}
 
 # PX4 no commit fixado
+[ -L px4 ] && [ ! -e px4 ] && rm -f px4   # link quebrado vindo de outra máquina
 [ -d px4/src ] || ./scripts/get_px4.sh "$raiz/px4" || { echo "ERRO ao baixar o PX4"; exit 3; }
 export PX4_ROOT="$raiz/px4"
 
