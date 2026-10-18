@@ -16,13 +16,13 @@
 #   --ub-shift-check       -> --undefined-shift-check
 #   --nan-check, --unwind, --function, --no-library, -D...  -> iguais
 #   UA: ESBMC padrão / CBMC --unwinding-assertions ; NUA: ESBMC --no-unwinding-assertions / CBMC padrão
-#   Harness C++ no CBMC: --cpp11. 1ª leva: shim cbmc/shim_esbmc_assume.cpp (__ESBMC_assume -> __CPROVER_assume).
+#   Harness C++ no CBMC: --cpp11. prelúdio cbmc/prelude_cbmc.h (inclui __ESBMC_assume -> __CPROVER_assume).
 # Tempo: ESBMC = "BMC program time"; CBMC = relógio de parede do processo.
-# CBMC + C++: a glibc do Ubuntu 24.04 usa _Float32/_Float64/... no <math.h> quando o compilador é
-# recente; o frontend C++ do CBMC 5.95 não conhece esses tipos ("symbol '_Float32' is unknown",
-# CONVERSION ERROR, PC do Bruno 18/10/2026). Contorno só no CBMC, sem tocar nos harnesses:
-# -D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double
-# (os tipos estendidos só aparecem em declarações da glibc não usadas pelos harnesses).
+# CBMC + C++: o frontend C++ do CBMC (5.95.1 e 6.11.0) não aceita os cabeçalhos de matemática da
+# glibc 2.39/libstdc++ 13 (Ubuntu 24.04): "_Float32 is unknown", depois "__iseqsig_type defined
+# previously" etc. (PC do Bruno, 18/10/2026). Contorno só no CBMC, sem tocar nos harnesses: cada
+# harness C++ entra num arquivo gerado com #include "cbmc/prelude_cbmc.h" + #include "<harness>"
+# (ver o prelúdio para a lista de ajustes e o motivo de cada um).
 set -uo pipefail
 cd "$(dirname "$0")"
 raiz="$(pwd)"
@@ -38,7 +38,6 @@ export ESBMC CBMC
 [ -d px4/src ] && [ -f px4/.px4_commit ] || ./scripts/get_px4.sh "$raiz/px4" || exit 3
 export PX4_ROOT="$raiz/px4"
 
-FLOATN="-D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double"
 
 case "$modo" in
   rapido)  export RUNS=1; TO=300; VARIANTES="ua" ;;
@@ -64,7 +63,12 @@ par() {
   for i in $inc; do incabs="$incabs $PX4_ROOT/$i"; done
   echo "--- $label"
   le=$(LOGDIR="$base/esbmc" ./scripts/run_esbmc.sh "$label" "$h" "" "$inc" $oe --timeout ${TO}s 2>&1 | tee /dev/stderr | tail -"$((RUNS+1))")
-  lc=$(LOGDIR="$base/cbmc" ./scripts/run_cbmc.sh "$label" "$h $extra" "$incabs" $oc 2>&1 | tee /dev/stderr | tail -"$((RUNS+1))")
+  local hc="$h"
+  if [[ "$h" == *.cpp ]]; then
+    hc="$base/cbmc/entrada_${label}.cpp"
+    printf '#include "%s"\n#include "%s"\n' "$raiz/cbmc/prelude_cbmc.h" "$h" > "$hc"
+  fi
+  lc=$(LOGDIR="$base/cbmc" ./scripts/run_cbmc.sh "$label" "$hc $extra" "$incabs" $oc 2>&1 | tee /dev/stderr | tail -"$((RUNS+1))")
   resum() { local med v; med=$(echo "$1" | grep -oE "mediana = [0-9.NA]+s" | grep -oE "[0-9.]+s|NAs"); v=$(echo "$1" | grep -oE "\[[^]]*\]" | sort | uniq -c | sort -rn | head -1 | sed 's/^ *//'); echo "$v, $med"; }
   printf '%-34s | %-28s | %-28s\n' "$label" "$(resum "$le")" "$(resum "$lc")" >> "$resumo"
 }
@@ -74,9 +78,9 @@ leva1() {
     [[ -z "$nome" || "$nome" == \#* ]] && continue
     for v in $VARIANTES; do
       oe="--unwind $unw $extra --overflow-check --default-solver boolector"
-      oc="--cpp11 $FLOATN --unwind $unw $extra --bounds-check --pointer-check --div-by-zero-check --signed-overflow-check --float-overflow-check"
+      oc="--cpp11 --unwind $unw $extra --bounds-check --pointer-check --div-by-zero-check --signed-overflow-check --float-overflow-check"
       [ "$v" = nua ] && oe="$oe --no-unwinding-assertions" || oc="$oc --unwinding-assertions"
-      par "leva1_${nome}_${v}" "$raiz/leva1/$arq" "$raiz/cbmc/shim_esbmc_assume.cpp" "" "$oe" "$oc"
+      par "leva1_${nome}_${v}" "$raiz/leva1/$arq" "" "" "$oe" "$oc"
     done
   done < leva1/leva1.conf
 }
@@ -87,7 +91,7 @@ modulo() {
   NOME=""; HARNESS=""; INC=""; TESTES=""; OPCOES=""; for n in 0 1 2 3 4 5 6 7 8 9; do unset "EXTRA_$n"; done
   source "$pasta/config.sh"
   [ -n "${SO_TESTES:-}" ] && TESTES="$SO_TESTES"
-  local cpp=""; [[ "$HARNESS" == *.cpp ]] && cpp="--cpp11 $FLOATN"
+  local cpp=""; [[ "$HARNESS" == *.cpp ]] && cpp="--cpp11"
   for t in $TESTES; do
     local ev="EXTRA_$t"; local ex=${!ev:-}
     local oc="" tok

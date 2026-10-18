@@ -257,7 +257,7 @@ Equivalência de opções (ESBMC 8.5 → CBMC 5.95, a mais próxima possível; n
 | `--ub-shift-check` | `--undefined-shift-check` |
 | `--nan-check`, `--unwind`, `--function`, `--no-library`, `-D` | iguais |
 | com asserções de desdobramento (padrão) / `--no-unwinding-assertions` | `--unwinding-assertions` / padrão |
-| `__ESBMC_assume` (1ª leva) | shim `cbmc/shim_esbmc_assume.cpp` → `__CPROVER_assume` |
+| `__ESBMC_assume` (1ª leva) | `__CPROVER_assume`, no prelúdio `cbmc/prelude_cbmc.h` |
 | solver Boolector | MiniSat (padrão do CBMC) |
 
 Tempo: ESBMC = "BMC program time"; CBMC = tempo de parede do processo (inclui a leitura do código).
@@ -265,11 +265,21 @@ Harnesses C++ no CBMC com `--cpp11`; o CBMC pode não aceitar parte do C++ do PX
 isso também é registrado como resultado (`PARSING ERROR`).
 
 1º teste rápido da 1ª leva (PC do Bruno, 18/10/2026):
-- CBMC: 10 de 12 com `CONVERSION ERROR` = `symbol '_Float32' is unknown` em `bits/mathcalls.h` (glibc do
-  Ubuntu 24.04 × frontend C++ do CBMC 5.95; problema de ambiente, não do harness). Contorno só no CBMC:
-  `-D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double`.
+- CBMC: 10 de 12 com `CONVERSION ERROR` = `symbol '_Float32' is unknown` em `bits/mathcalls.h`. O frontend
+  C++ do CBMC (5.95.1 e também o 6.11.0, o mais recente) não aceita os cabeçalhos de matemática da
+  glibc 2.39/libstdc++ 13 do Ubuntu 24.04. Definir os tipos com `-D_Float32=float ...` só troca o erro por
+  `__iseqsig_type defined previously`. Problema de ambiente, não do harness.
+- Contorno, só no CBMC e sem alterar os harnesses: cada harness C++ entra num arquivo gerado
+  (`logs/.../cbmc/entrada_<teste>.cpp`) com `#include "cbmc/prelude_cbmc.h"` seguido de
+  `#include "<harness>"`. O prelúdio lista cada ajuste e o motivo (`__GNUC__` = 12 para a glibc, macros
+  para `__builtin_isgreater` e afins, `using std::isnan/isinf/isfinite`, `__ESBMC_assume` →
+  `__CPROVER_assume`). Conferido só na fase de conversão (`--show-goto-functions`): 11 de 12 da 1ª leva
+  passam a ser aceitos.
 - CBMC: Barometer `PARSING ERROR` na linha 169 (`if (priority < 0 || priority > 100)`): o parser C++ do CBMC
-  parece ler `< ... >` como lista de template — limitação do frontend do CBMC.
+  parece ler `< ... >` como lista de template. Limitação do frontend do CBMC; o harness fica como está.
+- CBMC nos módulos novos em C++: `PARSING ERROR` no próprio código do PX4. PCA9685.h:95 (`override = default`),
+  literais `11_ms` (roboclaw) e `offsetof` em tap_esc_common.cpp:285. O CBMC só vai até `--cpp11`; o código
+  do PX4 não é alterado, então isso é registrado como resultado. voxl_esc (C) é aceito.
 - ESBMC 8.5: Navigator_Mission `PARSING ERROR` (`use of undeclared identifier 'isfinite'`); no artigo, com o
   ESBMC 8.1, o mesmo harness foi verificado — diferença entre versões do frontend do ESBMC.
 - ESBMC 8.5 nos demais: mesmos vereditos do artigo (GPS e IMU_BMI088 FAILED; os outros SUCCESSFUL).
