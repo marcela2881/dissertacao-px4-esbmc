@@ -19,6 +19,8 @@ pasta=$(ls -d modulos/*/ | sed 's#/$##' | grep -E "modulos/(${alvo}_|[0-9]+_${al
 NOME=""; HARNESS=""; INC=""; TESTES=""; OPCOES=""
 # shellcheck disable=SC1090
 source "$pasta/config.sh"
+# SO_TESTES="0 3" ./rodar_modulo.sh <módulo> <modo>  -> roda só esses testes
+[ -n "${SO_TESTES:-}" ] && TESTES="$SO_TESTES"
 
 # ESBMC: variável ESBMC, ou ~/esbmc-8.5, ou o que estiver no PATH
 if [ -z "${ESBMC:-}" ]; then

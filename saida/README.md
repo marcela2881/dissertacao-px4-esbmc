@@ -185,6 +185,9 @@ Recorte: a biblioteca do protocolo; a classe `TAP_ESC` não entra.
 Teste rápido no PC do Bruno (18/10/2026): T1 e T3 SUCCESSFUL; T0 (24 bytes), T2 e T4 *Timed out* em 300 s.
 Causa: `--unwind 130` global + tamanho lido do buffer -> laço do CRC desenrolado até 130. Correção: `--unwind`
 por teste (20 em T0/T2/T4), T0 com até 16 bytes e, na ida e volta, cabeçalho gravado com os valores já conferidos.
+2º teste rápido e 1ª oficial (18/10): T1–T4 SUCCESSFUL; T0 FAILED em 0 s só com asserções de desdobramento =
+laço de 128 voltas do PRÓPRIO harness (preencher o buffer) acima do --unwind 20 — erro do harness, não do PX4.
+Corrigido (buffer sem laço de preenchimento); T0 deve ser repetido.
 
 ## Replay (teste de reprodução dos contraexemplos) — regra 7
 

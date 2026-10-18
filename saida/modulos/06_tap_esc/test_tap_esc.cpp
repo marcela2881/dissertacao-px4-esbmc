@@ -90,10 +90,11 @@ static int invariante(const ESC_UART_BUF *b)
  * ------------------------------------------------------------------------- */
 void test_parser_memory()
 {
+	/* esc_feedback_buf NÃO é preenchido em laço: variável local não inicializada
+	 * já tem conteúdo arbitrário no ESBMC/CBMC. (Um laço de 128 voltas com
+	 * --unwind 20 gerou falha de asserção de desdobramento em 0 s, que era do
+	 * harness e não do PX4 — PC do Bruno, 18/10/2026.) */
 	ESC_UART_BUF buf;
-
-	for (int i = 0; i < UART_BUFFER_SIZE; i++) { buf.esc_feedback_buf[i] = nondet_uint8(); }
-
 	buf.head = nondet_uint8();
 	buf.dat_cnt = nondet_uint8();
 	__VERIFIER_assume(buf.head < UART_BUFFER_SIZE && buf.dat_cnt <= N_BYTES);
