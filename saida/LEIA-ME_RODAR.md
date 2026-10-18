@@ -71,6 +71,16 @@ cd ~/verificacoes
 nohup ./rodar_tudo.sh oficial > oficial_tudo.txt 2>&1 &
 ```
 
+## 3b. Replay: reproduzir os contraexemplos executando o código real (💻 PC)
+
+Compila o código ORIGINAL do PX4 com o g++ e executa com os valores dos contraexemplos.
+Precisa do g++ (`sudo apt install -y g++`, uma vez) e do PX4 já baixado (passo 2).
+
+```bash
+cd ~/verificacoes
+./replay/rodar_replay.sh
+```
+
 ## 4. Levar os logs para o PC (no final)
 
 🖥️ fm07:

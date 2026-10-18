@@ -186,6 +186,18 @@ Teste rápido no PC do Bruno (18/10/2026): T1 e T3 SUCCESSFUL; T0 (24 bytes), T2
 Causa: `--unwind 130` global + tamanho lido do buffer -> laço do CRC desenrolado até 130. Correção: `--unwind`
 por teste (20 em T0/T2/T4), T0 com até 16 bytes e, na ida e volta, cabeçalho gravado com os valores já conferidos.
 
+## Replay (teste de reprodução dos contraexemplos) — regra 7
+
+`replay/rodar_replay.sh` compila com o **g++ comum** os arquivos ORIGINAIS do PX4 (mesmos stubs, mas com o
+hardware simulado de forma determinística) e EXECUTA o driver com os valores dos contraexemplos do ESBMC.
+Logs em `logs/<data>_<máquina>_replay/`.
+
+| Candidato | O que o replay mostra (execução nativa, 18/10/2026) |
+|---|---|
+| RoboClaw R1 | `outputs[0]` = 254,5 / 255 / 256 / 257 → byte de dados 128 / 128 / 129 / 130 no comando DriveForwardMotor1; 0–254 → ≤ 127 |
+| RoboClaw R3 | com `write()` = -1, o driver chama `select()` 7 vezes (esperado 0) e só falha depois, no CRC |
+| PCA9685 T3 | 1524,39 Hz + 1024 µs → contagem 6400; `LED0_OFF_H` = 0x19 com o bit 4 (full OFF) ligado → canal desligado. Varredura com 2200 µs: ok até 450 Hz; 600 Hz e 1525 Hz desligam o canal; 1000 Hz gera pulso errado. A documentação de `PCA9685_PWM_FREQ` já proíbe > 400 Hz com pulsos (restrição só documental, não verificada no código) |
+
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
 1. **fm07 (sem git):** rodar os testes. Cada rodada vai para
