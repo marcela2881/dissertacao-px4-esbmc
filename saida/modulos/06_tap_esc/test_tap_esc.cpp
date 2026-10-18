@@ -73,7 +73,7 @@ ssize_t read(int, void *buf, size_t n)
 using namespace tap_esc_common;
 
 #ifndef N_BYTES
-#define N_BYTES 24      /* bytes no buffer em T0 (ver config.sh) */
+#define N_BYTES 16      /* bytes no buffer em T0 (24 deu Timed out em 300 s, 18/10/2026) */
 #endif
 
 static int invariante(const ESC_UART_BUF *b)
@@ -138,9 +138,19 @@ static void roundtrip(uint8_t len, uint8_t msg_id)
 	int n = send_packet(0, tx, -1);
 	assert(n == len + 4 && g_tx_len == (size_t)n);
 
-	ESC_UART_BUF buf{};
+	/* cabeçalho enviado confere com o pacote (formato do protocolo) */
+	assert(g_tx[0] == PACKET_HEAD && g_tx[1] == len && g_tx[2] == msg_id);
 
-	for (int i = 0; i < n; i++) { buf.esc_feedback_buf[i] = g_tx[i]; }
+	/* Bytes recebidos = bytes enviados. head/len/msg_id são gravados com os
+	 * valores (já conferidos acima) para que o ESBMC saiba que o tamanho é fixo;
+	 * senão ele desenrola o laço do CRC até o limite global (Timed out na 1ª
+	 * versão, 18/10/2026). Dados e CRC vêm do que foi enviado. */
+	ESC_UART_BUF buf{};
+	buf.esc_feedback_buf[0] = PACKET_HEAD;
+	buf.esc_feedback_buf[1] = len;
+	buf.esc_feedback_buf[2] = msg_id;
+
+	for (int i = 3; i < n; i++) { buf.esc_feedback_buf[i] = g_tx[i]; }
 
 	buf.dat_cnt = n;
 	buf.tail = n;

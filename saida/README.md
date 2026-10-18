@@ -165,6 +165,8 @@ causa: tamanho simbólico fazia o ESBMC desenrolar o CRC até o limite global; V
 tamanhos 0..10 com valores conhecidos — ainda *Timed out* (Boolector e Bitwuzla). Causa provável: P1 é
 uma checagem de equivalência entre dois cálculos de CRC (montagem × leitura byte a byte), difícil para
 SAT/SMT. V1 foi separado por tamanho (T1, T5–T8) para medir até onde a verificação alcança.
+PC do Bruno (18/10/2026, Boolector, 1 execução): 0–1 byte 17,6 s; 2 bytes 6,6 s; 4 bytes 31,2 s; 6 bytes 37,1 s;
+10 bytes *Timed out* (> 300 s). V0, V2, V3, V4 SUCCESSFUL.
 
 ## tap_esc — protocolo serial (src/drivers/tap_esc)
 
@@ -174,11 +176,15 @@ Recorte: a biblioteca do protocolo; a classe `TAP_ESC` não entra.
 
 | Teste | O que verifica | Pré-condição (origem) |
 |---|---|---|
-| T0 | TP1: `parse_tap_esc_feedback` com até 24 bytes quaisquer em qualquer posição do buffer circular (memória de `esc_feedback_buf` e `d.bytes`) | `head` < 128, `dat_cnt` ≤ 24; estado do leitor é `static` (parte de HEAD) |
+| T0 | TP1: `parse_tap_esc_feedback` com até 16 bytes quaisquer em qualquer posição do buffer circular (memória de `esc_feedback_buf` e `d.bytes`) | `head` < 128, `dat_cnt` ≤ 16; estado do leitor é `static` (parte de HEAD) |
 | T1 | TP1: `read_data_from_uart` mantém o invariante do buffer circular a partir de qualquer estado válido (indução) | `head`, `tail`, `dat_cnt` < 128 |
 | T2 | TP2: ida e volta `send_packet` → `parse_tap_esc_feedback` com `InfoRequest` (len 2) | dados livres |
 | T3 | `send_packet` com qualquer `len` < 100: memória (CRC em `d.bytes[len]`) | `len` < `sizeof(d)` (remetentes usam ≤ 16) |
 | T4 | TP2 com `EscbusTunePacket` (len 5) | dados livres |
+
+Teste rápido no PC do Bruno (18/10/2026): T1 e T3 SUCCESSFUL; T0 (24 bytes), T2 e T4 *Timed out* em 300 s.
+Causa: `--unwind 130` global + tamanho lido do buffer -> laço do CRC desenrolado até 130. Correção: `--unwind`
+por teste (20 em T0/T2/T4), T0 com até 16 bytes e, na ida e volta, cabeçalho gravado com os valores já conferidos.
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
