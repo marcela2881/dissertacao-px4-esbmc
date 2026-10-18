@@ -242,6 +242,28 @@ A 1ª oficial do tap_esc T0 (FAILED em 0 s com asserções de desdobramento) foi
 Os vereditos repetem os da fm07 (15–16/10/2026) nos testes rodados nas duas máquinas.
 A classificação de cada FAILED (defeito, falso positivo, limitação da ferramenta) é da pesquisadora.
 
+## Comparação ESBMC × CBMC (`comparar.sh`)
+
+Roda os dois verificadores no MESMO harness, com as MESMAS pré-condições, o MESMO `--unwind` e o MESMO
+tempo limite, na mesma máquina. Alvos: `leva1` (os 12 harnesses do artigo, copiados sem alteração de
+`../resultados/` para `leva1/`, com a configuração de `REPRODUCAO.md`) e cada módulo de `modulos/`.
+
+Equivalência de opções (ESBMC 8.5 → CBMC 5.95, a mais próxima possível; não é 1:1):
+
+| ESBMC | CBMC |
+|---|---|
+| checagens padrão (limites, ponteiros, divisão por zero) | `--bounds-check --pointer-check --div-by-zero-check` |
+| `--overflow-check` | `--signed-overflow-check --float-overflow-check` |
+| `--ub-shift-check` | `--undefined-shift-check` |
+| `--nan-check`, `--unwind`, `--function`, `--no-library`, `-D` | iguais |
+| com asserções de desdobramento (padrão) / `--no-unwinding-assertions` | `--unwinding-assertions` / padrão |
+| `__ESBMC_assume` (1ª leva) | shim `cbmc/shim_esbmc_assume.cpp` → `__CPROVER_assume` |
+| solver Boolector | MiniSat (padrão do CBMC) |
+
+Tempo: ESBMC = "BMC program time"; CBMC = tempo de parede do processo (inclui a leitura do código).
+Harnesses C++ no CBMC com `--cpp11`; o CBMC pode não aceitar parte do C++ do PX4 (já visto no PCA9685):
+isso também é registrado como resultado (`PARSING ERROR`).
+
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
 1. **fm07 (sem git):** rodar os testes. Cada rodada vai para

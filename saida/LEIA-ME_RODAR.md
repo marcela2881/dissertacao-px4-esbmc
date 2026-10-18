@@ -81,6 +81,21 @@ cd ~/verificacoes
 ./replay/rodar_replay.sh
 ```
 
+## 3c. Comparação ESBMC × CBMC (💻 PC)
+
+Mesmo harness, mesmas pré-condições, mesmo `--unwind` e mesmo tempo limite nos dois.
+Precisa do CBMC (uma vez): `sudo apt install -y cbmc`.
+
+```bash
+cd ~/verificacoes
+./comparar.sh leva1 rapido          # 12 módulos do artigo
+./comparar.sh voxl_esc rapido       # um módulo novo
+./comparar.sh todos oficial         # tudo, 3 execuções, com e sem asserções (demora; à noite)
+```
+
+No fim aparece uma tabela `teste | ESBMC | CBMC`, salva em
+`logs/<data>_<máquina>_comparacao_<modo>/RESUMO_COMPARACAO_<alvo>.txt`.
+
 ## 4. Levar os logs para o PC (no final)
 
 🖥️ fm07:
