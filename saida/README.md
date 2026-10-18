@@ -230,6 +230,15 @@ Logs em `logs/<data>_<máquina>_replay/`.
 | voxl_esc | V3 comando PWM | SUCCESSFUL | 0,041 | 0,042 |
 | voxl_esc | V4 bit de feedback | SUCCESSFUL | 0,562 | 0,557 |
 
+| tap_esc | T0 leitor, até 16 bytes (repetido após correção do harness) | SUCCESSFUL | 11,375 | 10,301 |
+| tap_esc | T1 buffer circular (invariante) | a confirmar* | 11,392 | 15,233 |
+| tap_esc | T2 ida e volta, InfoRequest (len 2) | a confirmar* | 8,968 | 8,993 |
+| tap_esc | T3 send_packet, qualquer len < 100 | a confirmar* | 0,544 | 0,514 |
+| tap_esc | T4 ida e volta, TunePacket (len 5) | a confirmar* | 11,422 | 10,228 |
+
+\* medianas de `oficial_tap.txt`; vereditos SUCCESSFUL no teste rápido, a conferir nas linhas `run` da oficial.
+A 1ª oficial do tap_esc T0 (FAILED em 0 s com asserções de desdobramento) foi descartada: erro do harness, corrigido e repetido.
+
 Os vereditos repetem os da fm07 (15–16/10/2026) nos testes rodados nas duas máquinas.
 A classificação de cada FAILED (defeito, falso positivo, limitação da ferramenta) é da pesquisadora.
 
