@@ -264,6 +264,16 @@ Tempo: ESBMC = "BMC program time"; CBMC = tempo de parede do processo (inclui a 
 Harnesses C++ no CBMC com `--cpp11`; o CBMC pode não aceitar parte do C++ do PX4 (já visto no PCA9685):
 isso também é registrado como resultado (`PARSING ERROR`).
 
+1º teste rápido da 1ª leva (PC do Bruno, 18/10/2026):
+- CBMC: 10 de 12 com `CONVERSION ERROR` = `symbol '_Float32' is unknown` em `bits/mathcalls.h` (glibc do
+  Ubuntu 24.04 × frontend C++ do CBMC 5.95; problema de ambiente, não do harness). Contorno só no CBMC:
+  `-D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double`.
+- CBMC: Barometer `PARSING ERROR` na linha 169 (`if (priority < 0 || priority > 100)`): o parser C++ do CBMC
+  parece ler `< ... >` como lista de template — limitação do frontend do CBMC.
+- ESBMC 8.5: Navigator_Mission `PARSING ERROR` (`use of undeclared identifier 'isfinite'`); no artigo, com o
+  ESBMC 8.1, o mesmo harness foi verificado — diferença entre versões do frontend do ESBMC.
+- ESBMC 8.5 nos demais: mesmos vereditos do artigo (GPS e IMU_BMI088 FAILED; os outros SUCCESSFUL).
+
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
 1. **fm07 (sem git):** rodar os testes. Cada rodada vai para

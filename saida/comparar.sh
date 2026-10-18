@@ -18,6 +18,11 @@
 #   UA: ESBMC padrão / CBMC --unwinding-assertions ; NUA: ESBMC --no-unwinding-assertions / CBMC padrão
 #   Harness C++ no CBMC: --cpp11. 1ª leva: shim cbmc/shim_esbmc_assume.cpp (__ESBMC_assume -> __CPROVER_assume).
 # Tempo: ESBMC = "BMC program time"; CBMC = relógio de parede do processo.
+# CBMC + C++: a glibc do Ubuntu 24.04 usa _Float32/_Float64/... no <math.h> quando o compilador é
+# recente; o frontend C++ do CBMC 5.95 não conhece esses tipos ("symbol '_Float32' is unknown",
+# CONVERSION ERROR, PC do Bruno 18/10/2026). Contorno só no CBMC, sem tocar nos harnesses:
+# -D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double
+# (os tipos estendidos só aparecem em declarações da glibc não usadas pelos harnesses).
 set -uo pipefail
 cd "$(dirname "$0")"
 raiz="$(pwd)"
@@ -32,6 +37,8 @@ export ESBMC CBMC
 [ -L px4 ] && [ ! -e px4 ] && rm -f px4
 [ -d px4/src ] && [ -f px4/.px4_commit ] || ./scripts/get_px4.sh "$raiz/px4" || exit 3
 export PX4_ROOT="$raiz/px4"
+
+FLOATN="-D_Float32=float -D_Float64=double -D_Float32x=double -D_Float64x=double -D_Float128=double"
 
 case "$modo" in
   rapido)  export RUNS=1; TO=300; VARIANTES="ua" ;;
@@ -67,7 +74,7 @@ leva1() {
     [[ -z "$nome" || "$nome" == \#* ]] && continue
     for v in $VARIANTES; do
       oe="--unwind $unw $extra --overflow-check --default-solver boolector"
-      oc="--cpp11 --unwind $unw $extra --bounds-check --pointer-check --div-by-zero-check --signed-overflow-check --float-overflow-check"
+      oc="--cpp11 $FLOATN --unwind $unw $extra --bounds-check --pointer-check --div-by-zero-check --signed-overflow-check --float-overflow-check"
       [ "$v" = nua ] && oe="$oe --no-unwinding-assertions" || oc="$oc --unwinding-assertions"
       par "leva1_${nome}_${v}" "$raiz/leva1/$arq" "$raiz/cbmc/shim_esbmc_assume.cpp" "" "$oe" "$oc"
     done
@@ -80,7 +87,7 @@ modulo() {
   NOME=""; HARNESS=""; INC=""; TESTES=""; OPCOES=""; for n in 0 1 2 3 4 5 6 7 8 9; do unset "EXTRA_$n"; done
   source "$pasta/config.sh"
   [ -n "${SO_TESTES:-}" ] && TESTES="$SO_TESTES"
-  local cpp=""; [[ "$HARNESS" == *.cpp ]] && cpp="--cpp11"
+  local cpp=""; [[ "$HARNESS" == *.cpp ]] && cpp="--cpp11 $FLOATN"
   for t in $TESTES; do
     local ev="EXTRA_$t"; local ex=${!ev:-}
     local oc="" tok
