@@ -104,12 +104,12 @@ Subir para o git só no final, quando tudo estiver pronto (combinado).
 
 | Pasta | Módulo | Testes | Situação |
 |---|---|---|---|
-| `01_pca9685` | driver PWM I2C PCA9685 | T0–T4 | rodada oficial feita (15/10/2026) |
-| `02_roboclaw` | driver UART RoboClaw | T0–T4 (R0–R4) | falta teste rápido |
+| `01_pca9685` | driver PWM I2C PCA9685 | T0–T4 | oficial feita (fm07 15/10; PC 18/10) |
+| `02_roboclaw` | driver UART RoboClaw | T0–T4 (R0–R4) | oficial feita (PC 18/10) |
 | `03_dshot` | DShot | — | em preparação |
 | `04_uavcan_actuators` | UAVCAN ESC/servo | — | em preparação |
-| `05_voxl_esc` | protocolo UART voxl_esc | T0–T8 (V0–V4; V1 por tamanho) | teste rápido em andamento |
-| `06_tap_esc` | protocolo serial TAP ESC | T0–T4 | falta teste rápido |
+| `05_voxl_esc` | protocolo UART voxl_esc | T0–T8 (V0–V4; V1 por tamanho) | oficial feita (PC 18/10) |
+| `06_tap_esc` | protocolo serial TAP ESC | T0–T4 | teste rápido em andamento |
 | `07_px4io` | PX4IO | — | em preparação |
 | `08_mixer_module` | mixer_module | — | em preparação |
 | `09_control_allocation` | biblioteca control_allocation | — | em preparação |

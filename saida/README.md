@@ -198,6 +198,38 @@ Logs em `logs/<data>_<máquina>_replay/`.
 | RoboClaw R3 | com `write()` = -1, o driver chama `select()` 7 vezes (esperado 0) e só falha depois, no CRC |
 | PCA9685 T3 | 1524,39 Hz + 1024 µs → contagem 6400; `LED0_OFF_H` = 0x19 com o bit 4 (full OFF) ligado → canal desligado. Varredura com 2200 µs: ok até 450 Hz; 600 Hz e 1525 Hz desligam o canal; 1000 Hz gera pulso errado. A documentação de `PCA9685_PWM_FREQ` já proíbe > 400 Hz com pulsos (restrição só documental, não verificada no código) |
 
+## Rodada oficial — PC do Bruno (18/10/2026)
+
+- Máquina: `bruno-pc` (WSL), ESBMC 8.5.0, solver Boolector, PX4 `8be2590c15`
+- 3 execuções por teste (mediana), com (UA) e sem (NUA) asserções de desdobramento, timeout 600 s
+- Logs: `logs/2026-10-18_bruno-pc_esbmc8.5.0_oficial/` (no PC; sobem ao GitHub no final)
+- Em todos os testes, as 3 execuções deram o mesmo veredito.
+
+| Módulo | Teste | Veredito | Mediana UA (s) | Mediana NUA (s) |
+|---|---|---|---|---|
+| pca9685 | T0 memória (updateRAW) | SUCCESSFUL | 0,745 | 0,803 |
+| pca9685 | T1 DS2 (LEDn_OFF_H) | SUCCESSFUL | 0,042 | 0,043 |
+| pca9685 | T2 DS3 (PRE_SCALE) | SUCCESSFUL | 0,788 | 0,845 |
+| pca9685 | T3 DS1 (contagem ≤ 4096) | FAILED | 12,435 | 12,512 |
+| pca9685 | T4 updateFreq sem pré-condição | FAILED | 2,326 | 2,618 |
+| roboclaw | R0 readEncoder | FAILED | 44,046 | 47,955 |
+| roboclaw | R1 byte ≤ 127 (faixa com failsafe) | FAILED | 4,121 | 3,571 |
+| roboclaw | R2 byte ≤ 127 (faixa normal) | SUCCESSFUL | 6,320 | 5,893 |
+| roboclaw | R3 erro de write() | FAILED | 59,209 | 29,617 |
+| roboclaw | R4 setMotorDutyCycle (NaN) | FAILED | 2,014 | 2,018 |
+| voxl_esc | V0 leitor (invariante) | SUCCESSFUL | 0,428 | 0,557 |
+| voxl_esc | V1 ida e volta, payload 0–1 | SUCCESSFUL | 22,937 | 17,425 |
+| voxl_esc | V1 ida e volta, payload 2 (T5) | SUCCESSFUL | 6,537 | 6,670 |
+| voxl_esc | V1 ida e volta, payload 4 (T6) | SUCCESSFUL | 34,313 | 31,391 |
+| voxl_esc | V1 ida e volta, payload 6 (T7) | SUCCESSFUL | 38,321 | 39,247 |
+| voxl_esc | V1 ida e volta, payload 10 (T8) | SUCCESSFUL | 238,022 | 247,535 |
+| voxl_esc | V2 comando RPM | SUCCESSFUL | 0,309 | 0,299 |
+| voxl_esc | V3 comando PWM | SUCCESSFUL | 0,041 | 0,042 |
+| voxl_esc | V4 bit de feedback | SUCCESSFUL | 0,562 | 0,557 |
+
+Os vereditos repetem os da fm07 (15–16/10/2026) nos testes rodados nas duas máquinas.
+A classificação de cada FAILED (defeito, falso positivo, limitação da ferramenta) é da pesquisadora.
+
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
 1. **fm07 (sem git):** rodar os testes. Cada rodada vai para
