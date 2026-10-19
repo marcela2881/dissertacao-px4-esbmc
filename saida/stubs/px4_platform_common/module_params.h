@@ -7,7 +7,7 @@
 #include "px4_common_stub.h"
 
 namespace px4 { namespace params {
-enum params_t { RBCLW_ADDRESS, RBCLW_COUNTS_REV, PARAM_COUNT };
+enum params_t { RBCLW_ADDRESS, RBCLW_COUNTS_REV, MC_AIRMODE, THR_MDL_FAC, PARAM_COUNT };
 } }
 
 extern int32_t g_param_values[px4::params::PARAM_COUNT];
@@ -17,11 +17,24 @@ class ParamInt
 {
 public:
 	int32_t get() const { return g_param_values[P]; }
+	int32_t &reference() { return g_param_values[P]; }
+};
+
+extern float g_param_values_f[px4::params::PARAM_COUNT];
+
+template<px4::params::params_t P>
+class ParamFloat
+{
+public:
+	float get() const { return g_param_values_f[P]; }
+	float &reference() { return g_param_values_f[P]; }
 };
 
 class ModuleParams
 {
 public:
+	ModuleParams() = default;
+	explicit ModuleParams(ModuleParams *) {}
 	virtual ~ModuleParams() = default;
 	virtual void updateParams() {}
 };

@@ -50,10 +50,13 @@ constexpr hrt_abstime operator ""_us(unsigned long long v) { return v; }
 }
 using namespace time_literals;
 
+/* STUB_MATHLIB_ORIGINAL: o harness usa o src/lib/mathlib ORIGINAL (que já define math::constrain) */
+#ifndef STUB_MATHLIB_ORIGINAL
 namespace math
 {
 template<typename T> constexpr T constrain(T v, T lo, T hi) { return (v < lo) ? lo : ((v > hi) ? hi : v); }
 }
+#endif
 
 /* parâmetros por nome (param_find/param_get): devolvem 0 (não usados nas propriedades) */
 typedef int param_t;

@@ -74,7 +74,8 @@ Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador a
 | voxl_esc | oficial ✅ | ❌ **(C: deve dar veredito)** | — (tudo SUCCESSFUL) |
 | tap_esc | oficial ✅ (confirmar T1–T4 no log) | ❌ (esperado PARSING ERROR) | — |
 | dshot | rápido ✅ (T3 refeito, falta rodar) · oficial ❌ | ❌ (esperado PARSING ERROR) | — até agora |
-| uavcan, px4io, mixer_module, control_allocation, control_allocator | ❌ harness a escrever | ❌ | ❌ |
+| mixer_module | ❌ harness pronto (19/10, `modulos/08_mixer_module`), falta rodar | ❌ (esperado PARSING ERROR) | só se der defeito |
+| uavcan, px4io, control_allocation, control_allocator | ❌ harness a escrever | ❌ | ❌ |
 
 ## Ordem sugerida (nunca duas rodadas ao mesmo tempo)
 
