@@ -678,7 +678,7 @@ segue a conferência da etapa~(v).}
 
 \corr{Para classificar esse candidato, a condição foi confrontada com o
 \textit{datasheet} do sensor, que descreve quando cada quadro curto é colocado na
-FIFO (\textit{Data format in FIFO}, Seção~4.9.3.2, p.~20~\cite{Bosch2021}). O
+FIFO (\textit{Data format in FIFO}, Seções~4.9.3.2 a~4.9.3.6, pp.~20--21~\cite{Bosch2021}). O
 quadro de \textit{sensortime} (4 bytes) só é enviado quando a FIFO se esvazia
 durante a leitura, ou seja, depois dos quadros de dados, e não antes deles. O
 quadro de configuração (2 bytes) é inserido quando o filtro ou a faixa do
@@ -689,7 +689,14 @@ conferência periódica dos registradores apenas lê os valores, provocando um n
 (2 bytes) é colocado no início da FIFO depois de um transbordamento, tanto no
 modo FIFO quanto no modo \textit{stream}; nesse caso, porém, a leitura seguinte
 traz o contador de bytes no limite da FIFO, e o próprio \texttt{FIFORead}
-descarta a leitura pela guarda \texttt{fifo\_byte\_counter >= FIFO::SIZE}. Com
+descarta a leitura pela guarda \texttt{fifo\_byte\_counter >= FIFO::SIZE}. O
+quadro de \textit{sample drop} (2 bytes), por sua vez, só aparece logo após uma
+reconfiguração indicada pelo quadro de configuração, no lugar da amostra que
+seria produzida naquele instante (Seção~4.9.3.5, p.~21), e por isso é eliminado
+pelo mesmo \textit{reset} da FIFO. Por fim, o \textit{datasheet} garante que um
+quadro lido apenas em parte é repetido por inteiro na leitura seguinte
+(Seção~4.9.3.6, p.~21), o que mantém as leituras alinhadas ao início de um
+quadro mesmo depois de uma leitura descartada. Com
 o sensor funcionando como especificado, portanto, nenhum quadro curto chega a
 anteceder 32 quadros de dados numa leitura aceita pelo driver, e o candidato foi
 classificado como \textbf{inalcançável em produção}: a leitura além do
@@ -697,7 +704,7 @@ classificado como \textbf{inalcançável em produção}: a leitura além do
 ela indica uma fragilidade do laço de leitura, que confia no cabeçalho de cada
 quadro sem conferir se o quadro inteiro cabe na janela lida.}
 
-\pendente{Ler no \textit{datasheet} (logo após a p.~20) a descrição do \textit{sample drop frame} e confirmar que ele também não pode anteceder os quadros de dados na configuração do PX4; conferir com o orientador a classificação acima antes de mencioná-la no Cap.~5.}
+\pendente{Conferir com o orientador a classificação acima antes de mencioná-la no Cap.~5.}
 
 \subsection{Etapa~(vi) --- Reporte \corr{à} Comunidade PX4}
 
