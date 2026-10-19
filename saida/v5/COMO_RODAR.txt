@@ -1,0 +1,13 @@
+No Ubuntu (WSL), dentro desta pasta:
+
+  chmod +x rodar_tudo.sh conferir_px4.sh
+  ./rodar_tudo.sh
+
+Se o esbmc nao estiver no PATH:
+  ESBMC=/caminho/do/esbmc ./rodar_tudo.sh
+
+Sem internet (pula a conferencia com o PX4):
+  SEM_PX4=1 ./rodar_tudo.sh
+
+Ultima linha esperada: "Tudo como esperado."
+Resumo: resultados_<data>/RESUMO.md (coluna "Confere" toda "sim").

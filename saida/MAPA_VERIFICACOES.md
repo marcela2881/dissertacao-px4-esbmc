@@ -1,4 +1,4 @@
-# Mapa das verificações: 3 fases × ESBMC, CBMC e teste unitário (replay)
+# Mapa das verificações: fases × ESBMC, CBMC e teste unitário (replay)
 
 Atualizado em 19/10/2026. Legenda: ✅ feito · ⏳ rodando · ❌ falta · — não se aplica.
 "Teste unitário" = replay: o código **original** do PX4 executado com g++ usando os valores do
@@ -33,6 +33,27 @@ contaminados por rodadas simultâneas).
 
 Tudo isso roda com **um comando**: `./rodar_fase2.sh rapido` (depois `oficial`).
 
+## Pacote v5: 8 candidatos de outros módulos (`saida/v5/`, pacote de 12/10/2026)
+
+Não são módulos de saída. Os harnesses já citam saídas do ESBMC 8.1 e 8.4, mas **não há logs
+no repositório** e nada foi rodado com o ESBMC 8.5 na máquina oficial. Tudo roda com um comando
+(`cd v5 && ./rodar_tudo.sh`), que faz ESBMC, CBMC e o teste unitário (replay com sanitizador) e
+compara com o esperado. Conferido aqui: o CBMC 5.95 lê todos os harnesses (só usam headers de C,
+não precisam do prelúdio) e todos os replays compilam com g++ 13.3.
+
+| # | Módulo | Situação | ESBMC 8.5 | CBMC 5.95 | Teste unitário (replay) |
+|---|---|---|---|---|---|
+| 1 | `Common.cpp` (commander) | retirado (premissa errada) | ❌ | ❌ | — (não é defeito) |
+| 2 | `externalChecks.cpp` (commander) | defeito, corrigido no PX4 (PR #28598) | ❌ original + correção | ❌ original + correção | ❌ ASan |
+| 3 | `ft7_technologies.cpp` (sensor de vento) | defeito, corrigido no PX4 (PR #28600) | ❌ original + correção | ❌ original + correção | ❌ UBSan (2 cenários, antes e depois) |
+| 4 | `sumd.cpp` (rádio RC) | **defeito, ainda no PX4** (issue em rascunho) | ❌ | ❌ | ❌ UBSan + efeito no canal 32 |
+| 5 | `logger.cpp` | sem violação de memória (truncamento latente) | ❌ | ❌ (só a sondagem do `snprintf`) | — (não é defeito) |
+| 6 | `IridiumSBD.cpp` (telemetria satelital) | defeito, corrigido no PX4 (PR #28599) | ❌ original + correção | ❌ original + correção | ❌ ASan |
+| 7 | `bst.cpp` (telemetria) | falso positivo (harness antigo sem as guardas) | ❌ antigo + fiel | ❌ fiel | — (não é defeito) |
+| 8 | `MicroStrain.cpp` (INS) | **defeito, ainda no PX4** (issue em rascunho) | ❌ | ❌ | ❌ ASan |
+
+Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador antes de publicar.
+
 ## Fase 3: segunda campanha (módulos de saída, código original, `saida/modulos/`)
 
 | Módulo | ESBMC 8.5 | CBMC 5.95 | Teste unitário (replay) |
@@ -53,6 +74,7 @@ Tudo isso roda com **um comando**: `./rodar_fase2.sh rapido` (depois `oficial`).
 | 3 | `SO_TESTES="3" ./rodar_modulo.sh dshot rapido` | ≤ 5 min |
 | 4 | `./rodar_fase2.sh rapido` | ~15–40 min |
 | 5 | `./comparar.sh voxl_esc rapido`, `pca9685`, `roboclaw`, `tap_esc`, `dshot` | ~30 min |
+| 5b | `cd v5 && nohup ./rodar_tudo.sh > ../v5_saida.txt 2>&1 &` (pacote v5: ESBMC, CBMC e replay; última linha esperada "Tudo como esperado.") | 1–3 h |
 | 6 (noite) | `nohup ./comparar.sh leva1 oficial > comp_leva1.txt 2>&1 &` (tempos limpos) | até 4 h |
 | 7 (noite) | `nohup ./rodar_fase2.sh oficial > fase2_oficial.txt 2>&1 &` | horas |
 | 8 (noite) | `nohup ./comparar.sh todos oficial > comp_todos.txt 2>&1 &` | horas |
