@@ -45,6 +45,30 @@ Reproduções mínimas (sem PX4):
 - `minimo_r1`: 254 → 127, 255 → 128, 256 → 129, 257 → 130
 - `minimo_r3`: `bytes_written = 18446744073709551615`, e `writeCommand()` devolve OK
 
+### Reprodução no formato da issue (`repro_roboclaw.cpp`): preparação, execução, assert violado
+
+Rodada na máquina oficial (bruno-pc, g++ 13.3), 19/10/2026:
+
+```
+R1: outputs[0] = 257 (RBCLW_FAIL1 = 257, flight termination)
+  sent: command 0, data byte 130
+Assertion `p[2] <= 127 && "drive command data byte must be 0..127"' failed.
+R3: write() returns -1 (errno = EIO)
+Assertion `!g_last_write_failed && "select() called after write() returned -1"' failed.
+```
+
+Com a correção, os dois testes terminam sem violar os asserts (byte 127; `select()` não é chamado).
+
+### Proteções conferidas no código (comentário 3 do orientador)
+
+- R1: nenhuma função entre `actualFailsafeValue()` e `write()` limita o valor; o mixer só limita no
+  caminho normal (`output_limit_calc`); 257 está dentro do `module.yaml`; a terminação é alcançável armado
+  por `MAV_CMD_DO_FLIGHTTERMINATION` ou por ação de failsafe "Terminate" (`NAV_RCL_ACT`, `NAV_DLL_ACT`);
+  `CBRK_FLIGHTTERM` só desliga a terminação do detector de falhas.
+- R3: nada trata o erro entre `write()` e a comparação; a falha só aparece depois, no timeout de 11 ms do
+  `select()`, com a mensagem errada ("ACK timeout"/"Select timeout"). Por isso o título diz "not detected",
+  e não "treated as success".
+
 ## 3. Com a CORREÇÃO (`5_pr/correcao_roboclaw.patch`), 19/10/2026
 
 | Verificação | Original | Corrigido |
