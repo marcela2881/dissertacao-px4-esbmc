@@ -599,7 +599,7 @@ se verifica é se o estado violado persiste quando o
 Ela pode ser feita de duas formas: por \textit{replay} ou por leitura do
 código de produção.
 
-%% LC 11 (resolvido parcialmente 19/10/2026): "Protocolo de replay especificado,
+%% LC 11 (resolvido 19/10/2026, tarde: replay do GPS e do BMI088 executado): "Protocolo de replay especificado,
 %% mas nunca executado; executar para FIFO e GPS." -> protocolo reescrito pelo
 %% que foi de fato executado na segunda campanha (RoboClaw e PCA9685); o replay
 %% de FIFO e GPS continua em \pendente.
@@ -1381,7 +1381,8 @@ customizadas deste trabalho.}
 %% LC 25 (resolvido parcialmente 19/10/2026): "Celulas de referencia citam
 %% documentos inteiros; indicar nomes de parametros, caminhos de arquivo e
 %% linhas." -> acrescentados arquivo-fonte do PX4 e funcao do harness em cada
-%% linha; numeros de linha do PX4 continuam pendentes.
+%% linha; numeros de linha do PX4 acrescentados em 19/10/2026 (tarde); falta so a
+%% pagina do datasheet do BMI088.
 %% LC 26 (resolvido 19/10/2026): "Battery Monitor e Barometer sem propriedade
 %% listada; acrescentar linhas ou explicar." -> duas linhas acrescentadas
 %% (assertions conferidas nos harnesses).
@@ -1398,35 +1399,35 @@ Faixa operacional de temperatura & IMU BMI088 & Datasheet do fabricante &
 Bosch Sensortec, BST-BMI088-DS000-19, rev.~1.9~\cite{Bosch2021}; \corr{\textit{harness}: \texttt{test\_temperature\_calculation}} \\
 \hline
 Capacidade do buffer FIFO & IMU BMI088 & Código-fonte do PX4 &
-Constante \texttt{FIFO::SIZE = 1024} em \texttt{Bosch\_BMI088\_ Accelerometer\_Registers.hpp}; \corr{\textit{harness}: \texttt{test\_fifo\_count\_calculation}} \\
+Constante \texttt{FIFO::SIZE = 1024} em \texttt{Bosch\_BMI088\_ Accelerometer\_Registers.hpp}\corr{, l.~152}; \corr{\textit{harness}: \texttt{test\_fifo\_count\_calculation}} \\
 \hline
 Limite do buffer de diagnóstico & GPS uBlox & Código-fonte do PX4 &
-\texttt{sizeof(dump\_data->data)}, 79 bytes, em \texttt{msg/GpsDump.msg}; no \textit{harness}, macro \texttt{GPS\_DUMP\_ DATA\_SIZE = 200}; \corr{\texttt{src/drivers/gps/gps.cpp}, l.~741} \\
+\texttt{sizeof(dump\_data->data)}, 79 bytes, em \texttt{msg/GpsDump.msg}; no \textit{harness}, macro \texttt{GPS\_DUMP\_ DATA\_SIZE = 200}; \corr{\texttt{src/drivers/gps/gps.cpp}: \texttt{dumpGpsData}, l.~727; guarda, l.~741} \\
 \hline
 Capacidade do buffer de transmissão & MAVLink & Especificação de protocolo &
-Tamanho máximo de pacote MAVLink, 280 bytes (\texttt{MAVLINK\_MAX\_ PACKET\_LEN})~\cite{PX4_Documentation}; \corr{\texttt{send\_bytes} em \texttt{src/modules/mavlink/mavlink\_main.cpp}} \\
+Tamanho máximo de pacote MAVLink, 280 bytes (\texttt{MAVLINK\_MAX\_ PACKET\_LEN})~\cite{PX4_Documentation}; \corr{\texttt{Mavlink::send\_bytes} em \texttt{src/modules/mavlink/mavlink\_main.cpp}, l.~852} \\
 \hline
 Faixa de entrada do rádio & Expo RC, RC Update & Documentação do PX4 &
-Intervalo normalizado $[-1;\,1]$~\cite{PX4_Documentation}; \corr{\texttt{math::expo()} em \texttt{src/lib/mathlib/math/Functions.hpp}; \texttt{src/modules/rc\_update/rc\_update.cpp}} \\
+Intervalo normalizado $[-1;\,1]$~\cite{PX4_Documentation}; \corr{\texttt{math::expo()} em \texttt{src/lib/mathlib/math/Functions.hpp}, l.~84; \texttt{src/modules/rc\_update/rc\_update.cpp}} \\
 \hline
 Limites de PWM & PWM Output & Documentação do PX4 &
-Faixas de motor e servo~\cite{PX4_Documentation}; \corr{\texttt{src/drivers/pwm\_out/PWMOut.cpp}; constantes \texttt{PWM\_MOTOR\_MIN}/\texttt{PWM\_MOTOR\_MAX} do \textit{harness}} \\
+Faixas de motor e servo~\cite{PX4_Documentation}; \corr{\texttt{PWMOut::updateOutputs} em \texttt{src/drivers/pwm\_out/PWMOut.cpp}, l.~130; constantes \texttt{PWM\_MOTOR\_MIN}/\texttt{PWM\_MOTOR\_MAX} do \textit{harness}} \\
 \hline
 Variância não negativa & EKF2, Magnetômetro & Requisito matemático &
-Propriedade de matriz de covariância; \corr{\texttt{src/modules/ekf2/EKF/covariance.cpp}} \\
+Propriedade de matriz de covariância; \corr{\texttt{Ekf::constrainStateVariances} em \texttt{src/modules/ekf2/EKF/covariance.cpp}, l.~249} \\
 \hline
 Ganho de Kalman em $[0;\,1]$ & Magnetômetro & Requisito matemático &
 Definição do filtro de Kalman; \corr{modelado no \textit{harness} a partir de \texttt{VehicleMagnetometer.cpp}} \\
 \hline
 Índice de missão válido & Navigator & Código-fonte do PX4 &
-Limites de \textit{waypoint}; \corr{\texttt{src/modules/navigator/mission.cpp}} \\
+Limites de \textit{waypoint}; \corr{\texttt{src/modules/navigator/mission.cpp}, l.~101 (\texttt{index < \_mission.count})} \\
 \hline
 \textit{Thrust} em $[0;\,0{,}9]$ & VTOL & Documentação do PX4 &
-Limite de transição~\cite{PX4_Documentation}; \corr{\texttt{src/modules/vtol\_att\_control/vtol\_type.cpp}} \\
+Limite de transição~\cite{PX4_Documentation}; \corr{\texttt{src/modules/vtol\_att\_control/vtol\_type.cpp}, l.~516 (\texttt{math::constrain(forward\_thrust, 0.0f, 0.9f)})} \\
 \hline
-\corr{Fator de escala de tensão em $[1{,}0;\,1{,}3]$; avisos e falhas coerentes com os limiares} & \corr{Battery Monitor} & \corr{Código-fonte do PX4} & \corr{\texttt{src/lib/battery/battery.cpp} (\texttt{determineWarning}, \texttt{determineFaults}, \texttt{computeScale})} \\
+\corr{Fator de escala de tensão em $[1{,}0;\,1{,}3]$; avisos e falhas coerentes com os limiares} & \corr{Battery Monitor} & \corr{Código-fonte do PX4} & \corr{\texttt{src/lib/battery/battery.cpp}: \texttt{determineWarning}, l.~328; \texttt{determineFaults}, l.~344; \texttt{computeScale}, l.~361} \\
 \hline
-\corr{Prioridade em $[0;\,100]$; pressão corrigida finita e em $[30000;\,120000]$ Pa} & \corr{Barômetro} & \corr{Código-fonte do PX4} & \corr{\texttt{src/lib/sensor\_calibration/Barometer.cpp}} \\
+\corr{Prioridade em $[0;\,100]$; pressão corrigida finita e em $[30000;\,120000]$ Pa} & \corr{Barômetro} & \corr{Código-fonte do PX4} & \corr{\texttt{Barometer::ParametersLoad} em \texttt{src/lib/sensor\_calibration/Barometer.cpp}, l.~154; faixa da prioridade, l.~160} \\
 \hline
 \end{tabular}
 \end{table}
@@ -1439,7 +1440,11 @@ As \textit{assertions} de cada linha da tabela estão no
 \texttt{Navigator\_Mission}, \texttt{VTOL}\corr{, \texttt{Battery\_Monitor} e
 \texttt{Barometer}.}
 
-\pendente{Completar a Tabela~\ref{tab:proveniencia} com o número da linha de cada função no commit \texttt{8be2590c15} (ex.: \texttt{math::expo()} em \texttt{Functions.hpp}, l.~NN) e, para o datasheet do BMI088, a seção e a página da faixa de temperatura.}
+\corr{Os números de linha da Tabela~\ref{tab:proveniencia} referem-se ao commit
+\texttt{8be2590c15}; a linha do \textit{harness} correspondente a cada
+propriedade pode ser localizada pelo nome da função de teste.}
+
+\pendente{Completar, para o \textit{datasheet} do BMI088, a seção e a página da faixa de temperatura.}
 
 \revisao{A distinção entre as três origens não é apenas documental: ela determina a
 força da conclusão. Propriedades derivadas do \textbf{código-fonte} são as mais seguras, pois
