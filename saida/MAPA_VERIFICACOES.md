@@ -11,7 +11,7 @@ contraexemplo. Só se aplica a testes com contraexemplo (FAILED).
 | Barometer, Battery, EKF2, Expo, MAVLink, Magnetometer, PWM, RC_Update | rápido ✅ · oficial ✅ | rápido ✅ · oficial ✅ | — (sem contraexemplo) |
 | Navigator | PARSING ERROR no 8.5 ✅ (registrado) | rápido ✅ · oficial ✅ (SUCCESSFUL com o prelúdio) | — |
 | VTOL | rápido ✅ · oficial ✅ | rápido ✅ · oficial ✅ (FAILED = modelo de `sqrtf` do CBMC) | — |
-| **GPS** | FAILED ✅ (rápido e oficial) | Timed out ✅ (rápido e oficial) | ✅ 19/10: estado do contraexemplo (len 207) → ASan acusa escrita fora do buffer; ⏳ a parte "alcance" se perdeu (vazamento do próprio replay, corrigido) e precisa ser repetida |
+| **GPS** | FAILED ✅ (rápido e oficial) | Timed out ✅ (rápido e oficial) | ✅ 19/10 (máquina oficial, 16:33): alcance, 2 milhões de chamadas a partir de len 0, máximo 78 (capacidade 79); estado do contraexemplo (len 207) → ASan acusa escrita fora do buffer |
 | **IMU BMI088** (temperatura e FIFO) | FAILED ✅ · oficial ✅ | FAILED ✅ · oficial ✅ | ✅ 19/10: temperatura 86,25 °C reproduzida; contador 9088 barrado pela guarda; **novo: leitura fora de `FIFOTransferBuffer` com bytes aleatórios** (ver abaixo) |
 
 **Achado novo do replay (19/10, regra 7 pendente):** `FIFORead` lê até 6 bytes além do fim de
@@ -19,7 +19,7 @@ contraexemplo. Só se aplica a testes com contraexemplo (FAILED).
 lida. Com dados válidos isso exige 32 amostras (buffer cheio) e um quadro de 2 ou 4 bytes antes dos
 quadros de dados (modo `fifo_quadro2`: ASan acusa; `fifo_alinhado`: sem erro). Só leitura (2 a 6
 bytes da pilha vão para o eixo z da última amostra). O código é igual no `main` de 19/10/2026.
-Falta: confirmar no datasheet quando o BMI088 emite esses quadros e decidir com o orientador.
+Confrontado com o datasheet (Seções 4.9.3.2 a 4.9.3.6, pp. 20–21): classificado como inalcançável em produção (só com bytes corrompidos na SPI); `fifo_quadro2` e `fifo_alinhado` confirmados na máquina oficial em 19/10. Falta o orientador confirmar.
 
 Depois: repetir `./comparar.sh leva1 oficial` **sozinha, à noite** (os tempos de 19/10 ficaram
 contaminados por rodadas simultâneas).
