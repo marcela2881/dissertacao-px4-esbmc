@@ -285,7 +285,7 @@ comparação sistemática com o CBMC.}
 \hline
 \corr{2.ª: validação} & \corr{(a) reexecução dos 12 módulos: nove dos dez módulos sem violação continuaram sem violação com ESBMC~8.4 + Bitwuzla~0.9; GPS e IMU continuaram com violação com ESBMC~7.10 + Boolector; o EKF2 não chegou a veredito com ESBMC~8.2 + Z3. (b) GPS, MAVLink e EKF2 com Boolector e com Z3 (ESBMC~8.1, 300~s): o Boolector concluiu os três; o Z3 não chegou a veredito em nenhum. (c) CBMC: IMU com as mesmas duas violações (temperatura e FIFO); GPS com pré-condição semeada (\texttt{len} $\geq 190$): violação com \texttt{--unwind} 2, 3 e 5 e sem término em 30~min com 10. (d) \textit{Patches} no CBMC: FIFO (0 de 2 propriedades violadas), temperatura (0 de 4) e GPS (0 de 7). (e) ArduPilot: mesma violação de temperatura no driver BMI088. (f) Busca nos testes do PX4: nenhum teste unitário exercita \texttt{dumpGpsData}.} & \corr{ESBMC 7.10, 8.1, 8.2 e 8.4; Boolector, Bitwuzla e Z3; CBMC 5.95.1} & \corr{\texttt{reexecucoes\_2026-10-09/}, \texttt{validacao\_esbmc\_8.1/}, \texttt{cbmc/}, \texttt{evidencia\_unit\_test\_gps.txt}} \\
 \hline
-\corr{3.ª: segunda campanha} & \corr{módulos de saída com o código original; reexecução dos 12 \textit{harnesses} com ESBMC~8.5; comparação ESBMC $\times$ CBMC em todos os \textit{harnesses}; \textit{replay}; correção e reporte da RoboClaw} & \corr{ESBMC 8.5.0 + Boolector; CBMC 5.95.1; g++ 13.3.0} & \corr{\texttt{saida/}} \\
+\corr{3.ª: segunda campanha} & \corr{módulos de saída com o código original; reexecução dos 12 \textit{harnesses} e dos da fase de validação com ESBMC~8.5; comparação ESBMC $\times$ CBMC em todos os \textit{harnesses}; \textit{replay} dos contraexemplos da primeira campanha e da segunda; correção e reporte da RoboClaw} & \corr{ESBMC 8.5.0 + Boolector; CBMC 5.95.1; g++ 13.3.0} & \corr{\texttt{saida/}} \\
 \hline
 \end{tabular}
 \end{table}
@@ -307,7 +307,21 @@ corrigido. Esse caso levou à regra aplicada na terceira fase: a reverificação
 uma correção usa as mesmas pré-condições e as mesmas opções antes e depois, e
 confere qual propriedade falhou (Seção~\ref{sec:segunda-campanha}).}
 
-\pendente{Opcional, para fechar o caso: verificar com o ESBMC~8.5 e com o CBMC o \textit{harness} do GPS com e sem a guarda do PR~\#27576, ambos com a pré-condição semeada (\texttt{len} $\geq 190$), e registrar o resultado na Seção~\ref{subsec:patch-gps}.}
+\corr{Seguindo essa regra, o caso foi refeito na terceira fase. O mesmo
+\textit{harness} do GPS foi verificado sem e com a guarda do PR~\#27576, desta
+vez com a pré-condição semeada (\texttt{len} $\geq 190$) nos dois casos e com as
+mesmas opções. Sem a guarda, o ESBMC~8.5 e o CBMC~5.95 encontraram a violação
+(em $8{,}1$~s e $178{,}8$~s, respectivamente); com a guarda, as duas
+ferramentas terminaram sem violação ($4{,}3$~s e $182{,}9$~s). Agora a
+comparação isola o efeito da guarda, porque a única diferença entre as duas
+verificações é a correção. Esse resultado, no entanto, diz respeito ao modelo:
+ele mostra que a guarda elimina a violação nos estados admitidos pelo
+\textit{harness}, e não altera a conclusão de que, no driver de produção, esses
+estados não são alcançados (Seção~\ref{subsec:gps-inducao}).}
+
+\pendente{Os tempos acima são da rodada rápida (uma execução, sem \textit{unwinding assertions}); trocar pela mediana da rodada oficial da fase de validação.}
+
+\pendente{Decidir com o orientador onde entra o pacote de oito candidatos verificado em 12/10/2026 (\texttt{saida/v5/}: \texttt{Common.cpp} e \texttt{externalChecks.cpp} do \textit{commander}, \texttt{ft7\_technologies.cpp}, \texttt{sumd.cpp}, \texttt{logger.cpp}, \texttt{IridiumSBD.cpp}, \texttt{bst.cpp} e \texttt{MicroStrain.cpp}), que não são módulos de saída. Pelos cabeçalhos dos \textit{harnesses}: três defeitos já corrigidos no PX4 por terceiros (PRs \#28598, \#28599 e \#28600), dois ainda presentes (\texttt{sumd} e \texttt{MicroStrain}, com \textit{issues} em rascunho), um sem violação de memória (\texttt{logger}), um falso positivo (\texttt{bst}) e um retirado (\texttt{Common}). A reexecução com ESBMC~8.5, CBMC e \textit{replay} está em andamento.}
 
 %% [RESOLVIDO] Paragrafo dividido em tres. Metodo de contagem: wc -l (artigo).
 
@@ -609,10 +623,12 @@ produção contém guarda que o \textit{harness} omitiu, o candidato é
 termina antes, no código de preparação; e confirmar que o cenário crítico é
 derivado da entrada injetada, e não fixado por atribuição direta no programa de
 \textit{replay} --- caso em que se estaria demonstrando aritmética, e não
-alcançabilidade. Os sanitizadores dinâmicos do compilador
-(\texttt{-fsanitize=address,undefined}) são indicados para violações de memória,
-mas não foram necessários nos casos analisados, cujas violações são de valor e de
-fluxo de controle, observáveis diretamente na saída do programa.}
+alcançabilidade. Quando a violação é de memória, como no GPS e no BMI088, o
+programa de \textit{replay} é compilado também com os sanitizadores dinâmicos do
+compilador (\texttt{-fsanitize=address,undefined}), que interrompem a execução
+no primeiro acesso fora dos limites e apontam a linha do código original. Já nos
+casos da RoboClaw e do PCA9685, as violações são de valor e de fluxo de
+controle, e por isso podem ser observadas diretamente na saída do programa.}
 
 Nos três contraexemplos da primeira campanha, a conferência foi
 feita por leitura do código de produção: o candidato do contador de FIFO foi
@@ -625,7 +641,42 @@ alcançáveis do driver da RoboClaw e do PCA9685
 registros estão no repositório do trabalho (\texttt{saida/replay/} e
 \texttt{saida/reporte\_roboclaw/}).}
 
-\pendente{Executar o \textit{replay} dos candidatos do contador de FIFO (BMI088) e do GPS no mesmo protocolo, ou registrar nas ameaças à validade que, na primeira campanha, a conferência foi apenas por leitura do código.}
+\corr{Restava, assim, uma diferença entre as campanhas: os contraexemplos da
+primeira tinham sido conferidos apenas por leitura. Para eliminá-la, os dois
+casos passaram, na terceira fase, pelo mesmo protocolo de \textit{replay}. Como
+os \textit{harnesses} da primeira campanha transcrevem o código, o
+\textit{replay} não os reaproveita: as funções originais (\texttt{dumpGpsData},
+\texttt{FIFORead} e \texttt{UpdateTemperature}) são extraídas automaticamente
+dos arquivos do PX4, sem alteração, e compiladas com os sanitizadores.}
+
+\corr{No GPS, o \textit{replay} foi feito em duas direções. Partindo do estado
+inicial do driver (\texttt{len}~$= 0$), dois milhões de chamadas com tamanhos e
+destinos aleatórios nunca levaram o preenchimento além de $78$ bytes, abaixo da
+capacidade de $79$; e, quando o estado do contraexemplo (\texttt{len}~$= 207$) é
+imposto diretamente, o AddressSanitizer acusa a escrita fora do registro. O
+\textit{replay} confirma, portanto, a classificação feita por leitura: a violação
+existe para aquele estado, mas o estado não é alcançado a partir do driver.}
+
+\pendente{O número de $78$ bytes veio de uma execução de conferência; repetir o \textit{replay} na máquina oficial e confirmar o valor.}
+
+\corr{No BMI088, o código original converteu os registradores do
+contraexemplo de temperatura (MSB~$= 63$, LSB~$= 95$) em $86{,}25\,^{\circ}$C,
+acima da faixa de $-40$ a $85\,^{\circ}$C do \textit{datasheet}, sem nenhuma
+limitação; e descartou, pela guarda \texttt{fifo\_byte\_counter >= FIFO::SIZE},
+o contador de FIFO do contraexemplo ($9088$ bytes), o que confirma o falso
+positivo. O \textit{replay} da FIFO, porém, revelou um caso que a primeira
+campanha não havia considerado. Com bytes aleatórios na transferência, o
+AddressSanitizer acusou uma leitura além do fim do \textit{buffer} de
+transferência (\texttt{FIFOTransferBuffer}). A leitura do código mostra quando
+isso acontece: se um cabeçalho de quadro de dados aparece nos últimos seis bytes
+da janela lida, o driver lê o quadro inteiro de sete bytes e ultrapassa o fim do
+\textit{buffer}. Com dados válidos do sensor, a situação exige 32 amostras
+acumuladas e um quadro de 2 ou 4 bytes antes dos quadros de dados; nesse caso,
+o driver lê até seis bytes além do \textit{buffer}, apenas para leitura, e esses
+bytes entram no eixo $z$ da última amostra. O caso é tratado como candidato e
+segue a conferência da etapa~(v).}
+
+\pendente{Concluir a classificação da leitura além do \textit{buffer} no \texttt{FIFORead}: confirmar no \textit{datasheet} do BMI088 (seção da FIFO, com página) em que situações o sensor coloca na FIFO quadros de 2 ou 4 bytes (\textit{skip}, \textit{sensortime}, \textit{FIFO input config}, \textit{sample drop}) e se, na configuração usada pelo PX4 (modo FIFO, só o acelerômetro), eles podem anteceder os quadros de dados.}
 
 \subsection{Etapa~(vi) --- Reporte \corr{à} Comunidade PX4}
 
@@ -1483,7 +1534,7 @@ fornece especificações independentes do próprio código.}
 \hline
 \corr{px4io} & \corr{\texttt{drivers/px4io}} & \pendente{recorte a definir} \\
 \hline
-\corr{mixer\_module} & \corr{\texttt{lib/mixer\_module}} & \pendente{recorte a definir} \\
+\corr{mixer\_module} & \corr{\texttt{lib/mixer\_module}} & \corr{entrega dos valores ao driver: \texttt{limitAndUpdateOutputs}, \texttt{output\_limit\_calc}, \texttt{output\_limit\_calc\_single}, \texttt{actualFailsafeValue}} \\
 \hline
 \corr{control\_allocation} & \corr{\texttt{lib/control\_allocation}} & \pendente{recorte a definir} \\
 \hline
@@ -1563,8 +1614,27 @@ de 0 a 10 bytes num único teste e foi dividida em um teste por tamanho.
 tratador do ESC AM32 excedeu o tempo-limite; a chamada ao tratador foi verificada
 à parte, com qualquer tamanho de 0 a 49 bytes, e o teste da resposta passou a
 verificar apenas o \textit{buffer} --- as duas partes juntas cobrem o caminho
-completo. Além disso, o limite de desdobramento é definido por teste, de
-acordo com o maior laço daquele teste.}
+completo. Mesmo assim, esse teste ainda excedeu o tempo-limite, e as duas
+técnicas foram então combinadas: o teste foi dividido em 51 testes menores, um
+para cada quantidade de bytes que a leitura da UART pode devolver (de $-1$,
+erro, até 49), mantendo livres o conteúdo dos bytes, a posição no
+\textit{buffer}, o comando e o tempo. Juntos, os 51 testes cobrem exatamente os
+casos do teste original. Além disso, o limite de desdobramento é definido por
+teste, de acordo com o maior laço daquele teste.}
+
+\corr{Por fim, dois problemas do próprio ESBMC exigiram contornos nos
+\textit{stubs}, sem alterar o código verificado. O primeiro apareceu na
+RoboClaw: o cabeçalho \texttt{<fcntl.h>} do sistema traz uma estrutura
+(\texttt{iovec}) que o ESBMC~8.5 já define internamente, o que gerava erro de
+leitura; o \textit{stub} passou a declarar apenas as constantes que o driver
+usa. O segundo apareceu no \textit{mixer}: o ESBMC~8.5 aborta, antes de
+verificar, ao construir uma classe com funções virtuais que tenha um vetor
+inicializado com \texttt{\{\}}, que é o caso da classe \texttt{MixingOutput}.
+Como o \textit{harness} não chama nenhuma dessas funções por meio da classe
+base, o \textit{stub} da classe de parâmetros foi escrito sem funções virtuais.
+Um exemplo mínimo de cada problema está no repositório
+(\texttt{saida/ferramenta/}), para que possa ser reportado aos desenvolvedores
+da ferramenta.}
 
 \subsection{\corr{Protocolo de execução}}
 
