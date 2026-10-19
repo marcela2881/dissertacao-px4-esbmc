@@ -32,6 +32,7 @@ for m in voxl_esc pca9685 roboclaw tap_esc dshot; do
   etapa "3 $m ESBMC x CBMC rápido"         ./comparar.sh "$m" rapido
 done
 etapa "5 mixer_module ESBMC rápido"       ./rodar_modulo.sh mixer_module rapido
+etapa "6 control_allocation ESBMC rápido" ./rodar_modulo.sh control_allocation rapido
 
 # PULAR_V5=1 ./rodar_fila.sh  -> pula o pacote v5 (quando ele já foi rodado à parte)
 if [ "${PULAR_V5:-0}" != 1 ]; then
