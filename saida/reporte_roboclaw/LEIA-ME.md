@@ -120,6 +120,16 @@ Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
    `sendUnsigned7Bit`, `writeCommand`). Em 17/10/2026 estava igual e não havia issue nem PR sobre isso.
 3. Anote a data em que conferiu (vai no campo *Software Version*).
 
+**Conferência feita em 19/10/2026 (pelo assistente; confira você também antes de enviar):**
+- `Roboclaw.cpp`, `Roboclaw.hpp` e `module.yaml` na `main` do PX4 são **idênticos** aos do commit `8be2590`
+  (comparação byte a byte). `mixer_module.cpp` mudou, mas o trecho de *termination* e `actualFailsafeValue()`
+  estão iguais.
+- Busca "roboclaw" no GitHub do PX4: 39 issues/PRs. Nenhum trata do byte acima de 127, da faixa do
+  failsafe ou do retorno de `write()`. O único PR aberto que mexe no driver é o #28848
+  ("feat(rover): add high level encoder support", aberto em 26/09/2026): ele só acrescenta 3 linhas em
+  `readEncoder()` (`counts_per_rev`) e não altera `updateOutputs`, `sendUnsigned7Bit`, `writeCommand`,
+  `writeCommandWithPayload` nem o `module.yaml`. Vale citá-lo na issue como trabalho em andamento no driver.
+
 ### Passo 4 (opcional, mas fortalece): hardware
 
 Se tiver acesso a uma RoboClaw:

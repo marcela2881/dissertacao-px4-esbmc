@@ -74,7 +74,7 @@ Issue 2: make `write()` return -1, for example by disconnecting the UART or with
 
 ## Software Version
 
-PX4-Autopilot commit `8be2590c1529517ccd54fbc09ae138402517baf4`. The relevant code is unchanged on `main` as of [[date you checked]].
+PX4-Autopilot commit `8be2590c1529517ccd54fbc09ae138402517baf4`. The relevant code is unchanged on `main` as of [[2026-10-19 — confirm]]. The open PR #28848 also touches `Roboclaw.cpp`, but only `readEncoder()`.
 
 ## Flight controller / Vehicle type
 
