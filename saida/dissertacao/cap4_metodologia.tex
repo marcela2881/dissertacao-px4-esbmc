@@ -676,7 +676,28 @@ o driver lê até seis bytes além do \textit{buffer}, apenas para leitura, e es
 bytes entram no eixo $z$ da última amostra. O caso é tratado como candidato e
 segue a conferência da etapa~(v).}
 
-\pendente{Concluir a classificação da leitura além do \textit{buffer} no \texttt{FIFORead}: confirmar no \textit{datasheet} do BMI088 (seção da FIFO, com página) em que situações o sensor coloca na FIFO quadros de 2 ou 4 bytes (\textit{skip}, \textit{sensortime}, \textit{FIFO input config}, \textit{sample drop}) e se, na configuração usada pelo PX4 (modo FIFO, só o acelerômetro), eles podem anteceder os quadros de dados.}
+\corr{Para classificar esse candidato, a condição foi confrontada com o
+\textit{datasheet} do sensor, que descreve quando cada quadro curto é colocado na
+FIFO (\textit{Data format in FIFO}, Seção~4.9.3.2, p.~20~\cite{Bosch2021}). O
+quadro de \textit{sensortime} (4 bytes) só é enviado quando a FIFO se esvazia
+durante a leitura, ou seja, depois dos quadros de dados, e não antes deles. O
+quadro de configuração (2 bytes) é inserido quando o filtro ou a faixa do
+acelerômetro mudam; no PX4, essa mudança só ocorre na configuração inicial, que é
+seguida de um \textit{reset} da FIFO (estado \texttt{FIFO\_RESET}), e a
+conferência periódica dos registradores apenas lê os valores, provocando um novo
+\textit{reset} completo quando encontra divergência. O quadro de \textit{skip}
+(2 bytes) é colocado no início da FIFO depois de um transbordamento, tanto no
+modo FIFO quanto no modo \textit{stream}; nesse caso, porém, a leitura seguinte
+traz o contador de bytes no limite da FIFO, e o próprio \texttt{FIFORead}
+descarta a leitura pela guarda \texttt{fifo\_byte\_counter >= FIFO::SIZE}. Com
+o sensor funcionando como especificado, portanto, nenhum quadro curto chega a
+anteceder 32 quadros de dados numa leitura aceita pelo driver, e o candidato foi
+classificado como \textbf{inalcançável em produção}: a leitura além do
+\textit{buffer} depende de bytes corrompidos na transferência SPI. Ainda assim,
+ela indica uma fragilidade do laço de leitura, que confia no cabeçalho de cada
+quadro sem conferir se o quadro inteiro cabe na janela lida.}
+
+\pendente{Ler no \textit{datasheet} (logo após a p.~20) a descrição do \textit{sample drop frame} e confirmar que ele também não pode anteceder os quadros de dados na configuração do PX4; conferir com o orientador a classificação acima antes de mencioná-la no Cap.~5.}
 
 \subsection{Etapa~(vi) --- Reporte \corr{à} Comunidade PX4}
 
