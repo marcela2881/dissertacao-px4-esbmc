@@ -113,8 +113,10 @@ Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
 
 ### Passo 2: especificação (feito em 19/10/2026)
 
-Encontrado no manual (Rev. 5.5, pp. 48–49; Rev. 5, pp. 40–41), já colocado no rascunho. Só confira se há
-revisão mais nova no site da Basicmicro.
+Encontrado no manual (Rev. 5.5, pp. 48–49; Rev. 5, pp. 40–41), já colocado no rascunho.
+**Pendente:** a revisão atual no site oficial é a **6.0** (firmware 4.3.0+), em
+https://downloads.basicmicro.com/docs/roboclaw_user_manual.pdf (o assistente não consegue abrir esse
+site). Baixar, conferir o texto e a página dos comandos 0, 1, 4 e 5 e atualizar a citação.
 
 ### Passo 3: conferir se já não foi reportado (você)
 
