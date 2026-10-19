@@ -21,8 +21,9 @@
  *     (standard_params): disarmed [800,2200], min [800,1400], center [800,2200],
  *     max [1600,2200], failsafe [800,2200] ou "não definido" (UINT16_MAX, valor
  *     inicial do construtor: usa o failsafe padrão da função).
- *   - 2 canais (max_num_outputs = 2): o código trata cada canal da mesma forma
- *     (laço sobre i); o índice só entra na máscara de inversão (bit i).
+ *   - 1 canal (max_num_outputs = 1): o código trata cada canal da mesma forma
+ *     (laço sobre i); o índice só entra na máscara de inversão (bit i). Com 2 canais
+ *     o T4 passou de 10 min no ESBMC 8.5; com 1, terminou em ~150 s (19/10/2026).
  *   - PWM_MAIN_REV (máscara de inversão): qualquer valor.
  *   - função do canal (PWM_MAIN_FUNCn): qualquer valor; o centro só é usado para
  *     servos, trem de pouso com roda e gimbal (mixer_module.cpp, linhas 551-556).
@@ -85,7 +86,7 @@ int32_t g_param_values[px4::params::PARAM_COUNT];
 float   g_param_values_f[px4::params::PARAM_COUNT];
 hrt_abstime g_hrt_elapsed = 0;
 
-#define N_CANAIS 2
+#define N_CANAIS 1   /* 1 canal: com 2, o T4 passou de 10 min (19/10/2026); o código trata cada canal igual */
 
 /* Driver de saída de teste: guarda o que o mixer entrega. */
 class SaidaTeste : public OutputModuleInterface
