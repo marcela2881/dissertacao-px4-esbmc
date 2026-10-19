@@ -103,7 +103,8 @@ Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador a
 | tap_esc | oficial ✅ (confirmar T1–T4 no log) | ❌ (esperado PARSING ERROR) | — |
 | dshot | rápido ✅ (T3 refeito, falta rodar) · oficial ❌ | ❌ (esperado PARSING ERROR) | — até agora |
 | mixer_module | ❌ harness pronto (19/10, 1 canal; T2 e T4 ~150 s na conferência), falta rodar | ❌ (esperado PARSING ERROR) | só se der defeito |
-| uavcan, px4io, control_allocation, control_allocator | ❌ harness a escrever | ❌ | ❌ |
+| control_allocation | ❌ harness pronto (19/10, `modulos/09_control_allocation`); conferência: T1 e T2 SUCCESSFUL (5 s e 10 s), T0 e T3 passam de 90 s, falta rodar | ❌ | só se der defeito |
+| uavcan, px4io, control_allocator | ❌ harness a escrever | ❌ | ❌ |
 
 ## Ordem sugerida (nunca duas rodadas ao mesmo tempo)
 
