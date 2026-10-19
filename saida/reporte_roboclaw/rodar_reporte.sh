@@ -48,6 +48,9 @@ echo; echo "##### 2/4 Replay com o Roboclaw.cpp ORIGINAL"
   echo "### px4 commit: $(cat px4/.px4_commit 2>/dev/null || echo desconhecido)"
   g++ -std=c++17 -O0 -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/replay_roboclaw.cpp" -o build_replay/replay_original -lm \
     && ./build_replay/replay_original
+  echo "--- reprodução no formato da issue (preparação, execução, assert violado)"
+  g++ -std=c++17 -O0 -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/repro_roboclaw.cpp" -o build_replay/repro_original -lm \
+    && { ./build_replay/repro_original r1; ./build_replay/repro_original r3; true; }
 } 2>&1 | tee "$out/2_replay_original.txt"
 
 echo; echo "##### 3/4 Reproduções mínimas (sem PX4)"
@@ -69,6 +72,9 @@ echo "--- Replay (esperado: bytes até 127, select() 0 vezes, 0 situações repr
 {
   g++ -std=c++17 -O0 -I "$corr" -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/replay_roboclaw.cpp" -o build_replay/replay_corrigido -lm \
     && ./build_replay/replay_corrigido
+  echo "--- reprodução no formato da issue, com a correção (esperado: nenhum assert violado)"
+  g++ -std=c++17 -O0 -I "$corr" -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/repro_roboclaw.cpp" -o build_replay/repro_corrigido -lm \
+    && { ./build_replay/repro_corrigido r1; ./build_replay/repro_corrigido r3; true; }
 } 2>&1 | tee "$out/4_replay_corrigido.txt"
 
 echo; echo "(tudo salvo em: $raiz/$out)"
