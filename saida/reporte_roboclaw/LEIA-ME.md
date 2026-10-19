@@ -7,6 +7,7 @@ encontrados no driver da RoboClaw (`src/drivers/roboclaw`, commit `8be2590`).
 |---|---|
 | `LEIA-ME.md` | este guia |
 | `RASCUNHO_ISSUE_EN.md` | rascunho da issue em inglês, **para você reescrever com as suas palavras** |
+| `RASCUNHO_ISSUE_PT.md` | tradução do rascunho, só para entender cada parte |
 | `rodar_reporte.sh` | reproduz toda a evidência na sua máquina (ESBMC + replay + reproduções mínimas) |
 | `minimo_r1.cpp` | programa pequeno, sem PX4, que mostra o byte 128–130 (para colar na issue) |
 | `minimo_r3.cpp` | programa pequeno, sem PX4, que mostra o −1 virando "sucesso" (para colar na issue) |
