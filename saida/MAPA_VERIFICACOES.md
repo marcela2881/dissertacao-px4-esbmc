@@ -76,20 +76,20 @@ não precisam do prelúdio) e todos os replays compilam com g++ 13.3.
 
 | # | Módulo | Situação | ESBMC 8.5 | CBMC 5.95 | Teste unitário (replay) |
 |---|---|---|---|---|---|
-| 1 | `Common.cpp` (commander) | retirado (premissa errada) | ❌ | ❌ | — (não é defeito) |
-| 2 | `externalChecks.cpp` (commander) | defeito, corrigido no PX4 (PR #28598) | ❌ original + correção | ❌ original + correção | ❌ ASan |
-| 3 | `ft7_technologies.cpp` (sensor de vento) | defeito, corrigido no PX4 (PR #28600) | ❌ original + correção | ❌ original + correção | ❌ UBSan (2 cenários, antes e depois) |
-| 4 | `sumd.cpp` (rádio RC) | **defeito, ainda no PX4** (issue em rascunho) | ❌ | ❌ | ❌ UBSan + efeito no canal 32 |
-| 5 | `logger.cpp` | sem violação de memória (truncamento latente) | ❌ | ❌ (só a sondagem do `snprintf`) | — (não é defeito) |
-| 6 | `IridiumSBD.cpp` (telemetria satelital) | defeito, corrigido no PX4 (PR #28599) | ❌ original + correção | ❌ original + correção | ❌ ASan |
-| 7 | `bst.cpp` (telemetria) | falso positivo (harness antigo sem as guardas) | ❌ antigo + fiel | ❌ fiel | — (não é defeito) |
-| 8 | `MicroStrain.cpp` (INS) | **defeito, ainda no PX4** (issue em rascunho) | ❌ | ❌ | ❌ ASan |
+| 1 | `Common.cpp` (commander) | retirado (premissa errada) | ✅ | ✅ | — (não é defeito) |
+| 2 | `externalChecks.cpp` (commander) | defeito, corrigido no PX4 (PR #28598) | ✅ original + correção | ✅ original + correção | ✅ ASan |
+| 3 | `ft7_technologies.cpp` (sensor de vento) | defeito, corrigido no PX4 (PR #28600) | ✅ original + correção | ✅ original + correção | ✅ UBSan (2 cenários, antes e depois) |
+| 4 | `sumd.cpp` (rádio RC) | **defeito, ainda no PX4** (issue em rascunho) | ✅ | ✅ | ✅ UBSan + efeito no canal 32 |
+| 5 | `logger.cpp` | sem violação de memória (truncamento latente) | ✅ | ✅ (só a sondagem do `snprintf`) | — (não é defeito) |
+| 6 | `IridiumSBD.cpp` (telemetria satelital) | defeito, corrigido no PX4 (PR #28599) | ✅ original + correção | ✅ original + correção | ✅ ASan |
+| 7 | `bst.cpp` (telemetria) | falso positivo (harness antigo sem as guardas) | ✅ antigo + fiel | ✅ fiel | — (não é defeito) |
+| 8 | `MicroStrain.cpp` (INS) | **defeito, ainda no PX4** (issue em rascunho) | ✅ | ✅ | ✅ ASan |
 
 **1ª execução (19/10/2026, bruno-pc): 47 de 48 resultados conferem com o esperado.** Atenção: o
 `rodar_tudo.sh` usou o `esbmc` do PATH, que é o **ESBMC 8.2.0**, e não o 8.5 (replays com clang 18.1.3;
 PX4 `main` conferido em `1c8874d41a`, de 19/10/2026). Única divergência: `4_sumd/esbmc.txt` deu OUTRO
 (provável tempo-limite de 1 h; o CBMC deu FAILED, 2 de 38 propriedades, e o replay com UBSan reproduziu).
-Falta: repetir com o 8.5 (`ESBMC=~/esbmc-8.5/.../esbmc ./rodar_tudo.sh`) e ver o log do sumd.
+**2ª execução (19/10/2026, `resultados_20261019_1423`), ESBMC 8.5 + Boolector (`esbmc_boolector.sh`): "Tudo como esperado", todos os resultados conferem, inclusive o sumd.** (O sumd do 8.2 era tempo-limite de 1 h com o Z3, solver padrão.)
 
 Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador antes de publicar.
 
