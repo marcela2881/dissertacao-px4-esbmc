@@ -114,9 +114,10 @@ Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
 ### Passo 2: especificação (feito em 19/10/2026)
 
 Encontrado no manual (Rev. 5.5, pp. 48–49; Rev. 5, pp. 40–41), já colocado no rascunho.
-**Pendente:** a revisão atual no site oficial é a **6.0** (firmware 4.3.0+), em
-https://downloads.basicmicro.com/docs/roboclaw_user_manual.pdf (o assistente não consegue abrir esse
-site). Baixar, conferir o texto e a página dos comandos 0, 1, 4 e 5 e atualizar a citação.
+**Rev. 6.0 (atual, site oficial, firmware 4.3.0+):** texto dos comandos 0 e 1 conferido em 19/10/2026,
+idêntico ("Valid data range is 0 - 127"), na mesma seção "Commands 0 - 7 Compatibility Commands".
+**Falta:** o número da página (rodapé) dos comandos 0/1 e 4/5 na Rev. 6.0, e conferir o texto dos 4 e 5.
+O rascunho já cita a Rev. 6.0, com a página em `[[ ]]`.
 
 ### Passo 3: conferir se já não foi reportado (você)
 

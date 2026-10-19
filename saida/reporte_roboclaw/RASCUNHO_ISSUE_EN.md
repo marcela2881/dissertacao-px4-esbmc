@@ -14,7 +14,7 @@ While formally verifying the Roboclaw driver (`src/drivers/roboclaw`) with the b
 
 **1. Drive commands can carry a data byte above 127.**
 
-The Packet Serial drive commands used by the driver are Drive Forward/Backwards M1/M2 (commands 0, 1, 4, 5). Their data byte must be in 0–127 (Ion Motion Control (Basicmicro), *RoboClaw Series User Manual*, Revision 5.5 (firmware 4.1.16 and newer), "Commands 0 - 7 Compatibility Commands", pp. 48–49: "Valid data range is 0 - 127").
+The Packet Serial drive commands used by the driver are Drive Forward/Backwards M1/M2 (commands 0, 1, 4, 5). Their data byte must be in 0–127 (Basicmicro, *RoboClaw Series User Manual*, Revision 6.0 (firmware 4.3.0 and newer), "Commands 0 - 7 Compatibility Commands", [[p. NN–NN]]: "Valid data range is 0 - 127"; same text since Revision 5).
 
 - `updateOutputs()` maps the output value with `(outputs[i] - 127) / 127` and does not clamp it (Roboclaw.cpp:161–162).
 - `sendUnsigned7Bit()` then computes `lroundf(fabs(data) * INT8_MAX)` (Roboclaw.cpp:291).
