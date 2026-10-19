@@ -87,7 +87,7 @@ do pacote. O `module.yaml` **não** é alterado; o PR menciona isso como alterna
 | Replay com o `Roboclaw.cpp` original (19/10/2026) | 255→128, 256→129, 257→130 | `select()` 7× após `write()` = −1 |
 | Reprodução mínima sem PX4 | `minimo_r1.cpp` | `minimo_r3.cpp` |
 | Especificação | manual Rev. 6.0, pp. 48–49 | POSIX: `write()` devolve −1 em erro |
-| **ESBMC com a correção** (19/10, 09:23) | **SUCCESSFUL** (opções da oficial) | ver nota abaixo; refazer com o script novo |
+| **ESBMC com a correção** (19/10/2026) | **SUCCESSFUL** (opções da oficial, 5.650 s) | só a propriedade do R3: original **FAILED** (15.466 s, `assertion !g_write_failed` no `select`), corrigido **SUCCESSFUL** (28.857 s) |
 | **Replay com a correção** (19/10, 09:23) | **todos os bytes ≤ 127** | **`select()` 0×**, 0 situações reproduzidas |
 | CBMC | não lê o C++ do PX4 (`PARSING ERROR`) | idem |
 | Hardware | pendente (opcional) | pendente (opcional) |
@@ -102,8 +102,8 @@ junto com outra verificação. Replay e mínimos como na tabela.
 **falso positivo do R0**, já conhecido: regra do C aplicada a C++17. No original, o ESBMC parava antes,
 no `select()` após a falha de `write()`; com a correção, chega ao próximo ponto, que é esse. Por isso, a
 etapa 4 agora checa o R3 só com a asserção do harness e as checagens padrão, **sem** `--overflow-check` e
-`--ub-shift-check`, com as **mesmas opções no original e no corrigido**. O esperado é original FAILED e
-corrigido SUCCESSFUL.
+`--ub-shift-check`, com as **mesmas opções no original e no corrigido**. Resultado (19/10/2026): original FAILED e
+corrigido SUCCESSFUL, como esperado.
 
 **Conferência no GitHub do PX4 (19/10/2026):** `Roboclaw.cpp`, `Roboclaw.hpp` e `module.yaml` na `main`
 são idênticos aos do commit `8be2590`. No `mixer_module.cpp`, o trecho de *termination* está igual.
