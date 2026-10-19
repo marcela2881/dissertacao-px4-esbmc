@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1010" viewBox="0 0 1600 1010" font-family="DejaVu Sans, Arial, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
+<style>
+.t{font-size:15px;fill:#111}.s{font-size:13px;fill:#333}.h{font-size:17px;font-weight:bold;fill:#111}
+.col{font-size:20px;font-weight:bold;letter-spacing:2px}
+.in{fill:#e0ecfb;stroke:#2563eb;stroke-width:1.5}.pr{fill:#f3f4f6;stroke:#374151;stroke-width:1.5}
+.cb{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.dc{fill:#fef3c7;stroke:#b45309;stroke-width:1.5}
+.out{fill:#dcfce7;stroke:#15803d;stroke-width:1.5}.ln{stroke:#333;stroke-width:1.6;fill:none}
+.lr{stroke:#b45309;stroke-width:1.6;fill:none;stroke-dasharray:6 4}
+</style></defs>
+<rect width="1600" height="1010" fill="#ffffff"/>
+<text x="800" y="34" text-anchor="middle" font-size="22" font-weight="bold">Metodologia de verificação dos módulos do PX4 — entradas, processo e saídas</text>
+
+<text x="170" y="74" text-anchor="middle" class="col" fill="#2563eb">ENTRADAS</text>
+<text x="750" y="74" text-anchor="middle" class="col" fill="#374151">PROCESSO</text>
+<text x="1425" y="74" text-anchor="middle" class="col" fill="#15803d">SAÍDAS</text>
+<line x1="345" y1="56" x2="345" y2="990" stroke="#ccc" stroke-dasharray="4 4"/>
+<line x1="1255" y1="56" x2="1255" y2="990" stroke="#ccc" stroke-dasharray="4 4"/>
+
+<!-- ENTRADAS -->
+<rect class="in" x="20" y="95" width="305" height="150" rx="8"/>
+<text x="35" y="122" class="h">E1. Código ORIGINAL do PX4</text>
+<text x="35" y="147" class="s">commit 8be2590 (fixado)</text>
+<text x="35" y="169" class="s">• 1ª leva: 12 módulos (artigo SBESC)</text>
+<text x="35" y="191" class="s">• 2ª leva: 10 módulos de saída</text>
+<text x="35" y="213" class="s">  (pca9685, roboclaw, dshot, uavcan,</text>
+<text x="35" y="233" class="s">  voxl_esc, tap_esc, px4io, mixer, CA…)</text>
+
+<rect class="in" x="20" y="265" width="305" height="150" rx="8"/>
+<text x="35" y="292" class="h">E2. Especificação</text>
+<text x="35" y="317" class="s">• datasheets (NXP PCA9685)</text>
+<text x="35" y="339" class="s">• manuais (Basicmicro RoboClaw)</text>
+<text x="35" y="361" class="s">• protocolos no próprio código</text>
+<text x="35" y="383" class="s">  (cabeçalhos .h, comentários)</text>
+<text x="35" y="405" class="s">→ origem das PROPRIEDADES</text>
+
+<rect class="in" x="20" y="435" width="305" height="130" rx="8"/>
+<text x="35" y="462" class="h">E3. Contexto de uso</text>
+<text x="35" y="487" class="s">• como o driver chama a função</text>
+<text x="35" y="509" class="s">  (faixas, tamanhos, parâmetros)</text>
+<text x="35" y="531" class="s">→ origem das PRÉ-CONDIÇÕES</text>
+<text x="35" y="553" class="s">  (cada uma com a origem anotada)</text>
+
+<rect class="in" x="20" y="585" width="305" height="110" rx="8"/>
+<text x="35" y="612" class="h">E4. Ferramentas e máquina</text>
+<text x="35" y="637" class="s">• ESBMC 8.5.0 + Boolector</text>
+<text x="35" y="659" class="s">• CBMC 5.95.1 + MiniSat</text>
+<text x="35" y="681" class="s">• PC bruno-pc (WSL) / fm07</text>
+
+<!-- PROCESSO -->
+<rect class="pr" x="395" y="95" width="535" height="160" rx="8"/>
+<text x="410" y="122" class="h">P1. Harness de verificação (um por módulo)</text>
+<text x="410" y="147" class="s">• #include do .c/.cpp ORIGINAL (tradução única, sem copiar código)</text>
+<text x="410" y="169" class="s">• stubs só do ambiente: POSIX, NuttX, uORB, parâmetros</text>
+<text x="410" y="191" class="s">• entradas não determinísticas (nondet_*) + pré-condições (assume)</text>
+<text x="410" y="213" class="s">• propriedades como assert(); um teste por propriedade (T0, T1, …)</text>
+<text x="410" y="235" class="s">• checagens automáticas: limites, ponteiros, overflow, shift, NaN</text>
+
+<rect class="pr" x="395" y="290" width="535" height="140" rx="8"/>
+<text x="410" y="317" class="h">P2. Verificação com ESBMC (BMC)</text>
+<text x="410" y="342" class="s">a) teste RÁPIDO: 1 execução, com asserções de desdobramento (UA), 300 s</text>
+<text x="425" y="362" class="s">→ descobre problema de harness/ferramenta antes da rodada oficial</text>
+<text x="410" y="386" class="s">b) rodada OFICIAL: 3 execuções (mediana), UA e NUA, 600 s</text>
+<text x="410" y="410" class="s">   rodar_modulo.sh &lt;módulo&gt; rapido | oficial</text>
+
+<rect class="cb" x="960" y="290" width="275" height="140" rx="8"/>
+<text x="975" y="317" class="h">P3. Comparação CBMC</text>
+<text x="975" y="342" class="s">• MESMO harness e</text>
+<text x="975" y="362" class="s">  pré-condições</text>
+<text x="975" y="384" class="s">• opções equivalentes</text>
+<text x="975" y="406" class="s">• comparar.sh</text>
+
+<polygon class="dc" points="650,465 800,515 650,565 500,515"/>
+<text x="650" y="511" text-anchor="middle" class="h">Veredito?</text>
+<text x="650" y="532" text-anchor="middle" class="s">(por teste)</text>
+
+<rect class="dc" x="395" y="610" width="535" height="135" rx="8"/>
+<text x="410" y="637" class="h">P4. Análise do contraexemplo (regra 7)</text>
+<text x="410" y="662" class="s">• confrontar o caminho do contraexemplo com o código de produção</text>
+<text x="410" y="684" class="s">• a entrada é alcançável no driver real? a propriedade vem da especificação?</text>
+<text x="410" y="706" class="s">• é limitação da ferramenta? (ex.: regra de C aplicada a C++)</text>
+<text x="410" y="728" class="s">• conferir a especificação (datasheet/manual, com página)</text>
+
+<rect class="dc" x="395" y="780" width="535" height="110" rx="8"/>
+<text x="410" y="807" class="h">P5. Replay (execução real)</text>
+<text x="410" y="832" class="s">• g++ executa o código ORIGINAL com os valores do contraexemplo</text>
+<text x="410" y="854" class="s">• confirma o comportamento fora do verificador (replay/rodar_replay.sh)</text>
+<text x="410" y="876" class="s">• próximo passo: teste no hardware</text>
+
+<!-- SAIDAS -->
+<rect class="out" x="1275" y="95" width="305" height="150" rx="8"/>
+<text x="1290" y="122" class="h">S1. Registros (logs)</text>
+<text x="1290" y="147" class="s">por execução: data, máquina,</text>
+<text x="1290" y="169" class="s">versão da ferramenta, commit</text>
+<text x="1290" y="191" class="s">do PX4, linha de comando,</text>
+<text x="1290" y="213" class="s">saída completa e código de saída</text>
+<text x="1290" y="235" class="s">→ RESUMO_&lt;módulo&gt;.txt</text>
+
+<rect class="out" x="1275" y="265" width="305" height="170" rx="8"/>
+<text x="1290" y="292" class="h">S2. Tabela de resultados</text>
+<text x="1290" y="317" class="s">por teste: veredito</text>
+<text x="1290" y="339" class="s">SUCCESSFUL / FAILED / Timed out</text>
+<text x="1290" y="361" class="s">+ tempo mediano (UA e NUA)</text>
+<text x="1290" y="391" class="s">+ ESBMC × CBMC (veredito,</text>
+<text x="1290" y="413" class="s">  tempo, erros de frontend)</text>
+
+<rect class="out" x="1275" y="455" width="305" height="120" rx="8"/>
+<text x="1290" y="482" class="h">S3. Propriedade provada</text>
+<text x="1290" y="507" class="s">dentro do limite de</text>
+<text x="1290" y="529" class="s">desdobramento (ou para qualquer</text>
+<text x="1290" y="551" class="s">tamanho, nos testes por indução)</text>
+
+<rect class="out" x="1275" y="610" width="305" height="235" rx="8"/>
+<text x="1290" y="637" class="h">S4. Classificação do FAILED</text>
+<text x="1290" y="664" class="s">• defeito real → reporte ao PX4</text>
+<text x="1305" y="684" class="s">(RoboClaw R1, com R3 junto)</text>
+<text x="1290" y="710" class="s">• restrição só documentada</text>
+<text x="1305" y="730" class="s">(PCA9685 T3, &gt; 400 Hz)</text>
+<text x="1290" y="756" class="s">• inalcançável na produção</text>
+<text x="1305" y="776" class="s">(RoboClaw R4, PCA9685 T4)</text>
+<text x="1290" y="802" class="s">• falso positivo da ferramenta</text>
+<text x="1305" y="822" class="s">(RoboClaw R0)</text>
+
+<rect class="out" x="1275" y="865" width="305" height="80" rx="8"/>
+<text x="1290" y="892" class="h">S5. Artefatos reprodutíveis</text>
+<text x="1290" y="917" class="s">harnesses, stubs, scripts e logs</text>
+<text x="1290" y="937" class="s">no repositório (git)</text>
+
+<!-- setas entradas -> processo -->
+<path class="ln" d="M325,170 L395,170" marker-end="url(#a)"/>
+<path class="ln" d="M325,340 L350,340 L350,200 L395,200" marker-end="url(#a)"/>
+<path class="ln" d="M325,500 L355,500 L355,225 L395,225" marker-end="url(#a)"/>
+<path class="ln" d="M325,640 L360,640 L360,400 L395,400" marker-end="url(#a)"/>
+<path class="ln" d="M325,340 L350,340 L350,700 L395,700" marker-end="url(#a)"/>
+<!-- processo -->
+<path class="ln" d="M650,255 L650,290" marker-end="url(#a)"/>
+<path class="ln" d="M930,175 L1097,175 L1097,290" marker-end="url(#a)"/>
+<path class="ln" d="M650,430 L650,465" marker-end="url(#a)"/>
+<path class="ln" d="M650,565 L650,610" marker-end="url(#a)"/><text x="660" y="593" class="s" font-weight="bold">FAILED</text>
+<path class="ln" d="M650,745 L650,780" marker-end="url(#a)"/>
+<!-- loop de ajuste -->
+<path class="lr" d="M500,515 L378,515 L378,272 L470,272 L470,257" marker-end="url(#r)"/>
+<text x="388" y="545" class="s" fill="#b45309">erro de harness</text>
+<text x="388" y="563" class="s" fill="#b45309">ou ferramenta,</text>
+<text x="388" y="581" class="s" fill="#b45309">Timed out</text>
+<text x="388" y="599" class="s" fill="#b45309">→ ajusta P1</text>
+<!-- saidas -->
+<path class="ln" d="M930,120 L1275,120" marker-end="url(#a)"/>
+<path class="ln" d="M1235,360 L1275,360" marker-end="url(#a)"/>
+<path class="ln" d="M930,360 L945,360 L945,450 L1255,450 L1255,380 L1275,380" marker-end="url(#a)"/>
+<path class="ln" d="M800,515 L1275,515" marker-end="url(#a)"/><text x="1000" y="507" class="s" font-weight="bold">SUCCESSFUL</text>
+<path class="ln" d="M930,835 L1240,835 L1240,730 L1275,730" marker-end="url(#a)"/>
+<path class="ln" d="M930,680 L1275,680" marker-end="url(#a)"/>
+<text x="20" y="985" class="s" fill="#555">UA/NUA = com/sem asserções de desdobramento. Linha tracejada = ciclo de ajuste do harness (teste rápido). Esquema gerado em 19/10/2026 a partir do estado atual do repositório.</text>
+</svg>
