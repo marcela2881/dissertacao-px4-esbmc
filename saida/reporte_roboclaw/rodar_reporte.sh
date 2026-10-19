@@ -1,35 +1,62 @@
 #!/usr/bin/env bash
-# Reproduz TODA a evidência do reporte da RoboClaw (R1 e R3), em 3 etapas:
-#   1) ESBMC 8.5 no código ORIGINAL do PX4: R1 (FAILED), R2 (SUCCESSFUL, faixa normal) e R3 (FAILED)
-#   2) replay: g++ executa o Roboclaw.cpp ORIGINAL com os valores do contraexemplo
-#   3) reproduções mínimas (sem PX4), para anexar à issue
+# Reproduz TODA a evidência do reporte da RoboClaw (R1 e R3), com o código ORIGINAL do PX4
+# e com a correção proposta (6_pr/correcao_roboclaw.patch):
+#   1) ESBMC no original: R1 (FAILED), R2 (SUCCESSFUL, faixa normal) e R3 (FAILED)
+#   2) replay: g++ executa o Roboclaw.cpp original com os valores do contraexemplo
+#   3) reproduções mínimas (sem PX4), para colar na issue
+#   4) correção: ESBMC R1 e R3 (esperado SUCCESSFUL) e replay (esperado: nada reproduzido)
 # Saída na tela e em ../logs/<data>_<máquina>_reporte_roboclaw/
-# Uso (dentro de ~/verificacoes):  ./reporte_roboclaw/rodar_reporte.sh
+# Uso (dentro da pasta que tem px4/, stubs/ e scripts/, ex. ~/verificacoes ou ~/reporte):
+#   ./reporte_roboclaw/rodar_reporte.sh
 set -uo pipefail
 cd "$(dirname "$0")/.."
-raiz="$(pwd)"
+raiz="$(pwd)"; R="$raiz/reporte_roboclaw"
 out="logs/$(date +%Y-%m-%d)_$(hostname -s)_reporte_roboclaw"; mkdir -p "$out" build_replay
 command -v g++ >/dev/null || { echo "ERRO: g++ não encontrado (sudo apt install -y g++)"; exit 2; }
+command -v patch >/dev/null || { echo "ERRO: patch não encontrado (sudo apt install -y patch)"; exit 2; }
+if [ -z "${ESBMC:-}" ]; then ESBMC=$(find "$HOME/esbmc-8.5" -name esbmc -type f 2>/dev/null | head -1); [ -n "$ESBMC" ] || ESBMC=$(command -v esbmc || true); fi
+[ -n "$ESBMC" ] && [ -x "$ESBMC" ] || { echo "ERRO: ESBMC não encontrado"; exit 2; }
+[ -d px4/src/drivers/roboclaw ] || { echo "ERRO: PX4 não encontrado em ./px4"; exit 3; }
+export ESBMC PX4_ROOT="$raiz/px4" RUNS=1
 
-echo "##### 1/3 ESBMC: R1, R2 e R3 (1 execução cada, com asserções de desdobramento)"
-SO_TESTES="1 2 3" ./rodar_modulo.sh roboclaw rapido 2>&1 | tee "$out/1_esbmc.txt" | tail -6
-# contraexemplo do R1 (valores de outputs[] e o byte enviado)
-ult=$(ls -td logs/*_esbmc*_rapido | head -1)
-grep -a -A40 "Counterexample" "$ult"/roboclaw_T1_ua_run1.log 2>/dev/null | grep -aE "outputs|byte|g_drive_byte|Violated|assert" | head -20 > "$out/1_contraexemplo_R1.txt"
-echo "(contraexemplo do R1 em $out/1_contraexemplo_R1.txt)"
+# Roboclaw.cpp/.hpp com a correção aplicada, numa pasta à parte (o PX4 original não é alterado)
+corr="$raiz/build_replay/roboclaw_corrigido"; rm -rf "$corr"; mkdir -p "$corr"
+cp px4/src/drivers/roboclaw/Roboclaw.cpp px4/src/drivers/roboclaw/Roboclaw.hpp "$corr/"
+patch -s -p4 -d "$corr" < "$R/6_pr/correcao_roboclaw.patch" || { echo "ERRO: a correção não aplicou"; exit 4; }
+cp "$R/6_pr/correcao_roboclaw.patch" "$corr/normalizacao.diff"   # registrado no log do ESBMC
 
-echo; echo "##### 2/3 Replay com o Roboclaw.cpp ORIGINAL"
+esbmc_teste() {   # $1=rótulo $2=número do teste ; PRE_INC opcional = versão corrigida
+  LOGDIR="$raiz/$out/esbmc" ./scripts/run_esbmc.sh "$1" "$R/1_verificacao_esbmc/test_roboclaw.cpp" "" \
+    "src/drivers/roboclaw" -DTEST_CHOICE="$2" --function harness_main --unwind 20 --overflow-check \
+    --ub-shift-check --default-solver boolector --timeout 300s | grep "run 1"
+}
+
+echo "##### 1/4 ESBMC no código ORIGINAL (esperado: T1 FAILED, T2 SUCCESSFUL, T3 FAILED)"
+for t in 1 2 3; do echo -n "roboclaw_T${t}_original:"; esbmc_teste "roboclaw_T${t}_original" "$t"; done 2>&1 | tee "$out/1_esbmc_original.txt"
+grep -a -A60 "Counterexample" "$out"/esbmc/roboclaw_T1_original_run1.log 2>/dev/null \
+  | grep -aE "outputs|g_drive_byte|Violated|assert|line [0-9]+ function" | head -20 > "$out/1_contraexemplo_R1.txt"
+
+echo; echo "##### 2/4 Replay com o Roboclaw.cpp ORIGINAL"
 {
   echo "### data: $(date -Iseconds) | maquina: $(uname -srm) | $(g++ --version | head -1)"
   echo "### px4 commit: $(cat px4/.px4_commit 2>/dev/null || echo desconhecido)"
-  g++ -std=c++17 -O0 -I stubs -I px4/src/drivers/roboclaw replay/replay_roboclaw.cpp -o build_replay/replay_roboclaw -lm \
-    && ./build_replay/replay_roboclaw
-} 2>&1 | tee "$out/2_replay.txt"
+  g++ -std=c++17 -O0 -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/replay_roboclaw.cpp" -o build_replay/replay_original -lm \
+    && ./build_replay/replay_original
+} 2>&1 | tee "$out/2_replay_original.txt"
 
-echo; echo "##### 3/3 Reproduções mínimas (sem PX4)"
+echo; echo "##### 3/4 Reproduções mínimas (sem PX4)"
 for m in minimo_r1 minimo_r3; do
   echo "--- $m"
-  g++ -std=c++17 "reporte_roboclaw/$m.cpp" -o "build_replay/$m" -lm && "./build_replay/$m"
+  g++ -std=c++17 "$R/3_minimos/$m.cpp" -o "build_replay/$m" -lm && "./build_replay/$m"
 done 2>&1 | tee "$out/3_minimos.txt"
+
+echo; echo "##### 4/4 Com a CORREÇÃO (6_pr/correcao_roboclaw.patch)"
+echo "--- ESBMC (esperado: T1 SUCCESSFUL, T3 SUCCESSFUL)"
+for t in 1 3; do echo -n "roboclaw_T${t}_corrigido:"; PRE_INC="$corr" esbmc_teste "roboclaw_T${t}_corrigido" "$t"; done 2>&1 | tee "$out/4_esbmc_corrigido.txt"
+echo "--- Replay (esperado: bytes até 127, select() 0 vezes, 0 situações reproduzidas)"
+{
+  g++ -std=c++17 -O0 -I "$corr" -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/replay_roboclaw.cpp" -o build_replay/replay_corrigido -lm \
+    && ./build_replay/replay_corrigido
+} 2>&1 | tee "$out/4_replay_corrigido.txt"
 
 echo; echo "(tudo salvo em: $raiz/$out)"
