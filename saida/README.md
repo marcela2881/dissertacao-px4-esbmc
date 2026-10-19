@@ -284,6 +284,39 @@ isso também é registrado como resultado (`PARSING ERROR`).
   ESBMC 8.1, o mesmo harness foi verificado — diferença entre versões do frontend do ESBMC.
 - ESBMC 8.5 nos demais: mesmos vereditos do artigo (GPS e IMU_BMI088 FAILED; os outros SUCCESSFUL).
 
+2º teste rápido da 1ª leva, com o prelúdio (PC do Bruno, 19/10/2026 06:35, timeout 300 s, 1 execução, UA):
+
+| Módulo | ESBMC 8.5.0 | CBMC 5.95.1 | Leitura |
+|---|---|---|---|
+| Barometer | SUCCESSFUL 0.921 s | PARSING ERROR | parser C++ do CBMC (linha 169) |
+| Battery_Monitor | SUCCESSFUL 19.352 s | Timed out | CBMC não termina em 300 s |
+| EKF2_Covariance | SUCCESSFUL 40.543 s | Timed out | idem |
+| Expo_RC | SUCCESSFUL 6.028 s | SUCCESSFUL 2.319 s | concordam |
+| GPS | FAILED 165.372 s | Timed out | idem |
+| IMU_BMI088 | FAILED 0.254 s | FAILED 1.943 s | concordam (CBMC lista as linhas 126 e 144) |
+| MAVLink | SUCCESSFUL 95.039 s | SUCCESSFUL 25.842 s | concordam |
+| Magnetometer | SUCCESSFUL 12.467 s | SUCCESSFUL 3.303 s | concordam |
+| Navigator_Mission | PARSING ERROR | FAILED 0.706 s | **falso positivo do CBMC** (abaixo); prelúdio corrigido |
+| PWM_Output | SUCCESSFUL 0.334 s | SUCCESSFUL 0.621 s | concordam |
+| RC_Update | SUCCESSFUL 8.742 s | SUCCESSFUL 37.605 s | concordam |
+| VTOL | SUCCESSFUL 9.852 s | FAILED 1.650 s | **falso positivo do CBMC** (modelo de `sqrtf`) |
+
+Análise das divergências (regra 7, contraexemplos do CBMC):
+- Navigator_Mission, linha 185 (`need_move == 1`): no contraexemplo, distance = 6553.6 e raio = 0.1, e
+  `std::isfinite(6553.6f)` devolveu FALSO (`return_value___builtin_isfinite=0`). O frontend C++ do CBMC não
+  modela `__builtin_isfinite`: vira função sem corpo, com retorno arbitrário. Conferido à parte: `isnan` e
+  `isinf` estão corretos no CBMC; só `isfinite` falha. Correção no prelúdio (`__builtin_isfinite(x)` =
+  `(x) - (x) == 0`, verdadeiro só para x finito), conferida com valores finitos, ±infinito e NaN, e
+  com x arbitrário (equivalente a `!isnan && !isinf`). Só o harness do Navigator usa `isfinite`.
+  O resultado de 19/10 desse módulo no CBMC é inválido; rodar de novo.
+- VTOL: todas as falhas vêm de `return_value_sqrtf`. Com `--no-library` (configuração do artigo), o CBMC
+  não tem o modelo de `sqrtf` e o retorno é arbitrário (negativo, NaN ou enorme), o que gera o "overflow"
+  e o `airspeed < 0`. Sem `--no-library`, o CBMC usa o modelo de biblioteca próprio de `sqrtf`, e a
+  checagem de overflow acusa o próprio modelo (`sqrtf.overflow.2/3`, `lower * lower`, `upper * upper`).
+  Nos dois casos a falha está na modelagem da biblioteca de matemática do CBMC, não no código. O ESBMC
+  modela a raiz quadrada internamente. Classificação: falso positivo da ferramenta.
+- Timed out (Battery, EKF2, GPS): repetir na oficial (600 s). Se continuar, é resultado de desempenho.
+
 ## Fluxo de trabalho: fm07 → PC → GitHub
 
 1. **fm07 (sem git):** rodar os testes. Cada rodada vai para

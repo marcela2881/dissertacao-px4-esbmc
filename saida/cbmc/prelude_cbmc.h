@@ -20,6 +20,12 @@
  *      e afins em <cmath>): as macros abaixo dão o mesmo resultado lógico
  *      (falso se algum operando é NaN); só não modelam a flag FE_INVALID,
  *      que nenhum harness consulta.
+ *   3b. __builtin_isfinite (usado por std::isfinite) não tem modelo no frontend
+ *      C++ do CBMC: vira função sem corpo, com retorno ARBITRÁRIO. Achado no
+ *      contraexemplo do Navigator_Mission (PC do Bruno, 19/10/2026):
+ *      isfinite(6553.6f) devolveu falso. (x - x == 0) é verdadeiro só para x
+ *      finito (infinito ou NaN dão NaN). isnan/isinf foram conferidos e estão
+ *      corretos no CBMC.
  *   4. Harnesses que usam isnan/isinf/isfinite sem "std::" (o ESBMC aceita).
  *   5. __ESBMC_assume (função do ESBMC) = __CPROVER_assume (mesmo significado:
  *      pré-condição). Substitui o antigo shim_esbmc_assume.cpp, que não servia
@@ -40,6 +46,7 @@
 #define __builtin_islessequal(x, y)    ((x) <= (y))
 #define __builtin_islessgreater(x, y)  ((x) < (y) || (x) > (y))
 #define __builtin_isunordered(x, y)    ((x) != (x) || (y) != (y))
+#define __builtin_isfinite(x)          ((x) - (x) == 0)
 
 #include <cmath>
 #include <math.h>
