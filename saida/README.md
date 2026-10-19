@@ -309,6 +309,9 @@ Análise das divergências (regra 7, contraexemplos do CBMC):
   `(x) - (x) == 0`, verdadeiro só para x finito), conferida com valores finitos, ±infinito e NaN, e
   com x arbitrário (equivalente a `!isnan && !isinf`). Só o harness do Navigator usa `isfinite`.
   O resultado de 19/10 desse módulo no CBMC é inválido; rodar de novo.
+  Reexecução manual com o prelúdio corrigido (19/10, `--unwind 15 --unwinding-assertions`, sem as
+  demais checagens): VERIFICATION SUCCESSFUL. A rodada oficial (`comparar.sh leva1 oficial`) traz o
+  resultado com todas as checagens.
 - VTOL: todas as falhas vêm de `return_value_sqrtf`. Com `--no-library` (configuração do artigo), o CBMC
   não tem o modelo de `sqrtf` e o retorno é arbitrário (negativo, NaN ou enorme), o que gera o "overflow"
   e o `airspeed < 0`. Sem `--no-library`, o CBMC usa o modelo de biblioteca próprio de `sqrtf`, e a
@@ -316,6 +319,25 @@ Análise das divergências (regra 7, contraexemplos do CBMC):
   Nos dois casos a falha está na modelagem da biblioteca de matemática do CBMC, não no código. O ESBMC
   modela a raiz quadrada internamente. Classificação: falso positivo da ferramenta.
 - Timed out (Battery, EKF2, GPS): repetir na oficial (600 s). Se continuar, é resultado de desempenho.
+
+## Módulo 03 — dshot (telemetria serial)
+
+Harness `modulos/03_dshot/test_dshot.cpp`. Inclui os ORIGINAIS `DShotTelemetry.cpp` e `esc/AM32Settings.cpp`
+(e `DShotCommon.h`, com a `crc8`). Stubs novos: `px4_platform_common/Serial.hpp` (UART), `drivers/drv_hrt.h`
+(tempo decorrido escolhido pelo harness), `drivers/drv_dshot.h` (só os códigos de comando),
+`uORB/topics/esc_status.h` e `esc_eeprom_read.h`. Os campos privados são acessados com `#define private public`
+só na inclusão do PX4, para os testes por indução partirem de qualquer estado.
+
+| Teste | Função | Propriedade |
+|---|---|---|
+| D0 | `parseTelemetryPacket` (indução, `_frame_position` em [0,10)) | DP1: memória de `_frame_buffer[10]` e invariante |
+| D1 | `parseTelemetryPacket`, quadro com CRC8 correto | DP2: Ready e campos conforme o formato do quadro (eRPM x100 sem estouro) |
+| D2 | `parseTelemetryPacket`, CRC8 errado | DP3: ParseError e `esc_data` intacto |
+| D3 | `parseCommandResponse` (indução, posição em [0,49]) | DP1: memória de `_command_response_buffer[49]` e invariante |
+| D4 | `AM32Settings::decodeInfoResponse` | DP4: aceita só 49 bytes com CRC8 correto; publica os 48 bytes, length 48, índice |
+
+Compilação conferida com g++ (`-fsyntax-only`, os 5 testes). CBMC: `PARSING ERROR` previsto, pelo literal
+`_ms` do stub de plataforma e pela lambda da `crc8` em `DShotCommon.h:76` (código do PX4).
 
 ## Fluxo de trabalho: fm07 → PC → GitHub
 

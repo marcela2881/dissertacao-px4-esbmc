@@ -121,7 +121,7 @@ Subir para o git só no final, quando tudo estiver pronto (combinado).
 |---|---|---|---|
 | `01_pca9685` | driver PWM I2C PCA9685 | T0–T4 | oficial feita (fm07 15/10; PC 18/10) |
 | `02_roboclaw` | driver UART RoboClaw | T0–T4 (R0–R4) | oficial feita (PC 18/10) |
-| `03_dshot` | DShot | — | em preparação |
+| `03_dshot` | telemetria serial DShot (DShotTelemetry, AM32) | T0–T4 (D0–D4) | pronto para o teste rápido |
 | `04_uavcan_actuators` | UAVCAN ESC/servo | — | em preparação |
 | `05_voxl_esc` | protocolo UART voxl_esc | T0–T8 (V0–V4; V1 por tamanho) | oficial feita (PC 18/10) |
 | `06_tap_esc` | protocolo serial TAP ESC | T0–T4 | oficial feita (PC 18/10; T0 repetido) |
