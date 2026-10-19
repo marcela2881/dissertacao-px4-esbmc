@@ -69,6 +69,17 @@ Com a correção, os dois testes terminam sem violar os asserts (byte 127; `sele
   `select()`, com a mensagem errada ("ACK timeout"/"Select timeout"). Por isso o título diz "not detected",
   e não "treated as success".
 
+### Teste gtest dentro do PX4 (`7_gtest/`, comentário do orientador: "testes que o dev possa só compilar e linkar")
+
+`make tests TESTFILTER=Roboclaw` no PX4 `8be2590c15` (`px4_sitl_test`, driver ligado com
+`CONFIG_DRIVERS_ROBOCLAW=y`), máquina oficial, 19/10/2026:
+
+| | Original | Com a correção |
+|---|---|---|
+| `FailsafeAbove254KeepsDriveDataByteWithin127` | FAILED (`actual: 130 vs 127`) | passa |
+| `WriteErrorIsDetected` | FAILED (`Which is: 1`) | passa |
+| ctest | `0% tests passed, 1 tests failed out of 1` | `100% tests passed, 0 tests failed out of 1` |
+
 ## 3. Com a CORREÇÃO (`5_pr/correcao_roboclaw.patch`), 19/10/2026
 
 | Verificação | Original | Corrigido |

@@ -89,20 +89,23 @@ TEST_F(RoboclawTest, WriteErrorIsDetected)
 }
 ```
 
-Result on the current code:
+Result on the current code (`make tests TESTFILTER=Roboclaw`, PX4 `8be2590c15`, `px4_sitl_test`):
 
 ```
-<SAIDA-DO-make-tests>
+[ RUN      ] RoboclawTest.FailsafeAbove254KeepsDriveDataByteWithin127
+src/drivers/roboclaw/RoboclawTest.cpp:154: Failure
 Expected: (static_cast<int>(packet[2])) <= (127), actual: 130 vs 127
-[  FAILED  ] RoboclawTest.FailsafeAbove254KeepsDriveDataByteWithin127
+[  FAILED  ] RoboclawTest.FailsafeAbove254KeepsDriveDataByteWithin127 (0 ms)
+[ RUN      ] RoboclawTest.WriteErrorIsDetected
+src/drivers/roboclaw/RoboclawTest.cpp:172: Failure
 Expected equality of these values:
   g_select_calls_after_failed_write
     Which is: 1
   0
-[  FAILED  ] RoboclawTest.WriteErrorIsDetected
+[  FAILED  ] RoboclawTest.WriteErrorIsDetected (0 ms)
 ```
 
-With the fix below applied, both tests pass.
+With the fix below applied, both tests pass (`100% tests passed, 0 tests failed out of 1`).
 
 On a vehicle: set `RBCLW_FAIL1` to 255, 256 or 257 and trigger flight termination.
 
