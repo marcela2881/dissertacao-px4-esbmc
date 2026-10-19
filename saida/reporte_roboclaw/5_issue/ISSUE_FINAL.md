@@ -47,53 +47,62 @@ I checked whether anything else in the code path prevents these bugs:
 
 ### To Reproduce
 
-Both tests compile the original `Roboclaw.cpp` unchanged, with the serial calls (`write`, `read`, `select`, `open`, termios) replaced by an emulated UART. Each test has three steps: input preparation, execution of a Roboclaw function, and an assert that is violated.
+Unit tests (gtest) that only need to be compiled and linked with the Roboclaw driver. `Roboclaw.cpp` is not changed; the UART is emulated at link time (`-Wl,--wrap=write -Wl,--wrap=select`), so the driver's `write()` and `select()` calls on its serial file descriptor reach the test. Each test has three steps: input preparation, execution of a Roboclaw function, and a check that fails while the bug is present.
 
-**Bug 1**
+1. Add `RoboclawTest.cpp` (attached / <LINK-DO-ARTEFATO>) to `src/drivers/roboclaw/`.
+2. Add to `src/drivers/roboclaw/CMakeLists.txt`:
+
+```cmake
+px4_add_functional_gtest(SRC RoboclawTest.cpp LINKLIBS drivers__roboclaw)
+if(TARGET functional-Roboclaw)
+	target_link_options(functional-Roboclaw PRIVATE -Wl,--wrap=write -Wl,--wrap=select)
+endif()
+```
+
+3. Enable the driver in the SITL test build (`CONFIG_DRIVERS_ROBOCLAW=y` in `boards/px4/sitl/test.px4board`) and run `make tests TESTFILTER=Roboclaw`.
+
+The two tests:
 
 ```cpp
-// emulated write(): check the data byte of commands 0, 1, 4, 5
-if (n == 5 && (p[1] == 0 || p[1] == 1 || p[1] == 4 || p[1] == 5)) {
-    assert(p[2] <= 127);
+// Bug 1
+TEST_F(RoboclawTest, FailsafeAbove254KeepsDriveDataByteWithin127)
+{
+	// 1. Input preparation: RBCLW_FAIL1 = 257, passed unchanged by the mixer in flight termination
+	float outputs[2] = {257.f, 127.f};
+	// 2. Execution
+	_roboclaw.updateOutputs(outputs, 2, 1);
+	// 3. Check: data byte of commands 0, 1, 4, 5 must be 0..127
+	for (const auto &packet : g_packets) {
+		if (isDriveCommand(packet[1])) { EXPECT_LE(static_cast<int>(packet[2]), 127); }
+	}
 }
 
-// 1. Input preparation: RBCLW_FAIL1 = 257; in flight termination the mixer passes it unchanged
-float outputs[2] = {257.f, 127.f};
-// 2. Execution
-dev.updateOutputs(outputs, 2, 1);
-// 3. Assert violated in write(): data byte = 130
+// Bug 2
+TEST_F(RoboclawTest, WriteErrorIsDetected)
+{
+	// 1. Input preparation: write() returns -1 (errno = EIO)
+	g_write_fails = true;
+	// 2. Execution
+	_roboclaw.readEncoder();
+	// 3. Check: no reply is awaited after a failed write()
+	EXPECT_EQ(g_select_calls_after_failed_write, 0);
+}
 ```
 
-Output:
+Result on the current code:
 
 ```
-R1: outputs[0] = 257 (RBCLW_FAIL1 = 257, flight termination)
-  sent: command 0, data byte 130
-Assertion `p[2] <= 127 && "drive command data byte must be 0..127"' failed.
+<SAIDA-DO-make-tests>
+Expected: (static_cast<int>(packet[2])) <= (127), actual: 130 vs 127
+[  FAILED  ] RoboclawTest.FailsafeAbove254KeepsDriveDataByteWithin127
+Expected equality of these values:
+  g_select_calls_after_failed_write
+    Which is: 1
+  0
+[  FAILED  ] RoboclawTest.WriteErrorIsDetected
 ```
 
-**Bug 2**
-
-```cpp
-// emulated write() returns -1 (errno = EIO) when g_write_fails is set;
-// emulated select(): after a failed write nothing was sent, so no reply should be awaited
-assert(!g_last_write_failed);
-
-// 1. Input preparation: the serial port fails
-g_write_fails = true;
-// 2. Execution (called every cycle by Run())
-dev.readEncoder();
-// 3. Assert violated in select()
-```
-
-Output:
-
-```
-R3: write() returns -1 (errno = EIO)
-Assertion `!g_last_write_failed && "select() called after write() returned -1"' failed.
-```
-
-With the fix below applied, both tests finish without violating the asserts. The full test program is available at <LINK-DO-ARTEFATO>.
+With the fix below applied, both tests pass.
 
 On a vehicle: set `RBCLW_FAIL1` to 255, 256 or 257 and trigger flight termination.
 

@@ -26,13 +26,13 @@ Bugfix: Roboclaw driver no longer sends drive data bytes above 127 (e.g. failsaf
 
 ### Test coverage
 
-Tested on a PC by compiling the driver source with an emulated UART (the serial calls `write`, `read`, `select`, `open` and termios are replaced; `Roboclaw.cpp` is used as is). Each test prepares the input, runs a Roboclaw function and checks an assert:
+Added `RoboclawTest.cpp`, a functional gtest linked with `drivers__roboclaw` (`make tests TESTFILTER=Roboclaw`). The UART is emulated at link time (`-Wl,--wrap=write -Wl,--wrap=select`); `Roboclaw.cpp` is used as is. Each test prepares the input, runs a Roboclaw function and checks the result:
 
-| Test | Input | Function | Assert | Before | After |
+| Test | Input | Function | Check | Before | After |
 |---|---|---|---|---|---|
-| Bug 1 | `outputs[0] = 257` (failsafe in termination) | `updateOutputs()` | data byte of commands 0/1/4/5 ≤ 127 | violated (byte 130) | holds (byte 127) |
-| Bug 2 | `write()` returns -1 | `readEncoder()` | `select()` is not called after a failed `write()` | violated | holds |
+| `FailsafeAbove254KeepsDriveDataByteWithin127` | `outputs[0] = 257` (failsafe in termination) | `updateOutputs()` | data byte of commands 0/1/4/5 ≤ 127 | fails (byte 130) | passes |
+| `WriteErrorIsDetected` | `write()` returns -1 | `readEncoder()` | no `select()` after a failed `write()` | fails | passes |
 
-Outputs 255, 256 and 257 produced bytes 128, 129 and 130 before the change and 127 after it. Outputs from 0 to 254 produce the same bytes as before.
+The driver is enabled in the SITL test build (`CONFIG_DRIVERS_ROBOCLAW=y` in `boards/px4/sitl/test.px4board`) so the test can link with it.
 
 Not tested on hardware.
