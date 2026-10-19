@@ -8,11 +8,11 @@ contraexemplo. Só se aplica a testes com contraexemplo (FAILED).
 
 | Harness | ESBMC 8.5 | CBMC 5.95 | Teste unitário (replay) |
 |---|---|---|---|
-| Barometer, Battery, EKF2, Expo, MAVLink, Magnetometer, PWM, RC_Update | rápido ✅ · oficial ⏳ | rápido ✅ · oficial ⏳ | — (sem contraexemplo) |
-| Navigator | PARSING ERROR no 8.5 ✅ (registrado) | rápido ✅ (SUCCESSFUL após prelúdio) · oficial ⏳ | — |
-| VTOL | rápido ✅ · oficial ⏳ | rápido ✅ (FAILED = modelo de `sqrtf` do CBMC) · oficial ⏳ | — |
+| Barometer, Battery, EKF2, Expo, MAVLink, Magnetometer, PWM, RC_Update | rápido ✅ · oficial ✅ | rápido ✅ · oficial ✅ | — (sem contraexemplo) |
+| Navigator | PARSING ERROR no 8.5 ✅ (registrado) | rápido ✅ · oficial ✅ (SUCCESSFUL com o prelúdio) | — |
+| VTOL | rápido ✅ · oficial ✅ | rápido ✅ · oficial ✅ (FAILED = modelo de `sqrtf` do CBMC) | — |
 | **GPS** | FAILED ✅ (rápido e oficial) | Timed out ✅ (rápido e oficial) | ✅ 19/10: estado do contraexemplo (len 207) → ASan acusa escrita fora do buffer; ⏳ a parte "alcance" se perdeu (vazamento do próprio replay, corrigido) e precisa ser repetida |
-| **IMU BMI088** (temperatura e FIFO) | FAILED ✅ · oficial ⏳ | FAILED ✅ · oficial ⏳ | ✅ 19/10: temperatura 86,25 °C reproduzida; contador 9088 barrado pela guarda; **novo: leitura fora de `FIFOTransferBuffer` com bytes aleatórios** (ver abaixo) |
+| **IMU BMI088** (temperatura e FIFO) | FAILED ✅ · oficial ✅ | FAILED ✅ · oficial ✅ | ✅ 19/10: temperatura 86,25 °C reproduzida; contador 9088 barrado pela guarda; **novo: leitura fora de `FIFOTransferBuffer` com bytes aleatórios** (ver abaixo) |
 
 **Achado novo do replay (19/10, regra 7 pendente):** `FIFORead` lê até 6 bytes além do fim de
 `FIFOTransferBuffer` quando um cabeçalho de quadro de dados aparece nos últimos 6 bytes da janela
@@ -23,6 +23,28 @@ Falta: confirmar no datasheet quando o BMI088 emite esses quadros e decidir com 
 
 Depois: repetir `./comparar.sh leva1 oficial` **sozinha, à noite** (os tempos de 19/10 ficaram
 contaminados por rodadas simultâneas).
+
+**Oficial da 1ª leva ESBMC × CBMC fechada (19/10/2026, bruno-pc, 3 execuções, mediana, 600 s).**
+Os tempos foram medidos com outras rodadas em paralelo; repetir à noite, sozinha, para tempos limpos.
+
+| Módulo | ESBMC 8.5 UA / NUA | CBMC 5.95 UA / NUA |
+|---|---|---|
+| Barometer | SUCCESSFUL 0,819 / 0,763 s | PARSING ERROR |
+| Battery_Monitor | SUCCESSFUL 16,010 / 13,502 s | Timed out |
+| EKF2_Covariance | SUCCESSFUL 34,779 / 40,462 s | Timed out |
+| Expo_RC | SUCCESSFUL 4,702 / 4,777 s | SUCCESSFUL 1,846 / 1,837 s |
+| GPS | FAILED 136,625 / 156,242 s | Timed out |
+| IMU_BMI088 | FAILED 0,287 / 0,247 s | FAILED 1,451 / 1,196 s |
+| MAVLink | SUCCESSFUL 88,747 / 87,482 s | SUCCESSFUL 26,151 / 24,550 s |
+| Magnetometer | SUCCESSFUL 9,894 / 9,774 s | SUCCESSFUL 2,358 / 2,350 s |
+| Navigator_Mission | PARSING ERROR | SUCCESSFUL 0,694 / 0,647 s (com o prelúdio) |
+| PWM_Output | SUCCESSFUL 0,299 / 0,298 s | SUCCESSFUL 0,612 / 0,572 s |
+| RC_Update | SUCCESSFUL 6,122 / 6,316 s | SUCCESSFUL 24,744 / 24,945 s |
+| VTOL | SUCCESSFUL 7,128 / 7,048 s | FAILED 1,033 / 1,092 s (modelo de `sqrtf` do CBMC) |
+
+Os vereditos concordam em 6 de 12 (Expo, IMU, MAVLink, Magnetometer, PWM, RC);
+o CBMC não chega a veredito em Battery, EKF2 e GPS (Timed out) e não lê o Barometer; o ESBMC 8.5
+não lê o Navigator; no VTOL o CBMC dá FAILED pelo modelo de `sqrtf`.
 
 ## Fase 2: validação (`saida/fase2/harnesses/`, cópias de `cbmc/` e `seeded_tests/`)
 
