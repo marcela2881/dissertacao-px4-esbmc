@@ -247,7 +247,7 @@ monitoramento, navegação e estimação de estado.}
 \hline
 \corr{1.ª} & \corr{IMU BMI088, GPS uBlox, MAVLink (\textit{buffer} de transmissão), Expo RC} & \corr{sensores e comunicação de maior criticidade} & \corr{GPS: violação alcançável no modelo (Issue~\#26866, PR~\#27576); IMU: FIFO falso positivo e temperatura contestada (Issue~\#26865, PR~\#27575); MAVLink e Expo RC: sem violação} \\
 \hline
-\corr{2.ª} & \pendente{módulos da 2.ª rodada} & \corr{monitoramento e estimação}\pendente{ (conferir)} & \pendente{resultado; incluir o caso cujo PR já estava aberto} \\
+\corr{2.ª} & \pendente{módulos da 2.ª rodada} & \corr{monitoramento e estimação}\pendente{ (conferir)} & \pendente{resultado} \\
 \hline
 \corr{3.ª} & \pendente{módulos da 3.ª rodada} & \corr{navegação}\pendente{ (conferir)} & \pendente{resultado} \\
 \hline
@@ -259,7 +259,55 @@ Monitor, EKF2, Magnetometer, Navigator, PWM Output, RC Update e VTOL; todos
 verificaram sem violação até o limite $k$ na primeira campanha.}
 \pendente{Distribuir esses oito módulos entre as rodadas 2 e 3.}
 
-\pendente{Caso da 2.ª rodada em que já havia um \textit{pull request} aberto no PX4: indicar o módulo, o teste, o número do PR, quem o abriu e o que ele corrigia, e como o caso foi tratado (comentado pelo orientador). Esse caso ilustra a checagem de \textit{issues} e PRs existentes antes do reporte (etapa~(vi)).}
+\subsection*{\corr{Fases do trabalho}}
+
+\corr{Independentemente das rodadas, o trabalho foi executado em três fases
+(Tabela~\ref{tab:fases}). A \textbf{primeira} é a campanha original, que
+produziu os resultados do artigo derivado. A \textbf{segunda} é uma fase de
+validação, feita depois que os achados já tinham sido reportados: reexecução dos
+\textit{harnesses} com outras versões do ESBMC e outros \textit{solvers},
+comparação entre Boolector e Z3, validação cruzada com o CBMC, verificação dos
+\textit{patches} propostos e reprodução no ArduPilot. A \textbf{terceira} é a
+segunda campanha, sobre o código original dos módulos de saída, acompanhada da
+reexecução dos doze \textit{harnesses} da primeira campanha com o ESBMC~8.5 e da
+comparação sistemática com o CBMC.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Fases do trabalho, ferramentas e registros}}
+\label{tab:fases}
+\footnotesize
+\begin{tabular}{|p{2.2cm}|p{6.6cm}|p{2.7cm}|p{2.6cm}|}
+\hline
+\textbf{Fase} & \textbf{O que foi feito} & \textbf{Ferramentas} & \textbf{Registros no repositório} \\
+\hline
+\corr{1.ª: campanha original} & \corr{12 módulos, três execuções por módulo (mediana); \textit{issues} \#26865 e \#26866, PRs \#27575 e \#27576 (os reportes partiram de execuções anteriores, com o ESBMC~7.10)} & \corr{ESBMC 8.1.0 + Boolector 3.2.4} & \corr{\texttt{medianas\_logs/}, \texttt{resultados/}} \\
+\hline
+\corr{2.ª: validação} & \corr{(a) reexecução dos 12 módulos: nove dos dez módulos sem violação continuaram sem violação com ESBMC~8.4 + Bitwuzla~0.9; GPS e IMU continuaram com violação com ESBMC~7.10 + Boolector; o EKF2 não chegou a veredito com ESBMC~8.2 + Z3. (b) GPS, MAVLink e EKF2 com Boolector e com Z3 (ESBMC~8.1, 300~s): o Boolector concluiu os três; o Z3 não chegou a veredito em nenhum. (c) CBMC: IMU com as mesmas duas violações (temperatura e FIFO); GPS com pré-condição semeada (\texttt{len} $\geq 190$): violação com \texttt{--unwind} 2, 3 e 5 e sem término em 30~min com 10. (d) \textit{Patches} no CBMC: FIFO (0 de 2 propriedades violadas), temperatura (0 de 4) e GPS (0 de 7). (e) ArduPilot: mesma violação de temperatura no driver BMI088. (f) Busca nos testes do PX4: nenhum teste unitário exercita \texttt{dumpGpsData}.} & \corr{ESBMC 7.10, 8.1, 8.2 e 8.4; Boolector, Bitwuzla e Z3; CBMC 5.95.1} & \corr{\texttt{reexecucoes\_2026-10-09/}, \texttt{validacao\_esbmc\_8.1/}, \texttt{cbmc/}, \texttt{evidencia\_unit\_test\_gps.txt}} \\
+\hline
+\corr{3.ª: segunda campanha} & \corr{módulos de saída com o código original; reexecução dos 12 \textit{harnesses} com ESBMC~8.5; comparação ESBMC $\times$ CBMC em todos os \textit{harnesses}; \textit{replay}; correção e reporte da RoboClaw} & \corr{ESBMC 8.5.0 + Boolector; CBMC 5.95.1; g++ 13.3.0} & \corr{\texttt{saida/}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{Os resultados da segunda fase não são comparáveis entre si em tempo, por
+terem usado versões, \textit{solvers} e máquinas diferentes; servem para avaliar
+a estabilidade dos vereditos. Eles não são a base da tabela de resultados do
+artigo, que vem da primeira fase.}
+
+\corr{Um caso da segunda fase, apontado pelo orientador, mostra por que a
+verificação de \textit{patch} exige as mesmas pré-condições antes e depois. A
+guarda proposta para o GPS (PR~\#27576, já aberto quando a verificação foi
+feita) foi verificada no CBMC, que reportou 0 de 7 propriedades violadas no
+\textit{harness} corrigido. Porém, o \textit{harness} sem a correção também
+reportou 0 de 7, porque os dois usavam a pré-condição \texttt{len} $< 200$, que
+já exclui os estados em que a violação ocorre. A comparação, portanto, não isola
+o efeito da guarda; e não há registro do ESBMC sobre o \textit{harness}
+corrigido. Esse caso levou à regra aplicada na terceira fase: a reverificação de
+uma correção usa as mesmas pré-condições e as mesmas opções antes e depois, e
+confere qual propriedade falhou (Seção~\ref{sec:segunda-campanha}).}
+
+\pendente{Opcional, para fechar o caso: verificar com o ESBMC~8.5 e com o CBMC o \textit{harness} do GPS com e sem a guarda do PR~\#27576, ambos com a pré-condição semeada (\texttt{len} $\geq 190$), e registrar o resultado na Seção~\ref{subsec:patch-gps}.}
 
 %% [RESOLVIDO] Paragrafo dividido em tres. Metodo de contagem: wc -l (artigo).
 
