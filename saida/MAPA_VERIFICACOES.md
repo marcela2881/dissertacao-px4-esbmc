@@ -85,6 +85,12 @@ não precisam do prelúdio) e todos os replays compilam com g++ 13.3.
 | 7 | `bst.cpp` (telemetria) | falso positivo (harness antigo sem as guardas) | ❌ antigo + fiel | ❌ fiel | — (não é defeito) |
 | 8 | `MicroStrain.cpp` (INS) | **defeito, ainda no PX4** (issue em rascunho) | ❌ | ❌ | ❌ ASan |
 
+**1ª execução (19/10/2026, bruno-pc): 47 de 48 resultados conferem com o esperado.** Atenção: o
+`rodar_tudo.sh` usou o `esbmc` do PATH, que é o **ESBMC 8.2.0**, e não o 8.5 (replays com clang 18.1.3;
+PX4 `main` conferido em `1c8874d41a`, de 19/10/2026). Única divergência: `4_sumd/esbmc.txt` deu OUTRO
+(provável tempo-limite de 1 h; o CBMC deu FAILED, 2 de 38 propriedades, e o replay com UBSan reproduziu).
+Falta: repetir com o 8.5 (`ESBMC=~/esbmc-8.5/.../esbmc ./rodar_tudo.sh`) e ver o log do sumd.
+
 Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador antes de publicar.
 
 ## Fase 3: segunda campanha (módulos de saída, código original, `saida/modulos/`)
