@@ -183,6 +183,84 @@ pela autora.}
 \label{fig:metodologia-visao-geral}
 \end{figure}
 
+%% [19/10/2026] Evolucao da metodologia (qualificacao -> artigo -> segunda
+%% campanha) e organizacao da primeira campanha em tres rodadas. Dados das
+%% rodadas 2 e 3 e o caso do PR ja aberto ficam em \pendente ate a autora
+%% informar.
+\subsection*{\corr{Evolução da metodologia}}
+
+\corr{A metodologia passou por três versões. Na \textbf{qualificação}, ela
+tinha seis etapas: seleção, instrumentação, especificação de propriedades,
+execução do ESBMC, análise de contraexemplos e reporte. No \textbf{artigo
+derivado}, passou a oito, com a validação cruzada e a verificação de
+\textit{patch}~(vii) e a reprodução em outro autopiloto e a integração
+contínua~(viii); a conferência contra o código de produção foi incorporada à
+etapa~(v). Na \textbf{segunda campanha}, desenvolvida nesta dissertação, o
+número de etapas não mudou: mudou a forma de executar seis delas, como resume a
+Tabela~\ref{tab:evolucao-metodologia}.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Evolução da metodologia: qualificação, artigo derivado e segunda campanha}}
+\label{tab:evolucao-metodologia}
+\footnotesize
+\begin{tabular}{|p{2.6cm}|p{2.4cm}|p{3.4cm}|p{5.6cm}|}
+\hline
+\textbf{Etapa} & \textbf{Qualificação (6 etapas)} & \textbf{Artigo derivado (8 etapas)} & \textbf{Segunda campanha (8 etapas)} \\
+\hline
+\corr{(i) Seleção} & \corr{sim} & \corr{sim} & \corr{módulos de saída, do alocador de controle aos atuadores} \\
+\hline
+\corr{(ii) \textit{Stubs}} & \corr{sim} & \corr{bytes não determinísticos passados ao trecho transcrito} & \corr{\textit{stubs} de fato e inclusão do código-fonte \emph{original}} \\
+\hline
+\corr{(iii) Propriedades} & \corr{sim} & \corr{\textit{datasheet}, código e requisito matemático} & \corr{origem e página do documento anotadas no \textit{harness}} \\
+\hline
+\corr{(iv) ESBMC} & \corr{sim} & \corr{ESBMC 8.1, uma configuração, sem \textit{unwinding assertions}} & \corr{ESBMC 8.5; rodada rápida e oficial; com e sem \textit{unwinding assertions}; indução, divisão por tamanho e composição} \\
+\hline
+\corr{(v) Contraexemplos} & \corr{análise do traço} & \corr{conferência por leitura do código} & \corr{\textit{replay} executado e quatro categorias de classificação} \\
+\hline
+\corr{(vi) Reporte} & \corr{sim} & \corr{reporte antes da triagem (GPS, FIFO)} & \corr{reporte depois da triagem, com checagem de \textit{issues} e da branch principal} \\
+\hline
+\corr{(vii) CBMC e \textit{patch}} & \corr{---} & \corr{só nos candidatos} & \corr{todos os \textit{harnesses}; \textit{patch} reverificado com ESBMC e \textit{replay}} \\
+\hline
+\corr{(viii) ArduPilot e CI} & \corr{---} & \corr{sim} & \corr{sem mudança} \\
+\hline
+\end{tabular}
+\end{table}
+
+\pendente{Conferir com a versão da qualificação os nomes exatos das seis etapas originais.}
+
+\subsection*{\corr{Organização da primeira campanha em rodadas}}
+
+\corr{Os doze módulos da primeira campanha foram verificados em três rodadas
+(Tabela~\ref{tab:rodadas}). A primeira concentrou os drivers de sensores e de
+comunicação de maior criticidade; as seguintes ampliaram a cobertura para
+monitoramento, navegação e estimação de estado.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Rodadas da primeira campanha}}
+\label{tab:rodadas}
+\footnotesize
+\begin{tabular}{|p{1.6cm}|p{5.0cm}|p{3.4cm}|p{4.0cm}|}
+\hline
+\textbf{Rodada} & \textbf{Módulos} & \textbf{Critério} & \textbf{Resultado} \\
+\hline
+\corr{1.ª} & \corr{IMU BMI088, GPS uBlox, MAVLink (\textit{buffer} de transmissão), Expo RC} & \corr{sensores e comunicação de maior criticidade} & \corr{GPS: violação alcançável no modelo (Issue~\#26866, PR~\#27576); IMU: FIFO falso positivo e temperatura contestada (Issue~\#26865, PR~\#27575); MAVLink e Expo RC: sem violação} \\
+\hline
+\corr{2.ª} & \pendente{módulos da 2.ª rodada} & \corr{monitoramento e estimação}\pendente{ (conferir)} & \pendente{resultado; incluir o caso cujo PR já estava aberto} \\
+\hline
+\corr{3.ª} & \pendente{módulos da 3.ª rodada} & \corr{navegação}\pendente{ (conferir)} & \pendente{resultado} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{Os módulos das rodadas 2 e 3 são, em conjunto, Barometer, Battery
+Monitor, EKF2, Magnetometer, Navigator, PWM Output, RC Update e VTOL; todos
+verificaram sem violação até o limite $k$ na primeira campanha.}
+\pendente{Distribuir esses oito módulos entre as rodadas 2 e 3.}
+
+\pendente{Caso da 2.ª rodada em que já havia um \textit{pull request} aberto no PX4: indicar o módulo, o teste, o número do PR, quem o abriu e o que ele corrigia, e como o caso foi tratado (comentado pelo orientador). Esse caso ilustra a checagem de \textit{issues} e PRs existentes antes do reporte (etapa~(vi)).}
+
 %% [RESOLVIDO] Paragrafo dividido em tres. Metodo de contagem: wc -l (artigo).
 
 %% Prof. Lucas: "O que voce define como verificacao modular?" -- CORRIGIDO
