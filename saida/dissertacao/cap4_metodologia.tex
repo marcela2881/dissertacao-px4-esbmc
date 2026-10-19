@@ -107,7 +107,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \corr{(vii) Validação cruzada} & \corr{CBMC 5.95.1 (MiniSat)} & \corr{opções equivalentes (Tabela~\ref{tab:equivalencia-opcoes})} & \corr{mesmo \textit{harness} e mesmas pré-condições do ESBMC} \\
 \hline
-\corr{(viii) ArduPilot e CI} & \corr{CBMC 5.95.1; GitHub Actions} & \corr{\pendente{opções do \textit{workflow}}} & \corr{lógica equivalente no driver do ArduPilot} \\
+\corr{(viii) ArduPilot e CI} & \corr{CBMC 5.95.1; GitHub Actions (CBMC do \texttt{apt}, \texttt{ubuntu-latest})} & \corr{\texttt{--unwind 10 --signed-overflow-check --unsigned-overflow-check --bounds-check}} & \corr{lógica equivalente no driver do ArduPilot} \\
 \hline
 \end{tabular}
 \end{table}
@@ -759,16 +759,62 @@ observação.
 
 \pendente{Opcional: repetir a reprodução no ArduPilot com o ESBMC~8.5, para que a etapa use as duas ferramentas.}
 
-%% LC 14 (pendente 19/10/2026): "Workflow de CI nao documentado; incluir trecho do
+%% LC 14 (resolvido 19/10/2026, tarde: YAML lido no fork, commit 6ce2d14; falta o tempo
+%% de execucao, na aba Actions): "Workflow de CI nao documentado; incluir trecho do
 %% YAML e um tempo de execucao medido." -> depende do arquivo do workflow no fork
 %% e de uma execucao medida.
-Por fim, os \textit{harnesses} do IMU e do GPS rodam em um
-\textit{workflow} do GitHub Actions, em um \textit{fork} do PX4
-(\url{https://github.com/marcela2881/PX4-Autopilot}), a cada \textit{push} e
-\textit{pull request}, de modo que a verificação é refeita a cada alteração do
-código.
+Por fim, \corr{a verificação do IMU e do GPS foi colocada em um
+\textit{workflow} do GitHub Actions, no arquivo
+\texttt{.github/workflows/esbmc-verify.yml} de um \textit{fork} do PX4
+(\url{https://github.com/marcela2881/PX4-Autopilot}, commit \texttt{6ce2d14},
+de 01/06/2026). O \textit{workflow} é disparado a cada \textit{push} e a cada
+\textit{pull request} na \textit{branch} principal do \textit{fork} e tem dois
+\textit{jobs}, um por módulo. Cada \textit{job} instala o CBMC pelo gerenciador
+de pacotes, escreve o \textit{harness} e executa o verificador, como resume a
+Listagem~\ref{lst:ci-yaml}.}
 
-\pendente{Incluir aqui o trecho do arquivo YAML do \textit{workflow} (pasta \texttt{.github/workflows/} do \textit{fork}) e o tempo de execução de uma rodada, lido na aba \textit{Actions} do GitHub.}
+\begin{lstlisting}[
+  caption={\corr{Trecho do \textit{workflow} de integração contínua (\textit{job} do GPS; o do IMU é análogo)}},
+  label={lst:ci-yaml},
+  frame=single,
+  basicstyle=\ttfamily\footnotesize]
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+jobs:
+  verify-gps-ublox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CBMC
+        run: sudo apt-get install -y cbmc
+      - name: Run CBMC on GPS uBlox
+        run: |
+          cat > /tmp/test_gps.cpp << 'EOF'
+          ...   # harness escrito no proprio workflow
+          EOF
+          cbmc /tmp/test_gps.cpp --unwind 10 \
+            --signed-overflow-check --unsigned-overflow-check \
+            --bounds-check 2>&1 | tee /tmp/resultado_gps.txt
+\end{lstlisting}
+
+\corr{A leitura do arquivo mostra três limitações, que restringem o que a
+integração contínua de fato garante. Primeiro, apesar do nome do arquivo, o
+verificador usado é o CBMC, e não o ESBMC. Segundo, os \textit{harnesses} não
+são os depositados no repositório de artefatos: são versões reduzidas, escritas
+dentro do próprio \textit{workflow}, que transcrevem as funções em vez de usar o
+código do \textit{fork}; o do GPS, além disso, usa a pré-condição
+\texttt{len < 200}, a mesma que, como mostrado na Seção~\ref{subsec:patch-gps},
+exclui os estados em que a violação ocorre. Terceiro, a saída do CBMC passa por
+\texttt{tee}, e o \textit{shell} padrão do GitHub Actions não propaga o código
+de saída do primeiro comando de um \textit{pipe}; assim, uma violação encontrada
+fica registrada no arquivo de resultado, mas não faz o \textit{job} falhar. Na
+forma atual, portanto, o \textit{workflow} registra a verificação a cada
+alteração, mas não bloqueia uma alteração que a viole.}
+
+\pendente{Ler na aba \textit{Actions} (``Ações'') do \textit{fork} se o \textit{workflow} chegou a executar, o resultado e o tempo de uma execução, e acrescentar aqui. Observação: o \textit{workflow} usa \texttt{actions/upload-artifact@v3}, versão que o GitHub desativou em 2025, o que pode fazer o passo de envio do resultado falhar. Decidir com o orientador se o \textit{workflow} será corrigido (CBMC e ESBMC, \textit{harnesses} do repositório, \texttt{set -o pipefail}) ou se fica registrado como limitação.}
 
 % =============================================================================
 \section{Exemplo Ilustrativo: GPS uBlox}
@@ -939,9 +985,10 @@ $600$~s, o ESBMC voltou a encontrar a violação em cerca de $137$~s (mediana de
 três execuções) e o CBMC não terminou dentro do limite
 (Seção~\ref{subsec:2c-cbmc}).}
 
-\textbf{Integração contínua.} O \textit{harness} do GPS roda no
-\textit{workflow} de integração contínua do \textit{fork} a cada \textit{push}
-(Seção~\ref{subsec:etapa-ardupilot-ci}). A etapa de reprodução no ArduPilot não
+\textbf{Integração contínua.} \corr{Uma versão reduzida do \textit{harness}
+do GPS roda com o CBMC no \textit{workflow} de integração contínua do
+\textit{fork} a cada \textit{push}, com as limitações descritas na
+Seção~\ref{subsec:etapa-ardupilot-ci}.} A etapa de reprodução no ArduPilot não
 se aplica a este achado, já que ela foi feita apenas para a observação de
 temperatura do BMI088.
 
