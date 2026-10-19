@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1010" viewBox="0 0 1600 1010" font-family="DejaVu Sans, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1540" viewBox="0 0 1600 1540" font-family="DejaVu Sans, Arial, sans-serif">
 <defs>
 <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
 <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
@@ -10,7 +10,7 @@
 .out{fill:#dcfce7;stroke:#15803d;stroke-width:1.5}.ln{stroke:#333;stroke-width:1.6;fill:none}
 .lr{stroke:#b45309;stroke-width:1.6;fill:none;stroke-dasharray:6 4}
 </style></defs>
-<rect width="1600" height="1010" fill="#ffffff"/>
+<rect width="1600" height="1540" fill="#ffffff"/>
 <text x="800" y="34" text-anchor="middle" font-size="22" font-weight="bold">Metodologia de verificação dos módulos do PX4 — entradas, processo e saídas</text>
 
 <text x="170" y="74" text-anchor="middle" class="col" fill="#2563eb">ENTRADAS</text>
@@ -22,7 +22,7 @@
 <!-- ENTRADAS -->
 <rect class="in" x="20" y="95" width="305" height="150" rx="8"/>
 <text x="35" y="122" class="h">E1. Código ORIGINAL do PX4</text>
-<text x="35" y="147" class="s">commit 8be2590 (fixado)</text>
+<text x="35" y="147" class="s">commit 8be2590 (fixado) — ver tabela abaixo</text>
 <text x="35" y="169" class="s">• 1ª leva: 12 módulos (artigo SBESC)</text>
 <text x="35" y="191" class="s">• 2ª leva: 10 módulos de saída</text>
 <text x="35" y="213" class="s">  (pca9685, roboclaw, dshot, uavcan,</text>
@@ -52,7 +52,7 @@
 <!-- PROCESSO -->
 <rect class="pr" x="395" y="95" width="535" height="160" rx="8"/>
 <text x="410" y="122" class="h">P1. Harness de verificação (um por módulo)</text>
-<text x="410" y="147" class="s">• #include do .c/.cpp ORIGINAL (tradução única, sem copiar código)</text>
+<text x="410" y="147" class="s">• 2ª leva: #include do .c/.cpp ORIGINAL; 1ª leva: lógica extraída</text>
 <text x="410" y="169" class="s">• stubs só do ambiente: POSIX, NuttX, uORB, parâmetros</text>
 <text x="410" y="191" class="s">• entradas não determinísticas (nondet_*) + pré-condições (assume)</text>
 <text x="410" y="213" class="s">• propriedades como assert(); um teste por propriedade (T0, T1, …)</text>
@@ -153,5 +153,39 @@
 <path class="ln" d="M800,515 L1275,515" marker-end="url(#a)"/><text x="1000" y="507" class="s" font-weight="bold">SUCCESSFUL</text>
 <path class="ln" d="M930,835 L1240,835 L1240,730 L1275,730" marker-end="url(#a)"/>
 <path class="ln" d="M930,680 L1275,680" marker-end="url(#a)"/>
-<text x="20" y="985" class="s" fill="#555">UA/NUA = com/sem asserções de desdobramento. Linha tracejada = ciclo de ajuste do harness (teste rápido). Esquema gerado em 19/10/2026 a partir do estado atual do repositório.</text>
+
+<line x1="20" y1="990" x2="1580" y2="990" stroke="#999"/>
+<text x="800" y="1020" text-anchor="middle" font-size="20" font-weight="bold">Módulos e funções verificadas (entrada E1)</text>
+<rect class="in" x="20" y="1040" width="760" height="444" rx="8"/>
+<text x="35" y="1066" class="h">1ª leva — artigo SBESC (12 módulos)</text>
+<text x="35" y="1088" class="s" font-style="italic">lógica das funções extraída do PX4 e reescrita no harness</text>
+<text x="35" y="1118" class="s" font-weight="bold">Módulo</text><text x="190" y="1118" class="s" font-weight="bold">Arquivo (src/…)</text><text x="470" y="1118" class="s" font-weight="bold">Funções</text>
+<text x="35" y="1144" class="s">Barometer</text><text x="190" y="1144" class="s" font-size="12">lib/sensor_calibration/Barometer.cpp</text><text x="470" y="1144" class="s" font-size="12">set_offset, calibration_index, correct_pressure</text>
+<text x="35" y="1170" class="s">Battery_Monitor</text><text x="190" y="1170" class="s" font-size="12">lib/battery/battery.cpp</text><text x="470" y="1170" class="s" font-size="12">determineWarning, determineFaults, scale</text>
+<text x="35" y="1196" class="s">EKF2_Covariance</text><text x="190" y="1196" class="s" font-size="12">modules/ekf2/EKF/covariance.cpp</text><text x="470" y="1196" class="s" font-size="12">constrain_state_var, compute_ekf_dt, variâncias</text>
+<text x="35" y="1222" class="s">Expo_RC</text><text x="190" y="1222" class="s" font-size="12">lib/mathlib/math/Functions.hpp</text><text x="470" y="1222" class="s" font-size="12">expo(), constrain()</text>
+<text x="35" y="1248" class="s">GPS</text><text x="190" y="1248" class="s" font-size="12">drivers/gps/gps.cpp</text><text x="470" y="1248" class="s" font-size="12">dumpGpsData()</text>
+<text x="35" y="1274" class="s">IMU_BMI088</text><text x="190" y="1274" class="s" font-size="12">drivers/imu/bosch/bmi088</text><text x="470" y="1274" class="s" font-size="12">updateTemperature, fifoReadCount, accel/gyro</text>
+<text x="35" y="1300" class="s">MAVLink</text><text x="190" y="1300" class="s" font-size="12">modules/mavlink/mavlink_main.cpp</text><text x="470" y="1300" class="s" font-size="12">send_bytes()</text>
+<text x="35" y="1326" class="s">Magnetometer</text><text x="190" y="1326" class="s" font-size="12">sensors/vehicle_magnetometer</text><text x="470" y="1326" class="s" font-size="12">ganho de Kalman, compensação, prioridade</text>
+<text x="35" y="1352" class="s">Navigator_Mission</text><text x="190" y="1352" class="s" font-size="12">modules/navigator/mission.cpp</text><text x="470" y="1352" class="s" font-size="12">set_current_mission_index, next_items</text>
+<text x="35" y="1378" class="s">PWM_Output</text><text x="190" y="1378" class="s" font-size="12">drivers/pwm_out/PWMOut.cpp</text><text x="470" y="1378" class="s" font-size="12">convert_output_to_pwm, process_channel</text>
+<text x="35" y="1404" class="s">RC_Update</text><text x="190" y="1404" class="s" font-size="12">modules/rc_update/rc_update.cpp</text><text x="470" y="1404" class="s" font-size="12">get_rc_value, calibrate_rc_channel, failsafe</text>
+<text x="35" y="1430" class="s">VTOL</text><text x="190" y="1430" class="s" font-size="12">modules/vtol_att_control/vtol_type.cpp</text><text x="470" y="1430" class="s" font-size="12">transição: tempo, airspeed, empuxo</text>
+<rect class="out" x="800" y="1040" width="780" height="444" rx="8"/>
+<text x="815" y="1066" class="h">2ª leva — módulos de saída (10 módulos)</text>
+<text x="815" y="1088" class="s" font-style="italic">arquivo ORIGINAL do PX4 incluído no harness (#include)</text>
+<text x="815" y="1118" class="s" font-weight="bold">Módulo</text><text x="960" y="1118" class="s" font-weight="bold">Arquivo</text><text x="1135" y="1118" class="s" font-weight="bold">Funções</text><text x="1525" y="1118" class="s" font-weight="bold">Testes</text>
+<text x="815" y="1148" class="s" fill="#333">pca9685_pwm_out</text><text x="960" y="1148" class="s" font-size="12" fill="#333">PCA9685.cpp</text><text x="1135" y="1148" class="s" font-size="12" fill="#333" >updateRAW, updateFreq, calcRawFromPulse</text><text x="1525" y="1148" class="s" fill="#333">T0–T4</text>
+<text x="815" y="1178" class="s" fill="#333">roboclaw</text><text x="960" y="1178" class="s" font-size="12" fill="#333">RoboClaw.cpp</text><text x="1135" y="1178" class="s" font-size="12" fill="#333" >readEncoder, updateOutputs, setMotorDutyCycle</text><text x="1525" y="1178" class="s" fill="#333">R0–R4</text>
+<text x="815" y="1208" class="s" fill="#333">voxl_esc</text><text x="960" y="1208" class="s" font-size="12" fill="#333">qc_esc_packet.c, crc16.c</text><text x="1135" y="1208" class="s" font-size="12" fill="#333" >process_char, create_packet, rpm/pwm_packet4</text><text x="1525" y="1208" class="s" fill="#333">T0–T8</text>
+<text x="815" y="1238" class="s" fill="#333">tap_esc</text><text x="960" y="1238" class="s" font-size="12" fill="#333">tap_esc_common.cpp</text><text x="1135" y="1238" class="s" font-size="12" fill="#333" >parse_feedback, read_data_from_uart, send_packet</text><text x="1525" y="1238" class="s" fill="#333">T0–T4</text>
+<text x="815" y="1268" class="s" fill="#999">dshot</text><text x="960" y="1268" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1268" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1268" class="s" fill="#999">—</text>
+<text x="815" y="1298" class="s" fill="#999">uavcan/actuators</text><text x="960" y="1298" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1298" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1298" class="s" fill="#999">—</text>
+<text x="815" y="1328" class="s" fill="#999">px4io</text><text x="960" y="1328" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1328" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1328" class="s" fill="#999">—</text>
+<text x="815" y="1358" class="s" fill="#999">mixer_module</text><text x="960" y="1358" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1358" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1358" class="s" fill="#999">—</text>
+<text x="815" y="1388" class="s" fill="#999">control_allocation</text><text x="960" y="1388" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1388" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1388" class="s" fill="#999">—</text>
+<text x="815" y="1418" class="s" fill="#999">control_allocator</text><text x="960" y="1418" class="s" font-size="12" fill="#999">—</text><text x="1135" y="1418" class="s" font-size="12" fill="#999" font-style="italic">a definir</text><text x="1525" y="1418" class="s" fill="#999">—</text>
+<text x="815" y="1448" class="s" fill="#999" font-style="italic">cinza = em preparação (harness ainda não escrito)</text>
+<text x="20" y="1520" class="s" fill="#555">UA/NUA = com/sem asserções de desdobramento. Linha tracejada = ciclo de ajuste do harness (teste rápido). Esquema gerado em 19/10/2026 a partir do estado atual do repositório.</text>
 </svg>
