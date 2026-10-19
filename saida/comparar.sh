@@ -62,13 +62,17 @@ par() {
   local label=$1 h=$2 extra=$3 inc=$4 oe=$5 oc=$6 le lc incabs="" i
   for i in $inc; do incabs="$incabs $PX4_ROOT/$i"; done
   echo "--- $label"
-  le=$(LOGDIR="$base/esbmc" ./scripts/run_esbmc.sh "$label" "$h" "" "$inc" $oe --timeout ${TO}s 2>&1 | tee /dev/stderr | tail -"$((RUNS+1))")
+  # saída de cada execução vai para o terminal/arquivo com >&2 (não "tee /dev/stderr": com
+  # "> arquivo 2>&1" ele reabre o arquivo na posição 0 e sobrescreve o que já foi escrito)
+  le=$(LOGDIR="$base/esbmc" ./scripts/run_esbmc.sh "$label" "$h" "" "$inc" $oe --timeout ${TO}s 2>&1)
+  printf '%s\n' "$le" >&2; le=$(printf '%s\n' "$le" | tail -"$((RUNS+1))")
   local hc="$h"
   if [[ "$h" == *.cpp ]]; then
     hc="$base/cbmc/entrada_${label}.cpp"
     printf '#include "%s"\n#include "%s"\n' "$raiz/cbmc/prelude_cbmc.h" "$h" > "$hc"
   fi
-  lc=$(LOGDIR="$base/cbmc" ./scripts/run_cbmc.sh "$label" "$hc $extra" "$incabs" $oc 2>&1 | tee /dev/stderr | tail -"$((RUNS+1))")
+  lc=$(LOGDIR="$base/cbmc" ./scripts/run_cbmc.sh "$label" "$hc $extra" "$incabs" $oc 2>&1)
+  printf '%s\n' "$lc" >&2; lc=$(printf '%s\n' "$lc" | tail -"$((RUNS+1))")
   resum() { local med v; med=$(echo "$1" | grep -oE "mediana = [0-9.NA]+s" | grep -oE "[0-9.]+s|NAs"); v=$(echo "$1" | grep -oE "\[[^]]*\]" | sort | uniq -c | sort -rn | head -1 | sed 's/^ *//'); echo "$v, $med"; }
   printf '%-34s | %-28s | %-28s\n' "$label" "$(resum "$le")" "$(resum "$lc")" >> "$resumo"
 }
