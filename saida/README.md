@@ -333,10 +333,15 @@ só na inclusão do PX4, para os testes por indução partirem de qualquer estad
 | D0 | `parseTelemetryPacket` (indução, `_frame_position` em [0,10)) | DP1: memória de `_frame_buffer[10]` e invariante |
 | D1 | `parseTelemetryPacket`, quadro com CRC8 correto | DP2: Ready e campos conforme o formato do quadro (eRPM x100 sem estouro) |
 | D2 | `parseTelemetryPacket`, CRC8 errado | DP3: ParseError e `esc_data` intacto |
-| D3 | `parseCommandResponse` (indução, posição em [0,49]) | DP1: memória de `_command_response_buffer[49]` e invariante |
+| D3 | `parseCommandResponse` (indução, posição em [0,49]; sem tratador AM32, que fica para D4) | DP1: memória de `_command_response_buffer[49]` e invariante |
 | D4 | `AM32Settings::decodeInfoResponse` | DP4: aceita só 49 bytes com CRC8 correto; publica os 48 bytes, length 48, índice |
 
-Compilação conferida com g++ (`-fsyntax-only`, os 5 testes). CBMC: `PARSING ERROR` previsto, pelo literal
+Compilação conferida com g++ (`-fsyntax-only`, os 5 testes).
+
+Teste rápido (PC do Bruno, 19/10/2026, 07:11 e 07:19; rodou junto com a oficial da 1ª leva, então os tempos
+estão inflados): T0 SUCCESSFUL ~119 s; T1 SUCCESSFUL ~7.7 s; T2 SUCCESSFUL ~6.1 s; T3 Timed out (300 s);
+T4 SUCCESSFUL ~2.7 s. Mesmos vereditos nas duas rodadas. T3 refeito sem o tratador AM32: a chamada
+`decodeInfoResponse(buffer, posição)` com posição em [0,49] já é o caso verificado em D4 (composição). CBMC: `PARSING ERROR` previsto, pelo literal
 `_ms` do stub de plataforma e pela lambda da `crc8` em `DShotCommon.h:76` (código do PX4).
 
 ## Fluxo de trabalho: fm07 → PC → GitHub

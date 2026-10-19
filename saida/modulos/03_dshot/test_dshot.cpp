@@ -32,7 +32,7 @@
  *          temperatura = byte 0 [°C]; tensão = bytes 1-2 (big-endian) x 0,01 V;
  *          corrente = bytes 3-4 x 0,01 A; eRPM = bytes 7-8 x 100 (sem estouro, >= 0).
  *   - DP3: quadro com CRC8 errado -> ParseError e esc_data não é alterado.
- *   - DP4: resposta AM32 só é aceita com 49 bytes e CRC8 correto; nesse caso o
+ *   - DP4 (D4, e a chamada feita por D3): resposta AM32 só é aceita com 49 bytes e CRC8 correto; nesse caso o
  *          tópico publicado traz os 48 bytes recebidos, length 48 e o índice do ESC.
  */
 
@@ -166,8 +166,12 @@ void test_telemetry_bad_crc()
 
 /* ---------------------------------------------------------------------------
  * D3 — DP1 na resposta de comando: parseCommandResponse a partir de QUALQUER
- * estado válido (posição em [0,49], comando e índice de motor quaisquer, com
- * ou sem tratador AM32 para o motor), UART devolvendo de -1 a 49 bytes.
+ * estado válido (posição em [0,49], comando e índice de motor quaisquer), UART
+ * devolvendo de -1 a 49 bytes. Sem tratador AM32 registrado: a 1ª versão, com
+ * o tratador, deu Timed out em 300 s (PC do Bruno, 19/10/2026), pois somava a
+ * cópia para posição livre ao CRC8 de 48 bytes livres. A chamada ao tratador,
+ * decodeInfoResponse(_command_response_buffer, posição) com posição em [0,49]
+ * sobre o buffer de 49 bytes, é verificada à parte em D4 (composição).
  * ------------------------------------------------------------------------- */
 void test_command_response()
 {
@@ -178,11 +182,6 @@ void test_command_response()
 	t._command_response_command = nondet_uint16();
 	t._command_response_start = 1;
 	g_hrt_elapsed = nondet_uint64();           /* inclui o caminho de timeout (> 1 s) */
-
-	int m = nondet_int();
-	__VERIFIER_assume(m >= 0 && m < DSHOT_MAX_MOTORS);
-
-	if (nondet_int()) { t._settings_handlers[m] = new AM32Settings(m); }
 
 	t.parseCommandResponse();
 
