@@ -114,10 +114,10 @@ Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
 ### Passo 2: especificação (feito em 19/10/2026)
 
 Encontrado no manual (Rev. 5.5, pp. 48–49; Rev. 5, pp. 40–41), já colocado no rascunho.
-**Rev. 6.0 (atual, site oficial, firmware 4.3.0+):** texto dos comandos 0 e 1 conferido em 19/10/2026,
-idêntico ("Valid data range is 0 - 127"), na mesma seção "Commands 0 - 7 Compatibility Commands".
-**Falta:** o número da página (rodapé) dos comandos 0/1 e 4/5 na Rev. 6.0, e conferir o texto dos 4 e 5.
-O rascunho já cita a Rev. 6.0, com a página em `[[ ]]`.
+**Rev. 6.0 (atual, site oficial, firmware 4.3.0+), conferida em 19/10/2026:** seção "Commands 0 - 7
+Compatibility Commands"; comandos 0 e 1 na **p. 48**, comando 4 na **p. 49**, com o mesmo texto
+("Valid data range is 0 - 127"). O comando 5 vem logo após o 4 (na Rev. 5.5 também está na p. 49):
+só confira de passagem. O rascunho já cita a Rev. 6.0, pp. 48–49.
 
 ### Passo 3: conferir se já não foi reportado (você)
 

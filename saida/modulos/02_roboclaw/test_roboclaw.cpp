@@ -16,7 +16,7 @@
  *     (mixer_module.cpp, limitAndUpdateOutputs/actualFailsafeValue).
  *
  * PROPRIEDADES DE ESPECIFICAÇÃO (RoboClaw Series User Manual, seção
- * "Commands 0 - 7 Compatibility Commands": Rev. 6.0 (atual, firmware 4.3.0+);
+ * "Commands 0 - 7 Compatibility Commands": Rev. 6.0 (atual, firmware 4.3.0+), pp. 48-49;
  * mesmo texto na Rev. 5.5, pp. 48-49, e na Rev. 5, pp. 40-41):
  *   - RC1: comandos 0, 1, 4 e 5 (Drive Forward/Backwards M1/M2): o byte de
  *          dados vai de 0 a 127.
