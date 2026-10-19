@@ -31,6 +31,8 @@ etapa "2 dshot D3 (51 tamanhos) ESBMC rápido" env SO_TESTES="$(seq -s " " 100 1
 for m in voxl_esc pca9685 roboclaw tap_esc dshot; do
   etapa "3 $m ESBMC x CBMC rápido"         ./comparar.sh "$m" rapido
 done
+etapa "5 mixer_module ESBMC rápido"       ./rodar_modulo.sh mixer_module rapido
+
 # PULAR_V5=1 ./rodar_fila.sh  -> pula o pacote v5 (quando ele já foi rodado à parte)
 if [ "${PULAR_V5:-0}" != 1 ]; then
   etapa "4 pacote v5 (ESBMC, CBMC e replay)" bash -c 'cd v5 && ./rodar_tudo.sh'
