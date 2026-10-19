@@ -128,7 +128,7 @@ Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
   failsafe ou do retorno de `write()`. O único PR aberto que mexe no driver é o #28848
   ("feat(rover): add high level encoder support", aberto em 26/09/2026): ele só acrescenta 3 linhas em
   `readEncoder()` (`counts_per_rev`) e não altera `updateOutputs`, `sendUnsigned7Bit`, `writeCommand`,
-  `writeCommandWithPayload` nem o `module.yaml`. Vale citá-lo na issue como trabalho em andamento no driver.
+  `writeCommandWithPayload` nem o `module.yaml`. Decisão: não citar esse PR na issue.
 
 ### Passo 4 (opcional, mas fortalece): hardware
 
