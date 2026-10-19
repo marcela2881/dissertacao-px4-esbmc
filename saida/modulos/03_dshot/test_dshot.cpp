@@ -172,8 +172,15 @@ void test_telemetry_bad_crc()
  * cópia para posição livre ao CRC8 de 48 bytes livres. A chamada ao tratador,
  * decodeInfoResponse(_command_response_buffer, posição) com posição em [0,49]
  * sobre o buffer de 49 bytes, é verificada à parte em D4 (composição).
+ *
+ * Divisão por tamanho (2ª versão, 19/10/2026): a versão com o tamanho lido
+ * livre também deu Timed out em 300 s. Agora cada teste fixa QUANTOS bytes a
+ * UART devolve (len), mantendo livres o conteúdo, a posição, o comando, o
+ * índice do motor e o tempo. TEST_CHOICE = 101 + len, de 100 (len = -1, erro)
+ * a 150 (len = 49): os 51 testes cobrem juntos todos os valores que read()
+ * pode devolver, o mesmo que a versão livre (mesma técnica do voxl_esc V1).
  * ------------------------------------------------------------------------- */
-void test_command_response()
+void test_command_response(long len)
 {
 	DShotTelemetry t;
 	t._command_response_position = nondet_int();
@@ -182,6 +189,11 @@ void test_command_response()
 	t._command_response_command = nondet_uint16();
 	t._command_response_start = 1;
 	g_hrt_elapsed = nondet_uint64();           /* inclui o caminho de timeout (> 1 s) */
+
+	g_serial_fixed = true;                     /* read() devolve len bytes quaisquer */
+	g_serial_len = len;
+
+	for (long i = 0; i < len; i++) { g_serial_bytes[i] = nondet_uint8(); }
 
 	t.parseCommandResponse();
 
@@ -230,15 +242,17 @@ int harness_main()
 	int choice = TEST_CHOICE;                 /* rodar um teste por vez: -DTEST_CHOICE=n */
 #else
 	int choice = nondet_int();
-	__VERIFIER_assume(choice >= 0 && choice <= 4);
+	__VERIFIER_assume((choice >= 0 && choice <= 4 && choice != 3) || (choice >= 100 && choice <= 150));
 #endif
 
 	switch (choice) {
 	case 0: test_telemetry_reader();  break;
 	case 1: test_telemetry_fields();  break;
 	case 2: test_telemetry_bad_crc(); break;
-	case 3: test_command_response();  break;
 	case 4: test_am32_decode();       break;
+	default:
+		if (choice >= 100 && choice <= 150) { test_command_response(choice - 101); }   /* D3, len = -1..49 */
+		break;
 	}
 
 	return 0;

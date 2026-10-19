@@ -92,7 +92,7 @@ leva1() {
 modulo() {
   local pasta; pasta=$(ls -d modulos/*/ | sed 's#/$##' | grep -E "modulos/(${1}_|[0-9]+_${1}$|${1}$)" | head -1)
   [ -f "$pasta/config.sh" ] || { echo "módulo $1 não encontrado"; return; }
-  NOME=""; HARNESS=""; INC=""; TESTES=""; OPCOES=""; for n in 0 1 2 3 4 5 6 7 8 9; do unset "EXTRA_$n"; done
+  NOME=""; HARNESS=""; INC=""; TESTES=""; OPCOES=""; for n in $(seq 0 9) $(seq 100 150); do unset "EXTRA_$n"; done
   source "$pasta/config.sh"
   [ -n "${SO_TESTES:-}" ] && TESTES="$SO_TESTES"
   local cpp=""; [[ "$HARNESS" == *.cpp ]] && cpp="--cpp11"
