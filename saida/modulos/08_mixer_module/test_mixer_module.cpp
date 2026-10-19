@@ -43,6 +43,11 @@
  */
 
 #define STUB_MATHLIB_ORIGINAL 1          /* math:: vem do src/lib/mathlib original */
+/* Contorno de um erro do ESBMC 8.5 (aborta com "bad optional access" ao construir classe
+ * polimórfica com membro vetor inicializado com {}, caso do MixingOutput): ModuleParams não
+ * polimórfica e "override" vazio. Não muda a lógica verificada: nada aqui chama
+ * updateParams() por ponteiro da base. Ver saida/ferramenta/esbmc_crash_vetor_polimorfico.cpp. */
+#define STUB_MODULEPARAMS_SEM_VIRTUAL 1
 #include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -68,11 +73,13 @@ void     __VERIFIER_assume(int);   /* aceito pelo ESBMC e pelo CBMC */
 #include <mathlib/math/Functions.hpp>   /* ORIGINAL: math::interpolate, interpolateNXY */
 
 /* acesso aos membros privados do MixingOutput, só para montar o estado e checar */
+#define override
 #define private public
 #define protected public
 #include "mixer_module.cpp"             /* ORIGINAL do PX4 (unidade de tradução única) */
 #undef private
 #undef protected
+#undef override
 
 int32_t g_param_values[px4::params::PARAM_COUNT];
 float   g_param_values_f[px4::params::PARAM_COUNT];
@@ -84,7 +91,10 @@ hrt_abstime g_hrt_elapsed = 0;
 class SaidaTeste : public OutputModuleInterface
 {
 public:
-	SaidaTeste() : OutputModuleInterface("teste", px4::wq_configurations::hp_default) {}
+	SaidaTeste() : OutputModuleInterface("teste", px4::wq_configurations::hp_default)
+	{
+		for (int i = 0; i < N_CANAIS; i++) { recebido[i] = 0.f; }   /* sem "{}" no membro: mesmo erro do ESBMC */
+	}
 	bool updateOutputs(float outputs[MAX_ACTUATORS], unsigned num_outputs, unsigned) override
 	{
 		n = num_outputs;
@@ -93,7 +103,7 @@ public:
 
 		return true;
 	}
-	float recebido[N_CANAIS] {};
+	float recebido[N_CANAIS];
 	unsigned n{0};
 };
 

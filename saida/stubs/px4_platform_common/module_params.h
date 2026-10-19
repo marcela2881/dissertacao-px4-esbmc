@@ -30,13 +30,21 @@ public:
 	float &reference() { return g_param_values_f[P]; }
 };
 
+/* STUB_MODULEPARAMS_SEM_VIRTUAL: ModuleParams não polimórfica. Contorno de um erro do
+ * ESBMC 8.5 ("bad optional access" ao construir classe polimórfica com membro vetor
+ * inicializado com {}, como o MixingOutput); ver saida/ferramenta/esbmc_crash_vetor_polimorfico.cpp.
+ * O harness que usa isto também define "override" como vazio. */
 class ModuleParams
 {
 public:
 	ModuleParams() = default;
 	explicit ModuleParams(ModuleParams *) {}
+#ifdef STUB_MODULEPARAMS_SEM_VIRTUAL
+	void updateParams() {}
+#else
 	virtual ~ModuleParams() = default;
 	virtual void updateParams() {}
+#endif
 };
 
 /* DEFINE_PARAMETERS((Tipo) nome, ...) -> "Tipo nome; ..." (até 8 parâmetros) */

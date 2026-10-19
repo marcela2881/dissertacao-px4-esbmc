@@ -1,4 +1,6 @@
 /* STUB de ScheduledWorkItem.hpp: a fila de trabalho (agendamento) não é modelada.
+ * Sem funções virtuais: com duas bases polimórficas (WorkItem e ModuleParams, como no
+ * OutputModuleInterface) o ESBMC 8.5 aborta com "bad optional access" (19/10/2026).
  * Também traz o semáforo do PX4 (px4_sem_*), usado pelo MixingOutput só como trava. */
 #pragma once
 #include <px4_platform_common/px4_common_stub.h>
@@ -18,10 +20,9 @@ class WorkItem
 {
 public:
 	WorkItem(const char *, const wq_config_t &) {}
-	virtual ~WorkItem() = default;
 	bool ChangeWorkQueue(const wq_config_t &) { return true; }
 	void ScheduleNow() {}
-	virtual void Run() {}
+	void Run() {}
 };
 
 class ScheduledWorkItem : public WorkItem
