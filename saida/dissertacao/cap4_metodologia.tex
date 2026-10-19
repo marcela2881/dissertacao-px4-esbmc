@@ -23,7 +23,7 @@
 \chapter{Metodologia}
 \label{cap:metodologia}
 
-%% LC 01 (resolvido 19/10/2026): "Incluir tabela: ferramentas, versoes, flags e
+%% LC 01 (resolvido 19/10/2026; maquina da 2a campanha preenchida a tarde): "Incluir tabela: ferramentas, versoes, flags e
 %% hipoteses de modelagem para cada etapa." -> Tabela tab:etapas-ferramentas,
 %% logo apos a lista das oito etapas.
 
@@ -99,7 +99,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \corr{(iii) Propriedades} & \corr{\textit{assertions} no \textit{harness}} & \corr{---} & \corr{tradução de documento (\textit{datasheet}, manual, código) em predicado sobre variável de programa} \\
 \hline
-\corr{(iv) ESBMC} & \corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ESBMC 8.5.0, Boolector, Windows + WSL Ubuntu 24.04} & \corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \\
+\corr{(iv) ESBMC} & \corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ESBMC 8.5.0, Boolector, AMD Ryzen~7 5700U, 11~GiB de memória no WSL (Windows + WSL Ubuntu 24.04)} & \corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \\
 \hline
 \corr{(v) Contraexemplos} & \corr{1.ª: leitura do código. 2.ª: \textit{replay} com g++~13.3.0} & \corr{\texttt{-std=c++17 -O0}} & \corr{UART simulada de forma determinística} \\
 \hline
@@ -112,7 +112,10 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \end{tabular}
 \end{table}
 
-\pendente{Conferir na máquina oficial da segunda campanha o modelo do processador e a memória, e completar a linha~(iv) da Tabela~\ref{tab:etapas-ferramentas}.}
+\corr{Na segunda campanha, todas as rodadas oficiais foram executadas numa
+única máquina, um computador pessoal com processador AMD Ryzen~7 5700U, em que
+o Ubuntu~24.04 roda no WSL com 11~GiB de memória disponível. Os tempos não são,
+portanto, comparáveis aos da primeira campanha, medidos num i7-13700K.}
 
 % =============================================================================
 \section{Visão Geral da Abordagem}
