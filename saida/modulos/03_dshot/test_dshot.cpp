@@ -190,10 +190,15 @@ void test_command_response(long len)
 	t._command_response_start = 1;
 	g_hrt_elapsed = nondet_uint64();           /* inclui o caminho de timeout (> 1 s) */
 
-	g_serial_fixed = true;                     /* read() devolve len bytes quaisquer */
+	g_serial_fixed = true;                     /* read() devolve len bytes */
 	g_serial_len = len;
 
-	for (long i = 0; i < len; i++) { g_serial_bytes[i] = nondet_uint8(); }
+	/* Conteúdo fixo (zeros) a partir da 3ª versão (19/10/2026): com bytes livres, os
+	 * testes de 36 bytes em diante deram Timed out em 300 s. Sem tratador AM32, o
+	 * conteúdo não influencia nenhuma decisão de parseCommandResponse (só é copiado
+	 * para o buffer); posição, tamanho, comando, índice e tempo continuam livres. O
+	 * conteúdo livre é verificado em D4, que recebe o buffer inteiro. */
+	for (long i = 0; i < len; i++) { g_serial_bytes[i] = 0; }
 
 	t.parseCommandResponse();
 
