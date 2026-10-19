@@ -27,7 +27,11 @@ O harness do ESBMC e o replay com o código original continuam onde estavam:
 4. O byte vai no comando de acionamento 0, 1, 4 ou 5 (*Drive Forward/Backwards M1/M2*).
 
 **A especificação:** nesses comandos, o byte de dados vai de **0 a 127** (manual da Basicmicro,
-*Packet Serial*; **falta você anotar a seção e a página**).
+*RoboClaw Series User Manual*, Rev. 5.5, firmware 4.1.16+, seção "Commands 0 - 7 Compatibility
+Commands", **p. 48** (comandos 0 e 1) e **p. 49** (comandos 4 e 5): *"Valid data range is 0 - 127. A value of
+127 = full speed forward, 64 = about half speed forward and 0 = full stop."* Na Rev. 5 (firmware 4.1.11+) o
+mesmo texto está nas pp. 40–41. Os dois PDFs são cópias de 2015/2016; se o site da Basicmicro tiver revisão
+mais nova, confira a página nela antes de enviar).
 
 **Quando acontece:**
 - Na faixa normal do mixer (0 a 254), o byte fica em 0–127. O ESBMC **prova** isso (teste R2, SUCCESSFUL).
@@ -107,11 +111,10 @@ tar -xzf saida.tar.gz --strip-components=2 --wildcards '*/saida/*'
 
 Tudo fica salvo em `logs/<data>_bruno-pc_reporte_roboclaw/`.
 
-### Passo 2: confirmar a especificação (você)
+### Passo 2: especificação (feito em 19/10/2026)
 
-1. Abra o **manual da Basicmicro RoboClaw** (*User Manual*, seção *Packet Serial*).
-2. Ache os comandos **0, 1, 4 e 5** e anote a **seção e a página** em que diz que o dado vai de 0 a 127.
-3. Coloque essa referência no rascunho, onde está `[[Basicmicro …]]`.
+Encontrado no manual (Rev. 5.5, pp. 48–49; Rev. 5, pp. 40–41), já colocado no rascunho. Só confira se há
+revisão mais nova no site da Basicmicro.
 
 ### Passo 3: conferir se já não foi reportado (você)
 

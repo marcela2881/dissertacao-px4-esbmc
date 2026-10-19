@@ -15,14 +15,13 @@
  *     No modo "termination" o mixer repassa o failsafe sem limitar
  *     (mixer_module.cpp, limitAndUpdateOutputs/actualFailsafeValue).
  *
- * PROPRIEDADES DE ESPECIFICAÇÃO (Basicmicro RoboClaw User Manual, a conferir
- * e citar com seção e página):
+ * PROPRIEDADES DE ESPECIFICAÇÃO (RoboClaw Series User Manual, Rev. 5.5,
+ * firmware 4.1.16+, "Commands 0 - 7 Compatibility Commands", pp. 48-49;
+ * Rev. 5: pp. 40-41):
  *   - RC1: comandos 0, 1, 4 e 5 (Drive Forward/Backwards M1/M2): o byte de
  *          dados vai de 0 a 127.
  *   - POSIX: write() devolve -1 em caso de erro (IEEE Std 1003.1, write()).
- *
- * >>> RC1 é uma PROPOSTA inicial. Confirme no manual (seção e página) antes de
- * >>> usar os resultados.
+ *   RC1 conferida no manual em 19/10/2026: "Valid data range is 0 - 127".
  */
 
 #include <cstdint>
