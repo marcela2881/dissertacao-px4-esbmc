@@ -1283,7 +1283,7 @@ Cada propriedade customizada é apresentada em três níveis de abstração: (i)
 
 \textbf{Propriedade 1 --- Faixa operacional de temperatura do BMI088.}
 
-\textit{Especificação em linguagem natural:} conforme o datasheet do fabricante Bosch Sensortec~\cite{Bosch2021}, a temperatura lida do sensor de temperatura integrado ao BMI088 deve estar contida na faixa operacional do componente, definida entre $-40\,^{\circ}$C e $+85\,^{\circ}$C. Valores fora dessa faixa indicam leitura inválida e não devem ser utilizados como entrada para os cálculos de compensação térmica do EKF2.
+\textit{Especificação em linguagem natural:} conforme o datasheet do fabricante Bosch Sensortec~\cite{Bosch2021}\corr{ (Seção~1.1, Tabela~1, p.~7)}, a temperatura lida do sensor de temperatura integrado ao BMI088 deve estar contida na faixa operacional do componente, definida entre $-40\,^{\circ}$C e $+85\,^{\circ}$C. Valores fora dessa faixa indicam leitura inválida e não devem ser utilizados como entrada para os cálculos de compensação térmica do EKF2.
 
 \textit{Formalização:}
 
@@ -1425,11 +1425,11 @@ traduz corretamente o requisito, nem como a comunidade avaliar um contraexemplo.
 Tabela~\ref{tab:proveniencia} registra essa correspondência para todas as propriedades
 customizadas deste trabalho.}
 
-%% LC 25 (resolvido parcialmente 19/10/2026): "Celulas de referencia citam
+%% LC 25 (resolvido 19/10/2026, tarde): "Celulas de referencia citam
 %% documentos inteiros; indicar nomes de parametros, caminhos de arquivo e
 %% linhas." -> acrescentados arquivo-fonte do PX4 e funcao do harness em cada
-%% linha; numeros de linha do PX4 acrescentados em 19/10/2026 (tarde); falta so a
-%% pagina do datasheet do BMI088.
+%% linha; numeros de linha do PX4 e pagina do datasheet do BMI088 (Tabela 1, p. 7)
+%% acrescentados em 19/10/2026 (tarde).
 %% LC 26 (resolvido 19/10/2026): "Battery Monitor e Barometer sem propriedade
 %% listada; acrescentar linhas ou explicar." -> duas linhas acrescentadas
 %% (assertions conferidas nos harnesses).
@@ -1443,7 +1443,7 @@ customizadas deste trabalho.}
 \textbf{Propriedade} & \textbf{Módulo} & \textbf{Origem} & \textbf{Referência exata} \\
 \hline
 Faixa operacional de temperatura & IMU BMI088 & Datasheet do fabricante &
-Bosch Sensortec, BST-BMI088-DS000-19, rev.~1.9~\cite{Bosch2021}; \corr{\textit{harness}: \texttt{test\_temperature\_calculation}} \\
+Bosch Sensortec, BST-BMI088-DS000-19, rev.~1.9~\cite{Bosch2021}\corr{, Seção~1.1, Tabela~1 (\textit{Operating Temperature}, $T_A$ de $-40$ a $+85\,^{\circ}$C), p.~7}; \corr{\textit{harness}: \texttt{test\_temperature\_calculation}} \\
 \hline
 Capacidade do buffer FIFO & IMU BMI088 & Código-fonte do PX4 &
 Constante \texttt{FIFO::SIZE = 1024} em \texttt{Bosch\_BMI088\_ Accelerometer\_Registers.hpp}\corr{, l.~152}; \corr{\textit{harness}: \texttt{test\_fifo\_count\_calculation}} \\
@@ -1491,7 +1491,7 @@ As \textit{assertions} de cada linha da tabela estão no
 \texttt{8be2590c15}; a linha do \textit{harness} correspondente a cada
 propriedade pode ser localizada pelo nome da função de teste.}
 
-\pendente{Completar, para o \textit{datasheet} do BMI088, a seção e a página da faixa de temperatura.}
+\pendente{Conferir na capa do PDF consultado (62 páginas) se o documento e a revisão são os mesmos da referência \texttt{Bosch2021} (BST-BMI088-DS000-19, rev.~1.9); se não forem, atualizar a referência.}
 
 \revisao{A distinção entre as três origens não é apenas documental: ela determina a
 força da conclusão. Propriedades derivadas do \textbf{código-fonte} são as mais seguras, pois
