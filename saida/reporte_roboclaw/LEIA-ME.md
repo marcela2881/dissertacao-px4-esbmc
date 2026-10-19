@@ -83,12 +83,12 @@ Só rode quando **nenhuma outra verificação** estiver rodando.
 
 ```bash
 cd ~/verificacoes
-curl -L -o saida.tar.gz https://github.com/marcela2881/dissertacao-px4-esbmc/archive/<HASH>.tar.gz
+curl -L -o saida.tar.gz https://github.com/marcela2881/dissertacao-px4-esbmc/archive/324709578b5e686c6a68e2f2217a2c9755f96092.tar.gz
 tar -xzf saida.tar.gz --strip-components=2 --wildcards '*/saida/*'
 ./reporte_roboclaw/rodar_reporte.sh
 ```
 
-(`<HASH>` = o commit mais recente da branch; o assistente te passa o valor.)
+(Se houver uma versão mais nova, troque o hash pelo commit mais recente da branch.)
 
 **Resultado esperado:**
 - **Etapa 1/3 (ESBMC):** T1 = FAILED, T2 = SUCCESSFUL, T3 = FAILED.
