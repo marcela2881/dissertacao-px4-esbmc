@@ -13,6 +13,11 @@
  *   ./replay_bmi088 fifo        : contador do contraexemplo (9088 bytes) na leitura da FIFO
  *   ./replay_bmi088 fifo_aleatorio : 200.000 leituras com contador e bytes da FIFO
  *                                 aleatorios (SPI com ruido), amostras 1..32
+ *   ./replay_bmi088 fifo_quadro2   : FIFO VALIDA: 1 quadro de 2 bytes (input config) seguido
+ *                                 de 32 quadros de dados; contador = 226, amostras = 32.
+ *                                 O ultimo quadro comeca em f[219] e o driver le 7 bytes:
+ *                                 2 bytes alem do fim de FIFOTransferBuffer (19/10/2026).
+ *   ./replay_bmi088 fifo_alinhado  : mesma FIFO sem o quadro de 2 bytes (controle: sem erro)
  */
 #include <cstdint>
 #include <cstddef>
@@ -50,7 +55,7 @@ class BMI088_Accelerometer
 public:
 	static constexpr uint32_t RATE{1600};
 	static constexpr float FIFO_SAMPLE_DT{1e6f / RATE};
-	static constexpr int32_t FIFO_MAX_SAMPLES{math::min(FIFO::SIZE / sizeof(FIFO::DATA), sizeof(sensor_accel_fifo_s::x) / sizeof(sensor_accel_fifo_s::x[0]))};
+	static constexpr int32_t FIFO_MAX_SAMPLES{math::min(FIFO::SIZE / sizeof(Bosch::BMI088::Accelerometer::FIFO::DATA), sizeof(sensor_accel_fifo_s::x) / sizeof(sensor_accel_fifo_s::x[0]))};
 
 	struct FIFOTransferBuffer {           /* BMI088_Accelerometer.hpp, identico */
 		uint8_t cmd{static_cast<uint8_t>(Register::FIFO_LENGTH_0) | DIR_READ};
@@ -59,7 +64,7 @@ public:
 		uint8_t FIFO_LENGTH_1{0};
 		FIFO::DATA f[FIFO_MAX_SAMPLES] {};
 	};
-	static_assert(sizeof(FIFOTransferBuffer) == (4 + FIFO_MAX_SAMPLES *sizeof(FIFO::DATA)));
+	static_assert(sizeof(FIFOTransferBuffer) == (4 + FIFO_MAX_SAMPLES *sizeof(Bosch::BMI088::Accelerometer::FIFO::DATA)));
 
 	int transfer(uint8_t *send, uint8_t *recv, size_t len) { memcpy(recv, g_spi, len); return PX4_OK; }
 
@@ -105,6 +110,34 @@ int main(int argc, char **argv)
 		bool ok = imu.FIFORead(0, BMI088_Accelerometer::FIFO_MAX_SAMPLES);
 		printf("FIFORead devolveu %s; contador de overflow = %d\n", ok ? "true" : "false", imu._fifo_overflow_perf);
 		printf("=> a guarda 'fifo_byte_counter >= FIFO::SIZE' descarta a leitura: nenhum acesso com 9088 bytes\n");
+		return 0;
+	}
+
+	if (strcmp(modo, "fifo_quadro2") == 0 || strcmp(modo, "fifo_alinhado") == 0) {
+		const bool desloca = strcmp(modo, "fifo_quadro2") == 0;
+		const unsigned n = BMI088_Accelerometer::FIFO_MAX_SAMPLES;   /* 32 */
+		const unsigned contador = (desloca ? 2 : 0) + n * sizeof(Bosch::BMI088::Accelerometer::FIFO::DATA);
+		memset(g_spi, 0, sizeof(g_spi));
+		g_spi[2] = contador & 0xFF; g_spi[3] = (contador >> 8) & 0x3F;
+		uint8_t *f = &g_spi[4];
+		unsigned i = 0;
+
+		if (desloca) { f[i++] = Bosch::BMI088::Accelerometer::FIFO::header::FIFO_input_config_frame; f[i++] = 0x00; }
+
+		for (unsigned k = 0; k < n; k++) {
+			f[i++] = Bosch::BMI088::Accelerometer::FIFO::header::sensor_data_frame;
+			for (int b = 0; b < 6; b++) { f[i++] = 0x10; }
+		}
+
+		const unsigned amostras = contador / sizeof(Bosch::BMI088::Accelerometer::FIFO::DATA);   /* como no RunImpl (linha 228) */
+		printf("=== BMI088 FIFO %s: contador = %u bytes, amostras = %u, transferencia = %u bytes ===\n",
+		       desloca ? "com quadro de 2 bytes no inicio" : "alinhada (controle)", contador, amostras,
+		       (unsigned)(amostras * sizeof(Bosch::BMI088::Accelerometer::FIFO::DATA) + 4));
+		if (desloca) { printf("ultimo quadro de dados em f[%u]; o driver le f[%u..%u], f tem %u bytes\n", 2 + (n - 1) * 7, 2 + (n - 1) * 7, 2 + (n - 1) * 7 + 6, n * 7); }
+		fflush(stdout);
+		g_amostras_publicadas = -1;
+		imu.FIFORead(0, amostras);
+		printf("FIFORead terminou; amostras publicadas = %d; sem erro de memoria\n", g_amostras_publicadas);
 		return 0;
 	}
 

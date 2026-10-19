@@ -88,5 +88,8 @@ int main(int argc, char **argv)
 
 	printf("maior preenchimento observado: %u (capacidade 79); registros publicados: %u\n", max_len, g_publicados);
 	printf("=> o estado do contraexemplo (len >= 79, ex.: 207) nao foi alcancado a partir do estado inicial\n");
+	fflush(stdout);
+	delete gps._dump_to_device;     /* sem isto o LeakSanitizer encerra o programa e a saida */
+	delete gps._dump_from_device;   /* bufferizada (log/tee) se perde (19/10/2026) */
 	return 0;
 }

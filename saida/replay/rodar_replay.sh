@@ -45,6 +45,9 @@ B=px4/src/drivers/imu/bosch/bmi088
   && extrai $B/BMI088_Accelerometer.cpp "void BMI088_Accelerometer::UpdateTemperature(" build_replay/gen/bmi088_UpdateTemperature.inc \
   && g++ -std=c++17 -O0 $SAN -I build_replay -I $B replay/replay_bmi088.cpp -o build_replay/replay_bmi088 \
   && { ./build_replay/replay_bmi088 temperatura; ./build_replay/replay_bmi088 fifo; \
-       ./build_replay/replay_bmi088 fifo_aleatorio 2>&1 | grep -E "===|maior|ERROR: AddressSanitizer|READ of size|WRITE of size|is located|SUMMARY|#[0-9] .*FIFORead" | head -10; }
+       ./build_replay/replay_bmi088 fifo_aleatorio 2>&1 | grep -E "===|maior|ERROR: AddressSanitizer|READ of size|WRITE of size|is located|SUMMARY|#[0-9] .*FIFORead" | head -10; \
+       ./build_replay/replay_bmi088 fifo_alinhado 2>&1 | grep -E "===|terminou|ERROR: AddressSanitizer|READ of size|SUMMARY" | head -6; \
+       echo "--- (esperado a seguir: AddressSanitizer acusa leitura alem do fim de FIFOTransferBuffer)"; \
+       ./build_replay/replay_bmi088 fifo_quadro2 2>&1 | grep -E "===|ultimo|terminou|ERROR: AddressSanitizer|READ of size|is located|SUMMARY|#[0-9] .*FIFORead" | head -8; }
 } 2>&1 | tee "$out/replay_fase1.log"
 echo "(logs em: $out)"

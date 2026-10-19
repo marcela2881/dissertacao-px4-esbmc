@@ -11,27 +11,38 @@ contraexemplo. Só se aplica a testes com contraexemplo (FAILED).
 | Barometer, Battery, EKF2, Expo, MAVLink, Magnetometer, PWM, RC_Update | rápido ✅ · oficial ⏳ | rápido ✅ · oficial ⏳ | — (sem contraexemplo) |
 | Navigator | PARSING ERROR no 8.5 ✅ (registrado) | rápido ✅ (SUCCESSFUL após prelúdio) · oficial ⏳ | — |
 | VTOL | rápido ✅ · oficial ⏳ | rápido ✅ (FAILED = modelo de `sqrtf` do CBMC) · oficial ⏳ | — |
-| **GPS** | FAILED ✅ (rápido e oficial) | Timed out ✅ (rápido e oficial) | ❌ **`replay_gps.cpp` pronto, falta rodar** |
-| **IMU BMI088** (temperatura e FIFO) | FAILED ✅ · oficial ⏳ | FAILED ✅ · oficial ⏳ | ❌ **`replay_bmi088.cpp` pronto, falta rodar** |
+| **GPS** | FAILED ✅ (rápido e oficial) | Timed out ✅ (rápido e oficial) | ✅ 19/10: estado do contraexemplo (len 207) → ASan acusa escrita fora do buffer; ⏳ a parte "alcance" se perdeu (vazamento do próprio replay, corrigido) e precisa ser repetida |
+| **IMU BMI088** (temperatura e FIFO) | FAILED ✅ · oficial ⏳ | FAILED ✅ · oficial ⏳ | ✅ 19/10: temperatura 86,25 °C reproduzida; contador 9088 barrado pela guarda; **novo: leitura fora de `FIFOTransferBuffer` com bytes aleatórios** (ver abaixo) |
+
+**Achado novo do replay (19/10, regra 7 pendente):** `FIFORead` lê até 6 bytes além do fim de
+`FIFOTransferBuffer` quando um cabeçalho de quadro de dados aparece nos últimos 6 bytes da janela
+lida. Com dados válidos isso exige 32 amostras (buffer cheio) e um quadro de 2 ou 4 bytes antes dos
+quadros de dados (modo `fifo_quadro2`: ASan acusa; `fifo_alinhado`: sem erro). Só leitura (2 a 6
+bytes da pilha vão para o eixo z da última amostra). O código é igual no `main` de 19/10/2026.
+Falta: confirmar no datasheet quando o BMI088 emite esses quadros e decidir com o orientador.
 
 Depois: repetir `./comparar.sh leva1 oficial` **sozinha, à noite** (os tempos de 19/10 ficaram
 contaminados por rodadas simultâneas).
 
 ## Fase 2: validação (`saida/fase2/harnesses/`, cópias de `cbmc/` e `seeded_tests/`)
 
-| Harness | Feito na fase 2 original | ESBMC 8.5 | CBMC 5.95 | Teste unitário |
-|---|---|---|---|---|
-| IMU reduzido (`test_bmi088_cbmc.cpp`) | CBMC: FAILED (temperatura e FIFO) | ❌ | ❌ refazer no protocolo novo | coberto pelo replay do IMU |
-| ArduPilot BMI088 | CBMC: FAILED (temperatura) | ❌ | ❌ refazer | — (outro autopiloto) |
-| Patch FIFO / patch temperatura | CBMC: 0/2 e 0/4 | ❌ | ❌ refazer | — |
-| GPS `len < 200` (sem e com guarda) | CBMC: 0/7 e 0/7 (**não isola a guarda**) | ❌ | ❌ refazer | — |
-| GPS semeado `len ≥ 190` sem guarda | CBMC: FAILED com unwind 2, 3, 5 | ❌ | ❌ refazer | coberto pelo replay do GPS |
-| **GPS semeado sem × com guarda** (`gps_guarda_semeado.cpp`, **novo**) | nunca feito | ❌ | ❌ | — |
-| 10 testes semeados (Boolector × Z3) | tabela do `MAPEAMENTO.md` **não preenchida** | ❌ (Boolector e Z3) | ❌ | — (sintéticos) |
-| Reexecuções com outras versões (8.4, 7.10, 8.2) | ✅ (`reexecucoes_2026-10-09/`) | coberto pela fase 1 em 8.5 | — | — |
-| Boolector × Z3 em GPS, MAVLink, EKF2 | ✅ ESBMC 8.1 (`validacao_esbmc_8.1/`) | opcional | — | — |
+Rápida feita em 19/10 (bruno-pc, ESBMC 8.5.0 e CBMC 5.95.1, 300 s, sem asserções de desdobramento).
+Falta a oficial (`./rodar_fase2.sh oficial`, à noite).
 
-Tudo isso roda com **um comando**: `./rodar_fase2.sh rapido` (depois `oficial`).
+| Harness | ESBMC 8.5 (Boolector) | ESBMC 8.5 (Z3) | CBMC 5.95 | Teste unitário |
+|---|---|---|---|---|
+| IMU reduzido | FAILED ✅ | — | FAILED ✅ (temperatura e FIFO) | replay do IMU ✅ |
+| ArduPilot BMI088 | FAILED ✅ | — | FAILED ✅ | — (outro autopiloto) |
+| Patch FIFO / patch temperatura | SUCCESSFUL ✅ | — | SUCCESSFUL ✅ | — |
+| GPS `len < 200` sem e com guarda | SUCCESSFUL ✅ | — | SUCCESSFUL ✅ (237 s e 254 s) | — |
+| GPS semeado `len ≥ 190` (antigo) | FAILED ✅ | — | FAILED ✅ | replay do GPS ✅ |
+| **GPS semeado sem guarda** (novo) | **FAILED ✅** | — | **FAILED ✅** | — |
+| **GPS semeado com guarda** (novo) | **SUCCESSFUL ✅** | — | **SUCCESSFUL ✅** | — |
+| 8 semeados sem laço | FAILED ✅ | FAILED ✅ | FAILED ✅ | — (sintéticos) |
+| 2 semeados com laço | FAILED ✅ | FAILED ✅ | **Timed out** | — |
+
+O caso do patch do GPS está fechado: com a mesma pré-condição (`len ≥ 190`), sem a guarda as duas
+ferramentas acham a violação e com a guarda as duas dão SUCCESSFUL.
 
 ## Pacote v5: 8 candidatos de outros módulos (`saida/v5/`, pacote de 12/10/2026)
 
@@ -70,9 +81,9 @@ Os rascunhos de issue (`v5/issues_px4/`) dependem da aprovação do orientador a
 | # | Comando (em `~/verificacoes`, depois de baixar a versão nova) | Tempo |
 |---|---|---|
 | 1 | esperar a oficial da 1ª leva terminar (`cat logs/2026-10-19_bruno-pc_comparacao_oficial/RESUMO_COMPARACAO_leva1.txt`) | — |
-| 2 | `./replay/rodar_replay.sh` (fase 1 GPS e IMU + fase 3 RoboClaw e PCA9685) | ~2 min |
+| 2 | ✅ `./replay/rodar_replay.sh` (repetir com a versão nova: GPS "alcance" e BMI088 `fifo_quadro2`) | ~2 min |
 | 3 | `SO_TESTES="3" ./rodar_modulo.sh dshot rapido` | ≤ 5 min |
-| 4 | `./rodar_fase2.sh rapido` | ~15–40 min |
+| 4 | ✅ `./rodar_fase2.sh rapido` | ~15–40 min |
 | 5 | `./comparar.sh voxl_esc rapido`, `pca9685`, `roboclaw`, `tap_esc`, `dshot` | ~30 min |
 | 5b | `cd v5 && nohup ./rodar_tudo.sh > ../v5_saida.txt 2>&1 &` (pacote v5: ESBMC, CBMC e replay; última linha esperada "Tudo como esperado.") | 1–3 h |
 | 6 (noite) | `nohup ./comparar.sh leva1 oficial > comp_leva1.txt 2>&1 &` (tempos limpos) | até 4 h |
