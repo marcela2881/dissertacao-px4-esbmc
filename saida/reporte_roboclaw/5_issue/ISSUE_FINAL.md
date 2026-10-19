@@ -53,7 +53,7 @@ Unit tests (gtest) that only need to be compiled and linked with the Roboclaw dr
 2. Add to `src/drivers/roboclaw/CMakeLists.txt`:
 
 ```cmake
-px4_add_functional_gtest(SRC RoboclawTest.cpp LINKLIBS drivers__roboclaw)
+px4_add_functional_gtest(SRC RoboclawTest.cpp LINKLIBS drivers__roboclaw mixer_module)
 if(TARGET functional-Roboclaw)
 	target_link_options(functional-Roboclaw PRIVATE -Wl,--wrap=write -Wl,--wrap=select)
 endif()

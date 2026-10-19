@@ -26,7 +26,7 @@ Bugfix: Roboclaw driver no longer sends drive data bytes above 127 (e.g. failsaf
 
 ### Test coverage
 
-Added `RoboclawTest.cpp`, a functional gtest linked with `drivers__roboclaw` (`make tests TESTFILTER=Roboclaw`). The UART is emulated at link time (`-Wl,--wrap=write -Wl,--wrap=select`); `Roboclaw.cpp` is used as is. Each test prepares the input, runs a Roboclaw function and checks the result:
+Added `RoboclawTest.cpp`, a functional gtest linked with `drivers__roboclaw` and `mixer_module` (`make tests TESTFILTER=Roboclaw`). The UART is emulated at link time (`-Wl,--wrap=write -Wl,--wrap=select`); `Roboclaw.cpp` is used as is. Each test prepares the input, runs a Roboclaw function and checks the result:
 
 | Test | Input | Function | Check | Before | After |
 |---|---|---|---|---|---|

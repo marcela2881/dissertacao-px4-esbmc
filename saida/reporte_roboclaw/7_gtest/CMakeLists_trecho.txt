@@ -1,5 +1,5 @@
 # Acrescentar ao final de src/drivers/roboclaw/CMakeLists.txt
-px4_add_functional_gtest(SRC RoboclawTest.cpp LINKLIBS drivers__roboclaw)
+px4_add_functional_gtest(SRC RoboclawTest.cpp LINKLIBS drivers__roboclaw mixer_module)
 if(TARGET functional-Roboclaw)
 	# emulated UART: write() and select() on the driver's serial fd go to the test
 	target_link_options(functional-Roboclaw PRIVATE -Wl,--wrap=write -Wl,--wrap=select)

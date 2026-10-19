@@ -7,6 +7,7 @@
 # Na primeira vez: baixa o PX4 com os submódulos (~2-4 GB) e instala o ambiente de
 # compilação do PX4 (Tools/setup/ubuntu.sh, pede a senha do sudo). Depois, só compila.
 # Saídas: ~/gtest_roboclaw_original.txt e ~/gtest_roboclaw_corrigido.txt
+# (19/10/2026: LINKLIBS inclui mixer_module; sem ele a ligação falhava em MixingOutput)
 set -uo pipefail
 AQUI="$(cd "$(dirname "$0")" && pwd)"
 PATCH="$AQUI/../6_pr/correcao_roboclaw.patch"
@@ -26,7 +27,8 @@ fi
 
 # teste e CMake (só acrescenta; o Roboclaw.cpp não é alterado)
 cp "$AQUI/RoboclawTest.cpp" src/drivers/roboclaw/
-grep -q "functional-Roboclaw" src/drivers/roboclaw/CMakeLists.txt || cat "$AQUI/CMakeLists_trecho.txt" >> src/drivers/roboclaw/CMakeLists.txt
+git checkout -q src/drivers/roboclaw/CMakeLists.txt   # volta ao original antes de acrescentar
+cat "$AQUI/CMakeLists_trecho.txt" >> src/drivers/roboclaw/CMakeLists.txt
 # o driver não vem ligado no SITL: liga só na configuração de testes
 grep -q CONFIG_DRIVERS_ROBOCLAW boards/px4/sitl/test.px4board || echo "CONFIG_DRIVERS_ROBOCLAW=y" >> boards/px4/sitl/test.px4board
 
