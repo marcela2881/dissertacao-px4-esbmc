@@ -4,7 +4,8 @@
 #   1) ESBMC no original: R1 (FAILED), R2 (SUCCESSFUL, faixa normal) e R3 (FAILED)
 #   2) replay: g++ executa o Roboclaw.cpp original com os valores do contraexemplo
 #   3) reproduções mínimas (sem PX4), para colar na issue
-#   4) correção: ESBMC R1 e R3 (esperado SUCCESSFUL) e replay (esperado: nada reproduzido)
+#   4) correção: ESBMC R1 (opções da oficial) e R3 (só a propriedade do R3, original x corrigido),
+#      esperado SUCCESSFUL no corrigido; replay (esperado: nada reproduzido)
 # Saída na tela e em ../logs/<data>_<máquina>_reporte_roboclaw/
 # Uso (dentro da pasta que tem px4/, stubs/ e scripts/, ex. ~/verificacoes ou ~/reporte):
 #   ./reporte_roboclaw/rodar_reporte.sh
@@ -25,10 +26,15 @@ cp px4/src/drivers/roboclaw/Roboclaw.cpp px4/src/drivers/roboclaw/Roboclaw.hpp "
 patch -s -p4 -d "$corr" < "$R/6_pr/correcao_roboclaw.patch" || { echo "ERRO: a correção não aplicou"; exit 4; }
 cp "$R/6_pr/correcao_roboclaw.patch" "$corr/normalizacao.diff"   # registrado no log do ESBMC
 
-esbmc_teste() {   # $1=rótulo $2=número do teste ; PRE_INC opcional = versão corrigida
-  LOGDIR="$raiz/$out/esbmc" ./scripts/run_esbmc.sh "$1" "$R/1_verificacao_esbmc/test_roboclaw.cpp" "" \
-    "src/drivers/roboclaw" -DTEST_CHOICE="$2" --function harness_main --unwind 20 --overflow-check \
-    --ub-shift-check --default-solver boolector --timeout 300s | grep "run 1"
+esbmc_teste() {   # $1=rótulo $2=teste [$3=sem_overflow] ; PRE_INC opcional = versão corrigida
+  local rot=$1 t=$2 chk=(--overflow-check --ub-shift-check)   # opções da oficial
+  # sem_overflow: só as checagens padrão do ESBMC (limites, ponteiros, divisão) e as asserções do harness
+  [ "${3:-}" = sem_overflow ] && chk=()
+  LOGDIR="$raiz/$out/esbmc" ./scripts/run_esbmc.sh "$rot" "$R/1_verificacao_esbmc/test_roboclaw.cpp" "" \
+    "src/drivers/roboclaw" -DTEST_CHOICE="$t" --function harness_main --unwind 20 ${chk[@]+"${chk[@]}"} \
+    --default-solver boolector --timeout 300s | grep "run 1"
+  # mostra a propriedade violada, se houver (para não confundir R3 com o falso positivo do R0)
+  grep -a -A3 "Violated property" "$raiz/$out/esbmc/${rot}_run1.log" 2>/dev/null | sed -n '2,4p' | sed 's/^/      /'
 }
 
 echo "##### 1/4 ESBMC no código ORIGINAL (esperado: T1 FAILED, T2 SUCCESSFUL, T3 FAILED)"
@@ -51,8 +57,14 @@ for m in minimo_r1 minimo_r3; do
 done 2>&1 | tee "$out/3_minimos.txt"
 
 echo; echo "##### 4/4 Com a CORREÇÃO (6_pr/correcao_roboclaw.patch)"
-echo "--- ESBMC (esperado: T1 SUCCESSFUL, T3 SUCCESSFUL)"
-for t in 1 3; do echo -n "roboclaw_T${t}_corrigido:"; PRE_INC="$corr" esbmc_teste "roboclaw_T${t}_corrigido" "$t"; done 2>&1 | tee "$out/4_esbmc_corrigido.txt"
+echo "--- ESBMC R1, opções da oficial (esperado: T1 SUCCESSFUL)"
+PRE_INC="$corr" esbmc_teste roboclaw_T1_corrigido 1 2>&1 | tee "$out/4_esbmc_corrigido.txt"
+# R3: assert do select() no harness + checagens padrão, SEM --overflow-check/--ub-shift-check.
+# Com elas, o corrigido para no falso positivo já conhecido do R0 ("arithmetic overflow on shl" em
+# swapBytesInt32, readEncoder), visto em 19/10/2026 -- não é o R3. Original e corrigido com as MESMAS opções.
+echo "--- ESBMC R3, só a propriedade do R3 (esperado: original FAILED, corrigido SUCCESSFUL)"
+{ esbmc_teste roboclaw_T3_R3_original 3 sem_overflow
+  PRE_INC="$corr" esbmc_teste roboclaw_T3_R3_corrigido 3 sem_overflow; } 2>&1 | tee -a "$out/4_esbmc_corrigido.txt"
 echo "--- Replay (esperado: bytes até 127, select() 0 vezes, 0 situações reproduzidas)"
 {
   g++ -std=c++17 -O0 -I "$corr" -I stubs -I px4/src/drivers/roboclaw "$R/2_replay/replay_roboclaw.cpp" -o build_replay/replay_corrigido -lm \

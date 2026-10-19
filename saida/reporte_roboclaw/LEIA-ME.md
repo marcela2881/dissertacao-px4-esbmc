@@ -87,14 +87,23 @@ do pacote. O `module.yaml` **não** é alterado; o PR menciona isso como alterna
 | Replay com o `Roboclaw.cpp` original (19/10/2026) | 255→128, 256→129, 257→130 | `select()` 7× após `write()` = −1 |
 | Reprodução mínima sem PX4 | `minimo_r1.cpp` | `minimo_r3.cpp` |
 | Especificação | manual Rev. 6.0, pp. 48–49 | POSIX: `write()` devolve −1 em erro |
-| **ESBMC com a correção** | **a rodar (passo 1)**, esperado SUCCESSFUL | **a rodar**, esperado SUCCESSFUL |
-| **Replay com a correção** | **a rodar**, esperado bytes ≤ 127 | **a rodar**, esperado `select()` 0× |
+| **ESBMC com a correção** (19/10, 09:23) | **SUCCESSFUL** (opções da oficial) | ver nota abaixo; refazer com o script novo |
+| **Replay com a correção** (19/10, 09:23) | **todos os bytes ≤ 127** | **`select()` 0×**, 0 situações reproduzidas |
 | CBMC | não lê o C++ do PX4 (`PARSING ERROR`) | idem |
 | Hardware | pendente (opcional) | pendente (opcional) |
 
 **Execução de referência no original** (PC do Bruno, 19/10/2026 08:47, ESBMC 8.5.0 + Boolector,
 g++ 13.3.0): T1 FAILED, T2 SUCCESSFUL, T3 FAILED. Tempos não são de referência, porque a rodada correu
 junto com outra verificação. Replay e mínimos como na tabela.
+
+**Nota sobre o R3 no ESBMC com a correção (19/10/2026, 09:23):** com as opções da oficial
+(`--overflow-check --ub-shift-check`), o T3 corrigido deu FAILED, mas pela propriedade
+`arithmetic overflow on shl` em `swapBytesInt32` (linha 458 do corrigido, 456 do original). É o
+**falso positivo do R0**, já conhecido: regra do C aplicada a C++17. No original, o ESBMC parava antes,
+no `select()` após a falha de `write()`; com a correção, chega ao próximo ponto, que é esse. Por isso, a
+etapa 4 agora checa o R3 só com a asserção do harness e as checagens padrão, **sem** `--overflow-check` e
+`--ub-shift-check`, com as **mesmas opções no original e no corrigido**. O esperado é original FAILED e
+corrigido SUCCESSFUL.
 
 **Conferência no GitHub do PX4 (19/10/2026):** `Roboclaw.cpp`, `Roboclaw.hpp` e `module.yaml` na `main`
 são idênticos aos do commit `8be2590`. No `mixer_module.cpp`, o trecho de *termination* está igual.
@@ -123,7 +132,7 @@ tar -xzf saida.tar.gz --strip-components=2 --wildcards '*/saida/*'
 | 1/4 ESBMC original | T1 FAILED · T2 SUCCESSFUL · T3 FAILED |
 | 2/4 Replay original | 254,5–257 → 128–130 "VIOLA"; `select()` 7 vez(es); "5 situação(ões) reproduzida(s)" |
 | 3/4 Mínimos | `255 → 128 … 257 → 130`; `writeCommand() returned OK (wrong)` |
-| 4/4 Corrigido | ESBMC T1 e T3 **SUCCESSFUL**; replay com todos os bytes ≤ 127, `select()` 0 vez(es), "0 situação(ões) reproduzida(s)" |
+| 4/4 Corrigido | ESBMC R1 corrigido **SUCCESSFUL**; R3 (só a propriedade do R3): original **FAILED** e corrigido **SUCCESSFUL**; replay com todos os bytes ≤ 127, `select()` 0 vez(es), "0 situação(ões) reproduzida(s)" |
 
 Tudo fica salvo em `~/reporte/logs/<data>_bruno-pc_reporte_roboclaw/`. Se a etapa 4 não der o
 esperado, **não envie o PR**: mande a saída para revisão.

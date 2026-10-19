@@ -35,5 +35,6 @@ Bugfix: Roboclaw driver no longer sends drive data bytes above 127 (e.g. failsaf
 - Formal verification with ESBMC 8.5.0 on the driver source (harness that includes `Roboclaw.cpp`):
   - before the change: "data byte ≤ 127 for outputs in [0, 257]" FAILS; "select() is not called after write() returns -1" FAILS.
   - after the change: both properties hold (VERIFICATION SUCCESSFUL).
+  - (Unrelated to this PR: with ESBMC's overflow check enabled, `swapBytesInt32()` is reported for `buffer[0] << 24`. This is defined behavior in C++17 when the result fits in the unsigned type, so the change does not touch it.)
 - Native run of the driver with a simulated UART, before and after the change: outputs 255/256/257 sent bytes 128/129/130 before and 127 after; with `write()` returning -1, `select()` was called 7 times before and 0 times after.
 - Not tested on hardware.
