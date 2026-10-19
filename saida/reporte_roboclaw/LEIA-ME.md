@@ -75,6 +75,16 @@ O driver então fica esperando uma resposta que não vai chegar. No replay, `sel
 
 ---
 
+### Execução de referência (PC do Bruno, 19/10/2026 08:47)
+
+`./reporte_roboclaw/rodar_reporte.sh`, ESBMC 8.5.0 + Boolector, g++ 13.3.0, PX4 `8be2590`:
+- ESBMC: T1 (R1) FAILED 5.872 s; T2 (R2) SUCCESSFUL 7.546 s; T3 (R3) FAILED 54.229 s. Rodou junto
+  com a oficial da 1ª leva, então os tempos não são de referência; os vereditos são.
+- Replay: 254.5→128, 255→128, 256→129, 257→130 (VIOLA); 0, 127, 200, 254 ok. R3: `select()` 7 vezes
+  depois de `write()` = −1. `readEncoder()` acaba devolvendo ERROR só porque a resposta simulada
+  não passa no CRC, e **não** porque a falha de escrita foi detectada.
+- Mínimos: iguais ao replay (128/129/130; `bytes_written = 18446744073709551615`).
+
 ## 3. Passo a passo
 
 ### Passo 1: reproduzir tudo na sua máquina (💻 PC do Bruno, ~5 min)
