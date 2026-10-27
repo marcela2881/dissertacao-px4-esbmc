@@ -19,7 +19,7 @@ Commit testado: 8be2590c15 (04/06/2026). Os candidatos foram documentados no rel
 | 2 | externalChecks.cpp | violação (`num_events` até 255 indexa `events[5]`) | corrigido em 14/09/2026, commit ca1d36476a, PR #28598, relatado por outra pessoa |
 | 3 | ft7_technologies.cpp | violação (contadores sem limite em `_readbuf[30]` e `_raw_*`) | corrigido em 16/09/2026, commit 3acf7935a0, PR #28600, relatado por outra pessoa |
 | 6 | IridiumSBD.cpp | violação (a guarda compara com `_packet_length`, não com `buflen`) | corrigido em 16/09/2026, commit 0c903d47d6, PR #28599, relatado por outras pessoas |
-| 4 | sumd.cpp | violação (`sumd_data[64]` com 32 canais, cai em `crc16_high`) | PR #29031 aberto em 08/10/2026 por outra pessoa, com a mesma análise (canal 32, `crc16_high`) |
+| 4 | sumd.cpp | violação (`sumd_data[64]` com 32 canais, cai em `crc16_high`) | relatado por outra pessoa em 08/10/2026 (PR #29031, refeito como #29117), com a mesma análise; **fechado pelo mantenedor sem merge e sem comentário em 13/10/2026** (conferido em 27/10) |
 | 8 | MicroStrain.cpp | violação (`_port[128]` com nome de porta ≥ 128 caracteres) | não reportado; impacto mínimo |
 | 7 | bst.cpp | **falso positivo**: o harness omitia duas guardas existentes desde o commit e8e86a2e0f (março de 2026) | — |
 | 1 | Common.cpp | retirado: a violação dependia de um índice que a guarda não permite | — |
@@ -41,4 +41,4 @@ Links:
 
 ## Mensagem central
 
-Quatro dos oito candidatos foram confirmados de forma independente pela comunidade do PX4 em poucas semanas: três correções incorporadas e um PR aberto. A conferência contra o código de produção barrou o único falso positivo (bst) antes de ele virar uma issue pública.
+Quatro dos oito candidatos foram relatados de forma independente por outras pessoas em poucas semanas; três viraram correções incorporadas ao PX4 e o do sumd teve o PR fechado sem merge. A conferência contra o código de produção barrou o único falso positivo (bst) antes de ele virar uma issue pública.
