@@ -19,8 +19,8 @@ done
 {
   echo "# RoboClaw - verificacao formal (maquina da Marcela)"
   date
-  echo -n "ESBMC: "; esbmc --version | head -1
-  echo -n "CBMC:  "; cbmc  --version | head -1
+  echo -n "ESBMC: "; esbmc --version 2>&1 | head -1
+  echo -n "CBMC:  "; cbmc  --version 2>&1 | head -1
   echo
   echo "################ BUG 1: byte de velocidade > 127 ################"
   echo "== ESBMC sem correcao (espera VERIFICATION FAILED) =="
