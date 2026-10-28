@@ -1,0 +1,19 @@
+# batmon replay (UBSan/ASan) - maquina da Marcela (WSL)
+Tue Oct 27 23:20:21 -04 2026
+g++: g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Linux bruno-pc 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+=== 14 ===
+cell_count=14 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+=== 15 ===
+replay.cpp:80:30: runtime error: index 14 out of bounds for type 'float [14]'
+cell_count=15 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+=== 16 ===
+replay.cpp:80:30: runtime error: index 14 out of bounds for type 'float [14]'
+cell_count=16 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=3.7150 (batmon nao preenche; esperado 0)

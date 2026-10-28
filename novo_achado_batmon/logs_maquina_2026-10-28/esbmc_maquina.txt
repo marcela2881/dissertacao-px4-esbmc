@@ -1,0 +1,137 @@
+== ESBMC sem correcao ==
+ESBMC version 8.2.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing harness.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.382s
+GOTO program processing time: 0.001s
+Starting Bounded Model Checking
+Unwinding loop 23 iteration 1   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 2   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 3   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 4   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 5   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 6   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 7   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 8   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 9   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 10   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 11   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 12   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 13   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 14   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 15   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 16   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 17   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 18   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 19   file harness.cpp line 94 column 2 function get_cell_voltages
+Not unwinding loop 23 iteration 20   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 24 iteration 1   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 2   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 3   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 4   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 5   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 6   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 7   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 8   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 9   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 10   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 11   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 12   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 13   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 14   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 15   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 16   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 17   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 18   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 19   file harness.cpp line 104 column 2 function run_impl
+Not unwinding loop 24 iteration 20   file harness.cpp line 104 column 2 function run_impl
+Symex completed in: 1.190s (2680 assignments)
+Caching time: 0.001s (removed 6 assertions)
+Slicing time: 0.005s (removed 2539 assignments)
+Generated 242 VCC(s), 70 remaining after simplification (135 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 43.981s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file harness.cpp line 82 column 2 function read_cell_count thread 0
+----------------------------------------------------
+  num_cells = 15 (00000000 00001111)
+
+State 46 file harness.cpp line 105 column 3 function run_impl thread 0
+----------------------------------------------------
+Violated property:
+  file harness.cpp line 105 column 3 function run_impl
+  assertion i < 14
+  i < 14
+
+
+VERIFICATION FAILED
+== ESBMC com correcao ==
+ESBMC version 8.2.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing harness.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.274s
+GOTO program processing time: 0.001s
+Starting Bounded Model Checking
+Unwinding loop 23 iteration 1   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 2   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 3   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 4   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 5   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 6   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 7   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 8   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 9   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 10   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 11   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 12   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 13   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 14   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 15   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 16   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 17   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 18   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 23 iteration 19   file harness.cpp line 94 column 2 function get_cell_voltages
+Not unwinding loop 23 iteration 20   file harness.cpp line 94 column 2 function get_cell_voltages
+Unwinding loop 24 iteration 1   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 2   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 3   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 4   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 5   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 6   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 7   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 8   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 9   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 10   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 11   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 12   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 13   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 14   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 15   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 16   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 17   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 18   file harness.cpp line 104 column 2 function run_impl
+Unwinding loop 24 iteration 19   file harness.cpp line 104 column 2 function run_impl
+Not unwinding loop 24 iteration 20   file harness.cpp line 104 column 2 function run_impl
+Symex completed in: 1.186s (2684 assignments)
+Caching time: 0.001s (removed 6 assertions)
+Slicing time: 0.005s (removed 2541 assignments)
+Generated 242 VCC(s), 70 remaining after simplification (137 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.002s
+Solving with solver Z3 v4.8.12
+Runtime decision procedure: 91.262s
+BMC program time: 92.467s
+
+VERIFICATION SUCCESSFUL
