@@ -1,0 +1,45 @@
+# RoboClaw - verificacao formal (maquina da Marcela)
+Wed Oct 28 02:14:48 -04 2026
+ESBMC: CBMC:  5.95.1 (cbmc-5.95.1)
+
+################ BUG 1: byte de velocidade > 127 ################
+== ESBMC sem correcao (espera VERIFICATION FAILED) ==
+
+
+VERIFICATION FAILED
+
+== ESBMC com correcao (espera VERIFICATION SUCCESSFUL) ==
+BMC program time: 0.792s
+
+VERIFICATION SUCCESSFUL
+
+== CBMC sem correcao (espera VERIFICATION FAILED) ==
+
+** 1 of 1 failed (2 iterations)
+VERIFICATION FAILED
+
+== CBMC com correcao (espera VERIFICATION SUCCESSFUL) ==
+
+** 0 of 1 failed (1 iterations)
+VERIFICATION SUCCESSFUL
+
+################ BUG 2: erro de write() nao detectado ################
+== ESBMC sem correcao (espera VERIFICATION FAILED) ==
+
+
+VERIFICATION FAILED
+
+== ESBMC com correcao (espera VERIFICATION SUCCESSFUL) ==
+BMC program time: 0.022s
+
+VERIFICATION SUCCESSFUL
+
+== CBMC sem correcao (espera VERIFICATION FAILED) ==
+
+** 1 of 1 failed (2 iterations)
+VERIFICATION FAILED
+
+== CBMC com correcao (espera VERIFICATION SUCCESSFUL) ==
+
+** 0 of 1 failed (1 iterations)
+VERIFICATION SUCCESSFUL
