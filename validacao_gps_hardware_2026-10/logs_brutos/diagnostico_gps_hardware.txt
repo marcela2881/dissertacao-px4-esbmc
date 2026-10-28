@@ -1,0 +1,24 @@
+== log_0_2026-10-27-21-11-16.ulg | duracao: 479 s
+    GPS_DUMP_COMM = 0
+    GPS_1_CONFIG = 201
+    GPS_1_PROTOCOL = 1
+    GPS_2_CONFIG = 0
+    SDLOG_MODE = 2
+    mudancas de parametro durante o log: []
+    topicos com gps: []
+== log_1_2026-10-27-21-14-04.ulg | duracao: 159 s
+    GPS_DUMP_COMM = 0
+    GPS_1_CONFIG = 201
+    GPS_1_PROTOCOL = 1
+    GPS_2_CONFIG = 0
+    SDLOG_MODE = 2
+    mudancas de parametro durante o log: []
+    topicos com gps: []
+== log_2_2026-10-27-21-19-46.ulg | duracao: 85 s
+    GPS_DUMP_COMM = 0
+    GPS_1_CONFIG = 201
+    GPS_1_PROTOCOL = 1
+    GPS_2_CONFIG = 0
+    SDLOG_MODE = 2
+    mudancas de parametro durante o log: []
+    topicos com gps: []

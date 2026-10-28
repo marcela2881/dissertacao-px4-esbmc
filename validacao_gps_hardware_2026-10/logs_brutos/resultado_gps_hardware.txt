@@ -1,0 +1,22 @@
+== log_0_2026-10-27-21-11-16.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_1_2026-10-27-21-14-04.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_2_2026-10-27-21-19-46.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_2_2026-10-27-21-27-14.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_3_2026-10-27-21-28-32.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_4_2026-10-27-21-29-02.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_5_2026-10-27-21-31-46.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 0
+   sem mensagens gps_dump neste log
+== log_6_2026-10-27-21-37-08.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 1
+   mensagens gps_dump: 158 | len min: 207 | len max: 207
+   pedacos com mais de 79 bytes de dados: 0
+   distribuicao de len: {207: 158}
+== log_7_2026-10-27-21-38-04.ulg  firmware: 8be2590c1529517ccd54fbc09ae138402517baf4  GPS_DUMP_COMM = 1
+   mensagens gps_dump: 17 | len min: 207 | len max: 207
+   pedacos com mais de 79 bytes de dados: 0
+   distribuicao de len: {207: 17}
