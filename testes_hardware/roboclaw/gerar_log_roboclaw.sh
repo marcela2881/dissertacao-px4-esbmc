@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Gera o log oficial da verificacao formal do RoboClaw (Bug 1 e Bug 2) + hashes.
-# Salve este arquivo na MESMA pasta dos dois harness e rode:
-#   bash gerar_log_roboclaw.sh
+# gerar_log_roboclaw_v2.sh
+# Gera o log oficial da verificacao formal do RoboClaw (Bug 1 e Bug 2) + hashes,
+# AGORA capturando corretamente a versao do ESBMC dentro do arquivo.
+# Salve na MESMA pasta dos dois harness e rode:
+#   bash gerar_log_roboclaw_v2.sh
 # NAO use "set -e": VERIFICATION FAILED devolve codigo != 0 de proposito.
 
 cd "$(dirname "$0")"
@@ -16,11 +18,15 @@ for f in harness_roboclaw_bug1.cpp harness_roboclaw_bug2.cpp; do
   fi
 done
 
+# versoes (grep -m1 . pega a primeira linha nao-vazia; 2>&1 pois esbmc escreve em stderr)
+ESBMC_VER="$(esbmc --version 2>&1 | grep -m1 . )"
+CBMC_VER="$(cbmc  --version 2>&1 | grep -m1 . )"
+
 {
   echo "# RoboClaw - verificacao formal (maquina da Marcela)"
   date
-  echo -n "ESBMC: "; esbmc --version 2>&1 | head -1
-  echo -n "CBMC:  "; cbmc  --version 2>&1 | head -1
+  echo "ESBMC: ${ESBMC_VER}"
+  echo "CBMC:  ${CBMC_VER}"
   echo
   echo "################ BUG 1: byte de velocidade > 127 ################"
   echo "== ESBMC sem correcao (espera VERIFICATION FAILED) =="
@@ -55,11 +61,11 @@ sha256sum roboclaw_maquina.txt harness_roboclaw_bug1.cpp harness_roboclaw_bug2.c
 
 echo
 echo "===================================================="
-echo "PRONTO. Arquivos gerados em: $OUT"
-echo "  - roboclaw_maquina.txt"
-echo "  - harness_roboclaw_bug1.cpp"
-echo "  - harness_roboclaw_bug2.cpp"
-echo "  - SHA256SUMS.txt"
-echo "Me mande esses quatro arquivos na conversa."
+echo "PRONTO. Confira a linha 'ESBMC:' no topo do arquivo:"
+echo
+head -4 "$OUT/roboclaw_maquina.txt"
+echo
+echo "Arquivos em: $OUT"
+echo "Me mande: roboclaw_maquina.txt e SHA256SUMS.txt"
 echo "===================================================="
 cat SHA256SUMS.txt

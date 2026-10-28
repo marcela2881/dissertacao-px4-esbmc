@@ -8,11 +8,9 @@ Marcela em 28/10/2026.
 - **ESBMC 8.2.0** (64-bit, Linux; solver Z3)
 - **CBMC 5.95.1**
 
-> Observação de proveniência: o comando `esbmc --version` imprime a versão em
-> *stderr*, então a string "ESBMC version 8.2.0 ..." aparece no terminal mas não
-> foi capturada dentro de `roboclaw_maquina.txt` (que registra apenas a do CBMC).
-> A versão 8.2.0 do ESBMC foi confirmada no terminal durante esta execução.
-> A campanha dos módulos do artigo usou ESBMC 8.1.0 (Boolector).
+As versões ficam registradas no topo de `roboclaw_maquina.txt`
+(`ESBMC version 8.2.0 64-bit x86_64 linux` e `5.95.1 (cbmc-5.95.1)`).
+A campanha dos módulos do artigo usou ESBMC 8.1.0 (Boolector).
 
 ## Resultado (ver `roboclaw_maquina.txt`)
 
