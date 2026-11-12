@@ -163,8 +163,15 @@ ocorreu antes do início da captura, no momento em que o fio de dados foi
 reencaixado com a placa já transmitindo. A captura começa com a terminação
 já ativa, então não contém a transição a partir do repouso.
 
-Pendente: `ver all` da placa e `diff_firmware_corrigido.patch`
-(só na máquina da autora). A correção do Bug 2 (`write()` com retorno
+`ver_all_firmware_corrigido.txt` traz o `ver all` da placa nesse ensaio: o
+`PX4 git-hash` é o commit analisado (`8be2590c…`). O `Build datetime`
+(1º de novembro) é a data em que a árvore foi compilada pela primeira vez; ele
+não muda em recompilações incrementais e o hash não marca alterações locais,
+então o `ver all` confirma o commit de base, mas **não distingue** o firmware
+original do corrigido. Essa distinção vem do md5 dos dois arquivos e do
+comportamento observado no fio.
+
+Pendente: `diff_firmware_corrigido.patch` (só na máquina da autora). A correção do Bug 2 (`write()` com retorno
 negativo) está no mesmo patch, mas este ensaio não a exercita.
 
 ## Ressalva sobre os ACKs
