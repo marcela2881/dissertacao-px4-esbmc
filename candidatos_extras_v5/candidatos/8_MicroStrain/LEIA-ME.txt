@@ -1,0 +1,12 @@
+Candidato 8 — MicroStrain.cpp — CONTINUA NO PX4 (issue: issues_px4/issue_microstrain.md)
+
+Construtor, linhas 53-57: max_len = min(sizeof(_port), strnlen(uart_port, 128))
+pode ser 128, e _port[max_len] = '\0' escreve _port[128] (array de 128).
+uart_port e o argumento -d de "microstrain start".
+
+harness.cpp : v3 (uart_port livre, strnlen e min calculados); v5 usa strncpy
+              como o driver (era memcpy) e corrige o comentario de uart_port[128] (C5).
+replay.cpp  : ASan com 128 bytes nao nulos. _port fica sozinho no heap para o
+              ASan ver; no driver o byte extra cai no membro seguinte do objeto.
+
+Esperado: esbmc/cbmc FAILED; asan ASAN.

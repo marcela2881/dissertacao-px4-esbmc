@@ -1,0 +1,166 @@
+# data: 2026-10-11T18:02:32Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/IMU_BMI088/test_bmi088_imu.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/IMU_BMI088/test_bmi088_imu.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.485s
+GOTO program processing time: 0.035s
+Starting Bounded Model Checking
+Symex completed in: 0.012s (325 assignments)
+Caching time: 0.000s (removed 26 assertions)
+Slicing time: 0.001s (removed 146 assignments)
+Generated 122 VCC(s), 64 remaining after simplification (153 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.004s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.253s
+Building error trace
+
+[Counterexample]
+
+
+State 2 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 245 column 5 function main thread 0
+----------------------------------------------------
+  test_choice = 2 (00000000 00000000 00000000 00000010)
+
+State 4 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 138 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_0 = 255 (11111111)
+
+State 5 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 139 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_1 = 227 (11100011)
+
+State 6 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 61 column 5 function fifoReadCount thread 0
+----------------------------------------------------
+  FIFO_LENGTH_1_MASKED = 35 (00100011)
+
+State 9 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 141 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  count = 9215 (00100011 11111111)
+
+State 10 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+Violated property:
+  file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation
+  assertion count <= FIFO_SIZE
+  (unsigned long int)count <= FIFO_SIZE
+
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                       line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                       line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                       line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                       line  12  arithmetic overflow on floating-point ieee_mul
+  NOT CHECKED  [global.arithmetic-overflow.5]                       line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                       line  20  arithmetic overflow on floating-point ieee_mul
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function combine
+  NOT CHECKED  [combine.arithmetic-overflow.1]                      line  32  arithmetic overflow on shl
+  NOT CHECKED  [combine.shift-undefined-behavior.1]                 line  32  undefined behavior on shift operation shl
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function processAccelData
+  NOT CHECKED  [processAccelData.arithmetic-overflow.1]             line  72  arithmetic overflow on neg
+  NOT CHECKED  [processAccelData.arithmetic-overflow.2]             line  72  arithmetic overflow on sub
+  PASSED       [processAccelData.object-out-of-bounds.1]            line  72  dereference failure: Access to object out of bounds
+  PASSED       [processAccelData.assertion.1]                       line  72  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [processAccelData.arithmetic-overflow.3]             line  73  arithmetic overflow on neg
+  NOT CHECKED  [processAccelData.arithmetic-overflow.4]             line  73  arithmetic overflow on sub
+  PASSED       [processAccelData.object-out-of-bounds.2]            line  73  dereference failure: Access to object out of bounds
+  PASSED       [processAccelData.assertion.2]                       line  73  dereference failure: Incorrect alignment when accessing data object
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function processGyroData
+  NOT CHECKED  [processGyroData.arithmetic-overflow.1]              line  83  arithmetic overflow on neg
+  NOT CHECKED  [processGyroData.arithmetic-overflow.2]              line  83  arithmetic overflow on sub
+  PASSED       [processGyroData.object-out-of-bounds.1]             line  87  dereference failure: Access to object out of bounds
+  PASSED       [processGyroData.assertion.1]                        line  87  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [processGyroData.arithmetic-overflow.3]              line  88  arithmetic overflow on neg
+  NOT CHECKED  [processGyroData.arithmetic-overflow.4]              line  88  arithmetic overflow on sub
+  PASSED       [processGyroData.object-out-of-bounds.2]             line  88  dereference failure: Access to object out of bounds
+  PASSED       [processGyroData.assertion.2]                        line  88  dereference failure: Incorrect alignment when accessing data object
+  NOT CHECKED  [processGyroData.arithmetic-overflow.5]              line  89  arithmetic overflow on neg
+  NOT CHECKED  [processGyroData.arithmetic-overflow.6]              line  89  arithmetic overflow on sub
+  PASSED       [processGyroData.object-out-of-bounds.3]             line  89  dereference failure: Access to object out of bounds
+  PASSED       [processGyroData.assertion.3]                        line  89  dereference failure: Incorrect alignment when accessing data object
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_accel_data_processing
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.1]   line 158  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.2]   line 158  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.3]   line 159  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.4]   line 159  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.5]   line 165  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.6]   line 165  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.assertion.1]             line 165  assertion accel_y_out >= INT16_MIN && accel_y_out <= INT16_MAX
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.7]   line 166  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.8]   line 166  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.assertion.2]             line 166  assertion accel_z_out >= INT16_MIN && accel_z_out <= INT16_MAX
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.9]   line 169  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.10]  line 169  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.assertion.3]             line 170  assertion accel_y_out == INT16_MAX
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.11]  line 172  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.assertion.4]             line 172  assertion accel_y_out == -accel_y_raw
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.12]  line 175  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.13]  line 175  arithmetic overflow on sub
+  NOT CHECKED  [test_accel_data_processing.assertion.5]             line 176  assertion accel_z_out == INT16_MAX
+  NOT CHECKED  [test_accel_data_processing.arithmetic-overflow.14]  line 178  arithmetic overflow on neg
+  NOT CHECKED  [test_accel_data_processing.assertion.6]             line 178  assertion accel_z_out == -accel_z_raw
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_arithmetic_safety
+  NOT CHECKED  [test_arithmetic_safety.arithmetic-overflow.1]       line 231  arithmetic overflow on mul
+  NOT CHECKED  [test_arithmetic_safety.arithmetic-overflow.2]       line 234  arithmetic overflow on mul
+  NOT CHECKED  [test_arithmetic_safety.assertion.1]                 line 234  assertion intermediate <= 255 * 8
+  NOT CHECKED  [test_arithmetic_safety.arithmetic-overflow.3]       line 237  arithmetic overflow on add
+  NOT CHECKED  [test_arithmetic_safety.arithmetic-overflow.4]       line 237  arithmetic overflow on div
+  NOT CHECKED  [test_arithmetic_safety.assertion.2]                 line 240  assertion temp_uint11 <= 2047
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_combine_function
+  NOT CHECKED  [test_combine_function.arithmetic-overflow.1]        line 106  arithmetic overflow on neg
+  NOT CHECKED  [test_combine_function.arithmetic-overflow.2]        line 106  arithmetic overflow on sub
+  NOT CHECKED  [test_combine_function.assertion.1]                  line 106  assertion result >= INT16_MIN && result <= INT16_MAX
+  NOT CHECKED  [test_combine_function.assertion.2]                  line 109  assertion ((result >> 8) & 0xFF) == msb
+  NOT CHECKED  [test_combine_function.assertion.3]                  line 112  assertion (result & 0xFF) == lsb
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_fifo_count_calculation
+  FAILED       [test_fifo_count_calculation.assertion.1]            line 144  assertion count <= FIFO_SIZE
+  NOT CHECKED  [test_fifo_count_calculation.assertion.2]            line 147  assertion count <= 0x3FFF
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_gyro_data_processing
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.1]    line 191  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.2]    line 191  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.3]    line 192  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.4]    line 192  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.5]    line 193  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.6]    line 193  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.7]    line 200  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.8]    line 200  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.assertion.1]              line 201  assertion result == false
+  NOT CHECKED  [test_gyro_data_processing.assertion.2]              line 203  assertion result == true
+  NOT CHECKED  [test_gyro_data_processing.assertion.3]              line 206  assertion gyro_x_out == gyro_x
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.9]    line 208  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.10]   line 208  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.assertion.4]              line 209  assertion gyro_y_out == INT16_MAX
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.11]   line 211  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.assertion.5]              line 211  assertion gyro_y_out == -gyro_y
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.12]   line 214  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.13]   line 214  arithmetic overflow on sub
+  NOT CHECKED  [test_gyro_data_processing.assertion.6]              line 215  assertion gyro_z_out == INT16_MAX
+  NOT CHECKED  [test_gyro_data_processing.arithmetic-overflow.14]   line 217  arithmetic overflow on neg
+  NOT CHECKED  [test_gyro_data_processing.assertion.7]              line 217  assertion gyro_z_out == -gyro_z
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function test_temperature_calculation
+  NOT CHECKED  [test_temperature_calculation.assertion.1]           line 126  assertion temperature >= -40.0f && temperature <= 85.0f
+  NOT CHECKED  [test_temperature_calculation.assertion.2]           line 129  assertion !isnan(temperature)
+  NOT CHECKED  [test_temperature_calculation.assertion.3]           line 130  assertion !isinf(temperature)
+resultados/IMU_BMI088/test_bmi088_imu.cpp, function updateTemperature
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.1]            line  42  arithmetic overflow on add
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.2]            line  42  arithmetic overflow on div
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.3]            line  42  arithmetic overflow on mul
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.4]            line  46  arithmetic overflow on sub
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.5]            line  51  arithmetic overflow on floating-point ieee_add
+  NOT CHECKED  [updateTemperature.arithmetic-overflow.6]            line  51  arithmetic overflow on floating-point ieee_mul
+
+** 1 of 91 properties failed, 15 passed, 75 not checked
+   (this mode stops at the first violation; use --multi-property for a verdict on every property)
+
+VERIFICATION FAILED
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 1

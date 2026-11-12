@@ -1,0 +1,31 @@
+# data:     2026-10-12T12:48:31Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/6_IridiumSBD/fontes
+# comando:  /opt/tools/esbmc-8.1/bin/esbmc harness.cpp -DCORRECAO_UPSTREAM --unwind 345 --overflow-check --no-library
+# o que e:  harness com a correcao upstream 0c903d47d6
+# --------------------------------------------------------------
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with systemlibc
+Parsing harness.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.033s
+GOTO program processing time: 0.000s
+Starting Bounded Model Checking
+WARNING: no body for function __ESBMC_pthread_start_main_hook
+WARNING: no body for function memcpy
+WARNING: no body for function memset
+WARNING: no body for function memcpy
+Symex completed in: 0.003s (90 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 37 assignments)
+Generated 27 VCC(s), 9 remaining after simplification (53 assignments)
+No solver specified; defaulting to Boolector
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.001s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.013s
+BMC program time: 0.018s
+
+VERIFICATION SUCCESSFUL
+# codigo de saida: 0

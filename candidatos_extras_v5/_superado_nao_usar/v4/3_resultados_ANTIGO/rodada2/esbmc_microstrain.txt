@@ -1,0 +1,41 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_microstrain_port_v2.cpp
+test_microstrain_port_v2.cpp:38:5: warning: array index 128 is past the end of the array (that has type 'char[128]') [-Warray-bounds]
+   38 |     _port[max_len] = '\0';   /* _port[128] — FORA DOS LIMITES */
+      |     ^     ~~~~~~~
+test_microstrain_port_v2.cpp:24:1: note: array '_port' declared here
+   24 | static char _port[PORT_SIZE] = {};
+      | ^
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.102s
+GOTO program processing time: 0.000s
+Checking base case, k = 1
+Starting Bounded Model Checking
+Symex completed in: 0.000s (18 assignments)
+Caching time: 0.000s (removed 1 assertions)
+Slicing time: 0.000s (removed 14 assignments)
+Generated 4 VCC(s), 2 remaining after simplification (3 assignments)
+WARNING: [smtlib] the smtlib interface solving is unstable. Please, use it with --smt-formula-only for production
+Using external solver cmd 'z3 -in' with PID 12233
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver 'z3 -in'
+Runtime decision procedure: 0.010s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file test_microstrain_port_v2.cpp line 38 column 5 function microstrain_init_port_critical thread 0
+----------------------------------------------------
+Violated property:
+  file test_microstrain_port_v2.cpp line 38 column 5 function microstrain_init_port_critical
+  array bounds violated: array `_port' upper bound
+  (signed long int)max_len < 128
+
+
+VERIFICATION FAILED
+
+Bug found (k = 1)

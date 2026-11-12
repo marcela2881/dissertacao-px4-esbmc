@@ -1,0 +1,25 @@
+# data: 2026-10-11T17:54:39Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.1.0 64-bit x86_64 linux
+# comando: esbmc resultados/VTOL/test_vtol_type.cpp --unwind 10 --no-library --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 120s
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with systemlibc
+Parsing resultados/VTOL/test_vtol_type.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 4.197s
+GOTO program processing time: 0.080s
+Starting Bounded Model Checking
+WARNING: no body for function piecewise_construct_t#
+WARNING: no body for function __ESBMC_pthread_start_main_hook
+Symex completed in: 0.014s (729 assignments)
+Caching time: 0.001s (removed 32 assertions)
+Slicing time: 0.002s (removed 527 assignments)
+Generated 110 VCC(s), 78 remaining after simplification (170 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.037s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 8.081s
+BMC program time: 8.136s
+
+VERIFICATION SUCCESSFUL
+# exit: 0

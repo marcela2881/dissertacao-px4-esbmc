@@ -1,0 +1,10 @@
+# data:     2026-10-12T12:47:03Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/3_ft7/fontes
+# compilar: g++ -fsanitize=undefined -fno-sanitize-recover=all -g -O0 -o ubsan_cenario1.bin replay.cpp
+# executar: ./ubsan_cenario1.bin 1
+# o que e:  replay chama collect(): 2 leituras de 19 bytes sem \n
+# --------------------------------------------------------------
+apos 1a chamada: _byte_counter=19
+replay.cpp:46:26: runtime error: index 30 out of bounds for type 'char [30]'
+# codigo de saida: 1

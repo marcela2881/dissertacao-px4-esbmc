@@ -1,0 +1,538 @@
+# data:     2026-10-12T12:50:00Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/8_MicroStrain/fontes
+# comando:  cbmc harness.cpp --unwind 200 --unwinding-assertions --bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check
+# o que e:  
+# --------------------------------------------------------------
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing harness.cpp
+Converting
+Type-checking harness
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop microstrain_init_port().0 iteration 1 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 2 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 3 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 4 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 5 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 6 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 7 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 8 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 9 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 10 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 11 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 12 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 13 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 14 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 15 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 16 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 17 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 18 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 19 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 20 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 21 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 22 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 23 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 24 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 25 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 26 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 27 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 28 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 29 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 30 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 31 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 32 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 33 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 34 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 35 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 36 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 37 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 38 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 39 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 40 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 41 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 42 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 43 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 44 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 45 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 46 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 47 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 48 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 49 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 50 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 51 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 52 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 53 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 54 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 55 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 56 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 57 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 58 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 59 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 60 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 61 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 62 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 63 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 64 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 65 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 66 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 67 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 68 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 69 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 70 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 71 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 72 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 73 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 74 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 75 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 76 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 77 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 78 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 79 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 80 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 81 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 82 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 83 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 84 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 85 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 86 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 87 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 88 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 89 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 90 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 91 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 92 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 93 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 94 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 95 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 96 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 97 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 98 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 99 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 100 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 101 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 102 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 103 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 104 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 105 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 106 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 107 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 108 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 109 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 110 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 111 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 112 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 113 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 114 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 115 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 116 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 117 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 118 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 119 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 120 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 121 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 122 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 123 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 124 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 125 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 126 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 127 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 128 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop microstrain_init_port().0 iteration 129 file harness.cpp line 98 function microstrain_init_port thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 1 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 2 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 3 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 4 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 5 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 6 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 7 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 8 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 9 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 10 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 11 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 12 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 13 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 14 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 15 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 16 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 17 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 18 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 19 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 20 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 21 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 22 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 23 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 24 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 25 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 26 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 27 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 28 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 29 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 30 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 31 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 32 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 33 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 34 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 35 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 36 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 37 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 38 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 39 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 40 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 41 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 42 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 43 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 44 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 45 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 46 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 47 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 48 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 49 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 50 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 51 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 52 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 53 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 54 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 55 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 56 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 57 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 58 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 59 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 60 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 61 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 62 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 63 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 64 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 65 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 66 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 67 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 68 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 69 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 70 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 71 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 72 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 73 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 74 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 75 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 76 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 77 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 78 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 79 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 80 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 81 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 82 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 83 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 84 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 85 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 86 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 87 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 88 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 89 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 90 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 91 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 92 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 93 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 94 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 95 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 96 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 97 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 98 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 99 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 100 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 101 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 102 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 103 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 104 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 105 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 106 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 107 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 108 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 109 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 110 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 111 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 112 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 113 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 114 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 115 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 116 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 117 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 118 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 119 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 120 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 121 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 122 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 123 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 124 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 125 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 126 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 127 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strnlen_model(ptr_const_char,unsigned_long_int).0 iteration 128 file harness.cpp line 82 function strnlen_model thread 0
+Unwinding loop strncpy.0 iteration 1 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 2 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 3 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 4 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 5 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 6 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 7 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 8 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 9 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 10 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 11 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 12 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 13 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 14 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 15 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 16 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 17 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 18 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 19 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 20 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 21 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 22 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 23 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 24 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 25 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 26 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 27 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 28 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 29 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 30 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 31 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 32 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 33 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 34 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 35 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 36 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 37 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 38 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 39 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 40 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 41 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 42 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 43 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 44 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 45 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 46 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 47 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 48 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 49 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 50 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 51 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 52 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 53 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 54 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 55 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 56 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 57 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 58 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 59 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 60 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 61 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 62 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 63 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 64 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 65 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 66 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 67 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 68 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 69 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 70 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 71 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 72 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 73 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 74 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 75 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 76 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 77 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 78 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 79 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 80 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 81 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 82 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 83 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 84 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 85 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 86 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 87 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 88 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 89 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 90 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 91 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 92 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 93 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 94 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 95 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 96 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 97 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 98 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 99 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 100 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 101 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 102 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 103 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 104 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 105 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 106 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 107 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 108 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 109 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 110 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 111 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 112 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 113 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 114 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 115 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 116 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 117 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 118 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 119 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 120 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 121 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 122 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 123 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 124 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 125 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 126 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 127 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 128 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 129 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 130 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 131 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 132 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 133 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 134 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 135 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 136 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 137 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 138 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 139 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 140 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 141 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 142 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 143 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 144 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 145 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 146 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 147 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 148 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 149 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 150 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 151 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 152 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 153 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 154 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 155 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 156 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 157 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 158 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 159 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 160 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 161 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 162 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 163 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 164 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 165 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 166 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 167 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 168 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 169 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 170 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 171 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 172 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 173 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 174 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 175 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 176 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 177 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 178 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 179 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 180 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 181 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 182 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 183 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 184 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 185 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 186 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 187 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 188 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 189 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 190 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 191 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 192 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 193 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 194 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 195 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 196 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 197 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 198 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Unwinding loop strncpy.0 iteration 199 file <builtin-library-strncpy> line 30 function strncpy thread 0
+Not unwinding loop strncpy.0 iteration 200 file <builtin-library-strncpy> line 30 function strncpy thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Runtime Symex: 0.360011s
+size of program expression: 4170 steps
+simple slicing removed 8 assignments
+Generated 3768 VCC(s), 146 remaining after simplification
+Runtime Postprocess Equation: 0.000762317s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.13161s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.88e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+90333 variables, 255530 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.203831s
+Runtime decision procedure: 0.335795s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+90333 variables, 32627 clauses
+SAT checker inconsistent: instance is UNSATISFIABLE
+Runtime Solver: 7.913e-06s
+Runtime decision procedure: 3.733e-05s
+
+** Results:
+<builtin-library-strncpy> function strncpy
+[strncpy.pointer.1] line 22 same object violation in uart_port >= _port + (signed long int)max_len: SUCCESS
+[strncpy.pointer.2] line 22 same object violation in _port >= uart_port + (signed long int)max_len: SUCCESS
+[strncpy.pointer_arithmetic.1] line 22 pointer relation: pointer outside object bounds in _port + (signed long int)max_len: SUCCESS
+[strncpy.pointer_arithmetic.2] line 22 pointer relation: pointer outside object bounds in uart_port + (signed long int)max_len: SUCCESS
+[strncpy.overflow.1] line 30 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+[strncpy.unwind.0] line 30 unwinding assertion loop 0: SUCCESS
+[strncpy.pointer_dereference.1] line 32 dereference failure: pointer NULL in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.2] line 32 dereference failure: pointer invalid in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.3] line 32 dereference failure: deallocated dynamic object in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.4] line 32 dereference failure: dead object in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.5] line 32 dereference failure: pointer outside object bounds in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.6] line 32 dereference failure: invalid integer address in src[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.7] line 33 dereference failure: pointer NULL in dst[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.8] line 33 dereference failure: pointer invalid in dst[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.9] line 33 dereference failure: deallocated dynamic object in dst[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.10] line 33 dereference failure: dead object in dst[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.11] line 33 dereference failure: pointer outside object bounds in dst[(signed long int)i]: SUCCESS
+[strncpy.pointer_dereference.12] line 33 dereference failure: invalid integer address in dst[(signed long int)i]: SUCCESS
+
+harness.cpp function microstrain_init_port
+[microstrain_init_port.overflow.1] line 98 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+[microstrain_init_port.array_bounds.1] line 99 array 'uart_port' upper bound in uart_port[(signed long int)i]: SUCCESS
+[microstrain_init_port.precondition_instance.1] line 106 strncpy src/dst overlap: SUCCESS
+[microstrain_init_port.assertion.1] line 112 assertion max_len < PORT_SIZE: FAILURE
+[microstrain_init_port.array_bounds.2] line 114 array '_port' upper bound in _port[(signed long int)max_len]: FAILURE
+
+harness.cpp function strnlen_model
+[strnlen_model.pointer_dereference.1] line 82 dereference failure: pointer NULL in s[(signed long int)i]: SUCCESS
+[strnlen_model.pointer_dereference.2] line 82 dereference failure: pointer invalid in s[(signed long int)i]: SUCCESS
+[strnlen_model.pointer_dereference.3] line 82 dereference failure: deallocated dynamic object in s[(signed long int)i]: SUCCESS
+[strnlen_model.pointer_dereference.4] line 82 dereference failure: dead object in s[(signed long int)i]: SUCCESS
+[strnlen_model.pointer_dereference.5] line 82 dereference failure: pointer outside object bounds in s[(signed long int)i]: SUCCESS
+[strnlen_model.pointer_dereference.6] line 82 dereference failure: invalid integer address in s[(signed long int)i]: SUCCESS
+[strnlen_model.overflow.1] line 83 arithmetic overflow on unsigned + in i + 1ul: SUCCESS
+
+** 2 of 30 failed (2 iterations)
+VERIFICATION FAILED
+# codigo de saida: 10

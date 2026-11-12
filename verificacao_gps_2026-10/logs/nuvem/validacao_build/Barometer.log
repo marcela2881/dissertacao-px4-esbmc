@@ -1,0 +1,22 @@
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Barometer/test_barometer.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.620s
+GOTO program processing time: 0.038s
+Starting Bounded Model Checking
+Symex completed in: 0.014s (254 assignments)
+Caching time: 0.000s (removed 1 assertions)
+Slicing time: 0.001s (removed 133 assignments)
+Generated 93 VCC(s), 34 remaining after simplification (120 assignments)
+No solver specified; defaulting to Boolector
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.012s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.770s
+BMC program time: 0.799s
+
+VERIFICATION SUCCESSFUL

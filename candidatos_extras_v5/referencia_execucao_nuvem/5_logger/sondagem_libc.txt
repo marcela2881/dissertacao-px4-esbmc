@@ -1,0 +1,9 @@
+# data:     2026-10-12T12:48:31Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/5_logger/fontes
+# compilar: g++ -x c -g -O0 -o sondagem_libc.bin sondagem_snprintf.c
+# executar: ./sondagem_libc.bin 
+# o que e:  mesma sondagem com a libc real (deve imprimir 10)
+# --------------------------------------------------------------
+snprintf devolveu 10
+# codigo de saida: 0

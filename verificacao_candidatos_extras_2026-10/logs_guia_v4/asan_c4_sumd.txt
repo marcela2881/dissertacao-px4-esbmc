@@ -1,0 +1,6 @@
+# 2026-10-12T12:00:47Z host=vm cmd: replay_sumd ASan
+length=32 sumd_data tem 64 posicoes (indices 0..63)
+Loop escreve ate rxlen <= length*2 = 64
+Tentando escrever em sumd_data[64] (ultimo invalido)...
+rxlen final=65
+# exit: 0

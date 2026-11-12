@@ -1,0 +1,17 @@
+Candidato 5 — logger.cpp — SEM VIOLACAO DE MEMORIA (sem issue)
+
+O que foi provado: nenhuma violacao de limites de memoria em
+write_info_multiple() para qualquer valor de key_len (0..255).
+O que NAO foi provado: que o truncamento nunca acontece. O k = 300 do log e
+so o laco concreto de 299 iteracoes do harness (parecer A6).
+
+harness.cpp           : modo normal (snprintf do verificador) e
+                        -DMODELO_KEY_LEN_NONDET (retorno livre + assercao do truncamento).
+sondagem_snprintf.c   : mostra que o modelo de snprintf do verificador nao
+                        devolve o comprimento real (parecer A7, secao 5.4).
+
+Esperado: esbmc SUCCESSFUL; esbmc_key_len FAILED so na assercao
+"ret_snprintf <= 255" (truncamento alcancavel), com as propriedades de
+memoria passando; esbmc_sondagem FAILED; sondagem_libc imprime 10.
+Leitura: o truncamento produz um registro ULog com key_len errado, nao uma
+escrita fora dos limites. Todos os call sites reais usam nomes curtos.

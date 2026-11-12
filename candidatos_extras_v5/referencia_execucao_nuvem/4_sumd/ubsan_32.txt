@@ -1,0 +1,9 @@
+# data:     2026-10-12T12:47:24Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/4_sumd/fontes
+# compilar: g++ -fsanitize=undefined -fno-sanitize-recover=all -g -O0 -o ubsan_32.bin replay.cpp
+# executar: ./ubsan_32.bin 32
+# o que e:  sumd_decode() real, quadro de 32 canais
+# --------------------------------------------------------------
+replay.cpp:192:29: runtime error: index 64 out of bounds for type 'unsigned char [64]'
+# codigo de saida: 1

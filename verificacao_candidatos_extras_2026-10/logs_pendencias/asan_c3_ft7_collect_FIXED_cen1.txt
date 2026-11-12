@@ -1,0 +1,6 @@
+# 2026-10-12T12:02:08Z host=vm cwd=/tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/novos
+# cmd: g++ -DFIXED -fsanitize=address replay_ft7_collect.cpp && ./ft7 1
+apos 1a chamada: _byte_counter=19
+apos 2a chamada: _byte_counter=30 (sizeof _readbuf = 30)
+_interval=100000 (inicial 100000)
+# exit: 0

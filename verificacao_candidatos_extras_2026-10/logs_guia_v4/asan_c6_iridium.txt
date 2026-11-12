@@ -1,0 +1,47 @@
+# 2026-10-12T12:00:50Z host=vm cmd: replay_iridiumsbd ASan
+=================================================================
+==735==ERROR: AddressSanitizer: global-buffer-overflow on address 0x564a52719394 at pc 0x7ff6f86fb303 bp 0x7ffe8a39b750 sp 0x7ffe8a39aef8
+WRITE of size 334 at 0x564a52719394 thread T0
+    #0 0x7ff6f86fb302 in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115
+    #1 0x564a527163ea in iridiumsbd_write(char const*, unsigned long) /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ANTIGO/rodada2/replay_iridiumsbd.cpp:24
+    #2 0x564a527165bf in main /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ANTIGO/rodada2/replay_iridiumsbd.cpp:36
+    #3 0x7ff6f7e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x7ff6f7e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x564a527161c4 in _start (/tmp/r_c6+0x11c4) (BuildId: cc7e5f114cd01704dec18b07e27b883b9b5c7fab)
+
+0x564a52719394 is located 0 bytes after global variable '_tx_buf' defined in 'replay_iridiumsbd.cpp:6:16' (0x564a52719240) of size 340
+0x564a52719394 is located 44 bytes before global variable '_tx_buf_write_idx' defined in 'replay_iridiumsbd.cpp:7:12' (0x564a527193c0) of size 4
+SUMMARY: AddressSanitizer: global-buffer-overflow ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115 in memcpy
+Shadow bytes around the buggy address:
+  0x564a52719100: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x564a52719180: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x564a52719200: f9 f9 f9 f9 00 00 00 00 00 00 00 00 00 00 00 00
+  0x564a52719280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x564a52719300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x564a52719380: 00 00[04]f9 f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9
+  0x564a52719400: 02 f9 f9 f9 f9 f9 f9 f9 04 f9 f9 f9 f9 f9 f9 f9
+  0x564a52719480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x564a52719500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x564a52719580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x564a52719600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==735==ABORTING
+# exit: 1

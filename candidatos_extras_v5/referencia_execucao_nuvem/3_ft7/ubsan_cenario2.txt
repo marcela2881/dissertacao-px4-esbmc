@@ -1,0 +1,9 @@
+# data:     2026-10-12T12:47:03Z
+# maquina:  vm
+# pasta:    /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/v5/resultados_teste_nuvem/3_ft7/fontes
+# compilar: g++ -fsanitize=undefined -fno-sanitize-recover=all -g -O0 -o ubsan_cenario2.bin replay.cpp
+# executar: ./ubsan_cenario2.bin 2
+# o que e:  replay chama collect(): campo speed sem delimitador
+# --------------------------------------------------------------
+replay.cpp:71:64: runtime error: index 5 out of bounds for type 'char [5]'
+# codigo de saida: 1

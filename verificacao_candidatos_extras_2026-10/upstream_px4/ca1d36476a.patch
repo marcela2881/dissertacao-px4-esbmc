@@ -1,0 +1,40 @@
+commit ca1d36476aee21cb835df5dfacc7eb46f1fdf047
+Author: Julian Oes <julian@oes.ch>
+Date:   Mon Sep 14 13:56:13 2026 +1200
+
+    fix(commander): clamp num_events from arming_check_reply (#28598)
+    
+    num_events is a uint8 while events is a fixed array of five, and the reply
+    arrives on /fmu/in/arming_check_reply, which uXRCE-DDS exposes as an input
+    topic. checkAndReport() looped to num_events and memcpy'd into events[i], so a
+    value above five wrote past the end of the heap-allocated reply.
+    
+    Clamp on ingestion, next to the existing registration_id validation, so the
+    stored reply cannot describe more events than it can hold.
+    
+    Reported by @REYu6.
+    
+    Assisted-by: Claude:claude-opus-5[1m]
+    
+    Signed-off-by: Julian Oes <julian@oes.ch>
+
+diff --git a/src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp b/src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp
+index 93bcfce7df..8b9843c9fe 100644
+--- a/src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp
++++ b/src/modules/commander/HealthAndArmingChecks/checks/externalChecks.cpp
+@@ -260,6 +260,15 @@ void ExternalChecks::update()
+ 			}
+ 
+ 			if (_registrations[reply.registration_id].reply) {
++				// num_events is a uint8 arriving on an externally writable topic, while events is
++				// a fixed-size array. Clamp it here, next to the registration_id check, so
++				// checkAndReport() cannot iterate past the end of the array.
++				static constexpr uint8_t max_num_events = sizeof(reply.events) / sizeof(reply.events[0]);
++
++				if (reply.num_events > max_num_events) {
++					reply.num_events = max_num_events;
++				}
++
+ 				*_registrations[reply.registration_id].reply = reply;
+ 			}
+ 

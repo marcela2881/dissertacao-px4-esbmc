@@ -1,0 +1,12 @@
+Candidato 2 — externalChecks.cpp — CORRIGIDO NO PX4 (nao abrir issue)
+
+Violacao real no 8be2590c15: num_events (uint8, 0..255) indexa events[5].
+Corrigido no PX4 por ca1d36476a (PR #28598, 14/09/2026, "clamp num_events
+from arming_check_reply"), relatado por outra pessoa.
+
+harness.cpp      : v5 com assercao sobre o indice (B18). -DCORRECAO_UPSTREAM aplica a correcao.
+replay.cpp       : ASan; recebe num_events do trace do CBMC (B6).
+
+Esperado: esbmc/cbmc FAILED; *_correcao SUCCESSFUL; asan ASAN.
+Nota: no ESBMC 8.1 o --generate-testcase nao concretiza num_events (fica
+nondet_symbol); por isso o valor vem do trace do CBMC.

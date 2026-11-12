@@ -1,0 +1,25 @@
+# data: 2026-10-11T17:54:18Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.1.0 64-bit x86_64 linux
+# comando: esbmc resultados/PWM_Output/test_pwm_out.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 120s
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/PWM_Output/test_pwm_out.cpp
+Converting
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.412s
+GOTO program processing time: 0.023s
+Starting Bounded Model Checking
+Symex completed in: 0.005s (209 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.000s (removed 151 assignments)
+Generated 38 VCC(s), 10 remaining after simplification (58 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.004s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.258s
+BMC program time: 0.267s
+
+VERIFICATION SUCCESSFUL
+# exit: 0

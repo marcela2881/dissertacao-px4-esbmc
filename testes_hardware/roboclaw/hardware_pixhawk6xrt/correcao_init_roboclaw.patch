@@ -1,0 +1,15 @@
+diff --git a/src/drivers/roboclaw/Roboclaw.hpp b/src/drivers/roboclaw/Roboclaw.hpp
+index d0ab6f75fa..9ab8e82dbf 100644
+--- a/src/drivers/roboclaw/Roboclaw.hpp
++++ b/src/drivers/roboclaw/Roboclaw.hpp
+@@ -132,8 +132,8 @@ private:
+ 	int initializeUART();
+ 	bool _uart_initialized{false};
+ 	int _uart_fd{0};
+-	fd_set _uart_fd_set;
+-	struct timeval _uart_fd_timeout;
++	fd_set _uart_fd_set{};
++	struct timeval _uart_fd_timeout{};
+ 
+ 	DEFINE_PARAMETERS(
+ 		(ParamInt<px4::params::RBCLW_ADDRESS>) _param_rbclw_address,

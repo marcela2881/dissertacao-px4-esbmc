@@ -1,0 +1,126 @@
+# data: 2026-10-11T16:52:13Z maquina: nuvem
+# versao: ESBMC version 8.1.0 64-bit x86_64 linux
+# comando: esbmc test_gps_prod_sem_invariante.cpp --unwind 80 --default-solver boolector (unwinding assertions LIGADAS, padrao do ESBMC)
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing test_gps_prod_sem_invariante.cpp
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.211s
+GOTO program processing time: 0.001s
+Starting Bounded Model Checking
+Unwinding loop 23 iteration 1   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 2   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 3   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 4   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 5   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 6   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 7   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 8   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 9   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 10   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 11   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 12   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 13   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 14   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 15   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 16   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 17   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 18   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 19   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 20   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 21   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 22   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 23   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 24   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 25   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 26   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 27   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 28   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 29   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 30   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 31   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 32   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 33   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 34   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 35   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 36   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 37   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 38   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 39   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 40   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 41   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 42   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 43   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 44   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 45   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 46   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 47   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 48   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 49   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 50   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 51   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 52   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 53   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 54   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 55   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 56   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 57   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 58   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 59   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 60   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 61   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 62   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 63   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 64   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 65   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 66   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 67   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 68   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 69   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 70   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 71   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 72   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 73   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 74   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 75   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 76   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 77   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 78   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Unwinding loop 23 iteration 79   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Not unwinding loop 23 iteration 80   file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 278 column 3 function __memcpy_impl
+Symex completed in: 0.059s (533 assignments)
+Caching time: 0.005s (removed 0 assertions)
+Slicing time: 0.003s (removed 356 assignments)
+Generated 446 VCC(s), 81 remaining after simplification (177 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.004s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.097s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file test_gps_prod_sem_invariante.cpp line 7 column 5 function main thread 0
+----------------------------------------------------
+  dump = { .timestamp = 0 }
+
+State 2 file test_gps_prod_sem_invariante.cpp line 8 column 16 function main thread 0
+----------------------------------------------------
+  dump.len = { .timestamp=0, .instance=0, .anon_pad$2=0, .device_id=0,
+    .len=146, .data={ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } }
+
+State 3 file test_gps_prod_sem_invariante.cpp line 10 column 5 function main thread 0
+----------------------------------------------------
+  len = 12 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001100)
+
+State 5 file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl thread 0
+----------------------------------------------------
+Violated property:
+  file /home/user/esbmc/esbmc/src/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+  dereference failure: Access to object out of bounds
+
+
+VERIFICATION FAILED
+# exit: 1 parede: .435717750 s

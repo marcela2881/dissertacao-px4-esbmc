@@ -1,0 +1,76 @@
+# data: 2026-10-11T18:04:08Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/RC_Update/test_rc_update.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/RC_Update/test_rc_update.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.458s
+GOTO program processing time: 0.030s
+Starting Bounded Model Checking
+Symex completed in: 0.011s (331 assignments)
+Caching time: 0.001s (removed 0 assertions)
+Slicing time: 0.000s (removed 166 assignments)
+Generated 56 VCC(s), 39 remaining after simplification (165 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.016s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 6.504s
+BMC program time: 6.533s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                         line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                         line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                         line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                         line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                         line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                         line  20  arithmetic overflow on floating-point ieee_mul
+resultados/RC_Update/test_rc_update.cpp, function calibrate_rc_channel
+  PASSED       [calibrate_rc_channel.arithmetic-overflow.1]           line  52  arithmetic overflow on floating-point ieee_add
+  PASSED       [calibrate_rc_channel.arithmetic-overflow.2]           line  52  arithmetic overflow on floating-point ieee_div
+  PASSED       [calibrate_rc_channel.arithmetic-overflow.3]           line  52  arithmetic overflow on floating-point ieee_sub
+  PASSED       [calibrate_rc_channel.arithmetic-overflow.4]           line  55  arithmetic overflow on floating-point ieee_div
+  PASSED       [calibrate_rc_channel.arithmetic-overflow.5]           line  55  arithmetic overflow on floating-point ieee_sub
+resultados/RC_Update/test_rc_update.cpp, function correct_throttle_trim
+  PASSED       [correct_throttle_trim.arithmetic-overflow.1]          line 100  arithmetic overflow on add
+  PASSED       [correct_throttle_trim.arithmetic-overflow.2]          line 100  arithmetic overflow on div
+resultados/RC_Update/test_rc_update.cpp, function get_switch_on_off
+  PASSED       [get_switch_on_off.arithmetic-overflow.1]              line  72  arithmetic overflow on floating-point ieee_add
+  PASSED       [get_switch_on_off.arithmetic-overflow.2]              line  72  arithmetic overflow on floating-point ieee_mul
+resultados/RC_Update/test_rc_update.cpp, function test_channel_calibration_range
+  PASSED       [test_channel_calibration_range.assertion.1]           line 148  assertion result >= -1.0f
+  PASSED       [test_channel_calibration_range.assertion.2]           line 149  assertion result <= 1.0f
+  PASSED       [test_channel_calibration_range.assertion.3]           line 152  assertion !isnan(result)
+  PASSED       [test_channel_calibration_range.assertion.4]           line 156  assertion at_trim >= -0.01f && at_trim <= 0.01f
+resultados/RC_Update/test_rc_update.cpp, function test_rc_value_range
+  PASSED       [test_rc_value_range.assertion.1]                      line 119  assertion result >= -1.0f
+  PASSED       [test_rc_value_range.assertion.2]                      line 122  assertion result <= 1.0f
+  PASSED       [test_rc_value_range.assertion.3]                      line 125  assertion !isnan(result)
+resultados/RC_Update/test_rc_update.cpp, function test_signal_lost_min_channels
+  PASSED       [test_signal_lost_min_channels.assertion.1]            line 201  assertion lost == 1
+  PASSED       [test_signal_lost_min_channels.assertion.2]            line 206  assertion lost == 1
+  PASSED       [test_signal_lost_min_channels.assertion.3]            line 211  assertion lost == 1
+resultados/RC_Update/test_rc_update.cpp, function test_switch_rescale_range
+  PASSED       [test_switch_rescale_range.arithmetic-overflow.1]      line 171  arithmetic overflow on floating-point ieee_add
+  PASSED       [test_switch_rescale_range.arithmetic-overflow.2]      line 171  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_switch_rescale_range.assertion.1]                line 174  assertion rescaled >= 0.0f
+  PASSED       [test_switch_rescale_range.assertion.2]                line 177  assertion rescaled <= 1.0f
+  PASSED       [test_switch_rescale_range.assertion.3]                line 181  assertion sw == SWITCH_POS_ON || sw == SWITCH_POS_OFF
+resultados/RC_Update/test_rc_update.cpp, function test_throttle_trim_correction
+  PASSED       [test_throttle_trim_correction.assertion.1]            line 232  assertion new_trim >= min
+  PASSED       [test_throttle_trim_correction.assertion.2]            line 233  assertion new_trim <= max
+  PASSED       [test_throttle_trim_correction.arithmetic-overflow.1]  line 236  arithmetic overflow on add
+  PASSED       [test_throttle_trim_correction.arithmetic-overflow.2]  line 236  arithmetic overflow on div
+  PASSED       [test_throttle_trim_correction.assertion.3]            line 236  assertion new_trim == (min + max) / 2
+
+** 0 of 35 properties failed, 35 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0

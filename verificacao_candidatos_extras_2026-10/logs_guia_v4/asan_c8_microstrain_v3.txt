@@ -1,0 +1,51 @@
+# 2026-10-12T12:00:51Z host=vm cmd: replay_microstrain_v3 ASan
+=================================================================
+==751==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x50c0000000c0 at pc 0x55dae3cb75bf bp 0x7ffe868b7f20 sp 0x7ffe868b7f10
+WRITE of size 1 at 0x50c0000000c0 thread T0
+    #0 0x55dae3cb75be in main /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ATUAL/replay_microstrain_v3.cpp:93
+    #1 0x7f4fcf82a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #2 0x7f4fcf82a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #3 0x55dae3cb7224 in _start (/tmp/r_c8+0x1224) (BuildId: 4332ce937a01692bb4fd553680f5d621ac025cab)
+
+0x50c0000000c0 is located 0 bytes after 128-byte region [0x50c000000040,0x50c0000000c0)
+allocated by thread T0 here:
+    #0 0x7f4fd00fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55dae3cb73fd in main /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ATUAL/replay_microstrain_v3.cpp:68
+    #2 0x7f4fcf82a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x7f4fcf82a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x55dae3cb7224 in _start (/tmp/r_c8+0x1224) (BuildId: 4332ce937a01692bb4fd553680f5d621ac025cab)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/pkg/2_replays/ATUAL/replay_microstrain_v3.cpp:93 in main
+Shadow bytes around the buggy address:
+  0x50bffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bfffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bfffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50c000000000: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+=>0x50c000000080: 00 00 00 00 00 00 00 00[fa]fa fa fa fa fa fa fa
+  0x50c000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==751==ABORTING
+# exit: 1

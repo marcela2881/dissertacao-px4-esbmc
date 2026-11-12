@@ -1,0 +1,14 @@
+Candidato 4 — sumd.cpp — CONTINUA NO PX4 (issue: issues_px4/issue_sumd.md)
+
+Com um quadro legitimo de 32 canais, sumd_decode() escreve o 64o byte de
+dados em sumd_data[64] (array de 64). No struct empacotado esse endereco e
+crc16_high, que em seguida e sobrescrito pelo byte alto do CRC.
+
+harness.cpp : estados ate GOT_CRC (sem a extracao de canais).
+replay.cpp  : a funcao sumd_decode() REAL, copiada sem alteracao, num quadro
+              valido de 32 canais com CRC correto.
+              ./replay 32 -> max_chan_count 32 (como no RCTest): canal 32 sai errado
+              ./replay 18 -> max_chan_count 18 (como no RCInput): canal 32 nao e lido
+
+Esperado: esbmc/cbmc FAILED; ubsan_32 UBSAN; efeito_32 mostra o canal 32
+errado; asan_32 nao detecta (dentro do objeto).

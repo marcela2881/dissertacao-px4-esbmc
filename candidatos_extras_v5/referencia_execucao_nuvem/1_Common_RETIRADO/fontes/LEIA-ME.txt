@@ -1,0 +1,13 @@
+Candidato 1 — Common.cpp (HealthAndArmingChecks) — RETIRADO
+
+orig_72.cpp / orig_168.cpp : premissa antiga do harness, 0 <= _next_buffer_idx <= SIZE+4
+inv_72.cpp  / inv_168.cpp  : invariante mantida pela guarda real, 0 <= _next_buffer_idx <= SIZE
+
+SIZE real = 168: ORB_QUEUE_LENGTH = 16 (msg/versioned/Event.msg) e
+_event_buffer[(16 - 2) * (sizeof(EventBufferHeader) + 1 + 1 + 4)] = 14 * 12 = 168
+(parecer B21). O harness original assumia ORB_QUEUE_LENGTH = 8 (SIZE 72);
+os dois tamanhos dao o mesmo resultado.
+
+Esperado: orig_* FAILED, inv_* SUCCESSFUL (ESBMC e CBMC). A violacao so existe
+com um indice que a guarda nunca deixa acontecer, entao o achado foi retirado.
+Sem replay (parecer B5 deixa de se aplicar).

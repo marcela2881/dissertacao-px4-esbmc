@@ -1,0 +1,188 @@
+== CBMC sem correcao ==
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing harness.cpp
+Converting
+Type-checking harness
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop get_cell_voltages().0 iteration 1 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 2 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 3 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 4 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 5 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 6 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 7 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 8 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 9 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 10 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 11 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 12 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 13 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 14 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 15 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 16 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 17 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 18 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 19 file harness.cpp line 94 function get_cell_voltages thread 0
+Not unwinding loop get_cell_voltages().0 iteration 20 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 1 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 2 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 3 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 4 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 5 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 6 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 7 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 8 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 9 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 10 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 11 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 12 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 13 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 14 file harness.cpp line 104 function run_impl thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 15 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 16 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 17 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 18 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 19 file harness.cpp line 104 function run_impl thread 0
+Not unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 20 file harness.cpp line 104 function run_impl thread 0
+Runtime Symex: 0.0279332s
+size of program expression: 992 steps
+simple slicing removed 218 assignments
+Generated 228 VCC(s), 16 remaining after simplification
+Runtime Postprocess Equation: 8.4271e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.0485256s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.128e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+46446 variables, 171190 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.224817s
+Runtime decision procedure: 0.273486s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+46446 variables, 452 clauses
+SAT checker inconsistent: instance is UNSATISFIABLE
+Runtime Solver: 4.628e-06s
+Runtime decision procedure: 1.9277e-05s
+
+** Results:
+harness.cpp function get_cell_voltages
+[get_cell_voltages.unwind.0] line 94 unwinding assertion loop 0: SUCCESS
+[get_cell_voltages.array_bounds.1] line 95 array '_cell_voltages' lower bound in _cell_voltages[(signed long int)i]: SUCCESS
+[get_cell_voltages.array_bounds.2] line 95 array '_cell_voltages' upper bound in _cell_voltages[(signed long int)i]: SUCCESS
+
+harness.cpp function run_impl
+[run_impl.unwind.0] line 104 unwinding assertion loop 0: SUCCESS
+[run_impl.assertion.1] line 105 assertion i < 14: FAILURE
+[run_impl.array_bounds.1] line 106 array.battery_status_s::voltage_cell_v dynamic object upper bound in new_report->voltage_cell_v[(signed long int)i]: SUCCESS
+[run_impl.array_bounds.2] line 106 array '_cell_voltages' lower bound in _cell_voltages[(signed long int)i]: SUCCESS
+[run_impl.array_bounds.3] line 106 array '_cell_voltages' upper bound in _cell_voltages[(signed long int)i]: SUCCESS
+[run_impl.pointer_dereference.1] line 106 dereference failure: pointer NULL in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.2] line 106 dereference failure: pointer invalid in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.3] line 106 dereference failure: deallocated dynamic object in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.4] line 106 dereference failure: dead object in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.5] line 106 dereference failure: pointer outside object bounds in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.6] line 106 dereference failure: invalid integer address in new_report->voltage_cell_v: SUCCESS
+
+** 1 of 14 failed (2 iterations)
+VERIFICATION FAILED
+== CBMC com correcao ==
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing harness.cpp
+Converting
+Type-checking harness
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop get_cell_voltages().0 iteration 1 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 2 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 3 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 4 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 5 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 6 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 7 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 8 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 9 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 10 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 11 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 12 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 13 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 14 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 15 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 16 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 17 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 18 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop get_cell_voltages().0 iteration 19 file harness.cpp line 94 function get_cell_voltages thread 0
+Not unwinding loop get_cell_voltages().0 iteration 20 file harness.cpp line 94 function get_cell_voltages thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 1 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 2 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 3 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 4 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 5 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 6 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 7 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 8 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 9 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 10 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 11 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 12 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 13 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 14 file harness.cpp line 104 function run_impl thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 15 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 16 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 17 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 18 file harness.cpp line 104 function run_impl thread 0
+Unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 19 file harness.cpp line 104 function run_impl thread 0
+Not unwinding loop run_impl(ref_struct_tag(identifier=tag-battery_status_s)).0 iteration 20 file harness.cpp line 104 function run_impl thread 0
+Runtime Symex: 0.0275209s
+size of program expression: 1002 steps
+simple slicing removed 218 assignments
+Generated 228 VCC(s), 16 remaining after simplification
+Runtime Postprocess Equation: 8.5734e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.0473641s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 3.256e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+46510 variables, 171246 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 0.0688464s
+Runtime decision procedure: 0.116385s
+
+** Results:
+harness.cpp function get_cell_voltages
+[get_cell_voltages.unwind.0] line 94 unwinding assertion loop 0: SUCCESS
+[get_cell_voltages.array_bounds.1] line 95 array '_cell_voltages' lower bound in _cell_voltages[(signed long int)i]: SUCCESS
+[get_cell_voltages.array_bounds.2] line 95 array '_cell_voltages' upper bound in _cell_voltages[(signed long int)i]: SUCCESS
+
+harness.cpp function run_impl
+[run_impl.unwind.0] line 104 unwinding assertion loop 0: SUCCESS
+[run_impl.assertion.1] line 105 assertion i < 14: SUCCESS
+[run_impl.array_bounds.1] line 106 array.battery_status_s::voltage_cell_v dynamic object upper bound in new_report->voltage_cell_v[(signed long int)i]: SUCCESS
+[run_impl.array_bounds.2] line 106 array '_cell_voltages' lower bound in _cell_voltages[(signed long int)i]: SUCCESS
+[run_impl.array_bounds.3] line 106 array '_cell_voltages' upper bound in _cell_voltages[(signed long int)i]: SUCCESS
+[run_impl.pointer_dereference.1] line 106 dereference failure: pointer NULL in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.2] line 106 dereference failure: pointer invalid in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.3] line 106 dereference failure: deallocated dynamic object in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.4] line 106 dereference failure: dead object in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.5] line 106 dereference failure: pointer outside object bounds in new_report->voltage_cell_v: SUCCESS
+[run_impl.pointer_dereference.6] line 106 dereference failure: invalid integer address in new_report->voltage_cell_v: SUCCESS
+
+** 0 of 14 failed (1 iterations)
+VERIFICATION SUCCESSFUL

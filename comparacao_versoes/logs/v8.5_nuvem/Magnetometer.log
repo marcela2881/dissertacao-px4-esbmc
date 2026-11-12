@@ -1,0 +1,80 @@
+# data: 2026-10-11T18:03:56Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/Magnetometer/test_vehicle_magnetometer.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Magnetometer/test_vehicle_magnetometer.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.380s
+GOTO program processing time: 0.033s
+Starting Bounded Model Checking
+Symex completed in: 0.008s (237 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.001s (removed 137 assignments)
+Generated 50 VCC(s), 29 remaining after simplification (102 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.011s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 10.329s
+BMC program time: 10.349s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]                               line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]                               line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]                               line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]                               line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]                               line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]                               line  20  arithmetic overflow on floating-point ieee_mul
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function compute_kalman_gain
+  PASSED       [compute_kalman_gain.arithmetic-overflow.1]                  line  47  arithmetic overflow on floating-point ieee_add
+  PASSED       [compute_kalman_gain.arithmetic-overflow.2]                  line  48  arithmetic overflow on floating-point ieee_add
+  PASSED       [compute_kalman_gain.arithmetic-overflow.3]                  line  48  arithmetic overflow on floating-point ieee_div
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function compute_power_compensation
+  PASSED       [compute_power_compensation.arithmetic-overflow.1]           line  67  arithmetic overflow on floating-point ieee_mul
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function test_kalman_gain_bounds
+  PASSED       [test_kalman_gain_bounds.arithmetic-overflow.1]              line 140  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_kalman_gain_bounds.arithmetic-overflow.2]              line 141  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_kalman_gain_bounds.arithmetic-overflow.3]              line 142  arithmetic overflow on floating-point ieee_add
+  PASSED       [test_kalman_gain_bounds.assertion.1]                        line 147  assertion gain >= 0.0f
+  PASSED       [test_kalman_gain_bounds.assertion.2]                        line 150  assertion gain <= 1.0f
+  PASSED       [test_kalman_gain_bounds.assertion.3]                        line 153  assertion !isnan(gain)
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function test_mag_inconsistency_angle_bounds
+  PASSED       [test_mag_inconsistency_angle_bounds.assertion.1]            line 116  assertion result >= 0.0f
+  PASSED       [test_mag_inconsistency_angle_bounds.assertion.2]            line 119  assertion result <= (float)M_PI
+  PASSED       [test_mag_inconsistency_angle_bounds.assertion.3]            line 122  assertion !isnan(result)
+  PASSED       [test_mag_inconsistency_angle_bounds.arithmetic-overflow.1]  line 126  arithmetic overflow on floating-point ieee_add
+  PASSED       [test_mag_inconsistency_angle_bounds.assertion.4]            line 126  assertion result <= (float)M_PI + 1e-5f
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function test_mag_priority_bounds
+  PASSED       [test_mag_priority_bounds.arithmetic-overflow.1]             line 214  arithmetic overflow on neg
+  PASSED       [test_mag_priority_bounds.assertion.1]                       line 219  assertion result >= MAG_PRIORITY_MIN
+  PASSED       [test_mag_priority_bounds.assertion.2]                       line 222  assertion result <= MAG_PRIORITY_MAX
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function test_power_compensation_valid
+  PASSED       [test_power_compensation_valid.assertion.1]                  line 195  assertion power >= 0.0f
+  PASSED       [test_power_compensation_valid.assertion.2]                  line 198  assertion !isnan(power)
+  PASSED       [test_power_compensation_valid.assertion.3]                  line 201  assertion power <= 1.0f
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function test_state_variance_non_negative
+  PASSED       [test_state_variance_non_negative.arithmetic-overflow.1]     line 166  arithmetic overflow on floating-point ieee_mul
+  PASSED       [test_state_variance_non_negative.assertion.1]               line 172  assertion result >= 0.0f
+  PASSED       [test_state_variance_non_negative.assertion.2]               line 175  assertion !isnan(result)
+  PASSED       [test_state_variance_non_negative.arithmetic-overflow.2]     line 178  arithmetic overflow on floating-point ieee_add
+  PASSED       [test_state_variance_non_negative.assertion.3]               line 178  assertion result <= state_var + 1e-6f
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function update_angle_diff
+  PASSED       [update_angle_diff.arithmetic-overflow.1]                    line  38  arithmetic overflow on floating-point ieee_add
+  PASSED       [update_angle_diff.arithmetic-overflow.2]                    line  38  arithmetic overflow on floating-point ieee_mul
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function update_priority
+  PASSED       [update_priority.arithmetic-overflow.1]                      line  76  arithmetic overflow on add
+resultados/Magnetometer/test_vehicle_magnetometer.cpp, function update_state_variance
+  PASSED       [update_state_variance.arithmetic-overflow.1]                line  57  arithmetic overflow on floating-point ieee_mul
+  PASSED       [update_state_variance.arithmetic-overflow.2]                line  57  arithmetic overflow on floating-point ieee_sub
+
+** 0 of 37 properties failed, 37 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0

@@ -1,0 +1,4 @@
+# 2026-10-12T12:02:07Z host=vm cwd=/tmp/claude-0/-home-user-dissertacao-px4-esbmc/891a91a2-4eef-54c5-b3e5-07b3737105ab/scratchpad/repro_v4/novos
+# cmd: g++  -fsanitize=undefined,bounds-strict replay_ft7_collect.cpp && ./ft7 1
+replay_ft7_collect.cpp:46:26: runtime error: index 30 out of bounds for type 'char [30]'
+# exit: 1

@@ -1,0 +1,25 @@
+# data: 2026-10-11T17:50:19Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.1.0 64-bit x86_64 linux
+# comando: esbmc resultados/Expo_RC/test_expo_mathlib.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 120s
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Expo_RC/test_expo_mathlib.cpp
+Converting
+WARNING: extern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+WARNING: extern variable with id c:@signgam not found, initializing value to nondet! This code would not compile with an actual compiler.
+Generating GOTO Program
+GOTO program creation time: 0.540s
+GOTO program processing time: 0.033s
+Starting Bounded Model Checking
+Symex completed in: 0.021s (316 assignments)
+Caching time: 0.002s (removed 0 assertions)
+Slicing time: 0.001s (removed 218 assignments)
+Generated 278 VCC(s), 49 remaining after simplification (98 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.032s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 10.960s
+BMC program time: 11.016s
+
+VERIFICATION SUCCESSFUL
+# exit: 0

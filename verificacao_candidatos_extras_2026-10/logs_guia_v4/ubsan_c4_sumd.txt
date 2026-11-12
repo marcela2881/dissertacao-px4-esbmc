@@ -1,0 +1,3 @@
+# 2026-10-12T12:00:47Z host=vm cmd: replay_sumd UBSan
+replay_sumd.cpp:37:29: runtime error: index 64 out of bounds for type 'unsigned char [64]'
+# exit: 1

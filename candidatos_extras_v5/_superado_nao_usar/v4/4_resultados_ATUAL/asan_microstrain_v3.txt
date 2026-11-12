@@ -1,0 +1,49 @@
+=================================================================
+==15313==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x50c0000000c0 at pc 0x5cf71f717567 bp 0x7ffdfaace5b0 sp 0x7ffdfaace5a0
+WRITE of size 1 at 0x50c0000000c0 thread T0
+    #0 0x5cf71f717566 in main /tmp/r2/replay_microstrain_v3.cpp:34
+    #1 0x79de88e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #2 0x79de88e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #3 0x5cf71f717224 in _start (/tmp/r2/r8v3+0x1224) (BuildId: 45ec98d0959e528065e997f5df688fa5780412a8)
+
+0x50c0000000c0 is located 0 bytes after 128-byte region [0x50c000000040,0x50c0000000c0)
+allocated by thread T0 here:
+    #0 0x79de896fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5cf71f7173ee in main /tmp/r2/replay_microstrain_v3.cpp:17
+    #2 0x79de88e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x79de88e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x5cf71f717224 in _start (/tmp/r2/r8v3+0x1224) (BuildId: 45ec98d0959e528065e997f5df688fa5780412a8)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /tmp/r2/replay_microstrain_v3.cpp:34 in main
+Shadow bytes around the buggy address:
+  0x50bffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bfffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50bfffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x50c000000000: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+=>0x50c000000080: 00 00 00 00 00 00 00 00[fa]fa fa fa fa fa fa fa
+  0x50c000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x50c000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==15313==ABORTING

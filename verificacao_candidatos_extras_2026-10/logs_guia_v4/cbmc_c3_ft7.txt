@@ -1,0 +1,151 @@
+# 2026-10-12T12:00:44Z host=vm cmd: cbmc test_ft7_technologies.cpp --unwind 25 --bounds-check --signed-overflow-check --unsigned-overflow-check
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.95.1 (cbmc-5.95.1) 64-bit x86_64 linux
+Parsing test_ft7_technologies.cpp
+Converting
+Type-checking test_ft7_technologies
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+Unwinding loop main.0 iteration 1 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 2 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 3 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 4 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 5 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 6 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 7 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 8 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 9 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 10 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 11 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 12 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 13 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 14 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 15 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 16 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 17 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 18 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop main.0 iteration 19 file test_ft7_technologies.cpp line 103 function main thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 1 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 2 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 3 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 4 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 5 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 6 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 7 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 8 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 9 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 10 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 11 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 12 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 13 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 14 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 15 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 16 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 17 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 18 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 19 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 20 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 21 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 22 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 23 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 24 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Not unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 25 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 1 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 2 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 3 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 4 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 5 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 6 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 7 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 8 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 9 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 10 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 11 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 12 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 13 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 14 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 15 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 16 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 17 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 18 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 19 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 20 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 21 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 22 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 23 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 24 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+Not unwinding loop simulate_collect_call(signed_int,ptr_const_char).0 iteration 25 file test_ft7_technologies.cpp line 58 function simulate_collect_call thread 0
+**** WARNING: no body for function __builtin_FILE
+**** WARNING: no body for function __builtin_LINE
+Runtime Symex: 0.407668s
+size of program expression: 14818 steps
+simple slicing removed 7 assignments
+Generated 799 VCC(s), 686 remaining after simplification
+Runtime Postprocess Equation: 0.00373156s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.255776s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.6e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+149173 variables, 548337 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.575507s
+Runtime decision procedure: 0.833928s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+149173 variables, 85811 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.0270183s
+Runtime decision procedure: 0.0270964s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+149173 variables, 83451 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.00934171s
+Runtime decision procedure: 0.00941869s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+149173 variables, 83444 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.0325267s
+Runtime decision procedure: 0.0325993s
+Running propositional reduction
+Solving with MiniSAT 2.2.1 with simplifier
+149173 variables, 82603 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 0.024219s
+Runtime decision procedure: 0.0242596s
+
+** Results:
+test_ft7_technologies.cpp function main
+[main.overflow.1] line 103 arithmetic overflow on signed + in i + 1: SUCCESS
+[main.array_bounds.1] line 104 array 'readbuf' lower bound in readbuf[(signed long int)i]: SUCCESS
+[main.array_bounds.2] line 104 array 'readbuf' upper bound in readbuf[(signed long int)i]: SUCCESS
+[main.assertion.1] line 120 assertion _byte_counter <= READBUF_SIZE: FAILURE
+
+test_ft7_technologies.cpp function simulate_collect_call
+[simulate_collect_call.overflow.5] line 58 arithmetic overflow on signed + in i + 1: SUCCESS
+[simulate_collect_call.array_bounds.1] line 61 array '_readbuf' lower bound in _readbuf[(signed long int)_byte_counter]: SUCCESS
+[simulate_collect_call.array_bounds.2] line 61 array '_readbuf' upper bound in _readbuf[(signed long int)_byte_counter]: FAILURE
+[simulate_collect_call.overflow.1] line 62 arithmetic overflow on signed + in _byte_counter + 1: SUCCESS
+[simulate_collect_call.overflow.2] line 73 arithmetic overflow on signed + in _msg_part_counter + 1: SUCCESS
+[simulate_collect_call.array_bounds.3] line 80 array '_raw_speed' lower bound in _raw_speed[(signed long int)_msg_byte_counter]: SUCCESS
+[simulate_collect_call.array_bounds.4] line 80 array '_raw_speed' upper bound in _raw_speed[(signed long int)_msg_byte_counter]: FAILURE
+[simulate_collect_call.array_bounds.5] line 83 array '_raw_angle' lower bound in _raw_angle[(signed long int)_msg_byte_counter]: SUCCESS
+[simulate_collect_call.array_bounds.6] line 83 array '_raw_angle' upper bound in _raw_angle[(signed long int)_msg_byte_counter]: FAILURE
+[simulate_collect_call.array_bounds.7] line 86 array '_raw_status' lower bound in _raw_status[(signed long int)_msg_byte_counter]: SUCCESS
+[simulate_collect_call.array_bounds.8] line 86 array '_raw_status' upper bound in _raw_status[(signed long int)_msg_byte_counter]: FAILURE
+[simulate_collect_call.overflow.3] line 89 arithmetic overflow on signed + in _checksum_counter + 1: SUCCESS
+[simulate_collect_call.array_bounds.9] line 90 array '_raw_checksum' lower bound in _raw_checksum[(signed long int)_msg_byte_counter]: SUCCESS
+[simulate_collect_call.array_bounds.10] line 90 array '_raw_checksum' upper bound in _raw_checksum[(signed long int)_msg_byte_counter]: FAILURE
+[simulate_collect_call.overflow.4] line 93 arithmetic overflow on signed + in _msg_byte_counter + 1: SUCCESS
+
+** 6 of 19 failed (5 iterations)
+VERIFICATION FAILED
+# exit: 10

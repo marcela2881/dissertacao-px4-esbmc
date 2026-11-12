@@ -1,0 +1,67 @@
+# data: 2026-10-11T17:59:48Z  host: vm  cpu: Intel(R) Xeon(R) Processor @ 2.10GHz
+# versao: ESBMC version 8.5.0 64-bit x86_64 linux
+# comando: esbmc resultados/Expo_RC/test_expo_mathlib.cpp --unwind 10 --no-unwinding-assertions --overflow-check --default-solver boolector --timeout 600s
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing resultados/Expo_RC/test_expo_mathlib.cpp
+Converting
+WARNING: no definition for external symbol signgam declared at file /usr/include/math.h line 854 column 1
+WARNING: no definition for external symbol errno declared at file /esbmc-vfs/libc/library/stdlib.c line 13 column 1
+Generating GOTO Program
+GOTO program creation time: 0.620s
+GOTO program processing time: 0.042s
+Starting Bounded Model Checking
+Symex completed in: 0.026s (307 assignments)
+Caching time: 0.000s (removed 0 assertions)
+Slicing time: 0.002s (removed 208 assignments)
+Generated 278 VCC(s), 50 remaining after simplification (99 assignments)
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.032s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 5.019s
+BMC program time: 5.079s
+
+** Results:
+/esbmc-vfs/libc/library/libm/musl/__rem_pio2f.c
+  PASSED       [global.arithmetic-overflow.1]       line  36  arithmetic overflow on floating-point ieee_div
+/esbmc-vfs/libc/library/libm/musl/cosf.c
+  PASSED       [global.arithmetic-overflow.2]       line  20  arithmetic overflow on floating-point ieee_mul
+/esbmc-vfs/libc/library/libm/musl/exp2f_data.c
+  PASSED       [global.arithmetic-overflow.3]       line  12  arithmetic overflow on floating-point ieee_div
+  PASSED       [global.arithmetic-overflow.4]       line  12  arithmetic overflow on floating-point ieee_mul
+  PASSED       [global.arithmetic-overflow.5]       line  12  arithmetic overflow on shl
+/esbmc-vfs/libc/library/libm/musl/sinf.c
+  PASSED       [global.arithmetic-overflow.6]       line  20  arithmetic overflow on floating-point ieee_mul
+resultados/Expo_RC/test_expo_mathlib.cpp, function constrain
+  PASSED       [constrain.object-out-of-bounds.1]   line  22  dereference failure: Access to object out of bounds
+  PASSED       [constrain.assertion.1]              line  22  dereference failure: Incorrect alignment when accessing data object
+resultados/Expo_RC/test_expo_mathlib.cpp, function expo
+  PASSED       [expo.arithmetic-overflow.1]         line  28  arithmetic overflow on neg
+  PASSED       [expo.arithmetic-overflow.2]         line  30  arithmetic overflow on floating-point ieee_add
+  PASSED       [expo.arithmetic-overflow.3]         line  30  arithmetic overflow on floating-point ieee_mul
+  PASSED       [expo.arithmetic-overflow.4]         line  30  arithmetic overflow on floating-point ieee_sub
+resultados/Expo_RC/test_expo_mathlib.cpp, function test_expo_cubic_safe
+  PASSED       [test_expo_cubic_safe.assertion.1]   line  62  assertion !isnan(result)
+  PASSED       [test_expo_cubic_safe.assertion.2]   line  63  assertion !isinf(result)
+  PASSED       [test_expo_cubic_safe.assertion.3]   line  64  assertion result >= -1.0f && result <= 1.0f
+resultados/Expo_RC/test_expo_mathlib.cpp, function test_expo_linear_safe
+  PASSED       [test_expo_linear_safe.assertion.1]  line  46  assertion !isnan(result)
+  PASSED       [test_expo_linear_safe.assertion.2]  line  47  assertion !isinf(result)
+  PASSED       [test_expo_linear_safe.assertion.3]  line  48  assertion result >= -1.0f && result <= 1.0f
+resultados/Expo_RC/test_expo_mathlib.cpp, function test_expo_max_input
+  PASSED       [test_expo_max_input.assertion.1]    line  94  assertion !isnan(result)
+  PASSED       [test_expo_max_input.assertion.2]    line  95  assertion !isinf(result)
+  PASSED       [test_expo_max_input.assertion.3]    line  96  assertion result >= 0.0f && result <= 1.0f
+resultados/Expo_RC/test_expo_mathlib.cpp, function test_expo_min_input
+  PASSED       [test_expo_min_input.assertion.1]    line 110  assertion !isnan(result)
+  PASSED       [test_expo_min_input.assertion.2]    line 111  assertion !isinf(result)
+  PASSED       [test_expo_min_input.assertion.3]    line 112  assertion result >= -1.0f && result <= 0.0f
+resultados/Expo_RC/test_expo_mathlib.cpp, function test_expo_zero_input
+  PASSED       [test_expo_zero_input.assertion.1]   line  78  assertion !isnan(result)
+  PASSED       [test_expo_zero_input.assertion.2]   line  79  assertion !isinf(result)
+  PASSED       [test_expo_zero_input.assertion.3]   line  80  assertion result >= -1e-5f && result <= 1e-5f
+
+** 0 of 27 properties failed, 27 passed
+
+VERIFICATION SUCCESSFUL
+ESBMC version 8.5.0 64-bit x86_64 linux
+# exit: 0
