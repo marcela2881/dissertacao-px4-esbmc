@@ -21,11 +21,11 @@ Registro transcrito da página da issue, colada pela autora em 2026-11-12:
 - O valor de retorno de `printf`/`fprintf` ficou fora dessa correção e passou
   a ser acompanhado na issue 8564 do mesmo repositório.
 
-## Pendência
+## Reteste do logger: não será feito
 
-No comentário de 2026-10-13 o mantenedor pediu: testar o ramo
-`fix/8524-sprintf-runtime-string-length` no código do logger do PX4
-(candidato 5, `logger.cpp`, `uint8_t key_len = snprintf(...)`). Na página
-colada não há resposta da autora a esse pedido. Como o PR já foi integrado, o
-teste pode ser feito com uma compilação do `master` do ESBMC que contenha o
-commit acima.
+No comentário de 2026-10-13 o mantenedor sugeriu testar o ramo da correção no
+código do logger do PX4 (candidato 5). Como o PR foi integrado e a issue
+fechada sem esse teste, a autora decidiu em 2026-11-12 não fazê-lo. Na
+dissertação o candidato 5 permanece como "nenhuma violação de memória", com a
+ressalva de que o modelo de `snprintf` das versões usadas não exercitava o
+truncamento.
