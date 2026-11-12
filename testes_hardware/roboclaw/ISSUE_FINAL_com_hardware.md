@@ -77,7 +77,31 @@ After applying the proposed fix and setting `RBCLW_FAIL1=257` again, the capture
 
 I monitored the output for approximately four minutes and did not observe any data byte above 127.
 
-The serial captures and the ESP32 sketch are included in the `hardware_pixhawk6xrt` folder.
+Excerpts from the ESP32 serial monitor (the emulator prints its counters in Portuguese: `com velocidade >127` is the number of drive packets with a data byte above 127, `CRC ruim` is the number of CRC errors).
+
+Original firmware, `RBCLW_FAIL1=257`:
+
+```
+22:29:17.011 -> [rx t=217103ms n=5] 80 00 82 8A 90
+22:29:17.011 -> [rx t=217114ms n=5] 80 05 00 C4 AF
+22:29:17.011 -> [rx t=217126ms n=2] 80 12
+22:29:18.930 -> [resumo v4] bytes recebidos=57037 | consultas respondidas=4834 | pacotes drive validos=9464 | com velocidade >127=406 | CRC ruim=0 | cmd desconhecido=0
+```
+
+With the proposed fix, `RBCLW_FAIL1=257`:
+
+```
+23:53:17.385 -> [rx t=191112ms n=5] 80 00 7F B4 22
+23:53:17.385 -> [rx t=191125ms n=5] 80 05 00 C4 AF
+23:53:17.398 -> [rx t=191137ms n=2] 80 12
+23:57:39.383 -> [resumo v4] bytes recebidos=104683 | consultas respondidas=8726 | pacotes drive validos=17444 | com velocidade >127=0 | CRC ruim=1 | cmd desconhecido=0
+```
+
+The single CRC error in the second run was already counted before the capture started, when I reseated the data wire with the board transmitting.
+
+<!-- attach here: photo of the bench setup, and optionally a screenshot of the serial monitor -->
+
+The full serial captures and the ESP32 sketch are included in the `hardware_pixhawk6xrt` folder.
 
 This test was performed on a bench, with the ESP32 emulating the RoboClaw. I did not use a physical RoboClaw device or run a flight test.
 
