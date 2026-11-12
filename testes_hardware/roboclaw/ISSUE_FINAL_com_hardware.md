@@ -57,6 +57,8 @@ I connected TELEM2 to an ESP32 running a RoboClaw emulator and used the followin
 - `RBCLW_FUNC1=101`
 - `RBCLW_FAIL1=257`
 
+<!-- IMAGE: bench photo -->
+
 After running `commander arm -f` and `commander termination`, I confirmed that `actuator_armed.termination` was `True`.
 
 The ESP32 captured the following packet, approximately every 50 ms:
@@ -64,6 +66,10 @@ The ESP32 captured the following packet, approximately every 50 ms:
 `80 00 82 8A 90`
 
 The data byte is `0x82` (130), which is above the protocol limit of 127. The packet CRC was valid.
+
+<!-- IMAGE 1: serial monitor, original firmware (80 00 82) -->
+
+The emulator's counter of drive packets with a data byte above 127 kept increasing during this run (for example, `com velocidade >127=406` at 22:29:18 and `=3105` at 22:31:33, with `CRC ruim=0`, i.e. no CRC errors).
 
 I then changed `RBCLW_FAIL1` to `254`. The captured packet became:
 
@@ -77,31 +83,11 @@ After applying the proposed fix and setting `RBCLW_FAIL1=257` again, the capture
 
 I monitored the output for approximately four minutes and did not observe any data byte above 127.
 
-Excerpts from the ESP32 serial monitor (the emulator prints its counters in Portuguese: `com velocidade >127` is the number of drive packets with a data byte above 127, `CRC ruim` is the number of CRC errors).
+<!-- IMAGE 2: serial monitor, with the proposed fix (80 00 7F) -->
 
-Original firmware, `RBCLW_FAIL1=257`:
+In this run the same counter stayed at `com velocidade >127=0` from the first to the last summary line.
 
-```
-22:29:17.011 -> [rx t=217103ms n=5] 80 00 82 8A 90
-22:29:17.011 -> [rx t=217114ms n=5] 80 05 00 C4 AF
-22:29:17.011 -> [rx t=217126ms n=2] 80 12
-22:29:18.930 -> [resumo v4] bytes recebidos=57037 | consultas respondidas=4834 | pacotes drive validos=9464 | com velocidade >127=406 | CRC ruim=0 | cmd desconhecido=0
-```
-
-With the proposed fix, `RBCLW_FAIL1=257`:
-
-```
-23:53:17.385 -> [rx t=191112ms n=5] 80 00 7F B4 22
-23:53:17.385 -> [rx t=191125ms n=5] 80 05 00 C4 AF
-23:53:17.398 -> [rx t=191137ms n=2] 80 12
-23:57:39.383 -> [resumo v4] bytes recebidos=104683 | consultas respondidas=8726 | pacotes drive validos=17444 | com velocidade >127=0 | CRC ruim=1 | cmd desconhecido=0
-```
-
-The single CRC error in the second run was already counted before the capture started, when I reseated the data wire with the board transmitting.
-
-<!-- attach here: photo of the bench setup, and optionally a screenshot of the serial monitor -->
-
-The full serial captures and the ESP32 sketch are included in the `hardware_pixhawk6xrt` folder.
+The serial captures and the ESP32 sketch are included in the `hardware_pixhawk6xrt` folder.
 
 This test was performed on a bench, with the ESP32 emulating the RoboClaw. I did not use a physical RoboClaw device or run a flight test.
 
@@ -137,6 +123,8 @@ These results apply to the harnesses and properties used in the analysis; they d
 
 - Commands 0, 1, 4, and 5 should never send a data byte greater than 127, even when the configured failsafe value exceeds that limit.
 - If `write()` fails, the driver should detect the error and return an error status instead of reporting success and waiting for a response.
+
+<!-- ===== PART 2: paste from here into "Flight Log / Additional Information" ===== -->
 
 ## Software version
 
