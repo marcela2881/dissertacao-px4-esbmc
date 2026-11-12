@@ -1,0 +1,44 @@
+\corr{\paragraph{Validação em hardware do Bug~1.} O Bug~1 foi observado também
+em bancada, numa Pixhawk~6X~RT com firmware compilado do mesmo commit
+(\texttt{px4\_fmu-v6xrt\_default}). A porta TELEM2 foi ligada a um ESP32 que
+faz o papel da RoboClaw: responde às consultas do driver e registra cada byte
+recebido. Com \texttt{RBCLW\_FAIL1} igual a 257 e a terminação de voo acionada
+pelo console (\texttt{commander termination}), a placa passou a transmitir o
+pacote \texttt{80 00 82 8A 90}: endereço \texttt{0x80}, comando~0, byte de
+dados 130 e CRC válido. O pacote se repetiu 24\,136 vezes nas duas capturas
+guardadas, sem erro de CRC. Dois ensaios complementares, na mesma montagem,
+isolam a causa (Tabela~\ref{tab:roboclaw-hardware}): com o parâmetro em 254, o
+maior valor que ainda resulta em byte válido, o mesmo firmware envia 127; e,
+com a correção aplicada e o parâmetro de volta em 257, o byte também fica em
+127, em 5\,267 pacotes e nenhum acima da faixa.}
+
+\begin{table}[htb]
+\centering
+\caption{\corr{RoboClaw: byte de dados observado na serial da Pixhawk~6X~RT durante a terminação}}
+\label{tab:roboclaw-hardware}
+\begin{tabular}{llll}
+\hline
+\corr{\textbf{Firmware}} & \corr{\textbf{\texttt{RBCLW\_FAIL1}}} & \corr{\textbf{Pacote}} & \corr{\textbf{Byte de dados}} \\
+\hline
+\corr{Original} & \corr{257} & \corr{\texttt{80 00 82 8A 90}} & \corr{130 (fora de 0--127)} \\
+\corr{Original} & \corr{254} & \corr{\texttt{80 00 7F B4 22}} & \corr{127} \\
+\corr{Corrigido} & \corr{257} & \corr{\texttt{80 00 7F B4 22}} & \corr{127} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{Esse resultado tem quatro limites, que delimitam o que ele prova.
+Primeiro, a RoboClaw é emulada: o ensaio mostra que a placa \emph{transmite} o
+byte inválido, mas não o que o controlador real faz ao recebê-lo, o que o
+manual não especifica. Segundo, o firmware não é o de fábrica: o driver não
+integra a configuração padrão dessa placa e foi incluído com
+\texttt{CONFIG\_DRIVERS\_ROBOCLAW=y}; além disso, foi preciso inicializar dois
+membros da classe (\texttt{\_uart\_fd\_set} e \texttt{\_uart\_fd\_timeout}),
+sem o que o driver bloqueava a fila de trabalho na partida. Essa alteração não
+toca o caminho de saída. Terceiro, a placa registrou \textit{timeout} de ACK
+durante os ensaios, de modo que o driver foi observado no caminho de erro de
+resposta; a medida, que é o byte lido diretamente do fio, não depende disso.
+Quarto, só o Bug~1 foi exercitado em hardware; a evidência do Bug~2 continua
+sendo a formal e o \textit{replay} com UART emulada. As capturas, os
+\textit{diffs} dos firmwares e o código do emulador estão em
+\texttt{testes\_hardware/roboclaw/hardware\_pixhawk6xrt/}.}
