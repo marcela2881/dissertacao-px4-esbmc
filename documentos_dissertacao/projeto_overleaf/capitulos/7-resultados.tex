@@ -478,7 +478,7 @@ asserções do \textit{harness} (faixa de temperatura e
 \textit{overflow} aritmético passam; o tempo do procedimento de decisão é
 inferior a $0{,}01$\,s. São as mesmas duas propriedades violadas no ESBMC. O log
 (\texttt{cbmc/resultado\_cbmc\_imu.txt}) não registra a linha de comando usada.
-No GPS, o comando registrado é:}
+No GPS, o comando registrado é o da Listagem~\ref{lst:comando-cbmc}:}
 
 \begin{lstlisting}[
   caption={\corr{Comando do CBMC para o \textit{harness} do GPS ($u \in \{2, 3, 5, 10\}$).}},
@@ -553,7 +553,8 @@ abordagem de limitar e avisar, e fecharam tanto o PR quanto a
 Issue~\#26865\footnote{\url{https://github.com/PX4/PX4-Autopilot/issues/26865}}.
 A observação é mantida nesta dissertação apenas como nota de projeto, \textbf{sem
 consequência de segurança confirmada e sem remediação aceita}, ilustrando a
-etapa de triagem da metodologia em vez de um defeito.}
+etapa de triagem da metodologia em vez de um defeito.} \corr{A
+Figura~\ref{fig:ce-imu-temp} reproduz a saída do verificador.}
 
 \begin{figure}[H]
     \centering
@@ -627,7 +628,8 @@ de \textit{replay} nem registros de sanitizadores.}
 \label{sec:caso-gps}
 
 O \artigo{harness do} driver uBlox (\artigo{arquivo-fonte de $1.712$}~LoC) foi verificado em $64,9$\,s. A verificação de
-espaço disponível \artigo{subtrai o nível de preenchimento da capacidade}:
+espaço disponível \artigo{subtrai o nível de preenchimento da capacidade}
+(Listagem~\ref{lst:gps-vulneravel}):
 
 \begin{lstlisting}[
   caption={\artigo{Verificação de espaço disponível no \textit{harness} do GPS uBlox}.},
@@ -676,7 +678,8 @@ para um valor muito grande --- corresponderia a \textit{overflow} por
 Weakness Enumeration}, cuja entrada CWE-191 intitula-se \textit{Integer Underflow
 (Wrap or Wraparound)} e cobre exatamente esse caso, de modo a preservar a
 correspondência entre o texto, a classificação empregada e os relatórios
-submetidos à comunidade.}}
+submetidos à comunidade.}} \corr{A Figura~\ref{fig:ce-gps} reproduz a saída do
+verificador para esse contraexemplo.}
 
 \begin{figure}[H]
     \centering

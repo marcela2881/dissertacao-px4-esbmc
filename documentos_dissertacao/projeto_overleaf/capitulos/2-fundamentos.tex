@@ -145,7 +145,7 @@ constitui um contraexemplo concreto~\cite{Biere1999}.
 %% VCC -> consulta SMT). LC (resolvido): relacionar a formula do BMC a codificacao
 %% do ESBMC para programas C -- ambos atendidos pelo exemplo abaixo.
 Em um programa C, essa codificação parte do código real. Considere um laço que
-percorre um \textit{array} de $N$ posições:
+percorre um \textit{array} de $N$ posições (Listagem~\ref{lst:exemplo-bmc}):
 
 \begin{lstlisting}[caption={Laço em C cuja segurança de acesso o ESBMC verifica.},
   label={lst:exemplo-bmc}, numbers=left, frame=single, language=C]
@@ -380,7 +380,8 @@ manutenção~\cite{PX4_Documentation}. Os principais subsistemas incluem os
 \textit{drivers} de sensores (GPS, IMU, magnetômetro e barômetro), a estimação de
 estado por filtros de Kalman estendidos, os controladores de atitude e posição, a
 navegação com planejamento de trajetória e os mecanismos de \textit{failsafe},
-além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
+além da interface de comunicação MAVLink~\cite{PX4_Documentation}. A
+Figura~\ref{fig:px4_arquitetura} resume essa organização.
 
 \begin{figure}[ht]
   \centering

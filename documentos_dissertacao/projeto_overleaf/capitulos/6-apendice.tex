@@ -43,7 +43,7 @@ da entrada e para o estado inicial do buffer. Assim, os valores concretos do
 contraexemplo dependem do teste selecionado e das escolhas feitas pelo solver.}
 
 \artigo{O arquivo tem 294 linhas (Tabela~\ref{tab:modulos}) e é reproduzido sem
-edição a partir do repositório de artefatos. O contraexemplo da
+edição a partir do repositório de artefatos (Listagem~\ref{lst:harness-gps}). O contraexemplo da
 Tabela~\ref{tab:resultados} vem do teste selecionado por
 \texttt{test\_choice = 3}, \texttt{test\_gps\_real\_bit\_operation()}
 (linhas 178--197).}
@@ -437,8 +437,8 @@ de cada módulo.}
 \section{Contraexemplo 1 --- Temperatura fora da faixa operacional (BMI088)}
 \label{sec:contraexemplo-bmi088-temp}
 
-O traço viola a propriedade $\phi_{\text{temp}}$
-(Equação~\ref{eq:prop_temp}): a temperatura calculada é
+O traço da Listagem~\ref{lst:contraex_bmi088_temp} viola a propriedade
+$\phi_{\text{temp}}$ (Equação~\ref{eq:prop_temp}): a temperatura calculada é
 $86{,}25\,^{\circ}$C, acima do limite superior de
 $85\,^{\circ}$C indicado para a faixa operacional no \textit{datasheet} do
 BMI088~\cite{Bosch2021}. \corr{Pela conversão indicada pelo fabricante,
@@ -508,7 +508,8 @@ de segurança confirmado nem remediação aceita.}
 \section{Contraexemplo 2 --- Contador FIFO excede capacidade do buffer (BMI088)}
 \label{sec:contraexemplo-bmi088-fifo}
 
-\corr{O traço apresenta \texttt{count = 9088} bytes, valor superior ao
+\corr{O traço da Listagem~\ref{lst:contraex_bmi088_fifo} apresenta
+\texttt{count = 9088} bytes, valor superior ao
 limite de \texttt{FIFO\_SIZE = 1.024} bytes e, portanto, uma violação da
 propriedade verificada no \textit{harness}. Na conferência com o driver de
 produção não instrumentado (Seção~\ref{subsec:imu-fifo}), porém, o candidato foi
@@ -586,7 +587,8 @@ sinal muito grande. Com isso, a condição da guarda não limita
 observado no \textit{harness}; a análise de alcançabilidade no driver de
 produção é tratada separadamente na Seção~\ref{subsec:gps-inducao}.
 
-\corr{O ESBMC reporta uma única propriedade violada: a falha de
+\corr{O ESBMC reporta uma única propriedade violada
+(Listagem~\ref{lst:contraex_gps}): a falha de
 \artigo{desreferência} no \texttt{memcpy}. O \textit{underflow} aritmético é a causa raiz,
 e não uma segunda violação independente --- a ferramenta encerra na primeira
 violação encontrada. A classificação CWE-191 (\textit{Integer Underflow (Wrap or Wraparound)})

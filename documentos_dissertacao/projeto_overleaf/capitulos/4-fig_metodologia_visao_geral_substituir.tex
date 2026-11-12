@@ -1,0 +1,86 @@
+%% =============================================================================
+%% SUBSTITUIR o ambiente \begin{figure}...\end{figure} de
+%% fig:metodologia-visao-geral (Cap. 4, Seção "Visão Geral da Abordagem")
+%% por este. Engloba as DUAS campanhas, na paleta nude. O \ref no texto
+%% continua válido (mesmo label). Requer as cores palPaper/palFill/palStrong/
+%% palEdge/palEdgeDark (definidas em 000-main.tex) e as bibliotecas
+%% positioning, shapes.geometric, arrows.meta (já carregadas).
+%% =============================================================================
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  font=\linespread{1}\footnotesize,
+  >={Stealth[length=2mm]},
+  node distance=4mm,
+  base/.style={draw=palEdge, rounded corners=2pt, align=center, inner sep=3pt,
+    fill=palPaper},
+  etapa/.style={base, text width=5.8cm, minimum height=7mm},
+  firm/.style={etapa, fill=palFill},
+  nova/.style={base, text width=4.8cm, minimum height=7mm, draw=palEdgeDark,
+    fill=palStrong},
+  dir/.style={base, text width=4.8cm, minimum height=7mm},
+  conf/.style={base, text width=6.2cm, fill=palFill, draw=palEdgeDark, very thick},
+  dec/.style={draw=palEdge, diamond, aspect=2.4, inner sep=1pt, fill=palPaper,
+    align=center},
+  out/.style={base, text width=3.0cm, minimum height=10mm, fill=palStrong,
+    draw=palEdgeDark},
+  outn/.style={base, text width=3.0cm, minimum height=10mm, fill=palPaper},
+  rot/.style={font=\scriptsize\itshape, align=center}]
+
+  % --- espinha (i)-(v)
+  \node[etapa] (e1) {(i) Seleção de módulos críticos};
+  \node[firm, below=of e1] (e2) {(ii) Instrumentação com \textit{stubs} de \textit{hardware}};
+  \node[firm, below=of e2] (e3) {(iii) Especificação de propriedades\\(\textit{datasheet}, documentação, código)};
+  \node[etapa, below=of e3] (e4) {(iv) Configuração e execução do ESBMC};
+  \node[etapa, below=of e4] (e5) {(v) Análise de contraexemplos};
+
+  % --- conferencia compartilhada, com os dois modos
+  \node[conf, below=6mm of e5] (conf) {\textbf{Conferência contra o código de produção}\\[1pt]
+    1.\textsuperscript{a} campanha: leitura do código\\
+    2.\textsuperscript{a} campanha: \textit{replay} do código real {\footnotesize+} ASan/UBSan};
+  \node[dec, below=6mm of conf] (dec) {Reproduz em\\produção?};
+
+  % --- desfechos
+  \node[out, below=10mm of dec] (def) {Defeito reproduzido / VAM};
+  \node[outn, left=20mm of def] (fp) {Falso positivo (modelagem / ferramenta)};
+  \node[outn, right=20mm of def] (ok) {Sem violação até o limite $k$};
+
+  % --- coluna direita (vi)-(viii)
+  \node[dir, right=2.4cm of e1.north east, anchor=north west] (e6) {(vi) Reporte à comunidade PX4\\(condicionado à revisão)};
+  \node[nova, below=of e6] (e7) {(vii) Validação cruzada (CBMC)\\e verificação de \textit{patch}};
+  \node[nova, below=of e7] (e8) {(viii) Reprodução (ArduPilot)\\e integração contínua};
+
+  % --- setas da espinha e da coluna direita
+  \foreach \a/\b in {e1/e2,e2/e3,e3/e4,e4/e5,e5/conf,conf/dec,e6/e7,e7/e8}
+    \draw[->] (\a) -- (\b);
+
+  % --- decisao -> desfechos
+  \draw[->] (dec) -- node[rot, right] {sim} (def);
+  \draw[->] (dec.west) -| node[rot, pos=0.25, above] {guarda\\omitida} (fp.north);
+  \draw[->] (dec.east) -| node[rot, pos=0.25, above] {nenhuma\\violação} (ok.north);
+
+  % --- defeito/VAM -> reporte (vi)
+  \draw[->] (def.east) .. controls +(2.6,0) and +(0,-2.2) .. (e6.south);
+
+  % --- legenda
+  \node[firm, text width=3mm, minimum height=3mm, below=12mm of fp.south west,
+    anchor=north west] (l1) {};
+  \node[right=1mm of l1, font=\scriptsize, anchor=west] (t1) {etapas de \textit{firmware}};
+  \node[nova, text width=3mm, minimum height=3mm, right=5mm of t1] (l2) {};
+  \node[right=1mm of l2, font=\scriptsize, anchor=west] (t2) {acréscimos deste trabalho};
+  \node[conf, text width=3mm, minimum height=3mm, right=5mm of t2] (l3) {};
+  \node[right=1mm of l3, font=\scriptsize, anchor=west] {conferência (1.\textsuperscript{a} e 2.\textsuperscript{a} campanhas)};
+\end{tikzpicture}}
+\caption{Metodologia de verificação em oito etapas, aplicada em duas campanhas.
+As etapas~(i) e~(iv)--(vi) seguem o fluxo de Sousa et al.~\cite{Sousa2026}; as
+etapas~(ii) e~(iii) são específicas de \textit{firmware} e as etapas~(vii)
+e~(viii) são acréscimos deste trabalho. A conferência contra o código de
+produção (etapa~v) é feita por leitura do código na primeira campanha e por
+\textit{replay} do código real sob sanitizadores (ASan/UBSan) na segunda. Apenas
+defeitos reproduzidos e violações alcançáveis no modelo (VAM) seguem para o
+reporte~(vi), que depende de revisão; falsos positivos e resultados sem violação
+encerram o fluxo do módulo. Os desfechos usam a escala do
+Capítulo~\ref{cap:introducao}. Elaborado pela autora.}
+\label{fig:metodologia-visao-geral}
+\end{figure}
