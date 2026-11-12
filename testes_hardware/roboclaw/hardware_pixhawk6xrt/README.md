@@ -62,7 +62,10 @@ As outras filas de trabalho mantêm a taxa normal nos três boots (por exemplo
 um item `hardfault_stream` em `wq:hp_default`, ausente no terceiro; não foi
 investigado. Os dois primeiros boots são anteriores à primeira proposta da
 alteração (01:46Z); o terceiro é posterior à compilação das 21:55 (hora
-local). Nos três, `RBCLW_FUNC1` ainda não estava configurado (no terceiro,
+local). A comparação não é totalmente controlada: os parâmetros do RoboClaw
+estavam sendo ajustados entre esses boots (o tamanho do arquivo de parâmetros
+no log de boot muda de 1422 para 1405 e 1388 bytes), de modo que o código do
+driver não foi a única diferença. Nos três, `RBCLW_FUNC1` ainda não estava configurado (no terceiro,
 `param show` mostra `RBCLW_FUNC1 = 0`).
 
 ## Configuração

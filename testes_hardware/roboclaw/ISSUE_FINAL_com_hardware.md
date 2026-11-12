@@ -1,110 +1,125 @@
-# RoboClaw: Drive commands can send data bytes above 127, and `write()` errors go undetected
+# RoboClaw: drive commands can send values above 127, and `write()` errors go undetected
 
 ## Describe the bug
 
-**Affected versions:** `release/1.18` (verified at `8303efda43cb` on 12 November 2026) and the previous implementation on `main`, at commit `8be2590c1529517ccd54fbc09ae138402517baf4` (4 June 2026). `Roboclaw.cpp`, `Roboclaw.hpp` and `module.yaml` are identical in these two revisions. I also verified that the same implementation was still present on `main` on 19 October 2026.
+While analysing the RoboClaw driver, I found two issues in `src/drivers/roboclaw/Roboclaw.cpp`. In the first, drive commands can send values above the limit accepted by the protocol. In the second, a failed write can go unnoticed by the driver, which keeps waiting for a response even though the operation failed.
 
-The RoboClaw driver was refactored in PR #29473, merged on 28 October 2026. In the refactored implementation, the failsafe range is limited to 254, values are constrained before conversion, and the return value of the write call is stored in an `ssize_t`. I have not tested the refactored driver. I am reporting these issues because the release branch still contains the previous implementation.
+I reproduced both issues on a PC using an emulated UART. For the first one, I also ran a bench test with a Pixhawk 6X RT connected to an ESP32 emulating the RoboClaw. I did not use a physical RoboClaw device.
 
-I found two issues in `src/drivers/roboclaw/Roboclaw.cpp`. I reproduced both on a PC using an emulated UART. I also observed the first issue on a Pixhawk 6X RT wired to an ESP32 emulating the RoboClaw. I have not tested with a physical RoboClaw device.
+I found these issues in the previous implementation of the driver, present on `main` at commit `8be2590c1529517ccd54fbc09ae138402517baf4` (4 June 2026). I also confirmed that this implementation was still on `main` on 19 October 2026. On the `release/1.18` branch, checked at commit `8303efda43cb` on 12 November 2026, I found the same code: `Roboclaw.cpp`, `Roboclaw.hpp` and `module.yaml` are identical in the two revisions.
+
+The driver was later refactored in PR #29473, merged on 28 October 2026. In the new implementation, the failsafe value is limited to 254, values are constrained before conversion, and the result of the write call is stored in an `ssize_t`. I have not tested the refactored driver. I am reporting these issues because the release branch still contains the previous implementation.
 
 ### 1. Drive commands can send values above 127
 
-RoboClaw packet serial commands 0, 1, 4, and 5 expect data values between 0 and 127 (RoboClaw User Manual, Revision 6.0, pp. 48–49).
+The first issue is in how drive commands are sent. According to the RoboClaw User Manual, Revision 6.0, pp. 48–49, commands 0, 1, 4 and 5 accept data values between 0 and 127.
 
-The issue is that the `module.yaml` failsafe parameters allow values up to 257. When flight termination is triggered, the mixer passes the configured failsafe value to the driver without limiting it to the expected range. The `sendUnsigned7Bit()` function also does not check or constrain the value.
+Following the failsafe value down to the driver, I noticed that the parameters defined in `module.yaml` allow values up to 257. On flight termination, the mixer passes the configured value to the driver without limiting it to the range accepted by the protocol. The normal output path goes through `output_limit_calc()`, but the failsafe value does not. I also checked that `sendUnsigned7Bit()` does not enforce the range, unlike `sendSigned16Bit()`, which constrains its input.
 
-For example, failsafe values of 255, 256, and 257 are transmitted as data bytes 128, 129, and 130, respectively. All three values are outside the supported range for these commands.
+As a result, failsafe values of 255, 256 and 257 are sent as data bytes 128, 129 and 130, respectively. In other words, the driver can transmit values above the limit for these commands.
 
-### 2. `write()` errors are not detected
+### 2. `write()` errors go undetected
 
-There is also an issue in `writeCommand()` and `writeCommandWithPayload()`. Both functions store the return value of `write()` in a `size_t`.
+The second issue is in `writeCommand()` and `writeCommandWithPayload()`. Both functions store the return value of `write()` in a `size_t`, which is an unsigned type.
 
-When `write()` returns `-1`, the value is converted to a large unsigned integer. As a result, the subsequent size checks do not detect the error, and the functions return `OK`.
+When `write()` returns `-1` to indicate a failure, the value is converted to a very large unsigned integer. Because of that, the size checks that follow do not catch the error, and the functions return `OK`.
 
-The driver then continues waiting for a response that will never arrive. The original write error is effectively hidden, and the problem only becomes visible later as a `select()` timeout.
+In practice, the driver assumes the write succeeded and keeps waiting for a response from the RoboClaw, even though the command was not sent. The original error is hidden and only shows up later, when `select()` times out.
 
-## How I reproduced the issues
+## How I reproduced it
 
-I used the original `Roboclaw.cpp` on a PC, replacing the serial calls with an emulated UART.
+To check whether the issues actually happen, I used the original `Roboclaw.cpp` on a PC and replaced the serial calls with an emulated UART.
 
-To reproduce the first issue, I set `RBCLW_FAIL1` to 257 and executed the flight termination path with `outputs[0] = 257`. During `updateOutputs()`, the emulated UART received a data byte of 130 for commands 0, 1, 4, and 5, exceeding the supported range.
+For the first issue, I set `RBCLW_FAIL1` to 257 and ran the flight termination path with `outputs[0] = 257`. During `updateOutputs()`, the emulated UART received a data byte of 130 for commands 0, 1, 4 and 5.
 
-To reproduce the second issue, I made the emulated `write()` return `-1` with `errno = EIO` and called `readEncoder()`. The driver did not detect the error and continued waiting for a response through `select()`.
+For the second issue, I made the emulated `write()` return `-1` with `errno = EIO` and called `readEncoder()`. Even with the failed write, the driver did not detect the error and kept waiting for a response through `select()`.
 
-The harnesses, commands, and execution logs are available here:
+The harnesses, commands and execution logs are available here:
 
 https://github.com/marcela2881/dissertacao-px4-esbmc/tree/080955010dfc8585197c3b52e8c5d6cf34599e71/testes_hardware/roboclaw
 
-### Hardware test (first issue only)
+### Bench test (first issue only)
 
-I built `px4_fmu-v6xrt_default` from commit `8be2590c15`, with `CONFIG_DRIVERS_ROBOCLAW=y` added to the board configuration (the driver is not enabled by default for this board), and flashed it to a Pixhawk 6X RT.
+After reproducing the first issue on the PC, I wanted to check whether the same behaviour also happens on a Pixhawk board. I built `px4_fmu-v6xrt_default` from commit `8be2590c15`, enabling `CONFIG_DRIVERS_ROBOCLAW=y` in the board configuration, since the driver is not enabled by default for this board, and flashed it to a Pixhawk 6X RT.
 
-I configured:
+I used the following parameters:
 
 - `RBCLW_SER_CFG=102` (TELEM2)
 - `SER_TEL2_BAUD=38400`
 - `RBCLW_FUNC1=101`
 - `RBCLW_FAIL1=257`
 
-I connected TELEM2 to an ESP32 that responds to driver queries and acknowledges commands as a RoboClaw would.
+I connected TELEM2 to an ESP32 set up to emulate the RoboClaw and answer the driver's queries.
 
-After running `commander arm -f` and `commander termination`, with `actuator_armed.termination: True`, the Pixhawk transmitted:
+After running `commander arm -f` and `commander termination`, I confirmed that `actuator_armed.termination` was `True`. At that point the Pixhawk started transmitting:
 
 `80 00 82 8A 90`
 
-This corresponds to address `0x80`, command `0`, data byte `0x82` (130), and a valid CRC. The packet was transmitted approximately every 50 ms.
+This is address `0x80`, command 0, data byte `0x82` (130) and a valid CRC. The packet was sent approximately every 50 ms.
 
-With `RBCLW_FAIL1=254`, the same firmware transmitted:
-
-`80 00 7F B4 22`
-
-The data byte was 127.
-
-After applying the proposed fix and setting `RBCLW_FAIL1=257` again, the Pixhawk also transmitted:
+For comparison, I changed `RBCLW_FAIL1` to 254 and repeated the test. This time the Pixhawk transmitted:
 
 `80 00 7F B4 22`
 
-The emulator did not record any data byte above 127 during approximately four minutes of capture.
+The data byte was 127, within the expected limit.
 
-The serial captures and the ESP32 emulator sketch are available in the `hardware_pixhawk6xrt` directory in the repository linked above.
+After applying my proposed fix, I set `RBCLW_FAIL1=257` again and repeated the test. The Pixhawk transmitted:
 
-One additional observation: to run the driver on this board, I had to value-initialize two members in `Roboclaw.hpp` (`_uart_fd_set{}` and `_uart_fd_timeout{}`). Without this change, the driver printed nothing after `Starting Roboclaw Driver on /dev/ttyS5`, and `work_queue status` showed `wq:hp_default` starved in two separate boots: `battery_status` at 0.1 Hz (11–14 s intervals), `board_adc` at 0.2–0.3 Hz (expected 10 ms), `pwm_out` with 62–79 s intervals (expected 300 ms), and `roboclaw` at 0.0 Hz. The other work queues ran at their normal rates. With the two members initialized, the driver printed `Successfully connected` and `wq:hp_default` returned to normal (`battery_status` 99.9 Hz, `roboclaw` 3.4 Hz). The three console logs are in the same `hardware_pixhawk6xrt` directory.
+`80 00 7F B4 22`
 
-This change does not affect the output path. Based on the code, `Run()` calls `_mixing_output.update()` before `initializeUART()`. Therefore, the first `updateOutputs()` call can reach `select()` while `_uart_fd_set` and `_uart_fd_timeout` are still uninitialized (the object is allocated with `new`) and `_uart_fd` is still 0. I have not confirmed with a debugger that this is where the work queue blocks; the evidence is the before/after behaviour with only those two lines changed.
+During approximately four minutes of capture, the ESP32 did not record any data byte above 127.
+
+The serial captures and the ESP32 sketch are in the `hardware_pixhawk6xrt` directory of the repository linked above.
+
+### Note on UART initialization
+
+During the bench tests I also ran into a behaviour worth mentioning. To get the driver running, I had to value-initialize the members `_uart_fd_set{}` and `_uart_fd_timeout{}` in `Roboclaw.hpp`.
+
+Before this change, the boot log showed `Starting Roboclaw Driver on /dev/ttyS5` and no further message from the driver. In the two boots I recorded, `wq:hp_default` was starved, with its items running far below their expected rates:
+
+- `battery_status`: 0.1 Hz, with 11–14 s intervals;
+- `board_adc`: 0.2–0.3 Hz, where 10 ms was expected;
+- `pwm_out`: 62–79 s intervals, where 300 ms was expected;
+- `roboclaw`: 0.0 Hz.
+
+The other work queues kept running at their normal rates.
+
+With the two members initialized, the driver printed `Successfully connected` and `wq:hp_default` went back to normal, with `battery_status` at 99.9 Hz and `roboclaw` at 3.4 Hz.
+
+Looking at the code, `Run()` calls `_mixing_output.update()` before `initializeUART()`. So the first `updateOutputs()` call can reach `select()` before `_uart_fd_set` and `_uart_fd_timeout` have been initialized. The object is allocated with `new`, and `_uart_fd` is still 0 at that point.
+
+I have not confirmed with a debugger that this is exactly where the work queue blocks. What I observed is the difference before and after initializing the two members. The driver source differed only in those two lines, but I was also adjusting RoboClaw parameters between those boots, so this was not a fully controlled comparison. For that reason I am recording it as an observation based on the code and the bench results, not as a third issue with a confirmed cause.
+
+The three console logs are in the same `hardware_pixhawk6xrt` directory.
 
 ## Formal verification
 
-I also analyzed the original implementation using ESBMC 8.2.0 and CBMC 5.95.1. Both tools detected the two issues.
+Besides the tests, I also analysed the original implementation with ESBMC 8.2.0 and CBMC 5.95.1. Both tools reported the two issues described above.
 
-After applying the proposed fixes, both verification runs passed.
-
-## What I checked
-
-For the first issue, I traced both the normal output path and the flight termination path. The normal path goes through `output_limit_calc()`, but the failsafe value reaches the driver without being constrained to the expected range. I also checked `sendUnsigned7Bit()` and confirmed that it does not enforce the 0–127 range. This differs from `sendSigned16Bit()`, which constrains its input.
-
-For the second issue, I traced the return value of `write()` through the size checks and the code that waits for a response. I could not find any handling of a negative return value before the driver continues.
+After applying the proposed fixes, I ran the verification again and both passed.
 
 ## Expected behavior
 
-Data sent by commands 0, 1, 4, and 5 should always remain within the range 0–127.
+Commands 0, 1, 4 and 5 should only send values between 0 and 127.
 
-If `write()` fails, the driver should report the error instead of returning `OK` and waiting for a response.
+When a call to `write()` fails, the driver should detect and report the error instead of returning `OK` and waiting for a response.
 
-I have candidate fixes for both issues and would be happy to submit a PR against the release branch if the maintainers consider them useful.
+I have fixes for both issues and can open a PR against `release/1.18` if the maintainers consider them useful.
 
 ## Software version
 
-`release/1.18` at `8303efda43cb` (code inspection) and PX4-Autopilot commit `8be2590c1529517ccd54fbc09ae138402517baf4` (analysis, PC reproduction and hardware test). The same implementation was present on `main` on 19 October 2026.
+- `release/1.18`, commit `8303efda43cb`: code inspected on 12 November 2026.
+- PX4-Autopilot commit `8be2590c1529517ccd54fbc09ae138402517baf4`: code used for the analysis, the PC reproduction and the bench test.
+- The same implementation was present on `main` on 19 October 2026.
 
 ## Flight controller / Vehicle type
 
 Rover with RoboClaw.
 
-Both issues were reproduced on a PC using an emulated UART. The first issue was also observed on a Pixhawk 6X RT (on the bench, without motors connected) with an ESP32 emulating the RoboClaw.
+I reproduced both issues on a PC using an emulated UART. I also observed the first one on a Pixhawk 6X RT, on the bench and without motors connected, with an ESP32 emulating the RoboClaw.
 
 I have not tested with a physical RoboClaw device and do not have a flight log.
 
 ## AI assistance
 
-I used a generative AI assistant to help with parts of the analysis and the verification tooling. I checked the claims against the source code and tool results, and I take responsibility for this report.
+I used a generative AI assistant to support parts of the analysis and the use of the verification tools. I checked the information against the source code and the test results. I am responsible for the content of this report.
