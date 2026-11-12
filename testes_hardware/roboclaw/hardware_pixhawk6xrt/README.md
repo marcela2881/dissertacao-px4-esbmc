@@ -177,9 +177,14 @@ de `Roboclaw.hpp`), e `correcao_init_roboclaw.patch` é o diff só das duas
 linhas, usado no firmware dos ensaios anteriores. Os dois foram reconstruídos
 a partir da saída do `cat` colada pela autora (tabulações restauradas); o
 tamanho confere byte a byte com o `ls -la` dos originais (2239 e 511 bytes).
-Fora de `src/drivers/roboclaw/`, a árvore tinha `default.px4board` (+2 linhas)
-e `Kconfig.topics` alterados, iguais nos dois firmwares; o conteúdo dessas
-duas alterações não foi capturado. A correção do Bug 2 (`write()` com retorno
+Fora de `src/drivers/roboclaw/`, a árvore tinha duas outras alterações, iguais
+nos dois firmwares. Em `boards/px4/fmu-v6xrt/default.px4board` foram
+acrescentadas duas linhas (`git diff` colado pela autora):
+`CONFIG_DRIVERS_ROBOCLAW=y`, que inclui o driver na compilação (ele não faz
+parte da configuração padrão desta placa), e
+`CONFIG_DRIVERS_WIND_SENSOR_FT_TECHNOLOGIES=y`, resto de outro ensaio e sem
+relação com o RoboClaw. `src/modules/zenoh/Kconfig.topics` (+50 linhas) também
+aparece alterado; o conteúdo não foi capturado. A correção do Bug 2 (`write()` com retorno
 negativo) está no mesmo patch, mas este ensaio não a exercita.
 
 ## Ressalva sobre os ACKs
