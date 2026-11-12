@@ -34,7 +34,7 @@ To reproduce the second issue, I made the emulated `write()` return `-1` with `e
 
 The harnesses, commands, and execution logs are available here:
 
-https://github.com/marcela2881/dissertacao-px4-esbmc/tree/67b35cb9bd31983d0aafb06f3e38d082fce9cbf1/testes_hardware/roboclaw
+https://github.com/marcela2881/dissertacao-px4-esbmc/tree/080955010dfc8585197c3b52e8c5d6cf34599e71/testes_hardware/roboclaw
 
 ### Hardware test (first issue only)
 
