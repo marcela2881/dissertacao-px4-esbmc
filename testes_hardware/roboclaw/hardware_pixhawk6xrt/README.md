@@ -80,3 +80,33 @@ Contadores do próprio emulador: de `com velocidade >127=406` (22:29:18) a
   `correcao_init_roboclaw.patch`.
 - Só o canal 1 foi configurado com failsafe fora da faixa.
 - O Bug 2 (`write()` em `size_t`) não foi exercitado em hardware.
+
+## Teste de controle: `RBCLW_FAIL1 = 254` (2026-11-12, 23:16)
+
+Mesma montagem e mesmo firmware, mudando só o parâmetro para 254, o maior valor
+que ainda resulta em byte válido ((254 − 127)/127 = 1,0 → 127). Com
+`actuator_armed: armed: True, termination: True`, a placa passou a enviar
+
+    80 00 7F B4 22
+
+comando 0, **dado `0x7F` = 127**, CRC `B422` (recalculado). Antes da terminação
+o tráfego era `80 01 00 08 6B` (comando 1, dado 0). Trecho em
+`roboclaw_esp32_captura_controle_254_trecho.txt` (4 pacotes; as linhas cortadas
+no início e no fim da colagem foram omitidas).
+
+| `RBCLW_FAIL1` | Byte de dados na terminação | Dentro de 0–127? |
+|---|---|---|
+| 254 | 127 (`0x7F`) | sim |
+| 257 | 130 (`0x82`) | **não** |
+
+Pendente neste controle: a captura completa, com a transição e a linha
+`[resumo v4]` (contador `>127`).
+
+## Ressalva sobre os ACKs
+
+Nas duas execuções o `dmesg` da placa registra `ACK timeout` e
+`Error reading encoders`, e o intervalo entre pacotes (~12 ms) coincide com o
+tempo de espera do driver. O emulador envia as respostas, mas não está
+confirmado que a placa as aceita (fio de retorno ou tempo de resposta). Isso
+não afeta a medição, que é o byte transmitido pela placa e lido direto do fio;
+significa, porém, que o ensaio observa o driver no caminho de erro de resposta.
