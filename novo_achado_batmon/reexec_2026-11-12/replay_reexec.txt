@@ -1,0 +1,39 @@
+# batmon replay — reexecucao de 2026-11-12T20:53Z
+# Linux 6.18.44-fc-v378 | g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+# PX4 main 8e94784e1dc0 (2026-11-11): BatteryStatus.msg e batmon.cpp conferidos; ordem dos campos do replay == ordem gerada a partir do .msg
+# compilacao rc=0
+
+## ./replay_plain 14 (g++ -O0, sem sanitizador)
+cell_count=14 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+rc=0
+## ./replay_san 14 (g++ -O0 -fsanitize=undefined,address)
+cell_count=14 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+rc=0
+
+## ./replay_plain 15 (g++ -O0, sem sanitizador)
+cell_count=15 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+rc=0
+## ./replay_san 15 (g++ -O0 -fsanitize=undefined,address)
+replay.cpp:80:30: runtime error: index 14 out of bounds for type 'float [14]'
+cell_count=15 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+rc=0
+
+## ./replay_plain 16 (g++ -O0, sem sanitizador)
+cell_count=16 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=3.7150 (batmon nao preenche; esperado 0)
+rc=0
+## ./replay_san 16 (g++ -O0 -fsanitize=undefined,address)
+replay.cpp:80:30: runtime error: index 14 out of bounds for type 'float [14]'
+cell_count=16 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=3.7150 (batmon nao preenche; esperado 0)
+rc=0

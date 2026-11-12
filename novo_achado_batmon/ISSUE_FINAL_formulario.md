@@ -25,7 +25,7 @@ The write isn't silent, because of how the generated struct is laid out. With 16
 
 ## How I reproduced it
 
-I checked the copy loop with ESBMC and CBMC, and wrote a short replay to see the effect under AddressSanitizer:
+I checked the copy loop with ESBMC and CBMC, and wrote a short replay to see the effect at run time, built with UBSan and ASan:
 
 - ESBMC (8.1.0 and 8.5.0) and CBMC (5.95.1) report a bounds violation on the original loop, and pass once the count is clamped to the array size.
 - The replay is clean with 14 cells; with 15 or 16 it triggers UBSan (`index 14 out of bounds for type 'float[14]'`).
