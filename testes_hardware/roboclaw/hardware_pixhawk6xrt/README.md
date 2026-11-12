@@ -102,6 +102,33 @@ no início e no fim da colagem foram omitidas).
 Pendente neste controle: a captura completa, com a transição e a linha
 `[resumo v4]` (contador `>127`).
 
+## Captura longa do ensaio original e transição ao vivo para 254
+
+`roboclaw_esp32_captura_257_longa_com_transicao_254.txt` (78 901 linhas,
+22:42:04–23:02:57; a primeira e a última linha vieram cortadas na cópia) é a
+continuação da mesma execução de `roboclaw_esp32_captura_trecho.txt`, sem
+reinício do ESP32 (os contadores do emulador seguem crescendo).
+
+| Trecho | Pacote do motor 1 | Ocorrências |
+|---|---|---|
+| 22:42:04 – 22:59:53 | `80 00 82 8A 90` (dado 130) | 21 360 |
+| 22:59:53 – 22:59:54 | `80 00 7F B4 22` (dado 127) | 21 |
+| 23:00:00 – 23:02:57 | `80 01 00 08 6B` (repouso, após reinício da placa) | 4 914 |
+
+O contador do emulador vai de `>127=15761` (22:42:07) a `>127=37072`
+(22:59:55) e para de crescer; `CRC ruim=0` e `cmd desconhecido=0` do começo
+ao fim. Somando as 3105 contagens já registradas no primeiro arquivo e o
+intervalo entre os dois, o emulador contou 37 072 pacotes com dado acima de
+127 em cerca de 30 minutos de terminação contínua.
+
+A troca de 130 para 127 às 22:59:53 acontece dentro da mesma execução, sem
+reinício, e coincide com a mudança de `RBCLW_FAIL1` para 254 feita no console
+antes do teste de controle (o horário do `param set` não ficou registrado; a
+associação é inferida). É a transição que faltava no controle: o mesmo
+firmware, na mesma terminação, passa de byte inválido a byte válido quando só
+o parâmetro muda. Fora do padrão há três linhas: um byte `00` isolado às
+22:59:54 (reinício da placa) e duas linhas embaralhadas pela cópia.
+
 ## Antes e depois da correção (2026-11-12, 23:53)
 
 Mesma montagem, mesmo parâmetro do ensaio original (`RBCLW_FAIL1 = 257`,
