@@ -1,0 +1,1130 @@
+% =============================================================================
+% REFERENCIAS BIBLIOGRAFICAS - DISSERTACAO DE MESTRADO
+% Marcela Alves Rodrigues - PPGEE/UFAM
+% Verificacao Formal do Autopiloto PX4 usando ESBMC
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+% MODEL CHECKING E VERIFICACAO FORMAL - FUNDAMENTOS
+% -----------------------------------------------------------------------------
+
+@book{Clarke1999,
+  author    = {Clarke, Edmund M. and Grumberg, Orna and Peled, Doron A.},
+  title     = {{Model Checking}},
+  publisher = {MIT Press},
+  year      = {1999},
+  address   = {Cambridge, MA}
+}
+
+% --- NOVAS ENTRADAS DO CAP. 2 (FUNDAMENTOS) - ABRIL 2026 ---
+
+@article{Clarke1986,
+  author  = {Clarke, Edmund M. and Emerson, E. Allen and Sistla, A. Prasad},
+  title   = {Automatic Verification of Finite-State Concurrent Systems Using Temporal Logic Specifications},
+  journal = {ACM Transactions on Programming Languages and Systems},
+  volume  = {8},
+  number  = {2},
+  pages   = {244--263},
+  year    = {1986},
+  publisher = {ACM},
+  doi     = {10.1145/5397.5399},
+}
+
+@inproceedings{Clarke1981,
+  author    = {Clarke, Edmund M. and Emerson, E. Allen},
+  title     = {Design and Synthesis of Synchronization Skeletons Using Branching Time Temporal Logic},
+  booktitle = {Logics of Programs, Workshop},
+  editor    = {Kozen, Dexter},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {131},
+  pages     = {52--71},
+  year      = {1982},
+  publisher = {Springer-Verlag},
+  address   = {Berlin, Heidelberg},
+  doi       = {10.1007/BFb0025774},
+}
+
+@book{Huth2004,
+  author    = {Huth, Michael and Ryan, Mark},
+  title     = {Logic in Computer Science: Modelling and Reasoning about Systems},
+  edition   = {2},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge, United Kingdom},
+  year      = {2004},
+  isbn      = {978-0-521-54310-1},
+}
+
+@inproceedings{Cousot1977,
+  author    = {Cousot, Patrick and Cousot, Radhia},
+  title     = {Abstract Interpretation: A Unified Lattice Model for Static Analysis of Programs by Construction or Approximation of Fixpoints},
+  booktitle = {Proceedings of the 4th ACM SIGACT-SIGPLAN Symposium on Principles of Programming Languages (POPL '77)},
+  pages     = {238--252},
+  year      = {1977},
+  publisher = {ACM Press},
+  address   = {Los Angeles, California, USA},
+  doi       = {10.1145/512950.512973},
+}
+
+@inproceedings{Queille1982,
+  author    = {Queille, Jean-Pierre and Sifakis, Joseph},
+  title     = {Specification and Verification of Concurrent Systems in CESAR},
+  booktitle = {International Symposium on Programming},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {137},
+  pages     = {337--351},
+  year      = {1982},
+  publisher = {Springer-Verlag},
+  address   = {Berlin, Heidelberg},
+  isbn      = {3-540-11494-7},
+  doi       = {10.1007/3-540-11494-7_22},
+}
+
+@inproceedings{Pnueli1977,
+  author    = {Pnueli, Amir},
+  title     = {The Temporal Logic of Programs},
+  booktitle = {18th Annual Symposium on Foundations of Computer Science (SFCS 1977)},
+  pages     = {46--57},
+  year      = {1977},
+  publisher = {IEEE Computer Society},
+  doi       = {10.1109/SFCS.1977.32},
+}
+
+% --- FIM DAS NOVAS ENTRADAS DO CAP. 2 ---
+
+@InProceedings{Beyer2024,
+  author    = {Dirk Beyer},
+  title     = {State of the Art in Software Verification and Witness
+               Validation: {SV-COMP} 2024},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems (TACAS 2024)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14572},
+  pages     = {299--329},
+  publisher = {Springer},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-57256-2_15},
+}
+
+%% [12/10/2026] Coautor Andreas Podelski acrescentado (artigo, ref. [16]).
+@InCollection{Beyer2022,
+  author    = {Dirk Beyer and Andreas Podelski},
+  title     = {Software Model Checking: 20 Years and Beyond},
+  booktitle = {Principles of Systems Design},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13660},
+  chapter   = {27},
+  pages     = {554--582},
+  publisher = {Springer},
+  year      = {2022},
+  doi       = {10.1007/978-3-031-22337-2_27},
+}
+
+
+%% [12/10/2026] Autores corrigidos (a lista anterior era de outro artigo) e paginas 317-339 -> 304-324 (Springer).
+@InProceedings{Chatterjee2022,
+  author    = {Prantik Chatterjee and Jaydeepsinh Meda and Akash Lal and
+               Subhajit Roy},
+  title     = {Proof-Guided Underapproximation Widening for Bounded
+               Model Checking},
+  booktitle = {Computer Aided Verification (CAV 2022)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13371},
+  pages     = {304--324},
+  publisher = {Springer},
+  year      = {2022},
+  doi       = {10.1007/978-3-031-13185-1_15},
+}
+
+
+%% [12/10/2026] Nome da revista e do segundo autor corrigidos (arXiv:2204.12913).
+@Article{Khairullah2022,
+  author    = {Fayhaa Hameedi Khlaif and Shawkat Sabah Khairullah},
+  title     = {A Survey on Formal Verification Approaches for
+               Dependable Systems},
+  journal   = {International Journal of Advances in Computer and
+               Electronics Engineering},
+  volume    = {7},
+  number    = {2},
+  pages     = {1--13},
+  year      = {2022},
+  note      = {arXiv:2204.12913},
+}
+
+
+@InProceedings{Biere1999,
+  author    = {Armin Biere and Alessandro Cimatti and Edmund M. Clarke
+               and Yunshan Zhu},
+  title     = {Symbolic Model Checking without {BDD}s},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems ({TACAS} 1999)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {1579},
+  pages     = {193--207},
+  publisher = {Springer},
+  year      = {1999},
+  doi       = {10.1007/3-540-49059-0\_14},
+}
+
+%% [SINCRONIZADO COM O ARTIGO] Entradas conferidas via busca web antes de
+%% inserir (autores, veiculo, ano, paginas, DOI) -- ver comentario LC em
+%% capitulos/2-fundamentos.tex sobre a atribuicao incorreta de k-inducao a
+%% Biere1999.
+@InProceedings{Sheeran2000,
+  author    = {Mary Sheeran and Satnam Singh and Gunnar St{\aa}lmarck},
+  title     = {Checking Safety Properties Using Induction and a
+               {SAT}-Solver},
+  booktitle = {Formal Methods in Computer-Aided Design
+               ({FMCAD} 2000)},
+  editor    = {Warren A. {Hunt, Jr.} and Steven D. Johnson},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {1954},
+  pages     = {108--125},
+  publisher = {Springer},
+  year      = {2000},
+  note      = {doi:10.1007/3-540-40922-X\_8},
+}
+
+@Article{Gadelha2017,
+  author    = {Mikhail Y. R. Gadelha and Hussama I. Ismail and
+               Lucas C. Cordeiro},
+  title     = {Handling Loops in Bounded Model Checking of {C}
+               Programs via $k$-Induction},
+  journal   = {International Journal on Software Tools for
+               Technology Transfer},
+  volume    = {19},
+  number    = {1},
+  pages     = {97--114},
+  year      = {2017},
+  note      = {doi:10.1007/s10009-015-0407-9},
+}
+
+%% [12/10/2026] Kroening2014, Menezes2024: titulos com "(Competition Contribution)";
+%% Khatiri2024: paginas 134-138; Wanner2024: vol. 12, p. 1-23; PX4_*: acesso
+%% 10/10/2026; ArduPilot: 2026 (todos como no artigo e nas editoras).
+@InProceedings{Kroening2014,
+  author    = {Daniel Kroening and Michael Tautschnig},
+  title     = {{CBMC} -- {C} Bounded Model Checker (Competition Contribution)},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems (TACAS 2014)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {8413},
+  pages     = {389--391},
+  publisher = {Springer},
+  year      = {2014},
+  doi       = {10.1007/978-3-642-54862-8_26},
+}
+
+@InProceedings{Godefroid2005,
+  author    = {Patrice Godefroid and Nils Klarlund and Koushik Sen},
+  title     = {{DART}: Directed Automated Random Testing},
+  booktitle = {Proceedings of the {ACM} {SIGPLAN} Conference on
+               Programming Language Design and Implementation
+               ({PLDI} 2005)},
+  pages     = {213--223},
+  publisher = {{ACM}},
+  year      = {2005},
+  doi       = {10.1145/1065010.1065036},
+}
+
+%% [12/11/2026] Titulo e paginas corrigidos (Springer, DOI abaixo): o titulo anterior nao existia.
+@InProceedings{Baier2024,
+  author    = {Daniel Baier and Dirk Beyer and Po-Chun Chien and
+               Marek Jankola and Matthias Kettl and Nian-Ze Lee and
+               Thomas Lemberger and Marian Lingsch-Rosenfeld and
+               Martin Spiessl and Henrik Wachowitz and Philipp Wendler},
+  title     = {{CPAchecker} 2.3 with Strategy Selection (Competition Contribution)},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems (TACAS 2024)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14572},
+  pages     = {359--364},
+  publisher = {Springer},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-57256-2_21},
+}
+
+% -----------------------------------------------------------------------------
+% ESBMC E FERRAMENTAS DE VERIFICACAO
+% -----------------------------------------------------------------------------
+
+@Article{Cordeiro2012,
+  author    = {Lucas Cordeiro and Bernd Fischer and Jo{\~{a}}o Marques-Silva},
+  title     = {{SMT}-Based Bounded Model Checking for Embedded {ANSI-C}
+               Software},
+  journal   = {{IEEE} Transactions on Software Engineering},
+  volume    = {38},
+  number    = {4},
+  pages     = {957--974},
+  year      = {2012},
+  publisher = {IEEE},
+  doi       = {10.1109/TSE.2011.59},
+}
+
+@InProceedings{Menezes2024,
+  author    = {Rafael Menezes and Mohannad Aldughaim and Bruno Farias
+               and Xianzhiyu Li and Edoardo Manino and Fedor Shmarov
+               and Kunjian Song and Franz Brau{\ss}e and
+               Mikhail R. Gadelha and Norbert Tihanyi and
+               Konstantin Korovin and Lucas C. Cordeiro},
+  title     = {{ESBMC} v7.4: Harnessing the Power of Intervals (Competition Contribution)},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems (TACAS 2024)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14572},
+  pages     = {376--380},
+  publisher = {Springer},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-57256-2_24},
+  note      = {Verificação realizada com ESBMC v8.1.0},
+}
+
+@Article{Monteiro2022,
+  author    = {Felipe R. Monteiro and Mikhail R. Gadelha and
+               Lucas C. Cordeiro},
+  title     = {Model Checking {C++} Programs},
+  journal   = {Software Testing, Verification and Reliability},
+  volume    = {32},
+  number    = {1},
+  pages     = {e1793},
+  year      = {2022},
+  publisher = {Wiley},
+  doi       = {10.1002/stvr.1793},
+}
+
+@InProceedings{Wu2024,
+  author    = {Tong Wu and Shale Xiong and Edoardo Manino and
+               Gareth Stockwell and Lucas C. Cordeiro},
+  title     = {Verifying Components of {Arm} Confidential Computing
+               Architecture with {ESBMC}},
+  booktitle = {Static Analysis Symposium (SAS 2024)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14995},
+  pages     = {451--462},
+  publisher = {Springer},
+  year      = {2024},
+  doi       = {10.1007/978-3-031-74776-2_18},
+}
+
+%% [12/10/2026] Coautor Eddie Batista de Lima Filho acrescentado (arXiv:2311.05281).
+@Article{Sousa2023,
+  author    = {Janislley Oliveira de Sousa and Bruno Carvalho de Farias
+               and Thales Araujo da Silva and Eddie Batista de Lima Filho
+               and Lucas C. Cordeiro},
+  title     = {Finding Software Vulnerabilities in Open-Source {C}
+               Projects via Bounded Model Checking},
+  journal   = {arXiv preprint},
+  year      = {2023},
+  note      = {arXiv:2311.05281},
+  url       = {https://arxiv.org/abs/2311.05281},
+}
+
+
+%% [12/10/2026] Tres coautores acrescentados (Tihanyi, Dubniczky, de Lima Filho), como no artigo (ref. [6]) e no Springer.
+@Article{Sousa2026,
+  author    = {Janislley Oliveira de Sousa and Bruno Carvalho de Farias and
+               Thales Araujo da Silva and Norbert Tihanyi and
+               Richard A. Dubniczky and Eddie B. de Lima Filho and
+               Lucas C. Cordeiro},
+  title     = {Finding Software Vulnerabilities in Large {C} Projects via Bounded Model Checking},
+  journal   = {International Journal on Software Tools for Technology Transfer},
+  year      = {2026},
+  publisher = {Springer},
+  note      = {Publicado online em 20 fev. 2026},
+  doi       = {10.1007/s10009-026-00838-0},
+}
+
+
+%% [12/11/2026] Autores corrigidos conforme o arXiv (a lista anterior era de outro artigo).
+%% Os seis nomes estao confirmados; a ORDEM dos autores nao foi conferida. Entrada nao citada nos capitulos 0 a 4.
+@Article{Tihanyi2023,
+  author    = {Norbert Tihanyi and Ridhi Jain and Yiannis Charalambous and
+               Mohamed Amine Ferrag and Youcheng Sun and Lucas C. Cordeiro},
+  title     = {A New Era in Software Security: Towards Self-Healing
+               Software via Large Language Models and Formal
+               Verification},
+  journal   = {arXiv preprint},
+  year      = {2023},
+  note      = {arXiv:2305.14752},
+  url       = {https://arxiv.org/abs/2305.14752},
+}
+
+%% [12/10/2026] Titulo, autores (sem Korovin), paginas e DOI corrigidos (Springer). O titulo anterior nao existia.
+@InProceedings{Alshmrany2022,
+  author    = {Kaled M. Alshmrany and Mohannad Aldughaim and Ahmed Bhayat
+               and Lucas C. Cordeiro},
+  title     = {{FuSeBMC} v4: Smart Seed Generation for Hybrid Fuzzing
+               (Competition Contribution)},
+  booktitle = {Fundamental Approaches to Software Engineering
+               (FASE 2022)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13241},
+  pages     = {336--340},
+  publisher = {Springer},
+  year      = {2022},
+  doi       = {10.1007/978-3-030-99429-7_19},
+}
+
+
+@InProceedings{Farias2024,
+  author    = {Bruno Farias and Rafael Menezes and
+               Eddie B. de Lima Filho and Youcheng Sun and
+               Lucas C. Cordeiro},
+  title     = {{ESBMC-Python}: A Bounded Model Checker for {Python}
+               Programs},
+  booktitle = {Proceedings of the 33rd ACM SIGSOFT International
+               Symposium on Software Testing and Analysis
+               (ISSTA 2024)},
+  pages     = {1836--1840},
+  publisher = {ACM},
+  year      = {2024},
+  doi       = {10.1145/3650212.3685304},
+}
+
+%% [12/10/2026] Paginas 107-123 -> 141-152 (Springer).
+@InProceedings{Song2024,
+  author    = {Kunjian Song and Mikhail R. Gadelha and Franz Brau{\ss}e
+               and Rafael S. Menezes and Lucas C. Cordeiro},
+  title     = {{ESBMC} v7.3: Model Checking {C++} Programs Using {Clang AST}},
+  booktitle = {Formal Methods: Foundations and Applications (SBMF 2023)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14414},
+  pages     = {141--152},
+  year      = {2024},
+  publisher = {Springer, Cham},
+  editor    = {Barbosa, H. and Zohar, Y.},
+  doi       = {10.1007/978-3-031-49342-3_9},
+}
+
+
+%% [12/11/2026] Silvestrim2023 removida: nao e citada nos capitulos 0 a 4 e os prenomes dos autores nao puderam ser confirmados (dblp: Silvestrim, Trigo, Rocha, Vieira, Junior, Mendes, Menezes, Cordeiro; SBESC 2023). Recriar a partir do dblp/IEEE se vier a ser citada.
+
+%% [12/10/2026] Nome do primeiro autor, ordem dos autores (ACM) e DOI corrigidos.
+@InProceedings{Pirzada2024,
+  author    = {Muhammad A. A. Pirzada and Giles Reger and Ahmed Bhayat and
+               Lucas C. Cordeiro},
+  title     = {{LLM}-Generated Invariants for Bounded Model Checking
+               Without Loop Unrolling},
+  booktitle = {39th {IEEE/ACM} International Conference on Automated
+               Software Engineering ({ASE})},
+  pages     = {1395--1407},
+  year      = {2024},
+  doi       = {10.1145/3691620.3695512},
+}
+
+
+@Article{Aljaafari2022,
+  author    = {Fatimah K. Aljaafari and Rafael Menezes and
+               Edoardo Manino and Fedor Shmarov and
+               Mustafa A. Mustafa and Lucas C. Cordeiro},
+  title     = {Combining {BMC} and Fuzzing Techniques for Finding
+               Software Vulnerabilities in Concurrent Programs},
+  journal   = {{IEEE} Access},
+  volume    = {10},
+  pages     = {121365--121384},
+  year      = {2022},
+  doi       = {10.1109/ACCESS.2022.3223359},
+}
+
+%% [12/10/2026] Autores corrigidos (tres, sem Monteiro e Nicole) e numero 6 (Springer).
+@Article{Gadelha2021,
+  author    = {Mikhail R. Gadelha and Rafael S. Menezes and
+               Lucas C. Cordeiro},
+  title     = {{ESBMC} 6.1: Automated Test Case Generation Using
+               Bounded Model Checking},
+  journal   = {International Journal on Software Tools for Technology
+               Transfer},
+  volume    = {23},
+  number    = {6},
+  pages     = {857--861},
+  year      = {2021},
+  doi       = {10.1007/s10009-020-00571-2},
+}
+
+
+@InProceedings{Brausse2022,
+  author    = {Franz Brausse and Fedor Shmarov and Rafael Menezes and
+               Mikhail R. Gadelha and Konstantin Korovin and
+               Giles Reger and Lucas C. Cordeiro},
+  title     = {{ESBMC-CHERI}: Towards Verification of {C} Programs
+               for {CHERI} Platforms with {ESBMC}},
+  booktitle = {ACM SIGSOFT International Symposium on Software
+               Testing and Analysis ({ISSTA})},
+  pages     = {773--776},
+  year      = {2022},
+  doi       = {10.1145/3533767.3543289},
+}
+
+%% [12/11/2026] DOI corrigido (3543290 -> 3543294), conforme o registro do arXiv 2206.04397; conferir na ACM DL.
+@InProceedings{Menezes2022,
+  author    = {Rafael Menezes and Daniel Moura and Helena Cavalcante
+               and Rosiane de Freitas and Lucas C. Cordeiro},
+  title     = {{ESBMC-Jimple}: Verifying {Kotlin} Programs via
+               {Jimple} Intermediate Representation},
+  booktitle = {ACM SIGSOFT International Symposium on Software
+               Testing and Analysis ({ISSTA})},
+  pages     = {777--780},
+  year      = {2022},
+  doi       = {10.1145/3533767.3543294},
+}
+
+@InProceedings{Gadelha2020,
+  author    = {Mikhail R. Gadelha and Lucas C. Cordeiro and
+               Denis A. Nicole},
+  title     = {An Efficient Floating-Point Bit-Blasting {API} for
+               Verifying {C} Programs},
+  booktitle = {13th International Workshop on Numerical Software
+               Verification ({NSV})},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12549},
+  pages     = {178--195},
+  year      = {2020},
+  doi       = {10.1007/978-3-030-63618-0_11},
+}
+
+% --- NOVA ENTRADA DO CAP. 2 (FUNDAMENTOS) - ABRIL 2026 ---
+
+@misc{ESBMC_GitHub,
+  author       = {{ESBMC Team}},
+  title        = {{ESBMC}: The Efficient {SMT}-based Context-Bounded Model Checker},
+  year         = {2026},
+  howpublished = {\url{https://github.com/esbmc/esbmc}},
+  note         = {Repositório oficial do ESBMC. Acesso em: abril de 2026},
+}
+
+%% [SINCRONIZADO COM O ARTIGO] Entrada nova para fundamentar a subseção sobre
+%% CWE em capitulos/2-fundamentos.tex (comentario LC "LACUNA DE FUNDAMENTACAO").
+%% Titulos verbatim de CWE-20, CWE-119, CWE-190, CWE-191 e CWE-787, e a relacao
+%% ChildOf entre CWE-787 e CWE-119, conferidos em cwe.mitre.org (versao 4.20).
+@misc{MITRE_CWE,
+  author       = {{MITRE Corporation}},
+  title        = {{CWE}: Common Weakness Enumeration},
+  year         = {2026},
+  howpublished = {\url{https://cwe.mitre.org/}},
+  note         = {Versão 4.20. Acesso em: setembro de 2026},
+}
+
+% -----------------------------------------------------------------------------
+% SMT SOLVERS
+% -----------------------------------------------------------------------------
+
+@inproceedings{deMoura2008,
+  author    = {de Moura, Leonardo and Bj{\o}rner, Nikolaj},
+  title     = {{Z3: An Efficient SMT Solver}},
+  booktitle = {Tools and Algorithms for the Construction and Analysis
+               of Systems (TACAS 2008)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {4963},
+  pages     = {337--340},
+  publisher = {Springer},
+  year      = {2008},
+  doi       = {10.1007/978-3-540-78800-3_24},
+}
+
+@InProceedings{Niemetz2023,
+  author    = {Aina Niemetz and Mathias Preiner},
+  title     = {Bitwuzla},
+  booktitle = {Computer Aided Verification (CAV 2023)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13965},
+  pages     = {3--17},
+  year      = {2023},
+  publisher = {Springer, Cham},
+  editor    = {Enea, C. and Lal, A.},
+  doi       = {10.1007/978-3-031-37703-7_1},
+}
+
+% --- NOVA ENTRADA DO CAP. 2 (FUNDAMENTOS) - ABRIL 2026 ---
+
+@inproceedings{Barbosa2022,
+  author    = {Barbosa, Haniel and Barrett, Clark and Brain, Martin and Kremer, Gereon and Lachnitt, Hanna and Mann, Makai and Mohamed, Abdalrhman and Mohamed, Mudathir and Niemetz, Aina and N{\"o}tzli, Andres and Ozdemir, Alex and Preiner, Mathias and Reynolds, Andrew and Sheng, Ying and Tinelli, Cesare and Zohar, Yoni},
+  title     = {cvc5: A Versatile and Industrial-Strength SMT Solver},
+  booktitle = {Tools and Algorithms for the Construction and Analysis of Systems (TACAS 2022)},
+  editor    = {Fisman, Dana and Rosu, Grigore},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13243},
+  pages     = {415--442},
+  year      = {2022},
+  publisher = {Springer},
+  address   = {Cham},
+  doi       = {10.1007/978-3-030-99524-9_24},
+}
+
+@InProceedings{Cai2022,
+  author    = {Shaowei Cai and Bohan Li and Xindi Zhang},
+  title     = {Local Search for {SMT} on Linear Integer Arithmetic},
+  booktitle = {Computer Aided Verification (CAV 2022)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {13372},
+  pages     = {227--248},
+  publisher = {Springer},
+  year      = {2022},
+  doi       = {10.1007/978-3-031-13188-2_12},
+}
+
+% -----------------------------------------------------------------------------
+% PX4 AUTOPILOT - DOCUMENTACAO OFICIAL
+% -----------------------------------------------------------------------------
+
+@misc{PX4_GitHub,
+  author       = {{PX4 Development Team}},
+  title        = {{PX4-Autopilot: Open Source Autopilot for Drones}},
+  year         = {2024},
+  howpublished = {\url{https://github.com/PX4/PX4-Autopilot}},
+  note         = {Acesso em: 10 out.~2026}
+}
+
+@misc{PX4_Documentation,
+  author       = {{PX4 Development Team}},
+  title        = {{PX4 Autopilot User Guide}},
+  year         = {2024},
+  howpublished = {\url{https://docs.px4.io}},
+  note         = {Acesso em: 10 out.~2026}
+}
+
+@misc{NuttX,
+  author       = {{Apache Software Foundation}},
+  title        = {{NuttX Real-Time Operating System}},
+  year         = {2024},
+  howpublished = {\url{https://nuttx.apache.org}},
+  note         = {Acesso em: jan.~2025}
+}
+
+% -----------------------------------------------------------------------------
+% DATASHEET FABRICANTE
+% -----------------------------------------------------------------------------
+
+%% CORRIGIDO: alinhado com o artigo do SBESC (rev. 1.9, doc. BST-BMI088-DS000-19).
+%% A chave Bosch2021 foi mantida porque é citada em 8 pontos da dissertação.
+@manual{Bosch2021,
+  author       = {{Bosch Sensortec GmbH}},
+  title        = {{BMI088: 6-Axis Motion Tracking for High-Performance Applications -- Data Sheet}},
+  number       = {BST-BMI088-DS000-19},
+  edition      = {Rev.~1.9},
+  year         = {2024},
+  address      = {Kusterdingen, Germany},
+  howpublished = {\url{https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmi088-ds001.pdf}}
+}
+
+% -----------------------------------------------------------------------------
+% UAV / DRONES
+% -----------------------------------------------------------------------------
+
+%% [12/10/2026] Lista completa de autores no lugar de "and others".
+@Article{Mohsan2023,
+  author    = {Syed Agha Hassnain Mohsan and Nawaf Qasem Hamood Othman and
+               Yanlong Li and Mohammed H. Alsharif and Muhammad Asghar Khan},
+  title     = {Unmanned Aerial Vehicles ({UAV}s): Practical Aspects,
+               Applications, Open Challenges, Security Issues, and
+               Future Trends},
+  journal   = {Intelligent Service Robotics},
+  volume    = {16},
+  number    = {1},
+  pages     = {109--137},
+  year      = {2023},
+  publisher = {Springer},
+  doi       = {10.1007/s11370-022-00452-4},
+}
+
+
+%% [12/10/2026] Lista completa de autores no lugar de "and others".
+@Article{Bakhshi2024,
+  author    = {Taimur Bakhshi and Bogdan Ghita and Ievgeniia Kuzminykh},
+  title     = {A Review of {IoT} Firmware Vulnerabilities and Auditing
+               Techniques},
+  journal   = {Sensors},
+  volume    = {24},
+  number    = {2},
+  pages     = {708},
+  year      = {2024},
+  publisher = {MDPI},
+  doi       = {10.3390/s24020708},
+}
+
+
+%% [RESOLVIDO] Entrada orfa removida (nao citada em capitulo algum; a tese de
+%% doutorado de Baptiste Pollien e de 2023, distinta do artigo FMICS 2021
+%% citado no texto como Pollien2021 -- ver correcao daquela entrada abaixo).
+%% Se a tese vier a ser citada no futuro, recriar como entrada separada.
+
+@Article{Siddiqi2022,
+  author    = {Murtaza Ahmed Siddiqi and Celestine Iwendi and
+               Kniezova Jaroslava and Noble Anumbe},
+  title     = {Analysis on Security-Related Concerns of Unmanned
+               Aerial Vehicle: Attacks, Limitations, and
+               Recommendations},
+  journal   = {Mathematical Biosciences and Engineering},
+  volume    = {19},
+  number    = {3},
+  pages     = {2641--2670},
+  year      = {2022},
+  doi       = {10.3934/mbe.2022121},
+}
+
+@Article{Mekdad2023,
+  author    = {Yassine Mekdad and Ahmet Aris and Leonardo Babun and
+               Abdeslam El Fergougui and Mauro Conti and
+               Riccardo Lazzeretti and A. Selcuk Uluagac},
+  title     = {A Survey on Security and Privacy Issues of {UAVs}},
+  journal   = {Computer Networks},
+  volume    = {224},
+  pages     = {109626},
+  year      = {2023},
+  publisher = {Elsevier},
+  doi       = {10.1016/j.comnet.2023.109626},
+}
+
+@Article{Wanner2024,
+  author    = {Devon Wanner and Hashim A. Hashim and
+               Siddhant Srivastava and Alex Steinhauer},
+  title     = {{UAV} Avionics Safety, Certification, Accidents,
+               Redundancy, Integrity, and Reliability: A Comprehensive
+               Review and Future Trends},
+  journal   = {Drone Systems and Applications},
+  volume    = {12},
+  pages     = {1--23},
+  year      = {2024},
+  publisher = {Canadian Science Publishing},
+  doi       = {10.1139/dsa-2023-0091},
+}
+
+%% [12/10/2026] Autores corrigidos (a lista anterior era de outro artigo); versao publicada no DSN 2021 no lugar do arXiv.
+@InProceedings{Taylor2021,
+  author    = {Max Taylor and Haicheng Chen and Feng Qin and
+               Christopher Stewart},
+  title     = {Avis: In-Situ Model Checking for Unmanned Aerial
+               Vehicles},
+  booktitle = {51st Annual {IEEE/IFIP} International Conference on
+               Dependable Systems and Networks ({DSN} 2021)},
+  pages     = {471--483},
+  publisher = {IEEE},
+  year      = {2021},
+  doi       = {10.1109/DSN48987.2021.00057},
+}
+
+
+%% [12/10/2026] Volume 32, numero 3, artigo 67 acrescentados; ano do fasciculo 2023.
+@Article{deSorbo2022,
+  author    = {Andrea Di Sorbo and Fiorella Zampetti and
+               Corrado A. Visaggio and
+               Massimiliano Di Penta and Sebastiano Panichella},
+  title     = {Automated Identification and Qualitative
+               Characterization of Safety Concerns Reported in
+               {UAV} Software Platforms},
+  journal   = {{ACM} Transactions on Software Engineering and
+               Methodology},
+  volume    = {32},
+  number    = {3},
+  pages     = {67:1--67:37},
+  year      = {2023},
+  doi       = {10.1145/3564821},
+}
+
+
+@Article{Bernardeschi2023,
+  author    = {Cinzia Bernardeschi and Andrea Domenici and
+               Adriano Fagiolini and Maurizio Palmieri},
+  title     = {Co-simulation and Formal Verification of Co-operative
+               Drone Control With Logic-Based Specifications},
+  journal   = {The Computer Journal},
+  volume    = {66},
+  number    = {2},
+  pages     = {295--317},
+  year      = {2023},
+  doi       = {10.1093/comjnl/bxab161},
+}
+
+@InProceedings{Ficco2022,
+  author    = {Massimo Ficco and Raffaele Palmiero and
+               Massimiliano Rak and Daniele Granata},
+  title     = {{MAVLink} Protocol for Unmanned Aerial Vehicle:
+               Vulnerabilities Analysis},
+  booktitle = {2022 {IEEE} International Conference on Dependable,
+               Autonomic and Secure Computing ({DASC})},
+  pages     = {1--6},
+  year      = {2022},
+  doi       = {10.1109/DASC/PiCom/CBDCom/Cy55231.2022.9927895},
+}
+
+%% [12/10/2026] Autores e veiculo corrigidos: artigo de conferencia (ICoDT2 2024), nao IEEE Access.
+@InProceedings{Hamza2024,
+  author    = {Muhammad Ameer Hamza and Mujahid Mohsin and Mohsin Khalil
+               and Syed M. Kazam Abbas Kazmi},
+  title     = {{MAVLink} Protocol: A Survey of Security Threats and
+               Countermeasures},
+  booktitle = {2024 4th International Conference on Digital Futures and
+               Transformative Technologies ({ICoDT2})},
+  pages     = {1--8},
+  publisher = {IEEE},
+  year      = {2024},
+  doi       = {10.1109/ICoDT262145.2024.10740195},
+}
+
+
+@InProceedings{Khatiri2024,
+  author    = {Sajad Khatiri and Sebastiano Panichella and
+               Paolo Tonella},
+  title     = {Simulation-based Testing of Unmanned Aerial Vehicles
+               with Aerialist},
+  booktitle = {2024 {IEEE/ACM} 46th International Conference on
+               Software Engineering: Companion Proceedings
+               ({ICSE-Companion})},
+  pages     = {134--138},
+  year      = {2024},
+  doi       = {10.1145/3639478.3640031},
+}
+
+% -----------------------------------------------------------------------------
+% SISTEMAS EMBARCADOS E TEMPO REAL
+% -----------------------------------------------------------------------------
+
+@Article{Mzid2024,
+  author    = {Rania Mzid},
+  title     = {Real-Time Design Patterns for the Verification of
+               Safety-Critical Embedded Systems in Model-Based
+               Approach},
+  journal   = {The Journal of Supercomputing},
+  volume    = {80},
+  number    = {8},
+  pages     = {11431--11473},
+  year      = {2024},
+  publisher = {Springer},
+  doi       = {10.1007/s11227-023-05866-0},
+}
+
+% -----------------------------------------------------------------------------
+% ENTRADAS ADICIONADAS - ABRIL 2026
+% -----------------------------------------------------------------------------
+
+%% [RESOLVIDO] Entrada corrigida: o trabalho citado no texto (Pollien et al.,
+%% Cap. 2 e Cap. 3) e o artigo de conferencia FMICS 2021, nao a tese de
+%% doutorado (que e de 2023, tem outro titulo, e nao e citada neste
+%% documento). Tipo trocado de "phdthesis" para "InProceedings"; titulo,
+%% coautores, veiculo, paginas e DOI conferidos de forma independente.
+%% [12/10/2026] Paginas 246-262 -> 167-173 (Springer e dblp).
+@InProceedings{Pollien2021,
+  author    = {Baptiste Pollien and Christophe Garion and
+               Gautier Hattenberger and Pierre Roux and
+               Xavier Thirioux},
+  title     = {Verifying the Mathematical Library of an {UAV} Autopilot
+               with {Frama-C}},
+  booktitle = {Formal Methods for Industrial Critical Systems
+               ({FMICS} 2021)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12863},
+  pages     = {167--173},
+  publisher = {Springer},
+  year      = {2021},
+  doi       = {10.1007/978-3-030-85248-1_10},
+}
+
+
+%% [12/10/2026] Tese citada no artigo SBESC 2026 (ref. [4]); dados conforme o
+%% artigo: ISAE-SUPAERO, 2023, NNT 2023ESAE0055.
+@PhdThesis{Pollien2023,
+  author    = {Baptiste Pollien},
+  title     = {Formal Verification of an {UAV} Autopilot: Static Analysis
+               and Verified Code Generation},
+  school    = {Institut sup{\'e}rieur de l'A{\'e}ronautique et de l'Espace (ISAE)},
+  year      = {2023},
+  note      = {NNT: 2023ESAE0055},
+}
+
+%% [RESOLVIDO] Corrigidos os autores (eram apenas dois de seis) e o DOI
+%% (constava 10.1145/3729370; o correto e o das Demonstracoes do FSE 2025 e
+%% 10.1145/3696630.3728581), conforme apontado no comentario \pendente{} do
+%% Cap. 3 e conferido de forma independente. Titulo tambem ajustado para a
+%% forma exata da publicacao ("VO-GCSE: ... through ...", nao "via").
+%% [12/10/2026] Paginas 1060-1064 acrescentadas (researchr/ACM).
+@InProceedings{Menezes2025GCSE,
+  author    = {Rafael Menezes and Norbert Tihanyi and Ridhi Jain and
+               Alexander Levin and Rosiane de Freitas and
+               Lucas C. Cordeiro},
+  title     = {{VO-GCSE}: Verification Optimization through Global
+               Common Subexpression Elimination},
+  booktitle = {Companion Proceedings of the 33rd {ACM} International
+               Conference on the Foundations of Software Engineering
+               ({FSE} Companion 2025) --- Demonstrations Track},
+  pages     = {1060--1064},
+  address   = {Trondheim, Norway},
+  publisher = {ACM},
+  year      = {2025},
+  doi       = {10.1145/3696630.3728581},
+}
+
+
+@article{Luckcuck2019,
+  author    = {Matt Luckcuck and Marie Farrell and Louise A. Dennis and
+               Clare Dixon and Michael Fisher},
+  title     = {Formal Specification and Verification of Autonomous
+               Robotic Systems: A Survey},
+  journal   = {{ACM} Computing Surveys},
+  volume    = {52},
+  number    = {5},
+  pages     = {100:1--100:41},
+  year      = {2019},
+  publisher = {ACM},
+  doi       = {10.1145/3342355},
+}
+
+% =============================================================================
+% (contagem antiga removida em 12/11/2026)
+% =============================================================================
+
+@inproceedings{Brummayer2009,
+  author    = {Robert Brummayer and Armin Biere},
+  title     = {Boolector: An Efficient {SMT} Solver for Bit-Vectors and Arrays},
+  booktitle = {TACAS 2009},
+  volume    = {5505},
+  publisher = {Springer, Berlin, Heidelberg},
+  pages     = {174--177},
+  year      = {2009},
+  doi       = {10.1007/978-3-642-00768-2_16}
+}
+
+@misc{ArduPilot,
+  author       = {{ArduPilot Development Team}},
+  title        = {{ArduPilot}: Open Source Autopilot},
+  howpublished = {\url{https://github.com/ArduPilot/ardupilot}},
+  year         = {2026},
+  note         = {Acesso em: 8 out.~2026}
+}
+
+@InProceedings{Merz2012,
+  author    = {Merz, Florian and Falke, Stephan and Sinz, Carsten},
+  title     = {{LLBMC}: Bounded Model Checking of C and C++ Programs Using a
+               Compiler {IR}},
+  booktitle = {Verified Software: Theories, Tools, Experiments (VSTTE 2012)},
+  editor    = {Joshi, Rajeev and M{\"u}ller, Peter and Podelski, Andreas},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {7152},
+  pages     = {146--161},
+  year      = {2012},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  doi       = {10.1007/978-3-642-27705-4_12},
+}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% RESOLVIDO — as duas entradas abaixo estavam citadas em
+%% capitulos/3-trabalhoscorrelatos.tex mas ausentes deste arquivo (bug de
+%% compilacao objetivo: BibTeX avisava "I didn't find a database entry for
+%% Kim2021PGFuzz / Han2024RangeFuzz" e ambas apareciam como [?] no PDF).
+%% Autor completo, titulo exato, veiculo, volume/numero/paginas e DOI
+%% conferidos via busca web antes de inserir (paginas oficiais dos autores e
+%% do periodico/simposio), seguindo a mesma regra de nao preencher de memoria.
+%%
+%% ATENCAO ao estilo: o bst_ufam.bst NAO declara os campos url, doi nem urldate
+%% no bloco ENTRY. O que for posto nesses campos e descartado em silencio. Para
+%% o DOI aparecer impresso, usar o campo note, como nas demais entradas.
+%% ═══════════════════════════════════════════════════════════════════════════
+
+@InProceedings{Kim2021PGFuzz,
+  author    = {Hyungsub Kim and Muslum Ozgur Ozmen and Antonio Bianchi
+               and Z. Berkay Celik and Dongyan Xu},
+  title     = {{PGFUZZ}: Policy-Guided Fuzzing for Robotic Vehicles},
+  booktitle = {Network and Distributed System Security Symposium
+               ({NDSS} 2021)},
+  publisher = {The Internet Society},
+  year      = {2021},
+  note      = {doi:10.14722/ndss.2021.24096},
+}
+
+%% [12/10/2026] Setimo autor (Jianfeng Ma) acrescentado (IEEE CSDL).
+@Article{Han2024RangeFuzz,
+  author    = {Ruidong Han and Siqi Ma and Juanru Li and Surya Nepal
+               and David Lo and Zhuo Ma and Jianfeng Ma},
+  title     = {Range Specification Bug Detection in Flight Control
+               System Through Fuzzing},
+  journal   = {{IEEE} Transactions on Software Engineering},
+  volume    = {50},
+  number    = {3},
+  pages     = {461--473},
+  year      = {2024},
+  doi       = {10.1109/TSE.2024.3354739},
+}
+
+
+% -----------------------------------------------------------------------------
+% ANALISE ESTATICA SOUND E CERTIFICACAO AERONAUTICA
+% -----------------------------------------------------------------------------
+
+%% [SINCRONIZADO COM O ARTIGO] Entradas acrescentadas para o comentario LC
+%% "DOIS BLOCOS A COMPLETAR" em capitulos/3-trabalhoscorrelatos.tex: (1) dar
+%% suporte bibliografico ao paragrafo sobre analise estatica sound (Astree,
+%% SPARK/Ada) e (2) fundamentar o paragrafo normativo sobre DO-178C/DO-333.
+%% Titulo, autoria, veiculo, ano e paginas conferidos nas paginas oficiais
+%% dos autores/orgaos antes de inserir, conforme exigido pelo parecer.
+
+@InProceedings{Cousot2005Astree,
+  author    = {Patrick Cousot and Radhia Cousot and J{\'e}r{\^o}me Feret
+               and Laurent Mauborgne and Antoine Min{\'e} and
+               David Monniaux and Xavier Rival},
+  title     = {The {ASTR{\'E}E} Analyzer},
+  booktitle = {European Symposium on Programming ({ESOP} 2005)},
+  editor    = {Sagiv, Mooly},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3444},
+  pages     = {21--30},
+  publisher = {Springer},
+  year      = {2005},
+  doi       = {10.1007/978-3-540-31987-0\_3},
+}
+
+%% [12/11/2026] Paginas e DOI acrescentados; comentario retirado do campo note.
+@InProceedings{Bertrane2010,
+  author    = {Julien Bertrane and Patrick Cousot and Radhia Cousot
+               and J{\'e}r{\^o}me Feret and Laurent Mauborgne and
+               Antoine Min{\'e} and Xavier Rival},
+  title     = {Static Analysis and Verification of Aerospace Software
+               by Abstract Interpretation},
+  booktitle = {{AIAA} Infotech@Aerospace 2010},
+  publisher = {American Institute of Aeronautics and Astronautics},
+  year      = {2010},
+  pages     = {1--38},
+  note      = {AIAA Paper 2010-3385. DOI: 10.2514/6.2010-3385},
+}
+
+@book{McCormick2015,
+  author    = {John W. McCormick and Peter C. Chapin},
+  title     = {Building High Integrity Applications with {SPARK}},
+  publisher = {Cambridge University Press},
+  year      = {2015},
+  address   = {Cambridge},
+}
+
+@manual{RTCA_DO178C,
+  author       = {{RTCA, Inc.}},
+  title        = {{DO-178C}: Software Considerations in Airborne
+                  Systems and Equipment Certification},
+  organization = {RTCA},
+  year         = {2011},
+  address      = {Washington, DC},
+  note         = {13 dez. 2011},
+}
+
+@manual{RTCA_DO333,
+  author       = {{RTCA, Inc.}},
+  title        = {{DO-333}: Formal Methods Supplement to {DO-178C}
+                  and {DO-278A}},
+  organization = {RTCA},
+  year         = {2011},
+  address      = {Washington, DC},
+  note         = {13 dez. 2011},
+}
+
+%% --- HACMS / SMACCMPilot (sintese de codigo verificado) ---
+@article{Fisher2017,
+  author  = {Fisher, Kathleen and Launchbury, John and Richards, Raymond},
+  title   = {The {HACMS} program: using formal methods to eliminate
+             exploitable bugs},
+  journal = {Philosophical Transactions of the Royal Society A:
+             Mathematical, Physical and Engineering Sciences},
+  volume  = {375},
+  number  = {2104},
+  pages   = {20150401},
+  year    = {2017},
+  note    = {DOI: 10.1098/rsta.2015.0401}
+}
+
+%% --- Execucao simbolica (seminal; substitui Godefroid2005 no Cap 2) ---
+@article{King1976,
+  author  = {King, James C.},
+  title   = {Symbolic execution and program testing},
+  journal = {Communications of the ACM},
+  volume  = {19},
+  number  = {7},
+  pages   = {385--394},
+  year    = {1976},
+  note    = {DOI: 10.1145/360248.360252}
+}
+
+%% --- SMT (handbook; definicao no Cap 2) ---
+%% [12/11/2026] A entrada anterior (Barrett2021) misturava duas obras: autores, livro e
+%% paginas do Handbook of Model Checking (2018) com ano e DOI do Handbook of
+%% Satisfiability (2021). Fica a de 2018, conferida na pagina do autor e no Crossref.
+@incollection{Barrett2018,
+  author    = {Barrett, Clark and Tinelli, Cesare},
+  title     = {Satisfiability Modulo Theories},
+  booktitle = {Handbook of Model Checking},
+  editor    = {Clarke, Edmund M. and Henzinger, Thomas A. and Veith, Helmut and Bloem, Roderick},
+  publisher = {Springer},
+  pages     = {305--343},
+  year      = {2018},
+  note      = {DOI: 10.1007/978-3-319-10575-8\_11}
+}
+
+%% --- Prova de teoremas (recente; substitui Huth2004 no Cap 2) ---
+%% [12/11/2026] Autor e titulo corrigidos conforme o arXiv e o dblp: o identificador
+%% 2501.18639 e deste trabalho; o titulo e o autor anteriores nao existiam.
+@article{Tang2025,
+  author  = {Tang, Xichen},
+  title   = {A Comprehensive Survey of the {Lean} 4 Theorem Prover:
+             Architecture, Applications, and Advances},
+  journal = {arXiv preprint},
+  year    = {2025},
+  note    = {arXiv:2501.18639}
+}
+
+%% --- Interpretacao abstrata: Astree ---
+%% [12/11/2026] Entrada repetida de Cousot2005Astree removida (ja definida acima).
+
+%% --- Astree em codigo aeronautico de producao (Airbus) ---
+%% [12/11/2026] Segunda entrada com a chave Bertrane2010 removida: era a monografia de 2015 (Foundations and Trends in Programming Languages, 2(2-3):71-190), obra distinta do artigo AIAA de 2010 mantido acima.
+
+%% --- SPARK (Ada) ---
+%% [12/11/2026] Entrada repetida de McCormick2015 removida (ja definida acima).
+
+%% --- RVFuzzer (fuzzing de validacao de entrada em autopilotos) ---
+%% [12/11/2026] Primeira entrada de Kim2019RVFuzzer removida: lista de autores incorreta. Mantida a entrada abaixo (Kim, Kim, Rhee, Fei, Tu, Walkup, Zhang, Deng, Xu).
+
+@InProceedings{Kim2019RVFuzzer,
+  author    = {Taegyu Kim and Chung Hwan Kim and Junghwan Rhee and
+               Fan Fei and Zhan Tu and Gregory Walkup and
+               Xiangyu Zhang and Xinyan Deng and Dongyan Xu},
+  title     = {{RVFuzzer}: Finding Input Validation Bugs in Robotic
+               Vehicles through Control-Guided Testing},
+  booktitle = {28th {USENIX} Security Symposium ({USENIX} Security 19)},
+  publisher = {{USENIX} Association},
+  pages     = {425--442},
+  year      = {2019},
+}
+
+% -----------------------------------------------------------------------------
+% ENTRADAS ACRESCENTADAS EM 12/11/2026
+% -----------------------------------------------------------------------------
+
+%% Conferido em 12/11/2026 em https://www.icmje.org/recommendations/ e na primeira
+%% pagina do PDF: "Updated January 2026". Secao II.A.4 trata de IA.
+@misc{ICMJE2026,
+  author       = {{International Committee of Medical Journal Editors}},
+  title        = {Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals},
+  year         = {2026},
+  howpublished = {\url{https://www.icmje.org/icmje-recommendations.pdf}},
+  note         = {Atualizado em janeiro de 2026. Acesso em: 12 nov.~2026}
+}
+
+%% Dados obtidos por busca na web em 12/11/2026; conferir a lista de autores na
+%% pagina da WAME antes do deposito.
+@misc{WAME2023,
+  author       = {Zielinski, Chris and Winker, Margaret A. and Aggarwal, Rakesh and others},
+  title        = {Chatbots, Generative {AI}, and Scholarly Manuscripts: {WAME} Recommendations on Chatbots and Generative Artificial Intelligence in Relation to Scholarly Publications},
+  year         = {2023},
+  howpublished = {\url{https://wame.org/page3.php?id=106}},
+  note         = {World Association of Medical Editors. Revisado em 31 maio 2023. Acesso em: 12 nov.~2026}
+}
+
+%% Citada na Introducao e ausente do arquivo. O ANO NAO FOI CONFERIDO: confirmar a
+%% edicao vigente da ICA 100-40 no site do DECEA antes do deposito.
+@manual{DECEA_ICA10040,
+  author       = {{Departamento de Controle do Espa\c{c}o A\'ereo (DECEA)}},
+  title        = {{ICA 100-40}: Aeronaves N\~ao Tripuladas e o Acesso ao
+                  Espa\c{c}o A\'ereo Brasileiro},
+  organization = {Comando da Aeron\'autica},
+  address      = {Rio de Janeiro, Brasil},
+  year         = {2023},
+  note         = {Acesso em: nov.~2026. Dispon\'ivel em:
+                  \url{https://www.decea.mil.br/drone/}},
+}
+
+%% FALTA: Rodrigues2026 (artigo da autora no SBESC 2026) e citada no texto e nao tem
+%% entrada. Preencher com titulo, autores, paginas e DOI do artigo publicado.
