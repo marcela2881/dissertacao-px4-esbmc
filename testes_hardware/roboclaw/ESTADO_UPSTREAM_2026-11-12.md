@@ -40,6 +40,11 @@ A autora decidiu reportar, com autorização do orientador.
 (`release/1.18` e o commit `8be2590c15`) e dizer que o `main` foi refatorado
 pelo #29473. A postagem é feita pela autora.
 
+**Publicada em 2026-11-12:** https://github.com/PX4/PX4-Autopilot/issues/29785
+(aberta pela autora, na conta dela; as imagens ficaram no segundo campo do
+formulário, com legenda, e não no meio do texto como em
+`ISSUE_FINAL_com_hardware.md`).
+
 ## batmon
 
 `src/drivers/smart_battery/batmon` não tem diferença entre o commit conferido

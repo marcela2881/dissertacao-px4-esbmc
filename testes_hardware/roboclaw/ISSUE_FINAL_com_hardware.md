@@ -1,3 +1,5 @@
+<!-- Publicada em 2026-11-12 como https://github.com/PX4/PX4-Autopilot/issues/29785 -->
+
 # RoboClaw: drive commands can send a data byte above 127, and `write()` errors go undetected
 
 ## Describe the bug
