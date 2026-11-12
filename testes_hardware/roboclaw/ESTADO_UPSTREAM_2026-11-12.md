@@ -18,18 +18,20 @@ de 2026-06-04) é anterior a ele.
 
 ## Onde o código antigo ainda está
 
-Os ramos `release/1.16`, `release/1.17` e `release/1.18` ainda trazem as linhas
-`lroundf(fabs(data) * INT8_MAX)` e `size_t bytes_written = write(...)`
-(conferido por busca textual no `Roboclaw.cpp` de cada ramo; não foi conferido
-o `module.yaml` nem o `.hpp` desses ramos).
+Conferido nos arquivos de cada ramo em 2026-11-12:
 
-## Consequência
+| Ramo | Bug 1 (`lroundf(fabs(data) * INT8_MAX)`, failsafe até 257) | Bug 2 (`size_t bytes_written = write`) | Membros não inicializados e `update()` antes de `initializeUART()` |
+|---|---|---|---|
+| `release/1.18` (`8303efda43cb`) | sim, as duas coisas | sim | sim |
+| `release/1.17` e `v1.17.0` | failsafe até 257; `sendUnsigned7Bit` tem outro código (limita `data >= 1.0`), não analisado | sim | sim |
+| `release/1.16` | failsafe até 257; `sendUnsigned7Bit` não conferido | sim | sim |
 
-`ISSUE_FINAL_com_hardware.md` e `PR.md` descrevem o defeito como presente no
-código atual. Isso deixou de ser verdade para o `main`. **Não postar como
-está.** As alternativas (reportar contra os ramos de release, ou não reportar e
-registrar na dissertação como defeito confirmado e corrigido de forma
-independente) dependem de decisão da autora com o orientador.
+## Decisão (2026-11-12)
+
+A autora decidiu reportar, com autorização do orientador.
+`ISSUE_FINAL_com_hardware.md` foi ajustado para declarar a versão afetada
+(`release/1.18` e o commit `8be2590c15`) e dizer que o `main` foi refatorado
+pelo #29473. A postagem é feita pela autora.
 
 ## batmon
 

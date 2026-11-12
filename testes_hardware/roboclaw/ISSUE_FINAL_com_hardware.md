@@ -1,8 +1,8 @@
-> **ATENÇÃO (2026-11-12): não postar como está.** O driver foi reescrito no `main` em 2026-10-28 (PR #29473) e os defeitos descritos aqui não ocorrem mais lá. Ver `ESTADO_UPSTREAM_2026-11-12.md`.
-
 # RoboClaw: drive commands can send a data byte above 127, and write() errors go undetected
 
 ## Describe the bug
+
+**Affected version:** `release/1.18` (checked at `8303efda43cb`, 2026-11-12) and `main` at `8be2590c15` (2026-06-04), which is the commit I analysed and flashed. The driver on current `main` was refactored in #29473 (2026-10-28), and from reading the new code these lines are gone there: the failsafe range is now capped at 254, the value is constrained before the cast, and the write result is an `ssize_t`. I have not run the refactored driver. I am reporting this because the release branch still carries the old code.
 
 I found two issues in `src/drivers/roboclaw/Roboclaw.cpp`. I reproduced both on a PC using an emulated UART. I also observed the first one on the wire on a Pixhawk 6X RT, with an ESP32 standing in for the RoboClaw. I haven't tested with a physical RoboClaw device.
 
@@ -32,7 +32,7 @@ The harnesses, commands and execution logs are available here: https://github.co
 
 **On hardware (first issue only).** I flashed a Pixhawk 6X RT with `px4_fmu-v6xrt_default` built with `CONFIG_DRIVERS_ROBOCLAW=y` added to the board config (the driver is not in the default build for this board), set `RBCLW_SER_CFG=102` (TELEM2), `SER_TEL2_BAUD=38400`, `RBCLW_FUNC1=101` and `RBCLW_FAIL1=257`, and connected TELEM2 to an ESP32 that answers the driver's queries and ACKs its commands like a RoboClaw would. After `commander arm -f` and `commander termination` (`actuator_armed.termination: True`), the board sent `80 00 82 8A 90` every ~50 ms: address 0x80, command 0, data byte 0x82 (130), valid CRC. With `RBCLW_FAIL1=254` the same firmware sent `80 00 7F B4 22` (data byte 127). With the proposed fix applied and `RBCLW_FAIL1=257` again, the board also sent `80 00 7F B4 22`, and the emulator counted no data byte above 127 in about 4 minutes. The captures and the emulator sketch are in the `hardware_pixhawk6xrt` folder of the link above.
 
-One caveat: to get the driver running on this board I had to value-initialize two members in `Roboclaw.hpp` (`_uart_fd_set{}` and `_uart_fd_timeout{}`). Without that, the driver blocked `wq:hp_default` at startup. This change does not touch the output path. I can describe that startup problem separately if it is useful.
+One caveat: to get the driver running on this board I had to value-initialize two members in `Roboclaw.hpp` (`_uart_fd_set{}` and `_uart_fd_timeout{}`). Without that, the driver blocked `wq:hp_default` at startup. This change does not touch the output path. From the code, `Run()` calls `_mixing_output.update()` before `initializeUART()`, so the first `updateOutputs()` reaches `select()` with `_uart_fd_set` and `_uart_fd_timeout` still uninitialized (the object is created with `new`), and with `_uart_fd` still 0. I did not save a log of the blocked work queue, so please treat this third point as an observation, not a measured result.
 
 I also ran the original code through ESBMC 8.2.0 and CBMC 5.95.1. Both tools detected the two issues. After applying the fixes, both verification checks passed.
 
