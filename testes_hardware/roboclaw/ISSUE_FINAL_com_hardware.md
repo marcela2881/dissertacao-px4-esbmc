@@ -2,7 +2,7 @@
 
 ## Describe the bug
 
-**Affected versions:** `release/1.18` (verified at `8303efda43cb` on 12 November 2026) and the previous implementation on `main`, at commit `8be2590c1529517ccd54fbc09ae138402517baf4` (4 June 2026). I also verified that the same implementation was still present on `main` on 19 October 2026.
+**Affected versions:** `release/1.18` (verified at `8303efda43cb` on 12 November 2026) and the previous implementation on `main`, at commit `8be2590c1529517ccd54fbc09ae138402517baf4` (4 June 2026). `Roboclaw.cpp`, `Roboclaw.hpp` and `module.yaml` are identical in these two revisions. I also verified that the same implementation was still present on `main` on 19 October 2026.
 
 The RoboClaw driver was refactored in PR #29473, merged on 28 October 2026. In the refactored implementation, the failsafe range is limited to 254, values are constrained before conversion, and the return value of the write call is stored in an `ssize_t`. I have not tested the refactored driver. I am reporting these issues because the release branch still contains the previous implementation.
 

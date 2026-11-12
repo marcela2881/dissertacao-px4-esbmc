@@ -26,6 +26,13 @@ Conferido nos arquivos de cada ramo em 2026-11-12:
 | `release/1.17` e `v1.17.0` | failsafe até 257; `sendUnsigned7Bit` tem outro código (limita `data >= 1.0`), não analisado | sim | sim |
 | `release/1.16` | failsafe até 257; `sendUnsigned7Bit` não conferido | sim | sim |
 
+`Roboclaw.cpp`, `Roboclaw.hpp` e `module.yaml` de `release/1.18`
+(`8303efda43cb`) são idênticos, byte a byte, aos do commit analisado
+(`8be2590c15`): `diff` sem saída nos três arquivos, conferido em 2026-11-12.
+A análise formal e o ensaio em hardware valem, portanto, para o código do
+driver que está hoje nesse ramo. O restante do firmware (mixer, NuttX) não foi
+comparado.
+
 ## Decisão (2026-11-12)
 
 A autora decidiu reportar, com autorização do orientador.
