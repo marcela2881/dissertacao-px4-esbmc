@@ -46,30 +46,33 @@ FIFO do BMI088 (Seção~\ref{subsec:imu-fifo}), que já havia sido proposto
 \corr{A Tabela~\ref{tab:etapas-ferramentas} resume, para cada etapa, as
 ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 
-\begin{table}[!htb]
+\begin{table}[!htbp]
 \centering
 \caption{\corr{Ferramentas, versões, opções e hipóteses de modelagem por etapa}}
 \label{tab:etapas-ferramentas}
-\footnotesize
-\begin{tabular}{|p{2.3cm}|p{3.4cm}|p{4.1cm}|p{4.1cm}|}
+\scriptsize
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt}
+\newcommand{\cel}{\raggedright\hspace{0pt}}
+\begin{tabular}{|p{2.0cm}|p{3.7cm}|p{4.9cm}|p{4.1cm}|}
 \hline
-\textbf{Etapa} & \textbf{Ferramentas e versões} & \textbf{Opções} & \textbf{Hipóteses de modelagem} \\
+\cel\textbf{Etapa} & \cel\textbf{Ferramentas e versões} & \cel\textbf{Opções} & \cel\textbf{Hipóteses de modelagem} \tabularnewline
 \hline
-\corr{(i) Seleção} & \corr{leitura do código e da documentação do PX4 (commit \texttt{8be2590c15})} & \corr{---} & \corr{módulo isolável por \textit{stubs}; amostra não estatística} \\
+\cel\corr{(i) Seleção} & \cel\corr{leitura do código e da documentação do PX4 (commit \texttt{8be2590c15})} & \cel\corr{---} & \cel\corr{módulo isolável por \textit{stubs}; amostra não estatística} \tabularnewline
 \hline
-\corr{(ii) \textit{Stubs}} & \corr{C/C++; \texttt{nondet\_T()}, \texttt{\_\_ESBMC\_assume} (1.ª campanha) e \texttt{\_\_VERIFIER\_assume} (2.ª)} & \corr{---} & \corr{E/S de \textit{hardware} sobreaproximada por valores não determinísticos; pré-condições da Tabela~\ref{tab:hipoteses-harness}} \\
+\cel\corr{(ii) \textit{Stubs}} & \cel\corr{C/C++; \texttt{nondet\_T()}, \texttt{\_\_ESBMC\_assume} (1.ª campanha) e \texttt{\_\_VERIFIER\_assume} (2.ª)} & \cel\corr{---} & \cel\corr{E/S de \textit{hardware} sobreaproximada por valores não determinísticos; pré-condições da Tabela~\ref{tab:hipoteses-harness}} \tabularnewline
 \hline
-\corr{(iii) Propriedades} & \corr{\textit{assertions} no \textit{harness}} & \corr{---} & \corr{tradução de documento (\textit{datasheet}, manual, código) em predicado sobre variável de programa} \\
+\cel\corr{(iii) Propriedades} & \cel\corr{\textit{assertions} no \textit{harness}} & \cel\corr{---} & \cel\corr{tradução de documento (\textit{datasheet}, manual, código) em predicado sobre variável de programa} \tabularnewline
 \hline
-\corr{(iv) ESBMC} & \corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ESBMC 8.1.0--8.5.0, Boolector/Z3, máquina da autora, Ubuntu 24.04} & \corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \\
+\cel\corr{(iv) ESBMC} & \cel\corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ESBMC 8.1.0--8.5.0, Boolector/Z3, máquina da autora, Ubuntu 24.04} & \cel\corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \cel\corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \tabularnewline
 \hline
-\corr{(v) Contraexemplos} & \corr{1.ª: leitura do código. 2.ª: \textit{replay} com g++~13.3.0 e ASan/UBSan} & \corr{\texttt{-std=c++17 -O0 -fsanitize=address,undefined}} & \corr{E/S simulada de forma determinística} \\
+\cel\corr{(v) Contraexemplos} & \cel\corr{1.ª: leitura do código. 2.ª: \textit{replay} com g++~13.3.0 e ASan/UBSan} & \cel\corr{\texttt{-std=c++17 -O0} \texttt{-fsanitize=address,undefined}} & \cel\corr{E/S simulada de forma determinística} \tabularnewline
 \hline
-\corr{(vi) Reporte} & \corr{GitHub (PX4-Autopilot)} & \corr{---} & \corr{---} \\
+\cel\corr{(vi) Reporte} & \cel\corr{GitHub (PX4-Autopilot)} & \cel\corr{---} & \cel\corr{---} \tabularnewline
 \hline
-\corr{(vii) Validação cruzada} & \corr{CBMC 5.95.1 (MiniSat)} & \corr{opções equivalentes (Tabela~\ref{tab:equivalencia-opcoes})} & \corr{mesmo \textit{harness} e mesmas pré-condições do ESBMC} \\
+\cel\corr{(vii) Validação cruzada} & \cel\corr{CBMC 5.95.1 (MiniSat)} & \cel\corr{opções equivalentes (Tabela~\ref{tab:equivalencia-opcoes})} & \cel\corr{mesmo \textit{harness} e mesmas pré-condições do ESBMC} \tabularnewline
 \hline
-\corr{(viii) ArduPilot e CI} & \corr{CBMC 5.95.1; GitHub Actions (\texttt{ubuntu-latest})} & \corr{\texttt{--unwind 10 --signed-overflow-check --unsigned-overflow-check --bounds-check}} & \corr{lógica equivalente no driver do ArduPilot} \\
+\cel\corr{(viii) ArduPilot e CI} & \cel\corr{CBMC 5.95.1; GitHub Actions (\texttt{ubuntu-latest})} & \cel\corr{\texttt{--unwind 10 --signed-overflow-check --unsigned-overflow-check --bounds-check}} & \cel\corr{lógica equivalente no driver do ArduPilot} \tabularnewline
 \hline
 \end{tabular}
 \end{table}
@@ -84,9 +87,9 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 %% LC 03 (resolvido 19/10/2026): seta "sem violacao" -> reporte removida.
 %% [12/11/2026] Figura atualizada para englobar as duas campanhas e recolorida
 %% para a paleta nude.
-\begin{figure}[H]
+\begin{figure}[!tb]
 \centering
-\resizebox{\linewidth}{!}{%
+\resizebox{0.92\linewidth}{!}{%
 \begin{tikzpicture}[
   font=\linespread{1}\footnotesize,
   >={Stealth[length=2mm]},
@@ -101,7 +104,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
   conf/.style={base, text width=6.2cm, fill=palFill, draw=palEdgeDark, very thick},
   dec/.style={draw=palEdge, diamond, aspect=2.4, inner sep=1pt, fill=palPaper,
     align=center},
-  out/.style={base, text width=3.0cm, minimum height=10mm, fill=palStrong,
+  desf/.style={base, text width=3.0cm, minimum height=10mm, fill=palStrong,
     draw=palEdgeDark},
   outn/.style={base, text width=3.0cm, minimum height=10mm, fill=palPaper},
   rot/.style={font=\scriptsize\itshape, align=center}]
@@ -120,7 +123,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
   \node[dec, below=6mm of conf] (dec) {Reproduz em\\produção?};
 
   % --- desfechos
-  \node[out, below=10mm of dec] (def) {Defeito reproduzido / VAM};
+  \node[desf, below=10mm of dec] (def) {Defeito reproduzido / VAM};
   \node[outn, left=20mm of def] (fp) {Falso positivo (modelagem / ferramenta)};
   \node[outn, right=20mm of def] (ok) {Sem violação até o limite $k$};
 
@@ -139,7 +142,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
   \draw[->] (dec.east) -| node[rot, pos=0.25, above] {nenhuma\\violação} (ok.north);
 
   % --- defeito/VAM -> reporte (vi)
-  \draw[->] (def.east) .. controls +(2.6,0) and +(0,-2.2) .. (e6.south);
+  \draw[->] (def.south) -- ++(0,-5mm) -| ([xshift=7mm]e6.east) -- (e6.east);
 
   % --- legenda
   \node[firm, text width=3mm, minimum height=3mm, below=12mm of fp.south west,
