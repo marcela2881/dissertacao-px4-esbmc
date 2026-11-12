@@ -1,5 +1,12 @@
 # Nota de validação em hardware — driver RoboClaw (Bug 1)
 
+> **Atualização (2026-11-12):** o Bug 1 **foi observado no fio** num Pixhawk 6X RT
+> real, com o RoboClaw emulado por um ESP32: pacote `80 00 82 8A 90` (dado 130)
+> durante a terminação de voo. Ver `hardware_pixhawk6xrt/README.md`.
+> Os itens 2 e 5 abaixo estavam errados: `SER_TEL2_BAUD` existe (padrão 921600,
+> oculto enquanto não usado) e a terminação pode ser disparada na bancada com
+> `commander termination`. O texto abaixo fica como registro da primeira tentativa.
+
 Registro do teste de bancada feito num **Pixhawk 6X RT real**, com o que ficou
 comprovado, o que **não** ficou, e o que falta para retomar depois. Escrito para
 não deixar nenhum número inflado entrar na dissertação.
