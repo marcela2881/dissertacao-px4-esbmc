@@ -45,8 +45,25 @@ placa antes de abrir a UART: `Roboclaw::Run` chama `_mixing_output.update()`
 antes de `initializeUART()`, o mixer força um primeiro `updateOutputs`, e o
 driver chama `select()` com `fd_set`/`timeval` não inicializados. A alteração
 não toca no caminho do Bug 1 (`updateOutputs`/`sendUnsigned7Bit`).
-Esse travamento é um terceiro defeito, observado só neste ensaio; ainda não foi
-verificado formalmente nem reportado.
+Esse travamento é um terceiro defeito, observado só neste ensaio e não
+verificado formalmente.
+
+O efeito ficou registrado no console da placa, em colagens feitas pela autora
+durante a sessão e recuperadas do histórico da conversa em 2026-11-12:
+
+| Arquivo | Driver | Mensagens do driver no boot | `wq:hp_default` em `work_queue status` |
+|---|---|---|---|
+| `console_original_travado_1.txt` | original | nenhuma depois de `Starting Roboclaw Driver on /dev/ttyS5` | `battery_status` 0,1 Hz (intervalo 11,4 s), `board_adc` 0,3 Hz (3,07 s, esperado 10 ms), `pwm_out` intervalo 62,8 s (esperado 300 ms), `roboclaw` 0,0 Hz |
+| `console_original_travado_2.txt` | original, outro boot | nenhuma | `battery_status` 0,1 Hz (14,4 s), `board_adc` 0,2 Hz (3,88 s), `pwm_out` 79,4 s, `roboclaw` 0,0 Hz |
+| `console_com_init_funcionando.txt` | com as duas linhas | `Successfully connected` | `battery_status` 99,9 Hz, `board_adc` 99,8 Hz, `pwm_out` 3,4 Hz, `roboclaw` 3,4 Hz |
+
+As outras filas de trabalho mantêm a taxa normal nos três boots (por exemplo
+`wq:rate_ctrl` a ~808 Hz). Nos dois boots com o driver original aparece ainda
+um item `hardfault_stream` em `wq:hp_default`, ausente no terceiro; não foi
+investigado. Os dois primeiros boots são anteriores à primeira proposta da
+alteração (01:46Z); o terceiro é posterior à compilação das 21:55 (hora
+local). Nos três, `RBCLW_FUNC1` ainda não estava configurado (no terceiro,
+`param show` mostra `RBCLW_FUNC1 = 0`).
 
 ## Configuração
 

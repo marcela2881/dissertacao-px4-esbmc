@@ -1,0 +1,137 @@
+(console MAVLink colado pela autora em 2026-11-12T01:41Z = 21:41 de 11/11 local; mesmo firmware, outro boot; inicio da colagem cortado)
+hell (NSH) NuttX-11.0.0
+nsh> dmesg
+HW arch: PX4_FMU_V6XRT
+HW type: V6XRT
+HW FMUM ID: 0x000
+HW BASE ID: 0x000
+PX4 git-hash: 8be2590c1529517ccd54fbc09ae138402517baf4
+PX4 version: Release 0.0.0 (255)
+OS: NuttX
+OS version: Release 11.0.0 (184549631)
+OS git-hash: b0b49a210696dd0074dff9531fd1603afb0cc2e4
+Build datetime: Nov  1 2026 20:42:17
+Build uri: localhost
+Build variant: default
+Toolchain: GNU GCC, 13.2.1 20231009
+PX4GUID: 000900000000000000008292b37f1832580e
+MCU: i.MX RT1170 rB0, rev. 0
+INFO  [bsondump] DECODED_SIZE:5 SAVED_SIZE:-1
+
+INFO  [param] selected parameter default file /fs/mtd_params
+INFO  [param] importing from '/fs/mtd_params'
+INFO  [parameters] BSON document size 1405 bytes, decoded 1405 bytes (INT32:28, FLOAT:37)
+INFO  [param] selected parameter backup file /fs/microsd/parameters_backup.bson
+Board architecture defaults: /etc/init.d/rc.board_arch_defaults
+Board defaults: /etc/init.d/rc.board_defaults
+ifup can0...OK
+ifup can1...OK
+ifup can2...OK
+Loading airframe: /etc/init.d/airframes/4001_quad_x
+INFO  [dataman] data manager file '/fs/microsd/dataman' size is 128528 bytes
+Board sensors: /etc/init.d/rc.board_sensors
+icm42686p #0 on SPI bus 1 rotation 12
+bmi088_accel #0 on SPI bus 3 rotation 4
+bmi088_gyro #0 on SPI bus 3 rotation 4
+icm42688p #0 on SPI bus 2 rotation 6
+bmm150 #0 on I2C bus 3 address 0x10
+ERROR [SPI_I2C] ist8310: no instance started (no device on bus?)
+bmp388 #0 on I2C bus 3 address 0x77
+bmp388 #1 on I2C bus 2 (external) address 0x76
+ekf2 [523:237]
+INFO  [px4io] IO FW CRC match
+INFO  [dshot] No channels configured
+INFO  [dshot] Exiting
+INFO  [uavcan] Node ID 1, bitrate 1000000
+Board mavlink: /etc/init.d/rc.board_mavlink
+Starting Main GPS on /dev/ttyS1
+Starting Roboclaw Driver on /dev/ttyS5
+Starting MAVLink on /dev/ttyS2
+INFO  [mavlink] mode: Normal, data rate: 1200 B/s on /dev/ttyS2 @ 38400B
+Starting MAVLink on ethernet
+INFO  [mavlink] mode: Normal, data rate: 100000 B/s on udp port 14550 remote port 14550
+WARN  [mavlink] no broadcasting address found
+INFO  [cdcacm_autostart] Starting CDC/ACM autostart
+INFO  [logger] logger started (mode=all)
+INFO  [logger] Max log file size: 1024 MiB
+INFO  [logger] Start file log (type: full)
+
+NuttShell (NSH) NuttX-11.0.0
+nsh> sercon: Registering CDC/ACM serial driver
+sercon: Successfully registered the CDC/ACM serial driver
+INFO  [logger] [logger] /fs/microsd/log/sess020/log100.ulg    
+INFO  [logger] Opened full log file: /fs/microsd/log/sess020/log100.ulg
+INFO  [cdcacm_autostart] Starting mavlink on /dev/ttyACM0 (SYS_USB_AUTO=2)
+INFO  [mavlink] mode: Onboard, data rate: 100000 B/s on /dev/ttyACM0 @ 2000000B
+INFO  [mavlink] Setting system clock from SYSTEM_TIME sent by 255/190
+INFO  [mavlink] Starting mavlink shell
+nsh> work_queue status
+
+Work Queue: 16 threads                          RATE        INTERVAL
+|__ 1) wq:rate_ctrl    
+|   |__ 1) control_allocator                808.8 Hz         1236 us
+|   |__ 2) mc_rate_control                  808.8 Hz         1236 us
+|   \__ 3) vehicle_angular_velocity         808.8 Hz         1236 us
+|__ 2) wq:SPI0         
+|   \__ 1) i2c_launcher                       1.0 Hz       994597 us (1000000 us)
+|__ 3) wq:SPI1         
+|   \__ 1) icm42686p                        808.6 Hz         1237 us
+|__ 4) wq:SPI2         
+|   \__ 1) icm42688p                        807.5 Hz         1238 us
+|__ 5) wq:SPI3         
+|   |__ 1) bmi088_accel                     799.9 Hz         1250 us (1250 us)
+|   \__ 2) bmi088_gyro                      665.9 Hz         1502 us
+|__ 6) wq:I2C0         
+|   \__ 1) i2c_launcher                       1.0 Hz       994746 us (1000000 us)
+|__ 7) wq:I2C2         
+|   \__ 1) bmp388                            23.1 Hz        43290 us (43300 us)
+|__ 8) wq:I2C3         
+|   |__ 1) bmm150                            20.0 Hz        49939 us (50000 us)
+|   \__ 2) bmp388                            23.1 Hz        43290 us (43300 us)
+|__ 9) wq:nav_and_controllers
+|   |__ 1) ekf2_selector                    301.4 Hz         3318 us
+|   |__ 2) flight_mode_manager               50.0 Hz        19997 us
+|   |__ 3) land_detector                    100.8 Hz         9921 us
+|   |__ 4) mc_att_control                   202.2 Hz         4946 us
+|   |__ 5) mc_hover_thrust_estimator        101.1 Hz         9891 us
+|   |__ 6) mc_pos_control                   100.7 Hz         9928 us
+|   |__ 7) sensors                          202.2 Hz         4946 us
+|   |__ 8) vehicle_acceleration             202.2 Hz         4945 us
+|   |__ 9) vehicle_air_data                  23.1 Hz        43294 us
+|   |__10) vehicle_gps_position               3.3 Hz       299718 us
+|   \__11) vehicle_magnetometer              27.7 Hz        36152 us
+|__ 10) wq:INS0         
+|   |__ 1) ekf2                             202.2 Hz         4946 us
+|   \__ 2) vehicle_imu                      202.2 Hz         4946 us
+|__ 11) wq:INS1         
+|   |__ 1) ekf2                             192.6 Hz         5191 us
+|   \__ 2) vehicle_imu                      263.4 Hz         3796 us
+|__ 12) wq:INS2         
+|   |__ 1) ekf2                             201.9 Hz         4952 us
+|   \__ 2) vehicle_imu                      202.0 Hz         4952 us
+|__ 13) wq:hp_default   
+|   |__ 1) battery_status                     0.1 Hz     14443040 us
+|   |__ 2) board_adc                          0.2 Hz      3883605 us (10000 us)
+|   |__ 3) gyro_fft                           0.0 Hz            0 us
+|   |__ 4) hardfault_stream                   0.0 Hz     31853000 us (150000 us)
+|   |__ 5) manual_control                     0.0 Hz            0 us
+|   |__ 6) mc_autotune_attitude_control       0.2 Hz      3529768 us
+|   |__ 7) pwm_out                            0.0 Hz     79424872 us (300000 us)
+|   |__ 8) rc_update                          0.0 Hz            0 us
+|   |__ 9) roboclaw                           0.0 Hz            0 us
+|   |__10) safety_button                      0.1 Hz     10621343 us (33000 us)
+|   \__11) tone_alarm                         0.0 Hz     79644032 us
+|__ 14) wq:uavcan       
+|   |__ 1) uavcan                           333.2 Hz         3001 us (3000 us)
+|   |__ 2) uavcan-actuators-esc               3.3 Hz       299186 us (300000 us)
+|   \__ 3) uavcan-actuators-servo             3.3 Hz       299193 us (300000 us)
+|__ 15) wq:ttyS4        
+|   \__ 1) px4io                             44.8 Hz        22344 us
+\__ 16) wq:lp_default   
+    |__ 1) cdcacm_autostart                   2.0 Hz       499333 us
+    |__ 2) gyro_calibration                  50.0 Hz        19998 us (20000 us)
+    |__ 3) load_mon                           2.0 Hz       499417 us (500000 us)
+    |__ 4) mag_bias_estimator                50.0 Hz        19998 us (20000 us)
+    |__ 5) parameters                         0.0 Hz            0 us
+    \__ 6) send_event                        30.0 Hz        33329 us (33333 us)
+nsh>

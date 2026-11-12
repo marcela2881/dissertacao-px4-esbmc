@@ -1,0 +1,156 @@
+(console MAVLink colado pela autora em 2026-11-12T02:16Z = 22:16 de 11/11 local; firmware com as duas linhas de inicializacao em Roboclaw.hpp, compilado as 21:55 local; inicio da colagem cortado)
+l (NSH) NuttX-11.0.0
+nsh> param show RBCLW_*
+Symbols: x = used, + = saved, * = unsaved, l = locked
+x     RBCLW_ADDRESS [888,1396] : 128
+x     RBCLW_COUNTS_REV [889,1397] : 1200
+x     RBCLW_DIS1 [890,1398] : 127
+x     RBCLW_DIS2 [891,1399] : 127
+x     RBCLW_FAIL1 [892,1400] : -1
+x     RBCLW_FAIL2 [893,1401] : -1
+x     RBCLW_FUNC1 [894,1402] : 0
+x     RBCLW_FUNC2 [895,1403] : 0
+x     RBCLW_MAX1 [896,1404] : 254
+x     RBCLW_MAX2 [897,1405] : 254
+x     RBCLW_MIN1 [898,1406] : 0
+x     RBCLW_MIN2 [899,1407] : 0
+x     RBCLW_REV [900,1408] : 0
+x +   RBCLW_SER_CFG [901,1409] : 102
+
+ 1291/1940 parameters used.
+nsh> dmesg
+HW arch: PX4_FMU_V6XRT
+HW type: V6XRT
+HW FMUM ID: 0x000
+HW BASE ID: 0x000
+PX4 git-hash: 8be2590c1529517ccd54fbc09ae138402517baf4
+PX4 version: Release 0.0.0 (255)
+OS: NuttX
+OS version: Release 11.0.0 (184549631)
+OS git-hash: b0b49a210696dd0074dff9531fd1603afb0cc2e4
+Build datetime: Nov  1 2026 20:42:17
+Build uri: localhost
+Build variant: default
+Toolchain: GNU GCC, 13.2.1 20231009
+PX4GUID: 000900000000000000008292b37f1832580e
+MCU: i.MX RT1170 rB0, rev. 0
+INFO  [bsondump] DECODED_SIZE:5 SAVED_SIZE:-1
+
+INFO  [param] selected parameter default file /fs/mtd_params
+INFO  [param] importing from '/fs/mtd_params'
+INFO  [parameters] BSON document size 1388 bytes, decoded 1388 bytes (INT32:27, FLOAT:37)
+INFO  [param] selected parameter backup file /fs/microsd/parameters_backup.bson
+Board architecture defaults: /etc/init.d/rc.board_arch_defaults
+Board defaults: /etc/init.d/rc.board_defaults
+ifup can0...OK
+ifup can1...OK
+ifup can2...OK
+Loading airframe: /etc/init.d/airframes/4001_quad_x
+INFO  [dataman] data manager file '/fs/microsd/dataman' size is 128528 bytes
+Board sensors: /etc/init.d/rc.board_sensors
+icm42686p #0 on SPI bus 1 rotation 12
+bmi088_accel #0 on SPI bus 3 rotation 4
+bmi088_gyro #0 on SPI bus 3 rotation 4
+icm42688p #0 on SPI bus 2 rotation 6
+bmm150 #0 on I2C bus 3 address 0x10
+ERROR [SPI_I2C] ist8310: no instance started (no device on bus?)
+bmp388 #0 on I2C bus 3 address 0x77
+bmp388 #1 on I2C bus 2 (external) address 0x76
+ekf2 [523:237]
+INFO  [px4io] IO FW CRC match
+INFO  [dshot] No channels configured
+INFO  [dshot] Exiting
+INFO  [uavcan] Node ID 1, bitrate 1000000
+Board mavlink: /etc/init.d/rc.board_mavlink
+Starting Main GPS on /dev/ttyS1
+Starting Roboclaw Driver on /dev/ttyS5
+ERROR [roboclaw] ACK timeout
+ERROR [roboclaw] ACK timeout
+INFO  [roboclaw] Successfully connected
+Starting MAVLink on /dev/ttyS2
+INFO  [mavlink] mode: Normal, data rate: 1200 B/s on /dev/ttyS2 @ 38400B
+Starting MAVLink on ethernet
+INFO  [mavlink] mode: Normal, data rate: 100000 B/s on udp port 14550 remote port 14550
+WARN  [mavlink] no broadcasting address found
+INFO  [cdcacm_autostart] Starting CDC/ACM autostart
+INFO  [logger] logger started (mode=all)
+
+NuttShell (NSH) NuttX-11.0.0
+nsh> INFO  [logger] Max log file size: 1024 MiB
+INFO  [logger] Start file log (type: full)
+INFO  [logger] [logger] /fs/microsd/log/2026-11-12/02_15_13.ulg    
+INFO  [logger] Opened full log file: /fs/microsd/log/2026-11-12/02_15_13.ulg
+sercon: Registering CDC/ACM serial driver
+sercon: Successfully registered the CDC/ACM serial driver
+INFO  [cdcacm_autostart] Starting mavlink on /dev/ttyACM0 (SYS_USB_AUTO=2)
+INFO  [mavlink] mode: Onboard, data rate: 100000 B/s on /dev/ttyACM0 @ 2000000B
+INFO  [mavlink] Starting mavlink shell
+nsh> work_queue status
+
+Work Queue: 16 threads                          RATE        INTERVAL
+|__ 1) wq:rate_ctrl    
+|   |__ 1) control_allocator                808.9 Hz         1236 us
+|   |__ 2) mc_rate_control                  808.9 Hz         1236 us
+|   \__ 3) vehicle_angular_velocity         808.9 Hz         1236 us
+|__ 2) wq:SPI0         
+|   \__ 1) i2c_launcher                       1.0 Hz       997407 us (1000000 us)
+|__ 3) wq:SPI1         
+|   \__ 1) icm42686p                        808.4 Hz         1237 us
+|__ 4) wq:SPI2         
+|   \__ 1) icm42688p                        807.3 Hz         1239 us
+|__ 5) wq:SPI3         
+|   |__ 1) bmi088_accel                     799.6 Hz         1251 us (1250 us)
+|   \__ 2) bmi088_gyro                      665.6 Hz         1502 us
+|__ 6) wq:I2C0         
+|   \__ 1) i2c_launcher                       1.0 Hz       997884 us (1000000 us)
+|__ 7) wq:I2C2         
+|   \__ 1) bmp388                            23.1 Hz        43252 us (43300 us)
+|__ 8) wq:I2C3         
+|   |__ 1) bmm150                            20.1 Hz        49841 us (50000 us)
+|   \__ 2) bmp388                            23.1 Hz        43288 us (43300 us)
+|__ 9) wq:nav_and_controllers
+|   |__ 1) ekf2_selector                    297.1 Hz         3366 us
+|   |__ 2) flight_mode_manager               50.0 Hz        19995 us
+|   |__ 3) land_detector                    100.2 Hz         9983 us
+|   |__ 4) mc_att_control                   202.2 Hz         4945 us
+|   |__ 5) mc_hover_thrust_estimator        101.1 Hz         9888 us
+|   |__ 6) mc_pos_control                    99.9 Hz        10006 us
+|   |__ 7) sensors                          202.2 Hz         4945 us
+|   |__ 8) vehicle_acceleration             202.3 Hz         4942 us
+|   |__ 9) vehicle_air_data                  23.1 Hz        43265 us
+|   |__10) vehicle_gps_position               3.3 Hz       298702 us
+|   \__11) vehicle_magnetometer              27.9 Hz        35829 us
+|__ 10) wq:INS0         
+|   |__ 1) ekf2                             202.2 Hz         4945 us
+|   \__ 2) vehicle_imu                      202.3 Hz         4944 us
+|__ 11) wq:INS1         
+|   |__ 1) ekf2                             193.1 Hz         5179 us
+|   \__ 2) vehicle_imu                      263.5 Hz         3795 us
+|__ 12) wq:INS2         
+|   |__ 1) ekf2                             201.9 Hz         4952 us
+|   \__ 2) vehicle_imu                      202.0 Hz         4950 us
+|__ 13) wq:hp_default   
+|   |__ 1) battery_status                    99.9 Hz        10012 us
+|   |__ 2) board_adc                         99.8 Hz        10023 us (10000 us)
+|   |__ 3) gyro_fft                         394.9 Hz         2533 us
+|   |__ 4) manual_control                     5.0 Hz       199930 us
+|   |__ 5) mc_autotune_attitude_control     784.2 Hz         1275 us
+|   |__ 6) pwm_out                            3.4 Hz       296896 us (300000 us)
+|   |__ 7) rc_update                          0.0 Hz            0 us
+|   |__ 8) roboclaw                           3.4 Hz       296561 us (300000 us)
+|   |__ 9) safety_button                     30.3 Hz        33016 us (33000 us)
+|   \__10) tone_alarm                         0.4 Hz      2501000 us
+|__ 14) wq:uavcan       
+|   |__ 1) uavcan                           332.9 Hz         3004 us (3000 us)
+|   |__ 2) uavcan-actuators-esc               3.4 Hz       297002 us (300000 us)
+|   \__ 3) uavcan-actuators-servo             3.4 Hz       297024 us (300000 us)
+|__ 15) wq:ttyS4        
+|   \__ 1) px4io                             44.6 Hz        22422 us
+\__ 16) wq:lp_default   
+    |__ 1) cdcacm_autostart                   2.0 Hz       500085 us
+    |__ 2) gyro_calibration                  50.0 Hz        19995 us (20000 us)
+    |__ 3) load_mon                           2.0 Hz       495497 us (500000 us)
+    |__ 4) mag_bias_estimator                50.0 Hz        19989 us (20000 us)
+    |__ 5) parameters                         0.0 Hz            0 us
+    \__ 6) send_event                        30.0 Hz        33318 us (33333 us)
+nsh>

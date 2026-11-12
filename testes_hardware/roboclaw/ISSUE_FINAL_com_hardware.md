@@ -69,11 +69,9 @@ The emulator did not record any data byte above 127 during approximately four mi
 
 The serial captures and the ESP32 emulator sketch are available in the `hardware_pixhawk6xrt` directory in the repository linked above.
 
-One additional observation: to run the driver on this board, I had to value-initialize two members in `Roboclaw.hpp` (`_uart_fd_set{}` and `_uart_fd_timeout{}`). Without this initialization, the driver blocked `wq:hp_default` during startup.
+One additional observation: to run the driver on this board, I had to value-initialize two members in `Roboclaw.hpp` (`_uart_fd_set{}` and `_uart_fd_timeout{}`). Without this change, the driver printed nothing after `Starting Roboclaw Driver on /dev/ttyS5`, and `work_queue status` showed `wq:hp_default` starved in two separate boots: `battery_status` at 0.1 Hz (11–14 s intervals), `board_adc` at 0.2–0.3 Hz (expected 10 ms), `pwm_out` with 62–79 s intervals (expected 300 ms), and `roboclaw` at 0.0 Hz. The other work queues ran at their normal rates. With the two members initialized, the driver printed `Successfully connected` and `wq:hp_default` returned to normal (`battery_status` 99.9 Hz, `roboclaw` 3.4 Hz). The three console logs are in the same `hardware_pixhawk6xrt` directory.
 
-This change does not affect the output path. Based on the code, `Run()` calls `_mixing_output.update()` before `initializeUART()`. Therefore, the first `updateOutputs()` call can reach `select()` while `_uart_fd_set` and `_uart_fd_timeout` are still uninitialized (the object is allocated with `new`) and `_uart_fd` is still 0.
-
-I did not save a work-queue trace showing the blockage, so I consider this a code-based observation rather than a measured result.
+This change does not affect the output path. Based on the code, `Run()` calls `_mixing_output.update()` before `initializeUART()`. Therefore, the first `updateOutputs()` call can reach `select()` while `_uart_fd_set` and `_uart_fd_timeout` are still uninitialized (the object is allocated with `new`) and `_uart_fd` is still 0. I have not confirmed with a debugger that this is where the work queue blocks; the evidence is the before/after behaviour with only those two lines changed.
 
 ## Formal verification
 
