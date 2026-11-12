@@ -1,0 +1,9 @@
+(transcrito do print do terminal WSL da autora, 2026-11-12; comandos:
+ g++ -O0 -g -fsanitize=undefined,address -o replay replay.cpp ; ./replay 14 ; ./replay 16)
+cell_count=14 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=0.0000 (batmon nao preenche; esperado 0)
+replay.cpp:80:30: runtime error: index 14 out of bounds for type 'float [14]'
+cell_count=16 (voltage_cell_v tem 14 posicoes)
+max_cell_voltage_delta=0.0075 (rescrito depois do laco)
+full_charge_capacity_wh=3.7150 (batmon nao preenche; esperado 0)
