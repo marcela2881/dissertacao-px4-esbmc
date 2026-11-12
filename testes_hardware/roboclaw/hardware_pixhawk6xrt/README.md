@@ -71,6 +71,15 @@ terminação**. Contagens refeitas por script sobre o arquivo:
 Contadores do próprio emulador: de `com velocidade >127=406` (22:29:18) a
 `=3105` (22:31:33), sempre com `CRC ruim=0` e `cmd desconhecido=0`.
 
+## Foto da montagem
+
+`foto_montagem_pixhawk6xrt_esp32.jpg` (enviada pela autora, girada 180° para
+leitura): Pixhawk 6X RT alimentada pela USB, conector na porta TELEM2 e os
+fios até o ESP32, que aparece com a face dos componentes para baixo, de modo
+que a serigrafia dos pinos não fica visível. A correspondência dos fios
+(amarelo TX → GPIO16, azul RX → GPIO17, preto GND) é a descrita em
+"Configuração"; a foto mostra a montagem, mas não permite conferir os pinos.
+
 ## Limites desta evidência
 
 - O trecho começa com a terminação já ativa: a transição (dado ≤127 → 130) e as
