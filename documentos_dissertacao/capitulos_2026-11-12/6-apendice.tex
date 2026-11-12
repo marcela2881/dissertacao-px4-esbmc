@@ -22,24 +22,25 @@
 \label{apend:harness-gps}
 
 \corr{Este apêndice reproduz na íntegra o \textit{harness} de
-verificação do módulo GPS uBlox, \texttt{test\_gps\_driver.cpp}, desenvolvido
-conforme a metodologia descrita no Capítulo~\ref{cap:metodologia}. Trata-se do
-caso desenvolvido de ponta a ponta nesta dissertação: dele decorre o
-contraexemplo apresentado na Seção~\ref{sec:contraexemplo-gps}}\artigo{, e
-sobre ele foram feitas a verificação do \textit{patch} e a análise de
-alcançabilidade discutidas no Capítulo~\ref{cap:experimentos}.}
+verificação do módulo GPS uBlox, \texttt{test\_gps\_driver.cpp}, utilizado
+no estudo descrito no Capítulo~\ref{cap:metodologia}. Esse caso foi analisado
+em maior profundidade nesta dissertação: dele provém o contraexemplo apresentado
+na Seção~\ref{sec:contraexemplo-gps}.} \artigo{O mesmo caso também foi usado
+na avaliação do \textit{patch} e na análise de alcançabilidade discutidas no
+Capítulo~\ref{cap:experimentos}.}
 
-\corr{A reprodução integral, e não por fragmentos, permite ao leitor
-verificar diretamente três pontos que fragmentos não sustentam: a assinatura
-exata das funções sob verificação, as pré-condições impostas a cada teste, e
-quais construções pertencem ao driver original do PX4 e quais foram introduzidas
-pelo \textit{harness}.}
+\corr{A reprodução integral permite ao leitor examinar a implementação
+utilizada na verificação, as pré-condições de cada teste e as diferenças entre
+a adaptação incluída no \textit{harness} e o código do driver de produção. Essa
+distinção é necessária para interpretar corretamente o contraexemplo: o
+\textit{harness} preserva partes da lógica analisada, mas não reproduz
+integralmente as estruturas nem todas as condições do driver.}
 
-\corr{O arquivo define cinco funções de teste, selecionadas em
-\texttt{main()} por uma variável não-determinística. Cada uma impõe pré-condições
-distintas sobre o comprimento de entrada e sobre o estado inicial do buffer, o
-que explica por que um mesmo módulo admite contraexemplos com valores diferentes
-conforme o teste alcançado primeiro pelo verificador.}
+\corr{O arquivo define cinco funções de teste, das quais uma é selecionada
+em cada execução por meio de uma variável não determinística em
+\texttt{main()}. Cada teste estabelece pré-condições próprias para o tamanho
+da entrada e para o estado inicial do buffer. Assim, os valores concretos do
+contraexemplo dependem do teste selecionado e das escolhas feitas pelo solver.}
 
 \artigo{O arquivo tem 294 linhas (Tabela~\ref{tab:modulos}) e é reproduzido sem
 edição a partir do repositório de artefatos. O contraexemplo da
@@ -51,23 +52,25 @@ Tabela~\ref{tab:resultados} vem do teste selecionado por
 %% comentarios do harness viraram o paragrafo abaixo. O arquivo e reproduzido
 %% literalmente, por isso os comentarios nao foram editados; a divergencia e
 %% declarada no texto. Conferido contra gps.cpp e GpsDump.msg no commit 8be2590c15.
-\corr{Como o arquivo é reproduzido sem edição, seus comentários internos são os
-da versão de desenvolvimento e divergem, em três pontos, do que este texto
-afirma. Prevalece o texto. (i)~O cabeçalho cita a versão~1.16 e a linha~643 de
-\texttt{gps.cpp}; a verificação reportada refere-se ao commit
-\texttt{8be2590c15}, em que \texttt{GPS::dumpGpsData()} começa na linha~727.
-(ii)~Os comandos listados no rodapé do arquivo (\texttt{--unwind 8} e
-\texttt{--unwind 5}) são anteriores à campanha; os resultados desta dissertação
-foram obtidos com \texttt{--unwind 10 --no-unwinding-assertions
---overflow-check} (Seção~\ref{sec:config-experimental}). (iii)~Os comentários
-dizem que a função foi extraída ``exatamente'' do driver, mas o \textit{harness}
-é uma transcrição adaptada: a capacidade do buffer é 200~bytes, e não os 79 de
-\texttt{uint8[79] data} em \texttt{GpsDump.msg}; a função recebe o buffer e o
-modo ativo como parâmetros adicionais, em vez de usar os membros da classe; e o
-campo \texttt{device\_id} da mensagem real não está na estrutura. A lógica do
-laço, da guarda de espaço, do \texttt{memcpy} e da operação de bit é a do
-driver. A diferença de capacidade é a mais relevante para a interpretação do
-contraexemplo e é discutida na Seção~\ref{subsec:gps-inducao}.}
+\corr{Como o arquivo é reproduzido sem edição, seus comentários internos
+foram mantidos, embora contenham descrições que não correspondem integralmente
+à versão do driver analisada. Para evitar ambiguidade, registram-se três
+diferenças verificadas em relação ao commit \texttt{8be2590c15}. (i)~O
+cabeçalho do \textit{harness} cita a versão~1.16 e a linha~643 de
+\texttt{gps.cpp}; nesse commit, \texttt{GPS::dumpGpsData()} começa na
+linha~727. (ii)~Os comandos indicados no rodapé do arquivo
+(\texttt{--unwind 8} e \texttt{--unwind 5}) não são os usados na campanha
+reportada nesta dissertação, que empregou
+\texttt{--unwind 10 --no-unwinding-assertions --overflow-check}
+(Seção~\ref{sec:config-experimental}). (iii)~A função apresentada é uma
+adaptação, e não uma extração literal: o \textit{harness} usa um buffer de
+200~bytes, enquanto a mensagem \texttt{GpsDump.msg} declara
+\texttt{uint8[79] data}; além disso, o buffer e o modo ativo são passados como
+parâmetros, e a estrutura modelada não inclui o campo
+\texttt{device\_id} da mensagem. Portanto, a correspondência com o driver é
+lógica e parcial. Em particular, a diferença de capacidade do buffer limita o
+alcance das conclusões que podem ser extraídas do contraexemplo; essa questão é
+retomada na Seção~\ref{subsec:gps-inducao}.}
 
 \begin{lstlisting}[
   caption={\artigo{\textit{Harness} \texttt{test\_gps\_driver.cpp} (literal)}},
@@ -379,17 +382,32 @@ int main() {
  */
 \end{lstlisting}
 
+\corr{A leitura do código também exige duas ressalvas. Primeiro, o teste
+\texttt{test\_gps\_real\_loop\_termination()} termina com
+\texttt{assert(true)}; essa asserção é tautológica e, isoladamente, não
+constitui uma propriedade formal de terminação. Segundo, as asserções dos
+outros testes verificam condições ao final da execução, mas não substituem a
+verificação direta de todas as operações de memória realizadas durante o
+caminho. O contraexemplo reproduzido a seguir é relevante porque o ESBMC acusa
+especificamente uma desreferência fora dos limites no \texttt{memcpy}. Essas
+limitações são consideradas na interpretação dos resultados e impedem que o
+\textit{harness} seja descrito como uma cópia integral ou uma validação completa
+do driver de produção.}
+
 \chapter{Contraexemplos Gerados pelo ESBMC}
 \label{apend:contraexemplos}
 
 %% Prof. Lucas (qualificacao): "Poderias mostrar o contraexemplo gerado pelo ESBMC
 %% no apendice." -- ATENDIDO: apendice adicionado.
 
-Este apêndice apresenta os contraexemplos gerados pelo ESBMC nos módulos IMU
-BMI088 e GPS uBlox. Conforme discutido no Capítulo~\ref{cap:experimentos}, apenas
-o do GPS uBlox sobreviveu à triagem como violação alcançável no modelo; os do
-BMI088 são reproduzidos aqui por completude documental, ilustrando a etapa de
-triagem da metodologia. \corr{Os contraexemplos da segunda campanha (RoboClaw,
+Este apêndice apresenta contraexemplos gerados pelo ESBMC nos módulos IMU
+BMI088 e GPS uBlox. Conforme discutido no Capítulo~\ref{cap:experimentos},
+apenas o contraexemplo do GPS uBlox permaneceu como violação alcançável no
+\textit{harness} correspondente. Isso não significa, por si só, que o estado
+seja alcançável no driver de produção: a análise de alcançabilidade descrita na
+Seção~\ref{subsec:gps-inducao} concluiu que ele não é alcançável nesse código.
+Os traços do BMI088 são apresentados para documentar a etapa de triagem; um foi
+classificado como falso positivo e o outro como especificação disputada. \corr{Os contraexemplos da segunda campanha (RoboClaw,
 batmon e candidatos adicionais) não são reproduzidos aqui; os registros
 completos estão no repositório de artefatos, nas pastas indicadas na
 Seção~\ref{sec:segunda-campanha}.}
@@ -419,13 +437,17 @@ de cada módulo.}
 \section{Contraexemplo 1 --- Temperatura fora da faixa operacional (BMI088)}
 \label{sec:contraexemplo-bmi088-temp}
 
-Violação da propriedade $\phi_{\text{temp}}$ (Equação~\ref{eq:prop_temp}): a
-temperatura calculada de $86{,}25\,^{\circ}$C excede o limite superior de
-$85\,^{\circ}$C de operação definido no \textit{datasheet} do
-BMI088~\cite{Bosch2021}. \corr{A conversão especificada pelo
-fabricante é $T = \texttt{Temp\_int11} \times 0{,}125 + 23$, de modo que o valor
-\texttt{Temp\_uint11 = 506} produz exatamente
-$506 \times 0{,}125 + 23 = 86{,}25\,^{\circ}$C.}
+O traço viola a propriedade $\phi_{\text{temp}}$
+(Equação~\ref{eq:prop_temp}): a temperatura calculada é
+$86{,}25\,^{\circ}$C, acima do limite superior de
+$85\,^{\circ}$C indicado para a faixa operacional no \textit{datasheet} do
+BMI088~\cite{Bosch2021}. \corr{Pela conversão indicada pelo fabricante,
+$T = \texttt{Temp\_int11} \times 0{,}125 + 23$, o valor
+\texttt{Temp\_uint11 = 506} resulta em
+$506 \times 0{,}125 + 23 = 86{,}25\,^{\circ}$C. O resultado demonstra que
+a entrada considerada pelo \textit{harness} ultrapassa o limite definido; sua
+interpretação como defeito do driver depende da validade dessa entrada no
+contexto de operação do sensor.}
 
 \begin{lstlisting}[
   caption={\corr{Contraexemplo ESBMC para a violação da faixa de temperatura no BMI088} \artigo{(trecho literal do log, ESBMC~v8.1.0)}},
@@ -473,28 +495,28 @@ Violated property:
 VERIFICATION FAILED
 \end{lstlisting}
 
-\corr{A ausência de validação de faixa antes da aritmética de
-compensação térmica caracteriza} \artigo{CWE-1284 (\textit{Improper Validation of
-Specified Quantity in Input}), subclasse de CWE-20 (\textit{Improper Input
-Validation})}\corr{.}
-\corr{
-Conforme discutido na Seção~\ref{subsec:imu-temperatura}, esta observação foi
-reportada à comunidade PX4 e recusada pelos mantenedores, que objetaram à
-abordagem de saturação proposta no PR~\#27575; permanece registrada como nota de
-projeto, sem consequência de segurança confirmada e sem remediação aceita.}
+\corr{O resultado foi inicialmente associado à validação da faixa de entrada
+e relacionado às categorias CWE-1284 (\textit{Improper Validation of Specified
+Quantity in Input}) e CWE-20 (\textit{Improper Input Validation}). Essa
+associação deve ser entendida como classificação do cenário investigado, não
+como confirmação de uma vulnerabilidade. Conforme discutido na
+Seção~\ref{subsec:imu-temperatura}, a observação foi reportada à comunidade
+PX4, mas a abordagem de saturação proposta no PR~\#27575 não foi aceita pelos
+mantenedores. Assim, o caso permanece como especificação disputada, sem defeito
+de segurança confirmado nem remediação aceita.}
 
 \section{Contraexemplo 2 --- Contador FIFO excede capacidade do buffer (BMI088)}
 \label{sec:contraexemplo-bmi088-fifo}
 
-\corr{Violação da propriedade que limita o contador do FIFO ao tamanho
-do buffer físico:} \artigo{\texttt{count = 9088}} \corr{bytes excede em mais de oito vezes o
-limite de \texttt{FIFO\_SIZE = 1.024} bytes. \textbf{Este candidato foi refutado
-como falso positivo} \artigo{na conferência contra o código do} driver de produção não
-instrumentado (Seção~\ref{subsec:imu-fifo}): o driver liberado protege a leitura
-em três níveis, e o valor} \artigo{$9.088 \geq 1.024$} \corr{dispara a primeira guarda de
-reinicialização, de modo que nenhum acesso fora dos limites é alcançável. O
-candidato surgiu porque o \textit{harness} omitia essas guardas, e foi capturado
-pela etapa obrigatória de} \artigo{conferência contra o código de produção}\corr{.}
+\corr{O traço apresenta \texttt{count = 9088} bytes, valor superior ao
+limite de \texttt{FIFO\_SIZE = 1.024} bytes e, portanto, uma violação da
+propriedade verificada no \textit{harness}. Na conferência com o driver de
+produção não instrumentado (Seção~\ref{subsec:imu-fifo}), porém, o candidato foi
+classificado como falso positivo: o código de produção contém três níveis de
+proteção, e esse valor aciona a primeira guarda de reinicialização antes do
+acesso ao buffer. O resultado do ESBMC decorre da ausência dessas guardas no
+\textit{harness}; não demonstra um acesso fora dos limites alcançável no driver
+de produção.}
 
 \artigo{O traço é o das três execuções da Tabela~\ref{tab:resultados} para o
 IMU BMI088 (\texttt{test\_choice = 2}): é deste candidato, e não do de
@@ -545,25 +567,31 @@ VERIFICATION FAILED
 \section[Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)]{\corr{Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)}}
 \label{sec:contraexemplo-gps}
 
-Violação da propriedade $\phi_{\text{gps}}$ (Equação~\ref{eq:prop_gps}). A
-verificação de espaço disponível em \texttt{dumpGpsData()} \artigo{subtrai o nível
-de preenchimento da capacidade}:
+O traço viola a propriedade $\phi_{\text{gps}}$
+(Equação~\ref{eq:prop_gps}) no \textit{harness}. A verificação de espaço
+modelada em \texttt{dumpGpsData()} calcula a capacidade restante por meio da
+subtração entre a capacidade do buffer e o nível de preenchimento:
 
 \begin{lstlisting}[language=C,basicstyle=\ttfamily\scriptsize,frame=none,numbers=none]
 if (write_len > GPS_DUMP_DATA_SIZE - dump_data->len)
 \end{lstlisting}
 
-Quando \texttt{dump\_data->len} excede \texttt{GPS\_DUMP\_DATA\_SIZE}
-($=200$), \artigo{a diferença, calculada em \texttt{int}, é negativa ($-7$ para
-\texttt{len = 207}) e, convertida para \texttt{size\_t} na comparação com
-\texttt{write\_len}, torna-se um valor sem sinal muito grande}, tornando a guarda permanentemente falsa. O \texttt{memcpy} subsequente
-escreve além dos limites do buffer alocado.
+No estado encontrado pelo solver, \texttt{dump\_data->len = 207}, enquanto
+\texttt{GPS\_DUMP\_DATA\_SIZE = 200}. A subtração é promovida para
+\texttt{int} e resulta em $-7$; na comparação com \texttt{write\_len}, que é
+do tipo \texttt{size\_t}, o valor negativo é convertido para um inteiro sem
+sinal muito grande. Com isso, a condição da guarda não limita
+\texttt{write\_len}, e o \texttt{memcpy} tenta escrever a partir da posição
+207 do buffer modelado, ultrapassando seus 200 bytes. Esse comportamento é
+observado no \textit{harness}; a análise de alcançabilidade no driver de
+produção é tratada separadamente na Seção~\ref{subsec:gps-inducao}.
 
 \corr{O ESBMC reporta uma única propriedade violada: a falha de
 \artigo{desreferência} no \texttt{memcpy}. O \textit{underflow} aritmético é a causa raiz,
 e não uma segunda violação independente --- a ferramenta encerra na primeira
-violação encontrada. A classificação CWE-191 (\textit{Integer Underflow})
-$\rightarrow$~CWE-119 (\textit{Memory Buffer Bounds Violation}) reflete essa
+violação encontrada. A classificação CWE-191 (\textit{Integer Underflow (Wrap or Wraparound)})
+$\rightarrow$~CWE-119 (\textit{Improper Restriction of Operations within the
+Bounds of a Memory Buffer}) reflete essa
 relação de causa e efeito.}
 
 \begin{lstlisting}[
@@ -609,20 +637,22 @@ Violated property:
 VERIFICATION FAILED
 \end{lstlisting}
 
-\corr{O contraexemplo foi obtido com o solver Boolector~3.2.4.
-Conforme registrado na Seção~\ref{sec:ameacas-validade}, esta é a única configuração que
-descarrega a violação dentro do limite de tempo estabelecido, o que caracteriza o
-achado como sensível ao solver --- uma das lições metodológicas desta pesquisa.}
-\artigo{O estado violador (\texttt{len = 207}) é alcançável no modelo, mas não no
-driver de produção, conforme a prova indutiva da
-Seção~\ref{subsec:gps-inducao}.} \corr{O
-\textit{harness} local \texttt{dump\_buffer} corresponde ao buffer
-\texttt{dump\_data} repassado ao driver.}
+\corr{O contraexemplo foi obtido com o solver Boolector~3.2.4. Conforme
+registrado na Seção~\ref{sec:ameacas-validade}, essa foi a única configuração
+que encontrou a violação dentro do limite de tempo estabelecido. Esse resultado
+indica sensibilidade à configuração do verificador e do solver; não significa
+que a violação seja exclusiva desse solver.} \artigo{O estado
+\texttt{len = 207} é alcançável no modelo do \textit{harness}, mas não no
+driver de produção, conforme a análise indutiva apresentada na
+Seção~\ref{subsec:gps-inducao}.} \corr{A variável local
+\texttt{dump\_buffer} representa, no modelo, a estrutura usada como destino
+do \texttt{memcpy}; ela não deve ser interpretada como reprodução exata da
+estrutura publicada pelo driver.}
 
-Em plataformas Pixhawk sem unidade de gerenciamento de memória, uma escrita fora
-dos limites pode corromper memória adjacente; sob o modelo de memória plana do
-NuttX, não necessariamente gera uma falha limpa. O impacto preciso depende do
-arranjo definido em tempo de ligação\artigo{, que não foi analisado nesta
-dissertação; quanto à alcançabilidade, o estado violador não ocorre no driver de
-produção (Seção~\ref{subsec:gps-inducao}).}
-
+\corr{Embora uma escrita fora dos limites possa, em termos gerais, corromper
+memória adjacente, este experimento não permite afirmar que tal efeito ocorra em
+uma plataforma Pixhawk. O \textit{harness} utiliza uma estrutura adaptada e um
+buffer de 200~bytes, e a análise de alcançabilidade não encontrou o estado
+\texttt{len = 207} no driver de produção. Portanto, o resultado deve ser
+interpretado como um contraexemplo do modelo analisado, e não como evidência de
+corrupção de memória em execução real.}
