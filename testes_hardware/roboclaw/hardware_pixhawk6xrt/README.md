@@ -102,9 +102,39 @@ no início e no fim da colagem foram omitidas).
 Pendente neste controle: a captura completa, com a transição e a linha
 `[resumo v4]` (contador `>127`).
 
+## Antes e depois da correção (2026-11-12, 23:53)
+
+Mesma montagem, mesmo parâmetro do ensaio original (`RBCLW_FAIL1 = 257`,
+conferido no console), firmware recompilado com `../correcao_roboclaw.patch`
+aplicado sobre o mesmo commit (mantidas as duas linhas de inicialização do
+`Roboclaw.hpp`). Arquivo gravado: `px4_roboclaw_CORRIGIDO.px4`
+(md5 `69170b2af0299125a1fc3440097c7818`; o firmware anterior,
+`px4_roboclaw_fix.px4`, tem md5 `53c54c1d34b1d02fd108726a1d62b0c5`).
+
+Com `actuator_armed: armed: True, termination: True`, a placa enviou
+
+    80 00 7F B4 22
+
+comando 0, **dado `0x7F` = 127**, CRC `B422`. Trecho transcrito da tela do
+Monitor em `roboclaw_esp32_captura_257_corrigido_trecho.txt` (5 pacotes).
+
+| Firmware | `RBCLW_FAIL1` | Pacote na terminação | Dado |
+|---|---|---|---|
+| original (+2 linhas de inicialização) | 257 | `80 00 82 8A 90` | 130, fora da faixa |
+| com `correcao_roboclaw.patch` | 257 | `80 00 7F B4 22` | 127, saturado no máximo válido |
+
+Na mesma sessão, minutos antes (≈23:40), a placa ainda estava com o firmware
+anterior por engano e, com o mesmo parâmetro, voltou a enviar `80 00 82 8A 90`
+— uma segunda reprodução do defeito, em outra sessão de bancada.
+
+Pendente: captura completa do Monitor com a transição e a linha `[resumo v4]`
+(contador `>127`), `ver all` da placa e `diff_firmware_corrigido.patch`
+(só na máquina da autora). A correção do Bug 2 (`write()` com retorno
+negativo) está no mesmo patch, mas este ensaio não a exercita.
+
 ## Ressalva sobre os ACKs
 
-Nas duas execuções o `dmesg` da placa registra `ACK timeout` e
+Em todas as execuções o `dmesg` da placa registra `ACK timeout` e
 `Error reading encoders`, e o intervalo entre pacotes (~12 ms) coincide com o
 tempo de espera do driver. O emulador envia as respostas, mas não está
 confirmado que a placa as aceita (fio de retorno ou tempo de resposta). Isso
