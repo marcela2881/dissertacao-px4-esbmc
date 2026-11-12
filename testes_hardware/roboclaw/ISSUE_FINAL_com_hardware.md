@@ -1,3 +1,5 @@
+> **ATENÇÃO (2026-11-12): não postar como está.** O driver foi reescrito no `main` em 2026-10-28 (PR #29473) e os defeitos descritos aqui não ocorrem mais lá. Ver `ESTADO_UPSTREAM_2026-11-12.md`.
+
 # RoboClaw: drive commands can send a data byte above 127, and write() errors go undetected
 
 ## Describe the bug
