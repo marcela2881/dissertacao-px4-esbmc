@@ -243,7 +243,7 @@ Tabela~\ref{tab:modulos}.}
 
 \begin{table}[H]
 \centering
-\caption{Módulos verificados: tamanho do alvo, tamanho do harness, localização
+\caption[Módulos verificados na primeira campanha]{Módulos verificados: tamanho do alvo, tamanho do harness, localização
 no código-fonte do PX4 e classe de entrada exercitada}
 \label{tab:modulos}
 \footnotesize
@@ -408,9 +408,7 @@ campanha. A Figura~\ref{fig:visao-resultados} resume desfechos e tempos.}
   \draw[fill=palPaper, draw=palEdgeDark, dashed] (7.2,-6.37) rectangle (7.55,-6.17); \node[anchor=west, font=\scriptsize] at (7.6,-6.27) {contraexemplo triado};
   \node[font=\scriptsize, anchor=north] at (4.50,-5.27) {tempo do procedimento de decisão (s, escala logarítmica)};
 \end{tikzpicture}
-\caption{\corr{Visão geral da primeira campanha: desfecho e tempo do procedimento de
-decisão (mediana de três execuções) por módulo, em ordem decrescente de tempo.
-Valores da Tabela~\ref{tab:resultados}. Elaborado pela autora.}}
+\caption[Desfecho e tempo de decisão por módulo (primeira campanha)]{\corr{Desfecho e tempo do procedimento de decisão por módulo na primeira campanha (mediana de três execuções). Elaborado pela autora.}}
 \label{fig:visao-resultados}
 \end{figure}
 
@@ -582,11 +580,7 @@ Figura~\ref{fig:ce-imu-temp} reproduz a saída do verificador.}
     \textcolor{ceCinza}{ESBMC 8.1.0 + Boolector 3.2.4 -{}- log: resultado\_temperatura\_8.1.log}\\
     \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26865 (fechada) / PR \#27575 (fechado)}
     \end{tcolorbox}
-    \caption{\corr{Reprodução}\artigo{, montada a partir do log do ESBMC~v8.1.0
-    com Boolector~3.2.4,} \corr{da saída do ESBMC:
-    temperatura de $86{,}25\,^\circ$C acima do limite de $85\,^\circ$C, por
-    ausência de validação de faixa de entrada} \artigo{(CWE-1284)}\corr{. O traço literal consta
-    do Apêndice~\ref{apend:contraexemplos} e do repositório de artefatos.}}
+    \caption[Contraexemplo de temperatura do BMI088 (saída do ESBMC)]{\corr{Saída do ESBMC para o contraexemplo de temperatura do BMI088, montada a partir do log (ESBMC~v8.1.0, Boolector~3.2.4).}}
     \label{fig:ce-imu-temp}
 \end{figure}
 
@@ -679,7 +673,9 @@ Weakness Enumeration}, cuja entrada CWE-191 intitula-se \textit{Integer Underflo
 (Wrap or Wraparound)} e cobre exatamente esse caso, de modo a preservar a
 correspondência entre o texto, a classificação empregada e os relatórios
 submetidos à comunidade.}} \corr{A Figura~\ref{fig:ce-gps} reproduz a saída do
-verificador para esse contraexemplo.}
+verificador para esse contraexemplo.} \corr{O \texttt{dump\_buffer} local do \textit{harness}
+corresponde ao buffer \texttt{dump\_data} passado ao driver, e o traço literal
+consta do Apêndice~\ref{apend:contraexemplos}.}
 
 \begin{figure}[H]
     \centering
@@ -704,14 +700,7 @@ verificador para esse contraexemplo.}
     \textcolor{ceCinza}{ESBMC 8.1.0 + Boolector 3.2.4 -{}- log: medianas\_logs/GPS\_run1.log (igual em run2 e run3)}\\
     \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26866 / PR \#27576}
     \end{tcolorbox}
-    \caption{\corr{Reprodução}\artigo{, montada a partir do log do ESBMC~v8.1.0
-    com Boolector~3.2.4,} \corr{da saída do ESBMC:
-    \textit{underflow} sem sinal em \texttt{dumpGpsData()} propagando-se para
-    \texttt{memcpy} fora dos limites (no \textit{harness}, CWE-195 $\rightarrow$
-CWE-119; ver texto). O
-    \texttt{dump\_buffer} local do harness é o buffer \texttt{dump\_data}
-    passado ao driver. O traço literal consta do
-    Apêndice~\ref{apend:contraexemplos} e do repositório de artefatos.}}
+    \caption[Contraexemplo do GPS uBlox (saída do ESBMC)]{\corr{Saída do ESBMC para o contraexemplo do GPS uBlox, montada a partir do log (ESBMC~v8.1.0, Boolector~3.2.4).}}
     \label{fig:ce-gps}
 \end{figure}
 

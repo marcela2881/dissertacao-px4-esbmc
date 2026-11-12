@@ -56,7 +56,14 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \section{Visão Geral da Abordagem}
 \label{sec:visao-geral}
 
-\corr{A Figura~\ref{fig:metodologia-visao-geral} sintetiza as oito etapas da metodologia e indica como elas foram aplicadas nas duas campanhas. O fluxo destaca a conferência com o código de produção, necessária para distinguir violações reproduzíveis de resultados decorrentes das limitações do modelo.}
+\corr{A Figura~\ref{fig:metodologia-visao-geral} sintetiza as oito etapas da metodologia e indica como elas foram aplicadas nas duas campanhas. O fluxo destaca a conferência com o código de produção, necessária para distinguir violações reproduzíveis de resultados decorrentes das limitações do modelo.} \corr{As
+etapas~(i) e~(iv)--(vi) seguem o fluxo de Sousa et al.~\cite{Sousa2026}; as
+etapas~(ii) e~(iii) são específicas de \textit{firmware}, e as etapas~(vii)
+e~(viii) são acréscimos deste trabalho. A conferência (etapa~v) é feita por
+leitura do código na primeira campanha e por \textit{replay} do código real sob
+sanitizadores na segunda. Apenas defeitos reproduzidos e violações alcançáveis
+no modelo seguem para o reporte~(vi); falsos positivos e resultados sem violação
+encerram o fluxo do módulo.}
 
 %% LC 03 (resolvido 19/10/2026): seta "sem violacao" -> reporte removida.
 \begin{figure}[!tb]
@@ -117,16 +124,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
   \node[conf, text width=3mm, minimum height=3mm, right=5mm of t2] (l3) {};
   \node[right=1mm of l3, font=\scriptsize, anchor=west] {conferência (1.\textsuperscript{a} e 2.\textsuperscript{a} campanhas)};
 \end{tikzpicture}}
-\caption{Metodologia de verificação em oito etapas, aplicada em duas campanhas.
-As etapas~(i) e~(iv)--(vi) seguem o fluxo de Sousa et al.~\cite{Sousa2026}; as
-etapas~(ii) e~(iii) são específicas de \textit{firmware} e as etapas~(vii)
-e~(viii) são acréscimos deste trabalho. A conferência contra o código de
-produção (etapa~v) é feita por leitura do código na primeira campanha e por
-\textit{replay} do código real sob sanitizadores (ASan/UBSan) na segunda. Apenas
-defeitos reproduzidos e violações alcançáveis no modelo (VAM) seguem para o
-reporte~(vi), que depende de revisão; falsos positivos e resultados sem violação
-encerram o fluxo do módulo. Os desfechos usam a escala do
-Capítulo~\ref{cap:introducao}. Elaborado pela autora.}
+\caption[Metodologia de verificação em oito etapas]{Metodologia de verificação em oito etapas, aplicada em duas campanhas. Elaborado pela autora.}
 \label{fig:metodologia-visao-geral}
 \end{figure}
 
@@ -246,7 +244,7 @@ contra o código de produção da etapa~(v).}
 
 \begin{table}[!htb]
 \centering
-\caption{\corr{Principais pré-condições dos \textit{harnesses} da primeira campanha e sua justificativa}}
+\caption[Pré-condições dos \textit{harnesses} da primeira campanha]{\corr{Principais pré-condições dos \textit{harnesses} da primeira campanha e sua justificativa}}
 \label{tab:hipoteses-harness}
 \footnotesize
 \begin{tabular}{|p{2.3cm}|p{5.6cm}|p{6.0cm}|}
@@ -773,10 +771,7 @@ inserem.
       \node[nver, text width=4mm, minimum height=4mm, right=6mm of t1] (l2) {};
       \node[right=1mm of l2, anchor=west, font=\scriptsize] {módulo não verificado};
     \end{tikzpicture}}
-    \caption{Organização modular do PX4 Autopilot e interação entre módulos
-    por meio do middleware uORB, com destaque (no tom mais escuro da paleta) para os doze módulos verificados
-    \corr{na primeira campanha}. Elaborado pela autora com base
-    em~\cite{PX4_Documentation}.}
+    \caption[Organização modular do PX4 Autopilot]{Organização modular do PX4 Autopilot, com destaque para os doze módulos da primeira campanha. Elaborado pela autora com base em~\cite{PX4_Documentation}.}
     \label{fig:px4-modular}
 \end{figure}
 
@@ -1080,7 +1075,7 @@ customizadas deste trabalho.}
 %% LC 26 (resolvido 19/10/2026): Battery Monitor e Barometer acrescentados.
 \begin{table}[!htb]
 \centering
-\caption{\revisao{Proveniência das propriedades customizadas verificadas} \corr{(primeira campanha)}}
+\caption[Proveniência das propriedades customizadas (primeira campanha)]{\revisao{Proveniência das propriedades customizadas verificadas} \corr{(primeira campanha)}}
 \label{tab:proveniencia}
 \footnotesize
 \begin{tabular}{|p{3.0cm}|p{2.2cm}|p{2.5cm}|p{6.0cm}|}
@@ -1321,7 +1316,7 @@ com a correção aplicada e o parâmetro de volta em 257, o byte também fica em
 
 \begin{table}[htb]
 \centering
-\caption{\corr{RoboClaw: byte de dados observado na serial da Pixhawk~6X~RT durante a terminação}}
+\caption[RoboClaw: byte de dados observado na Pixhawk~6X~RT]{\corr{RoboClaw: byte de dados observado na serial da Pixhawk~6X~RT durante a terminação}}
 \label{tab:roboclaw-hardware}
 \begin{tabular}{llll}
 \hline

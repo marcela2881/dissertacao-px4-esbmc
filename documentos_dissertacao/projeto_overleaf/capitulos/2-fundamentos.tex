@@ -302,12 +302,7 @@ $k$~\cite{Menezes2024}.
     \draw[->] (smt.east) -- ++(4mm,0) |- (sa.west);
     \draw[->] (smt.east) -- ++(4mm,0) |- (un.west);
   \end{tikzpicture}}
-  \caption{Pipeline de verificação do ESBMC: o código-fonte é processado pelos
-           \textit{front-ends} correspondentes, transformado em programa GOTO e submetido
-           à execução simbólica para geração das condições de verificação, que
-           são resolvidas por um solver SMT: SAT indica um contraexemplo
-           (violação no modelo); UNSAT, que a propriedade vale até o limite $k$.
-           Elaborado pela autora com base em~\cite{ESBMC_GitHub}.}
+  \caption[Pipeline de verificação do ESBMC]{Pipeline de verificação do ESBMC, do código-fonte à resposta do solver SMT. Elaborado pela autora com base em~\cite{ESBMC_GitHub}.}
   \label{fig:esbmc_pipeline}
 \end{figure}
 
@@ -381,7 +376,9 @@ manutenção~\cite{PX4_Documentation}. Os principais subsistemas incluem os
 estado por filtros de Kalman estendidos, os controladores de atitude e posição, a
 navegação com planejamento de trajetória e os mecanismos de \textit{failsafe},
 além da interface de comunicação MAVLink~\cite{PX4_Documentation}. A
-Figura~\ref{fig:px4_arquitetura} resume essa organização.
+Figura~\ref{fig:px4_arquitetura} resume essa organização. A figura é ilustrativa: destaca
+exemplos de módulos verificados neste trabalho, e não a totalidade da amostra,
+que consta do Capítulo~\ref{cap:metodologia}.
 
 \begin{figure}[ht]
   \centering
@@ -435,15 +432,7 @@ Figura~\ref{fig:px4_arquitetura} resume essa organização.
     \node[verif, text width=5.2cm, minimum height=7mm, below=26mm of uorb] (leg)
       {\textbf{Exemplos de módulos verificados}};
   \end{tikzpicture}}
-  \caption{Arquitetura de comunicação do PX4 Autopilot segundo o padrão
-    \textit{publish-subscribe}: \textit{drivers} de sensores (IMU BMI088, GPS uBlox)
-    e módulos de entrada e telemetria (Expo RC, MAVLink) publicam e assinam tópicos
-    por meio do \textit{middleware} uORB. Com realce (tom mais escuro e borda mais
-    espessa), exemplos de módulos verificados neste trabalho; a figura é
-    ilustrativa e não representa a
-    totalidade dos módulos analisados (a amostra completa consta do
-    Capítulo~\ref{cap:metodologia}). Elaborado pela autora com base
-    em~\cite{PX4_Documentation}.}
+  \caption[Arquitetura de comunicação do PX4 Autopilot]{Arquitetura de comunicação do PX4 Autopilot segundo o padrão \textit{publish-subscribe}, com exemplos de módulos verificados em realce. Elaborado pela autora com base em~\cite{PX4_Documentation}.}
   \label{fig:px4_arquitetura}
 \end{figure}
 
