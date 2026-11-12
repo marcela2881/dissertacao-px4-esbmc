@@ -154,8 +154,16 @@ Na mesma sessão, minutos antes (≈23:40), a placa ainda estava com o firmware
 anterior por engano e, com o mesmo parâmetro, voltou a enviar `80 00 82 8A 90`
 — uma segunda reprodução do defeito, em outra sessão de bancada.
 
-Pendente: captura completa do Monitor com a transição e a linha `[resumo v4]`
-(contador `>127`), `ver all` da placa e `diff_firmware_corrigido.patch`
+Captura completa em `roboclaw_esp32_captura_257_corrigido.txt` (15 827 linhas,
+23:53:17–23:57:40, a última cortada na cópia): **5267 pacotes
+`80 00 7F B4 22` e nenhum outro pacote de comando 0 ou 1**. O contador do
+emulador fica em `>127=0` nas 88 linhas de resumo, de 7007 a 17 444 pacotes
+de drive válidos. Há `CRC ruim=1`, constante do primeiro ao último resumo:
+ocorreu antes do início da captura, no momento em que o fio de dados foi
+reencaixado com a placa já transmitindo. A captura começa com a terminação
+já ativa, então não contém a transição a partir do repouso.
+
+Pendente: `ver all` da placa e `diff_firmware_corrigido.patch`
 (só na máquina da autora). A correção do Bug 2 (`write()` com retorno
 negativo) está no mesmo patch, mas este ensaio não a exercita.
 
