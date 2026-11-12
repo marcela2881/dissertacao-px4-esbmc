@@ -1,6 +1,9 @@
 # Novo achado: batmon, número de células × `voltage_cell_v[14]`
 
-Conferido em 13/10/2026 contra o PX4 `main` c9b9e4e25e. **Ainda não reportado. Não publicar sem o Prof. Lucas.**
+Conferido em 13/10/2026 contra o PX4 `main` c9b9e4e25e e reconferido em 12/11/2026 contra o `main` de 11/11 (8e94784e1dc0): sem alteração no driver nem na mensagem.
+
+**Reportado pela autora em 12/11/2026:** https://github.com/PX4/PX4-Autopilot/issues/29787
+(texto publicado: versão reescrita pela autora, com o print do replay da máquina dela; `ISSUE_FINAL_formulario.md` é a versão anterior, não publicada nessa forma).
 
 ## O defeito
 
