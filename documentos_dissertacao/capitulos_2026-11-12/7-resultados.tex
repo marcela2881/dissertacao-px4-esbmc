@@ -1,0 +1,1293 @@
+\chapter{Experimentos e Resultados}
+\label{cap:experimentos}
+\label{cap:resultados}
+
+\lc{Sem baseline: executar um analisador estático ou os testes existentes nestes módulos.}
+
+Este capítulo apresenta a avaliação empírica da metodologia descrita no
+Capítulo~\ref{cap:metodologia}, aplicada a 12 módulos do PX4 Autopilot
+\artigo{(ramo \textit{main}, \textit{commit}~\texttt{8be2590c15})}.
+\corr{As Seções~\ref{sec:config-experimental} a~\ref{sec:severidade} tratam
+dessa primeira campanha; os resultados da segunda, com dez módulos
+complementares e a validação em bancada, estão na
+Seção~\ref{sec:resultados-segunda-campanha}.}
+
+\revisao{O resultado principal da campanha é a evidência limitada em
+nível de modelo: dez dos doze módulos, cobrindo as principais classes de
+entrada não confiável, verificam-se livres de violações de segurança de memória
+e de \textit{overflow}} \corr{das classes habilitadas, nos caminhos alcançados
+sob $k = 10$\artigo{; a reexecução com as asserções de desenrolamento ligadas
+mostrou que nenhum laço desses dez \textit{harnesses} excede o limite
+(Seção~\ref{sec:config-experimental})} --- qualificação cujo alcance exato é discutido na
+Seção~\ref{sec:ameacas-validade}.} \revisao{O resultado secundário é
+a triagem disciplinada de três contraexemplos, que levou a três conclusões
+distintas: um falso positivo no contador de FIFO do BMI088, refutado \artigo{na
+conferência contra o código de produção}; uma observação de temperatura no BMI088 recusada pelos
+mantenedores; e um \textit{underflow} de inteiro sem sinal no driver GPS uBlox}
+\artigo{,
+proposto upstream como endurecimento defensivo (PR~\#27576) e posteriormente
+mostrado inalcançável no driver de produção}\revisao{. Essa distinção entre os três
+desfechos é ela própria um resultado: contraexemplos de BMC expõem estados
+alcançáveis no modelo que o código de produção pode nunca alcançar, de modo que
+a triagem e a revisão pela comunidade são companhias necessárias às provas.}
+
+\section{Configuração Experimental}
+\label{sec:config-experimental}
+
+A verificação foi executada em um servidor Intel Core i7-13700K com 64~GB de
+RAM sob Ubuntu 24.04, sobre as fontes do PX4
+\artigo{(ramo \textit{main}, \textit{commit}~\texttt{8be2590c15}, de 04 de
+junho de 2026, 2.935 \textit{commits} após a v1.16.0 e posterior ao lançamento
+da v1.17.0)}. Os tempos
+reportados são a \textbf{mediana de três execuções}.
+
+O artefato completo --- harnesses, logs de execução e instruções de reprodução
+--- está arquivado no Zenodo sob o DOI~\artigo{\texttt{10.5281/zenodo.23282236}
+(versão \texttt{v1.2-sbesc}; DOI de conceito \texttt{10.5281/zenodo.21401958})} e
+disponível em \url{https://github.com/marcela2881/dissertacao-px4-esbmc}.
+
+\artigo{Todos os doze módulos foram verificados com ESBMC v8.1.0 utilizando
+Boolector~3.2.4~\cite{Brummayer2009} como solver; os 36 logs da campanha
+(três execuções por módulo) registram \texttt{ESBMC version 8.1.0} e
+\texttt{Solving with solver Boolector 3.2.4}. O Boolector é também a
+configuração sob a qual o reporte upstream do GPS (Issue~\#26866) foi
+registrado; em execuções exploratórias, o Z3~\cite{deMoura2008} não produziu
+veredito no harness do GPS dentro do \textit{timeout}
+(Seção~\ref{sec:ameacas-validade}).} A invocação padrão foi:
+
+\begin{lstlisting}[
+  caption={Comando padrão de execução do ESBMC.},
+  label={lst:comando-esbmc},
+  numbers=left,
+  frame=single,
+  language=bash]
+esbmc modulo.cpp --unwind 10 --no-unwinding-assertions \
+  --overflow-check --default-solver boolector --timeout 120s
+\end{lstlisting}
+
+Três módulos exigiram ajuste. O MAVLink utilizou \texttt{--unwind~300}, pois
+seus laços de \textit{parsing} são profundos. O Navigator/Mission utilizou
+\texttt{--unwind~15}. O VTOL utilizou \texttt{--no-library}, que desabilita a
+biblioteca C abstrata do ESBMC: \texttt{sinf} e \texttt{sqrtf} passam a
+retornar valores não determinísticos, uma sobreaproximação sob a qual nenhuma
+violação das demais verificações é perdida; em contrapartida, as
+\artigo{verificações internas da biblioteca deixam de ser feitas}, de modo que o
+veredito cobre \artigo{correspondentemente} menos propriedades. A aritmética de ponto
+flutuante usa a codificação SMT padrão do ESBMC
+(\texttt{--floatbv})~\cite{Gadelha2020}.
+
+Como \texttt{--no-unwinding-assertions} está ativo, laços que excedem $k = 10$
+são truncados silenciosamente --- consequência discutida na
+Seção~\ref{sec:ameacas-validade} \artigo{e verificada a seguir}.
+
+%% LC: \textbf{[IMPORTANTE]} RECOMENDAÇÃO TRANSVERSAL Nº 3 --- A QUE MAIS FORTALECE O RESULTADO PRINCIPAL, E CUSTA CERCA DE TRÊS MINUTOS DE MÁQUINA.
+%% LC: O resultado principal declarado é ``dez dos doze módulos verificam-se livres de violações até o limite de desenrolamento''. Mas a campanha roda com --no-unwinding-assertions. A combinação tem um efeito que a dissertação reconhece com todas as letras nas Ameaças à Validade: laços que excedem k são truncados SILENCIOSAMENTE, ``de modo que um veredito SUCCESSFUL pode ocultar falsos negativos''. Ou seja: o resultado principal é enunciado sob a única configuração que o impede de ser conclusivo, e o próprio texto o admite.
+%% LC: Basta re-executar os DEZ módulos sem violação COM asserções de desenrolamento (removendo --no-unwinding-assertions). Só há dois desfechos, e ambos melhoram o trabalho:
+%% LC: \hangindent=1em\hangafter=1 - nenhum módulo dispara a asserção -> está PROVADO que nenhum laço excede k, e o veredito passa a ser conclusivo dentro do recorte;
+%% LC: \hangindent=1em\hangafter=1 - algum módulo dispara -> descobre-se onde o k é insuficiente e eleva-se o limite naquele módulo. Como a campanha inteira leva ~160 s, o custo é desprezível.
+%% LC: Alternativa, se algum laço não fechar: --k-induction nos módulos afetados.
+
+\artigo{\textbf{Reexecução com as asserções de desenrolamento ligadas.} Para
+retirar do resultado principal a dependência do truncamento silencioso, os doze
+\textit{harnesses} foram reexecutados em 12/10/2026 com as mesmas opções da
+Listagem~\ref{lst:comando-esbmc} e os mesmos ajustes por módulo, mas
+\textbf{sem} \texttt{--no-unwinding-assertions}, com o ESBMC~8.1.0 e o
+Boolector~3.2.4 recompilados e validados contra os logs de julho. A
+Tabela~\ref{tab:unwinding} resume os desfechos.}
+
+\begin{table}[H]
+\centering
+\caption{\artigo{Reexecução com as asserções de desenrolamento ligadas}}
+\label{tab:unwinding}
+\footnotesize
+\begin{tabular}{|p{6.3cm}|p{3.0cm}|p{4.2cm}|}
+\hline
+\textbf{Módulos} & \textbf{Veredito} & \textbf{Propriedade violada} \\
+\hline
+\artigo{Barômetro, Battery Monitor, EKF2 Covariance, Expo RC, MAVLink Parser
+($k = 300$), Magnetômetro, Navigator/Mission ($k = 15$), PWM Output, RC Update
+e VTOL} & \artigo{\textit{sem violação}} & \artigo{---} \\
+\hline
+\artigo{IMU BMI088} & \artigo{\textit{violação}} & \artigo{a mesma da campanha
+(candidato do FIFO)} \\
+\hline
+\artigo{GPS uBlox} & \artigo{\textit{violação}} & \artigo{asserção de
+desenrolamento do laço do \texttt{memcpy}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\artigo{Nos dez módulos sem violação, nenhuma asserção de desenrolamento
+falha: nenhum laço desses \textit{harnesses} excede o limite usado, e o veredito
+deixa de depender do truncamento silencioso. No IMU, a primeira violação
+continua sendo a do candidato do FIFO. No GPS, a primeira falha passa a ser a
+asserção de desenrolamento do laço do \texttt{memcpy}, que copia mais de dez
+bytes: a violação da Tabela~\ref{tab:resultados} continua válida no modelo,
+porque o BMC é \textit{sound}, mas a análise do GPS com $k = 10$ não cobre esse
+laço por inteiro. Como controle, o MAVLink com $k = 10$ e as asserções ligadas
+falha apenas na asserção de desenrolamento do \texttt{memcpy}, e com $k = 300$
+passa. Os logs estão em \texttt{verificacao\_unwinding\_2026-10/} no
+repositório de artefatos.}
+
+\lc{Laço do GPS excede k = 10; reexecutar com k cobrindo 210 bytes; reportar resultado.}
+
+%% LC: ``nove dos onze logs'' --- são doze módulos. Onze logs de quê? Se o BMI088 e o GPS geram um log cada e os dez restantes também, seriam doze. Se algum módulo compartilha log, dizer qual. Como está, o leitor tropeça num número que não fecha com nenhum outro do capítulo.
+
+\revisao{Quanto à proveniência das versões:} \artigo{os 36 logs de
+\texttt{medianas\_logs/} (três execuções de cada um dos doze módulos)
+registram explicitamente \texttt{ESBMC version 8.1.0}, conforme a nota de
+rodapé do artigo (``read from all twelve run logs'').} \revisao{Os contraexemplos do BMI088 e do GPS foram
+originalmente reportados upstream (Issues~\#26865 e~\#26866) sob o ESBMC
+v7.10.0; os tempos aqui reportados foram remedidos sob a configuração da
+campanha em v8.1.0.}
+
+%% [BANCA - Prof. Barreto] "Tres valores diferentes de --unwind. Nao deveria justificar
+%% melhor? A disparidade e muito grande, de 10, que e o padrao, para 300."
+\subsection{\revisao{Escolha do Limite de Desenrolamento}}
+\label{subsec:escolha-k}
+
+\revisao{A campanha utilizou três valores distintos de $k$, e a disparidade entre eles
+--- sobretudo entre o padrão $k = 10$ e o $k = 300$ do MAVLink --- merece justificativa
+explícita, por ser o parâmetro que mais afeta o alcance das conclusões.}
+
+\revisao{O limite de desenrolamento governa um compromisso direto. Aumentá-lo amplia o
+conjunto de execuções cobertas e, portanto, a força do veredito; em contrapartida, cada
+iteração adicional replica as instruções do laço na fórmula SMT, de modo que o custo cresce
+rapidamente e pode tornar a verificação intratável dentro do \textit{timeout}. Não existe,
+assim, um valor universalmente correto: o valor adequado é o menor que cobre o comportamento
+de interesse do módulo.}
+
+\revisao{O critério adotado foi derivar $k$ da estrutura do laço dominante de cada
+módulo, e não arbitrá-lo:}
+
+\begin{itemize}
+\item \revisao{\textbf{$k = 10$ (padrão, nove módulos).} Nesses módulos, os laços
+percorrem estruturas de dimensão pequena e fixa --- canais de rádio, saídas de PWM, elementos
+de matriz de covariância --- todos com menos de dez iterações no pior caso. O valor cobre o
+laço inteiro, e aumentá-lo não acrescentaria execuções novas.} \artigo{A reexecução com as
+asserções de desenrolamento ligadas confirma isso: nenhuma delas falha nesses
+\textit{harnesses} (Tabela~\ref{tab:unwinding}).}
+
+\item \revisao{\textbf{$k = 15$ (Navigator/Mission).} O laço itera sobre
+\textit{waypoints} da missão carregada\artigo{, e com $k = 15$ nenhuma asserção de
+desenrolamento falha no \textit{harness} (Tabela~\ref{tab:unwinding}).}}
+
+\item \revisao{\textbf{$k = 300$ (MAVLink Parser).} Aqui o valor não é arbitrário nem
+uma tentativa de aumentar cobertura por precaução: o \texttt{memcpy} \artigo{do
+\textit{harness}, que copia para o buffer de transmissão,} itera
+proporcionalmente ao tamanho do pacote, e o buffer \artigo{é de 280 bytes, o tamanho
+máximo de pacote}. Qualquer $k$
+inferior a 280 deixaria de cobrir pacotes de tamanho máximo\artigo{. A reexecução com
+as asserções ligadas confirma isso: com $k = 10$, a única falha é a asserção de
+desenrolamento do \texttt{memcpy} --- um resultado inconclusivo por profundidade
+insuficiente, e não um defeito ---, e com $k = 300$ o \textit{harness} passa
+(Seção~\ref{sec:config-experimental}).}
+O valor 300 é o menor múltiplo redondo acima do
+tamanho do buffer.}
+\end{itemize}
+
+\revisao{Segue-se disso que a disparidade entre 10 e 300 não reflete inconsistência de
+critério, mas heterogeneidade dos módulos: o MAVLink é o único cujo laço dominante percorre um
+buffer de centenas de bytes. Duas consequências devem ser registradas. Primeiro, os totais de
+VCC por módulo misturam limites diferentes e, portanto, não são diretamente comparáveis entre
+si. Segundo, o procedimento é reativo por construção --- parte-se do padrão e eleva-se $k$
+quando o verificador sinaliza insuficiência --- de modo que um módulo cujo laço exceda o limite
+sem disparar asserção de desenrolamento poderia passar despercebido, limitação agravada pelo
+uso de \texttt{--no-unwinding-assertions} e discutida na
+Seção~\ref{sec:ameacas-validade}.} \artigo{A reexecução com as asserções ligadas
+(Tabela~\ref{tab:unwinding}) afasta esse risco nos dez módulos sem violação.}
+
+\section{Questões Experimentais}
+\label{sec:objetivos-verificacao}
+
+A avaliação responde a três questões experimentais (QE). \corr{Para cada uma
+indicam-se a métrica observada e o critério adotado para considerá-la
+respondida.}
+
+\begin{itemize}
+    \item \textbf{QE1:} Qual é a latência de verificação por módulo em hardware
+    de prateleira? \corr{\textit{Métrica:} tempo do procedimento de decisão,
+    mediana de três execuções, com mínimo e máximo.
+    \textit{Critério:} todo módulo conclui dentro do \textit{timeout} de
+    $120$\,s.}
+    \item \textbf{QE2:} O BMC expõe violações alcançáveis no modelo em código
+    que os testes unitários existentes do PX4 não referenciam?
+    \corr{\textit{Métrica:} número de contraexemplos, desfecho de cada um após
+    a triagem e existência de teste unitário que referencie a função afetada.
+    \textit{Critério:} ao menos um contraexemplo que sobreviva à triagem como
+    violação alcançável no modelo, em função sem teste unitário direto.}
+    \item \textbf{QE3:} Quais configurações por módulo são necessárias para
+    tornar cada módulo tratável? \corr{\textit{Métrica:} número de módulos que
+    exigem opções diferentes da invocação padrão, e quais opções.
+    \textit{Critério:} questão descritiva, sem limiar de aceitação.}
+\end{itemize}
+
+\corr{Os critérios foram fixados depois da campanha, ao redigir este capítulo;
+servem para tornar explícito o que cada resposta afirma, e não como hipóteses
+registradas previamente.}
+
+\section{Módulos Verificados}
+\label{sec:modulos-verificados}
+
+Os módulos foram priorizados pelo impacto na segurança ao longo do caminho de
+sensoriamento até atuação e pela viabilidade de isolamento por \textit{stubs}.
+Foram verificados 12 módulos por meio de \textit{harnesses} construídos com assistência de IA generativa e revisados pela autora,
+totalizando aproximadamente $2.800$ linhas, medidas com \texttt{wc -l} sobre os
+arquivos \texttt{test\_*.cpp} do repositório de artefatos.
+
+\revisao{Em vez de reportar percentual de cobertura de linhas --- que
+seria enganoso, já que cada harness abstrai a maior parte do seu módulo e
+explora apenas caminhos alcançáveis sob $k = 10$ --- a cobertura é
+caracterizada por \textbf{classe de entrada}, conforme a última coluna da
+Tabela~\ref{tab:modulos}.}
+
+\begin{table}[H]
+\centering
+\caption{Módulos verificados: tamanho do alvo, tamanho do harness, localização
+no código-fonte do PX4 e classe de entrada exercitada}
+\label{tab:modulos}
+\footnotesize
+\begin{tabular}{|l|l|r|r|l|}
+\hline
+\textbf{Módulo} & \textbf{Caminho (\texttt{src/})} & \textbf{Alvo} &
+\textbf{Harness} & \textbf{Classe de entrada} \\
+\hline
+GPS uBlox         & \texttt{drivers/gps}          & \artigo{1712} & 294 & Sensor serial \\
+IMU BMI088        & \texttt{drivers/imu/.../bmi088} & \artigo{700} & 319 & Sensor serial \\
+MAVLink           & \texttt{modules/mavlink}      & \artigo{3624} &  82 & Telemetria \\
+Expo RC           & \texttt{lib/mathlib/math}     &  \artigo{303} & 129 & Rádio \\
+Battery Monitor   & \texttt{lib/battery}          &  \artigo{449} & 242 & Sensor de energia \\
+PWM Output        & \texttt{drivers/pwm\_out}     &  337 & 208 & Atuação \\
+RC Update         & \texttt{lib/rc}               & \artigo{769} & 253 & Rádio \\
+Navigator         & \texttt{modules/navigator}    & \artigo{497} & 291 & Lógica de missão \\
+EKF2 Covariance   & \texttt{modules/ekf2/EKF}     &  385 & 296 & Estimação \\
+Magnetômetro      & \texttt{modules/sensors}      &  792 & 239 & \corr{Agregação de sensores} \\
+Barômetro         & \texttt{modules/sensors}      &  \artigo{246} & 278 & \corr{Agregação de sensores} \\
+VTOL              & \texttt{modules/vtol\_att\_control} & \artigo{591} & 146 & Atuação \\
+\hline
+\end{tabular}
+
+\footnotesize
+Alvo = LoC \artigo{do(s) arquivo(s)-fonte do PX4 que o harness extrai (\textit{commit} fixado)}; Harness = LoC do harness (ambos por \texttt{wc -l}).
+\end{table}
+
+\lc{Acrescentar coluna: linhas do PX4 efetivamente extraídas por harness, separadas do código de modelo.}
+\corr{Os arquivos-alvo somam $10.405$ linhas, cerca de $1{,}5\,\%$ das $710.259$
+linhas de C/C++ em \texttt{src/} no \textit{commit} analisado ($2.710$ arquivos,
+contados com \texttt{wc -l}). Os alvos do Magnetômetro e do Barômetro estão em
+\texttt{modules/sensors}: são módulos que agregam e selecionam leituras já
+publicadas pelos drivers, e não drivers de barramento serial, razão pela qual
+aparecem como ``agregação de sensores''.}
+
+\section{Resultados Gerais}
+\label{sec:resultados-gerais}
+
+A Tabela~\ref{tab:resultados} sumariza os desfechos. Dez dos doze módulos
+verificam-se sem violação até o limite\artigo{; os dois restantes (IMU BMI088 e
+GPS uBlox) param na primeira violação encontrada. Como no artigo derivado, as
+contagens de condições de verificação (VCCs) por \textit{harness} não são
+tabeladas: elas misturam limites de desenrolamento diferentes (10, 15 e 300) e,
+nos dois módulos com violação, cobrem só o caminho até a primeira violação. Os
+valores constam dos logs do repositório de artefatos.}
+
+\begin{table}[H]
+\centering
+\caption{Resultados da verificação para os 12 módulos do PX4}
+\label{tab:resultados}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{|l|l|c|r|l|r|r|}
+\hline
+\textbf{Módulo} & \textbf{Desfecho} &
+\textbf{VAM}$^\P$ & \textbf{Unw.} & \textbf{Solver} & \textbf{Tempo}$^\|$ & \corr{\textbf{Decisão}$^{\star}$ (mín--máx)} \\
+\hline
+IMU BMI088        & \corr{\textit{contraex.\ (triado)}} & 0$^\ddagger$ &  10 & \artigo{Bool.} & \artigo{0,1\,s}$^{\#}$ & \corr{0,122 (0,121--0,122)} \\
+GPS uBlox         & \textit{violação}     & 1 &  10 & \artigo{Bool.} & 64,9\,s$^{\#}$ & \corr{64,857 (64,765--64,874)} \\
+MAVLink Parser    & \textit{sem violação} & 0 & 300 & \artigo{Bool.} & 49,2\,s & \corr{46,970 (46,916--47,083)} \\
+Expo RC           & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  4,9\,s & \corr{4,852 (4,840--4,866)} \\
+Battery Monitor   & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  6,7\,s & \corr{6,727 (6,703--6,731)} \\
+PWM Output        & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  0,2\,s & \corr{0,156 (0,156--0,156)} \\
+RC Update         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  9,5\,s & \corr{9,457 (9,384--9,534)} \\
+Navigator/Mission & \textit{sem violação} & 0 &  15 & \artigo{Bool.} &  0,1\,s & \corr{0,095 (0,095--0,095)} \\
+EKF2 Covariance   & \textit{sem violação} & 0 &  10 & \artigo{Bool.} & 12,2\,s & \corr{12,200 (12,181--12,228)} \\
+Magnetômetro      & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  6,6\,s & \corr{6,621 (6,616--6,629)} \\
+Barômetro         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  0,4\,s & \corr{0,360 (0,351--0,363)} \\
+VTOL$^\S$         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  4,0\,s & \corr{3,942 (3,911--3,943)} \\
+\hline
+\textbf{Total} & \corr{\textbf{10 sem violação, 1 violação,}} & \textbf{1} &
+--- & --- & \artigo{\textbf{$\approx$94\,s}$^{\dagger}$} & \corr{\textbf{156,359}} \\
+               & \corr{\textbf{1 contraex.\ refutado/recusado}} & & & & & \\
+\hline
+\end{tabular}
+
+\footnotesize
+\begin{flushleft}
+$^\P$VAM = violações alcançáveis no modelo (\textbf{não} defeitos
+confirmados).\\
+\artigo{Bool.\ = Boolector~3.2.4, com ESBMC v8.1.0, em todos os módulos.}\\
+$^\ddagger$\corr{Dois contraexemplos, ambos triados como não-defeito:
+FIFO, falso positivo; temperatura, recusada upstream.} \artigo{O tempo da
+tabela é o do candidato FIFO (\texttt{test\_choice = 2}), em que as três
+execuções param (0,122; 0,122; 0,121\,s); o contraexemplo de temperatura vem de
+uma execução separada (0,272\,s), Seção~\ref{sec:caso-imu}.}\\
+$^{\dagger}$\artigo{93,8\,s nos módulos que concluem (dez sem violação e o
+IMU); 158,7\,s incluindo o GPS (64,9\,s).}\\
+$^\S$VTOL com \texttt{--no-library}: \artigo{verificações internas da
+biblioteca não são feitas.}\\
+$^\|$Mediana de três execuções.\\
+\corr{$^{\star}$Tempo do procedimento de decisão (\textit{Runtime decision procedure}), em segundos: mediana, mínimo e máximo das três execuções. É a única medida registrada nos logs dos doze módulos.}\\
+$^{\#}$\artigo{Módulos com violação param na primeira violação; tempo do
+procedimento de decisão (\textit{Runtime decision procedure}); nos demais,
+\textit{BMC program time}.}
+\end{flushleft}
+\end{table}
+
+O tempo máximo foi de $64,9$\,s (GPS) e o mínimo de $0,1$\,s
+\artigo{(Navigator/Mission e IMU BMI088)}.
+
+\corr{A coluna \textit{Tempo} reproduz a Tabela~II do artigo e mistura duas
+medidas, conforme a nota~$^{\#}$: os logs dos dois módulos com violação não
+registram o tempo total do programa. Para permitir comparação uniforme, a
+última coluna traz o tempo do procedimento de decisão dos doze módulos, com
+mínimo e máximo; a dispersão entre execuções é inferior a $0{,}2$\,s em todos
+os casos. O tempo de relógio de ponta a ponta não foi registrado nos logs da
+campanha. A Figura~\ref{fig:visao-resultados} resume desfechos e tempos.}
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}
+  \draw[palEdge] (0,0.3) -- (0,-4.97);
+  \draw[palEdge, densely dotted] (0.000,0.3) -- (0.000,-4.97);
+  \node[font=\scriptsize, anchor=north] at (0.000,-4.97) {0,01};
+  \draw[palEdge, densely dotted] (2.250,0.3) -- (2.250,-4.97);
+  \node[font=\scriptsize, anchor=north] at (2.250,-4.97) {0,1};
+  \draw[palEdge, densely dotted] (4.500,0.3) -- (4.500,-4.97);
+  \node[font=\scriptsize, anchor=north] at (4.500,-4.97) {1};
+  \draw[palEdge, densely dotted] (6.750,0.3) -- (6.750,-4.97);
+  \node[font=\scriptsize, anchor=north] at (6.750,-4.97) {10};
+  \draw[palEdge, densely dotted] (9.000,0.3) -- (9.000,-4.97);
+  \node[font=\scriptsize, anchor=north] at (9.000,-4.97) {100};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-0.00) {GPS uBlox};
+  \draw[fill=palStrong, draw=palEdgeDark, thick] (0,-0.14) rectangle (8.577,0.14);
+  \node[anchor=west, font=\scriptsize] at (8.627,-0.00) {64,857\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-0.42) {MAVLink Parser};
+  \draw[fill=palFill, draw=palEdge] (0,-0.56) rectangle (8.262,-0.28);
+  \node[anchor=west, font=\scriptsize] at (8.312,-0.42) {46,970\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-0.84) {EKF2 Covariance};
+  \draw[fill=palFill, draw=palEdge] (0,-0.98) rectangle (6.944,-0.70);
+  \node[anchor=west, font=\scriptsize] at (6.994,-0.84) {12,200\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-1.26) {RC Update};
+  \draw[fill=palFill, draw=palEdge] (0,-1.40) rectangle (6.695,-1.12);
+  \node[anchor=west, font=\scriptsize] at (6.745,-1.26) {9,457\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-1.68) {Battery Monitor};
+  \draw[fill=palFill, draw=palEdge] (0,-1.82) rectangle (6.363,-1.54);
+  \node[anchor=west, font=\scriptsize] at (6.413,-1.68) {6,727\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-2.10) {Magnetômetro};
+  \draw[fill=palFill, draw=palEdge] (0,-2.24) rectangle (6.347,-1.96);
+  \node[anchor=west, font=\scriptsize] at (6.397,-2.10) {6,621\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-2.52) {Expo RC};
+  \draw[fill=palFill, draw=palEdge] (0,-2.66) rectangle (6.043,-2.38);
+  \node[anchor=west, font=\scriptsize] at (6.093,-2.52) {4,852\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-2.94) {VTOL};
+  \draw[fill=palFill, draw=palEdge] (0,-3.08) rectangle (5.840,-2.80);
+  \node[anchor=west, font=\scriptsize] at (5.890,-2.94) {3,942\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-3.36) {Barômetro};
+  \draw[fill=palFill, draw=palEdge] (0,-3.50) rectangle (3.502,-3.22);
+  \node[anchor=west, font=\scriptsize] at (3.552,-3.36) {0,360\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-3.78) {PWM Output};
+  \draw[fill=palFill, draw=palEdge] (0,-3.92) rectangle (2.685,-3.64);
+  \node[anchor=west, font=\scriptsize] at (2.735,-3.78) {0,156\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-4.20) {IMU BMI088};
+  \draw[fill=palPaper, draw=palEdgeDark, dashed] (0,-4.34) rectangle (2.444,-4.06);
+  \node[anchor=west, font=\scriptsize] at (2.494,-4.20) {0,122\,s};
+  \node[anchor=east, font=\scriptsize] at (-0.1,-4.62) {Navigator/Mission};
+  \draw[fill=palFill, draw=palEdge] (0,-4.76) rectangle (2.200,-4.48);
+  \node[anchor=west, font=\scriptsize] at (2.250,-4.62) {0,095\,s};
+  \draw[fill=palFill, draw=palEdge] (0,-6.37) rectangle (0.35,-6.17); \node[anchor=west, font=\scriptsize] at (0.4,-6.27) {sem violação};
+  \draw[fill=palStrong, draw=palEdgeDark, thick] (2.6,-6.37) rectangle (2.95,-6.17); \node[anchor=west, font=\scriptsize] at (3.0,-6.27) {violação alcançável no modelo};
+  \draw[fill=palPaper, draw=palEdgeDark, dashed] (7.2,-6.37) rectangle (7.55,-6.17); \node[anchor=west, font=\scriptsize] at (7.6,-6.27) {contraexemplo triado};
+  \node[font=\scriptsize, anchor=north] at (4.50,-5.27) {tempo do procedimento de decisão (s, escala logarítmica)};
+\end{tikzpicture}
+\caption{\corr{Visão geral da primeira campanha: desfecho e tempo do procedimento de
+decisão (mediana de três execuções) por módulo, em ordem decrescente de tempo.
+Valores da Tabela~\ref{tab:resultados}. Elaborado pela autora.}}
+\label{fig:visao-resultados}
+\end{figure}
+
+\lc{Um main multiplexa vários testes; a primeira falha mascara as demais; executar cada teste separadamente.}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
+title=\textbf{Resposta à QE1 --- Latência de verificação}]
+Todo módulo cronometrado verifica-se em menos de noventa segundos em hardware
+de prateleira. Como cada um é verificado isoladamente por meio de um harness
+pequeno, isso demonstra \textbf{viabilidade por módulo}, e não escalabilidade
+de sistema completo.
+\end{tcolorbox}
+
+\revisao{Os módulos verificados não constituem uma amostra uniforme:
+situam-se no caminho crítico de sensoriamento até atuação, onde bytes não
+confiáveis de I2C, SPI e UART entram no \textit{flight stack} pela primeira
+vez, cobrindo as principais classes de entrada não confiável --- barramentos
+seriais de sensores, enlace de rádio e telemetria, atuação, estimação e lógica
+de missão.} \corr{O que ficou de fora, porém, não é código periférico. No
+\textit{commit} analisado, as $710.259$ linhas de C/C++ de \texttt{src/}
+distribuem-se entre \texttt{modules} ($45{,}8\,\%$), \texttt{drivers}
+($39{,}4\,\%$), \texttt{lib} ($11{,}4\,\%$) e \texttt{systemcmds}
+($2{,}9\,\%$), e os maiores blocos não verificados incluem código crítico para
+o voo: \texttt{drivers/uavcan} ($58.267$ linhas), \texttt{drivers/imu}
+($46.127$), \texttt{modules/ekf2} ($33.516$, do qual só a rotina de covariância
+foi verificada), \texttt{modules/commander} ($25.377$) e
+\texttt{modules/navigator} ($17.613$). A campanha cobre, portanto, uma fração
+pequena e escolhida do \textit{firmware}.} \revisao{As exceções críticas para voo (\textit{commander},
+\textit{failsafe} e lógica de \textit{geofence}) são trabalho futuro
+prioritário, e os barramentos CAN/UAVCAN, a ponte RTPS/uXRCE-DDS e os drivers
+de fluxo óptico e telêmetro permanecem não verificados.}
+
+\section{Validação Cruzada com o CBMC}
+\label{sec:cbmc}
+
+\revisao{Para avaliar a dependência dos resultados em relação à
+ferramenta, o CBMC~5.95.1~\cite{Kroening2014} foi executado sobre os}
+\corr{harnesses adaptados aos intrínsecos do CBMC
+(\texttt{\_\_CPROVER\_assume} e \texttt{\_\_CPROVER\_assert} no lugar de
+\texttt{\_\_ESBMC\_assume} e \texttt{\_\_ESBMC\_assert}), preservando
+pré-condições e asserções,} \revisao{com opções equivalentes
+(\texttt{--unwind 10}, verificações de \textit{overflow} e de limites, sem
+asserções de desenrolamento) e o mesmo \textit{timeout} de $120$\,s.}
+\corr{A adaptação é parte do experimento e está registrada no repositório de
+artefatos}\artigo{, que contém o \textit{harness} do CBMC para o GPS
+(\texttt{cbmc/}) e os logs do CBMC para o IMU e o GPS.}
+
+\revisao{Para o IMU BMI088, as duas ferramentas concordaram. Para o GPS
+uBlox, sob a pré-condição \texttt{len}~$\geq$~$190$
+(\texttt{GPS\_DUMP\_DATA\_SIZE}~$-$~$10$, semeando o campo de comprimento
+próximo à fronteira do buffer), ambas sinalizam a violação}
+\artigo{, mas o CBMC apenas com limites reduzidos (\texttt{--unwind} 2, 3 e 5:
+\textit{memcpy destination region writeable}); com \texttt{--unwind 10} ele não
+terminou dentro de um limite de 30 minutos. O harness original do CBMC, com a
+pré-condição \texttt{len}~$<$~$200$, retornou \textsc{verification successful},
+porque a pré-condição exclui os estados violadores. O harness do ESBMC usa a
+janela $\texttt{GPS\_DUMP\_DATA\_SIZE} - 5$. As duas ferramentas reportam a
+mesma propriedade --- acesso fora dos limites dentro do \texttt{memcpy}
+(\textit{dereference failure} no ESBMC); a cadeia CWE-191 $\rightarrow$
+CWE-119/787 é uma classificação deste trabalho, e não saída das ferramentas.}
+
+\corr{No IMU, o CBMC~5.95.1 reporta 2 de 6 propriedades violadas: as duas
+asserções do \textit{harness} (faixa de temperatura e
+\texttt{count <= FIFO\_SIZE}) falham, e as quatro verificações de
+\textit{overflow} aritmético passam; o tempo do procedimento de decisão é
+inferior a $0{,}01$\,s. São as mesmas duas propriedades violadas no ESBMC. O log
+(\texttt{cbmc/resultado\_cbmc\_imu.txt}) não registra a linha de comando usada.
+No GPS, o comando registrado é:}
+
+\begin{lstlisting}[
+  caption={\corr{Comando do CBMC para o \textit{harness} do GPS ($u \in \{2, 3, 5, 10\}$).}},
+  label={lst:comando-cbmc},
+  numbers=left,
+  frame=single,
+  language=bash]
+cbmc test_gps_cbmc_fair.cpp --unwind $u --no-unwinding-assertions \
+  --bounds-check --pointer-check \
+  --signed-overflow-check --unsigned-overflow-check
+\end{lstlisting}
+
+\corr{As janelas de entrada dos dois \textit{harnesses} do GPS não são
+idênticas: o do CBMC assume \texttt{len}~$\geq 190$ e o do ESBMC,
+\texttt{len}~$\geq 195$. Os dois foram escritos em momentos diferentes e a
+diferença não foi uniformizada. Ela não altera a comparação, porque os estados
+que violam a propriedade (\texttt{len}~$> 200$) pertencem às duas janelas; uma
+reexecução com a mesma janela nas duas ferramentas tornaria a comparação mais
+limpa e fica registrada como pendência. As versões de compilador registradas
+nos artefatos são as do \textit{replay} da segunda campanha (g++~13.3.0); o
+ESBMC e o CBMC usam seus próprios \textit{front-ends}.}
+
+\lc{Validação cruzada cobre dois módulos; executar CBMC também nos dez harnesses sem violação.}
+
+\revisao{Cabe uma ressalva importante: isso \textbf{não} constitui
+confirmação independente de alcançabilidade. Com a mesma pré-condição no
+harness, a concordância corrobora apenas a codificação do problema, não que o
+estado surja no driver de produção.} \corr{A ressalva é ainda mais forte quando
+se considera que as duas execuções partem de codificações distintas do mesmo
+problema: a concordância entre elas atesta que o defeito sobrevive à tradução
+entre os dois conjuntos de intrínsecos, e nada além disso.}
+
+\section{Estudo de Caso: Driver IMU BMI088}
+\label{sec:caso-imu}
+
+\corr{O driver do BMI088 (\artigo{$700$}~LoC no arquivo verificado, conforme a
+Tabela~\ref{tab:modulos})} produziu dois candidatos.
+\revisao{A triagem levou a conclusões diferentes para cada um --- e
+nenhuma delas é a de defeito confirmado.}
+
+\subsection{Temperatura fora da faixa operacional (contestado, recusado upstream)}
+\label{subsec:imu-temperatura}
+
+O driver não valida a temperatura antes da aritmética de compensação térmica; o
+datasheet do BMI088~\cite{Bosch2021} restringe a operação à faixa de
+$[-40,\,+85]\,^\circ$C (Equação~\ref{eq:prop_temp}). O ESBMC produziu
+\texttt{temp\_msb = 63} e \texttt{temp\_lsb = 95}
+(\texttt{Temp\_uint11 = 506}), resultando em $86{,}25\,^\circ$C.
+\corr{A conversão especificada pelo fabricante é
+$T = \texttt{Temp\_int11} \times 0{,}125 + 23$, de modo que
+$506 \times 0{,}125 + 23 = 86{,}25\,^\circ$C; o traço literal consta do
+Apêndice~\ref{apend:contraexemplos}.}
+
+\corr{Se a observação fosse aceita como defeito, a classe em que se enquadraria
+é a CWE-1284 (\textit{Improper Validation of Specified Quantity in Input}),
+subclasse de CWE-20 (\textit{Improper Input Validation}): o driver consome uma
+leitura fora da faixa do \textit{datasheet} sem verificação. Como a observação
+foi recusada, o rótulo indica apenas a classe do cenário investigado, e não uma
+vulnerabilidade confirmada.}
+
+\revisao{Se isso constitui defeito é ponto contestado. Os mantenedores
+observam que a temperatura não alimenta o caminho inercial, e que descartar
+quadros da IMU diante de uma excursão transitória arrisca perda de controle em
+plataformas com uma única IMU; tais exceções seriam melhor tratadas pelas
+camadas de estimação a jusante, como a fusão de sensores do EKF2, do que por
+paradas em nível de driver. Trata-se de um compromisso entre rigor no driver e
+tolerância a falhas em nível de sistema.}
+
+\revisao{Um \textit{patch} upstream que limitava a temperatura fora de
+faixa (PX4~PR~\#27575) foi \textbf{rejeitado}: os mantenedores objetaram à
+abordagem de limitar e avisar, e fecharam tanto o PR quanto a
+Issue~\#26865\footnote{\url{https://github.com/PX4/PX4-Autopilot/issues/26865}}.
+A observação é mantida nesta dissertação apenas como nota de projeto, \textbf{sem
+consequência de segurança confirmada e sem remediação aceita}, ilustrando a
+etapa de triagem da metodologia em vez de um defeito.}
+
+\begin{figure}[H]
+    \centering
+    \definecolor{ceFundo}{HTML}{F7F8FA}\definecolor{ceCinza}{HTML}{5A6070}%
+    \definecolor{ceAmarelo}{HTML}{0B5CAD}\definecolor{ceVermelho}{HTML}{B3261E}%
+    \begin{tcolorbox}[colback=ceFundo, colframe=black!45, boxrule=0.6pt, arc=2pt,
+      left=8pt, right=8pt, top=6pt, bottom=6pt, width=0.95\linewidth,
+      fontupper=\ttfamily\scriptsize\linespread{1.45}\selectfont]
+    \textcolor{ceVermelho}{\textbf{[Counterexample]}}\\
+    \textcolor{ceCinza}{State 2 -{}- test\_bmi088\_imu.cpp:120 -{}- test\_temperature\_calculation}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{temp\_msb = 63 (00111111)}}}\\
+    \textcolor{ceCinza}{State 3 -{}- test\_bmi088\_imu.cpp:121 -{}- test\_temperature\_calculation}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{temp\_lsb = 95 (01011111)}}}\\
+    \textcolor{ceCinza}{State 7 -{}- test\_bmi088\_imu.cpp:42 -{}- updateTemperature}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{Temp\_uint11 = 506 (00000001 11111010)}}}\\
+    \textcolor{ceCinza}{State 11 -{}- test\_bmi088\_imu.cpp:51 -{}- updateTemperature}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{temperature = 8.625000e+1f (...00000000000)}}}\\
+    \textcolor{ceVermelho}{\textbf{Violated property:}}\\
+    \textcolor{ceVermelho}{\hspace*{1em}file test\_bmi088\_imu.cpp line 126 function test\_temperature\_calculation}\\
+    \textcolor{ceVermelho}{\hspace*{1em}assertion temperature >= -40.0f \&\& temperature <= 85.0f}\\
+    \textcolor{ceVermelho}{\hspace*{1em}temperature >= -40.000000f \&\& temperature <= 85.000000f}\\
+    \textcolor{ceVermelho}{\textbf{VERIFICATION FAILED}}\\[-2pt]
+    \textcolor{ceCinza}{\rule{\linewidth}{0.3pt}}\\
+    \textcolor{ceAmarelo}{8.625000e+1f = 86,25\,$^{\circ}$C > 85\,$^{\circ}$C (limite operacional do datasheet BMI088)}\\
+    \textcolor{ceCinza}{ESBMC 8.1.0 + Boolector 3.2.4 -{}- log: resultado\_temperatura\_8.1.log}\\
+    \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26865 (fechada) / PR \#27575 (fechado)}
+    \end{tcolorbox}
+    \caption{\corr{Reprodução}\artigo{, montada a partir do log do ESBMC~v8.1.0
+    com Boolector~3.2.4,} \corr{da saída do ESBMC:
+    temperatura de $86{,}25\,^\circ$C acima do limite de $85\,^\circ$C, por
+    ausência de validação de faixa de entrada} \artigo{(CWE-1284)}\corr{. O traço literal consta
+    do Apêndice~\ref{apend:contraexemplos} e do repositório de artefatos.}}
+    \label{fig:ce-imu-temp}
+\end{figure}
+
+%% LC: \textbf{[EM ABERTO]} Conferir dois dados internos desta figura contra o texto: ela cita o datasheet como ``BST-BMI088-DS001 §5.3.7'', ao passo que o .bib registra ``BST-BMI088-DS000-19, rev. 1.9'' e a Tab. \ref{tab:proveniencia} repete essa segunda forma. São dois números de documento diferentes para a mesma fonte. Verificar qual é o correto no PDF da Bosch e uniformizar figura, .bib e tabela.
+%% LC: \textbf{[AJUSTE]} Renomear figuras/imagematual.jpeg (usada na Fig. \ref{fig:ce-gps}). Sugestão: ce\_gps\_underflow.jpeg. Aproveitar para remover de figuras/ os arquivos que o LEIA-ME já identificou como contraditórios com o texto atual: bug1\_temperatura.jpeg (mostra 512 -> 87,0 $^\circ$C), bug\_gps.png (input\_len=1, len=216) e bug2\_fifo.jpeg (count=1032). Enquanto estiverem no .zip entregue, são um risco: basta alguém abrir a pasta.
+
+\subsection{Contador do FIFO (falso positivo)}
+\label{subsec:imu-fifo}
+
+\revisao{O ESBMC produziu} \artigo{\texttt{count = 9088}} \revisao{bytes, mais de oito
+vezes o FIFO de $1.024$ bytes, o que sugeria CWE-190 e CWE-787. A}
+\artigo{conferência} \revisao{desse contraexemplo} \artigo{contra o código} \revisao{do driver de produção \textbf{não
+instrumentado} revelou um \textbf{falso positivo}.}
+
+\revisao{O driver liberado protege a leitura em três níveis: o contador
+de bytes é comparado ao tamanho do FIFO e reiniciado sempre que
+\texttt{fifo\_byte\_counter}~$\geq$~\texttt{FIFO::SIZE}; a contagem de amostras
+é limitada por \texttt{FIFO\_MAX\_SAMPLES}; e o comprimento da transferência é
+restringido por
+\texttt{math::min(samples*sizeof(FIFO::DATA)+4,\,FIFO::SIZE)}. O valor \artigo{$9088$}
+$\geq 1.024$ dispara a reinicialização da primeira guarda, de modo que nenhum
+acesso fora dos limites é alcançável.}
+
+\revisao{O candidato surgiu porque o harness omitia essas guardas, e foi
+capturado pela etapa obrigatória de \artigo{conferência contra o código de produção}. Este caso é o exemplo mais
+didático da tese central deste trabalho:} \artigo{o candidato chegou a ser
+proposto \textit{upstream}, como uma limitação incluída no PR~\#27575, antes da
+conferência; foi a leitura do driver de produção que mostrou tratar-se de um
+contraexemplo formalmente válido para um defeito inexistente.}
+
+\artigo{A refutação foi feita por leitura do código-fonte do driver, e não por
+\textit{replay}: para repeti-la, basta conferir as três guardas acima em
+\texttt{BMI088\_Accelerometer.cpp}. O artefato depositado não contém programas
+de \textit{replay} nem registros de sanitizadores.}
+
+\lc{Refutação depende de leitura; verificar formalmente as três guardas, como feito para o GPS.}
+
+\section{Estudo de Caso: Driver GPS uBlox}
+\label{sec:caso-gps}
+
+O \artigo{harness do} driver uBlox (\artigo{arquivo-fonte de $1.712$}~LoC) foi verificado em $64,9$\,s. A verificação de
+espaço disponível \artigo{subtrai o nível de preenchimento da capacidade}:
+
+\begin{lstlisting}[
+  caption={\artigo{Verificação de espaço disponível no \textit{harness} do GPS uBlox}.},
+  label={lst:gps-vulneravel},
+  numbers=left,
+  frame=single,
+  language=C]
+if (write_len > GPS_DUMP_DATA_SIZE - dump_data->len)
+\end{lstlisting}
+
+\artigo{No harness, \texttt{GPS\_DUMP\_DATA\_SIZE} é a constante inteira $200$
+(\texttt{\#define}), e o comprimento \texttt{uint8\_t} é promovido a
+\texttt{int}; quando \texttt{dump\_data->len} excede a capacidade, a diferença
+é negativa ($-7$ para \texttt{len = 207}) e, na comparação com
+\texttt{write\_len} (\texttt{size\_t}), converte-se em um valor sem sinal
+enorme, tornando a guarda sempre falsa. No driver de produção a expressão
+correspondente é \texttt{sizeof(dump\_data->data) - dump\_data->len}
+(\texttt{gps.cpp}, linha 741), com buffer de 79 bytes
+(\texttt{msg/GpsDump.msg}); ali a subtração já é feita em \texttt{size\_t}, sem
+sinal, e daria a volta módulo $2^{32}$ no alvo de voo STM32 de 32 bits ---
+\textit{se} \texttt{len} pudesse exceder 79, o que a
+Seção~\ref{subsec:gps-inducao} mostra não ocorrer.}
+
+O ESBMC produziu \artigo{\texttt{input\_len = 10} e \texttt{dump\_data->len = 207}
+(\texttt{test\_choice = 3}, função \texttt{test\_gps\_real\_bit\_operation};
+idêntico nas três execuções)}; o
+\texttt{memcpy} subsequente escreve fora do buffer. Classificação:
+%% [BANCA - Prof. Yuri] "Isso ai nao e underflow, isso e overflow."
+%% DECISAO CONFIRMADA PELO LC: mantida a terminologia da CWE, com nota de
+%% rodape reconhecendo a distincao. O CWE-191 do MITRE denomina-se literalmente
+%% "Integer Underflow (Wrap or Wraparound)"; trocar o termo desalinharia a
+%% dissertacao da classificacao adotada e do artigo submetido.
+%% (Caixa \pergunta removida: questao respondida.)
+\corr{no \textit{harness}, em que a subtração é feita com sinal e o resultado
+negativo é depois convertido para um tipo sem sinal,} \textbf{CWE-195}
+\corr{(\textit{Signed to Unsigned Conversion Error})} $\rightarrow$
+\textbf{CWE-119} (\artigo{\textit{Improper Restriction of Operations within the
+Bounds of a Memory Buffer}}); \corr{na expressão do driver de produção, em que os
+dois operandos já são sem sinal, a classe correspondente seria} \textbf{CWE-191}
+(\textit{Integer Underflow \artigo{(Wrap or Wraparound)}}).\footnote{\revisao{Registra-se
+uma ambiguidade terminológica. No vocabulário de análise numérica,
+\textit{underflow} designa o resultado pequeno demais para ser representado, ao
+passo que o fenômeno aqui descrito --- uma subtração sem sinal que dá a volta
+para um valor muito grande --- corresponderia a \textit{overflow} por
+\textit{wraparound}. Adota-se, ainda assim, a denominação da \textit{Common
+Weakness Enumeration}, cuja entrada CWE-191 intitula-se \textit{Integer Underflow
+(Wrap or Wraparound)} e cobre exatamente esse caso, de modo a preservar a
+correspondência entre o texto, a classificação empregada e os relatórios
+submetidos à comunidade.}}
+
+\begin{figure}[H]
+    \centering
+    \definecolor{ceFundo}{HTML}{F7F8FA}\definecolor{ceCinza}{HTML}{5A6070}%
+    \definecolor{ceAmarelo}{HTML}{0B5CAD}\definecolor{ceVermelho}{HTML}{B3261E}%
+    \begin{tcolorbox}[colback=ceFundo, colframe=black!45, boxrule=0.6pt, arc=2pt,
+      left=8pt, right=8pt, top=6pt, bottom=6pt, width=0.95\linewidth,
+      fontupper=\ttfamily\scriptsize\linespread{1.45}\selectfont]
+    \textcolor{ceVermelho}{\textbf{[Counterexample]}}\\
+    \textcolor{ceCinza}{State 1 -{}- test\_gps\_driver.cpp:224 -{}- main}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{test\_choice = 3 (...00000000011)}}}\\
+    \textcolor{ceCinza}{State 3 -{}- test\_gps\_driver.cpp:179 -{}- test\_gps\_real\_bit\_operation}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{input\_len = 10 (...00000001010)}}}\\
+    \textcolor{ceCinza}{State 8 -{}- test\_gps\_driver.cpp:185 -{}- test\_gps\_real\_bit\_operation}\\
+    \hspace*{1em}\fcolorbox{ceAmarelo}{blue!6}{\textcolor{ceAmarelo}{\textbf{dump\_buffer.len = \{ .data=\{...\}, .len=207, ... \}}}}\\
+    \textcolor{ceVermelho}{\textbf{Violated property:}}\\
+    \textcolor{ceVermelho}{\hspace*{1em}file string.c line 280 function \_\_memcpy\_impl}\\
+    \textcolor{ceVermelho}{\hspace*{1em}dereference failure: Access to object out of bounds}\\
+    \textcolor{ceVermelho}{\textbf{VERIFICATION FAILED}}\\[-2pt]
+    \textcolor{ceCinza}{\rule{\linewidth}{0.3pt}}\\
+    \textcolor{ceAmarelo}{harness: 200 - 207 = -7 (int) -> size\_t enorme na compara\c{c}\~ao; guarda sempre falsa}\\
+    \textcolor{ceCinza}{ESBMC 8.1.0 + Boolector 3.2.4 -{}- log: medianas\_logs/GPS\_run1.log (igual em run2 e run3)}\\
+    \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26866 / PR \#27576}
+    \end{tcolorbox}
+    \caption{\corr{Reprodução}\artigo{, montada a partir do log do ESBMC~v8.1.0
+    com Boolector~3.2.4,} \corr{da saída do ESBMC:
+    \textit{underflow} sem sinal em \texttt{dumpGpsData()} propagando-se para
+    \texttt{memcpy} fora dos limites (no \textit{harness}, CWE-195 $\rightarrow$
+CWE-119; ver texto). O
+    \texttt{dump\_buffer} local do harness é o buffer \texttt{dump\_data}
+    passado ao driver. O traço literal consta do
+    Apêndice~\ref{apend:contraexemplos} e do repositório de artefatos.}}
+    \label{fig:ce-gps}
+\end{figure}
+
+Em hardware Pixhawk sem MMU, uma escrita fora dos limites pode corromper
+memória adjacente; sob o modelo de memória plana do NuttX ela não
+necessariamente levanta uma falha limpa. \revisao{O impacto preciso,
+porém, depende do arranjo em tempo de ligação}\artigo{, que não foi analisado
+aqui, e da alcançabilidade no alvo, tratada a seguir}\revisao{.}
+
+\artigo{A análise do código-fonte do driver de produção resolve essa questão
+negativamente: o laço de escrita limita \texttt{write\_len} ao espaço livre
+restante, de modo que o nível de preenchimento nunca excede o buffer antes de o
+registro ser publicado e o campo zerado. A violação é, portanto, alcançável no
+modelo, mas não no driver de produção. Ela é mantida aqui como a ilustração
+mais nítida da tese central da metodologia: um contraexemplo formalmente
+válido exige triagem contra o código de produção antes de poder ser chamado de
+defeito.} \artigo{Essa conclusão, obtida pelo mantenedor e por leitura do
+código, foi depois verificada formalmente (Seção~\ref{subsec:gps-inducao}).}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
+title=\textbf{Resposta à QE2 --- Violações em código sem teste unitário direto}]
+\corr{Parcial. O BMC expôs, no \textit{harness} do GPS, uma violação de
+segurança de memória alcançável no modelo, em uma função
+(\texttt{dumpGpsData}) que nenhum teste unitário do PX4 referencia. O estado
+violador, porém, é inalcançável no driver de produção
+(Seção~\ref{subsec:gps-inducao}); nenhum teste, unitário ou de integração,
+poderia exercitá-lo. O que a campanha demonstra para a QE2 é, portanto, mais
+restrito: a função não tem cobertura unitária direta, e a análise formal foi o
+que estabeleceu tanto a violação no modelo quanto a sua inalcançabilidade na
+produção. Na primeira campanha, nenhum defeito do driver foi exposto.}
+\end{tcolorbox}
+
+\corr{A ausência de teste unitário direto foi conferida em 09/07/2026 por busca
+textual na árvore do PX4 (registro em \texttt{evidencia\_unit\_test\_gps.txt},
+no repositório de artefatos). As únicas ocorrências de \texttt{dumpGpsData}
+estão em \texttt{src/drivers/gps/gps.cpp} (declaração na linha~303, chamadas nas
+linhas~428, 435, 457 e~660, definição na linha~727); nenhum arquivo de teste
+inclui \texttt{gps.cpp} nem instancia a classe \texttt{GPS}; e o único teste do
+diretório, \texttt{devices/gps-parser-test.cpp}, não menciona a função. O
+registro não guarda os comandos exatos nem o \textit{commit}; os números de
+linha coincidem com os do \textit{commit} \texttt{8be2590c15}. A busca evidencia
+ausência de cobertura unitária direta, e não de exercício indireto por SITL ou
+por testes de integração.}
+
+\subsection{Verificação do \textit{patch}}
+\label{subsec:patch-gps}
+
+\artigo{O artigo registra uma limitação da verificação do \textit{patch} então
+disponível: o CBMC~5.95.1 reportava $0$ de $7$ propriedades violadas no
+harness com a guarda do PR~\#27576, mas o harness \textbf{sem} a guarda
+reportava o mesmo $0$ de $7$, porque ambos assumiam
+\texttt{dump\_buffer.len}~$<$~\texttt{GPS\_DUMP\_DATA\_SIZE} --- pré-condição
+que exclui justamente os estados que a guarda trata. A comparação, portanto,
+não isolava o efeito da guarda, e não havia log do ESBMC para o harness
+corrigido.}
+
+\artigo{Para fechar essa lacuna, a verificação foi refeita em 11/10/2026 com
+\textbf{as mesmas pré-condições com e sem o \textit{patch}}, em duas formas da
+guarda: (a) a do PR~\#27576 (subtração em \texttt{int}; se não há espaço,
+zera \texttt{len} e interrompe o laço); e (b) a forma pedida pelo mantenedor na
+revisão do PR (no topo do laço, se \texttt{len} excede a capacidade, zera
+\texttt{len} e prossegue). A Tabela~\ref{tab:patch-gps} resume os
+desfechos.}
+
+\begin{table}[H]
+\centering
+\caption{\artigo{Verificação do \textit{patch} do GPS sob as mesmas pré-condições}}
+\label{tab:patch-gps}
+\footnotesize
+\begin{tabular}{|p{6.2cm}|c|c|c|}
+\hline
+\textbf{Ferramenta e harness} & \textbf{Sem \textit{patch}} & \textbf{PR \#27576} & \textbf{Forma do mantenedor} \\
+\hline
+\artigo{ESBMC~8.1.0 + Boolector~3.2.4; harness da Tabela~\ref{tab:resultados}, mesmas \textit{flags}} &
+\artigo{\textit{violação}} & \artigo{sem violação} & \artigo{sem violação} \\
+\artigo{CBMC~5.95.1; janela $\texttt{len} \geq 190$; \texttt{--unwind} 2, 3 e 5} &
+\artigo{\textit{violação}} & \artigo{sem violação} & \artigo{sem violação} \\
+\hline
+\end{tabular}
+
+\footnotesize
+\begin{flushleft}
+\artigo{ESBMC: sem \textit{patch}, 4.463 VCCs e o mesmo contraexemplo da
+Tabela~\ref{tab:resultados} (\texttt{input\_len = 10},
+\texttt{dump\_buffer.len = 207}); PR~\#27576, 3.453 VCCs; forma do mantenedor,
+4.760 VCCs. CBMC: sem \textit{patch}, 1 de 73 propriedades violadas
+(\textit{memcpy destination region writeable}) nos três limites; com as
+guardas, 0 de 73 e 0 de 79. As cópias do harness com \textit{patch} diferem do
+original apenas no laço de \texttt{dumpGpsData()}. O ESBMC~8.1.0 usado foi
+recompilado da \textit{tag} \texttt{v8.1} com Boolector~3.2.4 e validado contra
+os logs de julho (mesmas contagens de VCC e mesmos contraexemplos). Execuções
+em máquina de nuvem: só os vereditos são reportados; os tempos não são
+comparáveis aos da Tabela~\ref{tab:resultados}.}
+\end{flushleft}
+\end{table}
+
+\artigo{Sob as mesmas pré-condições, as duas formas da guarda eliminam a
+violação que o harness sem \textit{patch} exibe, nas duas ferramentas. O
+escopo continua limitado: são verificações até o limite de desenrolamento, sem
+asserções de desenrolamento, como na Tabela~\ref{tab:resultados}; e, como a
+próxima seção mostra, o estado que a guarda trata não ocorre no driver de
+produção, de modo que o \textit{patch} só se justifica como endurecimento
+defensivo --- exatamente o enquadramento dado pelo mantenedor.}
+
+\subsection{\artigo{Inalcançabilidade no driver de produção: prova indutiva}}
+\label{subsec:gps-inducao}
+
+\artigo{O argumento do mantenedor --- que \texttt{len} nunca excede a
+capacidade no programa real --- foi verificado formalmente sobre uma cópia
+literal do laço de \texttt{GPS::dumpGpsData()} (\texttt{gps.cpp}, linhas
+727--761 do \textit{commit} \texttt{8be2590c15}), com os tipos reais:
+\texttt{len} em \texttt{size\_t}, \texttt{sizeof(dump\_data->data)}~$= 79$ e
+\texttt{dump\_data->len} em \texttt{uint8\_t}. A prova é por indução sobre o
+invariante $I$: \texttt{dump\_data->len}~$< 79$.}
+
+\begin{itemize}
+\item \artigo{\textbf{Base.} \texttt{GPS::initializeCommunicationDump()} zera os
+dois buffers com \texttt{memset} (linhas 717--718), logo $I$ vale antes da
+primeira chamada.}
+\item \artigo{\textbf{Passo.} A partir de um estado arbitrário que satisfaz $I$
+e de um comprimento de entrada arbitrário ($1 \leq \texttt{len} \leq 4096$), uma
+iteração do laço não acessa fora dos limites no \texttt{memcpy} e preserva $I$.
+Verificado com o CBMC~5.95.1 (0 de 124 propriedades violadas) e com o
+ESBMC~8.1.0 + Boolector~3.2.4 (447 VCCs, \textsc{verification successful}, com
+asserções de desenrolamento \textbf{ligadas}).}
+\item \artigo{\textbf{Premissa.} \texttt{dumpGpsData()} é a única função que
+escreve \texttt{dump\_data->len}: no \textit{commit} verificado, as escritas
+estão nas linhas 747--757, e os ponteiros para os buffers são membros privados
+da classe.}
+\end{itemize}
+
+\artigo{Como controle negativo, o mesmo corpo sem a hipótese $I$ é refutado
+pelas duas ferramentas (acesso fora dos limites no \texttt{memcpy}), o que mostra
+que o harness detectaria o defeito se o invariante não valesse. Diferentemente
+dos resultados da Tabela~\ref{tab:resultados}, este não depende de limite de
+desenrolamento: o harness não tem laço próprio, e o único laço (o modelo de
+\texttt{memcpy}, de no máximo 79 iterações) é coberto com asserção de
+desenrolamento ativa. Logo, em toda execução do driver real o \texttt{memcpy}
+permanece dentro do buffer, e o estado violador do harness
+(\texttt{len = 207}) é inalcançável na produção. O resultado transforma a
+triagem por leitura de código em evidência formal e ilustra a etapa~(v) da
+metodologia aplicada ao próprio contraexemplo.}
+
+\corr{A premissa de escritor único foi conferida por busca dos dois ponteiros
+em \texttt{gps.cpp} no \textit{commit} verificado. \texttt{\_dump\_to\_device} e
+\texttt{\_dump\_from\_device} aparecem apenas na declaração (linhas 224--225),
+na liberação (410--411), na alocação e no teste de nulo (709--712), no
+\texttt{memset} (717--718) e na seleção do buffer dentro de
+\texttt{dumpGpsData()} (729). Não são passados a outra função nem expostos por
+método de acesso, e a publicação recebe o conteúdo por referência para cópia;
+não há, portanto, outro nome pelo qual \texttt{len} possa ser escrito
+(\textit{aliasing}).}
+
+\corr{A conclusão depende de três hipóteses, que a prova não verifica: (i)~as
+chamadas a \texttt{dumpGpsData()} sobre um mesmo buffer não se intercalam, isto
+é, não há escrita concorrente; (ii)~a memória do buffer não é corrompida por um
+defeito em outra parte do \textit{firmware}; e (iii)~compilador e
+\textit{hardware} executam o código conforme a semântica da linguagem. Sob
+qualquer violação dessas hipóteses o invariante pode deixar de valer, e a guarda
+proposta no PR~\#27576 passaria a ter efeito.}
+
+\section{Discussão}
+\label{sec:discussao-resultados}
+
+\subsection{Configuração, \textit{soundness} e tempo}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
+title=\textbf{Resposta à QE3 --- Configurações por módulo}]
+\corr{Nove dos doze módulos verificam-se sob a invocação padrão, sem qualquer
+ajuste. Apenas três exigiram configuração específica: MAVLink com
+\texttt{--unwind~300} (laços profundos de \textit{parsing}), Navigator com
+\texttt{--unwind~15} e VTOL com \texttt{--no-library} (desabilita a biblioteca C
+abstrata). Todas estão documentadas no repositório de artefatos. O custo de
+adoção da metodologia é, portanto, baixo: a maioria dos módulos não requer
+sintonia alguma.}
+\end{tcolorbox}
+
+\lc{Baixo custo de adoção ignora esforço de harness e triagem; reportar horas por módulo.}
+
+%% [BANCA - Prof. Barreto] "Ha uma tendencia do pessoal de metodos formais em achar que
+%% o teste e pior que a verificacao formal. Cada um tem o seu lugar."
+\revisao{Convém evitar uma assimetria comum na literatura de métodos formais: apontar a
+cobertura limitada dos testes sem reconhecer que a verificação formal está sujeita à mesma
+limitação, apenas por outra via. A cobertura do teste é limitada pelos casos que alguém
+escreveu; a do BMC é limitada por três fatores igualmente humanos --- as \emph{propriedades}
+que se escolheu especificar, a \emph{profundidade} até a qual se decidiu desenrolar, e o
+\emph{recorte} de código submetido ao verificador. Uma falha de lógica de negócio para a qual
+nenhuma propriedade foi formulada passa despercebida por um verificador tão silenciosamente
+quanto por uma suíte de testes que não a exercita.}
+
+\revisao{A diferença entre as duas abordagens não é, portanto, de completude, mas de
+\emph{natureza da garantia}: dentro do recorte especificado, o BMC cobre exaustivamente todas
+as entradas possíveis até o limite, enquanto o teste cobre exatamente as entradas escolhidas.
+Cada uma alcança o que a outra não alcança, e é nesse sentido preciso que são complementares
+--- e não em uma suposta superioridade de uma sobre a outra.}
+
+O BMC é \textit{sound} \artigo{e completo até o limite $k$}: violações reportadas são
+reais para o modelo codificado, mas a ausência de violações até a profundidade
+$k$ não é prova~\cite{Biere1999}.
+Dentro desse escopo, BMC e teste unitário são
+complementares~\cite{Godefroid2005}.
+
+\corr{Os dois módulos mais caros da campanha, à parte o GPS, são o MAVLink
+($49{,}2$\,s) e o EKF2 ($12{,}2$\,s). No caso do MAVLink, o custo acompanha o
+limite de desenrolamento elevado: com $k = 300$, cada iteração replica as
+instruções do laço na fórmula SMT, conforme discutido na
+Seção~\ref{subsec:escolha-k}. Não se atribui aqui o custo ao \textit{bit-blasting}
+de IEEE-754~\cite{Gadelha2020}, porque os dados da Tabela~\ref{tab:resultados}
+não sustentam essa explicação: o Expo RC é aritmética de ponto flutuante pura e
+verifica-se em $4{,}9$\,s, o Barômetro em $0{,}4$\,s e o VTOL, que emprega
+\texttt{sinf} e \texttt{sqrtf}, em $4{,}0$\,s. Isolar a contribuição do ponto
+flutuante exigiria execução controlada adicional, registrada como trabalho
+futuro.}
+
+\subsection{\revisao{Generalidade do padrão encontrado}}
+
+\revisao{Dois outros candidatos com subtração próxima a \texttt{memcpy}
+foram inspecionados (o \textit{statustext} do MAVLink e o RC Update) e não
+apresentam \textit{underflow} desprotegido. O padrão do GPS, portanto, não é
+disseminado nos módulos inspecionados.}
+
+\lc{Método de inspeção não informado; dizer se ESBMC ou leitura, e listar locais no código.}
+
+\subsection{\revisao{Observação entre autopilotos e integração contínua}}
+\label{subsec:ardupilot-ci}
+
+\revisao{A mesma observação de ausência de validação de faixa \artigo{(CWE-1284,
+\textit{Improper Validation of Specified Quantity in Input}, subclasse de
+CWE-20)} aparece no driver equivalente do ArduPilot~\cite{ArduPilot}: a execução do
+CBMC~5.95.1 sobre \texttt{AP\_InertialSensor\_BMI088.cpp} (linhas $383$--$385$)
+a reproduz, registrada na Issue~\#33272\footnote{\url{https://github.com/ArduPilot/ardupilot/issues/33272}}.
+Como os mantenedores do PX4 recusaram essa mesma observação, ela é reportada
+apenas como verificação de consistência entre autopilotos, e \textbf{não} como
+achado independente.} \artigo{Um mantenedor do ArduPilot encerrou a
+\textit{issue} citando a faixa de medição de $-104$ a $150\,^{\circ}$C do
+\textit{datasheet}; os dois projetos, portanto, recusaram a observação.}
+\revisao{Vale notar que o ArduPilot já protege o contador do FIFO
+(\texttt{fifo\_length}~$\leq 8 \times 7 = 56$ bytes,} \artigo{linhas 314--315 do
+ramo \textit{master} consultado em 12/10/2026}\revisao{).}
+
+\revisao{Um fluxo de trabalho do GitHub Actions em um \textit{fork} do
+PX4\footnote{\url{https://github.com/marcela2881/PX4-Autopilot}} executa os
+harnesses do IMU e do GPS a cada \textit{push} e \textit{pull request},
+integrando verificação baseada em harness a um \textit{pipeline} de CI padrão.
+Os tempos de relógio da CI não foram medidos sob configuração controlada.}
+
+%% [BANCA - Prof. Yuri] "A metodologia promete avaliar impacto e consequencias da falha
+%% no contexto de voo, mas eu nao senti que isso esta sendo feito nos exemplos."
+%% [BANCA - Prof. Reginaldo] "Nao e trivial fazer essa analise de criticidade. Para essa
+%% temperatura, sendo simples, da ate para comentar."
+%% DECISAO CONFIRMADA PELO LC: a analise e feita onde e tratavel (temperatura),
+%% com o criterio do Prof. Reginaldo, e declara-se por que nao se estende aos
+%% demais. O LC respondeu "vale tentar algo mais ambicioso" quanto ao SITL, que
+%% fica registrado como trabalho futuro por nao caber no cronograma ate a defesa.
+%% (Caixa \pergunta removida: questao respondida.)
+\section{\revisao{Análise de Severidade e Plausibilidade Operacional}}
+\label{sec:severidade}
+
+\revisao{Um contraexemplo demonstra que existe uma execução que viola a propriedade,
+mas nada diz sobre duas questões que interessam a quem opera o veículo: \emph{quão grave} é a
+violação e \emph{quão plausível} é que o estado que a produz ocorra em voo. O verificador não
+ordena achados por severidade nem avalia verossimilhança operacional --- essa etapa é humana e
+constitui parte da triagem. Esta seção a executa onde ela é tratável e explicita por que não
+se estende a todos os casos.}
+
+\subsection{\revisao{Temperatura do BMI088}}
+
+\revisao{Para esta propriedade a análise de severidade é decidível a partir do próprio
+código, e reduz-se a uma pergunta: existe, a jusante do driver, algum mecanismo que sinalize a
+leitura anômala?}
+
+\revisao{Se a pilha de software emite alarme ao ultrapassar os $85\,^\circ$C
+especificados, então o fato de a variável admitir $86{,}25\,^\circ$C é apenas margem de
+representação, sem consequência operacional: o sistema já sabe que a leitura é inválida. Se,
+ao contrário, nenhuma camada sinaliza a excursão, a situação é qualitativamente distinta ---
+o veículo pode estar operando fora da faixa certificada do componente sem que isso seja
+comunicado ao operador ou à lógica de \textit{failsafe}. A responsabilidade em jogo não é a de
+impedir o sobreaquecimento, que é fenômeno físico, mas a de \emph{medir e informar} a
+temperatura, que é responsabilidade de software.}
+
+\revisao{No PX4} \artigo{(\textit{commit} \texttt{8be2590c15})}\revisao{, a temperatura do BMI088 não alimenta o caminho inercial e não
+existe alarme dedicado a excursões dessa grandeza no nível do driver. A severidade, portanto,
+não é a de perda de controle, mas a de \textbf{perda de observabilidade}: uma leitura fora de
+faixa é consumida silenciosamente. Essa é precisamente a razão pela qual a observação foi
+mantida como nota de projeto após a recusa upstream --- é um achado de qualidade de
+instrumentação, não de segurança de voo, e essa distinção só se torna visível quando a análise
+de severidade é feita.}
+
+\corr{Os consumidores da leitura foram levantados por busca textual no
+\textit{commit} analisado. O driver publica a temperatura depois de testar
+apenas se o valor é finito (\texttt{PX4\_ISFINITE}); não há comparação com a
+faixa do \textit{datasheet}. A jusante, o campo é lido em quatro lugares:
+\texttt{sensors/vehicle\_imu}, que calcula a média e a publica em
+\texttt{vehicle\_imu\_status}; os fluxos \texttt{SCALED\_IMU} do MAVLink, que a
+enviam à estação de solo; \texttt{drivers/heater}, que a usa como realimentação
+do aquecedor da IMU; e \texttt{modules/temperature\_compensation}, que, quando
+habilitado por parâmetro (\texttt{TC\_A\_ENABLE}), calcula a partir dela a
+correção de \textit{offset} do acelerômetro. Nenhum desses pontos compara o
+valor com a faixa de $-40$ a $+85\,^{\circ}$C. Dois deles qualificam a afirmação
+de que a temperatura não alimenta o caminho inercial: com a compensação térmica
+habilitada ela influencia a correção aplicada à medida, e no controle do
+aquecedor ela fecha uma malha. O efeito de uma leitura fora de faixa nesses dois
+caminhos não foi analisado nesta dissertação.}
+
+\subsection{\revisao{Plausibilidade operacional da violação do GPS}}
+
+\revisao{Para o GPS a análise inicialmente ficou incompleta. A
+violação exige que \texttt{dump\_data->len} exceda 200 no momento da chamada. Como o campo é
+acumulado entre chamadas sucessivas, e como o recurso de \textit{dump} é ativado por
+parâmetro, estabelecer plausibilidade exigiria modelar a sequência de chamadas a montante ---
+isto é, demonstrar que os módulos abstraídos pelos \textit{stubs} podem efetivamente conduzir
+o driver a esse estado.}
+
+\artigo{Essa modelagem foi feita posteriormente, não por simulação da sequência de
+chamadas a montante, mas por análise direta do laço de escrita do próprio driver: ele
+limita \texttt{write\_len} ao espaço livre restante antes de cada incremento de
+\texttt{dump\_data->len}, de modo que o campo nunca excede a capacidade do buffer
+antes de o registro ser publicado e zerado. A pré-condição que o \textit{harness} assume
+--- \texttt{dump\_data->len} já acima de 200 ao entrar na verificação --- não tem
+como surgir no driver de produção, porque é o próprio laço de escrita que mantém
+esse invariante.}
+
+\revisao{A severidade, caso o estado fosse atingido, seria alta: em hardware sem
+MMU uma escrita fora dos limites pode corromper estado adjacente de voo.}
+\artigo{A plausibilidade, no entanto, está resolvida: o estado que dispara a
+violação é inalcançável no driver de produção. É essa combinação --- consequência
+potencialmente severa, mas restrita ao modelo do \textit{harness} --- que melhor
+descreve o achado, e que motivou a mudança de enquadramento junto ao mantenedor,
+de vulnerabilidade para endurecimento defensivo (PR~\#27576).}
+
+\artigo{A confirmação por simulação \textit{software-in-the-loop}, cogitada
+como caminho para estabelecer plausibilidade, deixou de ser necessária para
+este achado específico: a análise do código-fonte a resolveu diretamente. SITL
+permanece de interesse para casos futuros em que a leitura do código não for
+conclusiva por si só, e fica registrada nesse sentido mais geral entre as
+direções de trabalho futuro.}
+
+\subsection{\revisao{Por que a análise não se estende a todos os módulos}}
+
+\revisao{Dos doze módulos, dez não produziram violação, de modo que não há severidade a
+avaliar. Entre os três contraexemplos, o candidato do FIFO foi refutado \artigo{na conferência contra o código de produção} e
+sua severidade é, por construção, nula. Restam os dois casos analisados acima. A análise de
+criticidade em sentido pleno --- estabelecer a relação causal entre a violação e o desfecho da
+missão --- exigiria modelo da dinâmica do veículo e da propagação de erro entre módulos,
+elemento que está fora do escopo desta dissertação e que se registra como direção de trabalho
+futuro (Seção~\ref{sec:trabalhos-futuros-hw}).}
+
+\section{\corr{Resultados da Segunda Campanha}}
+\label{sec:resultados-segunda-campanha}
+
+\corr{A segunda campanha aplicou o método a dez módulos complementares, com
+verificação sobre o código original do PX4, validação cruzada com o CBMC em
+todos os \textit{harnesses} e \textit{replay} sob sanitizadores. O protocolo,
+as tabelas por frente e os registros estão na
+Seção~\ref{sec:segunda-campanha}; esta seção reúne os desfechos
+(Tabela~\ref{tab:desfechos-segunda}) e a validação em bancada.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Desfechos da segunda campanha, por módulo}}
+\label{tab:desfechos-segunda}
+\footnotesize
+\begin{tabular}{|p{5.6cm}|c|p{7.4cm}|}
+\hline
+\textbf{Desfecho} & \textbf{Módulos} & \textbf{Quais} \\
+\hline
+\corr{Defeito reproduzido no código real e corrigido \textit{upstream} por terceiros} & \corr{3} & \raggedright\corr{\texttt{externalChecks}, \texttt{ft7\_technologies}, \texttt{IridiumSBD}} \tabularnewline
+\hline
+\corr{Defeito reproduzido e reportado neste trabalho} & \corr{2} & \corr{RoboClaw (\textit{Issue}~\#29785), batmon (\textit{Issue}~\#29787)} \\
+\hline
+\corr{Defeito reproduzido, relatado por terceiro e não corrigido} & \corr{1} & \corr{\texttt{sumd}} \\
+\hline
+\corr{Defeito reproduzido, não reportado (impacto desprezível)} & \corr{1} & \corr{\texttt{MicroStrain}} \\
+\hline
+\corr{Falso positivo de modelagem, barrado na conferência} & \corr{1} & \corr{\texttt{bst}} \\
+\hline
+\corr{Sem defeito de memória} & \corr{2} & \corr{\texttt{logger}, \texttt{Common}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{Em sete dos dez módulos o efeito previsto pelo verificador foi reproduzido
+executando o código real do PX4. Em três deles, o próprio projeto corrigiu o
+mesmo ponto de forma independente, o que corrobora os achados sem que fosse
+preciso reportá-los. O único falso positivo, no \texttt{bst}, foi barrado pela
+conferência antes de qualquer relato público. O contraste com a primeira
+campanha é direto: lá, três contraexemplos não resultaram em defeito confirmado
+algum; aqui, nenhum candidato chegou a ser reportado sem ter sido antes
+reproduzido no código real. Os dois relatos abertos aguardavam triagem na data
+de fechamento deste texto. A campanha rendeu também uma correção fora do PX4: um
+defeito no modelo de \texttt{snprintf} do ESBMC, reportado e corrigido pelos
+mantenedores da ferramenta.}
+
+\subsection{\corr{Validação em bancada}}
+\label{subsec:validacao-bancada}
+
+\corr{Dois ensaios foram feitos numa Pixhawk~6X~RT com \textit{firmware}
+compilado do \textit{commit} analisado. Eles respondem a perguntas opostas: um
+mostra que um estado apontado pelo verificador \emph{não} ocorre na placa, e o
+outro, que um defeito apontado \emph{ocorre}.}
+
+\corr{\textbf{GPS (primeira campanha).} Com o registro da comunicação do GPS
+habilitado (\texttt{GPS\_DUMP\_COMM}~$= 1$), foram coletadas 175 mensagens
+\texttt{gps\_dump} em dois registros gravados pela placa em bancada, analisadas com
+\texttt{pyulog}. Em todas, o campo \texttt{len} vale 207, isto é, o bit~7
+(que marca dado enviado ao dispositivo) somado a 79~bytes, a capacidade do
+buffer: nenhuma mensagem excede a capacidade. O número coincide por acaso com o
+\texttt{len}~$= 207$ do contraexemplo, mas tem outro significado: no
+\textit{harness}, 207 é um nível de preenchimento acima de um buffer de
+200~bytes; na placa, é um buffer de 79~bytes exatamente cheio. O ensaio é
+consistente com a prova da Seção~\ref{subsec:gps-inducao}. Seu limite é que só
+o sentido da placa para o receptor foi exercitado, sem receptor GPS conectado.}
+
+\corr{\textbf{RoboClaw (segunda campanha).} Com um ESP32 no papel do
+controlador de motores, o valor de \textit{failsafe} em 257 e a terminação de
+voo acionada, a placa transmitiu o byte de dados 130, fora da faixa de 0 a 127
+aceita pelo protocolo; com o valor em 254, transmitiu 127; e, com a correção
+aplicada, voltou a transmitir 127 mesmo com 257. Os pacotes, as contagens e os
+limites do ensaio (controlador emulado, \textit{firmware} com o driver
+habilitado e dois membros inicializados, apenas o primeiro dos dois defeitos)
+estão na Seção~\ref{subsec:2c-roboclaw}.}
+
+\corr{Os dois ensaios cobrem, cada um, um único achado. Os demais resultados
+desta dissertação apoiam-se na verificação formal e, na segunda campanha, no
+\textit{replay} do código real em computador.}
+
+\section{Ameaças à Validade}
+\label{sec:ameacas-validade}
+
+\subsection{Validade interna}
+
+Os tempos reportados são medianas de três execuções e devem ser lidos apenas
+como ordens de grandeza. \corr{Na fase exploratória, um resultado do MAVLink com \texttt{--unwind~10}
+foi descartado como artefato de configuração: era desenrolamento insuficiente,
+resolvido com \texttt{--unwind~300} e confirmado pela reexecução com as
+asserções ligadas (Seção~\ref{subsec:escolha-k}). Um segundo candidato inicial,
+no EKF2, foi descartado na mesma fase, mas não há registro que permita
+descrevê-lo; por isso ele não é contado nem discutido neste trabalho.}
+\revisao{O \textit{underflow} do GPS é descarregado apenas pelo
+Boolector dentro do \textit{timeout}, de modo que o achado é sensível ao
+solver; a validação cruzada com CBMC mitiga artefatos específicos de
+ferramenta.}
+\artigo{Com o Z3, o ESBMC não produziu veredito dentro do \textit{timeout} no
+GPS, nem no MAVLink e no EKF2 com \texttt{--unwind 10}, nas re-execuções com a
+versão 8.1 (\texttt{validacao\_esbmc\_8.1/} no repositório); e a validação
+cruzada com o CBMC é parcial no GPS, pois só termina com limites reduzidos.}
+
+\corr{O limite de desenrolamento também é ameaça à validade interna.} A verificação foi limitada a $k = 10$ e, com
+\texttt{--no-unwinding-assertions} habilitado, laços que excedem o limite são
+truncados silenciosamente --- de modo que um veredito \textsc{successful} pode
+ocultar falsos negativos mesmo abaixo da profundidade operacional pretendida.
+\artigo{A reexecução com as asserções ligadas mostrou que isso não ocorre nos dez
+módulos sem violação (Tabela~\ref{tab:unwinding}); no GPS, porém, o laço do
+\texttt{memcpy} excede $k = 10$, e a análise desse módulo não o cobre por
+inteiro. Permanece, em todos os casos, o limite do recorte: o veredito vale
+para o \textit{harness}, e não para o módulo inteiro.}
+Os totais de VCC por módulo misturam limites de desenrolamento (10, 15 e 300) e
+não são diretamente comparáveis.
+
+\subsection{Validade externa}
+
+Selecionar módulos por viabilidade de \textit{stubbing} sub-representa módulos
+com acoplamento pesado a hardware ou ao escalonador, de modo que a amostra não
+é estatisticamente representativa do PX4; a mitigação é cobrir as principais
+classes de entrada não confiável. A análise modular não captura bugs de
+integração decorrentes de interações concorrentes, e os barramentos CAN/UAVCAN,
+a ponte RTPS/uXRCE-DDS e os drivers de fluxo óptico e telêmetro permanecem não
+verificados.
+
+\subsection{Validade de construto}
+
+\corr{A questão de construto é se as propriedades verificadas medem o que se
+pretende afirmar. Três ressalvas se aplicam. Primeiro, as asserções foram
+escritas pela autora a partir de \textit{datasheets} e da documentação, e uma
+delas, a faixa de temperatura do BMI088, foi contestada pelos mantenedores como
+requisito de software: violar a asserção não equivale a violar um requisito do
+projeto. Segundo, a asserção final do \textit{harness} do GPS é tautológica, e a
+propriedade efetivamente verificada ali é a checagem automática de limites do
+\texttt{memcpy} (Capítulo~\ref{cap:metodologia}). Terceiro, toda propriedade é
+verificada sobre o \textit{harness}, que transcreve e adapta o código: o
+veredito mede a segurança do modelo, e só a conferência contra o código de
+produção permite estendê-lo ao driver.}
+\corr{A comparação entre ESBMC com Boolector e CBMC com MiniSAT varia
+ferramenta e \textit{backend} conjuntamente, de modo que a propriedade distinta
+que cada uma reporta sobre o defeito do GPS reflete diferença de
+\textit{toolchain}, e não de SMT versus SAT isoladamente.}
+
+\subsection{\corr{Validade de conclusão}}
+
+\corr{Cada módulo foi executado três vezes e reporta-se a mediana, sem medida de
+dispersão. Isso sustenta afirmações de ordem de grandeza --- ``menos de noventa
+segundos'' --- mas não comparações finas entre módulos cujos tempos diferem por
+poucos segundos. Não há, além disso, \textit{baseline} de comparação: nenhuma
+outra técnica foi executada sobre os mesmos doze módulos para contraste, à
+exceção do CBMC em dois casos. Segue-se que a afirmação de viabilidade é
+absoluta, e não relativa: demonstra-se que a verificação é barata em termos
+próprios, não que seja mais ou menos barata que alternativas.}
+
+\subsection{\corr{Construção dos \textit{harnesses} com apoio de ferramenta de IA}}
+
+\corr{Conforme registrado na Declaração de Uso de IA, os \textit{harnesses}
+foram inicialmente montados com apoio de assistente de IA, a partir das regras
+de instrumentação do ESBMC e do código-fonte de cada módulo, e em seguida
+revisados manualmente pela autora. Trata-se de ameaça legítima à validade e
+merece registro explícito: um \textit{harness} gerado dessa forma pode
+reproduzir padrões plausíveis porém incorretos --- em particular, \textbf{omitir
+guardas presentes no código de produção}, que foi exatamente o mecanismo do
+falso positivo do contador de FIFO discutido na Seção~\ref{subsec:imu-fifo}.}
+
+\corr{A mitigação praticada tem duas camadas. A primeira é a revisão manual de
+cada \textit{harness} contra o código-fonte do módulo antes da execução. A
+segunda, e mais importante, é a etapa obrigatória de \artigo{conferência} contra o
+driver não instrumentado \artigo{(por \textit{replay} ou leitura do código)}, que capturou o único caso em que essa ameaça se
+materializou. O episódio do FIFO é, nesse sentido, evidência de que o método
+dispõe de mecanismo de refutação embutido, e não apenas de detecção.}
+
+\subsection{\revisao{Correção dos \textit{stubs}}}
+
+\revisao{Os \textit{stubs} que retornam \texttt{nondet\_T()}
+sobreaproximam apenas as \textbf{entradas} de hardware, não a lógica do driver
+ao redor: nenhuma violação é perdida por conta da abstração de entrada, mas
+quando o harness omite guardas de produção --- como mostrou o candidato do FIFO
+--- o modelo admite estados que o driver real rejeita. A legitimidade de um
+achado repousa, portanto, sobre a etapa obrigatória de \artigo{conferência} contra o
+driver não instrumentado.}
+
+\revisao{Inversamente, os \textit{stubs} \textbf{sub}aproximam o
+comportamento interno do hardware (máquinas de estado I2C e SPI, escalonamento
+do NuttX); defeitos disparados por esse estado interno não seriam detectados, o
+que torna a validação com hardware no laço um complemento necessário.}
+
+\subsection{\corr{Defeitos no verificador ou no solver}}
+
+\corr{Um veredito depende da correção do próprio verificador, do seu modelo das
+bibliotecas e do solver. A ameaça não é hipotética: durante a segunda campanha,
+o modelo de \texttt{snprintf} do ESBMC produziu um alarme falso, depois
+confirmado e corrigido pelos mantenedores da ferramenta
+(Seção~\ref{sec:segunda-campanha}). A mitigação praticada é parcial. Na
+primeira campanha, o CBMC, com outro \textit{front-end} e outro solver, foi
+executado apenas sobre os dois módulos com contraexemplo; os dez módulos sem
+violação foram verificados com uma única ferramenta e um único solver, de modo
+que um defeito que suprimisse uma violação neles passaria despercebido. Na
+segunda campanha, a validação cruzada com o CBMC cobre todos os
+\textit{harnesses}, e os candidatos alcançáveis foram ainda reproduzidos fora
+dos verificadores, por \textit{replay} sob sanitizadores.}
+
+\section{\corr{Lições Aprendidas}}
+\label{sec:licoes}
+
+\corr{Quatro lições atravessam as duas campanhas.}
+
+\corr{\textbf{Fidelidade do \textit{harness}.} Os dois falsos positivos deste
+trabalho, o contador de FIFO do BMI088 e o \texttt{bst}, têm a mesma origem: o
+\textit{harness} omitia guardas que o código de produção contém. Transcrever
+trechos é rápido, mas o veredito vale para a cópia. A segunda campanha passou a
+verificar o código original e a exigir \textit{replay} da função real, e foi
+essa exigência que barrou o \texttt{bst}.}
+
+\corr{\textbf{Reporte prematuro.} Na primeira campanha, as \textit{issues} do
+GPS e do FIFO foram abertas antes da conferência contra o código de produção, e
+a conferência depois enfraqueceu ou refutou os dois candidatos. A regra adotada
+em seguida foi reportar somente depois da conferência, do \textit{replay}, da
+consulta à especificação com página citada, da busca por relatos duplicados e
+da verificação do estado atual do código. O caso do RoboClaw acrescentou um
+item: conferir também em qual ramo o código analisado ainda existe, pois o
+driver havia sido reescrito no ramo principal entre a análise e o relato.}
+
+\corr{\textbf{Projeto das hipóteses de entrada.} A pré-condição decide o que o
+verificador pode encontrar, nos dois sentidos. No GPS, admitir um estado inicial
+acima da capacidade produziu uma violação que o driver real não alcança. No
+RoboClaw, restringir a saída à faixa declarada no \texttt{module.yaml}, de 0 a
+257, foi o que expôs o defeito; uma faixa mais estreita, de aparência razoável,
+o teria ocultado. Cada pré-condição precisa de origem documentada no código ou
+na especificação.}
+
+\corr{\textbf{Limites da ferramenta.} Três comportamentos do verificador
+exigiram atenção: o truncamento silencioso de laços com
+\texttt{--no-unwinding-assertions}, a sensibilidade do contraexemplo do GPS ao
+solver e um defeito no modelo de uma função de biblioteca. Nenhum invalidou os
+resultados, mas todos reforçam que um veredito isolado, de uma única ferramenta
+e configuração, é ponto de partida para a triagem, e não conclusão.}
+
