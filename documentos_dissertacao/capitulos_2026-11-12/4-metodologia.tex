@@ -1,32 +1,8 @@
-%% ═══════════════════════════════════════════════════════════════════════════
-%% CAPÍTULO 4 — METODOLOGIA   (versão da autora, 12/11/2026)
-%%
-%% CONVENÇÃO DE COR (definida em 000-main.tex):
-%%   \revisao{}  = PRETO — rodada anterior, já incorporada
-%%   \corr{}     = AZUL  — correções desta rodada
-%%   \pendente{} = LARANJA — pendência que exige ação antes da entrega
-%%
-%% ─── PENDÊNCIAS QUE RESTAM (atualizado 12/11/2026) ─────────────────────────
-%%  #8  [RESOLVIDA 12/11/2026] secao/pagina da faixa de temperatura: Secao 1.1, Tabela 1, p. 7; conversao: Secao 5.3.7, p. 28
-%%       (conferir tambem: citacao DS000-19 vs DS001 atual da Bosch)
-%%  #9  [RESOLVIDA 12/11/2026] RoboClaw #29785 e batmon #29787 reportados; sumd e MicroStrain nao reportados; ESBMC #8524
-%%       RoboClaw, batmon) .....................
-%% FECHADAS 12/11/2026: #1 (opções do workflow -> esbmc-verify.yml, lido no fork),
-%%  #2 (ref da declaração de IA), #3 (replay FIFO/GPS -> limitação),
-%%  #4 (harness GPS reexecutado: ESBMC 8.2.0/Z3, ~389s, SUCCESSFUL), #5 (ArduPilot
-%%  opcional), #6 (CI = smoke check CBMC; tempo descartado), #7 (lista SAGRES ->
-%%  limitação), #8-linhas (expo l.84, send_bytes l.852, FIFO SIZE l.152,
-%%  gps.cpp l.741 conferido).
-%% ───────────────────────────────────────────────────────────────────────────
-%% ═══════════════════════════════════════════════════════════════════════════
-
 \chapter{Metodologia}
 \label{cap:metodologia}
 
 %% LC 01 (resolvido 19/10/2026): "Incluir tabela: ferramentas, versoes, flags e
 %% hipoteses de modelagem para cada etapa." -> Tabela tab:etapas-ferramentas.
-%% [RESOLVIDO] Metodologia promovida a oito etapas. O replay e a validacao
-%% cruzada, antes implicitos na Etapa 5, passam a ser as Etapas 6 e 7.
 
 Este capítulo apresenta a metodologia empregada na verificação formal de módulos críticos do PX4 Autopilot com o ESBMC~\cite{Menezes2024}. O procedimento está organizado em oito etapas, conforme a numeração adotada no artigo derivado: (i) seleção dos módulos críticos; (ii) instrumentação para abstrair dependências de \textit{hardware}; (iii) especificação das propriedades de segurança; (iv) configuração e execução do ESBMC; (v) análise dos contraexemplos e conferência com o código de produção; (vi) reporte à comunidade PX4; (vii) validação cruzada com o CBMC e verificação de \textit{patches}; e (viii) reprodução em outro autopiloto (ArduPilot) e integração contínua. O módulo GPS uBlox é utilizado como exemplo para apresentar, de forma concreta, a aplicação dessas etapas.
 
@@ -77,16 +53,12 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \end{tabular}
 \end{table}
 
-% =============================================================================
 \section{Visão Geral da Abordagem}
 \label{sec:visao-geral}
-% =============================================================================
 
 \corr{A Figura~\ref{fig:metodologia-visao-geral} sintetiza as oito etapas da metodologia e indica como elas foram aplicadas nas duas campanhas. O fluxo destaca a conferência com o código de produção, necessária para distinguir violações reproduzíveis de resultados decorrentes das limitações do modelo.}
 
 %% LC 03 (resolvido 19/10/2026): seta "sem violacao" -> reporte removida.
-%% [12/11/2026] Figura atualizada para englobar as duas campanhas e recolorida
-%% para a paleta nude.
 \begin{figure}[!tb]
 \centering
 \resizebox{0.92\linewidth}{!}{%
@@ -109,42 +81,34 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
   outn/.style={base, text width=3.0cm, minimum height=10mm, fill=palPaper},
   rot/.style={font=\scriptsize\itshape, align=center}]
 
-  % --- espinha (i)-(v)
   \node[etapa] (e1) {(i) Seleção de módulos críticos};
   \node[firm, below=of e1] (e2) {(ii) Instrumentação com \textit{stubs} de \textit{hardware}};
   \node[firm, below=of e2] (e3) {(iii) Especificação de propriedades\\(\textit{datasheet}, documentação, código)};
   \node[etapa, below=of e3] (e4) {(iv) Configuração e execução do ESBMC};
   \node[etapa, below=of e4] (e5) {(v) Análise de contraexemplos};
 
-  % --- conferencia compartilhada, com os dois modos
   \node[conf, below=6mm of e5] (conf) {\textbf{Conferência contra o código de produção}\\[1pt]
     1.\textsuperscript{a} campanha: leitura do código\\
     2.\textsuperscript{a} campanha: \textit{replay} do código real {\footnotesize+} ASan/UBSan};
   \node[dec, below=6mm of conf] (dec) {Reproduz em\\produção?};
 
-  % --- desfechos
   \node[desf, below=10mm of dec] (def) {Defeito reproduzido / VAM};
   \node[outn, left=20mm of def] (fp) {Falso positivo (modelagem / ferramenta)};
   \node[outn, right=20mm of def] (ok) {Sem violação até o limite $k$};
 
-  % --- coluna direita (vi)-(viii)
   \node[dir, right=2.4cm of e1.north east, anchor=north west] (e6) {(vi) Reporte à comunidade PX4\\(condicionado à revisão)};
   \node[nova, below=of e6] (e7) {(vii) Validação cruzada (CBMC)\\e verificação de \textit{patch}};
   \node[nova, below=of e7] (e8) {(viii) Reprodução (ArduPilot)\\e integração contínua};
 
-  % --- setas da espinha e da coluna direita
   \foreach \a/\b in {e1/e2,e2/e3,e3/e4,e4/e5,e5/conf,conf/dec,e6/e7,e7/e8}
     \draw[->] (\a) -- (\b);
 
-  % --- decisao -> desfechos
   \draw[->] (dec) -- node[rot, right] {sim} (def);
   \draw[->] (dec.west) -| node[rot, pos=0.25, above] {guarda\\omitida} (fp.north);
   \draw[->] (dec.east) -| node[rot, pos=0.25, above] {nenhuma\\violação} (ok.north);
 
-  % --- defeito/VAM -> reporte (vi)
   \draw[->] (def.south) -- ++(0,-5mm) -| ([xshift=7mm]e6.east) -- (e6.east);
 
-  % --- legenda
   \node[firm, text width=3mm, minimum height=3mm, below=12mm of fp.south west,
     anchor=north west] (l1) {};
   \node[right=1mm of l1, font=\scriptsize, anchor=west] (t1) {etapas de \textit{firmware}};
@@ -223,8 +187,6 @@ A seleção dos módulos considerou dois critérios complementares: a relevânci
 
 %% LC 06 (resolvido 19/10/2026): "escrito manualmente" -> "assistencia de IA
 %% generativa e revisadas pela autora".
-%% [#2 RESOLVIDA 12/11/2026] A declaracao de IA e um \chapter* nao numerado
-%% (pre-textual, sem \label); trocou-se o \ref por referencia textual.
 \revisao{Cabe justificar a divisão em rodadas, já que o tempo total de execução do
 verificador é da ordem de poucos minutos e, isoladamente, não a justificaria. O custo
 dominante desta metodologia não é o tempo de máquina, e sim o \textbf{esforço humano} que o
@@ -416,8 +378,6 @@ derivado da entrada injetada, e não fixado por atribuição direta no programa 
 \textit{replay} --- caso em que se estaria demonstrando aritmética, e não
 alcançabilidade.}
 
-%% [#3 RESOLVIDA 12/11/2026] O replay de FIFO/GPS nao foi executado; a diferenca
-%% de procedimento da primeira campanha fica registrada como limitacao.
 Nos três contraexemplos da primeira campanha, a conferência foi
 feita por leitura do código de produção: o candidato do contador de FIFO foi
 refutado pela inspeção do driver do BMI088, e a inalcançabilidade do estado
@@ -510,8 +470,6 @@ no driver equivalente do ArduPilot~\cite{ArduPilot}
 medição de $-104$ a $150\,^{\circ}$C do \textit{datasheet}. A reprodução serve
 apenas como verificação de consistência: os dois projetos recusaram a
 observação.
-%% [#5 RESOLVIDA 12/11/2026] A repeticao com o ESBMC 8.5 era opcional; declarada
-%% como refinamento futuro.
 \corr{A repetição dessa reprodução com o ESBMC~8.5, para que a etapa empregasse
 as duas ferramentas também no ArduPilot, fica como refinamento futuro; como
 executada, a reprodução usou somente o CBMC.}
@@ -532,10 +490,8 @@ cada alteração do código, servindo de salvaguarda contra regressões; emprega
 CBMC, e não o ESBMC, por ser mais simples de instalar no ambiente de integração
 contínua.}
 
-% =============================================================================
 \section{Exemplo Ilustrativo: GPS uBlox}
 \label{sec:exemplo-ilustrativo}
-% =============================================================================
 
 A Listagem~\ref{lst:exemplo-harness-gps} apresenta o fragmento central do harness construído para o GPS uBlox, destacando os elementos essenciais da metodologia: a declaração da entrada não determinística (\revisao{\texttt{nondet\_size\_t()}}), a \textit{assumption} que restringe o domínio (\texttt{\_\_ESBMC\_assume}) e a \textit{assertion} que expressa a propriedade de segurança verificada. O código completo de todos os harnesses e os logs de execução do ESBMC estão disponíveis em \url{https://github.com/marcela2881/dissertacao-px4-esbmc}.
 
@@ -594,8 +550,6 @@ propriedade efetivamente verificada neste teste. Uma propriedade de saída
 significativa seria \texttt{dump\_buffer.len <= GPS\_DUMP\_DATA\_SIZE} após a
 chamada, sem os termos disjuntivos.}
 
-%% [#4 RESOLVIDA 12/11/2026] Harness reexecutado: ESBMC 8.2.0, Z3, ~389 s,
-%% VERIFICATION SUCCESSFUL. Log em resultados/GPS/gps_prop_limpa.txt.
 \corr{Para separar o que é defeito do que é artefato dessa modelagem, o
 \textit{harness} foi reexecutado com a propriedade de saída na forma não
 tautológica (\texttt{dump\_buffer.len <= GPS\_DUMP\_DATA\_SIZE}) e partindo de um
@@ -635,8 +589,6 @@ caminho não são idênticos; por isso, o resultado vale para o modelo, e a
 conclusão sobre o driver depende da conferência da etapa~(v). Essa limitação,
 comum a toda a primeira campanha, motivou a segunda campanha, em que o código
 verificado é o original (Seção~\ref{sec:segunda-campanha}).}
-
-%% [RESOLVIDO] Os tres numeros corrigidos (1.712 LoC; 64,9 s; oito etapas).
 
 Para concretizar a aplicação da metodologia, esta seção percorre
 \revisao{as oito etapas} tendo o driver GPS uBlox como objeto de verificação. O driver,
@@ -713,10 +665,8 @@ três execuções) e o CBMC não terminou dentro do limite
 se aplica a este achado, já que ela foi feita apenas para a observação de
 temperatura do BMI088.
 
-% =============================================================================
 \section{Seleção dos Módulos para Verificação}
 \label{sec:selecao-modulos}
-% =============================================================================
 
 \revisao{O procedimento de seleção combinou duas etapas de natureza distinta, e convém explicitá-las separadamente. A primeira é o \textbf{levantamento do conjunto candidato}, que não foi algorítmico: os módulos foram indicados pela equipe do projeto SAGRES em reunião, com base na experiência operacional da equipe sobre quais componentes são mais determinantes para missões de sensoriamento remoto em áreas remotas. Trata-se, portanto, de elicitação junto a especialistas do domínio, e não de um estudo sistemático de criticidade --- distinção que se registra aqui para que o leitor possa avaliar o alcance da amostra (Seção~\ref{sec:ameacas-validade}, no Capítulo~\ref{cap:experimentos}).}
 
@@ -744,8 +694,6 @@ temperatura do BMI088.
 \end{algorithmic}
 \end{algorithm}
 
-%% [#7 RESOLVIDA 12/11/2026] A nao reprodutibilidade da lista de candidatos fica
-%% declarada como limitacao (os registros do SAGRES nao foram preservados).
 O tamanho do conjunto candidato indicado pela equipe e os eventuais
 descartes em cada critério não foram registrados durante a pesquisa; por isso,
 não se pode afirmar quantos candidatos o filtro eliminou, e a etapa de
@@ -800,14 +748,12 @@ cobertura para monitoramento, navegação e estimação de estado.
         text width=2.6cm, minimum height=3.6cm},
       tit/.style={font=\small\bfseries}]
       \node[bus] (u) {\textbf{uORB}\\(barramento de mensagens\\\textit{publish--subscribe})};
-      % publicadores
       \node[ver, left=22mm of u, yshift=24mm] (imu) {\textbf{IMU BMI088}};
       \node[ver, below=3mm of imu] (gps) {\textbf{GPS uBlox}};
       \node[ver, below=3mm of gps] (mag) {\textbf{Magnetômetro}\\e \textbf{Barômetro}};
       \node[ver, below=3mm of mag] (rc) {\textbf{RC Update}\\e \textbf{Expo RC}};
       \node[ver, below=3mm of rc] (bat) {\textbf{Battery Monitor}};
       \node[tit, above=3mm of imu] {Publicadores};
-      % assinantes
       \node[ver, right=22mm of u, yshift=24mm] (ekf) {\textbf{EKF2}\\(covariância)};
       \node[ver, below=3mm of ekf] (nav) {\textbf{Navigator/Mission}};
       \node[nver, below=3mm of nav] (ctl) {Controle de posição\\e de atitude};
@@ -820,7 +766,6 @@ cobertura para monitoramento, navegação e estimação de estado.
       \draw[<->] (u.south) -- (mav.north);
       \node[left=1mm of u.north west, anchor=south east, font=\scriptsize\itshape] {\texttt{orb\_publish()}};
       \node[right=1mm of u.north east, anchor=south west, font=\scriptsize\itshape] {\texttt{orb\_copy()}};
-      % legenda
       \node[ver, text width=4mm, minimum height=4mm, below=6mm of mav.south west, xshift=-52mm, anchor=north west] (l1) {};
       \node[right=1mm of l1, anchor=west, font=\scriptsize] (t1) {módulo verificado neste trabalho (12 módulos)};
       \node[nver, text width=4mm, minimum height=4mm, right=6mm of t1] (l2) {};
@@ -833,10 +778,8 @@ cobertura para monitoramento, navegação e estimação de estado.
     \label{fig:px4-modular}
 \end{figure}
 
-% =============================================================================
 \section{Instrumentação e Preparação do Código}
 \label{sec:instrumentacao}
-% =============================================================================
 
 A verificação formal de firmware embarcado apresenta desafios relacionados a
 dependências de hardware. O PX4 utiliza intensivamente a HAL do NuttX e as bibliotecas de comunicação I2C, SPI e UART~\cite{PX4_Documentation}. Executar o verificador sobre o código original resultaria em falhas de compilação pela ausência dessas dependências no ambiente de verificação.
@@ -911,10 +854,8 @@ FIFO (Seção~\ref{subsec:imu-fifo}). É por isso que a conferência contra o c�
 de produção, na etapa~(v), é obrigatória. \corr{Essa limitação é a principal
 motivação da segunda campanha.}
 
-% =============================================================================
 \section{Propriedades Verificadas}
 \label{sec:propriedades}
-% =============================================================================
 
 As propriedades de segurança foram organizadas em duas categorias: automáticas,
 verificadas pelo ESBMC a partir das flags de configuração, e customizadas,
@@ -1123,7 +1064,6 @@ nunca excede sua capacidade, de 280 bytes, o tamanho máximo de pacote do
 protocolo, mesmo com pacotes de entrada maiores que ela e após envios
 sucessivos.
 
-% =============================================================================
 \subsection{\revisao{Proveniência das Propriedades}}
 \label{subsec:proveniencia}
 
@@ -1203,7 +1143,6 @@ Seção~\ref{subsec:imu-temperatura} do Capítulo~\ref{cap:experimentos}.}
 
 \section{Análise de Contraexemplos}
 \label{sec:contraexemplos}
-% =============================================================================
 
 %% LC 27 (resolvido 19/10/2026): secao reduzida a escala de classificacao.
 %% LC 28 (resolvido 19/10/2026): falha reportada e limite do memcpy.
@@ -1231,10 +1170,8 @@ ferramenta} decorre do verificador, e não do código. Os desfechos da segunda
 campanha e os valores concretos de cada contraexemplo são apresentados no
 Capítulo~\ref{cap:experimentos} e no Apêndice~\ref{apend:contraexemplos}.}
 
-% =============================================================================
 \section{\corr{Segunda Campanha: Código de Produção, \textit{Replay} e Sanitizadores}}
 \label{sec:segunda-campanha}
-% =============================================================================
 
 \corr{A primeira campanha mostrou a limitação de verificar trechos transcritos:
 o veredito vale para a cópia, e a conclusão sobre o driver depende de uma
@@ -1532,7 +1469,6 @@ programa mínimo e reportado ao projeto ESBMC (\textit{Issue}~\#8524, de
 12/10/2026); os mantenedores confirmaram o problema também no ramo principal e o
 corrigiram (PR~\#8563).}
 
-% =============================================================================
 \section{Resumo}
 \label{sec:resumo-metodologia}
 

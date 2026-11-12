@@ -1,7 +1,5 @@
-%--------------------------------------------
 \chapter{Fundamentação Teórica}
 \label{cap:fundamentacao}
-%--------------------------------------------
 
 Este capítulo reúne os conceitos que sustentam as decisões metodológicas do
 trabalho: o funcionamento do \textit{Bounded Model Checking}, as razões para o
@@ -281,7 +279,6 @@ $k$~\cite{Menezes2024}.
       text width=2.3cm, inner sep=2pt, minimum height=8mm},
     sat/.style={draw=palEdgeDark, line width=0.8pt, fill=palStrong, rounded corners=2pt, align=center, text width=2.6cm, inner sep=3pt},
     unsat/.style={draw=palEdge, fill=palPaper, rounded corners=2pt, align=center, text width=2.6cm, inner sep=3pt}]
-    % frontends
     \node[fe] (c) {\textbf{C/C++}\\Clang (AST)};
     \node[fe, below=1.5mm of c] (k) {\textbf{Java/Kotlin}\\Soot (Jimple)};
     \node[fe, below=1.5mm of k] (s) {\textbf{Solidity}\\gramática};
@@ -290,7 +287,6 @@ $k$~\cite{Menezes2024}.
     \begin{scope}[on background layer]
       \node[draw=palEdge, fill=palPaper, rounded corners=3pt, fit=(fet)(c)(p), inner sep=3pt] (fes) {};
     \end{scope}
-    % pipeline
     \node[bloco, right=9mm of fes, text width=2.5cm] (goto) {\textbf{Programa GOTO}\\representação intermediária};
     \node[bloco, right=7mm of goto, text width=2.7cm] (sym) {\textbf{Execução simbólica}\\BMC, $k$-indução,\\interpretação abstrata,\\\textit{slicing}};
     \node[bloco, right=7mm of sym, text width=2.6cm] (vcc) {\textbf{Condições de verificação}\\(VCCs)};
@@ -405,7 +401,6 @@ além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
       align=center, text width=2.6cm, minimum height=18mm},
     grp/.style={draw=palEdge, dashed, rounded corners=5pt, inner sep=6pt}]
 
-    % --- Publishers (esquerda)
     \node[verif] (imu) {\textbf{IMU Driver}\\(BMI088)};
     \node[verif, below=10mm of imu] (gps) {\textbf{GPS Driver}\\(uBlox)};
     \node[verif, below=10mm of gps] (rc) {\textbf{RC Input / Expo}};
@@ -413,10 +408,8 @@ além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
     \node[tabp, above=1.5mm of gps] (tgps) {Publisher};
     \node[tabp, above=1.5mm of rc]  (trc)  {Publisher};
 
-    % --- Barramento uORB (centro)
     \node[bus, right=30mm of gps] (uorb) {\textbf{uORB}\\barramento de\\mensagens};
 
-    % --- Subscribers (direita)
     \node[plano, right=30mm of uorb] (fc) {\textbf{Controle de voo}};
     \node[plano, above=10mm of fc]  (ekf) {\textbf{EKF / Estimador de estado}};
     \node[verif, below=10mm of fc]  (mav) {\textbf{MAVLink}};
@@ -424,7 +417,6 @@ além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
     \node[tabs, above=1.5mm of fc]  (tfc)  {Subscriber};
     \node[tabs, above=1.5mm of mav] (tmav) {Subscriber};
 
-    % --- caixas tracejadas dos grupos
     \begin{scope}[on background layer]
       \node[grp, fit=(timu)(imu)(trc)(rc)]   (gpub) {};
       \node[grp, fit=(tekf)(ekf)(tmav)(mav)] (gsub) {};
@@ -432,7 +424,6 @@ além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
     \node[font=\bfseries, above=1.5mm of gpub] {Publishers};
     \node[font=\bfseries, above=1.5mm of gsub] {Subscribers};
 
-    % --- fluxos
     \draw[->] (imu.east) -- node[above, font=\scriptsize\itshape] {orb\_publish()} (uorb.west);
     \draw[->] (gps.east) -- (uorb.west);
     \draw[->] (rc.east)  -- (uorb.west);
@@ -440,7 +431,6 @@ além da interface de comunicação MAVLink~\cite{PX4_Documentation}.
     \draw[->] (uorb.east) -- (fc.west);
     \draw[->] (uorb.east) -- (mav.west);
 
-    % --- legenda
     \node[verif, text width=5.2cm, minimum height=7mm, below=26mm of uorb] (leg)
       {\textbf{Exemplos de módulos verificados}};
   \end{tikzpicture}}

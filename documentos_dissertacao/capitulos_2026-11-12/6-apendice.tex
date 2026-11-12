@@ -1,17 +1,5 @@
-%% ═══════════════════════════════════════════════════════════════════════════
-%% CONVENCAO DE COR NESTE ARQUIVO
-%%   AZUL  (\corr{})  = alterado nesta rodada de correcoes (parecer LC)
-%%   PRETO (\revisao{})         = rodada anterior, ja incorporada (sem cor)
-%%   LARANJA (\pendente{})      = pendencia que exige acao de Marcela antes da entrega
-%% ═══════════════════════════════════════════════════════════════════════════
-
 \chapter[Produção Científica Derivada desta Dissertação]{\corr{Produção Científica Derivada desta Dissertação}}
 \label{apend:producoes}
-
-%% ALTERADO (LC, ponto 1): titulo trocado de "Producoes Cientificas em Andamento".
-%% O novo titulo cobre os tres desfechos possiveis ate a entrega (aceito, recusado,
-%% em avaliacao) sem precisar de nova alteracao. Se o artigo for ACEITO ate outubro,
-%% atualizar apenas o campo Status abaixo.
 
 \artigo{O artigo científico derivado desta pesquisa foi aceito para publicação:}
 \begin{itemize}
@@ -22,8 +10,6 @@
   \item \textbf{Veículo:} XVI Simpósio Brasileiro de Engenharia de Sistemas
         Computacionais (SBESC~2026), trilha de artigo completo, Salvador/BA,
         24 a 27 de novembro de 2026
-  %% [12/10/2026] Status confirmado pela autora: aceito; a versao final e a
-  %% enviada a esta revisao. Acrescentar paginas/DOI dos anais quando publicados.
   \item \textbf{Status:} \artigo{Aceito (submissão \#33507); versão final
         enviada em outubro de 2026}
   \item \textbf{Artefato:} \textit{harnesses}, logs de execução e instruções de
@@ -32,19 +18,8 @@
         disponíveis em \url{https://github.com/marcela2881/dissertacao-px4-esbmc}
 \end{itemize}
 
-
-% =============================================================================
 \chapter[Harness Completo --- GPS uBlox]{\corr{Harness Completo --- GPS uBlox}}
 \label{apend:harness-gps}
-% =============================================================================
-
-%% CAPITULO NOVO — atende ao ponto (2) [IMPORTANTE] do parecer do LC: o documento
-%% reivindica reprodutibilidade e cita ~2.800 linhas de harness, mas nenhum harness
-%% completo aparece no texto. Um harness integral resolve de uma vez as divergencias
-%% de assinatura, a duvida sobre a pre-condicao e a verificacao das flags usadas.
-%%
-%% ACAO: colar o conteudo LITERAL de test_gps_driver.cpp no lugar indicado
-%% (~/dissertacao-px4-esbmc/resultados/GPS/test_gps_driver.cpp).
 
 \corr{Este apêndice reproduz na íntegra o \textit{harness} de
 verificação do módulo GPS uBlox, \texttt{test\_gps\_driver.cpp}, desenvolvido
@@ -53,8 +28,6 @@ caso desenvolvido de ponta a ponta nesta dissertação: dele decorre o
 contraexemplo apresentado na Seção~\ref{sec:contraexemplo-gps}}\artigo{, e
 sobre ele foram feitas a verificação do \textit{patch} e a análise de
 alcançabilidade discutidas no Capítulo~\ref{cap:experimentos}.}
-%% [12/10/2026] "validacao em hardware" retirada: nao houve validacao em
-%% hardware (ver Cap. 6, trabalhos futuros).
 
 \corr{A reprodução integral, e não por fragmentos, permite ao leitor
 verificar diretamente três pontos que fragmentos não sustentam: a assinatura
@@ -68,11 +41,6 @@ distintas sobre o comprimento de entrada e sobre o estado inicial do buffer, o
 que explica por que um mesmo módulo admite contraexemplos com valores diferentes
 conforme o teste alcançado primeiro pelo verificador.}
 
-%% [11/10/2026] PENDENCIA RESOLVIDA: harness literal incluido a partir de
-%% codigo/test_gps_driver.cpp, copia byte a byte de
-%% resultados/GPS/test_gps_driver.cpp (commit b535829), so com as quebras de
-%% linha CRLF convertidas para LF. Acentos tratados pelo \lstset{literate}
-%% de 000-main.tex.
 \artigo{O arquivo tem 294 linhas (Tabela~\ref{tab:modulos}) e é reproduzido sem
 edição a partir do repositório de artefatos. O contraexemplo da
 Tabela~\ref{tab:resultados} vem do teste selecionado por
@@ -101,8 +69,6 @@ laço, da guarda de espaço, do \texttt{memcpy} e da operação de bit é a do
 driver. A diferença de capacidade é a mais relevante para a interpretação do
 contraexemplo e é discutida na Seção~\ref{subsec:gps-inducao}.}
 
-%% [12/10/2026] Conteudo de codigo/test_gps_driver.cpp colado aqui (antes era
-%% \lstinputlisting): o apendice nao depende mais da pasta codigo/.
 \begin{lstlisting}[
   caption={\artigo{\textit{Harness} \texttt{test\_gps\_driver.cpp} (literal)}},
   label={lst:harness-gps},
@@ -413,37 +379,11 @@ int main() {
  */
 \end{lstlisting}
 
-
-% =============================================================================
 \chapter{Contraexemplos Gerados pelo ESBMC}
 \label{apend:contraexemplos}
-% =============================================================================
 
 %% Prof. Lucas (qualificacao): "Poderias mostrar o contraexemplo gerado pelo ESBMC
 %% no apendice." -- ATENDIDO: apendice adicionado.
-
-%% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-%% [RESOLVIDO] PENDENCIA DOS LOGS LITERAIS
-%%
-%% O parecer do LC apontou que os numeros deste apendice contradiziam os do Cap. 5
-%% e que o Contraexemplo 1 era aritmeticamente inconsistente. A causa foi
-%% identificada: o apendice MISTURAVA DOIS RUNS DISTINTOS do ESBMC v7.10.0.
-%%
-%%   Run A (relatorio interno de 25/01/2026):  temp_msb=64, temp_lsb=0
-%%                                             -> Temp_uint11=512 -> 87,00 C
-%%   Run B (figura do artigo, Issue #26865):   temp_msb=63, temp_lsb=95
-%%                                             -> Temp_uint11=506 -> 86,25 C
-%%
-%% Ambos sao validos: temp_msb e temp_lsb sao totalmente nao-deterministicos, logo
-%% qualquer par que ultrapasse 85 C satisfaz a violacao, e a escolha da testemunha
-%% e do solver. O apendice havia ficado com a ENTRADA do run A e o RESULTADO do
-%% run B — dai a inconsistencia (512 x 0,125 + 23 = 87,00, nao 86,25).
-%%
-%% CORRECAO APLICADA: adotado integralmente o run B, que e o publicado no artigo
-%% #33507, na Fig. ce-imu-temp e na Issue #26865. Valores conferidos:
-%%   506 x 0,125 + 23 = 86,25 C            [OK]
-%%   506 = 0000000111111010 (binario)      [OK, confere com a figura]
-%% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Este apêndice apresenta os contraexemplos gerados pelo ESBMC nos módulos IMU
 BMI088 e GPS uBlox. Conforme discutido no Capítulo~\ref{cap:experimentos}, apenas
@@ -454,11 +394,6 @@ batmon e candidatos adicionais) não são reproduzidos aqui; os registros
 completos estão no repositório de artefatos, nas pastas indicadas na
 Seção~\ref{sec:segunda-campanha}.}
 
-%% [11/10/2026] Tracos substituidos por trechos LITERAIS dos logs do ESBMC
-%% 8.1.0 + Boolector 3.2.4 (os mesmos do artigo). As versoes anteriores eram
-%% transcricoes do v7.10.0, com valores (206/234) e estados que nao constam de
-%% nenhum log. Unica edicao: vetores de bytes longos elididos ("... omitidos
-%% ...") e o caminho interno do ESBMC abreviado como <esbmc>.
 \corr{Cada traço inclui os valores concretos atribuídos pelo solver
 SMT, o rastro de execução até o estado de falha e a propriedade violada reportada
 pelo verificador.} \artigo{Os traços abaixo são trechos literais dos logs do
@@ -481,10 +416,8 @@ isso constitua divergência de resultado.} \artigo{Os valores reproduzidos
 abaixo são os das execuções com o ESBMC~v8.1.0, idênticos nas três execuções
 de cada módulo.}
 
-% =============================================================================
 \section{Contraexemplo 1 --- Temperatura fora da faixa operacional (BMI088)}
 \label{sec:contraexemplo-bmi088-temp}
-% =============================================================================
 
 Violação da propriedade $\phi_{\text{temp}}$ (Equação~\ref{eq:prop_temp}): a
 temperatura calculada de $86{,}25\,^{\circ}$C excede o limite superior de
@@ -494,12 +427,6 @@ fabricante é $T = \texttt{Temp\_int11} \times 0{,}125 + 23$, de modo que o valo
 \texttt{Temp\_uint11 = 506} produz exatamente
 $506 \times 0{,}125 + 23 = 86{,}25\,^{\circ}$C.}
 
-%% [11/10/2026] Listagem substituida pelo trecho literal de
-%% resultados/IMU_BMI088/resultado_temperatura_8.1.log. A anterior dizia
-%% "ESBMC v7.10.0" e "State 7 - line 51" (o log diz linha 42) e trazia um
-%% comando que nao consta do log.
-%% [12/10/2026] Conteudo de codigo/ce_temperatura_bmi088.txt colado aqui (antes era
-%% \lstinputlisting): o apendice nao depende mais da pasta codigo/.
 \begin{lstlisting}[
   caption={\corr{Contraexemplo ESBMC para a violação da faixa de temperatura no BMI088} \artigo{(trecho literal do log, ESBMC~v8.1.0)}},
   label={lst:contraex_bmi088_temp},
@@ -550,23 +477,14 @@ VERIFICATION FAILED
 compensação térmica caracteriza} \artigo{CWE-1284 (\textit{Improper Validation of
 Specified Quantity in Input}), subclasse de CWE-20 (\textit{Improper Input
 Validation})}\corr{.}
-%% [12/10/2026] CWE-1284 mantida, como no artigo (pendencia encerrada).
 \corr{
 Conforme discutido na Seção~\ref{subsec:imu-temperatura}, esta observação foi
 reportada à comunidade PX4 e recusada pelos mantenedores, que objetaram à
 abordagem de saturação proposta no PR~\#27575; permanece registrada como nota de
 projeto, sem consequência de segurança confirmada e sem remediação aceita.}
 
-% =============================================================================
 \section{Contraexemplo 2 --- Contador FIFO excede capacidade do buffer (BMI088)}
 \label{sec:contraexemplo-bmi088-fifo}
-% =============================================================================
-
-%% ALTERADO: valor canonico do artigo (8.704; a versao anterior trazia 1.536) e
-%% status de falso positivo explicitado.
-%% [11/10/2026] 8.704 -> 9.088: valor dos tres logs IMU_BMI088_run*.log e do
-%% artigo. "replay" -> conferencia contra o codigo de producao. Pendencia do
-%% traco RESOLVIDA com o trecho literal de medianas_logs/IMU_BMI088_run1.log.
 
 \corr{Violação da propriedade que limita o contador do FIFO ao tamanho
 do buffer físico:} \artigo{\texttt{count = 9088}} \corr{bytes excede em mais de oito vezes o
@@ -582,8 +500,6 @@ pela etapa obrigatória de} \artigo{conferência contra o código de produção}
 IMU BMI088 (\texttt{test\_choice = 2}): é deste candidato, e não do de
 temperatura, o tempo de 0,1\,s registrado na tabela.}
 
-%% [12/10/2026] Conteudo de codigo/ce_fifo_bmi088.txt colado aqui (antes era
-%% \lstinputlisting): o apendice nao depende mais da pasta codigo/.
 \begin{lstlisting}[
   caption={\artigo{Contraexemplo ESBMC para o contador do FIFO no BMI088 (trecho literal do log, ESBMC~v8.1.0)}},
   label={lst:contraex_bmi088_fifo},
@@ -626,17 +542,8 @@ Violated property:
 VERIFICATION FAILED
 \end{lstlisting}
 
-% =============================================================================
 \section[Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)]{\corr{Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)}}
 \label{sec:contraexemplo-gps}
-% =============================================================================
-
-%% ALTERADO (LC, ponto 4): as secoes "Contraexemplo 3" e "Contraexemplo 4" foram
-%% FUNDIDAS. A figura do contraexemplo e o log mostram UMA unica propriedade
-%% violada — a falha de dereferencia no memcpy. O ESBMC encerra na primeira
-%% violacao, logo nao existem dois tracos independentes. A divisao anterior
-%% sugeria duas verificacoes distintas, o que nao corresponde a saida da
-%% ferramenta. Isso tambem resolve a contagem: tres contraexemplos, tres secoes.
 
 Violação da propriedade $\phi_{\text{gps}}$ (Equação~\ref{eq:prop_gps}). A
 verificação de espaço disponível em \texttt{dumpGpsData()} \artigo{subtrai o nível
@@ -646,7 +553,6 @@ de preenchimento da capacidade}:
 if (write_len > GPS_DUMP_DATA_SIZE - dump_data->len)
 \end{lstlisting}
 
-%% [11/10/2026] Aritmetica do harness corrigida (artigo, Sec. V-D).
 Quando \texttt{dump\_data->len} excede \texttt{GPS\_DUMP\_DATA\_SIZE}
 ($=200$), \artigo{a diferença, calculada em \texttt{int}, é negativa ($-7$ para
 \texttt{len = 207}) e, convertida para \texttt{size\_t} na comparação com
@@ -660,13 +566,6 @@ violação encontrada. A classificação CWE-191 (\textit{Integer Underflow})
 $\rightarrow$~CWE-119 (\textit{Memory Buffer Bounds Violation}) reflete essa
 relação de causa e efeito.}
 
-%% [11/10/2026] Listagem substituida pelo trecho literal de
-%% medianas_logs/GPS_run1.log (identico em run2 e run3): input_len = 10,
-%% dump_buffer.len = 207. A versao anterior (206/234, estados 1-5, "200 - 234")
-%% nao corresponde a nenhum log. O aviso antigo sobre as "duas versoes da
-%% figura" fica obsoleto: a figura foi refeita a partir do log.
-%% [12/10/2026] Conteudo de codigo/ce_gps_ublox.txt colado aqui (antes era
-%% \lstinputlisting): o apendice nao depende mais da pasta codigo/.
 \begin{lstlisting}[
   caption={\corr{Contraexemplo ESBMC para o underflow com acesso fora dos limites no GPS uBlox} \artigo{(trecho literal do log, ESBMC~v8.1.0)}},
   label={lst:contraex_gps},
@@ -727,8 +626,3 @@ arranjo definido em tempo de ligação\artigo{, que não foi analisado nesta
 dissertação; quanto à alcançabilidade, o estado violador não ocorre no driver de
 produção (Seção~\ref{subsec:gps-inducao}).}
 
-
-%% [12/10/2026] Apendice de VCCs (apend:vcc) RETIRADO: VCCs omitidas, como no
-%% artigo. Os valores continuam nos logs do repositorio e em
-%% ./tabela_ii_dos_logs.sh (Bar 93, Bat 49, EKF2 63, Expo 278, GPS 4463,
-%% IMU 120, MAVLink 3059, Mag 50, Nav 50, PWM 38, RC 56, VTOL 110).

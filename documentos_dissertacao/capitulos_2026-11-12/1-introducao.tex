@@ -1,0 +1,162 @@
+\chapter{Introdução}
+\label{cap:introducao}
+
+Os Veículos Aéreos Não Tripulados (VANTs) são utilizados em aplicações como monitoramento ambiental, agricultura de precisão, inspeção de infraestrutura crítica e operações de busca e salvamento~\cite{Wanner2024,Siddiqi2022}. A expansão desses usos foi favorecida pelos avanços tecnológicos e pela redução dos custos dos equipamentos. Independentemente da finalidade da missão, a operação desses veículos depende de sistemas de controle embarcados, cujo funcionamento exige confiabilidade e segurança~\cite{Mohsan2023}. Falhas nesses sistemas podem ocasionar a perda do equipamento e, dependendo do contexto operacional, oferecer riscos às pessoas e ao meio ambiente~\cite{Wanner2024}.
+
+Esse requisito de confiabilidade deixa de ser abstrato em missões realizadas em regiões remotas. No monitoramento ambiental da Amazônia, por exemplo, uma falha em pleno voo pode significar a perda de um equipamento de difícil recuperação e a interrupção de uma coleta de dados que nem sempre pode ser repetida. É nesse cenário que se insere esta pesquisa, vinculada ao projeto SAGRES, que emprega VANTs nesse tipo de operação. Examinar o comportamento do firmware que controla o voo, antes de confiá-lo a uma missão dessas, é parte do que torna essa operação segura.
+
+Entre as plataformas utilizadas no desenvolvimento de sistemas de controle de voo está o PX4 Autopilot, uma solução de código aberto para VANTs, implementada em C e C++~\cite{PX4_GitHub}. Em um projeto de grande porte como esse, testes e revisão de código são fundamentais para avaliar a qualidade do software. Entretanto, essas atividades não asseguram que todos os comportamentos possíveis sejam examinados, pois os testes exercitam cenários definidos durante sua elaboração~\cite{Godefroid2005}. Assim, problemas associados a combinações específicas de entradas, condições extremas ou limites de operação podem permanecer sem identificação.
+
+Entre esses problemas estão os \textit{overflows} aritméticos, os acessos inválidos à memória e as violações de limites estabelecidos para sensores. Para investigar situações dessa natureza, esta pesquisa aplica verificação formal por meio de \textit{Bounded Model Checking} (BMC). A técnica analisa sistematicamente as execuções representadas no modelo até um limite de desenrolamento previamente definido. Quando uma propriedade é violada dentro desse limite, o verificador pode produzir um contraexemplo que representa uma sequência de execução associada à violação~\cite{Biere1999}. Dessa forma, o BMC permite examinar combinações de entradas e condições que podem não ter sido contempladas nos testes tradicionais~\cite{Beyer2022}.
+
+O alcance dessa análise depende do modelo construído, das propriedades especificadas e do limite de desenrolamento adotado. Portanto, a ausência de contraexemplos indica que nenhuma violação foi encontrada nas condições analisadas, mas não demonstra que o programa esteja livre de defeitos. Essa ressalva é especialmente importante em sistemas embarcados, nos quais dependências de \textit{hardware} e componentes externos precisam ser representados de maneira controlada para permitir a análise dos módulos isoladamente.
+
+Nesta pesquisa, o BMC é aplicado por meio do ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker})~\cite{Cordeiro2012}, ferramenta de verificação formal com suporte às linguagens C e C++, utilizadas na implementação do PX4. A escolha considera o suporte a construções modernas de C++, a integração com diferentes solvers SMT e a experiência do grupo de pesquisa com a ferramenta~\cite{Menezes2024,Song2024}. Entre os solvers disponíveis estão Z3~\cite{deMoura2008}, Boolector~\cite{Brummayer2009}, cvc5~\cite{Barbosa2022} e Bitwuzla~\cite{Niemetz2023}.
+
+Outras ferramentas, como CBMC e LLBMC, também foram consideradas. O LLBMC opera sobre a representação intermediária do LLVM, exigindo uma cadeia de compilação compatível com essa representação~\cite{Merz2012}. O ESBMC, por sua vez, utiliza um \textit{front-end} baseado na AST do Clang para processar construções de C++~\cite{Song2024}, aspecto relevante para a base do PX4, que utiliza C++17. O CBMC não foi descartado: nesta pesquisa, ele é empregado na validação cruzada de achados selecionados. Assim, o ESBMC foi adotado como ferramenta principal, enquanto o CBMC foi utilizado como ferramenta independente para confrontar resultados.
+
+Como a análise produz contraexemplos relativos ao modelo, sua interpretação exige uma etapa de triagem. Um contraexemplo demonstra que a propriedade codificada foi violada nas condições representadas pelo modelo, mas não comprova, isoladamente, que a mesma situação ocorra no código de produção. Por isso, esta dissertação adota uma classificação que distingue o resultado da verificação da avaliação de sua correspondência com a implementação real.
+
+\begin{tcolorbox}[colback=gray!4!white, colframe=gray!55!black,
+boxrule=0.6pt, arc=2pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+title={\textbf{Classificação dos achados}}]
+\footnotesize
+\begin{description}[leftmargin=3.0cm, style=nextline, font=\normalfont\bfseries]
+
+\item[Contraexemplo] Traço de execução produzido pelo verificador quando uma propriedade é violada no modelo. Não comprova, isoladamente, que a situação ocorra no código de produção.
+
+\item[Candidato] Contraexemplo submetido à triagem, mas ainda não classificado como violação alcançável no modelo, falso positivo ou especificação disputada.
+
+\item[Violação alcançável no modelo (VAM)] Candidato cuja violação ocorre no modelo verificado, sem que o \textit{harness} tenha omitido guardas presentes no código de produção. A possibilidade de o estado violador ocorrer no driver real deve ser examinada separadamente, por meio da conferência com a implementação.
+
+\item[Falso positivo] Candidato cuja violação decorre da omissão, no \textit{harness}, de uma guarda existente no código de produção. A conferência com a implementação demonstra que a execução apresentada não representa o comportamento do trecho real nas mesmas condições.
+
+\item[Especificação disputada] Candidato cuja violação ocorre em relação à propriedade codificada, mas cuja interpretação, baseada em documentação técnica do fabricante, não é reconhecida pelos mantenedores como requisito do código.
+
+\item[Defeito reproduzido no código de produção] Problema cuja ocorrência foi reproduzida na implementação original, por meio de uma execução ou \textit{replay} que preserva as condições relevantes do comportamento observado.
+
+\item[Defeito confirmado] Achado reconhecido como defeito pelos mantenedores do projeto. Essa classificação é distinta da reprodução técnica de um problema no código de produção.
+
+\end{description}
+\end{tcolorbox}
+
+\noindent
+\footnotesize
+\textit{Nota:} \textit{harness} é o programa que instancia o trecho de código sob verificação, fornece entradas não determinísticas e propriedades a serem avaliadas e substitui dependências externas por \textit{stubs}.
+\normalsize
+
+Essa distinção é importante para interpretar os resultados desta pesquisa. No GPS uBlox (Seção~\ref{sec:caso-gps}), por exemplo, a violação foi classificada como alcançável no modelo porque o estado violador era admitido pelas condições do \textit{harness}. Entretanto, a análise do código de produção e a prova indutiva apresentada nesta dissertação (Seção~\ref{subsec:gps-inducao}) demonstraram que esse estado não ocorre no driver real. O mantenedor do PX4 enquadrou a guarda proposta como endurecimento defensivo. Já o candidato relacionado ao contador de FIFO do BMI088 foi classificado como falso positivo, pois o \textit{harness} não reproduzia uma guarda presente no driver de produção (Seção~\ref{subsec:imu-fifo}). Esses casos mostram por que a análise dos contraexemplos precisa considerar tanto o modelo quanto a implementação real.
+
+A aplicação da técnica ao PX4 considera um conjunto delimitado de módulos, correspondente ao ramo \textit{main} no commit \texttt{8be2590c15}. O objetivo não é verificar integralmente o firmware, mas avaliar componentes selecionados conforme sua relevância operacional, sua representatividade na arquitetura e a possibilidade de isolá-los para análise. Para isso, a metodologia contempla a seleção dos módulos, a criação de \textit{stubs} para abstrair dependências de \textit{hardware}, a especificação de propriedades de segurança e a análise dos contraexemplos. Os achados também podem ser conferidos com o código de produção, reportados à comunidade responsável pelo projeto e submetidos à validação cruzada com outra ferramenta.
+
+Foram selecionados 12 módulos, abrangendo sete classes funcionais do sistema de controle de voo --- de sensores seriais à estimação de estado ---, cuja composição completa é apresentada no Capítulo~\ref{cap:metodologia} (Tabela~\ref{tab:modulos}). Essa distribuição busca contemplar componentes com responsabilidades distintas, evitando concentrar a análise em uma única parte do firmware.
+
+Além da criticidade operacional e da representatividade arquitetural, a possibilidade de isolar cada módulo por meio de \textit{stubs} foi considerada na seleção. Esse critério facilita a execução da verificação, mas também pode introduzir viés na composição da amostra, uma limitação discutida na Seção~\ref{sec:ameacas-validade}. A seleção buscou, portanto, equilibrar a profundidade da análise com a representação de diferentes componentes do PX4.
+
+Como o estudo de caso integra o projeto SAGRES, voltado a esse tipo de missão em região remota, o enquadramento regulatório dessas operações também merece registro.
+
+O enquadramento das operações em linha de visada visual (VLOS) e além da linha de visada visual (BVLOS) no espaço aéreo brasileiro é estabelecido pela ICA~100-40 do DECEA~\cite{DECEA_ICA10040}. Como os requisitos variam conforme o tipo de operação, a realização de uma missão em região remota não significa, por si só, que ela seja BVLOS. Para esta pesquisa, o aspecto relevante é a dificuldade de acesso e recuperação do equipamento em determinadas localidades, independentemente do regime de operação.
+
+A partir desse contexto, a pesquisa busca responder à seguinte questão: é viável aplicar \textit{Bounded Model Checking} a um firmware de controle de voo de porte industrial, com tempo de verificação por módulo compatível com o uso prático, produzindo evidências auditáveis sobre propriedades de segurança relacionadas à memória e à aritmética, respeitados os limites do modelo e do desenrolamento?
+
+Essa questão é desdobrada em três questões experimentais, respondidas no Capítulo~\ref{cap:experimentos}:
+
+\begin{description}[leftmargin=1.5cm, style=nextline]
+\item[\textbf{QE1}] Qual é o tempo de verificação por módulo em \textit{hardware} de prateleira?
+
+\item[\textbf{QE2}] O BMC identifica violações alcançáveis no modelo em caminhos que não são exercitados pelos testes unitários existentes do PX4?
+
+\item[\textbf{QE3}] Quais configurações são necessárias para tornar cada módulo tratável pelo verificador?
+\end{description}
+
+\section{Delimitação: método e estudo de caso}
+\label{sec:delimitacao}
+
+Esta pesquisa tem como contribuição principal uma metodologia de verificação formal para firmware de sistemas críticos. O PX4 Autopilot, no ramo \textit{main} e no commit \texttt{8be2590c15}, constitui o estudo de caso utilizado para aplicar e avaliar o procedimento. Essa distinção permite separar a contribuição metodológica dos resultados obtidos especificamente nessa plataforma.
+
+A metodologia reúne etapas que podem ser aplicadas a diferentes bases de código C/C++ de grande porte: seleção de unidades verificáveis (i), execução do verificador (iv), análise dos contraexemplos com conferência do código de produção (v), reporte à comunidade responsável pelo projeto (vi), validação cruzada entre ferramentas e verificação de \textit{patches} (vii), além da portabilidade entre projetos e da integração contínua (viii). Essas seis etapas são consideradas agnósticas ao domínio e estão descritas no Capítulo~\ref{cap:metodologia} (Figura~\ref{fig:metodologia-visao-geral}).
+
+Duas etapas, por sua vez, foram particularizadas para firmware embarcado: a instrumentação com \textit{stubs} de \textit{hardware} (ii), utilizada para abstrair barramentos, sensores e chamadas ao sistema operacional de tempo real; e a especificação de propriedades derivadas de \textit{datasheets} (iii), que traduz limites declarados pelos fabricantes em asserções sobre variáveis do programa. Embora essas etapas exijam informações próprias do contexto embarcado, a estrutura geral da metodologia pode ser adaptada a outros sistemas.
+
+Essa adaptação, contudo, não foi demonstrada em diferentes domínios nesta pesquisa. A evidência está concentrada no estudo de caso do PX4 e em uma replicação mínima da lógica equivalente no ArduPilot, descrita no Capítulo~\ref{cap:metodologia}, Etapa~viii. A aplicação a sistemas industriais, automotivos ou dispositivos médicos embarcados exigiria adaptar as dependências abstraídas e as propriedades verificadas às características de cada alvo. Portanto, a transferência da metodologia para esses contextos permanece uma possibilidade a ser investigada.
+
+A avaliação experimental foi organizada em duas campanhas. A primeira compreende os 12 módulos da amostra principal, analisados por meio de \textit{harnesses} e \textit{stubs}. A segunda aplica o mesmo método a dez módulos complementares --- oito módulos adicionais do PX4, o driver RoboClaw e o driver \texttt{batmon} ---, com o objetivo de avaliar a generalidade da abordagem além da amostra principal. Seus desfechos são heterogêneos: a maioria confirma padrões já conhecidos ou não produz violação, enquanto o driver RoboClaw apresentou um defeito reproduzido no código de produção. Essa segunda campanha não integra as tabelas consolidadas da primeira nem os resultados do artigo derivado; o driver \texttt{batmon}, em particular, foi conferido em um \textit{commit} posterior do ramo \textit{main} (\texttt{c9b9e4e25e}). A apresentação separada preserva a distinção entre a amostra principal e as investigações complementares.
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+O objetivo geral desta pesquisa é desenvolver e avaliar uma metodologia de verificação formal baseada em \textit{Bounded Model Checking} para identificar e triar candidatos a violações de propriedades de segurança em módulos críticos do firmware PX4 Autopilot, utilizando o ESBMC como ferramenta principal.
+
+Para alcançar esse objetivo, foram definidos três objetivos específicos, relacionados às questões experimentais:
+
+\begin{description}[leftmargin=1.5cm, style=nextline, font=\normalfont\bfseries]
+
+\item[O1] Propor uma metodologia sistemática e replicável para a verificação formal de firmware embarcado em C/C++, contemplando a seleção de módulos críticos, a instrumentação com \textit{stubs} para abstração de dependências de \textit{hardware}, a especificação de propriedades de segurança derivadas de \textit{datasheets} e a análise dos contraexemplos gerados pelo ESBMC~\cite{Cordeiro2012}. Esse objetivo está relacionado principalmente à \textbf{QE3}.
+
+\item[O2] Aplicar a metodologia ao PX4 Autopilot em duas campanhas experimentais, verificando módulos de diferentes naturezas e classificando os candidatos encontrados como violações alcançáveis no modelo, falsos positivos, especificações disputadas ou defeitos reproduzidos no código de produção. Os achados também são submetidos à avaliação da comunidade PX4, por meio do reporte de contraexemplos e propostas de correção. Esse objetivo está relacionado à \textbf{QE2}.
+
+\item[O3] Avaliar a viabilidade da abordagem por meio da medição do tempo de verificação de cada módulo e do registro das configurações necessárias para tornar a análise tratável. Esse objetivo está relacionado à \textbf{QE1} e à \textbf{QE3}.
+
+\end{description}
+
+A Tabela~\ref{tab:rastreabilidade} relaciona os objetivos específicos às etapas da metodologia, aos resultados utilizados em sua avaliação e às respectivas questões experimentais.
+
+\begin{table}[H]
+\centering
+\caption{Rastreabilidade entre objetivos, metodologia, resultados e questões experimentais.}
+\label{tab:rastreabilidade}
+\footnotesize
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Objetivo} & \textbf{Metodologia} &
+\textbf{Resultados} & \textbf{Questão} \\
+\midrule
+O1 & Cap.~\ref{cap:metodologia} (etapas i--viii) &
+Cap.~\ref{cap:experimentos} & QE3 \\
+O2 & Seções~\ref{sec:selecao-modulos} e
+\ref{sec:caso-gps} &
+Cap.~\ref{cap:experimentos} & QE2 \\
+O3 & Cap.~\ref{cap:metodologia} (etapa iv) &
+Cap.~\ref{cap:experimentos} & QE1, QE3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Justificativa}
+\label{sec:justificativa}
+
+A verificação de software embarcado apresenta desafios relacionados às restrições de memória, processamento e tempo de resposta impostas pelo ambiente de execução~\cite{Mzid2024}. No caso do PX4, os alvos considerados utilizam o modo \textit{flat} do NuttX, no qual não há isolamento de memória entre os componentes da aplicação. Embora microcontroladores STM32 disponham de unidade de proteção de memória (MPU), sua utilização depende dos modos \textit{protected} ou \textit{kernel} do NuttX, e não do modo \textit{flat} adotado nos alvos analisados~\cite{NuttX}. Essa característica reforça a relevância de investigar possíveis violações de propriedades de memória e aritmética nos módulos do sistema de controle de voo.
+
+Nesse contexto, o BMC complementa os testes tradicionais ao analisar as execuções representadas no modelo até um limite de desenrolamento definido. A técnica pode revelar violações associadas a combinações de entradas e condições não contempladas nos casos de teste elaborados manualmente~\cite{Biere1999,Beyer2022}. Seus resultados, entretanto, dependem das propriedades especificadas e da fidelidade do modelo, razão pela qual a análise dos contraexemplos e a conferência com o código de produção são partes essenciais do procedimento.
+
+A pesquisa também se justifica por sua aplicação no projeto SAGRES, voltado ao monitoramento ambiental em regiões remotas da Amazônia. Nessas localidades, a recuperação de equipamentos após falhas pode ser complexa, e a interrupção de uma operação pode comprometer a continuidade da coleta de dados. A verificação de propriedades de segurança dos componentes do PX4 permite investigar possíveis problemas no firmware antes de sua utilização operacional.
+
+Por fim, a documentação do procedimento e dos artefatos experimentais permite que outras pesquisas examinem e reproduzam as etapas realizadas. A contribuição não consiste em afirmar que a metodologia elimina todos os defeitos ou garante a segurança integral do sistema, mas em oferecer um processo sistemático para selecionar módulos, instrumentá-los, verificar propriedades delimitadas e analisar as evidências produzidas.
+
+\section{Contribuições Científicas}
+\label{sec:contribuicoes}
+
+Este trabalho apresenta cinco contribuições principais. As três primeiras, relacionadas à primeira campanha, estão alinhadas, em conteúdo, às contribuições do artigo derivado~\cite{Rodrigues2026}; a demonstração formal da inalcançabilidade do estado violador do GPS no driver de produção, incluída na terceira, constitui um resultado próprio desta dissertação. A quarta amplia a investigação para a segunda campanha, e a quinta disponibiliza o artefato público de reprodução.
+
+\begin{enumerate}
+
+\item \textbf{Metodologia de verificação em oito etapas:} definição de um procedimento para verificação formal de firmware, com seis etapas agnósticas ao domínio e duas específicas para sistemas embarcados: instrumentação com \textit{stubs} de \textit{hardware} e especificação de propriedades derivadas de \textit{datasheets}. O procedimento também contempla validação cruzada entre ferramentas e verificação de \textit{patches} (Capítulo~\ref{cap:metodologia}).
+
+\item \artigo{\textbf{Evidência experimental delimitada pelo modelo:} os \textit{harnesses} de dez módulos do PX4 foram verificados sem violações das propriedades instrumentadas de segurança de memória e de \textit{overflow} aritmético, até o limite de desenrolamento adotado. O tempo total da campanha com os 12 módulos foi de aproximadamente 159 segundos, reduzido a 94 segundos quando desconsiderado o GPS uBlox (Capítulo~\ref{cap:experimentos}).}
+
+\item \novo{\textbf{Triagem documentada dos achados da campanha:} classificação dos três contraexemplos produzidos em dois módulos, distinguindo uma violação alcançável no modelo, um falso positivo e uma especificação disputada. No driver GPS uBlox, foi identificada uma violação alcançável no modelo (CWE-191 $\rightarrow$ CWE-119, Issue~\#26866), para a qual foi proposta uma guarda no PR~\#27576. A análise desta dissertação demonstrou, por prova indutiva com ESBMC e CBMC, que o estado violador não ocorre no driver de produção, a partir da análise do laço real de \texttt{dumpGpsData()} (Seções~\ref{subsec:patch-gps} e \ref{subsec:gps-inducao}). No BMI088, o candidato relacionado ao contador de FIFO foi classificado como falso positivo, pois o \textit{harness} não reproduzia uma guarda presente no código de produção. Já a observação de temperatura (Issue~\#26865, PR~\#27575) foi classificada como especificação disputada, uma vez que a interpretação da propriedade baseada no \textit{datasheet} não foi aceita pelos mantenedores. Essa observação também foi reproduzida no ArduPilot (Issue~\#33272).}
+
+\item \novo{\textbf{Segunda campanha --- aplicação complementar do método:} aplicação da metodologia a dez módulos complementares (oito módulos adicionais do PX4, o driver RoboClaw e o driver \texttt{batmon}), para avaliar a generalidade da abordagem além da amostra principal. A investigação do RoboClaw identificou um defeito na rotina de terminação de voo, em que o driver envia ao controlador do motor valores de byte superiores a 127, fora da faixa aceita pelo protocolo de comunicação; a ocorrência foi reproduzida por \textit{replay} no código original. No driver \texttt{batmon}, foi identificada uma escrita fora dos limites do arranjo \texttt{voltage\_cell\_v[14]} quando a contagem de células atinge 16 (\textit{commit} \texttt{c9b9e4e25e}). Os desfechos dos oito módulos adicionais foram heterogêneos: duplicatas de defeitos já corrigidos, um falso positivo, dois com \textit{issue} de baixa severidade e um sem violação.}
+
+\item \artigo{\textbf{Artefato público para reprodução:} disponibilização dos \textit{harnesses}, registros de execução e scripts utilizados na pesquisa, permitindo consultar e reproduzir os experimentos (\url{https://github.com/marcela2881/dissertacao-px4-esbmc}; Zenodo, DOI \texttt{10.5281/zenodo.23282236}).}
+
+\end{enumerate}
+
+\section{Organização do Trabalho}
+\label{sec:organizacao}
+
+O documento está estruturado em seis capítulos. O Capítulo~\ref{cap:fundamentacao} apresenta a fundamentação teórica sobre verificação formal, \textit{model checking}, \textit{bounded model checking}, solvers SMT, ESBMC e arquitetura do PX4 Autopilot. O Capítulo~\ref{cap:relacionados} discute trabalhos relacionados à aplicação de verificação formal em sistemas embarcados e veículos autônomos.
+
+O Capítulo~\ref{cap:metodologia} descreve o procedimento adotado, incluindo os critérios de seleção dos módulos, a criação de \textit{stubs}, a definição das propriedades de segurança e a configuração do ESBMC. O Capítulo~\ref{cap:experimentos} apresenta os experimentos e resultados, incluindo a análise dos contraexemplos, a classificação dos achados e a avaliação da viabilidade da abordagem. Por fim, o Capítulo~\ref{cap:conclusao} reúne as conclusões, contribuições, limitações e possibilidades de trabalhos futuros.
+
+O documento é complementado por três apêndices: o Apêndice~\ref{apend:producoes} registra a produção científica derivada desta dissertação; o Apêndice~\ref{apend:harness-gps} apresenta o \textit{harness} do GPS uBlox; e o Apêndice~\ref{apend:contraexemplos} reúne os contraexemplos gerados pelo ESBMC para os três candidatos submetidos à triagem.
