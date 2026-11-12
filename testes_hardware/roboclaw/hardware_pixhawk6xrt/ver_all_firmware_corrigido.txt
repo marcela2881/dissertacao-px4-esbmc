@@ -1,4 +1,4 @@
-(transcrito da tela do MAVLink Console, 2026-11-12, placa com px4_roboclaw_CORRIGIDO.px4)
+(transcrito da tela do MAVLink Console, virada de 2026-11-11 para 2026-11-12, placa com px4_roboclaw_CORRIGIDO.px4)
 HW arch: PX4_FMU_V6XRT
 HW type: V6XRT
 HW FMUM ID: 0x000

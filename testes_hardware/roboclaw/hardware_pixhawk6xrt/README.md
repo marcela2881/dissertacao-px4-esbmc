@@ -1,6 +1,6 @@
 # Validação em hardware do Bug 1 do driver RoboClaw — Pixhawk 6X RT + ESP32
 
-Data do ensaio: 2026-11-12. Este registro substitui a conclusão da primeira
+Data dos ensaios: noite de 2026-11-11 (22:29–23:57), com registros finais na madrugada de 2026-11-12. Este registro substitui a conclusão da primeira
 tentativa (Arduino Uno, ver `../NOTA_VALIDACAO_HARDWARE.md`), que não tinha
 conseguido ler o protocolo.
 
@@ -90,7 +90,7 @@ que a serigrafia dos pinos não fica visível. A correspondência dos fios
 - Só o canal 1 foi configurado com failsafe fora da faixa.
 - O Bug 2 (`write()` em `size_t`) não foi exercitado em hardware.
 
-## Teste de controle: `RBCLW_FAIL1 = 254` (2026-11-12, 23:16)
+## Teste de controle: `RBCLW_FAIL1 = 254` (2026-11-11, 23:16)
 
 Mesma montagem e mesmo firmware, mudando só o parâmetro para 254, o maior valor
 que ainda resulta em byte válido ((254 − 127)/127 = 1,0 → 127). Com
@@ -138,7 +138,7 @@ firmware, na mesma terminação, passa de byte inválido a byte válido quando s
 o parâmetro muda. Fora do padrão há três linhas: um byte `00` isolado às
 22:59:54 (reinício da placa) e duas linhas embaralhadas pela cópia.
 
-## Antes e depois da correção (2026-11-12, 23:53)
+## Antes e depois da correção (2026-11-11, 23:53)
 
 Mesma montagem, mesmo parâmetro do ensaio original (`RBCLW_FAIL1 = 257`,
 conferido no console), firmware recompilado com `../correcao_roboclaw.patch`
@@ -171,6 +171,11 @@ de drive válidos. Há `CRC ruim=1`, constante do primeiro ao último resumo:
 ocorreu antes do início da captura, no momento em que o fio de dados foi
 reencaixado com a placa já transmitindo. A captura começa com a terminação
 já ativa, então não contém a transição a partir do repouso.
+
+Um print de tela das 00:08:24 de 12/11/2026 (relógio do Windows visível;
+guardado pela autora) mostra a mesma execução ainda em curso, com
+`t=1098…ms` no emulador (cerca de 18 minutos desde o reset do ESP32) e o
+pacote do motor 1 ainda em `80 00 7F B4 22`.
 
 `ver_all_firmware_corrigido.txt` traz o `ver all` da placa nesse ensaio: o
 `PX4 git-hash` é o commit analisado (`8be2590c…`). O `Build datetime`
