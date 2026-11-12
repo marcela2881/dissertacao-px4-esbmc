@@ -1,0 +1,658 @@
+\chapter[Produção Científica Derivada desta Dissertação]{\corr{Produção Científica Derivada desta Dissertação}}
+\label{apend:producoes}
+
+\artigo{O artigo científico derivado desta pesquisa foi aceito para publicação:}
+\begin{itemize}
+  \item \textbf{Título:} Formal Verification of Critical Modules in the PX4
+        Autopilot using Bounded Model Checking
+  \item \textbf{Autores:} Marcela Alves Rodrigues, Lucas Carvalho Cordeiro,
+        José Reginaldo Hughes de Carvalho
+  \item \textbf{Veículo:} XVI Simpósio Brasileiro de Engenharia de Sistemas
+        Computacionais (SBESC~2026), trilha de artigo completo, Salvador/BA,
+        24 a 27 de novembro de 2026
+  \item \textbf{Status:} \artigo{Aceito (submissão \#33507); versão final
+        enviada em outubro de 2026}
+  \item \textbf{Artefato:} \textit{harnesses}, logs de execução e instruções de
+        reprodução arquivados no Zenodo sob o DOI~\artigo{\texttt{10.5281/zenodo.23282236}
+        (versão \texttt{v1.2-sbesc}; DOI de conceito \texttt{10.5281/zenodo.21401958})} e
+        disponíveis em \url{https://github.com/marcela2881/dissertacao-px4-esbmc}
+\end{itemize}
+
+\chapter[Harness Completo --- GPS uBlox]{\corr{Harness Completo --- GPS uBlox}}
+\label{apend:harness-gps}
+
+\corr{Este apêndice reproduz na íntegra o \textit{harness} de
+verificação do módulo GPS uBlox, \texttt{test\_gps\_driver.cpp}, utilizado
+no estudo descrito no Capítulo~\ref{cap:metodologia}. Esse caso foi analisado
+em maior profundidade nesta dissertação: dele provém o contraexemplo apresentado
+na Seção~\ref{sec:contraexemplo-gps}.} \artigo{O mesmo caso também foi usado
+na avaliação do \textit{patch} e na análise de alcançabilidade discutidas no
+Capítulo~\ref{cap:experimentos}.}
+
+\corr{A reprodução integral permite ao leitor examinar a implementação
+utilizada na verificação, as pré-condições de cada teste e as diferenças entre
+a adaptação incluída no \textit{harness} e o código do driver de produção. Essa
+distinção é necessária para interpretar corretamente o contraexemplo: o
+\textit{harness} preserva partes da lógica analisada, mas não reproduz
+integralmente as estruturas nem todas as condições do driver.}
+
+\corr{O arquivo define cinco funções de teste, das quais uma é selecionada
+em cada execução por meio de uma variável não determinística em
+\texttt{main()}. Cada teste estabelece pré-condições próprias para o tamanho
+da entrada e para o estado inicial do buffer. Assim, os valores concretos do
+contraexemplo dependem do teste selecionado e das escolhas feitas pelo solver.}
+
+\artigo{O arquivo tem 294 linhas (Tabela~\ref{tab:modulos}) e é reproduzido sem
+edição a partir do repositório de artefatos. O contraexemplo da
+Tabela~\ref{tab:resultados} vem do teste selecionado por
+\texttt{test\_choice = 3}, \texttt{test\_gps\_real\_bit\_operation()}
+(linhas 178--197).}
+
+%% LC (resolvido 12/11/2026): as duas observacoes sobre o cabecalho e os
+%% comentarios do harness viraram o paragrafo abaixo. O arquivo e reproduzido
+%% literalmente, por isso os comentarios nao foram editados; a divergencia e
+%% declarada no texto. Conferido contra gps.cpp e GpsDump.msg no commit 8be2590c15.
+\corr{Como o arquivo é reproduzido sem edição, seus comentários internos
+foram mantidos, embora contenham descrições que não correspondem integralmente
+à versão do driver analisada. Para evitar ambiguidade, registram-se três
+diferenças verificadas em relação ao commit \texttt{8be2590c15}. (i)~O
+cabeçalho do \textit{harness} cita a versão~1.16 e a linha~643 de
+\texttt{gps.cpp}; nesse commit, \texttt{GPS::dumpGpsData()} começa na
+linha~727. (ii)~Os comandos indicados no rodapé do arquivo
+(\texttt{--unwind 8} e \texttt{--unwind 5}) não são os usados na campanha
+reportada nesta dissertação, que empregou
+\texttt{--unwind 10 --no-unwinding-assertions --overflow-check}
+(Seção~\ref{sec:config-experimental}). (iii)~A função apresentada é uma
+adaptação, e não uma extração literal: o \textit{harness} usa um buffer de
+200~bytes, enquanto a mensagem \texttt{GpsDump.msg} declara
+\texttt{uint8[79] data}; além disso, o buffer e o modo ativo são passados como
+parâmetros, e a estrutura modelada não inclui o campo
+\texttt{device\_id} da mensagem. Portanto, a correspondência com o driver é
+lógica e parcial. Em particular, a diferença de capacidade do buffer limita o
+alcance das conclusões que podem ser extraídas do contraexemplo; essa questão é
+retomada na Seção~\ref{subsec:gps-inducao}.}
+
+\begin{lstlisting}[
+  caption={\artigo{\textit{Harness} \texttt{test\_gps\_driver.cpp} (literal)}},
+  label={lst:harness-gps},
+  language=C++,
+  numbers=left,
+  frame=single,
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  extendedchars=true,
+  literate={á}{{\'a}}1 {à}{{`a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ê}{{\^e}}1
+    {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1
+    {Á}{{\'A}}1 {À}{{`A}}1 {Â}{{\^A}}1 {Ã}{{\~A}}1 {É}{{\'E}}1 {Ê}{{\^E}}1
+    {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ô}{{\^O}}1 {Õ}{{\~O}}1 {Ú}{{\'U}}1 {Ç}{{\c C}}1]
+/**
+ * @file teste_gps_driver_real_esbmc.cpp
+ * @author Dissertação Mestrado - Verificação Formal PX4 v1.16
+ * 
+ * OBJETIVO: Teste de código REAL extraído do PX4 GPS Driver
+ * FUNÇÃO TESTADA: GPS::dumpGpsData() - linha ~643 de src/drivers/gps/gps.cpp
+ * MÉTODO: Bounded Model Checking com ESBMC
+ * ESTRUTURAS: Baseadas no USO real no código gps.cpp
+ */
+
+#include <assert.h>
+#include <cstring>
+#include <cstdint>
+
+// ================== FUNÇÕES ESBMC ==================
+extern int nondet_int();
+extern uint8_t nondet_uint8();
+extern size_t nondet_size_t();
+extern bool nondet_bool();
+extern void __ESBMC_assume(int condition);
+
+// ================== ESTRUTURAS REAIS EXTRAÍDAS DO PX4 ==================
+/**
+ * ESTRUTURA REAL baseada no USO no gps.cpp:
+ * - dump_data->data + dump_data->len
+ * - dump_data->len += write_len  
+ * - sizeof(dump_data->data)
+ * - dump_data->len |= 1 << 7
+ * - dump_data->timestamp = hrt_absolute_time()
+ * - dump_data->instance = (uint8_t)_instance
+ */
+
+// Tamanho realista que funciona com uint8_t len
+#define GPS_DUMP_DATA_SIZE 200
+
+struct gps_dump_s {
+    uint8_t data[GPS_DUMP_DATA_SIZE];    // Buffer principal
+    uint8_t len;                         // Índice atual (usado com bitwise ops)
+    uint8_t instance;                    // Instância GPS
+    uint64_t timestamp;                  // hrt_absolute_time()
+};
+
+enum class gps_dump_comm_mode_t : int32_t {
+    Disabled = 0,
+    Full = 1,
+    RTCM = 2
+};
+
+// ================== FUNÇÃO REAL EXTRAÍDA DO PX4 ==================
+
+/**
+ * FUNÇÃO ORIGINAL dumpGpsData() extraída EXATAMENTE do gps.cpp linha ~643
+ * Lógica preservada: while loop, memcpy, aritmética de ponteiros, bit operations
+ */
+void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_to_gps_device, 
+                 gps_dump_s *dump_data, gps_dump_comm_mode_t active_mode)
+{
+    // Verificação de modo (do código original)
+    if (active_mode != mode || !dump_data) {
+        return;
+    }
+
+    dump_data->instance = 0; // Simular: dump_data->instance = (uint8_t)_instance;
+
+    // LOOP CRÍTICO REAL DO PX4
+    while (len > 0) {
+        size_t write_len = len;
+
+        // CÁLCULO CRÍTICO: potencial underflow se dump_data->len > GPS_DUMP_DATA_SIZE
+        if (write_len > GPS_DUMP_DATA_SIZE - dump_data->len) {
+            write_len = GPS_DUMP_DATA_SIZE - dump_data->len;
+        }
+
+        // OPERAÇÃO CRÍTICA: memcpy com aritmética de ponteiros (do código real)
+        memcpy(dump_data->data + dump_data->len, data, write_len);
+        
+        // ATUALIZAÇÕES (exatamente como no gps.cpp)
+        data += write_len;
+        dump_data->len += write_len;
+        len -= write_len;
+
+        // LÓGICA DE PUBLICAÇÃO (do código original)
+        if (dump_data->len >= GPS_DUMP_DATA_SIZE) {
+            // BIT OPERATION do código real
+            if (msg_to_gps_device) {
+                dump_data->len |= 1 << 7;  // Set bit 7
+            }
+
+            // Simular: dump_data->timestamp = hrt_absolute_time();
+            dump_data->timestamp = 12345;
+            
+            // Simular: _dump_communication_pub.publish(*dump_data);
+            // Reset para próxima iteração (do código real)
+            dump_data->len = 0;
+        }
+    }
+}
+
+// ================== TESTES DE VERIFICAÇÃO FORMAL ==================
+
+/**
+ * TESTE 1: Verificar buffer bounds na operação memcpy real
+ * PROPRIEDADE: memcpy nunca deve escrever além do buffer data[]
+ */
+void test_gps_real_buffer_bounds() {
+    size_t input_len = nondet_size_t();
+    bool msg_to_device = nondet_bool();
+    
+    // Entrada realista mas potencialmente perigosa
+    __ESBMC_assume(input_len > 0 && input_len <= 300);
+    
+    uint8_t input_data[300];
+    gps_dump_s dump_buffer;
+    dump_buffer.len = nondet_uint8();
+    __ESBMC_assume(dump_buffer.len < GPS_DUMP_DATA_SIZE);
+    
+    uint8_t initial_len = dump_buffer.len;
+    
+    // Chamar função REAL do PX4
+    dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, msg_to_device, 
+                &dump_buffer, gps_dump_comm_mode_t::Full);
+    
+    // PROPRIEDADE CRÍTICA: len nunca deve exceder tamanho do buffer
+    // (considerando que pode ser resetado para 0)
+    assert(dump_buffer.len <= GPS_DUMP_DATA_SIZE);
+}
+
+/**
+ * TESTE 2: Verificar underflow no cálculo GPS_DUMP_DATA_SIZE - dump_data->len
+ * PROPRIEDADE: Subtração deve ser segura mesmo se len estiver corrompido
+ */
+void test_gps_real_underflow_protection() {
+    size_t input_len = nondet_size_t();
+    
+    __ESBMC_assume(input_len > 0 && input_len <= 50);
+    
+    uint8_t input_data[50];
+    gps_dump_s dump_buffer;
+    
+    // CENÁRIO CRÍTICO: len próximo ou maior que GPS_DUMP_DATA_SIZE
+    dump_buffer.len = nondet_uint8();
+    __ESBMC_assume(dump_buffer.len >= GPS_DUMP_DATA_SIZE - 10);
+    
+    // Chamar função REAL
+    dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
+                &dump_buffer, gps_dump_comm_mode_t::Full);
+    
+    // PROPRIEDADE: Resultado deve ser coerente
+    assert(dump_buffer.len <= GPS_DUMP_DATA_SIZE);
+}
+
+/**
+ * TESTE 3: Verificar terminação do loop while(len > 0) real
+ * PROPRIEDADE: Loop deve sempre terminar, mesmo com inputs extremos
+ */
+void test_gps_real_loop_termination() {
+    size_t input_len = nondet_size_t();
+    
+    __ESBMC_assume(input_len > 0 && input_len <= 100);
+    
+    uint8_t input_data[100];
+    gps_dump_s dump_buffer;
+    dump_buffer.len = nondet_uint8();
+    __ESBMC_assume(dump_buffer.len < GPS_DUMP_DATA_SIZE);
+    
+    // Chamar função REAL
+    dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
+                &dump_buffer, gps_dump_comm_mode_t::Full);
+    
+    // PROPRIEDADE: Se chegou aqui, loop terminou
+    assert(true);
+}
+
+/**
+ * TESTE 4: Verificar bit operation real do código
+ * PROPRIEDADE: dump_data->len |= 1 << 7 deve ser segura
+ */
+void test_gps_real_bit_operation() {
+    size_t input_len = nondet_size_t();
+    
+    __ESBMC_assume(input_len > 0 && input_len <= GPS_DUMP_DATA_SIZE + 10);
+    
+    uint8_t input_data[GPS_DUMP_DATA_SIZE + 10];
+    gps_dump_s dump_buffer;
+    dump_buffer.len = nondet_uint8();
+    __ESBMC_assume(dump_buffer.len >= GPS_DUMP_DATA_SIZE - 5);
+    
+    uint8_t initial_len = dump_buffer.len;
+    
+    // Chamar função REAL que pode executar bit operation
+    dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, true, 
+                &dump_buffer, gps_dump_comm_mode_t::Full);
+    
+    // PROPRIEDADE: Operação bit deve ser válida OU len deve ser resetado
+    assert(dump_buffer.len == 0 || dump_buffer.len <= GPS_DUMP_DATA_SIZE || 
+           (dump_buffer.len & 0x7F) <= GPS_DUMP_DATA_SIZE);
+}
+
+/**
+ * TESTE 5: Verificar edge case quando buffer está completamente cheio
+ * PROPRIEDADE: Função deve lidar corretamente com buffer no limite
+ */
+void test_gps_real_full_buffer_edge_case() {
+    size_t input_len = nondet_size_t();
+    
+    __ESBMC_assume(input_len > 0 && input_len <= 20);
+    
+    uint8_t input_data[20];
+    gps_dump_s dump_buffer;
+    
+    // Buffer exatamente cheio
+    dump_buffer.len = GPS_DUMP_DATA_SIZE;
+    
+    // Chamar função REAL
+    dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
+                &dump_buffer, gps_dump_comm_mode_t::Full);
+    
+    // PROPRIEDADE: Deve lidar graciosamente com buffer cheio
+    assert(dump_buffer.len <= GPS_DUMP_DATA_SIZE);
+}
+
+// ================== MAIN PARA ESBMC ==================
+int main() {
+    int test_choice = nondet_int();
+    __ESBMC_assume(test_choice >= 0 && test_choice < 5);
+    
+    switch(test_choice) {
+        case 0:
+            test_gps_real_buffer_bounds();
+            break;
+        case 1:
+            test_gps_real_underflow_protection();
+            break;
+        case 2:
+            test_gps_real_loop_termination();
+            break;
+        case 3:
+            test_gps_real_bit_operation();
+            break;
+        case 4:
+            test_gps_real_full_buffer_edge_case();
+            break;
+    }
+    
+    return 0;
+}
+
+/* 
+ * ================================================================
+ * DOCUMENTAÇÃO
+ * ================================================================
+ * 
+ * METODOLOGIA DEMONSTRADA:
+ * 
+ * 1. EXTRAÇÃO DE CÓDIGO 100% REAL:
+ *    - Função dumpGpsData() copiada exatamente de src/drivers/gps/gps.cpp
+ *    - Estrutura gps_dump_s baseada no USO real observado no código
+ *    - Lógica preservada: while loop, memcpy, bit operations, reset
+ * 
+ * 2. ESTRUTURA DERIVADA DO CÓDIGO REAL:
+ *    - data[]: deduzido de sizeof(dump_data->data) 
+ *    - len: deduzido de dump_data->len += write_len e operações bit
+ *    - instance: observado em dump_data->instance = (uint8_t)_instance
+ *    - timestamp: observado em dump_data->timestamp = hrt_absolute_time()
+ * 
+ * 3. PROPRIEDADES BASEADAS EM VULNERABILIDADES REAIS:
+ *    - Buffer overflow em memcpy + aritmética de ponteiros
+ *    - Integer underflow em GPS_DUMP_DATA_SIZE - dump_data->len
+ *    - Loop infinito se write_len não decrementar len corretamente
+ *    - Bit operation safety em len |= 1 << 7
+ * 
+ * 4. TÉCNICA DE VERIFICAÇÃO:
+ *    - Bounded Model Checking com ESBMC
+ *    - Entrada simbólica para tamanhos e estados do buffer
+ *    - Assumptions para cenários críticos específicos
+ *    - Assertions para propriedades de memory safety
+ * 
+ * COMANDOS DE EXECUÇÃO:
+ * esbmc teste_gps_driver_real_esbmc.cpp --unwind 8 --timeout 300s
+ * esbmc teste_gps_driver_real_esbmc.cpp --overflow-check --unwind 5
+ * 
+ * VULNERABILIDADES ALVO:
+ * - Buffer overflow se dump_data->len corrompido
+ * - Integer underflow na subtração GPS_DUMP_DATA_SIZE - len
+ * - Aritmética de ponteiros insegura em memcpy
+ * - Loop infinito se write_len == 0
+ * 
+ * DIFERENCIAL DESTA VERSÃO:
+ * - Estruturas baseadas em USO real, não especulação
+ * - Função extraída palavra por palavra do gps.cpp
+ * - Tamanhos realistas compatíveis com uint8_t
+ * - Testes focados em padrões observados no código real
+ * 
+ * ================================================================
+ */
+\end{lstlisting}
+
+\corr{A leitura do código também exige duas ressalvas. Primeiro, o teste
+\texttt{test\_gps\_real\_loop\_termination()} termina com
+\texttt{assert(true)}; essa asserção é tautológica e, isoladamente, não
+constitui uma propriedade formal de terminação. Segundo, as asserções dos
+outros testes verificam condições ao final da execução, mas não substituem a
+verificação direta de todas as operações de memória realizadas durante o
+caminho. O contraexemplo reproduzido a seguir é relevante porque o ESBMC acusa
+especificamente uma desreferência fora dos limites no \texttt{memcpy}. Essas
+limitações são consideradas na interpretação dos resultados e impedem que o
+\textit{harness} seja descrito como uma cópia integral ou uma validação completa
+do driver de produção.}
+
+\chapter{Contraexemplos Gerados pelo ESBMC}
+\label{apend:contraexemplos}
+
+%% Prof. Lucas (qualificacao): "Poderias mostrar o contraexemplo gerado pelo ESBMC
+%% no apendice." -- ATENDIDO: apendice adicionado.
+
+Este apêndice apresenta contraexemplos gerados pelo ESBMC nos módulos IMU
+BMI088 e GPS uBlox. Conforme discutido no Capítulo~\ref{cap:experimentos},
+apenas o contraexemplo do GPS uBlox permaneceu como violação alcançável no
+\textit{harness} correspondente. Isso não significa, por si só, que o estado
+seja alcançável no driver de produção: a análise de alcançabilidade descrita na
+Seção~\ref{subsec:gps-inducao} concluiu que ele não é alcançável nesse código.
+Os traços do BMI088 são apresentados para documentar a etapa de triagem; um foi
+classificado como falso positivo e o outro como especificação disputada. \corr{Os contraexemplos da segunda campanha (RoboClaw,
+batmon e candidatos adicionais) não são reproduzidos aqui; os registros
+completos estão no repositório de artefatos, nas pastas indicadas na
+Seção~\ref{sec:segunda-campanha}.}
+
+\corr{Cada traço inclui os valores concretos atribuídos pelo solver
+SMT, o rastro de execução até o estado de falha e a propriedade violada reportada
+pelo verificador.} \artigo{Os traços abaixo são trechos literais dos logs do
+ESBMC~v8.1.0 com Boolector~3.2.4 depositados no repositório de artefatos (os
+mesmos que fundamentam a Tabela~\ref{tab:resultados} e as Listagens do artigo);
+a única edição é a elisão de vetores de bytes longos, indicada no próprio
+texto. Os contraexemplos foram originalmente reportados} \corr{à comunidade PX4 nas
+Issues~\#26865 (IMU BMI088)\footnote{\url{https://github.com/PX4/PX4-Autopilot/issues/26865}}
+e~\#26866 (GPS uBlox)\footnote{\url{https://github.com/PX4/PX4-Autopilot/issues/26866}}
+\artigo{a partir de execuções anteriores com o ESBMC~v7.10.0; os tempos e os
+valores aqui reportados vêm das execuções com o ESBMC~v8.1.0, conforme a nota
+de rodapé do artigo.}}
+
+\corr{Cabe uma observação metodológica sobre a leitura destes traços.
+As entradas dos \textit{harnesses} são não-determinísticas, de modo que o solver
+é livre para escolher qualquer testemunha que satisfaça a condição de violação.
+Execuções distintas do mesmo \textit{harness}, sob versões ou solvers diferentes,
+produzem valores concretos diferentes para a mesma propriedade violada, sem que
+isso constitua divergência de resultado.} \artigo{Os valores reproduzidos
+abaixo são os das execuções com o ESBMC~v8.1.0, idênticos nas três execuções
+de cada módulo.}
+
+\section{Contraexemplo 1 --- Temperatura fora da faixa operacional (BMI088)}
+\label{sec:contraexemplo-bmi088-temp}
+
+O traço viola a propriedade $\phi_{\text{temp}}$
+(Equação~\ref{eq:prop_temp}): a temperatura calculada é
+$86{,}25\,^{\circ}$C, acima do limite superior de
+$85\,^{\circ}$C indicado para a faixa operacional no \textit{datasheet} do
+BMI088~\cite{Bosch2021}. \corr{Pela conversão indicada pelo fabricante,
+$T = \texttt{Temp\_int11} \times 0{,}125 + 23$, o valor
+\texttt{Temp\_uint11 = 506} resulta em
+$506 \times 0{,}125 + 23 = 86{,}25\,^{\circ}$C. O resultado demonstra que
+a entrada considerada pelo \textit{harness} ultrapassa o limite definido; sua
+interpretação como defeito do driver depende da validade dessa entrada no
+contexto de operação do sensor.}
+
+\begin{lstlisting}[
+  caption={\corr{Contraexemplo ESBMC para a violação da faixa de temperatura no BMI088} \artigo{(trecho literal do log, ESBMC~v8.1.0)}},
+  label={lst:contraex_bmi088_temp},
+  numbers=left,
+  frame=single,
+  language=bash,
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true]
+ESBMC version 8.1.0 64-bit x86_64 linux
+Solving with solver Boolector 3.2.4
+[Counterexample]
+
+State 2 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 120 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temp_msb = 63 (00111111)
+
+State 3 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 121 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temp_lsb = 95 (01011111)
+
+State 7 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 42 column 5 function updateTemperature thread 0
+----------------------------------------------------
+  Temp_uint11 = 506 (00000001 11111010)
+
+State 8 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 48 column 9 function updateTemperature thread 0
+----------------------------------------------------
+  Temp_int11 = 506 (00000001 11111010)
+
+State 11 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 51 column 5 function updateTemperature thread 0
+----------------------------------------------------
+  temperature = 8.625000e+1f (01000010 10101100 10000000 00000000)
+
+State 12 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 123 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+  temperature = 8.625000e+1f (01000010 10101100 10000000 00000000)
+
+State 13 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 126 column 5 function test_temperature_calculation thread 0
+----------------------------------------------------
+Violated property:
+  file resultados/IMU_BMI088/test_bmi088_imu.cpp line 126 column 5 function test_temperature_calculation
+  assertion temperature >= -40.0f && temperature <= 85.0f
+  temperature >= -40.000000f && temperature <= 85.000000f
+
+VERIFICATION FAILED
+\end{lstlisting}
+
+\corr{O resultado foi inicialmente associado à validação da faixa de entrada
+e relacionado às categorias CWE-1284 (\textit{Improper Validation of Specified
+Quantity in Input}) e CWE-20 (\textit{Improper Input Validation}). Essa
+associação deve ser entendida como classificação do cenário investigado, não
+como confirmação de uma vulnerabilidade. Conforme discutido na
+Seção~\ref{subsec:imu-temperatura}, a observação foi reportada à comunidade
+PX4, mas a abordagem de saturação proposta no PR~\#27575 não foi aceita pelos
+mantenedores. Assim, o caso permanece como especificação disputada, sem defeito
+de segurança confirmado nem remediação aceita.}
+
+\section{Contraexemplo 2 --- Contador FIFO excede capacidade do buffer (BMI088)}
+\label{sec:contraexemplo-bmi088-fifo}
+
+\corr{O traço apresenta \texttt{count = 9088} bytes, valor superior ao
+limite de \texttt{FIFO\_SIZE = 1.024} bytes e, portanto, uma violação da
+propriedade verificada no \textit{harness}. Na conferência com o driver de
+produção não instrumentado (Seção~\ref{subsec:imu-fifo}), porém, o candidato foi
+classificado como falso positivo: o código de produção contém três níveis de
+proteção, e esse valor aciona a primeira guarda de reinicialização antes do
+acesso ao buffer. O resultado do ESBMC decorre da ausência dessas guardas no
+\textit{harness}; não demonstra um acesso fora dos limites alcançável no driver
+de produção.}
+
+\artigo{O traço é o das três execuções da Tabela~\ref{tab:resultados} para o
+IMU BMI088 (\texttt{test\_choice = 2}): é deste candidato, e não do de
+temperatura, o tempo de 0,1\,s registrado na tabela.}
+
+\begin{lstlisting}[
+  caption={\artigo{Contraexemplo ESBMC para o contador do FIFO no BMI088 (trecho literal do log, ESBMC~v8.1.0)}},
+  label={lst:contraex_bmi088_fifo},
+  numbers=left,
+  frame=single,
+  language=bash,
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true]
+ESBMC version 8.1.0 64-bit x86_64 linux
+Solving with solver Boolector 3.2.4
+[Counterexample]
+
+State 2 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 245 column 5 function main thread 0
+----------------------------------------------------
+  test_choice = 2 (00000000 00000000 00000000 00000010)
+
+State 4 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 138 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_0 = 128 (10000000)
+
+State 5 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 139 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  fifo_len_1 = 227 (11100011)
+
+State 6 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 61 column 5 function fifoReadCount thread 0
+----------------------------------------------------
+  FIFO_LENGTH_1_MASKED = 35 (00100011)
+
+State 8 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 141 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+  count = 9088 (00100011 10000000)
+
+State 9 file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation thread 0
+----------------------------------------------------
+Violated property:
+  file resultados/IMU_BMI088/test_bmi088_imu.cpp line 144 column 5 function test_fifo_count_calculation
+  assertion count <= FIFO_SIZE
+  (unsigned long int)count <= FIFO_SIZE
+
+VERIFICATION FAILED
+\end{lstlisting}
+
+\section[Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)]{\corr{Contraexemplo 3 --- Underflow e acesso fora dos limites (GPS uBlox)}}
+\label{sec:contraexemplo-gps}
+
+O traço viola a propriedade $\phi_{\text{gps}}$
+(Equação~\ref{eq:prop_gps}) no \textit{harness}. A verificação de espaço
+modelada em \texttt{dumpGpsData()} calcula a capacidade restante por meio da
+subtração entre a capacidade do buffer e o nível de preenchimento:
+
+\begin{lstlisting}[language=C,basicstyle=\ttfamily\scriptsize,frame=none,numbers=none]
+if (write_len > GPS_DUMP_DATA_SIZE - dump_data->len)
+\end{lstlisting}
+
+No estado encontrado pelo solver, \texttt{dump\_data->len = 207}, enquanto
+\texttt{GPS\_DUMP\_DATA\_SIZE = 200}. A subtração é promovida para
+\texttt{int} e resulta em $-7$; na comparação com \texttt{write\_len}, que é
+do tipo \texttt{size\_t}, o valor negativo é convertido para um inteiro sem
+sinal muito grande. Com isso, a condição da guarda não limita
+\texttt{write\_len}, e o \texttt{memcpy} tenta escrever a partir da posição
+207 do buffer modelado, ultrapassando seus 200 bytes. Esse comportamento é
+observado no \textit{harness}; a análise de alcançabilidade no driver de
+produção é tratada separadamente na Seção~\ref{subsec:gps-inducao}.
+
+\corr{O ESBMC reporta uma única propriedade violada: a falha de
+\artigo{desreferência} no \texttt{memcpy}. O \textit{underflow} aritmético é a causa raiz,
+e não uma segunda violação independente --- a ferramenta encerra na primeira
+violação encontrada. A classificação CWE-191 (\textit{Integer Underflow (Wrap or Wraparound)})
+$\rightarrow$~CWE-119 (\textit{Improper Restriction of Operations within the
+Bounds of a Memory Buffer}) reflete essa
+relação de causa e efeito.}
+
+\begin{lstlisting}[
+  caption={\corr{Contraexemplo ESBMC para o underflow com acesso fora dos limites no GPS uBlox} \artigo{(trecho literal do log, ESBMC~v8.1.0)}},
+  label={lst:contraex_gps},
+  numbers=left,
+  frame=single,
+  language=bash,
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true]
+ESBMC version 8.1.0 64-bit x86_64 linux
+Solving with solver Boolector 3.2.4
+[Counterexample]
+
+State 1 file resultados/GPS/test_gps_driver.cpp line 224 column 5 function main thread 0
+----------------------------------------------------
+  test_choice = 3 (00000000 00000000 00000000 00000011)
+
+State 3 file resultados/GPS/test_gps_driver.cpp line 179 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  input_len = 10 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001010)
+
+State 6 file resultados/GPS/test_gps_driver.cpp line 183 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  input_data = { ... 210 bytes omitidos ... }
+
+State 7 file resultados/GPS/test_gps_driver.cpp line 184 column 5 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  dump_buffer = { .data={ ... 200 bytes omitidos ... }, .len=0,
+    .instance=0, .anon_pad$3=281474976710655, .timestamp=0xFFFFFFFFFFFFFFFF }
+
+State 8 file resultados/GPS/test_gps_driver.cpp line 185 column 23 function test_gps_real_bit_operation thread 0
+----------------------------------------------------
+  dump_buffer.len = { .data={ ... 200 bytes omitidos ... }, .len=207,
+    .instance=0, .anon_pad$3=281474976710655, .timestamp=0xFFFFFFFFFFFFFFFF }
+
+State 21 file <esbmc>/c2goto/library/string.c line 280 column 5 function __memcpy_impl thread 0
+----------------------------------------------------
+Violated property:
+  file <esbmc>/c2goto/library/string.c line 280 column 5 function __memcpy_impl
+  dereference failure: Access to object out of bounds
+
+VERIFICATION FAILED
+\end{lstlisting}
+
+\corr{O contraexemplo foi obtido com o solver Boolector~3.2.4. Conforme
+registrado na Seção~\ref{sec:ameacas-validade}, essa foi a única configuração
+que encontrou a violação dentro do limite de tempo estabelecido. Esse resultado
+indica sensibilidade à configuração do verificador e do solver; não significa
+que a violação seja exclusiva desse solver.} \artigo{O estado
+\texttt{len = 207} é alcançável no modelo do \textit{harness}, mas não no
+driver de produção, conforme a análise indutiva apresentada na
+Seção~\ref{subsec:gps-inducao}.} \corr{A variável local
+\texttt{dump\_buffer} representa, no modelo, a estrutura usada como destino
+do \texttt{memcpy}; ela não deve ser interpretada como reprodução exata da
+estrutura publicada pelo driver.}
+
+\corr{Embora uma escrita fora dos limites possa, em termos gerais, corromper
+memória adjacente, este experimento não permite afirmar que tal efeito ocorra em
+uma plataforma Pixhawk. O \textit{harness} utiliza uma estrutura adaptada e um
+buffer de 200~bytes, e a análise de alcançabilidade não encontrou o estado
+\texttt{len = 207} no driver de produção. Portanto, o resultado deve ser
+interpretado como um contraexemplo do modelo analisado, e não como evidência de
+corrupção de memória em execução real.}

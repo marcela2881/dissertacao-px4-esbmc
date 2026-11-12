@@ -1,0 +1,244 @@
+\chapter{Conclusão}
+\label{cap:conclusao}
+
+%% LC (resolvido 12/11/2026): resposta explícita à questão de pesquisa e ligação
+%% de cada objetivo à sua evidência.
+A questão que orientou esta pesquisa foi se é viável aplicar \textit{Bounded
+Model Checking} a um \textit{firmware} de controle de voo de porte industrial,
+com tempo de verificação por módulo compatível com o uso prático e produzindo
+evidências auditáveis sobre propriedades de memória e de aritmética. A resposta
+é afirmativa, com um alcance que precisa ser dito junto: a viabilidade foi
+demonstrada por módulo, sobre \textit{harnesses} que isolam cada unidade, e não
+para o sistema completo. Vinte e dois módulos do PX4 Autopilot foram
+verificados em duas campanhas; cada verificação da primeira concluiu em menos
+de noventa segundos, e todo veredito pode ser refeito a partir dos artefatos
+publicados.
+
+Os três objetivos específicos foram atendidos da seguinte forma. O objetivo~O1,
+propor a metodologia, corresponde às oito etapas do
+Capítulo~\ref{cap:metodologia}. O objetivo~O2, aplicá-la e classificar os
+candidatos, corresponde às duas campanhas do Capítulo~\ref{cap:experimentos}:
+três contraexemplos triados na primeira e dez módulos com desfecho individual
+na segunda (Tabelas~\ref{tab:resultados} e~\ref{tab:desfechos-segunda}). O
+objetivo~O3, avaliar a viabilidade, corresponde aos tempos e às configurações
+por módulo da Tabela~\ref{tab:resultados} e às respostas às questões
+experimentais.
+
+\section{Síntese dos Resultados}
+\label{sec:conclusao-sintese}
+
+%% LC (resolvido 12/11/2026): síntese condensada em um parágrafo por achado.
+\textbf{Dez módulos sem violação.} Na primeira campanha, os
+\textit{harnesses} de dez dos doze módulos foram verificados sem violação das
+propriedades de segurança de memória e de \textit{overflow} habilitadas. A
+reexecução com as asserções de desenrolamento ligadas mostrou que nenhum laço
+desses \textit{harnesses} excede o limite usado, de modo que o resultado não
+depende de truncamento silencioso.
+
+\textbf{Temperatura do BMI088.} O verificador produziu uma leitura de
+$86{,}25\,^{\circ}$C, acima do limite operacional de $85\,^{\circ}$C do
+\textit{datasheet}. Os mantenedores recusaram a observação como defeito, e ela
+permanece como especificação disputada.
+
+\textbf{Contador do FIFO do BMI088.} O contraexemplo, com
+\texttt{count}~$= 9088$ para um FIFO de $1.024$~bytes, era um falso positivo: o
+driver de produção contém três guardas que o \textit{harness} omitia.
+
+\textbf{GPS uBlox.} O verificador encontrou, no \textit{harness}, uma escrita
+fora dos limites em \texttt{dumpGpsData()}. Uma prova indutiva sobre o laço real
+do driver mostrou que o estado violador é inalcançável na produção, e um ensaio
+em bancada foi consistente com essa conclusão. A guarda proposta foi enquadrada
+pelo mantenedor como endurecimento defensivo.
+
+\textbf{Segunda campanha.} Em sete de dez módulos complementares, o efeito
+previsto foi reproduzido executando o código real do PX4 sob sanitizadores.
+Três desses defeitos foram corrigidos pelo próprio projeto, de forma
+independente; dois foram reportados neste trabalho (RoboClaw e batmon) e
+aguardavam triagem no fechamento do texto; um já havia sido relatado por
+terceiro; e um não foi reportado, pelo impacto desprezível. Um falso positivo
+foi barrado pela conferência antes de qualquer relato.
+
+\textbf{Validação em bancada.} Numa Pixhawk~6X~RT, o driver do RoboClaw
+transmitiu o byte de dados 130, fora da faixa de 0 a 127 do protocolo, e deixou
+de fazê-lo com a correção aplicada. O controlador de motores foi emulado.
+
+\textbf{Correção na ferramenta.} A campanha expôs um defeito no modelo de
+\texttt{snprintf} do ESBMC, confirmado e corrigido pelos mantenedores.
+
+\section{Contribuições}
+\label{sec:conclusao-contribuicoes}
+
+%% LC (resolvido 12/11/2026): lista alinhada às cinco contribuições da
+%% Introdução, com a numeração (i) a (viii) das etapas.
+As contribuições são as cinco enunciadas na Introdução
+(Seção~\ref{sec:contribuicoes}).
+
+\begin{enumerate}
+\item \textbf{Metodologia em oito etapas.} Seleção de módulos~(i),
+instrumentação com \textit{stubs}~(ii), especificação de propriedades~(iii),
+execução do verificador~(iv), análise de contraexemplos com conferência contra
+o código de produção~(v), reporte~(vi), validação cruzada e verificação de
+\textit{patch}~(vii), e reprodução em outro autopiloto com integração
+contínua~(viii).
+\item \textbf{Evidência experimental delimitada pelo modelo.} Dez módulos sem
+violação até o limite de desenrolamento, com tempos por módulo medidos em três
+execuções.
+\item \textbf{Triagem documentada.} Três contraexemplos com três desfechos
+distintos, e a prova formal de que o estado violador do GPS não ocorre no
+driver de produção.
+\item \textbf{Segunda campanha.} Dez módulos verificados sobre o código
+original, com defeitos reproduzidos por \textit{replay}, um deles observado em
+bancada, dois relatos ao PX4 e uma correção aceita no ESBMC.
+\item \textbf{Artefato público.} \textit{Harnesses}, registros, programas de
+\textit{replay}, capturas de bancada e roteiros de reprodução.
+\end{enumerate}
+
+A ausência de teste unitário direto para \texttt{dumpGpsData()} foi conferida
+por busca na árvore do PX4 (Seção~\ref{sec:caso-gps}). Ela evidencia falta de
+cobertura unitária direta, e não de exercício indireto por simulação ou por
+testes de integração.
+
+\section{Limitações do Estudo}
+\label{sec:conclusao-limitacoes}
+
+\textbf{Cobertura.} Os arquivos-alvo da primeira campanha somam cerca de
+$1{,}5\,\%$ das $710$~mil linhas de C/C++ de \texttt{src/}. Ficaram de fora os
+mecanismos de \textit{failsafe} do Commander, a lógica de \textit{geofence}, os
+barramentos CAN/UAVCAN, a ponte RTPS/uXRCE-DDS e os drivers de fluxo óptico e
+telêmetro, as mesmas exclusões da Seção~\ref{sec:ameacas-validade}.
+
+\textbf{Limite de desenrolamento.} As garantias valem até o limite $k$
+adotado: 10 como padrão, 15 no Navigator/Mission e 300 no MAVLink Parser
+(Seção~\ref{subsec:escolha-k}). A campanha original usou
+\texttt{--no-unwinding-assertions}; a reexecução com as asserções ligadas
+afastou o risco de truncamento nos dez módulos sem violação, mas, no GPS, o
+laço do \texttt{memcpy} excede $k = 10$ e não é coberto por inteiro.
+
+\textbf{Modelo.} Os \textit{stubs} não representam temporização, atrasos de
+barramento nem falhas intermitentes, e a análise modular não captura defeitos
+que surgem da interação entre tarefas concorrentes.
+
+%% LC (resolvido 12/11/2026): limitação sobre defeitos confirmados.
+\textbf{Eficácia em encontrar defeitos.} A primeira campanha não produziu
+defeito confirmado algum: de três contraexemplos, um era falso positivo, um foi
+recusado e um é inalcançável na produção. A segunda campanha reproduziu
+defeitos no código real, e três deles coincidem com correções feitas pelo
+próprio PX4; ainda assim, nenhum relato deste trabalho havia sido aceito pelos
+mantenedores no fechamento do texto. A eficácia do método em encontrar defeitos
+que o projeto reconheça como tais está, portanto, demonstrada de forma
+indireta.
+
+%% LC (resolvido 12/11/2026): limitação sobre esforço humano.
+\textbf{Esforço humano.} O tempo de máquina é pequeno, mas o custo do método é
+dominado pelo trabalho de escrever \textit{harnesses}, triar contraexemplos e
+conferir o código de produção. Esse esforço não foi medido, e nenhuma afirmação
+sobre custo total de adoção se sustenta nos dados deste trabalho.
+
+\textbf{Validação em bancada.} Os ensaios cobrem dois achados. No do RoboClaw,
+o controlador de motores foi emulado, o \textit{firmware} precisou de duas
+alterações declaradas e só um dos dois defeitos foi exercitado; no do GPS, não
+havia receptor conectado.
+
+%% LC (resolvido 12/11/2026): aplicabilidade ao SAGRES.
+\textbf{Relação com o projeto SAGRES.} O projeto motivou a pesquisa, mas não
+foi levantada a configuração de aeronave que ele utiliza, nem quais dos módulos
+verificados fazem parte dela. A aplicabilidade dos resultados às suas missões é
+uma hipótese, e não um resultado.
+
+\section{Trabalhos Futuros}
+\label{sec:conclusao-futuros}
+
+\subsection{Expansão da cobertura}
+
+%% LC (resolvido 12/11/2026): Navigator retirado da lista de não analisados;
+%% LPE definido; citações mantidas só onde sustentam a frase.
+A metodologia pode ser estendida aos subsistemas não analisados: os mecanismos
+de \textit{failsafe} do Commander, a lógica de \textit{geofence}, os barramentos
+CAN/UAVCAN e o estimador de posição local do PX4 (\textit{Local Position
+Estimator}, LPE). Nos módulos já verificados, cabe ampliar os cenários; no
+MAVLink Parser, por exemplo, sequências de mensagens malformadas do tipo
+descrito por Ficco et al.~\cite{Ficco2022}.
+
+\subsection{Validação em bancada e em simulação}
+\label{sec:trabalhos-futuros-hw}
+
+%% LC (resolvido 12/11/2026): seção numerada, para que as referências apontem
+%% para ela.
+A validação em bancada pode ser estendida aos demais achados da segunda
+campanha. O sensor de vento FT7 e o batmon são os candidatos imediatos: o
+primeiro usa a mesma interface serial do ensaio do RoboClaw, e o segundo
+exigiria emular uma bateria SMBus. Para o RoboClaw, falta observar a reação de
+um controlador real ao byte fora da faixa, que o manual não especifica. Para o
+GPS, falta o sentido do receptor para a placa.
+
+Os ensaios feitos injetam a condição de disparo diretamente, por parâmetro e
+por comando de console. Eles mostram que o defeito ocorre na placa quando a
+condição se apresenta, mas não que a cadeia de módulos a montante a produz em
+operação. Responder a essa pergunta exige exercitar a pilha completa, e a
+simulação \textit{software-in-the-loop} é o ambiente adequado, sem risco ao
+equipamento.
+
+\subsection{Integração em \textit{pipeline} de desenvolvimento}
+
+Um fluxo do GitHub Actions já executa os \textit{harnesses} do IMU e do GPS a
+cada \textit{push} (Seção~\ref{subsec:ardupilot-ci}). Os passos seguintes são a
+verificação incremental, restrita aos módulos modificados, a medição do tempo
+de relógio sob configuração controlada e a proposição do fluxo à integração
+contínua oficial do projeto.
+
+\subsection{Verificação composicional e concorrente}
+
+A verificação módulo a módulo não detecta defeitos de composição. Dois recursos
+do ESBMC atacam essa limitação. Os contratos de função permitem substituir um
+\textit{stub} não determinístico por uma especificação verificada do que a
+função exige e garante. A verificação de programas concorrentes, não explorada
+aqui, permitiria tratar condições de corrida entre as tarefas que o PX4 executa
+sob o escalonador do NuttX; exigiria modelar o escalonamento e a semântica de
+publicação do uORB.
+
+\subsection{Propriedades além do software}
+
+As propriedades verificadas referem-se a estados do programa. O que uma
+violação significa para o veículo, isto é, em que condição de voo ocorreria e
+com que consequência, exige acoplar à verificação um modelo abstrato da
+dinâmica do sistema físico. Essa foi uma pergunta da banca de qualificação que
+este trabalho não responde.
+
+\section{Considerações Finais}
+\label{sec:conclusao-finais}
+
+As três questões experimentais tiveram as seguintes respostas. Quanto à
+\textbf{QE1}, todo módulo da primeira campanha foi verificado em menos de
+noventa segundos em \textit{hardware} de prateleira, o que demonstra
+viabilidade por módulo. Quanto à \textbf{QE2}, a resposta é parcial: o BMC
+expôs, no \textit{harness} do GPS, uma violação em função sem teste unitário
+direto, mas o estado é inalcançável na produção, e nenhum defeito do driver foi
+exposto na primeira campanha. Quanto à \textbf{QE3}, nove dos doze módulos
+foram verificados com a invocação padrão, e três exigiram opções específicas.
+
+%% LC (resolvido 12/11/2026): alegações de custo e de casos de canto qualificadas.
+Os resultados indicam que o BMC é aplicável a módulos de \textit{firmware} de
+VANTs em produção com tempo de máquina pequeno. Não permitem afirmar que o
+custo total seja compatível com um ciclo de desenvolvimento, porque o esforço
+humano e o tempo em integração contínua não foram medidos. Também não se
+sustenta, para a primeira campanha, a afirmação de que a abordagem alcança
+casos extremos que os testes não cobrem: o único caso extremo encontrado ali
+não ocorre no driver real.
+
+%% LC (resolvido 12/11/2026): argumento final apoiado na segunda campanha.
+O valor da abordagem aparece com mais clareza na segunda campanha, e por uma
+razão metodológica. Quando a verificação foi feita sobre o código original, e
+cada candidato só foi aceito depois de reproduzido fora do verificador, sete de
+dez módulos exibiram defeitos que o código real de fato tem, três deles
+corrigidos pelo próprio projeto sem conhecimento deste trabalho. A primeira
+campanha mostrou o que acontece sem essa disciplina: contraexemplos formalmente
+válidos para defeitos que não existem.
+
+O que este trabalho entrega é, assim, uma metodologia de verificação formal
+para \textit{firmware} de sistemas críticos, aplicada ao PX4 como estudo de
+caso. Os achados são produto da aplicação do método, e não a sua medida:
+aplicado a outro \textit{firmware}, ele poderia não revelar violação alguma e
+ainda assim produzir evidência da mesma natureza, limitada, reproduzível e
+auditável. A lição que atravessa as duas campanhas é que um contraexemplo é o
+início da triagem, e que a conferência contra o código de produção é a etapa
+que separa um achado de um artefato do modelo.

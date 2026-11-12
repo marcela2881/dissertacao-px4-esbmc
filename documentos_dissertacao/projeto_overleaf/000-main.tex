@@ -1,0 +1,190 @@
+\documentclass[msc]{cls_bst/cls_file_ufam_v3}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\usepackage[dvipsnames]{xcolor}
+%% Paleta neutra (nude/taupe) do documento. Usar estas cores nas figuras de
+%% todos os capitulos para manter consistencia visual.
+\definecolor{palPaper}{HTML}{F4EFE8}
+\definecolor{palFill}{HTML}{EAE1D2}
+\definecolor{palStrong}{HTML}{D9C4A0}
+\definecolor{palEdge}{HTML}{A4927A}
+\definecolor{palEdgeDark}{HTML}{6F6051}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc,fit,backgrounds}
+\usepackage{listings}
+\lstset{inputencoding=utf8,extendedchars=true,literate=
+  {á}{{\'a}}1 {à}{{`a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ê}{{\^e}}1
+  {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1
+  {Á}{{\'A}}1 {À}{{`A}}1 {Â}{{\^A}}1 {Ã}{{\~A}}1 {É}{{\'E}}1 {Ê}{{\^E}}1
+  {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ô}{{\^O}}1 {Õ}{{\~O}}1 {Ú}{{\'U}}1 {Ç}{{\c C}}1
+  {°}{{\textdegree}}1}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{tcolorbox}
+
+\usepackage{enumitem}
+
+\usepackage{pdfpages}
+
+\usepackage[english,brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\fancypagestyle{fancy}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0.8pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[L]{\footnotesize\scshape\nouppercase{\leftmark}}%
+  \fancyhead[R]{\footnotesize\scshape\nouppercase{\rightmark}}%
+  \fancyfoot[C]{\small\thepage}%
+}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\small\thepage}%
+}
+\renewcommand{\chaptermark}[1]{\markboth{Capítulo \thechapter\ -- #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ \ #1}}
+
+\newif\ifbanca
+\bancafalse
+
+%% ┌─────────────────────────────────────────────────────────────────────┐
+%% │ ANTES DE VIRAR PARA \bancatrue, RESOLVER:                           │
+%% │                                                                     │
+%% │ A única pendência vermelha do documento está no Apêndice            │
+%% │ \ref{apend:contraexemplos}: os contraexemplos NÃO são cópias        │
+%% │ literais dos logs. Ocultar o \pendente sem corrigir o conteúdo      │
+%% │ esconde o problema do leitor, não do examinador. — LC               │
+%% │                                                                     │
+%% │ Ação: substituir cada contraexemplo pelo trecho literal do log do   │
+%% │ servidor iartes. Valor canônico do candidato 1 é                    │
+%% │ _next_buffer_idx = 74 (o 75 vem da reprodução em macOS e não entra  │
+%% │ na dissertação).                                                    │
+%% └─────────────────────────────────────────────────────────────────────┘
+
+\newcommand{\revisao}[1]{#1}
+\newcommand{\corr}[1]{#1}
+
+\newcommand{\artigo}[1]{#1}
+\newcommand{\novo}[1]{#1}
+
+\ifbanca
+  \newcommand{\pendente}[1]{#1}
+  \newcommand{\falta}[1]{#1}
+\else
+  \newcommand{\pendente}[1]{\textcolor{orange!85!black}{#1}}
+  \newcommand{\falta}[1]{\textcolor{red!80!black}{#1}}
+\fi
+
+%% ─── Compactação de espaços verticais ────────────────────────────────────
+%% Não altera margens nem entrelinha (norma ABNT/UFAM preservada); apenas
+%% aproxima floats, listagens e listas do texto. Reduz páginas sem mexer no
+%% corpo do texto. Para afrouxar, aumentar os valores abaixo.
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}  % float no topo/base da página x texto
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}       % floats [h] no meio do texto
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}        % entre dois floats
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+\lstset{aboveskip=6pt, belowskip=6pt}                % folga ao redor de código
+\setlist{topsep=3pt, itemsep=2pt, parsep=0pt}        % listas mais justas (enumitem)
+%% ──────────────────────────────────────────────────────────────────────────
+
+%% ─── Topo de capítulo mais justo ─────────────────────────────────────────
+%% A classe v3 herda o \@makechapterhead do book padrão, que reserva ~50pt de
+%% espaço em branco acima do "Capítulo N". Reduz-se esse espaço (e o vão abaixo
+%% do título) sem mexer em fonte, numeração ou estilo. Se o v3 customizar o
+%% cabeçalho e os alvos não existirem, os \patchcmd simplesmente não agem (ramo
+%% de falha vazio), sem erro. Para afrouxar, aumentar os "10\p@" / "18\p@".
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{12\p@}}{}{}
+\patchcmd{\@makechapterhead}{\vskip 40\p@}{\vskip 20\p@}{}{}
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{12\p@}}{}{}
+\patchcmd{\@makeschapterhead}{\vskip 40\p@}{\vskip 20\p@}{}{}
+\makeatother
+%% ──────────────────────────────────────────────────────────────────────────
+
+\setlength{\emergencystretch}{3em}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\setlength{\parindent}{1.25cm}
+\hyphenpenalty=1000
+\tolerance=2000
+
+\newif\ifperguntas
+\ifbanca \perguntasfalse \else \perguntastrue \fi
+
+\newtcolorbox{caixapergunta}[1]{%
+  colback=orange!6!white, colframe=orange!75!black,
+  boxrule=0.8pt, arc=2pt, boxsep=1pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries\footnotesize,
+  title={Pergunta ao orientador --- #1}}
+
+\newcommand{\pergunta}[2]{%
+  \ifperguntas
+    \begin{caixapergunta}{#1}\footnotesize #2\end{caixapergunta}
+  \fi}
+
+\tcbuselibrary{breakable}
+\newif\iflc
+\ifbanca \lcfalse \else \lctrue \fi
+
+\newtcolorbox{caixalc}{%
+  breakable,
+  colback=red!3!white, colframe=red!65!black,
+  boxrule=0.6pt, arc=1pt, boxsep=1pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+
+\newcommand{\lc}[1]{%
+  \iflc
+    \begin{caixalc}%
+      \footnotesize\color{red!72!black}%
+      \textbf{LC:}\ #1
+    \end{caixalc}%
+  \fi}
+
+\AtBeginDocument{%
+  \ifbanca
+    \typeout{^^J*** VERSAO PARA A BANCA: marcacoes ocultas. ***^^J}%
+  \else
+    \typeout{^^J*** VERSAO DE TRABALHO: verde/vermelho/laranja/LC VISIVEIS. ***^^J%
+             *** Para a banca, trocar \string\bancafalse por \string\bancatrue. ***^^J}%
+  \fi}
+
+\begin{document}
+
+\input{capitulos/0-capa_n_contra}
+
+\mainmatter
+\pagestyle{fancy}
+\input{capitulos/1-introducao}
+\input{capitulos/2-fundamentos}
+\input{capitulos/3-trabalhoscorrelatos}
+\input{capitulos/4-metodologia}
+\input{capitulos/7-resultados}
+\input{capitulos/5-conclusao}
+
+
+\bibliographystyle{cls_bst/bst_ufam}
+\bibliography{referencias}
+
+\appendix
+\input{capitulos/6-apendice}
+
+\end{document}
