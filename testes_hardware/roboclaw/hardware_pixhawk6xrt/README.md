@@ -171,7 +171,15 @@ então o `ver all` confirma o commit de base, mas **não distingue** o firmware
 original do corrigido. Essa distinção vem do md5 dos dois arquivos e do
 comportamento observado no fio.
 
-Pendente: `diff_firmware_corrigido.patch` (só na máquina da autora). A correção do Bug 2 (`write()` com retorno
+`diff_firmware_corrigido.patch` é o `git diff src/drivers/roboclaw/` da árvore
+que gerou o firmware corrigido (correção em `Roboclaw.cpp` mais as duas linhas
+de `Roboclaw.hpp`), e `correcao_init_roboclaw.patch` é o diff só das duas
+linhas, usado no firmware dos ensaios anteriores. Os dois foram reconstruídos
+a partir da saída do `cat` colada pela autora (tabulações restauradas); o
+tamanho confere byte a byte com o `ls -la` dos originais (2239 e 511 bytes).
+Fora de `src/drivers/roboclaw/`, a árvore tinha `default.px4board` (+2 linhas)
+e `Kconfig.topics` alterados, iguais nos dois firmwares; o conteúdo dessas
+duas alterações não foi capturado. A correção do Bug 2 (`write()` com retorno
 negativo) está no mesmo patch, mas este ensaio não a exercita.
 
 ## Ressalva sobre os ACKs
