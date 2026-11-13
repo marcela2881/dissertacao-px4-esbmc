@@ -47,8 +47,8 @@
   \fancyhf{}%
   \renewcommand{\headrulewidth}{0.8pt}%
   \renewcommand{\footrulewidth}{0pt}%
-  \fancyhead[L]{\footnotesize\scshape\nouppercase{\leftmark}}%
-  \fancyhead[R]{\footnotesize\scshape\nouppercase{\rightmark}}%
+  \fancyhead[L]{\footnotesize\scshape\let\itshape\relax\let\em\relax\nouppercase{\leftmark}}%
+  \fancyhead[R]{\footnotesize\scshape\let\itshape\relax\let\em\relax\nouppercase{\rightmark}}%
   \fancyfoot[C]{\small\thepage}%
 }
 \fancypagestyle{plain}{%
