@@ -60,6 +60,8 @@ veredito no harness do GPS dentro do \textit{timeout}
   label={lst:comando-esbmc},
   numbers=left,
   frame=single,
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
   language=bash]
 esbmc modulo.cpp --unwind 10 --no-unwinding-assertions \
   --overflow-check --default-solver boolector --timeout 120s
@@ -295,28 +297,28 @@ valores constam dos logs do repositório de artefatos.}
 \caption{Resultados da verificação para os 12 módulos do PX4}
 \label{tab:resultados}
 \footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{|l|l|c|r|l|r|r|}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|l|l|c|r|r|r|}
 \hline
 \textbf{Módulo} & \textbf{Desfecho} &
-\textbf{VAM}$^\P$ & \textbf{Unw.} & \textbf{Solver} & \textbf{Tempo}$^\|$ & \corr{\textbf{Decisão}$^{\star}$ (mín--máx)} \\
+\textbf{VAM}$^\P$ & \textbf{Unw.} & \textbf{Tempo}$^\|$ & \corr{\textbf{Decisão}$^{\star}$ (mín--máx)} \\
 \hline
-IMU BMI088        & \corr{\textit{contraex.\ (triado)}} & 0$^\ddagger$ &  10 & \artigo{Bool.} & \artigo{0,1\,s}$^{\#}$ & \corr{0,122 (0,121--0,122)} \\
-GPS uBlox         & \textit{violação}     & 1 &  10 & \artigo{Bool.} & 64,9\,s$^{\#}$ & \corr{64,857 (64,765--64,874)} \\
-MAVLink Parser    & \textit{sem violação} & 0 & 300 & \artigo{Bool.} & 49,2\,s & \corr{46,970 (46,916--47,083)} \\
-Expo RC           & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  4,9\,s & \corr{4,852 (4,840--4,866)} \\
-Battery Monitor   & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  6,7\,s & \corr{6,727 (6,703--6,731)} \\
-PWM Output        & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  0,2\,s & \corr{0,156 (0,156--0,156)} \\
-RC Update         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  9,5\,s & \corr{9,457 (9,384--9,534)} \\
-Navigator/Mission & \textit{sem violação} & 0 &  15 & \artigo{Bool.} &  0,1\,s & \corr{0,095 (0,095--0,095)} \\
-EKF2 Covariance   & \textit{sem violação} & 0 &  10 & \artigo{Bool.} & 12,2\,s & \corr{12,200 (12,181--12,228)} \\
-Magnetômetro      & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  6,6\,s & \corr{6,621 (6,616--6,629)} \\
-Barômetro         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  0,4\,s & \corr{0,360 (0,351--0,363)} \\
-VTOL$^\S$         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  4,0\,s & \corr{3,942 (3,911--3,943)} \\
+IMU BMI088        & \corr{\textit{contraex.\ (triado)}} & 0$^\ddagger$ &  10 & \artigo{0,1\,s}$^{\#}$ & \corr{0,122 (0,121--0,122)} \\
+GPS uBlox         & \textit{violação}     & 1 &  10 & 64,9\,s$^{\#}$ & \corr{64,857 (64,765--64,874)} \\
+MAVLink Parser    & \textit{sem violação} & 0 & 300 & 49,2\,s & \corr{46,970 (46,916--47,083)} \\
+Expo RC           & \textit{sem violação} & 0 &  10 &  4,9\,s & \corr{4,852 (4,840--4,866)} \\
+Battery Monitor   & \textit{sem violação} & 0 &  10 &  6,7\,s & \corr{6,727 (6,703--6,731)} \\
+PWM Output        & \textit{sem violação} & 0 &  10 &  0,2\,s & \corr{0,156 (0,156--0,156)} \\
+RC Update         & \textit{sem violação} & 0 &  10 &  9,5\,s & \corr{9,457 (9,384--9,534)} \\
+Navigator/Mission & \textit{sem violação} & 0 &  15 &  0,1\,s & \corr{0,095 (0,095--0,095)} \\
+EKF2 Covariance   & \textit{sem violação} & 0 &  10 & 12,2\,s & \corr{12,200 (12,181--12,228)} \\
+Magnetômetro      & \textit{sem violação} & 0 &  10 &  6,6\,s & \corr{6,621 (6,616--6,629)} \\
+Barômetro         & \textit{sem violação} & 0 &  10 &  0,4\,s & \corr{0,360 (0,351--0,363)} \\
+VTOL$^\S$         & \textit{sem violação} & 0 &  10 &  4,0\,s & \corr{3,942 (3,911--3,943)} \\
 \hline
 \textbf{Total} & \corr{\textbf{10 sem violação, 1 violação,}} & \textbf{1} &
---- & --- & \artigo{\textbf{$\approx$94\,s}$^{\dagger}$} & \corr{\textbf{156,359}} \\
-               & \corr{\textbf{1 contraex.\ refutado/recusado}} & & & & & \\
+--- & \artigo{\textbf{$\approx$94\,s}$^{\dagger}$} & \corr{\textbf{156,359}} \\
+               & \corr{\textbf{1 contraex.\ refutado/recusado}} & & & & \\
 \hline
 \end{tabular}
 
@@ -324,7 +326,7 @@ VTOL$^\S$         & \textit{sem violação} & 0 &  10 & \artigo{Bool.} &  4,0\,s
 \begin{flushleft}
 $^\P$VAM = violações alcançáveis no modelo (\textbf{não} defeitos
 confirmados).\\
-\artigo{Bool.\ = Boolector~3.2.4, com ESBMC v8.1.0, em todos os módulos.}\\
+\artigo{Solver: Boolector~3.2.4, com ESBMC v8.1.0, em todos os módulos.}\\
 $^\ddagger$\corr{Dois contraexemplos, ambos triados como não-defeito:
 FIFO, falso positivo; temperatura, recusada upstream.} \artigo{O tempo da
 tabela é o do candidato FIFO (\texttt{test\_choice = 2}), em que as três
@@ -483,6 +485,8 @@ No GPS, o comando registrado é o da Listagem~\ref{lst:comando-cbmc}:}
   label={lst:comando-cbmc},
   numbers=left,
   frame=single,
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
   language=bash]
 cbmc test_gps_cbmc_fair.cpp --unwind $u --no-unwinding-assertions \
   --bounds-check --pointer-check \
@@ -1069,11 +1073,11 @@ Seção~\ref{sec:segunda-campanha}; esta seção reúne os desfechos
 \caption{\corr{Desfechos da segunda campanha, por módulo}}
 \label{tab:desfechos-segunda}
 \footnotesize
-\begin{tabular}{|p{5.6cm}|c|p{7.4cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{5.2cm}|c|>{\raggedright\arraybackslash}p{6.9cm}|}
 \hline
 \textbf{Desfecho} & \textbf{Módulos} & \textbf{Quais} \\
 \hline
-\corr{Defeito reproduzido no código real e corrigido \textit{upstream} por terceiros} & \corr{3} & \raggedright\corr{\texttt{externalChecks}, \texttt{ft7\_technologies}, \texttt{IridiumSBD}} \tabularnewline
+\corr{Defeito reproduzido no código real e corrigido \textit{upstream} por terceiros} & \corr{3} & \corr{\texttt{externalChecks}, \texttt{ft7\_technologies}, \texttt{IridiumSBD}} \\
 \hline
 \corr{Defeito reproduzido e reportado neste trabalho} & \corr{2} & \corr{RoboClaw (\textit{Issue}~\#29785), batmon (\textit{Issue}~\#29787)} \\
 \hline

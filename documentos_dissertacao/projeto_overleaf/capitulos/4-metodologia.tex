@@ -30,7 +30,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{3pt}
 \newcommand{\cel}{\raggedright\hspace{0pt}}
-\begin{tabular}{|p{2.0cm}|p{3.7cm}|p{4.9cm}|p{4.1cm}|}
+\begin{tabular}{|p{1.91cm}|p{3.53cm}|p{4.67cm}|p{3.91cm}|}
 \hline
 \cel\textbf{Etapa} & \cel\textbf{Ferramentas e versões} & \cel\textbf{Opções} & \cel\textbf{Hipóteses de modelagem} \tabularnewline
 \hline
@@ -246,8 +246,8 @@ contra o código de produção da etapa~(v).}
 \centering
 \caption[Pré-condições dos \textit{harnesses} da primeira campanha]{\corr{Principais pré-condições dos \textit{harnesses} da primeira campanha e sua justificativa}}
 \label{tab:hipoteses-harness}
-\footnotesize
-\begin{tabular}{|p{2.3cm}|p{5.6cm}|p{6.0cm}|}
+\scriptsize
+\begin{tabular}{|p{2.25cm}|>{\raggedright\arraybackslash}p{5.49cm}|>{\raggedright\arraybackslash}p{5.88cm}|}
 \hline
 \textbf{Módulo} & \textbf{Pré-condição (\texttt{\_\_ESBMC\_assume})} & \textbf{Justificativa} \\
 \hline
@@ -498,6 +498,8 @@ A Listagem~\ref{lst:exemplo-harness-gps} apresenta o fragmento central do harnes
   label={lst:exemplo-harness-gps},
   numbers=left,
   frame=single,
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
   language=C]
 // Entrada simbolica - o solver escolhe o valor
 size_t input_len = nondet_size_t();
@@ -870,7 +872,7 @@ A Tabela~\ref{tab:propriedades-automaticas} detalha as principais classes de def
 \caption{Propriedades automáticas verificadas pelo ESBMC neste trabalho}
 \label{tab:propriedades-automaticas}
 \footnotesize
-\begin{tabular}{|p{3cm}|p{7cm}|p{3cm}|}
+\begin{tabular}{|p{2.8cm}|p{6.2cm}|>{\raggedright\arraybackslash}p{4.0cm}|}
 \hline
 \textbf{Classe} & \textbf{Descrição} & \textbf{Flag ESBMC} \\
 \hline
@@ -1077,8 +1079,9 @@ customizadas deste trabalho.}
 \centering
 \caption[Proveniência das propriedades customizadas (primeira campanha)]{\revisao{Proveniência das propriedades customizadas verificadas} \corr{(primeira campanha)}}
 \label{tab:proveniencia}
-\footnotesize
-\begin{tabular}{|p{3.0cm}|p{2.2cm}|p{2.5cm}|p{6.0cm}|}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{1.7cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{7.8cm}|}
 \hline
 \textbf{Propriedade} & \textbf{Módulo} & \textbf{Origem} & \textbf{Referência exata} \\
 \hline
@@ -1208,7 +1211,7 @@ esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 \scriptsize
 \renewcommand{\arraystretch}{0.95}
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{|p{2.4cm}|p{5.2cm}|p{5.0cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{5.4cm}|>{\raggedright\arraybackslash}p{5.6cm}|}
 \hline
 \textbf{Módulo} & \textbf{Resultado no commit testado} & \textbf{Situação e desfecho} \\
 \hline
