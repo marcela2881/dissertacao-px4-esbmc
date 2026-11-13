@@ -30,7 +30,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{3pt}
 \newcommand{\cel}{\raggedright\hspace{0pt}}
-\begin{tabular}{|p{1.91cm}|p{3.53cm}|p{4.67cm}|p{3.91cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{1.91cm}|>{\raggedright\arraybackslash}p{3.53cm}|>{\raggedright\arraybackslash}p{4.67cm}|>{\raggedright\arraybackslash}p{3.91cm}|}
 \hline
 \cel\textbf{Etapa} & \cel\textbf{Ferramentas e versões} & \cel\textbf{Opções} & \cel\textbf{Hipóteses de modelagem} \tabularnewline
 \hline
@@ -247,7 +247,7 @@ contra o código de produção da etapa~(v).}
 \caption[Pré-condições dos \textit{harnesses} da primeira campanha]{\corr{Principais pré-condições dos \textit{harnesses} da primeira campanha e sua justificativa}}
 \label{tab:hipoteses-harness}
 \scriptsize
-\begin{tabular}{|p{2.25cm}|>{\raggedright\arraybackslash}p{5.49cm}|>{\raggedright\arraybackslash}p{5.88cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{5.49cm}|>{\raggedright\arraybackslash}p{5.88cm}|}
 \hline
 \textbf{Módulo} & \textbf{Pré-condição (\texttt{\_\_ESBMC\_assume})} & \textbf{Justificativa} \\
 \hline
@@ -872,7 +872,7 @@ A Tabela~\ref{tab:propriedades-automaticas} detalha as principais classes de def
 \caption{Propriedades automáticas verificadas pelo ESBMC neste trabalho}
 \label{tab:propriedades-automaticas}
 \footnotesize
-\begin{tabular}{|p{2.8cm}|p{6.2cm}|>{\raggedright\arraybackslash}p{4.0cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{6.2cm}|>{\raggedright\arraybackslash}p{4.0cm}|}
 \hline
 \textbf{Classe} & \textbf{Descrição} & \textbf{Flag ESBMC} \\
 \hline
@@ -1211,7 +1211,8 @@ esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 \scriptsize
 \renewcommand{\arraystretch}{0.95}
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{5.4cm}|>{\raggedright\arraybackslash}p{5.6cm}|}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}p{5.3cm}|>{\raggedright\arraybackslash}p{5.4cm}|}
 \hline
 \textbf{Módulo} & \textbf{Resultado no commit testado} & \textbf{Situação e desfecho} \\
 \hline
@@ -1262,7 +1263,7 @@ Dois defeitos foram verificados no commit \texttt{8be2590c15}, com ESBMC~8.2.0
 \caption{\corr{RoboClaw: verificação formal dos dois defeitos}}
 \label{tab:roboclaw-resultados}
 \footnotesize
-\begin{tabular}{|p{7.6cm}|p{2.6cm}|p{2.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{7.6cm}|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{2.6cm}|}
 \hline
 \textbf{Defeito} & \textbf{Sem correção} & \textbf{Com \texttt{-DCORRECAO}} \\
 \hline
@@ -1380,7 +1381,7 @@ mantém explícita.}
 \caption{\corr{batmon: resultados (commit \texttt{c9b9e4e25e})}}
 \label{tab:batmon-resultados}
 \footnotesize
-\begin{tabular}{|p{6.8cm}|p{3.2cm}|p{2.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{6.8cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{2.6cm}|}
 \hline
 \textbf{Ferramenta / verificação} & \textbf{Código atual} & \textbf{\texttt{-DCORRECAO}} \\
 \hline
@@ -1446,7 +1447,7 @@ propriedades, e não de desacordo sobre a existência das violações.}
 \caption{\corr{Equivalência de opções entre ESBMC e CBMC~5.95}}
 \label{tab:equivalencia-opcoes}
 \footnotesize
-\begin{tabular}{|p{6.5cm}|p{7.0cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{6.5cm}|>{\raggedright\arraybackslash}p{7.0cm}|}
 \hline
 \textbf{ESBMC} & \textbf{CBMC} \\
 \hline
