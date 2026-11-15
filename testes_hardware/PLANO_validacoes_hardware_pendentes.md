@@ -62,3 +62,33 @@ o ESP32 envia bytes em rajadas de tamanhos variados; analisar `gps_dump` com
 pyulog, como no ensaio de outubro, conferindo que `len` (sem o bit 7) nunca
 passa de 79. O sketch do ESP32 ainda não foi escrito. A fonte dos bytes seria
 emulada, não um receptor u-blox real, e isso deve ser declarado.
+
+## RoboClaw no `main` refatorado — adiado (registrado em 2026-11-15)
+
+Origem: em 14/11/2026 um mantenedor (dirksavage88) respondeu à issue 29785 do
+PX4 dizendo que a refatoração não deve ser levada para a 1.18 e pedindo que se
+teste o driver refatorado (PR 29473). Ele não confirmou nem contestou o defeito.
+
+Estado: resposta à issue redigida, **ainda não postada** (passar antes pelo
+orientador). O `main` foi conferido só por leitura de código; não foi rodado
+na bancada.
+
+Bancada: a mesma de 11/11 (Pixhawk 6X-RT, ESP32 de escuta, TELEM2:
+amarelo TX → GPIO16, azul RX → GPIO17, preto GND). Só muda o firmware.
+
+Passos previstos (cerca de 1 hora):
+
+1. Clonar o PX4 `main` atual em pasta separada no WSL.
+2. Habilitar o driver do RoboClaw na configuração da placa.
+3. Compilar e gravar.
+4. Configurar os parâmetros e capturar no ESP32, conferindo se algum byte de
+   velocidade passa de 127.
+
+A conferir no código refatorado antes de escrever o passo a passo:
+
+- se os nomes dos parâmetros continuam os mesmos (`RBCLW_SER_CFG` etc.);
+- se o *failsafe* 257 ainda pode ser configurado;
+- se o formato dos pacotes mudou (exigiria ajustar o sketch do ESP32).
+
+Se o driver novo não aceitar 257, o resultado a registrar passa a ser "o valor
+inválido não pode mais ser configurado".
