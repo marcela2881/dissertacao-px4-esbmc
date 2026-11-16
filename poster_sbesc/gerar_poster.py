@@ -10,6 +10,9 @@ from PIL import Image
 import qrcode
 
 P = sys.argv[1]            # poster dir
+VB = len(sys.argv) > 3 and sys.argv[3] == "B"
+BH = 8.5 if VB else 6.85
+BANNER = "banner_B.jpg" if VB else "banner_header.jpg"
 OUT = sys.argv[2]
 
 NAVY = RGBColor(0x0B, 0x2F, 0x4E)
@@ -138,7 +141,7 @@ def pic(path, x, y, w=None, h=None):
 
 
 # ---------------------------------------------------------------- header
-sl.shapes.add_picture(f"{P}/build/banner_header.jpg", 0, 0, Inches(W), Inches(6.85)).name = "Header forest and drone"
+sl.shapes.add_picture(f"{P}/build/{BANNER}", 0, 0, Inches(W), Inches(BH)).name = "Header forest and drone"
 pic(f"{P}/logos/ufam_round.png", M, M, h=4.0)
 pic(f"{P}/logos/l10.png", W - M - 5.0, M + 0.35, w=5.0)
 text(W - M - 5.0, M + 2.75, 5.0, 1.2,
@@ -155,9 +158,9 @@ text(tx, M + 3.7, tw, 1.1,
      ["Graduate Program in Electrical Engineering (PPGEE) · Institute of Computing",
       "Federal University of Amazonas (UFAM), Manaus, Brazil · marcela.rodrigues@ufam.edu.br"],
      size=24, color=MUTE, align=PP_ALIGN.CENTER, name="Affiliation")
-rect(0, 6.85, W, 0.12, fill=TEAL)
+rect(0, BH, W, 0.12, fill=TEAL)
 
-TOP = 7.55
+TOP = BH + 0.7
 # ---------------------------------------------------------------- left column
 y = heading(XL, TOP, 1, "Introduction")
 y = bullets(XL, y, [
@@ -201,7 +204,7 @@ stages = [
     ("Cross-tool validation and patch verification", "CBMC 5.95.1 as an independent verifier", True),
     ("Cross-autopilot check and CI/CD", "ArduPilot comparison; harnesses run in GitHub Actions", True),
 ]
-RH, RG = 1.2, 0.3
+RH, RG = 1.2, (0.26 if VB else 0.3)
 for i, (t, d, new) in enumerate(stages):
     b = rect(XL, y, CW, RH, fill=HILITE if new else PANEL, line=TEAL if new else LINE,
              shape=MSO_SHAPE.ROUNDED_RECTANGLE, lw=2.25 if new else 1.25, name=f"Stage {i+1}")
@@ -234,7 +237,7 @@ classes = [
     ("State estimation", "EKF2 Covariance"),
     ("Mission logic", "Navigator"),
 ]
-rh = 0.66
+rh = 0.46 if VB else 0.66
 for i, (c, m) in enumerate(classes):
     if i % 2 == 0: rect(XL, y, CW, rh, fill=PANEL)
     text(XL + 0.2, y, 4.2, rh, c, size=24, bold=True, color=TEAL, anchor=MSO_ANCHOR.MIDDLE)
@@ -263,7 +266,7 @@ data = [("GPS uBlox", 64.9, 1), ("MAVLink Parser", 49.2, 0), ("EKF2 Covariance",
 cd = CategoryChartData()
 cd.categories = [d[0] for d in reversed(data)]
 cd.add_series("Time (s)", [d[1] for d in reversed(data)])
-CH = 6.8
+CH = 5.1 if VB else 6.8
 gf = sl.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(XR), Inches(y), Inches(CW), Inches(CH), cd)
 gf.name = "Time chart"
 ch = gf.chart
