@@ -118,7 +118,7 @@ def heading(x, y, num, title):
     return y + 1.0 + 0.35
 
 
-def bullets(x, y, items, size=28, w=CW, sa=10):
+def bullets(x, y, items, size=27, w=CW, sa=10):
     ps = [{"b": i} for i in items]
     h = est(ps, size, w, space_after=sa)
     text(x, y, w, h, ps, size=size, space_after=sa)
@@ -155,8 +155,8 @@ text(tx, M + 2.95, tw, 0.75,
      "Marcela Alves Rodrigues · Lucas C. Cordeiro · José Reginaldo H. de Carvalho",
      size=34, bold=True, color=INK, align=PP_ALIGN.CENTER, name="Authors")
 text(tx, M + 3.7, tw, 1.1,
-     ["Graduate Program in Electrical Engineering (PPGEE) · Institute of Computing",
-      "Federal University of Amazonas (UFAM), Manaus, Brazil · marcela.rodrigues@ufam.edu.br"],
+     ["Graduate Program in Electrical Engineering (PPGEE) \u00b7 Institute of Computing",
+      "Federal University of Amazonas (UFAM), Manaus, Brazil"],
      size=24, color=MUTE, align=PP_ALIGN.CENTER, name="Affiliation")
 rect(0, BH, W, 0.12, fill=TEAL)
 
@@ -164,30 +164,30 @@ TOP = BH + 0.7
 # ---------------------------------------------------------------- left column
 y = heading(XL, TOP, 1, "Introduction")
 y = bullets(XL, y, [
-    [("Autopilot firmware is safety-critical. ", {"bold": True}),
-     ("PX4’s source tree has ≈710k lines of C/C++ and runs on microcontrollers without a memory management unit (MMU).", {})],
-    "All modules share one address space, so a memory defect in any driver can corrupt flight-critical state.",
-    "Testing can miss faults triggered by extreme sensor values or unsigned-arithmetic edge cases.",
-    [("Gap: ", {"bold": True}), ("production autopilot driver code has not been examined with software verifiers.", {})],
+    [("Autopilot firmware is safety-critical ", {"bold": True}),
+     ("because software failures can directly affect flight operations.", {})],
+    "PX4 contains approximately 710,000 lines of C/C++ code and runs on MMU-less microcontrollers, where modules share the same address space. A memory error in one driver can therefore affect other flight-critical components.",
+    "Conventional testing may miss faults triggered by extreme sensor values and unsigned-arithmetic edge cases. Formal verification can explore execution paths that existing tests may not exercise.",
+    [("Research gap: ", {"bold": True}), ("production PX4 driver code remains insufficiently explored by software verification tools, particularly for memory safety and arithmetic overflow.", {})],
 ])
 y += 0.45
 
 y = heading(XL, y, 2, "Proposal")
 y = bullets(XL, y, [
-    [("Apply ", {}), ("bounded model checking (BMC)", {"bold": True}),
-     (" to harnesses derived from twelve PX4 modules, using ESBMC and CBMC.", {})],
-    "Replace hardware interfaces (UART, I2C, SPI, uORB) with nondeterministic stubs and add assertions derived from datasheets.",
+    [("We apply ", {}), ("bounded model checking (BMC)", {"bold": True}),
+     (" to harnesses derived from twelve PX4 modules. Each harness replaces hardware interfaces (UART, I2C, SPI and uORB) with nondeterministic stubs, enabling input exploration without physical hardware.", {})],
+    "ESBMC is the primary verifier across all twelve modules. CBMC provides independent cross-tool validation on two selected cases. The checks include datasheet-derived assertions and implicit properties such as memory safety and arithmetic overflow.",
 ])
 y += 0.15
 tw3 = (CW - 0.8) / 3
-tile(XL, y, tw3, 2.5, "12", "PX4 modules covered by a harness")
-tile(XL + tw3 + 0.4, y, tw3, 2.5, "≈2,800", "lines of hand-written harness code", TEAL)
+tile(XL, y, tw3, 2.5, "12", "PX4 modules covered")
+tile(XL + tw3 + 0.4, y, tw3, 2.5, "≈2,800", "lines of handwritten harness code", TEAL)
 tile(XL + 2 * (tw3 + 0.4), y, tw3, 2.5, "≈10,400", "lines of target PX4 code")
 y += 2.5 + 0.35
 rq = [
-    [("RQ1 ", {"bold": True, "color": TEAL}), ("What is the per-module verification latency on commodity hardware?", {})],
-    [("RQ2 ", {"bold": True, "color": TEAL}), ("Does BMC expose model-reachable violations that existing PX4 unit tests do not exercise?", {})],
-    [("RQ3 ", {"bold": True, "color": TEAL}), ("Which per-module configurations are needed to make each module tractable?", {})],
+    [("RQ1 ", {"bold": True, "color": TEAL}), ("What is the per-module verification time on commodity hardware?", {})],
+    [("RQ2 ", {"bold": True, "color": TEAL}), ("Can BMC expose model-reachable violations that existing PX4 unit tests do not exercise?", {})],
+    [("RQ3 ", {"bold": True, "color": TEAL}), ("Which module-specific configurations are needed to make each harness tractable?", {})],
 ]
 h = est(rq, 26, CW, space_after=6)
 text(XL, y, CW, h, rq, size=26, space_after=6)
@@ -195,22 +195,22 @@ y += h + 0.45
 
 y = heading(XL, y, 3, "Development")
 stages = [
-    ("Module selection", "by safety impact on the sensing-to-actuation path and stub feasibility", False),
-    ("Hardware-abstraction stubs", "UART, I2C, SPI and uORB calls return nondeterministic values", True),
-    ("Safety-property specification", "automatic checks plus datasheet-derived assertions", True),
-    ("ESBMC execution", "unwind bound k = 10, overflow check, 120 s timeout", False),
-    ("Counterexample analysis", "each trace is checked against the unmodified driver source", False),
-    ("Community reporting", "findings are filed with the PX4 developers", False),
-    ("Cross-tool validation and patch verification", "CBMC 5.95.1 as an independent verifier", True),
-    ("Cross-autopilot check and CI/CD", "ArduPilot comparison; harnesses run in GitHub Actions", True),
+    ("Module selection", "Prioritize safety impact and stub feasibility.", False),
+    ("Hardware-abstraction stubs", "Replace hardware and middleware interfaces.", True),
+    ("Safety-property specification", "Add datasheet-derived and implicit properties.", True),
+    ("ESBMC execution", "Configure and verify each harness within a bound.", False),
+    ("Counterexample analysis", "Check each trace against original production code.", False),
+    ("Community reporting", "Submit relevant findings to PX4 developers.", False),
+    ("Cross-tool validation and patch verification", "Use CBMC on selected cases; re-verify fixes.", True),
+    ("Cross-autopilot check and CI/CD", "Compare with ArduPilot and run harnesses in CI.", True),
 ]
-RH, RG = 1.2, (0.26 if VB else 0.3)
+RH, RG = (1.05 if VB else 1.2), (0.2 if VB else 0.3)
 for i, (t, d, new) in enumerate(stages):
     b = rect(XL, y, CW, RH, fill=HILITE if new else PANEL, line=TEAL if new else LINE,
              shape=MSO_SHAPE.ROUNDED_RECTANGLE, lw=2.25 if new else 1.25, name=f"Stage {i+1}")
     b.adjustments[0] = 0.18
-    c = rect(XL + 0.22, y + 0.23, 0.8, 0.8, fill=TEAL if new else NAVY, shape=MSO_SHAPE.OVAL)
-    text(XL + 0.22, y + 0.23, 0.8, 0.8, str(i + 1), size=30, bold=True, color=WHITE,
+    c = rect(XL + 0.22, y + (RH - 0.8) / 2, 0.8, 0.8, fill=TEAL if new else NAVY, shape=MSO_SHAPE.OVAL)
+    text(XL + 0.22, y + (RH - 0.8) / 2, 0.8, 0.8, str(i + 1), size=30, bold=True, color=WHITE,
          align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
     text(XL + 1.25, y + 0.1, CW - 1.45, RH - 0.2,
          [[(t, {"bold": True, "size": 27, "color": NAVY})], [(d, {"size": 22, "color": MUTE})]],
@@ -226,7 +226,7 @@ text(XL + 0.7, y, CW - 0.7, 0.9,
      "stages 1 and 4–6 follow the workflow of Sousa et al. [1].", size=21, color=MUTE)
 y += 1.05
 
-text(XL, y, CW, 0.6, "Modules covered, by input class", size=28, bold=True, color=NAVY)
+text(XL, y, CW, 0.6, "Modules by input class", size=28, bold=True, color=NAVY)
 y += 0.65
 classes = [
     ("Serial sensor", "GPS uBlox · IMU BMI088 · Magnetometer · Barometer"),
@@ -244,21 +244,17 @@ for i, (c, m) in enumerate(classes):
     text(XL + 4.5, y, CW - 4.7, rh, m, size=24, anchor=MSO_ANCHOR.MIDDLE)
     y += rh
 y += 0.3
-setup = [[("Setup: ", {"bold": True, "color": NAVY}),
-          ("ESBMC v8.1.0 with Boolector 3.2.4; CBMC 5.95.1; PX4 main branch, commit 8be2590c15 (2026-06-04); "
-           "Intel i7-13700K, 64 GB, Ubuntu 24.04. Times are medians of three runs.", {})]]
-h = est(setup, 24, CW)
-text(XL, y, CW, h, setup, size=24, color=MUTE)
+h = 0
 YL_END = y + h
 
 # ---------------------------------------------------------------- right column
 y = heading(XR, TOP, 4, "Results")
-tile(XR, y, tw3, 2.5, "10 of 12", "harnesses verify with no violation up to the bound", GREEN)
-tile(XR + tw3 + 0.4, y, tw3, 2.5, "2", "harnesses with a counterexample (GPS, BMI088)", AMBER)
+tile(XR, y, tw3, 2.5, "10 of 12", "no property violation within the selected bound", GREEN)
+tile(XR + tw3 + 0.4, y, tw3, 2.5, "2", "counterexamples (GPS, BMI088)", AMBER)
 tile(XR + 2 * (tw3 + 0.4), y, tw3, 2.5, "0.1–64.9 s", "verification time per harness")
 y += 2.5 + 0.4
 
-text(XR, y, CW, 0.6, "Verification time per harness (seconds, median of three runs)", size=26, bold=True, color=NAVY)
+text(XR, y, CW, 0.6, "Verification time per harness (seconds; median of three runs)", size=26, bold=True, color=NAVY)
 y += 0.7
 data = [("GPS uBlox", 64.9, 1), ("MAVLink Parser", 49.2, 0), ("EKF2 Covariance", 12.2, 0), ("RC Update", 9.5, 0),
         ("Battery Monitor", 6.7, 0), ("Magnetometer", 6.6, 0), ("Expo RC", 4.9, 0), ("VTOL", 4.0, 0),
@@ -266,7 +262,7 @@ data = [("GPS uBlox", 64.9, 1), ("MAVLink Parser", 49.2, 0), ("EKF2 Covariance",
 cd = CategoryChartData()
 cd.categories = [d[0] for d in reversed(data)]
 cd.add_series("Time (s)", [d[1] for d in reversed(data)])
-CH = 5.1 if VB else 6.8
+CH = 4.8 if VB else 6.8
 gf = sl.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(XR), Inches(y), Inches(CW), Inches(CH), cd)
 gf.name = "Time chart"
 ch = gf.chart
@@ -286,27 +282,23 @@ va.format.line.fill.background(); va.tick_labels.font.size = Pt(20)
 ca = ch.category_axis; ca.format.line.color.rgb = LINE; ca.tick_labels.font.size = Pt(22)
 y += CH + 0.05
 rect(XR + 0.2, y + 0.08, 0.4, 0.34, fill=GREEN)
-text(XR + 0.75, y, 6.2, 0.5, "no violation up to the bound", size=21, color=MUTE, anchor=MSO_ANCHOR.MIDDLE)
+text(XR + 0.75, y, 6.2, 0.5, "no violation within the selected bound", size=21, color=MUTE, anchor=MSO_ANCHOR.MIDDLE)
 rect(XR + 7.2, y + 0.08, 0.4, 0.34, fill=AMBER)
 text(XR + 7.75, y, 8.4, 0.5, "counterexample found (stops at first violation)", size=21, color=MUTE, anchor=MSO_ANCHOR.MIDDLE)
 y += 0.85
 
-text(XR, y, CW, 0.6, "Triage of the three counterexamples against production code", size=26, bold=True, color=NAVY)
+text(XR, y, CW, 0.6, "Counterexample triage against production code", size=26, bold=True, color=NAVY)
 y += 0.72
 cases = [
-    ("GPS uBlox — out-of-bounds memcpy",
-     "The harness reaches input_len = 10 with dump_buffer.len = 207. CBMC reproduces it at a reduced bound. "
-     "The maintainer’s review and source analysis show the production write loop clamps the length, so the state "
-     "does not arise there. A defensive guard was proposed upstream.",
-     "Reachable in the model, not in production"),
-    ("IMU BMI088 — FIFO byte counter",
-     "ESBMC produced count = 9088 for a 1,024-byte FIFO. The released driver guards this read on three levels; "
-     "the harness had omitted those guards.",
-     "False positive"),
-    ("IMU BMI088 — temperature range",
-     "A reading of 86.25 °C exceeds the datasheet operating range of −40 to +85 °C without validation. "
-     "The proposed fix was declined by the PX4 developers.",
-     "Design note, declined upstream"),
+    ("GPS uBlox \u2014 model-reachable out-of-bounds access",
+     "ESBMC identified an out-of-bounds memcpy in the harness. The production write loop clamps the transfer length to available buffer space. The state was reachable in the model, but not in production.",
+     "model-reachable; not reachable in production."),
+    ("BMI088 FIFO \u2014 false positive",
+     "The harness omitted three protective checks present in the released driver. Those guards prevent the reported out-of-bounds access.",
+     "false positive."),
+    ("BMI088 temperature \u2014 disputed specification",
+     "A reading of 86.25 \u00b0C exceeded the datasheet operating range. PX4 developers did not accept the proposed finding as a defect.",
+     "observation declined upstream."),
 ]
 for t, d, verdict in cases:
     dp = [d]
@@ -319,10 +311,12 @@ for t, d, verdict in cases:
          [[("Outcome: ", {"color": MUTE}), (verdict, {"bold": True, "color": AMBER})]], size=23)
     y += hh + 0.22
 y += 0.1
+text(XR, y, CW, 0.6, "Research question answers", size=26, bold=True, color=NAVY)
+y += 0.7
 ans = [
-    [("RQ1 ", {"bold": True, "color": TEAL}), ("Every timed harness verifies in under ninety seconds: per-module feasibility, not whole-system scaling.", {})],
-    [("RQ2 ", {"bold": True, "color": TEAL}), ("Yes for one module: no PX4 unit test references the GPS function where the violation was found.", {})],
-    [("RQ3 ", {"bold": True, "color": TEAL}), ("Three adjustments suffice: MAVLink --unwind 300, Navigator --unwind 15, VTOL --no-library.", {})],
+    [("RQ1 ", {"bold": True, "color": TEAL}), ("All timed harnesses completed in under 90 seconds; this is per-module feasibility, not whole-system scaling.", {})],
+    [("RQ2 ", {"bold": True, "color": TEAL}), ("No direct unit-test reference to the GPS function was found in the PX4 unit-test tree; this does not rule out SITL coverage.", {})],
+    [("RQ3 ", {"bold": True, "color": TEAL}), ("Required configurations: MAVLink --unwind 300; Navigator --unwind 15; VTOL --no-library.", {})],
 ]
 h = est(ans, 24, CW, space_after=6)
 text(XR, y, CW, h, ans, size=24, space_after=6)
@@ -330,19 +324,18 @@ y += h + 0.45
 
 y = heading(XR, y, 5, "Conclusions and Future Work")
 y = bullets(XR, y, [
-    "BMC with datasheet-derived assertions is feasible for production autopilot code and reaches paths that unit tests do not cover.",
-    "Ten harnesses give bounded, model-level evidence of memory safety and absence of overflow.",
-    "A formally valid counterexample must be checked against production code before it is called a defect.",
-    [("Future work: ", {"bold": True}), ("k-induction; commander, failsafe and geofence modules; PX4 CI with hardware-in-the-loop evaluation.", {})],
+    "BMC with datasheet-derived assertions is feasible for harnesses derived from production PX4 modules.",
+    "Ten harnesses completed without property violations within the selected bound. Counterexamples required inspection against the original source before classification.",
+    "The results provide bounded, model-level evidence; they do not constitute an unbounded proof of correctness of the complete modules.",
+    [("Future work: ", {"bold": True}), ("k-induction, commander/failsafe/geofence modules, and PX4 CI integration with Hardware-in-the-Loop evaluation.", {})],
 ], size=26, sa=8)
 y += 0.45
 
 y = heading(XR, y, 6, "References and Acknowledgment")
 refs = [
-    "[1] J. O. de Sousa et al., “Finding software vulnerabilities in large C projects via bounded model checking,” Int. J. Softw. Tools Technol. Transf., 2026.",
-    "[2] L. Cordeiro, B. Fischer and J. Marques-Silva, “SMT-based bounded model checking for embedded ANSI-C software,” IEEE Trans. Softw. Eng., 2012.",
-    "[3] D. Kroening and M. Tautschnig, “CBMC – C bounded model checker,” TACAS 2014.",
-    "[4] S. Khatiri, S. Panichella and P. Tonella, “Simulation-based testing of unmanned aerial vehicles with Aerialist,” ICSE-Companion 2024.",
+    "[1] J. O. de Sousa et al., \u201cFinding software vulnerabilities in large C projects via bounded model checking,\u201d Int. J. Softw. Tools Technol. Transfer, 2026.",
+    "[2] PX4 Autopilot documentation and source repository.",
+    "[3] D. Kroening and M. Tautschnig, \u201cCBMC \u2013 A bounded model checker for C,\u201d TACAS 2014.",
 ]
 QR = 3.0
 rw = CW - QR - 0.5
@@ -355,9 +348,8 @@ text(XR + CW - QR - 0.3, y + QR + 0.05, QR + 0.6, 0.8, ["Artifact: harnesses and
      size=14, color=MUTE, align=PP_ALIGN.CENTER)
 y += max(h, QR + 0.9) + 0.1
 ack = [[("Acknowledgment. ", {"bold": True, "color": NAVY}),
-        ("Part of the SAGRES Project, funded by CAPES Pr\u00f3-Defesa V, carried out at UFAM with the support of CAPES "
-         "(AUXPE-CAPES-PROEX, Finance Code 001) and FAPEAM (PDPG-CAPES and POSGRAD projects). "
-         "The authors thank the PX4 development community.", {})]]
+        ("Supported by CAPES (AUXPE-CAPES-PROEX, Finance Code 001) and FAPEAM (PDPG-CAPES and POSGRAD projects). "
+         "Part of the SAGRES Project, funded by CAPES Pr\u00f3-Defesa V.", {})]]
 h = est(ack, 20, CW)
 text(XR, y, CW, h, ack, size=20, color=MUTE)
 YR_END = y + h
