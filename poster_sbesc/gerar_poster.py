@@ -138,7 +138,8 @@ def pic(path, x, y, w=None, h=None):
 
 
 # ---------------------------------------------------------------- header
-pic(f"{P}/logos/ufam.png", M, M, h=4.0)
+sl.shapes.add_picture(f"{P}/build/banner_header.jpg", 0, 0, Inches(W), Inches(6.85)).name = "Header forest and drone"
+pic(f"{P}/logos/ufam_round.png", M, M, h=4.0)
 pic(f"{P}/logos/l10.png", W - M - 5.0, M + 0.35, w=5.0)
 text(W - M - 5.0, M + 2.75, 5.0, 1.2,
      ["XVI Symposium on Computing", "Systems Engineering", "Nov 24–27, 2026 · Salvador, BA"],
@@ -147,16 +148,16 @@ tx, tw = M + 4.5, W - 2 * M - 4.5 - 5.4
 text(tx, M - 0.05, tw, 3.1,
      "Formal Verification of Critical Modules in the PX4 Autopilot using Bounded Model Checking",
      size=66, bold=True, color=NAVY, align=PP_ALIGN.CENTER, line_spacing=1.0, name="Title")
-text(tx, M + 3.2, tw, 0.75,
+text(tx, M + 2.95, tw, 0.75,
      "Marcela Alves Rodrigues · Lucas C. Cordeiro · José Reginaldo H. de Carvalho",
      size=34, bold=True, color=INK, align=PP_ALIGN.CENTER, name="Authors")
-text(tx, M + 4.0, tw, 1.1,
+text(tx, M + 3.7, tw, 1.1,
      ["Graduate Program in Electrical Engineering (PPGEE) · Institute of Computing",
       "Federal University of Amazonas (UFAM), Manaus, Brazil · marcela.rodrigues@ufam.edu.br"],
      size=24, color=MUTE, align=PP_ALIGN.CENTER, name="Affiliation")
-rect(M, M + 5.35, W - 2 * M, 0.09, fill=TEAL)
+rect(0, 6.85, W, 0.12, fill=TEAL)
 
-TOP = M + 5.85
+TOP = 7.55
 # ---------------------------------------------------------------- left column
 y = heading(XL, TOP, 1, "Introduction")
 y = bullets(XL, y, [
@@ -200,7 +201,7 @@ stages = [
     ("Cross-tool validation and patch verification", "CBMC 5.95.1 as an independent verifier", True),
     ("Cross-autopilot check and CI/CD", "ArduPilot comparison; harnesses run in GitHub Actions", True),
 ]
-RH, RG = 1.26, 0.3
+RH, RG = 1.2, 0.3
 for i, (t, d, new) in enumerate(stages):
     b = rect(XL, y, CW, RH, fill=HILITE if new else PANEL, line=TEAL if new else LINE,
              shape=MSO_SHAPE.ROUNDED_RECTANGLE, lw=2.25 if new else 1.25, name=f"Stage {i+1}")
@@ -262,7 +263,7 @@ data = [("GPS uBlox", 64.9, 1), ("MAVLink Parser", 49.2, 0), ("EKF2 Covariance",
 cd = CategoryChartData()
 cd.categories = [d[0] for d in reversed(data)]
 cd.add_series("Time (s)", [d[1] for d in reversed(data)])
-CH = 7.3
+CH = 6.8
 gf = sl.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(XR), Inches(y), Inches(CW), Inches(CH), cd)
 gf.name = "Time chart"
 ch = gf.chart
