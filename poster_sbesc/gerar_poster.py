@@ -176,13 +176,13 @@ y = heading(XL, y, 2, "Proposal")
 y = bullets(XL, y, [
     [("We apply ", {}), ("bounded model checking (BMC)", {"bold": True}),
      (" to harnesses derived from twelve PX4 modules. Each harness replaces hardware interfaces (UART, I2C, SPI and uORB) with nondeterministic stubs, enabling input exploration without physical hardware.", {})],
-    "ESBMC is the primary verifier across all twelve modules. CBMC provides independent cross-tool validation on two selected cases. The checks include datasheet-derived assertions and implicit properties such as memory safety and arithmetic overflow.",
+    "The harnesses are verified with ESBMC (all twelve) and CBMC (two of them). The checks include datasheet-derived assertions and implicit properties such as memory safety and arithmetic overflow.",
 ])
 y += 0.15
 tw3 = (CW - 0.8) / 3
 tile(XL, y, tw3, 2.5, "12", "PX4 modules covered")
-tile(XL + tw3 + 0.4, y, tw3, 2.5, "≈2,800", "lines of handwritten harness code", TEAL)
-tile(XL + 2 * (tw3 + 0.4), y, tw3, 2.5, "≈10,400", "lines of target PX4 code")
+tile(XL + tw3 + 0.4, y, tw3, 2.5, "2", "bounded model checkers: ESBMC and CBMC", TEAL)
+tile(XL + 2 * (tw3 + 0.4), y, tw3, 2.5, "8", "verification stages")
 y += 2.5 + 0.35
 rq = [
     [("RQ1 ", {"bold": True, "color": TEAL}), ("What is the per-module verification time on commodity hardware?", {})],
