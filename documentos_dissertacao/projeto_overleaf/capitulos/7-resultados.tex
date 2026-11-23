@@ -625,12 +625,76 @@ proposto \textit{upstream}, como uma limitação incluída no PR~\#27575, antes 
 conferência; foi a leitura do driver de produção que mostrou tratar-se de um
 contraexemplo formalmente válido para um defeito inexistente.}
 
-\artigo{A refutação foi feita por leitura do código-fonte do driver, e não por
+\artigo{A primeira refutação foi feita por leitura do código-fonte do driver, e não por
 \textit{replay}: para repeti-la, basta conferir as três guardas acima em
 \texttt{BMI088\_Accelerometer.cpp}. O artefato depositado não contém programas
 de \textit{replay} nem registros de sanitizadores.}
 
-\lc{Refutação depende de leitura; verificar formalmente as três guardas, como feito para o GPS.}
+%% LC (resolvido): as tres guardas do FIFO verificadas formalmente com ESBMC e CBMC (matriz de 8 variantes x 2 propriedades); resultado na subsecao seguinte.
+
+\subsection{\corr{Verificação formal das guardas do FIFO}}
+\label{subsec:fifo-guardas}
+
+\corr{A refutação acima dependia de leitura do código. Para torná-la formal, como
+foi feito para o GPS, modelou-se o caminho de leitura do FIFO do acelerômetro
+(\texttt{Run()} e \texttt{FIFORead()}) com as constantes do PX4 no \textit{commit}
+analisado: FIFO de $1.024$ bytes, amostras de $7$ bytes, no máximo $32$ amostras e
+buffer de transferência de $228$ bytes ($4 + 32 \times 7$). O contador de bytes é
+de $14$ bits e, portanto, varia de $0$ a $16.383$; o valor $9088$ do contraexemplo
+antigo está dentro dessa faixa. Duas propriedades foram verificadas, cada uma em
+uma execução: \textbf{P1}, quando há leitura, o contador é menor que $1.024$; e
+\textbf{P2}, quando há leitura, o tamanho da transferência cabe no buffer de $228$
+bytes. Cada guarda (G1: reinício se o contador é $\geq 1.024$; G2: reinício se as
+amostras excedem $32$; G3: limite $\min(\text{amostras} \times 7 + 4,\ 1.024)$ na
+transferência) foi ligada e desligada em todas as combinações, o que dá oito
+variantes. A Tabela~\ref{tab:fifo-guardas} resume os vereditos.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Vereditos para as oito variantes de guardas do FIFO (ESBMC~8.2.0 com Z3 e CBMC~5.95.1, mesma máquina; as duas ferramentas deram o mesmo veredito nas 16 combinações)}}
+\label{tab:fifo-guardas}
+\footnotesize
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Guardas presentes} & \textbf{P1 (contador $<1.024$)} & \textbf{P2 (transferência $\leq 228$)} \\
+\hline
+\corr{G1, G2 e G3 (código real)} & \corr{vale} & \corr{vale} \\
+\hline
+\corr{sem G1} & \corr{\textbf{falha}} & \corr{vale} \\
+\hline
+\corr{sem G2} & \corr{vale} & \corr{\textbf{falha}} \\
+\hline
+\corr{sem G3} & \corr{vale} & \corr{vale} \\
+\hline
+\corr{sem G1 e G2} & \corr{\textbf{falha}} & \corr{\textbf{falha}} \\
+\hline
+\corr{sem G1 e G3} & \corr{\textbf{falha}} & \corr{vale} \\
+\hline
+\corr{sem G2 e G3} & \corr{vale} & \corr{\textbf{falha}} \\
+\hline
+\corr{nenhuma} & \corr{\textbf{falha}} & \corr{\textbf{falha}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{Com as três guardas, as duas propriedades valem, o que confirma
+formalmente que o contador de $9088$ do contraexemplo antigo não chega à leitura.
+O resultado mostra também que as guardas não têm o mesmo papel. A G1 é necessária
+e suficiente para P1, e a razão não é óbvia: sem ela, o ESBMC e o CBMC encontram
+o contador $14.343$ ($\texttt{0x3807}$), cujo quociente por $7$ é $2.049$; guardado
+em \texttt{uint8\_t}, como no código, esse valor dá a volta e vira $1$, de modo que
+a leitura prossegue com o contador acima do FIFO e a G2 não a barra. A G2 é
+necessária e suficiente para P2: sem ela, a transferência chega a $1.024$ bytes, mais
+que os $228$ do buffer. A G3, por sua vez, não é necessária para nenhuma das duas
+propriedades, pois o seu limite de $1.024$ bytes é maior que o buffer; ela é uma
+defesa adicional, e não aquela que protege o buffer neste caminho.}
+
+\corr{O modelo cobre apenas o caminho em que o número de amostras vem da leitura do
+contador. Quando a interrupção de dado pronto está ativa, as amostras vêm de
+\texttt{\_fifo\_samples}, limitado por outra linha do código, e esse caminho não
+foi modelado. Como nos demais \textit{harnesses}, a verificação vale para o modelo,
+cujas constantes foram conferidas contra o código-fonte. Os programas e os registros
+estão em \texttt{fifo\_guardas\_2026-11/} no repositório de artefatos.}
 
 \section{Estudo de Caso: Driver GPS uBlox}
 \label{sec:caso-gps}

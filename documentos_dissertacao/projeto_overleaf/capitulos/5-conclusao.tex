@@ -44,7 +44,7 @@ permanece como especificação disputada.
 
 \textbf{Contador do FIFO do BMI088.} O contraexemplo, com
 \texttt{count}~$= 9088$ para um FIFO de $1.024$~bytes, era um falso positivo: o
-driver de produção contém três guardas que o \textit{harness} omitia.
+driver de produção contém três guardas que o \textit{harness} omitia. A verificação formal dessas guardas, com o ESBMC e o CBMC, mostrou que a primeira e a segunda são necessárias, cada uma para uma propriedade, e que a terceira não é necessária para nenhuma delas (Seção~\ref{subsec:fifo-guardas}).
 
 \textbf{GPS uBlox.} O verificador encontrou, no \textit{harness}, uma escrita
 fora dos limites em \texttt{dumpGpsData()}. Uma prova indutiva sobre o laço real
