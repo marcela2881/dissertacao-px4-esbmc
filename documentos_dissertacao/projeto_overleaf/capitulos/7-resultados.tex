@@ -831,18 +831,10 @@ código, foi depois verificada formalmente (Seção~\ref{subsec:gps-inducao}).}
 
 \begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
 title=\textbf{Resposta à QE2 --- Violações em código sem teste unitário direto}]
-\corr{Parcial. O BMC expôs, no \textit{harness} do GPS, uma violação de
-segurança de memória alcançável no modelo, em uma função
-(\texttt{dumpGpsData}) que nenhum teste unitário do PX4 referencia. O estado
-violador, porém, é inalcançável no driver de produção
-(Seção~\ref{subsec:gps-inducao}); nenhum teste, unitário ou de integração,
-poderia exercitá-lo. O que a campanha demonstra para a QE2 é, portanto, mais
-restrito: a função não tem cobertura unitária direta, e a análise formal foi o
-que estabeleceu tanto a violação no modelo quanto a sua inalcançabilidade na
-produção. Na primeira campanha, nenhum defeito do driver foi exposto.}
+\corr{\textbf{Sim, na segunda campanha; na primeira, apenas em parte.} Na primeira, o BMC expôs, no \textit{harness} do GPS, uma violação em uma função (\texttt{dumpGpsData}) que nenhum teste unitário do PX4 referencia, mas o estado violador é inalcançável no driver de produção (Seção~\ref{subsec:gps-inducao}), e nenhum defeito do driver foi exposto. Na segunda, a busca de testes unitários feita em 23/11/2026 na árvore do PX4 (\texttt{src/}, \textit{commit} \texttt{8be2590c15}) não encontrou nenhum arquivo de teste que referencie o \texttt{batmon} nem o RoboClaw (nenhuma ocorrência das classes fora dos diretórios dos \textit{drivers}); os dois tiveram o defeito reproduzido no código real. O critério da QE2 é, portanto, atendido por esses dois módulos. O \texttt{sumd} tem um teste, \texttt{RCTest::sumdTest}, que chama \texttt{sumd\_decode} com dados gravados, mas só verifica a abertura do arquivo e o fim da leitura (três chamadas \texttt{ut\_test}), sem asserção sobre os valores decodificados; o defeito do \texttt{sumd} persiste no \texttt{main}, e o teste não o detecta. A busca mostra ausência de referência direta, e não de exercício indireto por simulação ou por testes de integração; também não se verificou quantos canais tem o arquivo de dados desse teste.}
 \end{tcolorbox}
 
-\lc{A segunda campanha responde melhor à QE2: sumd, batmon e RoboClaw têm teste unitário? Fazer a mesma busca nesses módulos e incorporar à resposta.}
+%% LC: A segunda campanha responde melhor a QE2: sumd, batmon e RoboClaw tem teste unitario? Busca feita em 23/11/2026 e incorporada a resposta.
 
 
 \corr{A ausência de teste unitário direto foi conferida em 09/07/2026 por busca
@@ -1121,7 +1113,8 @@ foram inspecionados (o \textit{statustext} do MAVLink e o RC Update) e não
 apresentam \textit{underflow} desprotegido. O padrão do GPS, portanto, não é
 disseminado nos módulos inspecionados.}
 
-\lc{Método de inspeção não informado; dizer se ESBMC ou leitura, e listar locais no código.}
+%% LC: Metodo de inspecao nao informado; dizer se ESBMC ou leitura, e listar locais no codigo.
+\corr{\textbf{Método e locais.} A inspeção foi feita por leitura do código-fonte, com busca textual por \texttt{strlen}, \texttt{strncpy}, \texttt{sizeof} e \texttt{memcpy}, sobre o \textit{commit} \texttt{8be2590c15}; o ESBMC não foi usado nesses dois módulos. No \textit{statustext} do MAVLink, o arquivo é \texttt{src/modules/mavlink/MavlinkStatustextHandler.cpp}, linhas 43--46, 66--68, 72--82, 87--89 e 106--115. As subtrações \texttt{sizeof(\_log\_msg.text) - offset} (linhas 45, 74 e 80) usam \texttt{offset = strlen(\_log\_msg.text)}, e as linhas 46, 75 e 82 terminam a cadeia em NUL, de modo que, pela leitura, a diferença não fica negativa; a linha 106 tem um \texttt{static\_assert} de que o buffer de destino é maior que o texto de entrada. No RC Update, o arquivo é \texttt{src/modules/rc\_update/rc\_update.cpp}: a linha 384 limita \texttt{channel\_count} a \texttt{RC\_MAX\_CHAN\_COUNT}, os laços das linhas 440 e 487 usam o valor limitado, e o \texttt{memcpy} da linha 517 copia \texttt{channel\_count\_limited} elementos, com um \texttt{static\_assert} na linha 518 de que os dois vetores têm o mesmo tamanho. O registro da busca está em \texttt{evidencia\_segunda\_campanha\_2026-11/}. Como é leitura, a conclusão vale para o que foi lido, e não substitui uma verificação.}
 
 \subsection{\revisao{Observação entre autopilotos e integração contínua}}
 \label{subsec:ardupilot-ci}

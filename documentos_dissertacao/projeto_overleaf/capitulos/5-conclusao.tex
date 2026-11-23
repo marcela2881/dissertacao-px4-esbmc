@@ -224,10 +224,13 @@ este trabalho não responde.
 As quatro questões experimentais tiveram as seguintes respostas. Quanto à
 \textbf{QE1}, todo módulo da primeira campanha foi verificado em menos de
 noventa segundos em \textit{hardware} de prateleira, o que demonstra
-viabilidade por módulo. Quanto à \textbf{QE2}, a resposta é parcial: o BMC
+viabilidade por módulo. Quanto à \textbf{QE2}, a resposta é parcial na primeira campanha: o BMC
 expôs, no \textit{harness} do GPS, uma violação em função sem teste unitário
 direto, mas o estado é inalcançável na produção, e nenhum defeito do driver foi
-exposto na primeira campanha. Quanto à \textbf{QE3}, nove dos doze módulos
+exposto. Na segunda, o critério foi atendido: o \texttt{batmon} e o RoboClaw, com
+defeito reproduzido no código real, não são referenciados por nenhum teste
+unitário, e o \texttt{sumd} tem um teste que não verifica os valores decodificados
+e não detecta o defeito. Quanto à \textbf{QE3}, nove dos doze módulos
 foram verificados com a invocação padrão, e três exigiram opções específicas. Quanto à \textbf{QE4}, que mede a eficácia nas duas campanhas, nenhum dos três contraexemplos da primeira foi reproduzido como defeito (dois falsos positivos de modelagem e uma especificação disputada), ao passo que, na segunda, sete de dez módulos tiveram o efeito previsto reproduzido no código real, dois foram falsos positivos de modelagem e um não apresentou defeito de memória. A diferença acompanha a mudança de método, mas a seleção dos candidatos também mudou, e os dois efeitos não podem ser separados com os dados desta pesquisa.
 
 %% LC: alegações de custo e de casos de canto qualificadas.

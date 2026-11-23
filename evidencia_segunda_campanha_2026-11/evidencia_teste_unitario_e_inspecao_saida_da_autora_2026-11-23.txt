@@ -1,0 +1,80 @@
+# Saida do terminal da autora (WSL bruno-pc), 23/11/2026, executando:
+#   bash gerar_evidencia.sh ~/PX4-Autopilot
+# Arvore do PX4: commit 8be2590c15 (mesma pasta da contagem de linhas do mesmo dia). Texto colado na conversa; unica edicao: o trecho (a.2), que foi resumido (ver nota no proprio trecho).
+### (a) Arquivos de teste que citam sumd, batmon ou roboclaw (sem diferenciar maiúsculas)
+src/lib/rc/rc_tests/RCTest.cpp
+(fim da lista)
+
+### (a.1) sumd: onde sumd_decode e chamado
+src/modules/px4iofirmware/controls.cpp:165:			*sumd_updated |= (OK == sumd_decode(bytes[i], &sumd_rssi, &sumd_rx_count,
+src/drivers/rc_input/RCInput.cpp:654:						rc_updated = (OK == sumd_decode(_rcs_buf[i], &sumd_rssi, &rx_count,
+src/lib/rc/rc_tests/RCTest.cpp:508:		if (!sumd_decode(b, &rssi, &rx_count, &channel_count, channels, 32, &sumd_failsafe)) {
+src/lib/rc/sumd.h:102:__EXPORT int sumd_decode(uint8_t byte, uint8_t *rssi, uint8_t *rx_count, uint16_t *channel_count,
+src/lib/rc/sumd.h:105:__EXPORT int sumd_decode(uint8_t byte, uint8_t *rssi, uint8_t *rx_count, uint16_t *channel_count,
+src/lib/rc/sumd.cpp:111:int sumd_decode(uint8_t byte, uint8_t *rssi, uint8_t *rx_count, uint16_t *channel_count, uint16_t *channels,
+
+### (a.2) sumd: o teste RCTest::sumdTest (trecho)
+bool RCTest::sumdTest()
+{
+	const char *filepath = TEST_DATA_PATH "sumd_data.txt";
+	...
+	ut_test(fp);
+	...
+		if (ret <= 0) {
+			fclose(fp);
+			ut_test(ret > 0);
+		}
+	...
+		if (!sumd_decode(b, &rssi, &rx_count, &channel_count, channels, 32, &sumd_failsafe)) { ... }
+	...
+	ut_test(ret == EOF);
+	return true;
+}
+(trecho resumido neste arquivo; o texto completo foi colado na conversa e mostra apenas as tres chamadas ut_test acima, sem asserção sobre os valores decodificados)
+
+### (a.3) batmon: ocorrências da classe Batmon fora de src/drivers/smart_battery/batmon
+(nenhuma se vazio)
+
+### (a.4) roboclaw: ocorrências de Roboclaw fora de src/drivers/roboclaw
+(nenhuma se vazio)
+
+### (b) STATUSTEXT: MavlinkStatustextHandler.cpp, linhas com strlen/strncpy/sizeof
+43:		const size_t offset = strlen(_log_msg.text);
+44:		strncpy(_log_msg.text + offset, "[ missing ... ]",
+45:			sizeof(_log_msg.text) - offset);
+46:		_log_msg.text[sizeof(_log_msg.text) - 1] = '\0';
+66:			strncpy(_log_msg.text, msg_statustext.text,
+67:				math::min(sizeof(_log_msg.text), sizeof(msg_statustext.text)));
+68:			_log_msg.text[sizeof(msg_statustext.text)] = '\0';
+72:				const size_t offset = strlen(_log_msg.text);
+73:				strncpy(_log_msg.text + offset, "[ missing ... ]",
+74:					sizeof(_log_msg.text) - offset);
+75:				_log_msg.text[sizeof(_log_msg.text) - offset - 1] = '\0';
+79:			const size_t offset = strlen(_log_msg.text);
+80:			const size_t max_to_add = math::min(sizeof(_log_msg.text) - offset - 1, sizeof(msg_statustext.text));
+81:			strncpy(_log_msg.text + offset, msg_statustext.text, max_to_add);
+82:			_log_msg.text[math::min(offset + max_to_add, sizeof(_log_msg.text) - 1)] = '\0';
+87:		const bool publication_message_is_full = sizeof(_log_msg.text) - 1 == strlen(_log_msg.text);
+89:							sizeof(msg_statustext.text)) < sizeof(msg_statustext.text);
+106:		static_assert(sizeof(_log_msg.text) > sizeof(msg_statustext.text),
+109:		strncpy(_log_msg.text, msg_statustext.text,
+110:			math::min(sizeof(_log_msg.text),
+111:				 sizeof(msg_statustext.text)));
+115:		_log_msg.text[sizeof(msg_statustext.text) - 1] = '\0';
+
+### (b.1) tamanho do buffer de destino
+49:	log_message_s _log_msg{}; // required global for multi chunk statustexts
+(a busca em msg/LogMessage.msg nao retornou linha: o tamanho do campo text nao consta desta saida)
+
+### (b.2) RC Update: memcpy e limite de canais
+304:	static_assert(rc_channels_s::FUNCTION_FLTBTN_SLOT_1 + manual_control_switches_s::MODE_SLOT_NUM <= sizeof(
+306:	static_assert(rc_channels_s::FUNCTION_FLTBTN_SLOT_COUNT == manual_control_switches_s::MODE_SLOT_NUM,
+384:		const uint8_t channel_count_limited = math::min(input_rc.channel_count, RC_MAX_CHAN_COUNT);
+386:		if (channel_count_limited > _channel_count_max) {
+387:			_channel_count_max = channel_count_limited;
+440:		for (unsigned int i = 0; i < channel_count_limited; i++) {
+487:				for (unsigned i = 0; i < channel_count_limited; i++) {
+517:		memcpy(_rc_values_previous, input_rc.values, sizeof(input_rc.values[0]) * channel_count_limited);
+518:		static_assert(sizeof(_rc_values_previous) == sizeof(input_rc.values), "check sizeof(_rc_values_previous)");
+147:	static constexpr uint8_t RC_MAX_CHAN_COUNT{input_rc_s::RC_INPUT_MAX_CHANNELS}; /**< maximum number of r/c channels we handle */
+38:uint16[18] values                    # measured pulse widths for each of the supported channels

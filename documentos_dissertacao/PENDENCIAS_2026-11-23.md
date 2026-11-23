@@ -1,7 +1,7 @@
 # Pendências da dissertação — análise completa (23/11/2026)
 
 Estado: 8 capítulos compilam sem erro; 151 páginas (corpo = 104; pré-textuais = 18 romanas; refs 106-115; apêndices ~116-132).
-Caixas amarelas do professor abertas: 6 (todas em Resultados). Comentários %% LC no código: 108 (a remover no fim).
+Caixas amarelas do professor abertas: 4 (todas em Resultados; QE2 e método de inspeção fechadas em 23/11 com a evidência da autora). Comentários %% LC no código: 108 (a remover no fim).
 Estimativas: M = tempo de máquina da autora (roda sozinho, pode deixar de noite); A = tempo ativo da autora; E = tempo do assistente; T = espera de terceiros. São estimativas, não medições.
 
 ## URGENTE (prazo externo)
@@ -16,8 +16,8 @@ Estimativas: M = tempo de máquina da autora (roda sozinho, pode deixar de noite
 | 2 | GPS com k = 211 | `inconclusivos.tgz`; GPS testes 0-3 não deram veredito em 900 s com Z3 (8.2.0 sem Boolector). Opções: (a) escrever como sem veredito; (b) rodar LIMITE=3600 (4 h); (c) compilar ESBMC 8.5 com Boolector (1-2 h de preparo) | M 4-5 h (opção b); E 1 h |
 | 3 | Cada teste separado | `inconclusivos.tgz` cobre 7 testes. O que o professor quer é separar onde a 1ª falha mascara: IMU (6 testes) e GPS (5). Script novo `rodar_cada_teste.sh` para os 11 | E 1 h (script) + 1 h (texto); M 1-3 h |
 | 4 | CBMC nos dez | rodar `rodar_cbmc_dez.sh` (20 execuções, 900 s cada no pior caso) | M 1-5 h; E 1 h + 30 min (Ameaças) |
-| 5 | QE2 em sumd, batmon, RoboClaw | A cola `evidencia_teste_unitario_e_inspecao.txt` (2 min) ou roda `gerar_evidencia.sh` (5 min) | A 5 min; E 1 h |
-| 6 | Método de inspeção (statustext, RC Update) | mesmo arquivo do item 5 | E 45 min |
+| 5 | QE2 em sumd, batmon, RoboClaw | FECHADA em 23/11 (saída do terminal da autora arquivada) | — |
+| 6 | Método de inspeção (statustext, RC Update) | FECHADA em 23/11 | — |
 
 ## 2. Textos que mudam quando os logs chegarem (revisão em cascata)
 Resultados (configuração e Z3; seção CBMC; QE2; baseline; tabela de testes), Ameaças (defeitos no verificador: hoje diz CBMC só em 2 módulos; validade de conclusão), Metodologia (tabela de timeouts +900 s; tabela de versões +execuções de 23/11), Conclusão (QE2 parcial; limitações), Trabalhos Relacionados (frase do clang-tidy sem comparação), Introdução (se houver mudança de contribuição). Estimativa: E 2-3 h.
