@@ -2,7 +2,7 @@
 \label{cap:experimentos}
 \label{cap:resultados}
 
-\lc{Sem baseline: executar um analisador estático ou os testes existentes nestes módulos.}
+%% LC: Sem baseline: executar um analisador estatico ou os testes existentes nestes modulos. Feito com o cppcheck (Secao de linha de base) e com a busca de testes unitarios (QE2).
 
 Este capítulo apresenta a avaliação empírica da metodologia descrita no
 Capítulo~\ref{cap:metodologia}, aplicada a 12 módulos do PX4 Autopilot
@@ -557,6 +557,47 @@ estado surja no driver de produção.} \corr{A ressalva é ainda mais forte quan
 se considera que as duas execuções partem de codificações distintas do mesmo
 problema: a concordância entre elas atesta que o defeito sobrevive à tradução
 entre os dois conjuntos de intrínsecos, e nada além disso.}
+
+\section{\corr{Linha de Base com Análise Estática}}
+\label{sec:baseline-cppcheck}
+
+\corr{Para dar um ponto de comparação à verificação com o ESBMC, os doze módulos da primeira campanha foram também analisados com o cppcheck, um analisador estático sem \textit{harness}. A execução foi feita pela autora em 23/11/2026, no \textit{commit} \texttt{8be2590c15}, em duas frentes: sobre o código real dos diretórios de cada módulo e sobre os \textit{harnesses} que o ESBMC verificou. As opções foram \texttt{--enable=warning,performance,portability --inconclusive --max-configs=2}, com os arquivos de teste excluídos e sem as dependências do \textit{build} do PX4 (\texttt{missingInclude} suprimido); a versão do cppcheck consta do registro de ambiente. A análise de cada módulo levou de menos de 1 a 6~s. A Tabela~\ref{tab:baseline-cppcheck} resume a contagem de achados.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Achados do cppcheck sobre o código real dos módulos e sobre os \textit{harnesses} (23/11/2026)}}
+\label{tab:baseline-cppcheck}
+\footnotesize
+\begin{tabular}{|l|r|r|r|}
+\hline
+\textbf{Módulo} & \textbf{Código real: avisos} & \textbf{Código real: erros de macro} & \textbf{\textit{Harness}} \\
+\hline
+GPS uBlox & 9 & 0 & 0 \\
+IMU BMI088 & 0 & 0 & 0 \\
+MAVLink & 2 & 1 & 0 \\
+Expo RC & 1 & 0 & 0 \\
+Battery Monitor & 0 & 0 & 0 \\
+PWM Output & 2 & 0 & 0 \\
+RC Update & 15 & 0 & 0 \\
+Navigator & 0 & 4 & 0 \\
+EKF2 Covariance & 9 & 0 & 0 \\
+Magnetômetro & 0 & 0 & 0 \\
+Barômetro & 0 & 0 & 0 \\
+VTOL & 1 & 0 & 0 \\
+\hline
+\textbf{Total} & \textbf{39} & \textbf{5} & \textbf{0} \\
+\hline
+\end{tabular}
+
+\scriptsize
+\begin{flushleft}
+\corr{Os diretórios analisados são os dos módulos (por exemplo, todo \texttt{drivers/gps}), e não apenas os arquivos-alvo da Tabela~\ref{tab:modulos}. Os cinco erros são todos \texttt{unknownMacro}: o cppcheck não conhece a macro \texttt{DEFINE\_PARAMETERS} do PX4 e não analisou \texttt{mavlink\_main.h} e quatro cabeçalhos do Navigator; não são defeitos do código. O registro do terminal está em \texttt{baseline\_cppcheck\_2026-11/logs/}.}
+\end{flushleft}
+\end{table}
+
+\corr{Dos 39 avisos, 17 são de tipo de argumento em \texttt{printf} e \texttt{scanf} (\texttt{invalidPrintfArgType\_sint} 11, \texttt{invalidScanfArgType\_int} 4 e \texttt{invalidPrintfArgType\_uint} 2), 10 de membro de classe não inicializado (\texttt{uninitMemberVar} 9 e \texttt{uninitMemberVarPrivate} 1), 8 de expressão sem efeito (\texttt{constStatement}) e 4 de naturezas distintas: \texttt{thisUseAfterFree}, \texttt{invalidFunctionArg}, \texttt{duplInheritedMember} e \texttt{shiftTooManyBitsSigned}, um de cada. Os três primeiros desses quatro merecem registro porque tocam memória ou aritmética. \texttt{invalidFunctionArg} aponta \texttt{sqrtf} com argumento $-12$ em \texttt{lib/mathlib/math/Functions.hpp}, linha~231, no mesmo arquivo da função \texttt{expo()} verificada, mas em outra função. \texttt{thisUseAfterFree} aponta a chamada de \texttt{unlock()} quando \texttt{this} pode ser inválido em \texttt{modules/mavlink/mavlink\_ulog.cpp}, linha~242. \texttt{shiftTooManyBitsSigned} aponta um deslocamento de um valor de 32 bits com sinal por 31 posições, comportamento definido pela implementação, em \texttt{lib/rc/spektrum\_rssi.h}, linha~75. Nenhum desses três foi triado: não se verificou se os caminhos são alcançáveis, e eles não são classificados aqui como defeitos.}
+
+\corr{A comparação com o ESBMC exige cuidado, porque as duas técnicas não medem a mesma coisa. O cppcheck percorre todo o código dos diretórios, sem \textit{harness} nem pré-condições, e aponta padrões suspeitos; o ESBMC verifica propriedades escolhidas sobre um modelo. Sobre o código real, o cppcheck não apontou nenhum dos três pontos que o ESBMC levantou: \texttt{gps.cpp} não tem nenhum aviso, e o diretório do BMI088 tem zero (nem o contador do FIFO nem a temperatura). Os avisos do cppcheck, por sua vez, são de classes que a invocação do ESBMC desta pesquisa não habilitou (formato de \texttt{printf}, membros não inicializados, deslocamento de bits), de modo que as duas análises se complementam, e a ausência de achado de um lado não diz nada sobre o outro. Sobre os \textit{harnesses}, o cppcheck não apontou nada, o que é esperado em programas curtos. Nenhuma das duas técnicas produziu, nos doze módulos, um defeito confirmado pelos mantenedores. Como a execução foi feita sem as dependências do \textit{build}, no Navigator, quatro cabeçalhos não foram analisados (os quatro achados são erros de macro) e não houve nenhum aviso, e o resultado do cppcheck deve ser lido como limite inferior do que a ferramenta encontraria numa execução integrada ao \textit{build}.}
 
 \section{Estudo de Caso: Driver IMU BMI088}
 \label{sec:caso-imu}
@@ -1621,9 +1662,10 @@ máximo do tempo do procedimento de decisão na Tabela~\ref{tab:resultados}; a
 dispersão observada é inferior a $0{,}2$\,s em todos os módulos. Três execuções,
 porém, não permitem inferência estatística. Isso sustenta afirmações de ordem de
 grandeza --- ``menos de noventa segundos'' --- e comparações entre módulos cujos
-tempos diferem por mais que a dispersão observada. Não há, além disso, \textit{baseline} de comparação: nenhuma
-outra técnica foi executada sobre os mesmos doze módulos para contraste, à
-exceção do CBMC em dois casos. Segue-se que a afirmação de viabilidade é
+tempos diferem por mais que a dispersão observada. A única comparação disponível é com o cppcheck, uma análise estática
+executada sobre os mesmos doze módulos (Seção~\ref{sec:baseline-cppcheck}), além do CBMC em dois casos;
+as duas técnicas medem classes diferentes de problema e não permitem comparar
+custo ou eficácia em termos equivalentes. Segue-se que a afirmação de viabilidade é
 absoluta, e não relativa: demonstra-se que a verificação é barata em termos
 próprios, não que seja mais ou menos barata que alternativas.}
 

@@ -1,7 +1,7 @@
 # Pendências da dissertação — análise completa (23/11/2026)
 
 Estado: 8 capítulos compilam sem erro; 151 páginas (corpo = 104; pré-textuais = 18 romanas; refs 106-115; apêndices ~116-132).
-Caixas amarelas do professor abertas: 4 (todas em Resultados; QE2 e método de inspeção fechadas em 23/11 com a evidência da autora). Comentários %% LC no código: 108 (a remover no fim).
+Caixas amarelas do professor abertas: 3 (todas em Resultados: GPS k=211, cada teste separado, CBMC nos dez). Fechadas em 23/11 com a evidência da autora: QE2, método de inspeção e linha de base (cppcheck). Comentários %% LC no código: 108 (a remover no fim).
 Estimativas: M = tempo de máquina da autora (roda sozinho, pode deixar de noite); A = tempo ativo da autora; E = tempo do assistente; T = espera de terceiros. São estimativas, não medições.
 
 ## URGENTE (prazo externo)
@@ -12,7 +12,7 @@ Estimativas: M = tempo de máquina da autora (roda sozinho, pode deixar de noite
 ## 1. Caixas abertas em Resultados (6)
 | # | Caixa | O que falta | Estimativa |
 |---|---|---|---|
-| 1 | Linha de base (cppcheck) | A roda `rodar_baseline_cppcheck.sh`; E escreve subseção e atualiza "Validade de conclusão" (que hoje diz "não há baseline") | M 10-20 min; E 1,5 h |
+| 1 | Linha de base (cppcheck) | FECHADA em 23/11 (Seção "Linha de Base com Análise Estática"; saída do terminal arquivada) | — |
 | 2 | GPS com k = 211 | `inconclusivos.tgz`; GPS testes 0-3 não deram veredito em 900 s com Z3 (8.2.0 sem Boolector). Opções: (a) escrever como sem veredito; (b) rodar LIMITE=3600 (4 h); (c) compilar ESBMC 8.5 com Boolector (1-2 h de preparo) | M 4-5 h (opção b); E 1 h |
 | 3 | Cada teste separado | `inconclusivos.tgz` cobre 7 testes. O que o professor quer é separar onde a 1ª falha mascara: IMU (6 testes) e GPS (5). Script novo `rodar_cada_teste.sh` para os 11 | E 1 h (script) + 1 h (texto); M 1-3 h |
 | 4 | CBMC nos dez | rodar `rodar_cbmc_dez.sh` (20 execuções, 900 s cada no pior caso) | M 1-5 h; E 1 h + 30 min (Ameaças) |

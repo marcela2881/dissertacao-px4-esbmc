@@ -55,6 +55,8 @@ do driver mostrou que o estado violador é inalcançável na produção, o que f
 em bancada foi consistente com essa conclusão. A guarda proposta foi enquadrada
 pelo mantenedor como endurecimento defensivo.
 
+\textbf{Linha de base.} O cppcheck, executado sobre os mesmos doze módulos, deu 39 avisos no código real (formato de \texttt{printf}, membros não inicializados, expressões sem efeito e poucos outros), nenhum sobre os pontos que o ESBMC levantou, e nenhum sobre os \textit{harnesses}; as duas técnicas são complementares, e o resultado do cppcheck foi obtido sem as dependências do \textit{build} (Seção~\ref{sec:baseline-cppcheck}).
+
 \textbf{Segunda campanha.} Em sete de dez módulos complementares, o efeito
 previsto foi reproduzido executando o código real do PX4 sob sanitizadores.
 Três desses defeitos foram corrigidos pelo próprio projeto, de forma

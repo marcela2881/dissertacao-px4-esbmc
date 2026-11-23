@@ -1,0 +1,57 @@
+# Saida do terminal da autora (WSL bruno-pc), 23/11/2026, PX4 em ~/PX4-Autopilot (commit 8be2590c15).
+# Texto colado na conversa, sem edicao. Os logs completos ficaram na maquina da autora (baseline_cppcheck.tgz, nao anexado).
+
+## bash baseline_cppcheck_2026-11/rodar_baseline_cppcheck.sh ~/PX4-Autopilot
+== (1) codigo real do PX4
+GPS           achados=9    (erro=0) | # exit: 0 tempo: 6s
+IMU_BMI088    achados=0    (erro=0) | # exit: 0 tempo: 1s
+MAVLink       achados=3    (erro=1) | # exit: 0 tempo: 0s
+Expo_RC       achados=1    (erro=0) | # exit: 0 tempo: 1s
+Battery       achados=0    (erro=0) | # exit: 0 tempo: 0s
+PWM_Output    achados=2    (erro=0) | # exit: 0 tempo: 0s
+RC_Update     achados=15   (erro=0) | # exit: 0 tempo: 3s
+Navigator     achados=4    (erro=4) | # exit: 0 tempo: 1s
+EKF2          achados=9    (erro=0) | # exit: 0 tempo: 2s
+Magnetometer  achados=0    (erro=0) | # exit: 0 tempo: 0s
+Barometer     achados=0    (erro=0) | # exit: 0 tempo: 0s
+VTOL          achados=1    (erro=0) | # exit: 0 tempo: 0s
+== (2) harnesses que o ESBMC verificou
+GPS                achados=0   (erro=0)
+IMU_BMI088         achados=0   (erro=0)
+MAVLink            achados=0   (erro=0)
+Expo_RC            achados=0   (erro=0)
+Battery_Monitor    achados=0   (erro=0)
+PWM_Output         achados=0   (erro=0)
+RC_Update          achados=0   (erro=0)
+Navigator_Mission  achados=0   (erro=0)
+EKF2_Covariance    achados=0   (erro=0)
+Magnetometer       achados=0   (erro=0)
+Barometer          achados=0   (erro=0)
+VTOL               achados=0   (erro=0)
+
+## grep -h ':error:' baseline_cppcheck_2026-11/logs/real_*.txt
+modules/mavlink/mavlink_main.h:635:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/navigator/precland.h:169:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/navigator/mission_base.h:599:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS_CUSTOM_PARENT is a macro then please configure it.
+modules/navigator/rtl_direct.h:174:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/navigator/vtol_takeoff.h:79:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+
+## contagem por tipo (grep -h -o ':\(warning\|performance\|portability\):[A-Za-z0-9_]*' real_*.txt | sort | uniq -c | sort -rn)
+     11 :warning:invalidPrintfArgType_sint
+      9 :warning:uninitMemberVar
+      8 :warning:constStatement
+      4 :warning:invalidScanfArgType_int
+      2 :warning:invalidPrintfArgType_uint
+      1 :warning:uninitMemberVarPrivate
+      1 :warning:thisUseAfterFree
+      1 :warning:invalidFunctionArg
+      1 :warning:duplInheritedMember
+      1 :portability:shiftTooManyBitsSigned
+
+## grep -h 'gps.cpp' baseline_cppcheck_2026-11/logs/real_GPS.txt
+(nenhuma linha)
+
+## grep -h 'thisUseAfterFree\|invalidFunctionArg\|shiftTooManyBitsSigned' real_*.txt
+lib/mathlib/math/Functions.hpp:231:warning:invalidFunctionArg:Invalid sqrtf() argument nr 1. The value is -12 but the valid values are '0.0:'.
+modules/mavlink/mavlink_ulog.cpp:242:warning:thisUseAfterFree:Calling method 'unlock()' when 'this' might be invalid
+lib/rc/spektrum_rssi.h:75:portability:shiftTooManyBitsSigned:Shifting signed 32-bit value by 31 bits is implementation-defined behaviour
