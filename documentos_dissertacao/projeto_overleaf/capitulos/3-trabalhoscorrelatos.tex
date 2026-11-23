@@ -1,7 +1,7 @@
 \chapter{Trabalhos Relacionados}
 \label{cap:relacionados}
 
-%% LC (resolvido): barra invertida de \chapter restaurada; o capitulo volta a ser o Capitulo 3 e as secoes voltam a ser numeradas 3.1 a 3.x.
+%% LC: barra invertida de \chapter restaurada; o capitulo volta a ser o Capitulo 3 e as secoes voltam a ser numeradas 3.1 a 3.x.
 Este capítulo apresenta trabalhos que aplicaram verificação formal a sistemas
 embarcados e a software de veículos autônomos, posicionando esta pesquisa em
 relação ao estado da arte.
@@ -40,7 +40,7 @@ ferramentas na identificação de defeitos em projetos de código aberto de gran
 escala~\cite{Sousa2026}. Ambas são usadas nesta pesquisa: o ESBMC verifica
 os doze \textit{harnesses}, e o CBMC faz a validação cruzada de parte deles.
 
-%% LC (resolvido): corrigida a frase sobre qual ferramenta faz a validacao cruzada (CBMC); deMoura2008 trocado por Cordeiro2012.
+%% LC: corrigida a frase sobre qual ferramenta faz a validacao cruzada (CBMC); deMoura2008 trocado por Cordeiro2012.
 Em firmware e software de infraestrutura embarcada, o CBMC é usado dentro do fluxo de
 desenvolvimento. Chong et al.~\cite{Chong2020} relatam quatro anos de uso
 contínuo do CBMC na Amazon Web Services, em componentes de bibliotecas públicas e do
@@ -55,7 +55,7 @@ trabalhos de verificação ainda se concentra em programas sintéticos ou
 \textit{benchmarks} padronizados, e não em sistemas reais de produção --- lacuna
 que motiva diretamente este trabalho. Cabe a ressalva de que essa observação
 decorre de um levantamento exploratório, não de uma medição sistemática.
-%% LC (resolvido): afirmacao de lacuna atenuada -- nao atribuida aos relatorios
+%% LC: afirmacao de lacuna atenuada -- nao atribuida aos relatorios
 %% de competicao, que nao a sustentam.
 
 \section{Aplicações Práticas de Verificação Formal}
@@ -71,7 +71,7 @@ com restrições de tempo real --- tratadas aqui pela seleção de módulos
 verificáveis isoladamente, com \textit{stubs} que abstraem dependências de
 hardware e temporização, sem comprometer a análise das propriedades de
 \textit{safety} internas a cada módulo.
-%% LC (resolvido): Sousa2023 era o preprint de Sousa2026 -- citacoes unificadas
+%% LC: Sousa2023 era o preprint de Sousa2026 -- citacoes unificadas
 %% em Sousa2026.
 
 Monteiro et al.~\cite{Monteiro2022} estenderam o ESBMC para C++, com suporte a
@@ -86,8 +86,8 @@ artigo da trilha de demonstrações do FSE 2025. A otimização não foi emprega
 nesta pesquisa, mas é relevante para módulos de firmware com estruturas
 repetitivas como as do PX4. 
 
-%% LC (resolvido): informado que a otimizacao VO-GCSE nao foi usada neste
-%% trabalho. LC (resolvido): FuSeBMC retirado deste paragrafo (discutido na
+%% LC: informado que a otimizacao VO-GCSE nao foi usada neste
+%% trabalho. LC: FuSeBMC retirado deste paragrafo (discutido na
 %% subsecao de abordagens nao-BMC, como desenvolvimento relacionado).
 
 \section{Verificação de Sistemas Autônomos}
@@ -166,7 +166,7 @@ na compilação~\cite{McCormick2015}. As três compartilham o custo estrutural q
 motiva a escolha do BMC: exigem disciplina de anotação ou de linguagem que uma
 base pré-existente e não anotada, como a do PX4, não satisfaz.
 
-%% LC (resolvido): esforco comparado sobre o mesmo recorte de doze modulos (10.400 linhas de codigo-alvo), nao sobre as 710 mil; esforco de anotar declarado como nao medido.
+%% LC: esforco comparado sobre o mesmo recorte de doze modulos (10.400 linhas de codigo-alvo), nao sobre as 710 mil; esforco de anotar declarado como nao medido.
 \textbf{Análise estática aplicada ao próprio PX4.} O PX4 já submete seu código a análise
 estática: o repositório traz uma configuração do clang-tidy que habilita todas as
 verificações e desativa explicitamente uma lista delas, trata qualquer aviso como erro
@@ -308,8 +308,8 @@ falsos positivos de modelagem (\texttt{bst} e \texttt{Common}) e um sem defeito 
 monitoramento ambiental na Amazônia é a motivação do estudo de caso, e não um
 fator que altere o método.
 
-%% LC (resolvido): linha 'Este trabalho' e paragrafo de posicionamento atualizados com a segunda campanha (7 de 10 modulos com efeito reproduzido).
-%% LC (resolvido): retirada a sugestao de que o monitoramento ambiental influencia
+%% LC: linha 'Este trabalho' e paragrafo de posicionamento atualizados com a segunda campanha (7 de 10 modulos com efeito reproduzido).
+%% LC: retirada a sugestao de que o monitoramento ambiental influencia
 %% o metodo -- apresentado como motivacao, nao como fator metodologico.
 
 \section{Resumo}
@@ -339,4 +339,4 @@ embarcado na indústria. Nesse levantamento, que é exploratório, não foi iden
 trabalho que aplique BMC com contraexemplo concreto a \textit{drivers} de um autopiloto
 de produção a partir de fora do projeto.
 
-%% LC (resolvido): incluidos clang-tidy do PX4 (PX4_ClangTidy), estudo de defeitos de autopilotos (Wang2021) e BMC em firmware embarcado (Chong2020). A comparacao direta com um analisador estatico (baseline) depende do experimento do Cap. de resultados.
+%% LC: incluidos clang-tidy do PX4 (PX4_ClangTidy), estudo de defeitos de autopilotos (Wang2021) e BMC em firmware embarcado (Chong2020). A comparacao direta com um analisador estatico (baseline) depende do experimento do Cap. de resultados.

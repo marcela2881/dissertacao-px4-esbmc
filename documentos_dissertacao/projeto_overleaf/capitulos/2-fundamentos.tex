@@ -28,11 +28,11 @@ memória quanto comportamentos próprios de cada módulo. Propriedades de
 fora do escopo: o suporte do ESBMC a elas limita-se à terminação e à detecção de
 laços não terminantes, sem verificação geral de LTL~\cite{ESBMC_GitHub}.
 
-%% LC (resolvido): afirmacao sobre liveness recalibrada ao escopo real do ESBMC
+%% LC: afirmacao sobre liveness recalibrada ao escopo real do ESBMC
 %% (terminacao/lacos nao terminantes, nao LTL geral); citacao Clarke1986 -> Menezes2024.
-%% LC (resolvido): Menezes2024 (competicao, 5 paginas) substituido pelo artigo da ferramenta (Cordeiro2012) e pela documentacao oficial (ESBMC_GitHub).
+%% LC: Menezes2024 (competicao, 5 paginas) substituido pelo artigo da ferramenta (Cordeiro2012) e pela documentacao oficial (ESBMC_GitHub).
 
-%% LC (resolvido): DART (Godefroid2005) e teste concolico; execucao simbolica passou
+%% LC: DART (Godefroid2005) e teste concolico; execucao simbolica passou
 %% a citar o artigo original, King1976.
 Entre as técnicas de verificação formal destacam-se o \textit{Model
 Checking}~\cite{Clarke1981}, que explora automaticamente o espaço de estados; o
@@ -64,9 +64,9 @@ retorna um contraexemplo --- a sequência de transições que leva à
 violação~\cite{Clarke1986}. Essa geração automática de contraexemplos é o que
 torna o Model Checking atraente para sistemas complexos.
 
-%% LC (resolvido): algoritmo restrito a invariantes/safety -- renomeado e com
+%% LC: algoritmo restrito a invariantes/safety -- renomeado e com
 %% ressalva de que propriedades temporais gerais exigem rotulacao CTL ou automato
-%% de Buchi (Clarke1986). LC (resolvido): acrescentado o mapa de predecessores.
+%% de Buchi (Clarke1986). LC: acrescentado o mapa de predecessores.
 O Algoritmo~\ref{alg:mc} apresenta, de forma simplificada, a busca de invariantes
 no espaço de estados; é uma ilustração do princípio, e não o procedimento
 completo das demais verificações temporais. Propriedades temporais gerais não se
@@ -112,7 +112,7 @@ variáveis booleanas). O driver do IMU BMI088, por exemplo, manipula leituras
 brutas do sensor e valores convertidos em ponto flutuante de 32 bits; um modelo que
 tratasse como simbólicas apenas dez dessas variáveis de 32 bits já ultrapassaria
 $2^{320}$ configurações, inviabilizando a exploração exaustiva.
-%% LC (resolvido): hipotese do 2^320 declarada (dez variaveis de 32 bits).
+%% LC: hipotese do 2^320 declarada (dez variaveis de 32 bits).
 Diversas técnicas atacam esse problema ---
 BDDs (\textit{Binary Decision Diagrams}), abstração, redução de ordem parcial e o
 \textit{Bounded Model Checking}, que limita a profundidade de
@@ -142,8 +142,8 @@ transições válidas; e a disjunção final verifica se algum estado $s_i$ viol
 $\phi$. Se a fórmula for satisfatível, o solver devolve uma atribuição que
 constitui um contraexemplo concreto~\cite{Biere1999}.
 
-%% LC (resolvido): incluir exemplo completo (laco C -> desenrolamento -> SSA ->
-%% VCC -> consulta SMT). LC (resolvido): relacionar a formula do BMC a codificacao
+%% LC: incluir exemplo completo (laco C -> desenrolamento -> SSA ->
+%% VCC -> consulta SMT). LC: relacionar a formula do BMC a codificacao
 %% do ESBMC para programas C -- ambos atendidos pelo exemplo abaixo.
 Em um programa C, essa codificação parte do código real. Considere um laço que
 percorre um \textit{array} de $N$ posições (Listagem~\ref{lst:exemplo-bmc}):
@@ -179,7 +179,7 @@ preciso elevar $k$ ou recorrer à $k$-indução --- foi o que mostrou o teste co
 ligadas, $k = 10$ falha e $k = 300$ verifica (Capítulo~\ref{cap:experimentos}). Com a opção
 \texttt{--no-unwinding-assertions}, laços acima de $k$ são truncados
 silenciosamente~\cite{Gadelha2017}.
-%% LC (resolvido): Biere1999 nao sustenta o comportamento da flag do ESBMC;
+%% LC: Biere1999 nao sustenta o comportamento da flag do ESBMC;
 %% citacao trocada para Gadelha2017.
 
 Sob uma codificação fiel do modelo e com o limite de desenrolamento adequadamente
@@ -199,7 +199,7 @@ considerada comprovada quando o caso base e o passo indutivo são ambos verifica
 com sucesso. Distinta dessa $k$-indução automática, a prova de inalcançabilidade do GPS uBlox apresentada nesta
 dissertação (Seção~\ref{subsec:gps-inducao}) é uma indução manual de um único
 passo sobre um invariante do laço.
-%% LC (resolvido): k-inducao e de Sheeran2000 (nao Biere1999), implementada no
+%% LC: k-inducao e de Sheeran2000 (nao Biere1999), implementada no
 %% ESBMC por Gadelha2017; distincao entre inducao manual de um passo e a k-inducao
 %% automatica da ferramenta acrescentada.
 
@@ -216,7 +216,7 @@ Bitwuzla~\cite{Niemetz2023} e o cvc5~\cite{Barbosa2022}; o
 Boolector~\cite{Brummayer2009}, especializado em \textit{bit-vectors} e
 \textit{arrays}, é o solver usado em todas as verificações deste trabalho
 (versão~3.2.4).
-%% LC (resolvido): definicao de SMT estava sem citacao -- acrescentada a
+%% LC: definicao de SMT estava sem citacao -- acrescentada a
 %% referencia padrao Barrett2018 (Handbook of Model Checking, 2018).
 
 \subsection{Teorias Relevantes e Vantagens sobre SAT}
@@ -232,7 +232,7 @@ flutuante: o ESBMC contorna isso codificando cada operação IEEE-754 em operaç
 de \textit{bit-vector} (\textit{bit-blasting}), de modo que solvers restritos a
 \textit{bit-vectors}, como o Boolector, verifiquem programas com ponto
 flutuante~\cite{Gadelha2020}.
-%% LC (resolvido): Boolector nao tem teoria nativa de ponto flutuante --
+%% LC: Boolector nao tem teoria nativa de ponto flutuante --
 %% explicada a codificacao por bit-blasting do ESBMC (Gadelha2020).
 
 Frente à codificação direta em SAT, os solvers SMT são mais expressivos ---
@@ -255,7 +255,7 @@ SMT, combinando a eficiência dos procedimentos SAT com o raciocínio sobre teor
 matemáticas --- aritmética, \textit{bit-vectors} e \textit{arrays} ---, o que dá
 suporte mais preciso à verificação de aritmética e estruturas de dados
 complexas~\cite{Cordeiro2012}.
-%% LC (resolvido): sigla ESBMC uniformizada para "Efficient SMT-Based
+%% LC: sigla ESBMC uniformizada para "Efficient SMT-Based
 %% Context-Bounded Model Checker" nos quatro lugares do documento.
 
 \subsection{Pipeline de Verificação}
@@ -319,9 +319,9 @@ memória (limites de \textit{arrays} e validade de ponteiros) e de \textit{overf
 aritmético, conforme a configuração detalhada no Capítulo~\ref{cap:experimentos}.
 O usuário pode ainda inserir \textit{assertions} próprias no código.
 
-%% LC (resolvido): lacuna de fundamentacao -- acrescentada subsecao sobre a CWE
+%% LC: lacuna de fundamentacao -- acrescentada subsecao sobre a CWE
 %% (relacao com CVE, hierarquia, e as entradas usadas no Cap. de resultados).
-%% LC (resolvido): CWE-195 incluida na lista; cadeia CWE-191 -> CWE-195 -> CWE-119 definida aqui.
+%% LC: CWE-195 incluida na lista; cadeia CWE-191 -> CWE-195 -> CWE-119 definida aqui.
 \subsection{Classificação de Vulnerabilidades: a CWE}
 
 A \textit{Common Weakness Enumeration} (CWE) é uma taxonomia mantida pelo MITRE
@@ -354,7 +354,7 @@ As extensões recentes do ESBMC, como o suporte a C++, e suas aplicações em ou
 domínios são discutidas na Seção~\ref{sec:rel-praticas}, no capítulo de trabalhos
 relacionados.
 
-%% LC (resolvido): o paragrafo de Extensoes Recentes ficou so no Cap. 3 (Secao de aplicacoes praticas); aqui resta a referencia cruzada.
+%% LC: o paragrafo de Extensoes Recentes ficou so no Cap. 3 (Secao de aplicacoes praticas); aqui resta a referencia cruzada.
 
 \section{PX4 Autopilot}
 
@@ -446,7 +446,7 @@ proteção de memória (MPU), mas essa proteção só é ativada nos modos
 \textit{flat}, não há isolamento entre os módulos --- todos compartilham o mesmo
 espaço de endereçamento, de modo que um defeito de memória em qualquer módulo pode
 comprometer o estado global~\cite{NuttX}.
-%% LC (resolvido): STM32 possui MPU -- esclarecido que ela so e usada nos modos
+%% LC: STM32 possui MPU -- esclarecido que ela so e usada nos modos
 %% protected/kernel; nos alvos deste trabalho (modo flat) nao ha isolamento.
 
 \subsection{Desafios para Verificação Formal}
@@ -472,8 +472,8 @@ anteriores em sistemas embarcados \textit{safety-critical} estabeleceram
 metodologias aplicáveis a VANTs~\cite{Mzid2024}, e a combinação de Model Checking
 com análise de código embarcado tem se mostrado eficaz na detecção de defeitos que
 escapam a abordagens baseadas apenas em testes~\cite{Khairullah2022, Sousa2026}.
-%% LC (resolvido): alegacao de certificacao reformulada com o suplemento de
-%% metodos formais DO-333 (nao substitui testes automaticamente). LC (resolvido):
+%% LC: alegacao de certificacao reformulada com o suplemento de
+%% metodos formais DO-333 (nao substitui testes automaticamente). LC:
 %% Chatterjee2022 nao sustentava a frase -- trocado por Sousa2026.
 
 \section{Resumo}

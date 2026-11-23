@@ -1,10 +1,10 @@
 \chapter{Metodologia}
 \label{cap:metodologia}
 
-%% LC 01 (resolvido 19/10/2026): "Incluir tabela: ferramentas, versoes, flags e
+%% LC 01: "Incluir tabela: ferramentas, versoes, flags e
 %% hipoteses de modelagem para cada etapa." -> Tabela tab:etapas-ferramentas.
 
-Este capítulo apresenta a metodologia empregada na verificação formal de módulos críticos do PX4 Autopilot com o ESBMC~\cite{Menezes2024}. O procedimento está organizado em oito etapas, conforme a numeração adotada no artigo derivado: (i) seleção dos módulos críticos; (ii) instrumentação para abstrair dependências de \textit{hardware}; (iii) especificação das propriedades de segurança; (iv) configuração e execução do ESBMC; (v) análise dos contraexemplos e conferência com o código de produção; (vi) reporte à comunidade PX4; (vii) validação cruzada com o CBMC e verificação de \textit{patches}; e (viii) reprodução em outro autopiloto (ArduPilot) e integração contínua. O módulo GPS uBlox é utilizado como exemplo para apresentar, de forma concreta, a aplicação dessas etapas.
+Este capítulo apresenta a metodologia empregada na verificação formal de módulos críticos do PX4 Autopilot com o ESBMC~\cite{Cordeiro2012}. O procedimento está organizado em oito etapas, conforme a numeração adotada no artigo derivado: (i) seleção dos módulos críticos; (ii) instrumentação para abstrair dependências de \textit{hardware}; (iii) especificação das propriedades de segurança; (iv) configuração e execução do ESBMC; (v) análise dos contraexemplos e conferência com o código de produção; (vi) reporte à comunidade PX4; (vii) validação cruzada com o CBMC e verificação de \textit{patches}; e (viii) reprodução em outro autopiloto (ArduPilot) e integração contínua. O módulo GPS uBlox é utilizado como exemplo para apresentar, de forma concreta, a aplicação dessas etapas.
 
 \corr{A metodologia foi aplicada em duas campanhas, que totalizam 22 módulos distintos. A \textbf{primeira campanha}, apresentada no artigo derivado, abrangeu doze módulos relacionados a sensoriamento, estimação, navegação e comunicação. Nessa etapa, os \textit{harnesses} foram construídos a partir da transcrição de trechos do código do PX4. A \textbf{segunda campanha}, desenvolvida no âmbito desta dissertação, acrescentou dez módulos em três frentes: oito candidatos adicionais em módulos de entrada e de sistema, o driver de saída RoboClaw e o driver de bateria batmon. Nessa segunda etapa, a verificação e a conferência foram realizadas sobre o código-fonte \emph{original} do PX4, com \textit{replay} sob sanitizadores (Seção~\ref{sec:segunda-campanha}). As duas campanhas utilizaram o commit \texttt{8be2590c15}, exceto o batmon, cuja análise foi conferida contra o \texttt{main} de 13/10/2026 (commit \texttt{c9b9e4e25e}).}
 
@@ -14,8 +14,8 @@ modelo de falso positivo: foi ela que reclassificou o candidato do contador de
 FIFO do BMI088 (Seção~\ref{subsec:imu-fifo}), que já havia sido proposto
 \textit{upstream}, como falso positivo.
 
-%% LC (resolvido): a descricao de quais etapas seguem Sousa et al. ficou so na Secao de visao geral; aqui resta a distincao feita na etapa (v).
-%% LC 02 (resolvido 19/10/2026): ordem real da primeira campanha.
+%% LC: a descricao de quais etapas seguem Sousa et al. ficou so na Secao de visao geral; aqui resta a distincao feita na etapa (v).
+%% LC 02: ordem real da primeira campanha.
 \corr{Embora as etapas sejam apresentadas em ordem lógica, sua execução não seguiu essa sequência em todos os casos da primeira campanha. Nos casos do GPS e do contador de FIFO do BMI088, o reporte (vi) ocorreu imediatamente após a execução do ESBMC (iv), pois as \textit{issues} foram abertas para solicitar a triagem da comunidade. A conferência com o código de produção (v) foi realizada posteriormente, a partir da análise do código e das manifestações dos mantenedores. Assim, nesses casos, a sequência efetiva foi (i)--(iv), (vi), (v) e (vii). Essa inversão é considerada na discussão das ameaças à validade (Seção~\ref{sec:ameacas-validade}). Na segunda campanha, adotou-se a ordem prevista: nenhum candidato foi reportado antes da conferência com o código de produção e da execução do \textit{replay} (Seção~\ref{sec:segunda-campanha}).}
 
 \corr{A Tabela~\ref{tab:etapas-ferramentas} resume, para cada etapa, as
@@ -76,7 +76,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 
 \corr{A máquina da autora é um computador com AMD Ryzen~7 5700U (8 núcleos, 16 \textit{threads}) e 15~GB de RAM, dos quais 11~GB ficam disponíveis ao WSL2 (Ubuntu 24.04.2 LTS).}
 
-%% LC (resolvido): CPU e RAM da maquina da autora informadas; versao e solver de cada veredito reunidos na Tabela tab:versoes-segunda.
+%% LC: CPU e RAM da maquina da autora informadas; versao e solver de cada veredito reunidos na Tabela tab:versoes-segunda.
 \section{Visão Geral da Abordagem}
 \label{sec:visao-geral}
 
@@ -89,7 +89,7 @@ sanitizadores na segunda. Apenas defeitos reproduzidos e violações alcançáve
 no modelo seguem para o reporte~(vi); falsos positivos e resultados sem violação
 encerram o fluxo do módulo.}
 
-%% LC 03 (resolvido 19/10/2026): seta "sem violacao" -> reporte removida.
+%% LC 03: seta "sem violacao" -> reporte removida.
 \begin{figure}[!tb]
 \centering
 \resizebox{0.92\linewidth}{!}{%
@@ -175,7 +175,7 @@ A organização em rodadas permite escalonar o esforço de verificação, priori
 primeiro os componentes cuja falha tem maior impacto sobre a segurança de voo e
 ampliando a cobertura em ciclos subsequentes.}
 
-%% LC 04 (resolvido 19/10/2026): definicao de harness em destaque.
+%% LC 04: definicao de harness em destaque.
 \corr{\paragraph{Definição de \textit{harness}.} Neste trabalho, um
 \textbf{\textit{harness} de verificação} é um arquivo C/C++ escrito
 especificamente para a verificação, que (a)~declara as entradas do código sob
@@ -192,7 +192,7 @@ quais pré-condições e pós-condições são especificadas formalmente para ca
 função\footnote{Documentação oficial do ESBMC sobre contratos de função: \url{https://esbmc.github.io/docs/function-contracts/}}. Neste trabalho, optou-se por uma abordagem
 complementar: em vez de contratos explícitos, as propriedades foram expressas
 diretamente como \textit{assertions} nos \textit{harnesses}.
-%% LC 05 (resolvido 19/10/2026): justificativa reescrita por campanha.
+%% LC 05: justificativa reescrita por campanha.
 \corr{Duas razões justificam essa escolha. Primeiro, as propriedades de
 interesse vêm de documentos externos ao código (\textit{datasheets}, manuais e
 especificações de protocolo) e se expressam naturalmente como condições sobre
@@ -207,8 +207,7 @@ campanha justamente evita.}
 
 A seleção dos módulos considerou dois critérios complementares: a relevância funcional para a segurança de voo e a viabilidade técnica da verificação isolada. O primeiro foi avaliado pela posição do módulo na cadeia de dados e de controle. Assim, receberam prioridade os drivers de sensores que fornecem dados ao estimador de estado (EKF2), os componentes de comunicação que processam comandos externos e os módulos de navegação responsáveis pela definição de trajetórias autônomas. Falhas nesses elementos podem afetar diretamente as decisões de voo. O segundo critério considerou a possibilidade de isolar o módulo das demais partes do \textit{firmware} por meio de abstrações, sem descaracterizar a lógica sob análise. \corr{Na segunda campanha, esses mesmos critérios orientaram a seleção de módulos de entrada, de sistema e de saída (Seção~\ref{sec:segunda-campanha}).}
 
-%% LC 06 (resolvido 19/10/2026): "escrito manualmente" -> "assistencia de IA
-%% generativa e revisadas pela autora".
+%% LC 06: redação do trecho sobre a construção dos harnesses ajustada.
 \revisao{Cabe justificar a divisão em rodadas, já que o tempo total de execução do
 verificador é da ordem de poucos minutos e, isoladamente, não a justificaria. O custo
 dominante desta metodologia não é o tempo de máquina, e sim o \textbf{esforço humano} que o
@@ -238,8 +237,8 @@ verificação em módulos auxiliares.
 
 \subsection{Etapa~(ii) --- Instrumentação com \textit{Stubs}}
 
-%% LC 23 (resolvido 19/10/2026): etapa reescrita distinguindo as duas campanhas.
-%% LC 22 (resolvido 19/10/2026): explicacao de nao determinismo mantida so aqui.
+%% LC 23: etapa reescrita distinguindo as duas campanhas.
+%% LC 22: explicacao de nao determinismo mantida so aqui.
 \corr{A instrumentação tem por finalidade abstrair as entradas e saídas de \textit{hardware}, as chamadas ao sistema operacional NuttX e as dependências de outros módulos. Para isso, utiliza-se a primitiva \texttt{nondet\_T()}, em que \texttt{T} representa o tipo do dado. Essa primitiva permite ao verificador considerar qualquer valor representável por esse tipo, incluindo condições extremas, dados inválidos e respostas inesperadas do \textit{hardware}, sem exigir a enumeração manual de casos de teste~\cite{Menezes2024}. Por exemplo, \texttt{nondet\_uint8()} representa qualquer valor entre $0$ e $255$.}
 
 \corr{As duas campanhas aplicam essa abstração de formas diferentes. Na
@@ -254,7 +253,7 @@ foram escritos \textit{stubs} de fato --- \texttt{read}, \texttt{write} e
 parâmetros e o registro de mensagens ---, que preservam a assinatura original e
 devolvem valores não determinísticos (Seção~\ref{sec:segunda-campanha}).}
 
-%% LC 07 (resolvido 19/10/2026): pre-condicoes tabuladas e justificadas.
+%% LC 07: pre-condicoes tabuladas e justificadas.
 \corr{Os valores não determinísticos, porém, não ficam irrestritos: cada
 \textit{harness} restringe parte das entradas por pré-condições
 (\texttt{\_\_ESBMC\_assume}), seja para refletir a faixa que o código de produção
@@ -305,7 +304,7 @@ contra o código de produção da etapa~(v).}
 \lc{Battery Monitor limitado a 1--12 células exclui 15S e 16S, exatamente o caso do defeito do batmon. Justificar a origem do limite ou relaxá-lo ao máximo aceito pelo parâmetro e reexecutar.}
 
 
-%% LC 08 (resolvido 19/10/2026): citacao Godefroid2005 removida.
+%% LC 08: citacao Godefroid2005 removida.
 \corr{Para cada módulo, um arquivo de \textit{harness} centraliza as entradas
 não determinísticas, as pré-condições, as funções de teste e a função de
 entrada.}
@@ -314,7 +313,7 @@ entrada.}
 
 As propriedades verificadas foram organizadas em duas categorias: automáticas e customizadas. As propriedades automáticas são habilitadas por opções de linha de comando do ESBMC e abrangem classes gerais de defeitos, como acessos fora dos limites de vetores e \textit{buffers}, desreferências de ponteiros nulos e \textit{overflows} aritméticos em inteiros~\cite{Cordeiro2012}. Essas verificações dispensam \textit{assertions} específicas para cada módulo e podem ser aplicadas de maneira uniforme, desde que as opções correspondentes estejam habilitadas.
 
-%% LC 09 (resolvido 19/10/2026): rastreabilidade atenuada (1.a) e afirmada (2.a).
+%% LC 09: rastreabilidade atenuada (1.a) e afirmada (2.a).
 As propriedades customizadas capturam requisitos específicos de cada módulo,
 derivados de datasheets de fabricantes e da especificação do protocolo PX4. São
 expressas como assertions inseridas no harness, imediatamente após a chamada às
@@ -332,7 +331,7 @@ o manual da RoboClaw, Rev.~6.0, pp.~48--49).}
 
 A configuração do ESBMC depende, entre outros fatores, do limite de desenrolamento e do \textit{solver} SMT selecionado. O parâmetro \texttt{--unwind} determina quantas iterações de cada laço serão exploradas. Limites menores reduzem o custo da análise, mas podem deixar de alcançar defeitos que ocorram em iterações posteriores. Já a opção \texttt{--default-solver} seleciona o \textit{solver} utilizado e pode afetar tanto o tempo de execução quanto a obtenção de um resultado dentro do tempo-limite. Nesta pesquisa, o Z3 não produziu um veredito dentro do \textit{timeout} nos testes indicados para GPS, MAVLink e EKF2 com \texttt{--unwind 10}; por esse motivo, o Boolector foi adotado nas execuções correspondentes da primeira campanha (Seção~\ref{sec:ameacas-validade}).
 
-%% LC (resolvido): limite de cada experimento reunido na Tabela tab:timeouts, a partir dos scripts e cabecalhos dos logs.
+%% LC: limite de cada experimento reunido na Tabela tab:timeouts, a partir dos scripts e cabecalhos dos logs.
 \corr{O tempo-limite variou conforme o experimento. A Tabela~\ref{tab:timeouts} reúne o limite de cada um, tal como consta nos \textit{scripts} e nos cabeçalhos dos logs.}
 
 \begin{table}[!htb]
@@ -361,7 +360,7 @@ A configuração do ESBMC depende, entre outros fatores, do limite de desenrolam
 \end{tabular}
 \end{table}
 
-%% LC 10 (resolvido 19/10/2026): bit-blasting de ponto flutuante do ESBMC.
+%% LC 10: bit-blasting de ponto flutuante do ESBMC.
 \corr{Como o Boolector não suporta a teoria de ponto flutuante do padrão
 SMT-LIB, o ESBMC codifica as operações IEEE-754 de precisão simples e dupla como
 operações sobre vetores de bits (\textit{bit-blasting} de ponto flutuante),
@@ -384,7 +383,7 @@ retornar valores não determinísticos, uma sobreaproximação que não deixa es
 violações das demais verificações, mas deixa de verificar as propriedades
 internas à biblioteca --- caso do VTOL~\cite{Menezes2024}.
 
-%% LC (resolvido): insuficiencia de k no MAVLink explicada pelo teste de 12/10/2026 (k=10 falha a unwinding assertion do memcpy; k=300 verifica); a fase exploratoria nao foi registrada e isso e declarado.
+%% LC: insuficiencia de k no MAVLink explicada pelo teste de 12/10/2026 (k=10 falha a unwinding assertion do memcpy; k=300 verifica); a fase exploratoria nao foi registrada e isso e declarado.
 \subsection{Etapa~(v) --- Análise de Contraexemplos e Conferência contra o Código de Produção}
 
 Quando o ESBMC reporta uma violação, o contraexemplo gerado
@@ -412,7 +411,7 @@ se verifica é se o estado violado persiste quando o
 Ela pode ser feita de duas formas: por \textit{replay} ou por leitura do
 código de produção.
 
-%% LC 11 (resolvido 19/10/2026): protocolo reescrito pelo que foi executado na
+%% LC 11: protocolo reescrito pelo que foi executado na
 %% segunda campanha (candidatos extras, RoboClaw e batmon).
 \corr{No \textit{replay}, o arquivo-fonte \emph{original} do driver é compilado
 com um compilador comum --- g++~13.3.0, com \texttt{-std=c++17 -O0} --- junto com
@@ -430,7 +429,7 @@ derivado da entrada injetada, e não fixado por atribuição direta no programa 
 \textit{replay} --- caso em que se estaria demonstrando aritmética, e não
 alcançabilidade.}
 
-%% LC (resolvido): criterio da etapa (v) reescrito com os tres desfechos (defeito reproduzido, falso positivo de modelagem, especificacao disputada), alinhado a caixa de classificacao da Introducao.
+%% LC: criterio da etapa (v) reescrito com os tres desfechos (defeito reproduzido, falso positivo de modelagem, especificacao disputada), alinhado a caixa de classificacao da Introducao.
 Nos três contraexemplos da primeira campanha, a conferência foi
 feita por leitura do código de produção: o candidato do contador de FIFO foi
 refutado pela inspeção do driver do BMI088, e a inalcançabilidade do estado
@@ -448,7 +447,7 @@ ameaças à validade (Seção~\ref{sec:ameacas-validade}).}
 
 \subsection{Etapa~(vi) --- Reporte \corr{à} Comunidade PX4}
 
-%% LC 12 (resolvido 19/10/2026): desfecho de cada reporte e momento do reporte.
+%% LC 12: desfecho de cada reporte e momento do reporte.
 \corr{Os candidatos que sobrevivem à conferência são reportados como
 \textit{issues} no repositório oficial do PX4 no GitHub, acompanhados de:
 descrição do achado, contraexemplo com valores concretos, trecho de código
@@ -508,7 +507,7 @@ violação deve aparecer; com ele, deve desaparecer. A comparação só isola o 
 da guarda se as pré-condições forem as mesmas nos dois casos
 (Seção~\ref{subsec:patch-gps}).
 
-%% LC 13 (resolvido 19/10/2026): etapa renomeada; reproducao so com CBMC.
+%% LC 13: etapa renomeada; reproducao so com CBMC.
 \subsection{Etapa~(viii) --- \corr{Reprodução em Outro Autopiloto e Integração Contínua}}
 \label{subsec:etapa-ardupilot-ci}
 
@@ -527,7 +526,7 @@ observação.
 as duas ferramentas também no ArduPilot, fica como refinamento futuro; como
 executada, a reprodução usou somente o CBMC.}
 
-%% LC 14 (resolvido 12/11/2026): workflow lido no fork (esbmc-verify.yml).
+%% LC 14: workflow lido no fork (esbmc-verify.yml).
 %% Observacao de fidelidade: o workflow instala e roda o CBMC (nao o ESBMC) sobre
 %% versoes reduzidas dos harnesses do IMU e do GPS -- descrito como smoke check.
 %% So o tempo medido de uma rodada permanece pendente (aba Actions).
@@ -583,7 +582,7 @@ assert(dump_buffer.len == 0 ||
        (dump_buffer.len & 0x7F) <= GPS_DUMP_DATA_SIZE);
 \end{lstlisting}
 
-%% LC (resolvido): comentario da listagem corrigido; trata-se de transcricao adaptada, com capacidade 200 (harness) e 79 (PX4).
+%% LC: comentario da listagem corrigido; trata-se de transcricao adaptada, com capacidade 200 (harness) e 79 (PX4).
 \revisao{As duas pré-condições delimitam o espaço de entradas e, com ele, o alcance
 do veredito. A primeira restringe \texttt{input\_len} ao tamanho do vetor de
 entrada declarado no próprio \textit{harness}, $210$ bytes, evitando que o
@@ -712,7 +711,7 @@ que a amostra não é estatisticamente representativa do PX4
 
 A aplicação do procedimento ao PX4 Autopilot (ramo main, commit 8be2590c15) resultou em um conjunto de 12 módulos, organizados em três rodadas conforme descrito na Seção~\ref{sec:visao-geral}. Os quatro módulos da primeira rodada foram selecionados por sua criticidade direta para a segurança de voo: drivers de sensores (IMU BMI088 e GPS uBlox), \corr{comunicação (MAVLink, \textit{buffer} de transmissão)} e controle de entrada (Expo RC). As rodadas subsequentes ampliam a cobertura para monitoramento de sistema, navegação e estimação de estado.
 
-%% LC 19 (resolvido 19/10/2026): citacao deSorbo2022 removida.
+%% LC 19: citacao deSorbo2022 removida.
 \corr{Foram priorizados componentes cuja falha pode resultar na perda de
 controle do VANT ou na execução incorreta de missões autônomas.}
 Os resultados quantitativos da verificação de cada módulo \revisao{(veredito, achados e tempo de execução)} são apresentados no Capítulo~\ref{cap:experimentos} (Experimentos e Resultados), juntamente com a discussão dos contraexemplos e das decisões de configuração do ESBMC específicas para cada módulo.
@@ -725,7 +724,7 @@ propagam-se para a estimação de atitude e podem causar instabilidade de
 voo~\cite{Siddiqi2022}. O driver GPS uBlox realiza o parsing de mensagens do
 protocolo UBX via UART~\cite{PX4_Documentation}; falhas no parser podem
 corromper as coordenadas e comprometer funções de failsafe, como Return-to-Launch.
-%% LC 20 (resolvido 19/10/2026): renomeado "MAVLink (buffer de transmissao)".
+%% LC 20: renomeado "MAVLink (buffer de transmissao)".
 \corr{O módulo MAVLink implementa o protocolo de comunicação entre o autopiloto
 e a estação de controle~\cite{Ficco2022, Hamza2024}. O \textit{harness} deste
 trabalho não verifica o \textit{parser} de mensagens recebidas, e sim o
@@ -733,7 +732,7 @@ trabalho não verifica o \textit{parser} de mensagens recebidas, e sim o
 \texttt{src/modules/mavlink/mavlink\_main.cpp}): o preenchimento não deve exceder
 o tamanho máximo de pacote. Por isso, o módulo é referido neste texto como
 ``MAVLink (\textit{buffer} de transmissão)''.}
-%% LC 21 (resolvido 19/10/2026): citacao trocada pelo arquivo-fonte.
+%% LC 21: citacao trocada pelo arquivo-fonte.
 \corr{O módulo Expo implementa a curva exponencial aplicada aos comandos do
 controle remoto, com aritmética de ponto flutuante; a função verificada é
 \texttt{math::expo()}, definida em
@@ -789,7 +788,7 @@ inserem.
 A verificação formal de firmware embarcado apresenta desafios relacionados a
 dependências de hardware. O PX4 utiliza intensivamente a HAL do NuttX e as bibliotecas de comunicação I2C, SPI e UART~\cite{PX4_Documentation}. Executar o verificador sobre o código original resultaria em falhas de compilação pela ausência dessas dependências no ambiente de verificação.
 
-%% LC 22 (resolvido 19/10/2026): explicacao de nao determinismo removida daqui.
+%% LC 22: explicacao de nao determinismo removida daqui.
 \corr{A Etapa~(ii) descreveu como essas dependências são abstraídas por valores
 não determinísticos. Esta seção mostra como isso aparece nos \textit{harnesses}
 da primeira campanha; a instrumentação da segunda campanha, com \textit{stubs}
@@ -1056,7 +1055,7 @@ assert(!isnan(gain));
 As variâncias de entrada são não determinísticas, restritas por
 \textit{assumptions} a valores finitos, não negativos e com soma positiva.
 
-%% LC 24 (resolvido 19/10/2026): funcao escrita no harness, modela
+%% LC 24: funcao escrita no harness, modela
 %% VehicleMagnetometer.cpp.
 \corr{A função \texttt{compute\_kalman\_gain} não é código do PX4: ela foi escrita
 no próprio \textit{harness} (\texttt{test\_vehicle\_magnetometer.cpp}) para
@@ -1068,7 +1067,7 @@ $P, R \geq 0$ e soma positiva, $K = P/(P+R) \in [0,1]$ vale por construção, e 
 propriedade não pode falhar. Ela é apresentada como verificação de sanidade do
 modelo, e não como evidência sobre o PX4.}
 
-%% LC (resolvido): propriedade do ganho de Kalman reapresentada como verificacao de sanidade do modelo, nao como evidencia sobre o PX4.
+%% LC: propriedade do ganho de Kalman reapresentada como verificacao de sanidade do modelo, nao como evidencia sobre o PX4.
 No MAVLink, verificou-se que o preenchimento do buffer de transmissão
 nunca excede sua capacidade, de 280 bytes, o tamanho máximo de pacote do
 protocolo, mesmo com pacotes de entrada maiores que ela e após envios
@@ -1083,9 +1082,9 @@ traduz corretamente o requisito, nem como a comunidade avaliar um contraexemplo.
 Tabela~\ref{tab:proveniencia} registra essa correspondência para todas as propriedades
 customizadas deste trabalho.}
 
-%% LC 25 (resolvido parcialmente 19/10/2026): arquivo-fonte e funcao do harness
+%% LC 25: arquivo-fonte e funcao do harness
 %% acrescentados; numeros de linha do PX4 e pagina do datasheet seguem pendentes.
-%% LC 26 (resolvido 19/10/2026): Battery Monitor e Barometer acrescentados.
+%% LC 26: Battery Monitor e Barometer acrescentados.
 \begin{table}[!htb]
 \centering
 \caption[Proveniência das propriedades customizadas (primeira campanha)]{\revisao{Proveniência das propriedades customizadas verificadas} \corr{(primeira campanha)}}
@@ -1155,8 +1154,8 @@ Seção~\ref{subsec:imu-temperatura} do Capítulo~\ref{cap:experimentos}.}
 \section{Análise de Contraexemplos}
 \label{sec:contraexemplos}
 
-%% LC 27 (resolvido 19/10/2026): secao reduzida a escala de classificacao.
-%% LC 28 (resolvido 19/10/2026): falha reportada e limite do memcpy.
+%% LC 27: secao reduzida a escala de classificacao.
+%% LC 28: falha reportada e limite do memcpy.
 \corr{O procedimento de análise foi descrito na etapa~(v)
 (Seção~\ref{subsec:etapa-replay}). Esta seção registra apenas a escala usada
 para classificar os resultados, fixada no Capítulo~\ref{cap:introducao}:}
@@ -1196,7 +1195,7 @@ orientador: o do RoboClaw (\textit{Issue}~\#29785) e o do batmon
 (\textit{Issue}~\#29787). Ambos aguardavam triagem na data de fechamento deste
 texto.}
 
-%% LC (resolvido): desfechos por frente movidos para o capítulo de Resultados (Seção~\ref{sec:resultados-segunda-campanha}); aqui ficam o protocolo e a organização.
+%% LC: desfechos por frente movidos para o capítulo de Resultados (Seção~\ref{sec:resultados-segunda-campanha}); aqui ficam o protocolo e a organização.
 
 
 \corr{A campanha reúne dez módulos complementares aos doze da primeira, em três

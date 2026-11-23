@@ -1,7 +1,7 @@
 \chapter{Conclusão}
 \label{cap:conclusao}
 
-%% LC (resolvido 12/11/2026): resposta explícita à questão de pesquisa e ligação
+%% LC: resposta explícita à questão de pesquisa e ligação
 %% de cada objetivo à sua evidência.
 A questão que orientou esta pesquisa foi se é viável aplicar \textit{Bounded
 Model Checking} a um \textit{firmware} de controle de voo de porte industrial,
@@ -15,7 +15,7 @@ de noventa segundos; na segunda, os tempos não foram registrados de forma
 sistemática, e a afirmação de tempo não se estende a ela. Todo veredito pode ser
 refeito a partir dos artefatos publicados.
 
-%% LC (resolvido): 'verificados' trocado por 'analisados'; afirmacao de tempo restrita a primeira campanha.
+%% LC: 'verificados' trocado por 'analisados'; afirmacao de tempo restrita a primeira campanha.
 Os três objetivos específicos foram atendidos da seguinte forma. O objetivo~O1,
 propor a metodologia, corresponde às oito etapas do
 Capítulo~\ref{cap:metodologia}. O objetivo~O2, aplicá-la e classificar os
@@ -29,7 +29,7 @@ experimentais.
 \section{Síntese dos Resultados}
 \label{sec:conclusao-sintese}
 
-%% LC (resolvido 12/11/2026): síntese condensada em um parágrafo por achado.
+%% LC: síntese condensada em um parágrafo por achado.
 \textbf{Dez módulos sem violação.} Na primeira campanha, os
 \textit{harnesses} de dez dos doze módulos foram verificados sem violação das
 propriedades de segurança de memória e de \textit{overflow} habilitadas. Esses
@@ -73,7 +73,7 @@ de fazê-lo com a correção aplicada. O controlador de motores foi emulado.
 \section{Contribuições}
 \label{sec:conclusao-contribuicoes}
 
-%% LC (resolvido 12/11/2026): lista alinhada às cinco contribuições da
+%% LC: lista alinhada às cinco contribuições da
 %% Introdução, com a numeração (i) a (viii) das etapas.
 As contribuições são as cinco enunciadas na Introdução
 (Seção~\ref{sec:contribuicoes}).
@@ -125,7 +125,7 @@ laço do \texttt{memcpy} excede $k = 10$ e não é coberto por inteiro.
 barramento nem falhas intermitentes, e a análise modular não captura defeitos
 que surgem da interação entre tarefas concorrentes.
 
-%% LC (resolvido 12/11/2026): limitação sobre defeitos confirmados.
+%% LC: limitação sobre defeitos confirmados.
 \textbf{Eficácia em encontrar defeitos.} A primeira campanha não produziu
 defeito confirmado algum: de três contraexemplos, um era falso positivo, um foi
 recusado e um é inalcançável na produção. A segunda campanha reproduziu
@@ -135,7 +135,7 @@ mantenedores no fechamento do texto. A eficácia do método em encontrar defeito
 que o projeto reconheça como tais está, portanto, demonstrada de forma
 indireta.
 
-%% LC (resolvido 12/11/2026): limitação sobre esforço humano.
+%% LC: limitação sobre esforço humano.
 \textbf{Esforço humano.} O tempo de máquina é pequeno, mas o custo do método é
 dominado pelo trabalho de escrever \textit{harnesses}, triar contraexemplos e
 conferir o código de produção. Esse esforço não foi medido, e nenhuma afirmação
@@ -146,7 +146,7 @@ o controlador de motores foi emulado, o \textit{firmware} precisou de duas
 alterações declaradas e só um dos dois defeitos foi exercitado; no do GPS, não
 havia receptor conectado.
 
-%% LC (resolvido 12/11/2026): aplicabilidade ao SAGRES.
+%% LC: aplicabilidade ao SAGRES.
 \textbf{Relação com o projeto SAGRES.} A amostra nasceu do projeto: os módulos
 foram escolhidos a partir das indicações da coordenação do SAGRES sobre o que
 era relevante para as suas missões. Essas indicações foram dadas ao longo do
@@ -160,7 +160,7 @@ da seleção; a cobertura que os módulos verificados representam sobre o
 
 \subsection{Expansão da cobertura}
 
-%% LC (resolvido 12/11/2026): Navigator retirado da lista de não analisados;
+%% LC: Navigator retirado da lista de não analisados;
 %% LPE definido; citações mantidas só onde sustentam a frase.
 A metodologia pode ser estendida aos subsistemas não analisados: os mecanismos
 de \textit{failsafe} do Commander, a lógica de \textit{geofence}, os barramentos
@@ -172,7 +172,7 @@ descrito por Ficco et al.~\cite{Ficco2022}.
 \subsection{Validação em bancada e em simulação}
 \label{sec:trabalhos-futuros-hw}
 
-%% LC (resolvido 12/11/2026): seção numerada, para que as referências apontem
+%% LC: seção numerada, para que as referências apontem
 %% para ela.
 A validação em bancada pode ser estendida aos demais achados da segunda
 campanha. O sensor de vento FT7 e o batmon são os candidatos imediatos: o
@@ -226,7 +226,7 @@ direto, mas o estado é inalcançável na produção, e nenhum defeito do driver
 exposto na primeira campanha. Quanto à \textbf{QE3}, nove dos doze módulos
 foram verificados com a invocação padrão, e três exigiram opções específicas. Quanto à \textbf{QE4}, que mede a eficácia nas duas campanhas, nenhum dos três contraexemplos da primeira foi reproduzido como defeito (dois falsos positivos de modelagem e uma especificação disputada), ao passo que, na segunda, sete de dez módulos tiveram o efeito previsto reproduzido no código real, dois foram falsos positivos de modelagem e um não apresentou defeito de memória. A diferença acompanha a mudança de método, mas a seleção dos candidatos também mudou, e os dois efeitos não podem ser separados com os dados desta pesquisa.
 
-%% LC (resolvido 12/11/2026): alegações de custo e de casos de canto qualificadas.
+%% LC: alegações de custo e de casos de canto qualificadas.
 Os resultados indicam que o BMC é aplicável a módulos de \textit{firmware} de
 VANTs em produção com tempo de máquina pequeno. Não permitem afirmar que o
 custo total seja compatível com um ciclo de desenvolvimento, porque o esforço
@@ -235,7 +235,7 @@ sustenta, para a primeira campanha, a afirmação de que a abordagem alcança
 casos extremos que os testes não cobrem: o único caso extremo encontrado ali
 não ocorre no driver real.
 
-%% LC (resolvido 12/11/2026): argumento final apoiado na segunda campanha.
+%% LC: argumento final apoiado na segunda campanha.
 O valor da abordagem aparece com mais clareza na segunda campanha, e por uma
 razão metodológica. Quando a verificação foi feita sobre o código original, e
 cada candidato só foi aceito depois de reproduzido fora do verificador, sete de
@@ -244,7 +244,7 @@ corrigidos pelo próprio projeto sem conhecimento deste trabalho. Esse reforço 
 campanha mostrou o que acontece sem essa disciplina: contraexemplos formalmente
 válidos para defeitos que não existem.
 
-%% LC (resolvido): criterio de selecao da Frente A declarado (indicacao do SAGRES, sem criterio proprio; historico de correcoes nao excluido).
+%% LC: criterio de selecao da Frente A declarado (indicacao do SAGRES, sem criterio proprio; historico de correcoes nao excluido).
 O que este trabalho entrega é, assim, uma metodologia de verificação formal
 para \textit{firmware} de sistemas críticos, aplicada ao PX4 como estudo de
 caso. Os achados são produto da aplicação do método, e não a sua medida:

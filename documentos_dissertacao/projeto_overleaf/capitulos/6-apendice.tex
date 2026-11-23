@@ -48,7 +48,7 @@ Tabela~\ref{tab:resultados} vem do teste selecionado por
 \texttt{test\_choice = 3}, \texttt{test\_gps\_real\_bit\_operation()}
 (linhas 178--197).}
 
-%% LC (resolvido 23/11/2026): comentarios do harness corrigidos (so comentarios; o codigo executavel e identico); listagem abaixo e a versao corrigida.
+%% LC: comentarios do harness corrigidos (so comentarios; o codigo executavel e identico); listagem abaixo e a versao corrigida.
 \corr{Os comentários internos da versão arquivada inicialmente descreviam o arquivo como extração ``100\% real'' e ``palavra por palavra'' do driver, o que não é verdadeiro, e citavam a versão~1.16, a linha~643 de \texttt{gps.cpp} e comandos (\texttt{--unwind 8} e \texttt{--unwind 5}) que não são os da campanha. Em 23/11/2026 esses comentários foram corrigidos no repositório, sem alterar uma única linha de código executável (as 294 linhas se mantêm, e a numeração abaixo é a mesma): a função é descrita como \emph{adaptação} do trecho de \texttt{GPS::dumpGpsData()} no commit \texttt{8be2590c15}, que começa na linha~727; o buffer tem 200~bytes no \textit{harness}, contra $79$ em \texttt{GpsDump.msg}; o buffer e o modo ativo são passados como parâmetros; a estrutura modelada não inclui o campo \texttt{device\_id}; e os comandos de execução são os da Seção~\ref{sec:config-experimental}. A correspondência com o driver é, portanto, lógica e parcial, e a diferença de capacidade limita o alcance das conclusões extraídas do contraexemplo (Seção~\ref{subsec:gps-inducao}). A versão corrigida será arquivada em nova versão do depósito no Zenodo.}
 
 \begin{lstlisting}[
@@ -373,7 +373,7 @@ limitações são consideradas na interpretação dos resultados e impedem que o
 \textit{harness} seja descrito como uma cópia integral ou uma validação completa
 do driver de produção.}
 
-%% LC (resolvido 23/11/2026): comentários corrigidos; nova versão no Zenodo a publicar pela autora.
+%% LC: comentários corrigidos; nova versão no Zenodo a publicar pela autora.
 
 \chapter{Contraexemplos Gerados pelo ESBMC}
 \label{apend:contraexemplos}

@@ -276,7 +276,7 @@ VTOL              & \texttt{modules/vtol\_att\_control} & \artigo{591} & 146 & A
 Alvo = LoC \artigo{do(s) arquivo(s)-fonte do PX4 que o harness representa (\textit{commit} fixado)}; Harness = LoC do harness (ambos por \texttt{wc -l}).
 \end{table}
 
-%% LC (resolvido 23/11/2026): medicao feita pela autora em 23/11/2026, no PX4 8be2590c15 (logs: contagem_linhas_extraidas_2026-11/logs/).
+%% LC: medicao feita pela autora em 23/11/2026, no PX4 8be2590c15 (logs: contagem_linhas_extraidas_2026-11/logs/).
 \corr{Para separar o código do PX4 do código de modelo, contaram-se, em cada \textit{harness}, as linhas de código (sem comentários nem linhas em branco) que são idênticas, descontados os espaços, a alguma linha do código-fonte do PX4 em \texttt{src/} (Tabela~\ref{tab:linhas-extraidas}). Linhas triviais, com menos de 12 caracteres (como \texttt{\{}, \texttt{\}} e \texttt{return;}), ficam fora da contagem, e só contam arquivos do PX4 com pelo menos cinco linhas coincidentes. O número é um \emph{limite inferior}: uma linha adaptada, com tipo, nome ou constante alterados, conta como modelo. A medição foi feita pela autora em 23/11/2026, no \textit{commit} \texttt{8be2590c15}.}
 
 \begin{table}[!htb]
@@ -468,7 +468,7 @@ foram registrados de forma sistemática, e há ao menos um caso longo, o do
 (Seção~\ref{sec:segunda-campanha}).
 \end{tcolorbox}
 
-%% LC (resolvido): resposta da QE1 restrita a primeira campanha (critério 120 s; todos abaixo de 90 s); tempos da segunda campanha declarados como nao registrados, com o caso do sumd (>15 min).
+%% LC: resposta da QE1 restrita a primeira campanha (critério 120 s; todos abaixo de 90 s); tempos da segunda campanha declarados como nao registrados, com o caso do sumd (>15 min).
 \revisao{Os módulos verificados não constituem uma amostra uniforme:
 situam-se no caminho crítico de sensoriamento até atuação, onde bytes não
 confiáveis de I2C, SPI e UART entram no \textit{flight stack} pela primeira
@@ -665,7 +665,7 @@ contraexemplo formalmente válido para um defeito inexistente.}
 \texttt{BMI088\_Accelerometer.cpp}. O artefato depositado não contém programas
 de \textit{replay} nem registros de sanitizadores.}
 
-%% LC (resolvido): as tres guardas do FIFO verificadas formalmente com ESBMC e CBMC (matriz de 8 variantes x 2 propriedades); resultado na subsecao seguinte.
+%% LC: as tres guardas do FIFO verificadas formalmente com ESBMC e CBMC (matriz de 8 variantes x 2 propriedades); resultado na subsecao seguinte.
 
 \subsection{\corr{Verificação formal das guardas do FIFO}}
 \label{subsec:fifo-guardas}
@@ -785,7 +785,7 @@ verificador para esse contraexemplo.} \corr{O \texttt{dump\_buffer} local do \te
 corresponde ao buffer \texttt{dump\_data} passado ao driver, e o traço literal
 consta do Apêndice~\ref{apend:contraexemplos}.}
 
-%% LC (resolvido): cadeia CWE uniformizada em CWE-191 -> CWE-195 -> CWE-119 (Fundamentacao, Introducao, Resultados e Apendice).
+%% LC: cadeia CWE uniformizada em CWE-191 -> CWE-195 -> CWE-119 (Fundamentacao, Introducao, Resultados e Apendice).
 \begin{figure}[H]
     \centering
     \definecolor{ceFundo}{HTML}{F7F8FA}\definecolor{ceCinza}{HTML}{5A6070}%
@@ -860,7 +860,7 @@ por testes de integração.}
 \subsection{\corr{Limites do \textit{harness} do GPS}}
 \label{subsec:gps-limites-harness}
 
-%% LC 15 (resolvido 19/10/2026): tautologia declarada; propriedade de memoria do
+%% LC 15: tautologia declarada; propriedade de memoria do
 %% memcpy e a verificada.
 \corr{A \textit{assertion} final da Listagem~\ref{lst:exemplo-harness-gps} é,
 na prática, uma tautologia: o terceiro termo, \texttt{(dump\_buffer.len \& 0x7F)
@@ -887,8 +887,8 @@ consistentes: o modelo só viola a propriedade quando parte de um estado que o
 código de produção nunca alcança, o que sustenta a classificação do achado como
 falso positivo de modelagem, e não como defeito. O mecanismo é o da pré-condição ampla demais, apontada na etapa~(ii) como fonte de falso positivo: a violação só aparece porque o \textit{harness} admite um estado inicial acima da capacidade.}
 
-%% LC (resolvido): GPS reclassificado como falso positivo de modelagem por pre-condicao ampla (mesmo mecanismo da etapa ii).
-%% LC 16 (resolvido 19/10/2026): violacao e admitida pela pre-condicao.
+%% LC: GPS reclassificado como falso positivo de modelagem por pre-condicao ampla (mesmo mecanismo da etapa ii).
+%% LC 16: violacao e admitida pela pre-condicao.
 \corr{A segunda pré-condição merece uma ressalva adicional. Como ela admite
 \texttt{dump\_buffer.len} entre $195$ e $255$, o \textit{harness} já parte de
 estados em que o preenchimento está \emph{acima} da capacidade de $200$ bytes ---
@@ -900,7 +900,7 @@ pergunta que a revisão do mantenedor e a prova indutiva da
 Seção~\ref{subsec:gps-inducao} responderam negativamente para o driver de
 produção.}
 
-%% LC 17 (resolvido 19/10/2026): retirado "fiel"; duas diferencas declaradas.
+%% LC 17: retirado "fiel"; duas diferencas declaradas.
 \corr{O \textit{harness} também difere do driver em dois pontos, que impedem
 chamá-lo de transcrição fiel. Primeiro, a capacidade: $200$ bytes no
 \textit{harness} (\texttt{GPS\_DUMP\_DATA\_SIZE}) e $79$ no PX4
@@ -914,7 +914,7 @@ conclusão sobre o driver depende da conferência da etapa~(v). Essa limitação
 comum a toda a primeira campanha, motivou a segunda campanha, em que o código
 verificado é o original (Seção~\ref{sec:segunda-campanha}).}
 
-%% LC (resolvido): terceira diferenca (bit 7 como sinalizador; capacidade 79 < 128) discutida no paragrafo abaixo.
+%% LC: terceira diferenca (bit 7 como sinalizador; capacidade 79 < 128) discutida no paragrafo abaixo.
 \corr{Há uma terceira diferença, que torna o modelo incoerente com a codificação real. No PX4, o bit~7 de \texttt{len} é um sinalizador: indica que o dado foi enviado ao dispositivo, e a contagem ocupa os sete bits restantes, o que só funciona porque a capacidade é $79$, menor que $128$. No \textit{harness}, a capacidade é $200$ e \texttt{len} varia livremente entre $195$ e $255$; para valores acima de $127$, o bit~7 já está ligado, e o sinalizador e a contagem deixam de se distinguir (por exemplo, $200 \mathbin{|} \texttt{0x80} = 200$). A segunda pré-condição, portanto, admite estados iniciais que a codificação real não consegue representar como contagem. Isso reforça que o estado violador é artefato do modelo: na placa, as $175$ mensagens coletadas trazem \texttt{len}~$= 207 = 128 + 79$, isto é, o sinalizador mais o buffer exatamente cheio, e nenhuma excede a capacidade (Seção~\ref{subsec:validacao-bancada}).}
 
 \subsection{Verificação do \textit{patch}}
@@ -1004,7 +1004,7 @@ estão nas linhas 747--757, e os ponteiros para os buffers são membros privados
 da classe.}
 \end{itemize}
 
-%% LC (resolvido 23/11/2026): limite 4096 justificado (escolha de modelagem, suficiente por argumento sobre o laco); 207 explicado (valor transitorio da mensagem publicada).
+%% LC: limite 4096 justificado (escolha de modelagem, suficiente por argumento sobre o laco); 207 explicado (valor transitorio da mensagem publicada).
 \corr{\textbf{Sobre o limite $\texttt{len} \leq 4096$.} O valor é uma escolha de modelagem para o tamanho do buffer do chamador, e não um limite derivado do \textit{driver}; não se determinou o maior comprimento que o código real passa a \texttt{dumpGpsData()}. Ele é suficiente por uma razão que se lê no corpo do laço: em uma iteração, \texttt{write\_len} depende de \texttt{len} apenas por \texttt{write\_len = min(len, 79 - dump\_data->len)}. Para qualquer \texttt{len}~$\geq 79$, \texttt{write\_len} é o mesmo, no máximo $79$, e o \texttt{memcpy} e a atualização de \texttt{dump\_data->len} se comportam do mesmo modo; qualquer limite maior ou igual a $79$ cobre, portanto, todos os comportamentos distintos, e $4096$ está bem acima disso. Trata-se de um argumento por leitura do código, e não de uma verificação adicional: não se reexecutou o passo com outros limites.}
 
 \corr{\textbf{Sobre o invariante $\texttt{len} < 79$ e o valor $207$ em bancada.} O invariante $I$ vale para o estado \emph{guardado} em \texttt{dump\_data->len} entre iterações e entre chamadas, e é isso que o passo verifica ao final de uma iteração completa. Quando o buffer enche, o código faz \texttt{len |= 1 << 7}, publica o registro e só então zera \texttt{len}. O valor $207 = 128 + 79$ visto nas mensagens capturadas em bancada é o campo \texttt{len} \emph{da mensagem publicada}, copiado no instante em que o buffer está cheio e o sinalizador, ligado; o estado guardado volta a $0$ logo em seguida. Os dois fatos são compatíveis: $207$ aparece em toda mensagem publicada, e nenhum valor guardado chega a $79$ entre iterações. O $207$ do contraexemplo do \textit{harness} tem outro significado, como se explicou na Seção~\ref{subsec:gps-limites-harness}: lá, é um nível de preenchimento acima da capacidade de $200$ bytes.}
@@ -1056,7 +1056,7 @@ configuração é, portanto, baixo: a maioria dos módulos não requer
 sintonia alguma.}
 \end{tcolorbox}
 
-%% LC (resolvido 12/11/2026): o esforço humano não foi registrado; a afirmação
+%% LC: o esforço humano não foi registrado; a afirmação
 %% de baixo custo foi restrita ao tempo de máquina e à configuração.
 \begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
 title=\textbf{Resposta à QE4 --- Defeitos reproduzidos versus falsos positivos}]
@@ -1336,7 +1336,7 @@ três ferramentas, cada log com cabeçalho (data, máquina, pasta, comando e
 versões) e código de saída diferente de zero se algum resultado divergir do
 esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 
-%% LC (resolvido): candidatos indicados pelo SAGRES, sem criterio proprio da autora; data da execucao declarada; vies tratado nas ameacas a validade.
+%% LC: candidatos indicados pelo SAGRES, sem criterio proprio da autora; data da execucao declarada; vies tratado nas ameacas a validade.
 \corr{Os oito candidatos foram indicados pelo projeto SAGRES; a autora não aplicou critério próprio de seleção, e não há registro de que o histórico de correções do PX4 tenha orientado a indicação. Como três deles já tinham correção \textit{upstream} em setembro de 2026, essa origem da escolha é tratada como ameaça à validade (Seção~\ref{sec:ameacas-validade}). A execução de referência dos candidatos é de 12/10/2026 (Tabela~\ref{tab:versoes-segunda}).}
 
 \begin{table}[!htb]
@@ -1370,7 +1370,7 @@ esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 \end{tabular}
 \end{table}
 
-%% LC (resolvido): Common.cpp uniformizado como falso positivo de modelagem (pre-condicao ampla) na Metodologia e nos Resultados.
+%% LC: Common.cpp uniformizado como falso positivo de modelagem (pre-condicao ampla) na Metodologia e nos Resultados.
 \corr{Dois pontos merecem registro. Primeiro, três candidatos
 (\texttt{externalChecks}, \texttt{ft7} e \texttt{IridiumSBD}) eram violações reais
 no commit testado e foram \emph{corrigidos pelo próprio PX4}, por outras pessoas,
@@ -1386,7 +1386,7 @@ acusam as mesmas violações. O caso do \texttt{sumd} precisou de
 \texttt{--unwind 70}; como o modo \texttt{--multi-property} do ESBMC ultrapassa
 quinze minutos nesse limite, a contagem de propriedades foi tomada do CBMC.}
 
-%% LC (resolvido): explicado por que o sumd nao foi reportado de novo (ja relatado por terceiro, PR fechado sem merge) e o efeito observado.
+%% LC: explicado por que o sumd nao foi reportado de novo (ja relatado por terceiro, PR fechado sem merge) e o efeito observado.
 \corr{O \texttt{sumd} merece uma explicação à parte, porque o defeito é reproduzido, persiste no \texttt{main} e continua sem correção. Ele não foi reportado de novo porque já havia sido relatado por outra pessoa, com a mesma análise, em 08/10/2026 (PR~\#29031, refeito como \#29117); o mantenedor fechou o PR sem \textit{merge} e sem comentário em 13/10/2026. Abrir outra \textit{issue} duplicaria o relato sem acrescentar informação ao projeto. O efeito observado é a escrita de um byte além de \texttt{sumd\_data[64]}, sobre a variável vizinha \texttt{crc16\_high}, com um quadro legítimo de $32$ canais.}
 
 \subsection{\corr{Frente B --- Driver de saída RoboClaw}}
@@ -1496,7 +1496,7 @@ sendo a formal e o \textit{replay} com UART emulada. As capturas, os
 \texttt{testes\_hardware/roboclaw/hardware\_pixhawk6xrt/}.}
 
 Para testar a hipótese sem depender da placa, reconstruí o padrão em um programa isolado (\texttt{roboclaw\_uninit\_2026-11/reproducao\_roboclaw\_uninit.cpp}): dois membros \texttt{fd\_set} e \texttt{timeval} sem inicialização, a atualização das saídas chamada antes da inicialização da UART e, em seguida, \texttt{select()}. O Valgrind~3.22.0 apontou três avisos, todos com origem em \texttt{readAcknowledgement()}, chamada a partir de \texttt{Run()}: dois de ``salto condicional depende de valor não inicializado'' dentro de \texttt{select()} e um de ``o parâmetro \texttt{timeout} de \texttt{pselect6} aponta para bytes não inicializados''. A variante corrigida, com a inicialização feita antes da primeira chamada, não produziu aviso algum. O \textit{MemorySanitizer} não detectou o problema nessa configuração e, por isso, não é usado como evidência. Dois limites precisam ficar claros: trata-se de uma reconstrução do padrão, e não do binário do PX4, e o tempo de bloqueio observado no programa (até o limite de 15~s) depende do conteúdo que a memória suja assume (o valor \texttt{0x7f} foi uma escolha da demonstração); a evidência de que o efeito ocorre na placa são os consoles de 11/11 descritos acima. O defeito vale para a \textit{release/1.18}; na \textit{main}, o \textit{driver} foi refatorado e o teste equivalente ainda precisa ser feito.
-%% LC (resolvido): reprodução com Valgrind feita; MSan não detectou; registrado como padrão reproduzido, sem acrescentar defeito confirmado.
+%% LC: reprodução com Valgrind feita; MSan não detectou; registrado como padrão reproduzido, sem acrescentar defeito confirmado.
 
 
 \subsection{\corr{Frente C --- Driver de bateria batmon}}
@@ -1634,7 +1634,7 @@ exceção do CBMC em dois casos. Segue-se que a afirmação de viabilidade é
 absoluta, e não relativa: demonstra-se que a verificação é barata em termos
 próprios, não que seja mais ou menos barata que alternativas.}
 
-%% LC (resolvido): dispersao (minimo e maximo da Tabela tab:resultados; inferior a 0,2 s) agora referida no texto.
+%% LC: dispersao (minimo e maximo da Tabela tab:resultados; inferior a 0,2 s) agora referida no texto.
 \subsection{\corr{Construção dos \textit{harnesses} com apoio de ferramenta de IA}}
 
 \corr{Conforme registrado na Declaração de Uso de IA, os \textit{harnesses}
@@ -1683,7 +1683,7 @@ segunda campanha, a validação cruzada com o CBMC cobre todos os
 \textit{harnesses}, e os candidatos alcançáveis foram ainda reproduzidos fora
 dos verificadores, por \textit{replay} sob sanitizadores.}
 
-%% LC (resolvido): ameacas da segunda campanha acrescentadas (selecao dos candidatos, versoes mistas, commit do batmon, replay em x86 -O0).
+%% LC: ameacas da segunda campanha acrescentadas (selecao dos candidatos, versoes mistas, commit do batmon, replay em x86 -O0).
 \subsection{\corr{Ameaças específicas da segunda campanha}}
 
 \corr{Quatro ameaças valem apenas para a segunda campanha. A primeira é a
