@@ -575,7 +575,7 @@ nos artefatos são as do \textit{replay} da segunda campanha (g++~13.3.0); o
 ESBMC e o CBMC usam seus próprios \textit{front-ends}.}
 
 %% LC: Validação cruzada cobre dois módulos; executar CBMC também nos dez harnesses sem violação.
-\corr{O CBMC~5.95.1 foi executado também nos dez \textit{harnesses} em que o ESBMC não encontrou violação, pela autora, em 23/11/2026, com as mesmas pré-condições (\texttt{\_\_ESBMC\_assume} trocado por \texttt{\_\_CPROVER\_assume}), com e sem asserções de desenrolamento e limite de 900\,s por execução. O leitor de C++ do CBMC não aceita a expressão \texttt{a < 0 || a > 100} nem o \texttt{<cmath>} com o glibc~2.39 (\texttt{\_Float32}); por isso oito \textit{harnesses} (Barometer, Battery, EKF2, Magnetometer, Navigator, PWM, RC e VTOL) foram lidos como C, e o Expo e o MAVLink como C++11, com \texttt{isnan} e \texttt{isinf} redefinidos. Os limites são os da primeira campanha ($k = 10$; MAVLink $k = 300$; Navigator $k = 15$). O resultado está na Tabela~\ref{tab:cbmc-dez}: oito módulos terminam sem violação, em até 110\,s, e Battery e EKF2 ficam sem veredito em 900\,s. Nenhuma violação foi encontrada.}
+\corr{O CBMC~5.95.1 foi executado também nos dez \textit{harnesses} em que o ESBMC não encontrou violação, pela autora, em 23/11/2026, com as mesmas pré-condições (\texttt{\_\_ESBMC\_assume} trocado por \texttt{\_\_CPROVER\_assume}), com e sem asserções de desenrolamento e limite de 900\,s por execução. O leitor de C++ do CBMC não aceita a expressão \texttt{a < 0 || a > 100} nem o \texttt{<cmath>} com o glibc~2.39 (\texttt{\_Float32}); por isso oito \textit{harnesses} (Barometer, Battery, EKF2, Magnetometer, Navigator, PWM, RC e VTOL) foram lidos como C, e o Expo e o MAVLink como C++11, com \texttt{isnan} e \texttt{isinf} redefinidos. Os limites são os da primeira campanha ($k = 10$; MAVLink $k = 300$; Navigator $k = 15$). O resultado está na Tabela~\ref{tab:cbmc-dez}: oito módulos terminam sem violação, em até 110\,s, e Battery e EKF2 ficam sem veredito em 900\,s. Uma repetição desses dois com limite de 7.200\,s, com e sem asserções de desenrolamento, também terminou sem veredito nas quatro execuções (saída 124, 7.200\,s cada); o CBMC, portanto, não decide esses dois \textit{harnesses} em duas horas. Nenhuma violação foi encontrada.}
 
 \corr{Na primeira execução com a leitura como C, o Navigator foi reportado com uma falha (1 de 19 propriedades, a asserção de que a distância maior que o raio exige movimento). A trilha mostrou que o CBMC~5.95.1 não tem corpo para \texttt{\_\_builtin\_isfinite} e devolve um valor arbitrário, de modo que o teste de finitude da função devolvia zero sem relação com o código. Ao redefinir \texttt{isfinite(x)} como \texttt{!isnan(x) \&\& !isinf(x)}, a repetição terminou sem violação (0 de 19 e 0 de 20), em 1\,s. A falha foi, portanto, uma limitação da ferramenta, e não um defeito do módulo; os logs das duas execuções estão no artefato.}
 
@@ -589,8 +589,8 @@ ESBMC e o CBMC usam seus próprios \textit{front-ends}.}
 \textbf{Módulo} & \textbf{$k$} & \textbf{Resultado} & \textbf{Tempo (s)} \\
 \hline
 Barometer & 10 & sem violação & 1 \\
-Battery Monitor & 10 & sem veredito (900\,s) & --- \\
-EKF2 Covariance & 10 & sem veredito (900\,s) & --- \\
+Battery Monitor & 10 & sem veredito (900 e 7.200\,s) & --- \\
+EKF2 Covariance & 10 & sem veredito (900 e 7.200\,s) & --- \\
 Expo RC & 10 & sem violação & 1 \\
 Magnetometer & 10 & sem violação & 1--2 \\
 MAVLink Parser & 300 & sem violação & 28--29 \\
