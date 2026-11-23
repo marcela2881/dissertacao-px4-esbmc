@@ -131,8 +131,8 @@ text(sl, 0.8, 4.2, 11.8, 2.0, [
 
 # ---------------------------------------------------------------- 5 metodologia
 sl = slide("Eight-stage methodology", "Etapas 1 e 4 a 6 seguem Sousa et al. Em verde, as etapas 7 e 8; as etapas 2 e 3 também são adições do trabalho.")
-w_, h_ = pic(sl, "fig/fig2_pipeline.png", 0.8, 1.6, h=4.4)
-text(sl, 0.8 + w_ + 0.5, 1.8, 12.6 - (0.8 + w_ + 0.5), 4.5, [
+w_, h_ = pic(sl, "fig/fig2_pipeline.png", 0.8, 1.7, h=3.9)
+text(sl, 0.8 + w_ + 0.6, 1.9, 12.6 - (0.8 + w_ + 0.6), 4.5, [
     "We add stages 2, 3, 7 and 8 to the workflow of Sousa et al.",
     "Each counterexample is checked against the unmodified driver"], size=22, sa=16)
 
@@ -158,27 +158,24 @@ text(sl, 0.8, 1.8, 11.8, 4.8, [
     size=28, sa=20)
 
 # ---------------------------------------------------------------- 8 resultados
-sl = slide("10 of 12 harnesses verify clean", "RQ1: todo harness verifica em menos de 90 s. Os dois com violação (GPS e IMU) param na primeira violação.")
+sl = slide("10 of 12 harnesses: no violation up to k", "RQ1: todo harness verifica em menos de 90 s. Os dois com violação (GPS e IMU) param na primeira violação.")
 data = [("GPS uBlox", 64.9, 1), ("MAVLink Parser", 49.2, 0), ("EKF2 Covariance", 12.2, 0), ("RC Update", 9.5, 0),
         ("Battery Monitor", 6.7, 0), ("Magnetometer", 6.6, 0), ("Expo RC", 4.9, 0), ("VTOL", 4.0, 0),
         ("Barometer", 0.4, 0), ("PWM Output", 0.2, 0), ("IMU BMI088", 0.1, 1), ("Navigator/Mission", 0.1, 0)]
-cd = CategoryChartData(); cd.categories = [d[0] for d in reversed(data)]; cd.add_series("Time (s)", [d[1] for d in reversed(data)])
-gf = sl.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(0.8), Inches(1.4), Inches(7.6), Inches(5.3), cd)
-ch = gf.chart; ch.has_legend = False; ch.has_title = False
-ch.font.size = Pt(18); ch.font.name = FONT; ch.font.color.rgb = INK
-pl = ch.plots[0]; pl.gap_width = 40; pl.has_data_labels = True
-dl = pl.data_labels; dl.number_format = '0.0'; dl.number_format_is_linked = False
-dl.position = XL_LABEL_POSITION.OUTSIDE_END; dl.font.size = Pt(18); dl.font.bold = True
-for i, d in enumerate(reversed(data)):
-    pt = pl.series[0].points[i]; pt.format.fill.solid(); pt.format.fill.fore_color.rgb = MID if d[2] else NAVY
-va = ch.value_axis; va.maximum_scale = 80; va.minimum_scale = 0; va.major_unit = 20
-va.has_major_gridlines = False; va.visible = False
-ch.category_axis.format.line.color.rgb = RGBColor(0xC8, 0xD1, 0xDA); ch.category_axis.tick_labels.font.size = Pt(18)
+LW, BX, BWM, RH, y0 = 2.9, 3.9, 3.6, 0.41, 1.4
+for i, (nm, v, ce) in enumerate(data):
+    yy = y0 + i * RH
+    if i % 2 == 0: rect(sl, 0.8, yy, 7.9, RH, LGRAY)
+    text(sl, 0.8, yy, LW, RH, nm, size=18, align=PP_ALIGN.RIGHT, anchor=MSO_ANCHOR.MIDDLE, sa=0)
+    bw = max(BWM * v / 65.0, 0.14)
+    rect(sl, BX, yy + 0.07, bw, RH - 0.14, MID if ce else NAVY)
+    text(sl, BX + bw + 0.12, yy, 0.9, RH, f"{v:.1f}", size=18, bold=True, anchor=MSO_ANCHOR.MIDDLE, sa=0)
+text(sl, 0.8, y0 + 12 * RH + 0.05, 7.9, 0.4, "seconds, median of 3 runs", size=18, color=GRAY, sa=0)
 text(sl, 8.8, 1.7, 3.9, 5.0, [
     [("0.1 to 64.9 s", {"bold": True, "size": 32, "color": NAVY})], "per harness, median of 3 runs",
     [("≈94 s", {"bold": True, "size": 32, "color": NAVY})], "for the ten completed harnesses",
     [("≈159 s", {"bold": True, "size": 32, "color": NAVY})], "with GPS (64.9 s)"], size=22, sa=6)
-text(sl, 8.8, 6.25, 3.9, 0.5, "gray = violation found", size=20, color=GRAY)
+text(sl, 8.8, 6.2, 3.9, 0.5, "gray = violation found (GPS uBlox, IMU BMI088)", size=18, color=GRAY)
 
 # ---------------------------------------------------------------- 9 achados
 sl = slide("Three findings, none a confirmed bug", "Cada um foi conferido contra o código de produção. O GPS só existe no modelo; o FIFO é falso positivo; a temperatura é contestada.")
