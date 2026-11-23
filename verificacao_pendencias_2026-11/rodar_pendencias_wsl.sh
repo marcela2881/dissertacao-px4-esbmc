@@ -17,10 +17,19 @@ TO_LONGO=7200    # segundos, parte C
   lscpu | grep -E 'Model name|^CPU\(s\)'; free -h | sed -n 1,2p
   grep PRETTY_NAME /etc/os-release; esbmc --version | head -1; cbmc --version | head -1; } > "$OUT/ambiente.txt" 2>&1
 
-# ---- solver: boolector se estiver embutido, senao z3
-echo 'int main(){return 0;}' > "$TMP/p.c"
-if esbmc "$TMP/p.c" --default-solver boolector >/dev/null 2>&1; then SOLVER=boolector; else SOLVER=z3; fi
+# ---- solver: usa boolector se estiver embutido; senao z3 (teste com programa que PRECISA do solver)
+cat > "$TMP/p.c" <<'EOC'
+#include <assert.h>
+int nondet_int(void);
+int main(void){ int x = nondet_int(); assert(x != 5); return 0; }
+EOC
+if [ -z "${SOLVER:-}" ]; then
+  if esbmc "$TMP/p.c" --default-solver boolector 2>&1 | grep -q 'has not been built'; then SOLVER=z3; else SOLVER=boolector; fi
+fi
 echo "solver usado: $SOLVER" | tee -a "$OUT/ambiente.txt"
+if ! esbmc "$TMP/p.c" --default-solver "$SOLVER" 2>&1 | grep -q 'VERIFICATION FAILED'; then
+  echo "ERRO: o ESBMC nao funcionou com o solver $SOLVER. Rode:  esbmc $TMP/p.c --default-solver $SOLVER   e me mande a saida."; exit 1
+fi
 
 roda() {  # roda <log> <timeout_s> <args do esbmc...>
   local lg=$1 to=$2; shift 2
@@ -38,7 +47,7 @@ veredito() { local v p; v=$(grep -aoE 'VERIFICATION [A-Z]+' "$1" | tail -1)
 # ======================= A) Battery ate 16 celulas =======================
 echo "== A) Battery Monitor, n_cells ate 16"
 sed -E 's/(n_cells *<= *)12/\116/g' resultados/Battery_Monitor/test_battery.cpp > "$TMP/test_battery_16.cpp"
-echo "linhas alteradas: $(grep -c 'n_cells <= 16' "$TMP/test_battery_16.cpp") (esperado: 2)"
+echo "linhas alteradas: $(grep -cE 'n_cells *<= *16' "$TMP/test_battery_16.cpp") (esperado: 2)"
 cp "$TMP/test_battery_16.cpp" "$OUT/test_battery_16.cpp"
 for i in 1 2 3; do
   roda "$OUT/A_battery16_run$i.log" $TO_CURTO "$OUT/test_battery_16.cpp" --unwind 10 --overflow-check --no-unwinding-assertions --timeout 120s
