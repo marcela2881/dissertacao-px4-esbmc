@@ -60,8 +60,10 @@ previsto foi reproduzido executando o código real do PX4 sob sanitizadores.
 Três desses defeitos foram corrigidos pelo próprio projeto, de forma
 independente; dois foram reportados neste trabalho (RoboClaw e batmon) e
 aguardavam triagem no fechamento do texto; um já havia sido relatado por
-terceiro; e um não foi reportado, pelo impacto desprezível. Um falso positivo
-foi barrado pela conferência antes de qualquer relato.
+terceiro; e um não foi reportado, pelo impacto desprezível. Os outros três módulos
+não renderam defeito: dois falsos positivos de modelagem (\texttt{bst} e \texttt{Common})
+foram barrados pela conferência antes de qualquer relato, e o \texttt{logger} não
+apresentou defeito de memória.
 
 \textbf{Validação em bancada.} Numa Pixhawk~6X~RT, o driver do RoboClaw
 transmitiu o byte de dados 130, fora da faixa de 0 a 127 do protocolo, e deixou

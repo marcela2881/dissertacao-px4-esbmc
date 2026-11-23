@@ -383,12 +383,13 @@ do driver de produção.}
 
 Este apêndice apresenta contraexemplos gerados pelo ESBMC nos módulos IMU
 BMI088 e GPS uBlox. Conforme discutido no Capítulo~\ref{cap:experimentos},
-apenas o contraexemplo do GPS uBlox permaneceu como violação alcançável no
-\textit{harness} correspondente. Isso não significa, por si só, que o estado
-seja alcançável no driver de produção: a análise de alcançabilidade descrita na
-Seção~\ref{subsec:gps-inducao} concluiu que ele não é alcançável nesse código.
-Os traços do BMI088 são apresentados para documentar a etapa de triagem; um foi
-classificado como falso positivo e o outro como especificação disputada. \corr{Os contraexemplos da segunda campanha (RoboClaw,
+os três contraexemplos são violações alcançáveis nos respectivos
+\textit{harnesses}, o que não significa, por si só, que o estado seja alcançável no
+driver de produção. No GPS uBlox, a análise de alcançabilidade descrita na
+Seção~\ref{subsec:gps-inducao} concluiu que ele não é alcançável nesse código
+(falso positivo por pré-condição ampla). Os traços do BMI088 são apresentados para
+documentar a etapa de triagem; um foi classificado como falso positivo por guarda
+omitida e o outro como especificação disputada. \corr{Os contraexemplos da segunda campanha (RoboClaw,
 batmon e candidatos adicionais) não são reproduzidos aqui; os registros
 completos estão no repositório de artefatos, nas pastas indicadas na
 Seção~\ref{sec:segunda-campanha}.}
