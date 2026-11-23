@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # CBMC nos dez harnesses sem violacao no ESBMC (pedido do orientador).
 # Mesmo harness e mesmas pre-condicoes: so se troca __ESBMC_assume por __CPROVER_assume.
+# Navigator usa isfinite(): o CBMC 5.95.1 nao tem corpo para __builtin_isfinite (retorna valor arbitrario), entao ele e redefinido com isnan/isinf.
 # O leitor C++ do CBMC 5.95.1 tem limitacoes: nao le 'a < 0 || a > 100' e nao le <cmath> com o glibc 2.39 ('_Float32').
 # Por isso, oito harnesses (Barometer, Battery, EKF2, Magnetometer, Navigator, PWM, RC, VTOL) sao analisados como C
 # (cabecalhos <cX> trocados por <X.h>); Expo (template) e MAVLink (class) sao C++ de fato e usam --cpp11; no Expo,
@@ -27,7 +28,7 @@ echo "$LISTA" | while IFS='|' read -r nome arq k ext; do
   if [ -n "${ONLY:-}" ] && ! echo "|$ONLY|" | grep -q "|$nome|"; then continue; fi
   f="$TMP/$nome.$ext"
   if [ $ext = c ]; then
-    grep -v 'extern void *__ESBMC_assume' "$arq" | sed 's/__ESBMC_assume(/__CPROVER_assume(/g; s/#include <c\([a-z]*\)>/#include <\1.h>/' > "$f"; STD=""
+    grep -v 'extern void *__ESBMC_assume' "$arq" | sed 's/__ESBMC_assume(/__CPROVER_assume(/g; s/#include <c\([a-z]*\)>/#include <\1.h>/; s|#include <math.h>|#include <math.h>\n#undef isfinite\n#define isfinite(x) (!isnan(x) \&\& !isinf(x))|' > "$f"; STD=""
   else
     grep -v 'extern void *__ESBMC_assume' "$arq" | sed 's/__ESBMC_assume(/__CPROVER_assume(/g; s/#include <cmath>/#define isnan(x) __builtin_isnan(x)\n#define isinf(x) __builtin_isinf(x)/' > "$f"; STD="--cpp11"
   fi
