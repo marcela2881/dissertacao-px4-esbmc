@@ -1,0 +1,11 @@
+data: 2026-11-23T10:36:35Z
+host: bruno-pc
+Linux bruno-pc 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+CPU(s):                                  16
+Model name:                              AMD Ryzen 7 5700U with Radeon Graphics
+               total        used        free      shared  buff/cache   available
+Mem:            11Gi       1.8Gi       9.5Gi       3.6Mi       592Mi       9.9Gi
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
+ESBMC version 8.2.0 64-bit x86_64 linux
+5.95.1 (cbmc-5.95.1)
+solver usado: z3

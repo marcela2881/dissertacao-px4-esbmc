@@ -1,0 +1,62 @@
+battery16 run1 | SEM VEREDITO (timeout?) | 
+battery16 run2 | SEM VEREDITO (timeout?) | 
+battery16 run3 | SEM VEREDITO (timeout?) | 
+Barometer teste 0 | VERIFICATION SUCCESSFUL | 
+Barometer teste 1 | VERIFICATION SUCCESSFUL | 
+Barometer teste 2 | VERIFICATION SUCCESSFUL | 
+Barometer teste 3 | VERIFICATION SUCCESSFUL | 
+Barometer teste 4 | VERIFICATION SUCCESSFUL | 
+Battery teste 0 | VERIFICATION SUCCESSFUL | 
+Battery teste 1 | VERIFICATION SUCCESSFUL | 
+Battery teste 2 | VERIFICATION SUCCESSFUL | 
+Battery teste 3 | VERIFICATION SUCCESSFUL | 
+Battery teste 4 | VERIFICATION SUCCESSFUL | 
+EKF2 teste 0 | VERIFICATION SUCCESSFUL | 
+EKF2 teste 1 | SEM VEREDITO (timeout?) | 
+EKF2 teste 2 | VERIFICATION SUCCESSFUL | 
+EKF2 teste 3 | VERIFICATION SUCCESSFUL | 
+EKF2 teste 4 | VERIFICATION SUCCESSFUL | 
+Expo teste 0 | VERIFICATION SUCCESSFUL | 
+Expo teste 1 | VERIFICATION SUCCESSFUL | 
+Expo teste 2 | VERIFICATION SUCCESSFUL | 
+Expo teste 3 | VERIFICATION SUCCESSFUL | 
+Expo teste 4 | VERIFICATION SUCCESSFUL | 
+GPS teste 0 | SEM VEREDITO (timeout?) | 
+GPS teste 1 | SEM VEREDITO (timeout?) | 
+GPS teste 2 | SEM VEREDITO (timeout?) | 
+GPS teste 3 | SEM VEREDITO (timeout?) | 
+GPS teste 4 | SEM VEREDITO (timeout?) | 
+IMU_BMI088 teste 0 | VERIFICATION SUCCESSFUL | 
+IMU_BMI088 teste 1 | VERIFICATION FAILED | assertion temperature >= -40.0f && temperature <= 85.0f
+IMU_BMI088 teste 2 | VERIFICATION FAILED | assertion count <= FIFO_SIZE
+IMU_BMI088 teste 3 | VERIFICATION SUCCESSFUL | 
+IMU_BMI088 teste 4 | VERIFICATION SUCCESSFUL | 
+IMU_BMI088 teste 5 | VERIFICATION SUCCESSFUL | 
+Magnetometer teste 0 | VERIFICATION SUCCESSFUL | 
+Magnetometer teste 1 | VERIFICATION SUCCESSFUL | 
+Magnetometer teste 2 | VERIFICATION SUCCESSFUL | 
+Magnetometer teste 3 | VERIFICATION SUCCESSFUL | 
+Magnetometer teste 4 | VERIFICATION SUCCESSFUL | 
+Navigator teste 0 | VERIFICATION SUCCESSFUL | 
+Navigator teste 1 | VERIFICATION SUCCESSFUL | 
+Navigator teste 2 | VERIFICATION SUCCESSFUL | 
+Navigator teste 3 | VERIFICATION SUCCESSFUL | 
+Navigator teste 4 | VERIFICATION SUCCESSFUL | 
+PWM teste 0 | VERIFICATION SUCCESSFUL | 
+PWM teste 1 | VERIFICATION SUCCESSFUL | 
+PWM teste 2 | VERIFICATION SUCCESSFUL | 
+PWM teste 3 | VERIFICATION SUCCESSFUL | 
+PWM teste 4 | VERIFICATION SUCCESSFUL | 
+RC teste 0 | VERIFICATION SUCCESSFUL | 
+RC teste 1 | VERIFICATION SUCCESSFUL | 
+RC teste 2 | VERIFICATION SUCCESSFUL | 
+RC teste 3 | VERIFICATION SUCCESSFUL | 
+RC teste 4 | VERIFICATION SUCCESSFUL | 
+VTOL teste 0 | SEM VEREDITO (timeout?) | 
+VTOL teste 1 | SEM VEREDITO (timeout?) | 
+VTOL teste 2 | VERIFICATION SUCCESSFUL | 
+VTOL teste 3 | VERIFICATION SUCCESSFUL | 
+VTOL teste 4 | VERIFICATION SUCCESSFUL | 
+(MAVLink nao tem selecao de teste: o main e uma unica sequencia; nao se aplica.)
+GPS original k=211 | SEM VEREDITO (timeout?) | 
+GPS prop. limpa k=211 | SEM VEREDITO (timeout?) | 
