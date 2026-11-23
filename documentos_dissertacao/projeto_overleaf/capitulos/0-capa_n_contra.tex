@@ -92,7 +92,7 @@ Pessoal de Nível Superior -- Brasil (CAPES) -- Código de Financiamento 001.
 
 Veículos Aéreos Não Tripulados dependem de software embarcado confiável para operar com segurança. O PX4 Autopilot é uma plataforma de código aberto para controle de voo cuja árvore \texttt{src/}, no commit analisado nesta pesquisa, reúne aproximadamente 710 mil linhas físicas de arquivos C/C++. Nesse contexto, este trabalho desenvolve e avalia uma abordagem de verificação formal aplicada a módulos críticos do PX4, organizada em duas campanhas experimentais. A primeira utiliza o ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker}) para verificar propriedades de segurança em módulos selecionados, com \textit{harnesses} e \textit{stubs} para representar suas dependências. Foram analisados 12 módulos do PX4 Autopilot, no ramo \textit{main}, commit \texttt{8be2590c15}, utilizando o ESBMC v8.1.0 e o solver Boolector 3.2.4. O tempo total da campanha foi de aproximadamente 159 segundos, ou 94 segundos quando desconsiderado o módulo GPS uBlox, considerando a mediana de três execuções. Dez módulos não apresentaram violações das propriedades instrumentadas até o limite de desenrolamento adotado. Os outros dois, GPS uBlox e IMU BMI088, produziram três contraexemplos. Após a triagem, um foi classificado como violação alcançável no modelo, embora uma prova indutiva tenha demonstrado que o estado violador não ocorre no driver de produção. Os outros dois foram classificados como falso positivo e especificação disputada. Nenhum dos três achados foi classificado como defeito confirmado.
 
-A segunda campanha aplica o mesmo método a dez módulos complementares --- oito módulos adicionais do PX4, o driver RoboClaw e o driver \texttt{batmon} ---, com o objetivo de avaliar a generalidade da abordagem além da amostra principal. A investigação do RoboClaw identificou um defeito na rotina de terminação de voo, em que o driver envia ao controlador do motor valores de byte superiores a 127, fora da faixa aceita pelo protocolo de comunicação; a ocorrência foi reproduzida por meio de \textit{replay} no código original, caracterizando um defeito reproduzido na implementação de produção, e foi também observada em bancada, numa Pixhawk~6X~RT com o controlador de motores emulado. No driver \texttt{batmon}, foi identificada uma escrita fora dos limites de um arranjo de tensões de célula. Os desfechos dos oito módulos adicionais foram heterogêneos, incluindo duplicatas de defeitos já corrigidos, um falso positivo e casos de baixa severidade. Em conjunto, as duas campanhas evidenciam a importância de complementar os resultados do verificador com a inspeção da implementação e a reprodução dos achados no código original.
+A segunda campanha aplica o mesmo método a dez módulos complementares --- oito módulos adicionais do PX4, o driver RoboClaw e o driver \texttt{batmon} ---, com o objetivo de avaliar a generalidade da abordagem além da amostra principal. A investigação do RoboClaw identificou um defeito na rotina de terminação de voo, em que o driver envia ao controlador do motor valores de byte superiores a 127, fora da faixa aceita pelo protocolo de comunicação; a ocorrência foi reproduzida por meio de \textit{replay} no código original, caracterizando um defeito reproduzido na implementação de produção, e foi também observada em bancada, numa Pixhawk~6X~RT com o controlador de motores emulado. No driver \texttt{batmon}, foi identificada uma escrita fora dos limites de um arranjo de tensões de célula. Dos oito módulos adicionais, três tiveram o defeito reproduzido no código real e já corrigido pelo próprio projeto; dois tiveram defeito reproduzido e ainda não corrigido, um relatado por terceiro e outro de impacto desprezível, não reportado; um foi falso positivo de modelagem; e dois não apresentaram defeito de memória. Em conjunto, as duas campanhas evidenciam a importância de complementar os resultados do verificador com a inspeção da implementação e a reprodução dos achados no código original.
 
 \noindent
 \textbf{Palavras-chave}: Verificação Formal; PX4 Autopilot; ESBMC; Bounded Model Checking; VANT; Sistemas Embarcados.
@@ -102,7 +102,7 @@ A segunda campanha aplica o mesmo método a dez módulos complementares --- oito
 
 Unmanned Aerial Vehicles rely on reliable embedded software for safe operation. PX4 Autopilot is an open-source flight control platform whose \texttt{src/} tree, at the commit analysed in this study, contains approximately 710,000 physical lines in C/C++ files. This work develops and evaluates a formal verification approach applied to critical PX4 modules through two experimental campaigns. The first uses ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker}) to verify safety properties in selected modules, with \textit{harnesses} and \textit{stubs} representing their dependencies. Twelve PX4 Autopilot modules were analysed on the \textit{main} branch, commit \texttt{8be2590c15}, using ESBMC v8.1.0 and the Boolector 3.2.4 solver. The campaign took approximately 159 seconds in total, or 94 seconds when the GPS uBlox module was excluded, based on the median of three runs. Ten modules showed no violations of the instrumented properties up to the adopted unwinding bound. The other two modules, GPS uBlox and IMU BMI088, produced three counterexamples. After triage, one was classified as a model-reachable violation, although an inductive proof demonstrated that the violating state does not occur in the production driver. The other two were classified as a false positive and a disputed specification. None of these three findings was classified as a confirmed defect.
 
-The second campaign applies the same method to ten complementary modules --- eight additional PX4 modules, the RoboClaw driver and the \texttt{batmon} driver --- to assess the generality of the approach beyond the main sample. The investigation of RoboClaw identified a defect in the flight termination routine, in which the driver sends byte values greater than 127 to the motor controller, outside the range accepted by the communication protocol; the occurrence was reproduced through \textit{replay} on the original source code, characterising a defect reproduced in the production implementation; it was also observed on a bench, on a Pixhawk~6X~RT with an emulated motor controller. In the \texttt{batmon} driver, an out-of-bounds write to a cell-voltage array was identified. The outcomes of the eight additional modules were heterogeneous, including duplicates of already-fixed defects, a false positive and low-severity cases. Taken together, the two campaigns highlight the importance of complementing verifier results with implementation inspection and reproduction of findings in the original source code.
+The second campaign applies the same method to ten complementary modules --- eight additional PX4 modules, the RoboClaw driver and the \texttt{batmon} driver --- to assess the generality of the approach beyond the main sample. The investigation of RoboClaw identified a defect in the flight termination routine, in which the driver sends byte values greater than 127 to the motor controller, outside the range accepted by the communication protocol; the occurrence was reproduced through \textit{replay} on the original source code, characterising a defect reproduced in the production implementation; it was also observed on a bench, on a Pixhawk~6X~RT with an emulated motor controller. In the \texttt{batmon} driver, an out-of-bounds write to a cell-voltage array was identified. Of the eight additional modules, three had the defect reproduced on the production code and already fixed by the project itself; two had a reproduced defect that remains unfixed, one reported by a third party and the other of negligible impact and not reported; one was a modelling false positive; and two showed no memory defect. Taken together, the two campaigns highlight the importance of complementing verifier results with implementation inspection and reproduction of findings in the original source code.
 
 \noindent
 \textbf{Keywords}: Formal Verification; PX4 Autopilot; ESBMC; Bounded Model Checking; UAV; Embedded Systems.
@@ -120,6 +120,9 @@ Na escrita, a ferramenta auxiliou na revisão gramatical, na clareza do texto em
 
 Na parte experimental, os \textit{harnesses} de verificação foram escritos pela autora a partir do código-fonte do PX4, com o Claude como apoio na sintaxe de \textit{assertions} do ESBMC, no uso de valores não determinísticos e na composição dos comandos de execução. A definição das propriedades e a versão final de cada \textit{harness} são da autora, que conduziu todas as execuções do ESBMC e do CBMC. A execução das verificações, a interpretação dos contraexemplos e a triagem dos achados foram feitas exclusivamente pela autora; o Claude não apontou achados nem indicou trechos suspeitos. Na revisão final, a ferramenta também auxiliou a conferir os números contra os logs de execução e a montar em \LaTeX{} as figuras dos contraexemplos. Todo o material gerado com apoio da ferramenta foi revisado pela autora, que permanece responsável pelo conteúdo final desta dissertação.
 
+\lc{Contradição: aqui os \textit{harnesses} são ``escritos pela autora'', com IA só na sintaxe; nos Capítulos de metodologia e resultados, foram ``construídos/montados com assistência de IA''. Descrever o uso real de forma única; a banca cobrará essa coerência.}
+
+
 \par}
 
 \tableofcontents
@@ -136,10 +139,12 @@ Na parte experimental, os \textit{harnesses} de verificação foram escritos pel
 \addcontentsline{toc}{chapter}{Lista de Siglas}
 
 \begin{description}
+\item[ASan]      AddressSanitizer
 \item[AST]     Abstract Syntax Tree
 \item[BDD]     Binary Decision Diagram
 \item[BMC]     Bounded Model Checking
 \item[BSD]     Berkeley Software Distribution
+\item[BVLOS]     Beyond Visual Line of Sight
 \item[CAN]     Controller Area Network
 \item[CAPES]   Coordenação de Aperfeiçoamento de Pessoal de Nível Superior
 \item[CBMC]    C Bounded Model Checker
@@ -149,6 +154,7 @@ Na parte experimental, os \textit{harnesses} de verificação foram escritos pel
 \item[CVE]     Common Vulnerabilities and Exposures
 \item[CWE]     Common Weakness Enumeration
 \item[DDS]     Data Distribution Service
+\item[DECEA]     Departamento de Controle do Espaço Aéreo
 \item[DOI]     Digital Object Identifier
 \item[EKF2]    Extended Kalman Filter 2
 \item[ESBMC]   Efficient SMT-Based Context-Bounded Model Checker
@@ -158,6 +164,7 @@ Na parte experimental, os \textit{harnesses} de verificação foram escritos pel
 \item[HIL]     Hardware-in-the-Loop
 \item[I2C]     Inter-Integrated Circuit
 \item[IA]      Inteligência Artificial
+\item[ICA]       Instrução do Comando da Aeronáutica
 \item[IEEE]    Institute of Electrical and Electronics Engineers
 \item[IMU]     Inertial Measurement Unit
 \item[LLVM]    Low Level Virtual Machine
@@ -166,6 +173,8 @@ Na parte experimental, os \textit{harnesses} de verificação foram escritos pel
 \item[LTL]     Linear Temporal Logic
 \item[MAVLink] Micro Air Vehicle Link
 \item[MMU]     Memory Management Unit
+\item[MPU]       Memory Protection Unit
+\item[NaN]       Not a Number
 \item[PID]     Proporcional-Integral-Derivativo
 \item[POSIX]   Portable Operating System Interface
 \item[PPGEE]   Programa de Pós-Graduação em Engenharia Elétrica
@@ -178,17 +187,22 @@ Na parte experimental, os \textit{harnesses} de verificação foram escritos pel
 \item[SAT]     Satisfiability
 \item[SBESC]   Simpósio Brasileiro de Engenharia de Sistemas Computacionais
 \item[SITL]    Software-in-the-Loop
+\item[SMBus]     System Management Bus
 \item[SMT]     Satisfiability Modulo Theories
+\item[SoC]       State of Charge
 \item[SPI]     Serial Peripheral Interface
+\item[SSA]       Static Single Assignment
 \item[SV-COMP] International Competition on Software Verification
 \item[UART]    Universal Asynchronous Receiver/Transmitter
 \item[UAV]     Unmanned Aerial Vehicle
 \item[UAVCAN]  Uncomplicated Application-level Vehicular Computing and Networking
+\item[UBSan]     UndefinedBehaviorSanitizer
 \item[UBX]     u-blox Binary Protocol
 \item[UNSAT]   Unsatisfiable
 \item[uORB]    micro Object Request Broker
 \item[VAM]     Violação Alcançável no Modelo
 \item[VANT]    Veículo Aéreo Não Tripulado
 \item[VCC]     Verification Condition
+\item[VLOS]      Visual Line of Sight
 \item[VTOL]    Vertical Take-Off and Landing
 \end{description}
