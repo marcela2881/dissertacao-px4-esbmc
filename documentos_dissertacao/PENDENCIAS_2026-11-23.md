@@ -3,6 +3,9 @@
 Estado: 8 capítulos compilam sem erro (151 páginas com as caixas visíveis; corpo = 104 páginas).
 Caixas amarelas do professor abertas: 6, todas em Resultados.
 
+Conferido em 23/11/2026: o datasheet da Bosch (rev. 1.9, janeiro de 2024) traz o número BST-BMI088-DS000-19 na capa e no rodapé; faixa de operação -40 a +85 C na p. 7; registradores 0x22-0x23 na Seção 5.3.7, p. 28. Texto e .bib estão corretos.
+Issues em 23/11/2026: #29785 aberta (needs-triage; 1 comentário de contribuidor em 14/11 pedindo para testar o refactor do PR 29473); #29787 aberta (needs-triage; sem respostas).
+
 ## 1. Caixas abertas em Resultados
 | Caixa | Falta | Quem |
 |---|---|---|
@@ -21,13 +24,11 @@ Caixas amarelas do professor abertas: 6, todas em Resultados.
 
 ## 3. Respostas da autora
 - Significado de SAGRES por extenso (lista de siglas)
-- Número correto do datasheet BMI088 (ler na capa do PDF da Bosch; provável BST-BMI088-DS001-<rev>, hoje o texto usa DS000-19)
 - (decidido: sumário com 2 níveis)
 - Confirmar a banca com o PPGEE
 
 ## 4. Assistente (sem depender de terceiros)
 - Trocar as citações de Menezes2024 que restam na Metodologia (nondet, --no-library/VTOL, propriedades automáticas) por Cordeiro2012 / documentação do ESBMC
-- Corrigir número do datasheet (.bib, Metodologia, Resultados) quando a autora informar
 - Portaria CNPq nº 2.664/2026 no .bib e na Declaração de IA; sigla SAGRES na lista
 - Remover 11 entradas não citadas do .bib; limpeza final dos comentários `%% LC` (quando o professor fechar)
 - Reescrever Resultados/Conclusão com os logs novos (QE2, baseline, CBMC, testes separados)
