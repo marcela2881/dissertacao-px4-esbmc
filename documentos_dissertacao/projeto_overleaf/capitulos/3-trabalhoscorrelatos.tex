@@ -38,7 +38,8 @@ SMT~\cite{Cordeiro2012}, que incorpora teorias como vetores de bits,
 \textit{arrays} e ponto flutuante. Aplicações recentes demonstram o uso dessas
 ferramentas na identificação de defeitos em projetos de código aberto de grande
 escala~\cite{Sousa2026}. Ambas são usadas nesta pesquisa: o ESBMC verifica
-os doze \textit{harnesses}, e o CBMC faz a validação cruzada de parte deles.
+os \textit{harnesses} das duas campanhas, e o CBMC faz a validação cruzada de parte deles na
+primeira e de todos na segunda.
 
 %% LC: corrigida a frase sobre qual ferramenta faz a validacao cruzada (CBMC); deMoura2008 trocado por Cordeiro2012.
 Em firmware e software de infraestrutura embarcada, o CBMC é usado dentro do fluxo de
@@ -152,7 +153,7 @@ da base, representados por modelos e não pelo código compilado. Sobre esse mes
 continua exigindo contratos e invariantes de laço que o código não traz e que
 precisariam ser escritos e mantidos função a função; esse esforço não foi medido
 neste trabalho. O BMC exigiu, para o mesmo recorte, cerca de 2.800 linhas de
-\textit{harness} escritas à mão, que incluem o código de modelo do ambiente de cada
+\textit{harness} construídas para a verificação e revisadas pela autora, que incluem o código de modelo do ambiente de cada
 módulo e as entradas não determinísticas. A interpretação abstrata é \textit{sound} por
 construção e escala bem, mas produz alarmes que o analista descarta um a um, sem
 o contraexemplo concreto que o BMC entrega --- justamente o que permite a
@@ -335,8 +336,9 @@ CBMC e reporte direto à comunidade \textit{open-source} é a abordagem proposta
 para firmware de autopiloto de VANTs, endereçando uma lacuna observada no
 levantamento. O levantamento incluiu também a análise estática que o próprio PX4 já
 executa (clang-tidy), estudos de defeitos em autopilotos e o uso do CBMC em firmware
-embarcado na indústria. Nesse levantamento, que é exploratório, não foi identificado
-trabalho que aplique BMC com contraexemplo concreto a \textit{drivers} de um autopiloto
-de produção a partir de fora do projeto.
+embarcado na indústria. Nesse levantamento exploratório, não foi identificado trabalho que aplique BMC,
+com geração de contraexemplos e triagem no código original, a modelos de
+\textit{drivers} de um autopiloto de produção, em uma avaliação conduzida de
+forma independente do projeto.
 
 %% LC: incluidos clang-tidy do PX4 (PX4_ClangTidy), estudo de defeitos de autopilotos (Wang2021) e BMC em firmware embarcado (Chong2020). A comparacao direta com um analisador estatico (baseline) depende do experimento do Cap. de resultados.
