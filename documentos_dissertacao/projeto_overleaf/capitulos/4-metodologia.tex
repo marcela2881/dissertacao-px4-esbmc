@@ -1430,7 +1430,8 @@ sendo a formal e o \textit{replay} com UART emulada. As capturas, os
 \textit{diffs} dos firmwares e o código do emulador estão em
 \texttt{testes\_hardware/roboclaw/hardware\_pixhawk6xrt/}.}
 
-\lc{Membros não inicializados que paralisam a fila \texttt{hp\_default} merecem investigação própria: reproduzir com Valgrind ou MSan e, se confirmado, acrescentar à \textit{Issue}~\#29785.}
+Para testar a hipótese sem depender da placa, reconstruí o padrão em um programa isolado (\texttt{roboclaw\_uninit\_2026-11/reproducao\_roboclaw\_uninit.cpp}): dois membros \texttt{fd\_set} e \texttt{timeval} sem inicialização, a atualização das saídas chamada antes da inicialização da UART e, em seguida, \texttt{select()}. O Valgrind~3.22.0 apontou três avisos, todos com origem em \texttt{readAcknowledgement()}, chamada a partir de \texttt{Run()}: dois de ``salto condicional depende de valor não inicializado'' dentro de \texttt{select()} e um de ``o parâmetro \texttt{timeout} de \texttt{pselect6} aponta para bytes não inicializados''. A variante corrigida, com a inicialização feita antes da primeira chamada, não produziu aviso algum. O \textit{MemorySanitizer} não detectou o problema nessa configuração e, por isso, não é usado como evidência. Dois limites precisam ficar claros: trata-se de uma reconstrução do padrão, e não do binário do PX4, e o tempo de bloqueio observado no programa (até o limite de 15~s) depende do conteúdo que a memória suja assume (o valor \texttt{0x7f} foi uma escolha da demonstração); a evidência de que o efeito ocorre na placa são os consoles de 11/11 descritos acima. O defeito vale para a \textit{release/1.18}; na \textit{main}, o \textit{driver} foi refatorado e o teste equivalente ainda precisa ser feito.
+%% LC (resolvido): reprodução com Valgrind feita; MSan não detectou; registrado como padrão reproduzido, sem acrescentar defeito confirmado.
 
 
 \subsection{\corr{Frente C --- Driver de bateria batmon}}
