@@ -651,7 +651,7 @@ variantes. A Tabela~\ref{tab:fifo-guardas} resume os vereditos.}
 
 \begin{table}[!htb]
 \centering
-\caption{\corr{Vereditos para as oito variantes de guardas do FIFO (ESBMC~8.2.0 com Z3 e CBMC~5.95.1, mesma máquina; as duas ferramentas deram o mesmo veredito nas 16 combinações)}}
+\caption{\corr{Vereditos para as oito variantes de guardas do FIFO (ESBMC~8.2.0 com Z3 e CBMC~5.95.1, mesma máquina, execução de 22/11/2026; as duas ferramentas deram o mesmo veredito nas 16 combinações)}}
 \label{tab:fifo-guardas}
 \footnotesize
 \begin{tabular}{|l|c|c|}
@@ -694,7 +694,8 @@ contador. Quando a interrupção de dado pronto está ativa, as amostras vêm de
 \texttt{\_fifo\_samples}, limitado por outra linha do código, e esse caminho não
 foi modelado. Como nos demais \textit{harnesses}, a verificação vale para o modelo,
 cujas constantes foram conferidas contra o código-fonte. Os programas e os registros
-estão em \texttt{fifo\_guardas\_2026-11/} no repositório de artefatos.}
+completos das 32 execuções (16 do ESBMC e 16 do CBMC) estão em
+\texttt{fifo\_guardas\_2026-11/} no repositório de artefatos.}
 
 \section{Estudo de Caso: Driver GPS uBlox}
 \label{sec:caso-gps}

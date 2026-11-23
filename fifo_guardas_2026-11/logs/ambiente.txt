@@ -1,0 +1,5 @@
+2026-11-23T04:52:14Z
+bruno-pc
+ESBMC version 8.2.0 64-bit x86_64 linux
+5.95.1 (cbmc-5.95.1)
+solver do ESBMC: z3
