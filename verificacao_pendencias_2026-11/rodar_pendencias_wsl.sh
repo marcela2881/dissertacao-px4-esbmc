@@ -10,7 +10,7 @@ cd "$(dirname "$0")/.."
 OUT=verificacao_pendencias_2026-11/logs; mkdir -p "$OUT"
 TMP=$(mktemp -d)
 TO_CURTO=600     # segundos, partes A e B
-TO_LONGO=7200    # segundos, parte C
+TO_LONGO=${TO_LONGO:-7200}    # segundos, parte C
 
 # ---- ambiente
 { echo "data: $(date -u +%FT%TZ)"; echo "host: $(hostname)"; uname -a
@@ -44,6 +44,8 @@ veredito() { local v p; v=$(grep -aoE 'VERIFICATION [A-Z]+' "$1" | tail -1)
   p=$(grep -a -A2 'Violated property' "$1" | sed -n 3p | sed 's/^ *//')
   printf '%s | %s | %s\n' "$2" "${v:-SEM VEREDITO (timeout?)}" "$p"; }
 
+# SO_C=1 pula as partes A e B e roda so a C (GPS k=211).
+if [ -z "${SO_C:-}" ]; then
 # ======================= A) Battery ate 16 celulas =======================
 echo "== A) Battery Monitor, n_cells ate 16"
 sed -E 's/(n_cells *<= *)12/\116/g' resultados/Battery_Monitor/test_battery.cpp > "$TMP/test_battery_16.cpp"
@@ -79,6 +81,7 @@ echo "$LISTA" | while IFS='|' read -r nome arq var n extra; do
   done
 done
 echo "(MAVLink nao tem selecao de teste: o main e uma unica sequencia; nao se aplica.)" | tee -a "$OUT/RESUMO.txt"
+fi
 
 # ======================= C) GPS com k = 211 =======================
 if [ "${PULAR_LONGOS:-0}" = "1" ]; then echo "== C) pulado (PULAR_LONGOS=1)"; else
