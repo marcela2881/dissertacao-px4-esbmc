@@ -202,7 +202,7 @@ Seção~\ref{sec:ameacas-validade}.} \artigo{A reexecução com as asserções l
 \section{Questões Experimentais}
 \label{sec:objetivos-verificacao}
 
-A avaliação responde a três questões experimentais (QE). \corr{Para cada uma
+A avaliação responde a quatro questões experimentais (QE). \corr{Para cada uma
 indicam-se a métrica observada e o critério adotado para considerá-la
 respondida.}
 
@@ -221,6 +221,9 @@ respondida.}
     \item \textbf{QE3:} Quais configurações por módulo são necessárias para
     tornar cada módulo tratável? \corr{\textit{Métrica:} número de módulos que
     exigem opções diferentes da invocação padrão, e quais opções.
+    \textit{Critério:} questão descritiva, sem limiar de aceitação.}
+    \item \textbf{QE4:} Em que proporção os candidatos encontrados se confirmam como defeitos reproduzidos no código de produção, e em que proporção como falsos positivos de modelagem?
+    \corr{\textit{Métrica:} por campanha, número de candidatos classificados como defeito reproduzido, falso positivo de modelagem, especificação disputada ou sem defeito.
     \textit{Critério:} questão descritiva, sem limiar de aceitação.}
 \end{itemize}
 
@@ -420,15 +423,17 @@ campanha. A Figura~\ref{fig:visao-resultados} resume desfechos e tempos.}
 
 \begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
 title=\textbf{Resposta à QE1 --- Latência de verificação}]
-Todo módulo cronometrado verifica-se em menos de noventa segundos em hardware
-de prateleira. Como cada um é verificado isoladamente por meio de um harness
-pequeno, isso demonstra \textbf{viabilidade por módulo}, e não escalabilidade
-de sistema completo.
+Na primeira campanha, todo módulo cronometrado verificou-se em menos de noventa
+segundos, portanto dentro do critério de $120$\,s, em hardware de prateleira.
+Como cada um é verificado isoladamente por meio de um harness pequeno, isso
+demonstra \textbf{viabilidade por módulo}, e não escalabilidade de sistema
+completo. A resposta vale só para a primeira campanha: na segunda, os tempos não
+foram registrados de forma sistemática, e há ao menos um caso longo, o do
+\texttt{sumd}, cuja contagem de propriedades com o ESBMC passou de quinze minutos
+(Seção~\ref{sec:segunda-campanha}).
 \end{tcolorbox}
 
-\lc{O critério da QE1 é 120~s, mas a resposta fala em 90~s. Faltam também os tempos da segunda campanha (o sumd passa de 15~min). Reportá-los ou restringir a resposta à primeira campanha.}
-
-
+%% LC (resolvido): resposta da QE1 restrita a primeira campanha (critério 120 s; todos abaixo de 90 s); tempos da segunda campanha declarados como nao registrados, com o caso do sumd (>15 min).
 \revisao{Os módulos verificados não constituem uma amostra uniforme:
 situam-se no caminho crítico de sensoriamento até atuação, onde bytes não
 confiáveis de I2C, SPI e UART entram no \textit{flight stack} pela primeira
@@ -890,6 +895,21 @@ sintonia alguma.}
 
 %% LC (resolvido 12/11/2026): o esforço humano não foi registrado; a afirmação
 %% de baixo custo foi restrita ao tempo de máquina e à configuração.
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!60!black,
+title=\textbf{Resposta à QE4 --- Defeitos reproduzidos versus falsos positivos}]
+\corr{Na primeira campanha, dos três contraexemplos nenhum foi reproduzido como
+defeito: dois eram falsos positivos de modelagem (FIFO do BMI088, por guarda
+omitida; GPS uBlox, por pré-condição ampla) e um era especificação disputada
+(temperatura). Na segunda campanha, dos dez módulos, sete tiveram o efeito
+previsto reproduzido no código real, dois foram falsos positivos de modelagem
+(\texttt{bst} e \texttt{Common}) e um não apresentou defeito de memória
+(\texttt{logger}) (Tabela~\ref{tab:desfechos-segunda}). A diferença acompanha a
+mudança de método, que passou a verificar o código original e a exigir
+reprodução fora do verificador. Mas a seleção dos módulos também mudou, pois os
+candidatos adicionais foram indicados pelo SAGRES, e não há como separar os dois
+efeitos com os dados desta pesquisa.}
+\end{tcolorbox}
+
 \corr{Essa resposta refere-se apenas à configuração do verificador. O esforço de
 escrever cada \textit{harness}, triar os contraexemplos e conferir o código de
 produção não foi registrado durante a pesquisa, e por isso não é reportado em
@@ -1206,18 +1226,18 @@ que cada uma reporta sobre o defeito do GPS reflete diferença de
 
 \subsection{\corr{Validade de conclusão}}
 
-\corr{Cada módulo foi executado três vezes e reporta-se a mediana, sem medida de
-dispersão. Isso sustenta afirmações de ordem de grandeza --- ``menos de noventa
-segundos'' --- mas não comparações finas entre módulos cujos tempos diferem por
-poucos segundos. Não há, além disso, \textit{baseline} de comparação: nenhuma
+\corr{Cada módulo foi executado três vezes e reporta-se a mediana, com o mínimo e o
+máximo do tempo do procedimento de decisão na Tabela~\ref{tab:resultados}; a
+dispersão observada é inferior a $0{,}2$\,s em todos os módulos. Três execuções,
+porém, não permitem inferência estatística. Isso sustenta afirmações de ordem de
+grandeza --- ``menos de noventa segundos'' --- e comparações entre módulos cujos
+tempos diferem por mais que a dispersão observada. Não há, além disso, \textit{baseline} de comparação: nenhuma
 outra técnica foi executada sobre os mesmos doze módulos para contraste, à
 exceção do CBMC em dois casos. Segue-se que a afirmação de viabilidade é
 absoluta, e não relativa: demonstra-se que a verificação é barata em termos
 próprios, não que seja mais ou menos barata que alternativas.}
 
-\lc{Diz ``sem medida de dispersão'', mas a Tabela~\ref{tab:resultados} traz mínimo e máximo. Corrigir.}
-
-
+%% LC (resolvido): dispersao (minimo e maximo da Tabela tab:resultados; inferior a 0,2 s) agora referida no texto.
 \subsection{\corr{Construção dos \textit{harnesses} com apoio de ferramenta de IA}}
 
 \corr{Conforme registrado na Declaração de Uso de IA, os \textit{harnesses}
@@ -1266,8 +1286,25 @@ segunda campanha, a validação cruzada com o CBMC cobre todos os
 \textit{harnesses}, e os candidatos alcançáveis foram ainda reproduzidos fora
 dos verificadores, por \textit{replay} sob sanitizadores.}
 
-\lc{Faltam ameaças da segunda campanha: escolha dos candidatos, versões mistas do ESBMC, commit diferente no batmon e \textit{replay} em x86 com \texttt{-O0}, não no alvo ARM, o que altera a manifestação de comportamento indefinido.}
+%% LC (resolvido): ameacas da segunda campanha acrescentadas (selecao dos candidatos, versoes mistas, commit do batmon, replay em x86 -O0).
+\subsection{\corr{Ameaças específicas da segunda campanha}}
 
+\corr{Quatro ameaças valem apenas para a segunda campanha. A primeira é a
+\emph{seleção}: os oito candidatos adicionais foram indicados pelo projeto SAGRES,
+sem critério próprio da autora, e três deles já tinham correção \textit{upstream};
+se o histórico de correções orientou a indicação, a proporção de defeitos
+reproduzidos (sete de dez módulos) pode estar inflada, e não há como excluir isso.
+A segunda são as \emph{versões mistas} das ferramentas: houve execuções com
+ESBMC~8.1.0, 8.2.0 e 8.5.0, com Boolector ou Z3 (Tabela~\ref{tab:versoes-segunda}),
+de modo que vereditos e tempos não são diretamente comparáveis entre as frentes. A
+terceira é o \emph{\textit{commit}}: o \texttt{batmon} foi conferido contra o
+\textit{commit} \texttt{c9b9e4e25e} do ramo \textit{main}, e não contra
+\texttt{8be2590c15}, como os demais. A quarta é o \emph{alvo do \textit{replay}}: ele
+foi executado em x86 com \texttt{-O0} e sanitizadores, e não no alvo ARM do
+\textit{firmware}; um comportamento indefinido, como a escrita fora de um arranjo, pode
+se manifestar de outro modo no alvo, e o \textit{replay} mostra que o efeito ocorre no
+código compilado para x86, não que seja idêntico na placa. A validação em bancada do
+RoboClaw reduz essa ameaça apenas para o ponto observado.}
 
 \section{\corr{Lições Aprendidas}}
 \label{sec:licoes}

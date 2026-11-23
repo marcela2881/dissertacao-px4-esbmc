@@ -10,13 +10,12 @@ evidências auditáveis sobre propriedades de memória e de aritmética. A respo
 é afirmativa, com um alcance que precisa ser dito junto: a viabilidade foi
 demonstrada por módulo, sobre \textit{harnesses} que isolam cada unidade, e não
 para o sistema completo. Vinte e dois módulos do PX4 Autopilot foram
-verificados em duas campanhas; cada verificação da primeira concluiu em menos
-de noventa segundos, e todo veredito pode ser refeito a partir dos artefatos
-publicados.
+analisados em duas campanhas. Na primeira, cada verificação concluiu em menos
+de noventa segundos; na segunda, os tempos não foram registrados de forma
+sistemática, e a afirmação de tempo não se estende a ela. Todo veredito pode ser
+refeito a partir dos artefatos publicados.
 
-\lc{``Vinte e dois módulos verificados'' mistura as campanhas; na segunda, o Common foi retirado e os tempos não foram reportados. Usar ``analisados'' e restringir a afirmação de tempo à primeira campanha.}
-
-
+%% LC (resolvido): 'verificados' trocado por 'analisados'; afirmacao de tempo restrita a primeira campanha.
 Os três objetivos específicos foram atendidos da seguinte forma. O objetivo~O1,
 propor a metodologia, corresponde às oito etapas do
 Capítulo~\ref{cap:metodologia}. O objetivo~O2, aplicá-la e classificar os
@@ -237,13 +236,11 @@ O valor da abordagem aparece com mais clareza na segunda campanha, e por uma
 razão metodológica. Quando a verificação foi feita sobre o código original, e
 cada candidato só foi aceito depois de reproduzido fora do verificador, sete de
 dez módulos exibiram defeitos que o código real de fato tem, três deles
-corrigidos pelo próprio projeto sem conhecimento deste trabalho. A primeira
+corrigidos pelo próprio projeto sem conhecimento deste trabalho. Esse reforço tem um limite que precisa ser dito: os oito candidatos adicionais foram indicados pelo projeto SAGRES, e a autora não aplicou critério próprio de seleção; não há registro de que o histórico de correções do PX4 tenha orientado a indicação, mas também não há como excluí-lo. A primeira
 campanha mostrou o que acontece sem essa disciplina: contraexemplos formalmente
 válidos para defeitos que não existem.
 
-\lc{``Sem conhecimento deste trabalho'' só reforça a eficácia se os candidatos não foram escolhidos a partir dessas correções. Declarar o critério de seleção da Frente~A.}
-
-
+%% LC (resolvido): criterio de selecao da Frente A declarado (indicacao do SAGRES, sem criterio proprio; historico de correcoes nao excluido).
 O que este trabalho entrega é, assim, uma metodologia de verificação formal
 para \textit{firmware} de sistemas críticos, aplicada ao PX4 como estudo de
 caso. Os achados são produto da aplicação do método, e não a sua medida:

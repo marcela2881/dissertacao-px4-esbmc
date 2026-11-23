@@ -48,11 +48,9 @@ Essa distinção é importante para interpretar os resultados desta pesquisa. No
 
 A aplicação da técnica ao PX4 considera um conjunto delimitado de módulos, correspondente ao ramo \textit{main} no commit \texttt{8be2590c15}. O objetivo não é verificar integralmente o firmware, mas avaliar componentes selecionados conforme sua relevância operacional, sua representatividade na arquitetura e a possibilidade de isolá-los para análise. Para isso, a metodologia contempla a seleção dos módulos, a criação de \textit{stubs} para abstrair dependências de \textit{hardware}, a especificação de propriedades de segurança e a análise dos contraexemplos. Os achados também podem ser conferidos com o código de produção, reportados à comunidade responsável pelo projeto e submetidos à validação cruzada com outra ferramenta.
 
-Foram selecionados 12 módulos, abrangendo sete classes funcionais do sistema de controle de voo --- de sensores seriais à estimação de estado ---, cuja composição completa é apresentada no Capítulo~\ref{cap:metodologia} (Tabela~\ref{tab:modulos}). Essa distribuição busca contemplar componentes com responsabilidades distintas, evitando concentrar a análise em uma única parte do firmware.
+Foram selecionados 12 módulos, abrangendo oito classes de entrada do sistema de controle de voo --- de sensores seriais à estimação de estado ---, cuja composição completa é apresentada no Capítulo~\ref{cap:experimentos} (Tabela~\ref{tab:modulos}). Essa distribuição busca contemplar componentes com responsabilidades distintas, evitando concentrar a análise em uma única parte do firmware.
 
-\lc{A Tabela~\ref{tab:modulos} lista oito classes de entrada, não sete, e está no capítulo de resultados, não no de metodologia. Corrigir as duas informações.}
-
-
+%% LC (resolvido): sete -> oito classes de entrada; a Tabela tab:modulos esta no capitulo de resultados (cap:experimentos).
 Além da criticidade operacional e da representatividade arquitetural, a possibilidade de isolar cada módulo por meio de \textit{stubs} foi considerada na seleção. Esse critério facilita a execução da verificação, mas também pode introduzir viés na composição da amostra, uma limitação discutida na Seção~\ref{sec:ameacas-validade}. A seleção buscou, portanto, equilibrar a profundidade da análise com a representação de diferentes componentes do PX4.
 
 Como o estudo de caso integra o projeto SAGRES, voltado a esse tipo de missão em região remota, o enquadramento regulatório dessas operações também merece registro.
@@ -61,7 +59,7 @@ O enquadramento das operações em linha de visada visual (VLOS) e além da linh
 
 A partir desse contexto, a pesquisa busca responder à seguinte questão: é viável aplicar \textit{Bounded Model Checking} a um firmware de controle de voo de porte industrial, com tempo de verificação por módulo compatível com o uso prático, produzindo evidências auditáveis sobre propriedades de segurança relacionadas à memória e à aritmética, respeitados os limites do modelo e do desenrolamento?
 
-Essa questão é desdobrada em três questões experimentais, respondidas no Capítulo~\ref{cap:experimentos}:
+Essa questão é desdobrada em quatro questões experimentais, respondidas no Capítulo~\ref{cap:experimentos}:
 
 \begin{description}[leftmargin=1.5cm, style=nextline]
 \item[\textbf{QE1}] Qual é o tempo de verificação por módulo em \textit{hardware} de prateleira?
@@ -69,11 +67,11 @@ Essa questão é desdobrada em três questões experimentais, respondidas no Cap
 \item[\textbf{QE2}] O BMC expõe violações alcançáveis no modelo em código que os testes unitários existentes do PX4 não referenciam?
 
 \item[\textbf{QE3}] Quais configurações são necessárias para tornar cada módulo tratável pelo verificador?
+
+\item[\textbf{QE4}] Em que proporção os candidatos encontrados se confirmam como defeitos reproduzidos no código de produção, e em que proporção como falsos positivos de modelagem?
 \end{description}
 
-\lc{As três QEs medem só a primeira campanha; a segunda, com \textit{replay} e defeitos reproduzidos, não responde a pergunta alguma. Acrescentar uma QE de eficácia (defeitos reproduzidos versus falsos positivos) ou estender a QE2.}
-
-
+%% LC (resolvido): acrescentada a QE4 (eficacia: defeitos reproduzidos versus falsos positivos), que a segunda campanha responde; resposta no Cap. de resultados.
 \section{Delimitação: método e estudo de caso}
 \label{sec:delimitacao}
 
@@ -98,7 +96,7 @@ Para alcançar esse objetivo, foram definidos três objetivos específicos, rela
 
 \item[O1] Propor uma metodologia sistemática e replicável para a verificação formal de firmware embarcado em C/C++, contemplando a seleção de módulos críticos, a instrumentação com \textit{stubs} para abstração de dependências de \textit{hardware}, a especificação de propriedades de segurança derivadas de \textit{datasheets} e a análise dos contraexemplos gerados pelo ESBMC~\cite{Cordeiro2012}. Esse objetivo está relacionado principalmente à \textbf{QE3}.
 
-\item[O2] Aplicar a metodologia ao PX4 Autopilot em duas campanhas experimentais, verificando módulos de diferentes naturezas e classificando os candidatos encontrados como falsos positivos de modelagem, especificações disputadas ou defeitos reproduzidos no código de produção. Os achados também são submetidos à avaliação da comunidade PX4, por meio do reporte de contraexemplos e propostas de correção. Esse objetivo está relacionado à \textbf{QE2}.
+\item[O2] Aplicar a metodologia ao PX4 Autopilot em duas campanhas experimentais, verificando módulos de diferentes naturezas e classificando os candidatos encontrados como falsos positivos de modelagem, especificações disputadas ou defeitos reproduzidos no código de produção. Os achados também são submetidos à avaliação da comunidade PX4, por meio do reporte de contraexemplos e propostas de correção. Esse objetivo está relacionado à \textbf{QE2} e à \textbf{QE4}.
 
 \item[O3] Avaliar a viabilidade da abordagem por meio da medição do tempo de verificação de cada módulo e do registro das configurações necessárias para tornar a análise tratável. Esse objetivo está relacionado à \textbf{QE1} e à \textbf{QE3}.
 
@@ -117,19 +115,17 @@ A Tabela~\ref{tab:rastreabilidade} relaciona os objetivos específicos às etapa
 \textbf{Resultados} & \textbf{Questão} \\
 \midrule
 O1 & Cap.~\ref{cap:metodologia} (etapas i--viii) &
-Cap.~\ref{cap:experimentos} & QE3 \\
+Tab.~\ref{tab:resultados} e Tab.~\ref{tab:desfechos-segunda} & QE3 \\
 O2 & Seções~\ref{sec:selecao-modulos} e
 \ref{sec:caso-gps} &
-Cap.~\ref{cap:experimentos} & QE2 \\
+Seç.~\ref{sec:caso-gps}, Tab.~\ref{tab:desfechos-segunda} e Seç.~\ref{subsec:validacao-bancada} & QE2, QE4 \\
 O3 & Cap.~\ref{cap:metodologia} (etapa iv) &
-Cap.~\ref{cap:experimentos} & QE1, QE3 \\
+Tab.~\ref{tab:resultados}, Fig.~\ref{fig:visao-resultados} e Seç.~\ref{sec:config-experimental} & QE1, QE3 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\lc{A coluna ``Resultados'' repete o mesmo capítulo nos três objetivos e omite a segunda campanha. Indicar a seção e a tabela que evidenciam cada objetivo.}
-
-
+%% LC (resolvido): coluna Resultados agora indica a secao, tabela ou figura que evidencia cada objetivo, incluindo a segunda campanha.
 \section{Justificativa}
 \label{sec:justificativa}
 
