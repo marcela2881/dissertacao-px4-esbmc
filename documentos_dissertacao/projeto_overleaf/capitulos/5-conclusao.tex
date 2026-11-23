@@ -14,6 +14,9 @@ verificados em duas campanhas; cada verificação da primeira concluiu em menos
 de noventa segundos, e todo veredito pode ser refeito a partir dos artefatos
 publicados.
 
+\lc{``Vinte e dois módulos verificados'' mistura as campanhas; na segunda, o Common foi retirado e os tempos não foram reportados. Usar ``analisados'' e restringir a afirmação de tempo à primeira campanha.}
+
+
 Os três objetivos específicos foram atendidos da seguinte forma. O objetivo~O1,
 propor a metodologia, corresponde às oito etapas do
 Capítulo~\ref{cap:metodologia}. O objetivo~O2, aplicá-la e classificar os
@@ -46,7 +49,7 @@ driver de produção contém três guardas que o \textit{harness} omitia.
 
 \textbf{GPS uBlox.} O verificador encontrou, no \textit{harness}, uma escrita
 fora dos limites em \texttt{dumpGpsData()}. Uma prova indutiva sobre o laço real
-do driver mostrou que o estado violador é inalcançável na produção, e um ensaio
+do driver mostrou que o estado violador é inalcançável na produção, o que faz do candidato um falso positivo por pré-condição ampla, e um ensaio
 em bancada foi consistente com essa conclusão. A guarda proposta foi enquadrada
 pelo mantenedor como endurecimento defensivo.
 
@@ -83,8 +86,9 @@ contínua~(viii).
 \item \textbf{Evidência experimental delimitada pelo modelo.} Dez módulos sem
 violação até o limite de desenrolamento, com tempos por módulo medidos em três
 execuções.
-\item \textbf{Triagem documentada.} Três contraexemplos com três desfechos
-distintos, e a prova formal de que o estado violador do GPS não ocorre no
+\item \textbf{Triagem documentada.} Três contraexemplos com três casos
+distintos (dois falsos positivos de modelagem, por causas diferentes, e uma especificação
+disputada), e a prova formal de que o estado violador do GPS não ocorre no
 driver de produção.
 \item \textbf{Segunda campanha.} Dez módulos verificados sobre o código
 original, com defeitos reproduzidos por \textit{replay}, um deles observado em
@@ -236,6 +240,9 @@ dez módulos exibiram defeitos que o código real de fato tem, três deles
 corrigidos pelo próprio projeto sem conhecimento deste trabalho. A primeira
 campanha mostrou o que acontece sem essa disciplina: contraexemplos formalmente
 válidos para defeitos que não existem.
+
+\lc{``Sem conhecimento deste trabalho'' só reforça a eficácia se os candidatos não foram escolhidos a partir dessas correções. Declarar o critério de seleção da Frente~A.}
+
 
 O que este trabalho entrega é, assim, uma metodologia de verificação formal
 para \textit{firmware} de sistemas críticos, aplicada ao PX4 como estudo de

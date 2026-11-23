@@ -394,6 +394,8 @@ limitações são consideradas na interpretação dos resultados e impedem que o
 \textit{harness} seja descrito como uma cópia integral ou uma validação completa
 do driver de produção.}
 
+\lc{Os comentários do \textit{harness} (``100\% REAL'', ``palavra por palavra'') são falsos e enfraquecem o trabalho. Corrigi-los no repositório, publicar nova versão no Zenodo e reproduzir aqui a versão corrigida.}
+
 \chapter{Contraexemplos Gerados pelo ESBMC}
 \label{apend:contraexemplos}
 
@@ -592,6 +594,7 @@ produção é tratada separadamente na Seção~\ref{subsec:gps-inducao}.
 \artigo{desreferência} no \texttt{memcpy}. O \textit{underflow} aritmético é a causa raiz,
 e não uma segunda violação independente --- a ferramenta encerra na primeira
 violação encontrada. A classificação CWE-191 (\textit{Integer Underflow (Wrap or Wraparound)})
+$\rightarrow$~CWE-195 (\textit{Signed to Unsigned Conversion Error})
 $\rightarrow$~CWE-119 (\textit{Improper Restriction of Operations within the
 Bounds of a Memory Buffer}) reflete essa
 relação de causa e efeito.}

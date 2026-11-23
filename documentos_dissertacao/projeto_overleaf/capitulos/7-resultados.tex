@@ -21,13 +21,13 @@ mostrou que nenhum laço desses dez \textit{harnesses} excede o limite
 (Seção~\ref{sec:config-experimental})} --- qualificação cujo alcance exato é discutido na
 Seção~\ref{sec:ameacas-validade}.} \revisao{O resultado secundário é
 a triagem disciplinada de três contraexemplos, que levou a três conclusões
-distintas: um falso positivo no contador de FIFO do BMI088, refutado \artigo{na
+distintas: um falso positivo por guarda omitida no contador de FIFO do BMI088, refutado \artigo{na
 conferência contra o código de produção}; uma observação de temperatura no BMI088 recusada pelos
 mantenedores; e um \textit{underflow} de inteiro sem sinal no driver GPS uBlox}
 \artigo{,
 proposto upstream como endurecimento defensivo (PR~\#27576) e posteriormente
-mostrado inalcançável no driver de produção}\revisao{. Essa distinção entre os três
-desfechos é ela própria um resultado: contraexemplos de BMC expõem estados
+mostrado inalcançável no driver de produção, o que o torna um falso positivo por pré-condição ampla}\revisao{. Essa distinção entre os três
+casos é ela própria um resultado: contraexemplos de BMC expõem estados
 alcançáveis no modelo que o código de produção pode nunca alcançar, de modo que
 a triagem e a revisão pela comunidade são companhias necessárias às provas.}
 
@@ -217,7 +217,7 @@ respondida.}
     \corr{\textit{Métrica:} número de contraexemplos, desfecho de cada um após
     a triagem e existência de teste unitário que referencie a função afetada.
     \textit{Critério:} ao menos um contraexemplo que sobreviva à triagem como
-    violação alcançável no modelo, em função sem teste unitário direto.}
+    defeito reproduzido, em função sem teste unitário direto.}
     \item \textbf{QE3:} Quais configurações por módulo são necessárias para
     tornar cada módulo tratável? \corr{\textit{Métrica:} número de módulos que
     exigem opções diferentes da invocação padrão, e quais opções.
@@ -301,10 +301,10 @@ valores constam dos logs do repositório de artefatos.}
 \begin{tabular}{|l|l|c|r|r|r|}
 \hline
 \textbf{Módulo} & \textbf{Desfecho} &
-\textbf{VAM}$^\P$ & \textbf{Unw.} & \textbf{Tempo}$^\|$ & \corr{\textbf{Decisão}$^{\star}$ (mín--máx)} \\
+\textbf{Contraex.}$^\P$ & \textbf{Unw.} & \textbf{Tempo}$^\|$ & \corr{\textbf{Decisão}$^{\star}$ (mín--máx)} \\
 \hline
-IMU BMI088        & \corr{\textit{contraex.\ (triado)}} & 0$^\ddagger$ &  10 & \artigo{0,1\,s}$^{\#}$ & \corr{0,122 (0,121--0,122)} \\
-GPS uBlox         & \textit{violação}     & 1 &  10 & 64,9\,s$^{\#}$ & \corr{64,857 (64,765--64,874)} \\
+IMU BMI088        & \corr{\textit{contraex.\ (triado)}} & 2$^\ddagger$ &  10 & \artigo{0,1\,s}$^{\#}$ & \corr{0,122 (0,121--0,122)} \\
+GPS uBlox         & \corr{\textit{contraex.\ (triado)}} & 1 &  10 & 64,9\,s$^{\#}$ & \corr{64,857 (64,765--64,874)} \\
 MAVLink Parser    & \textit{sem violação} & 0 & 300 & 49,2\,s & \corr{46,970 (46,916--47,083)} \\
 Expo RC           & \textit{sem violação} & 0 &  10 &  4,9\,s & \corr{4,852 (4,840--4,866)} \\
 Battery Monitor   & \textit{sem violação} & 0 &  10 &  6,7\,s & \corr{6,727 (6,703--6,731)} \\
@@ -316,19 +316,21 @@ Magnetômetro      & \textit{sem violação} & 0 &  10 &  6,6\,s & \corr{6,621 (
 Barômetro         & \textit{sem violação} & 0 &  10 &  0,4\,s & \corr{0,360 (0,351--0,363)} \\
 VTOL$^\S$         & \textit{sem violação} & 0 &  10 &  4,0\,s & \corr{3,942 (3,911--3,943)} \\
 \hline
-\textbf{Total} & \corr{\textbf{10 sem violação, 1 violação,}} & \textbf{1} &
+\textbf{Total} & \corr{\textbf{10 sem violação,}} & \textbf{3} &
 --- & \artigo{\textbf{$\approx$94\,s}$^{\dagger}$} & \corr{\textbf{156,359}} \\
-               & \corr{\textbf{1 contraex.\ refutado/recusado}} & & & & \\
+               & \corr{\textbf{2 com contraexemplo}} & & & & \\
 \hline
 \end{tabular}
 
 \footnotesize
 \begin{flushleft}
-$^\P$VAM = violações alcançáveis no modelo (\textbf{não} defeitos
-confirmados).\\
+$^\P$Contraex. = contraexemplos produzidos pelo ESBMC, antes da triagem (\textbf{não}
+defeitos confirmados); os três foram triados como não-defeito: dois falsos positivos de
+modelagem (GPS, por pré-condição ampla; FIFO, por guarda omitida) e uma especificação
+disputada (temperatura).\\
 \artigo{Solver: Boolector~3.2.4, com ESBMC v8.1.0, em todos os módulos.}\\
 $^\ddagger$\corr{Dois contraexemplos, ambos triados como não-defeito:
-FIFO, falso positivo; temperatura, recusada upstream.} \artigo{O tempo da
+FIFO, falso positivo por guarda omitida; temperatura, especificação disputada, recusada upstream.} \artigo{O tempo da
 tabela é o do candidato FIFO (\texttt{test\_choice = 2}), em que as três
 execuções param (0,122; 0,122; 0,121\,s); o contraexemplo de temperatura vem de
 uma execução separada (0,272\,s), Seção~\ref{sec:caso-imu}.}\\
@@ -406,8 +408,8 @@ campanha. A Figura~\ref{fig:visao-resultados} resume desfechos e tempos.}
   \draw[fill=palFill, draw=palEdge] (0,-4.76) rectangle (2.200,-4.48);
   \node[anchor=west, font=\scriptsize] at (2.250,-4.62) {0,095\,s};
   \draw[fill=palFill, draw=palEdge] (0,-6.37) rectangle (0.35,-6.17); \node[anchor=west, font=\scriptsize] at (0.4,-6.27) {sem violação};
-  \draw[fill=palStrong, draw=palEdgeDark, thick] (2.6,-6.37) rectangle (2.95,-6.17); \node[anchor=west, font=\scriptsize] at (3.0,-6.27) {violação alcançável no modelo};
-  \draw[fill=palPaper, draw=palEdgeDark, dashed] (7.2,-6.37) rectangle (7.55,-6.17); \node[anchor=west, font=\scriptsize] at (7.6,-6.27) {contraexemplo triado};
+  \draw[fill=palStrong, draw=palEdgeDark, thick] (2.6,-6.37) rectangle (2.95,-6.17); \node[anchor=west, font=\scriptsize] at (3.0,-6.27) {contraexemplo (GPS)};
+  \draw[fill=palPaper, draw=palEdgeDark, dashed] (7.2,-6.37) rectangle (7.55,-6.17); \node[anchor=west, font=\scriptsize] at (7.6,-6.27) {contraexemplos triados (BMI088)};
   \node[font=\scriptsize, anchor=north] at (4.50,-5.27) {tempo do procedimento de decisão (s, escala logarítmica)};
 \end{tikzpicture}
 \caption[Desfecho e tempo de decisão por módulo (primeira campanha)]{\corr{Desfecho e tempo do procedimento de decisão por módulo na primeira campanha (mediana de três execuções). Elaborado pela autora.}}
@@ -423,6 +425,9 @@ de prateleira. Como cada um é verificado isoladamente por meio de um harness
 pequeno, isso demonstra \textbf{viabilidade por módulo}, e não escalabilidade
 de sistema completo.
 \end{tcolorbox}
+
+\lc{O critério da QE1 é 120~s, mas a resposta fala em 90~s. Faltam também os tempos da segunda campanha (o sumd passa de 15~min). Reportá-los ou restringir a resposta à primeira campanha.}
+
 
 \revisao{Os módulos verificados não constituem uma amostra uniforme:
 situam-se no caminho crítico de sensoriamento até atuação, onde bytes não
@@ -470,7 +475,7 @@ porque a pré-condição exclui os estados violadores. O harness do ESBMC usa a
 janela $\texttt{GPS\_DUMP\_DATA\_SIZE} - 5$. As duas ferramentas reportam a
 mesma propriedade --- acesso fora dos limites dentro do \texttt{memcpy}
 (\textit{dereference failure} no ESBMC); a cadeia CWE-191 $\rightarrow$
-CWE-119/787 é uma classificação deste trabalho, e não saída das ferramentas.}
+CWE-195 $\rightarrow$ CWE-119/787 é uma classificação deste trabalho, e não saída das ferramentas.}
 
 \corr{No IMU, o CBMC~5.95.1 reporta 2 de 6 propriedades violadas: as duas
 asserções do \textit{harness} (faixa de temperatura e
@@ -661,13 +666,7 @@ idêntico nas três execuções)}; o
 %% "Integer Underflow (Wrap or Wraparound)"; trocar o termo desalinharia a
 %% dissertacao da classificacao adotada e do artigo submetido.
 %% (Caixa \pergunta removida: questao respondida.)
-\corr{no \textit{harness}, em que a subtração é feita com sinal e o resultado
-negativo é depois convertido para um tipo sem sinal,} \textbf{CWE-195}
-\corr{(\textit{Signed to Unsigned Conversion Error})} $\rightarrow$
-\textbf{CWE-119} (\artigo{\textit{Improper Restriction of Operations within the
-Bounds of a Memory Buffer}}); \corr{na expressão do driver de produção, em que os
-dois operandos já são sem sinal, a classe correspondente seria} \textbf{CWE-191}
-(\textit{Integer Underflow \artigo{(Wrap or Wraparound)}}).\footnote{\revisao{Registra-se
+\corr{no \textit{harness}, a subtração, feita com sinal, fica abaixo do valor esperado,} \textbf{CWE-191} \corr{(\textit{Integer Underflow (Wrap or Wraparound)}); o resultado negativo é então convertido para um tipo sem sinal na comparação,} \textbf{CWE-195} \corr{(\textit{Signed to Unsigned Conversion Error}); e a guarda, assim anulada, deixa o \texttt{memcpy} escrever fora do buffer,} \textbf{CWE-119} (\artigo{\textit{Improper Restriction of Operations within the Bounds of a Memory Buffer}}). \corr{Na expressão do driver de produção, em que os dois operandos já são sem sinal, a etapa de conversão não existe e a subtração dá a volta diretamente (CWE-191).}\footnote{\revisao{Registra-se
 uma ambiguidade terminológica. No vocabulário de análise numérica,
 \textit{underflow} designa o resultado pequeno demais para ser representado, ao
 passo que o fenômeno aqui descrito --- uma subtração sem sinal que dá a volta
@@ -681,6 +680,7 @@ verificador para esse contraexemplo.} \corr{O \texttt{dump\_buffer} local do \te
 corresponde ao buffer \texttt{dump\_data} passado ao driver, e o traço literal
 consta do Apêndice~\ref{apend:contraexemplos}.}
 
+%% LC (resolvido): cadeia CWE uniformizada em CWE-191 -> CWE-195 -> CWE-119 (Fundamentacao, Introducao, Resultados e Apendice).
 \begin{figure}[H]
     \centering
     \definecolor{ceFundo}{HTML}{F7F8FA}\definecolor{ceCinza}{HTML}{5A6070}%
@@ -718,7 +718,7 @@ aqui, e da alcançabilidade no alvo, tratada a seguir}\revisao{.}
 negativamente: o laço de escrita limita \texttt{write\_len} ao espaço livre
 restante, de modo que o nível de preenchimento nunca excede o buffer antes de o
 registro ser publicado e o campo zerado. A violação é, portanto, alcançável no
-modelo, mas não no driver de produção. Ela é mantida aqui como a ilustração
+modelo, mas não no driver de produção, e o candidato é classificado como falso positivo de modelagem por pré-condição ampla. Ele é mantido aqui como a ilustração
 mais nítida da tese central da metodologia: um contraexemplo formalmente
 válido exige triagem contra o código de produção antes de poder ser chamado de
 defeito.} \artigo{Essa conclusão, obtida pelo mantenedor e por leitura do
@@ -736,6 +736,9 @@ restrito: a função não tem cobertura unitária direta, e a análise formal fo
 que estabeleceu tanto a violação no modelo quanto a sua inalcançabilidade na
 produção. Na primeira campanha, nenhum defeito do driver foi exposto.}
 \end{tcolorbox}
+
+\lc{A segunda campanha responde melhor à QE2: sumd, batmon e RoboClaw têm teste unitário? Fazer a mesma busca nesses módulos e incorporar à resposta.}
+
 
 \corr{A ausência de teste unitário direto foi conferida em 09/07/2026 por busca
 textual na árvore do PX4 (registro em \texttt{evidencia\_unit\_test\_gps.txt},
@@ -835,6 +838,9 @@ escreve \texttt{dump\_data->len}: no \textit{commit} verificado, as escritas
 estão nas linhas 747--757, e os ponteiros para os buffers são membros privados
 da classe.}
 \end{itemize}
+
+\lc{Justificar o limite $\texttt{len} \leq 4096$ do passo indutivo. Explicar também o invariante $\texttt{len} < 79$ diante do \texttt{len = 207} (sinalizador mais 79) observado em bancada.}
+
 
 \artigo{Como controle negativo, o mesmo corpo sem a hipótese $I$ é refutado
 pelas duas ferramentas (acesso fora dos limites no \texttt{memcpy}), o que mostra
@@ -1085,9 +1091,9 @@ Seção~\ref{sec:segunda-campanha}; esta seção reúne os desfechos
 \hline
 \corr{Defeito reproduzido, não reportado (impacto desprezível)} & \corr{1} & \corr{\texttt{MicroStrain}} \\
 \hline
-\corr{Falso positivo de modelagem, barrado na conferência} & \corr{1} & \corr{\texttt{bst}} \\
+\corr{Falso positivo de modelagem, barrado na conferência} & \corr{2} & \corr{\texttt{bst}, \texttt{Common}} \\
 \hline
-\corr{Sem defeito de memória} & \corr{2} & \corr{\texttt{logger}, \texttt{Common}} \\
+\corr{Sem defeito de memória} & \corr{1} & \corr{\texttt{logger}} \\
 \hline
 \end{tabular}
 \end{table}
@@ -1095,7 +1101,7 @@ Seção~\ref{sec:segunda-campanha}; esta seção reúne os desfechos
 \corr{Em sete dos dez módulos o efeito previsto pelo verificador foi reproduzido
 executando o código real do PX4. Em três deles, o próprio projeto corrigiu o
 mesmo ponto de forma independente, o que corrobora os achados sem que fosse
-preciso reportá-los. O único falso positivo, no \texttt{bst}, foi barrado pela
+preciso reportá-los. Os dois falsos positivos, no \texttt{bst} e no \texttt{Common}, foram barrados pela
 conferência antes de qualquer relato público. O contraste com a primeira
 campanha é direto: lá, três contraexemplos não resultaram em defeito confirmado
 algum; aqui, nenhum candidato chegou a ser reportado sem ter sido antes
@@ -1209,6 +1215,9 @@ exceção do CBMC em dois casos. Segue-se que a afirmação de viabilidade é
 absoluta, e não relativa: demonstra-se que a verificação é barata em termos
 próprios, não que seja mais ou menos barata que alternativas.}
 
+\lc{Diz ``sem medida de dispersão'', mas a Tabela~\ref{tab:resultados} traz mínimo e máximo. Corrigir.}
+
+
 \subsection{\corr{Construção dos \textit{harnesses} com apoio de ferramenta de IA}}
 
 \corr{Conforme registrado na Declaração de Uso de IA, os \textit{harnesses}
@@ -1256,6 +1265,9 @@ que um defeito que suprimisse uma violação neles passaria despercebido. Na
 segunda campanha, a validação cruzada com o CBMC cobre todos os
 \textit{harnesses}, e os candidatos alcançáveis foram ainda reproduzidos fora
 dos verificadores, por \textit{replay} sob sanitizadores.}
+
+\lc{Faltam ameaças da segunda campanha: escolha dos candidatos, versões mistas do ESBMC, commit diferente no batmon e \textit{replay} em x86 com \texttt{-O0}, não no alvo ARM, o que altera a manifestação de comportamento indefinido.}
+
 
 \section{\corr{Lições Aprendidas}}
 \label{sec:licoes}

@@ -260,15 +260,12 @@ Han (2024)          & Fuzzing         & \textbf{Controle de voo}& Empírico   & 
 Khatiri (2024)      & Simulação       & \textbf{PX4 VANTs}      & Ferramenta & Simulação             & Aerialist \\ \hline
 Wang (2021)         & Estudo de defeitos & \textbf{PX4, ArduPilot} & Empírico & 569 defeitos        & --        \\ \hline
 Di Sorbo (2022)     & Análise SW      & \textbf{UAV software}   & Empírico   & Relatos de defeito    & --        \\ \hline
-\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 1 VAM$^\dagger$; 7 de 10 módulos com efeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
+\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 3 contraex.\ triados$^\dagger$; 7 de 10 módulos com efeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
 \end{tabular}
 
 \scriptsize
 \begin{flushleft}
-$^\dagger$VAM = violação alcançável no modelo, na acepção fixada no
-Capítulo~\ref{cap:introducao}. Não se reivindica defeito confirmado: a análise do
-driver de produção mostrou o estado violador inalcançável
-(Seção~\ref{subsec:gps-inducao}). Ver Tabela~\ref{tab:resultados}.\\
+$^\dagger$Primeira campanha: três contraexemplos, todos triados como não-defeito (dois falsos positivos de modelagem e uma especificação disputada), na acepção fixada no Capítulo~\ref{cap:introducao}. Não se reivindica defeito confirmado: a análise do driver de produção mostrou o estado violador do GPS inalcançável (Seção~\ref{subsec:gps-inducao}). Ver Tabela~\ref{tab:resultados}.\\
 $^\ddagger$Segunda campanha: dez módulos, sete com o efeito previsto reproduzido no código
 real; desfechos de cada um na Tabela~\ref{tab:desfechos-segunda}.
 \end{flushleft}
@@ -291,11 +288,11 @@ derivadas de \textit{datasheets} e do código-fonte.
 Diferentemente dos \textit{surveys} sobre segurança de
 UAVs~\cite{Wanner2024, Siddiqi2022, Mekdad2023}, este trabalho oferece evidência
 empírica da \textbf{aplicabilidade} da verificação formal a firmware de drones em
-produção: uma violação alcançável no modelo (GPS uBlox), reportada à comunidade
-PX4 (Issue~\#26866), proposta como endurecimento defensivo (PR~\#27576) e mostrada
-inalcançável no driver de produção, e dois candidatos triados, respectivamente,
-como especificação disputada (temperatura do BMI088) e falso positivo (FIFO do
-BMI088), com o procedimento de triagem documentado. Na segunda campanha, o mesmo
+produção: um contraexemplo no GPS uBlox, reportado à comunidade
+PX4 (Issue~\#26866), proposto como endurecimento defensivo (PR~\#27576) e mostrado
+inalcançável no driver de produção (falso positivo por pré-condição ampla), e dois
+candidatos no BMI088, triados como especificação disputada (temperatura) e falso
+positivo por guarda omitida (FIFO), com o procedimento de triagem documentado. Na segunda campanha, o mesmo
 método, estendido com a execução do código original sob sanitizadores (\textit{replay}),
 reproduziu o efeito previsto em sete de dez módulos, o que não equivale a sete defeitos
 distintos: um mesmo módulo pode reunir mais de um ponto. Dois desses módulos foram
@@ -305,9 +302,9 @@ do arranjo de tensões de célula no driver \texttt{batmon} (\textit{Issue}~\#29
 haviam sido corrigidos por terceiros no ramo \textit{main}, o que corrobora, de forma
 independente, que os achados eram defeitos reais. Dos outros dois, o \texttt{sumd} já havia
 sido relatado por terceiro e continua sem correção, e o \texttt{MicroStrain}, de impacto
-desprezível, não foi reportado. Os três módulos restantes não renderam defeito: um
-falso positivo de modelagem (\texttt{bst}) e dois sem defeito de memória (\texttt{logger}
-e \texttt{Common}). A aplicação ao SAGRES e ao
+desprezível, não foi reportado. Os três módulos restantes não renderam defeito: dois
+falsos positivos de modelagem (\texttt{bst} e \texttt{Common}) e um sem defeito de memória
+(\texttt{logger}). A aplicação ao SAGRES e ao
 monitoramento ambiental na Amazônia é a motivação do estudo de caso, e não um
 fator que altere o método.
 

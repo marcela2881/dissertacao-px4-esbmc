@@ -123,8 +123,8 @@ encerram o fluxo do módulo.}
     2.\textsuperscript{a} campanha: \textit{replay} do código real {\footnotesize+} ASan/UBSan};
   \node[dec, below=6mm of conf] (dec) {Reproduz em\\produção?};
 
-  \node[desf, below=10mm of dec] (def) {Defeito reproduzido / VAM};
-  \node[outn, left=20mm of def] (fp) {Falso positivo (modelagem / ferramenta)};
+  \node[desf, below=10mm of dec] (def) {Defeito reproduzido};
+  \node[outn, left=20mm of def] (fp) {Falso positivo (de modelagem ou da ferramenta)};
   \node[outn, right=20mm of def] (ok) {Sem violação até o limite $k$};
 
   \node[dir, right=2.4cm of e1.north east, anchor=north west] (e6) {(vi) Reporte à comunidade PX4\\(condicionado à revisão)};
@@ -404,8 +404,8 @@ seguem para as etapas seguintes e com qual prioridade.}
 \paragraph{Conferência contra o código de produção.}
 \label{subsec:etapa-replay}
 
-\revisao{Esta conferência decide se um candidato é violação alcançável no modelo ou falso
-positivo, e é a que sustenta a distinção que organiza os resultados deste
+\revisao{Esta conferência decide se um candidato é defeito reproduzido ou falso
+positivo de modelagem, e é a que sustenta a distinção que organiza os resultados deste
 trabalho. Um contraexemplo é sempre válido \emph{para o modelo codificado}; o que
 se verifica é se o estado violado persiste quando o
 \textit{harness} sai de cena e o código de produção entra em seu lugar.}
@@ -423,22 +423,14 @@ executado, sob os sanitizadores de endereço (ASan) e de comportamento indefinid
 (UBSan), e registra o efeito observável do caminho do contraexemplo, como o byte
 efetivamente enviado ao atuador ou o acesso a um índice fora dos limites.}
 
-\corr{O critério de decisão é binário. Se a execução do código original
-reproduz o efeito previsto pelo contraexemplo --- por exemplo, um byte fora da
-faixa especificada no pacote enviado ---, o candidato é classificado como
-\textbf{violação alcançável no modelo} e, conforme a análise de alcançabilidade
-no uso real, como defeito. Se não reproduz, investiga-se a razão: se o código de
-produção contém guarda que o \textit{harness} omitiu, o candidato é
-\textbf{falso positivo}. Duas verificações de sanidade acompanham o
+\corr{O critério de decisão tem três desfechos, e não dois. Se a execução do código original reproduz o efeito previsto pelo contraexemplo --- por exemplo, um byte fora da faixa especificada no pacote enviado ---, o candidato é classificado como \textbf{defeito reproduzido no código de produção}, e só passa a \textbf{defeito confirmado} quando os mantenedores o reconhecem. Se não reproduz, investiga-se a razão: se o \textit{harness} omitiu uma guarda do código de produção, ou se a pré-condição do \textit{harness} admite um estado inicial que o código real nunca alcança, o candidato é \textbf{falso positivo de modelagem}; e se a violação decorre de uma interpretação da documentação que os mantenedores não aceitam como requisito, é \textbf{especificação disputada}. Duas verificações de sanidade acompanham o
 \textit{replay}: confirmar que a execução alcança a função analisada, e não
 termina antes, no código de preparação; e confirmar que o cenário crítico é
 derivado da entrada injetada, e não fixado por atribuição direta no programa de
 \textit{replay} --- caso em que se estaria demonstrando aritmética, e não
 alcançabilidade.}
 
-\lc{Critério conflita com o Capítulo~\ref{cap:introducao}: reproduzir no código de produção define ``defeito reproduzido'', não VAM. E não é binário, pois há três desfechos. Alinhar com a caixa de classificação.}
-
-
+%% LC (resolvido): criterio da etapa (v) reescrito com os tres desfechos (defeito reproduzido, falso positivo de modelagem, especificacao disputada), alinhado a caixa de classificacao da Introducao.
 Nos três contraexemplos da primeira campanha, a conferência foi
 feita por leitura do código de produção: o candidato do contador de FIFO foi
 refutado pela inspeção do driver do BMI088, e a inalcançabilidade do estado
@@ -627,11 +619,9 @@ pela pré-condição --- estado inalcançável no driver de produção, como con
 prova indutiva da Seção~\ref{subsec:gps-inducao}. Os dois resultados são
 consistentes: o modelo só viola a propriedade quando parte de um estado que o
 código de produção nunca alcança, o que sustenta a classificação do achado como
-violação alcançável no modelo, e não como defeito.}
+falso positivo de modelagem, e não como defeito. O mecanismo é o da pré-condição ampla demais, apontada na etapa~(ii) como fonte de falso positivo: a violação só aparece porque o \textit{harness} admite um estado inicial acima da capacidade.}
 
-\lc{Se a violação vem só de estado inicial que a produção nunca alcança, o mecanismo é o da pré-condição larga demais, apontada na Etapa~(ii) como fonte de falso positivo. Justificar por que o GPS é VAM e não falso positivo.}
-
-
+%% LC (resolvido): GPS reclassificado como falso positivo de modelagem por pre-condicao ampla (mesmo mecanismo da etapa ii).
 %% LC 16 (resolvido 19/10/2026): violacao e admitida pela pre-condicao.
 \corr{A segunda pré-condição merece uma ressalva adicional. Como ela admite
 \texttt{dump\_buffer.len} entre $195$ e $255$, o \textit{harness} já parte de
@@ -1224,26 +1214,25 @@ Seção~\ref{subsec:imu-temperatura} do Capítulo~\ref{cap:experimentos}.}
 \corr{O procedimento de análise foi descrito na etapa~(v)
 (Seção~\ref{subsec:etapa-replay}). Esta seção registra apenas a escala usada
 para classificar os resultados, fixada no Capítulo~\ref{cap:introducao}:}
-\textbf{violação alcançável no modelo},
-quando a violação decorre dos estados admitidos pelas pré-condições do
-\textit{harness} (caso do GPS); e
-\textbf{falso positivo}, quando o candidato decorre de guarda presente no código
-de produção e omitida no \textit{harness} (caso do contador de FIFO). A
-observação de temperatura ficou fora dessas duas categorias: a violação é real
+\textbf{falso positivo de modelagem}, quando a violação decorre de uma diferença
+entre o modelo e o código de produção, seja por guarda de produção omitida no
+\textit{harness} (o contador de FIFO e o \texttt{bst}), seja por pré-condição do
+\textit{harness} que admite um estado inicial que o código real nunca alcança (o
+GPS e o \texttt{Common}); \textbf{especificação disputada}, quando a violação é real
 no modelo, mas a própria propriedade, derivada do \textit{datasheet}, foi
-contestada pelos mantenedores. \corr{No caso do GPS, a falha reportada pelo
+contestada pelos mantenedores (a observação de temperatura); e \textbf{defeito
+reproduzido}, quando o efeito previsto foi reproduzido no código real.
+\corr{No caso do GPS, a falha reportada pelo
 ESBMC não é a violação da \textit{assertion} da propriedade~\eqref{eq:prop_gps},
 e sim a verificação automática de limites dentro do \texttt{memcpy}
 (\textit{dereference failure}), consequência do \textit{underflow} descrito na
 Seção~\ref{sec:exemplo-ilustrativo}.}
 
-\corr{Na segunda campanha, essa mesma escala foi aplicada, com uma distinção que
-a primeira já exigia: um \textbf{falso positivo de modelagem} decorre de uma
-guarda de produção omitida no \textit{harness} (o contador de FIFO na primeira
-campanha; o \texttt{bst} na segunda), ao passo que um \textbf{falso positivo da
-ferramenta} decorre do verificador, e não do código. Os desfechos da segunda
-campanha e os valores concretos de cada contraexemplo são apresentados no
-Capítulo~\ref{cap:experimentos} e no Apêndice~\ref{apend:contraexemplos}.}
+\corr{Na segunda campanha, essa mesma escala foi aplicada, com uma distinção
+adicional: um \textbf{falso positivo da ferramenta} decorre do verificador, e não
+do modelo nem do código. Os desfechos da segunda campanha e os valores concretos
+de cada contraexemplo são apresentados no Capítulo~\ref{cap:experimentos} e no
+Apêndice~\ref{apend:contraexemplos}.}
 
 \section{\corr{Segunda Campanha: Código de Produção, \textit{Replay} e Sanitizadores}}
 \label{sec:segunda-campanha}
@@ -1311,14 +1300,12 @@ esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 \hline
 \corr{\texttt{logger.cpp}} & \corr{nenhuma violação de memória em \texttt{write\_info\_multiple()} para qualquer \texttt{key\_len}} & \corr{sem defeito de memória; o truncamento é alcançável, mas gera registro com \texttt{key\_len} errado, não escrita fora dos limites} \\
 \hline
-\corr{\texttt{Common.cpp}} & \corr{violação só com índice que a guarda de produção nunca permite} & \corr{\textbf{retirado}} \\
+\corr{\texttt{Common.cpp}} & \corr{violação só com índice que a guarda de produção nunca permite} & \corr{\textbf{falso positivo de modelagem}: a premissa do \textit{harness} admite um índice que a guarda de produção nunca permite; com a guarda como invariante, o \textit{harness} verifica \textsc{successful}} \\
 \hline
 \end{tabular}
 \end{table}
 
-\lc{Common.cpp está ``retirado'' aqui e ``sem defeito de memória'' no capítulo de resultados. Pela descrição (índice barrado por guarda de produção), é falso positivo de modelagem, como o bst. Uniformizar.}
-
-
+%% LC (resolvido): Common.cpp uniformizado como falso positivo de modelagem (pre-condicao ampla) na Metodologia e nos Resultados.
 \corr{Dois pontos merecem registro. Primeiro, três candidatos
 (\texttt{externalChecks}, \texttt{ft7} e \texttt{IridiumSBD}) eram violações reais
 no commit testado e foram \emph{corrigidos pelo próprio PX4}, por outras pessoas,
