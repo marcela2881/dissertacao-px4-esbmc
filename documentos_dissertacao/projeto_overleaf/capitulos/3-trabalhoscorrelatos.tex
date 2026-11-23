@@ -195,10 +195,10 @@ al.~\cite{Kim2019RVFuzzer}, usa realimentação do controlador para gerar valore
 de parâmetros --- enviados pela estação de solo --- que levam o veículo a estados
 inseguros, encontrando defeitos de validação de entrada em autopilotos de
 produção, incluindo o PX4. Han et al.~\cite{Han2024RangeFuzz} detectam defeitos de
-especificação de faixa em módulos de controle de voo. Na fronteira entre as duas famílias, o FuSeBMC~\cite{Alshmrany2022} combina BMC e
-\textit{fuzzing} para ampliar a cobertura na geração automática de casos de teste, mas
-foi avaliado em programas C genéricos, e não em firmware de VANT. Os três trabalhos
-anteriores encontram defeitos reais, por execução, não por análise. A relação com este trabalho é de
+especificação de faixa em módulos de controle de voo. Os três atuam por execução do sistema, e não por análise do código-fonte. Na fronteira
+entre as duas famílias, o FuSeBMC~\cite{Alshmrany2022} combina BMC e \textit{fuzzing} para
+ampliar a cobertura na geração automática de casos de teste, mas foi avaliado em
+programas C genéricos, e não em firmware de VANT. A relação com este trabalho é de
 complementaridade: técnicas dinâmicas exercitam o sistema integrado, com
 escalonador e hardware presentes, mas cobrem apenas as execuções que ocorrem; o
 BMC explora exaustivamente os caminhos representados no modelo até o limite de
@@ -260,7 +260,7 @@ Han (2024)          & Fuzzing         & \textbf{Controle de voo}& Empírico   & 
 Khatiri (2024)      & Simulação       & \textbf{PX4 VANTs}      & Ferramenta & Simulação             & Aerialist \\ \hline
 Wang (2021)         & Estudo de defeitos & \textbf{PX4, ArduPilot} & Empírico & 569 defeitos        & --        \\ \hline
 Di Sorbo (2022)     & Análise SW      & \textbf{UAV software}   & Empírico   & Relatos de defeito    & --        \\ \hline
-\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 1 VAM$^\dagger$; 7 módulos com efeito reproduzido$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
+\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 1 VAM$^\dagger$; 7 de 10 módulos com efeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
 \end{tabular}
 
 \scriptsize
@@ -338,7 +338,8 @@ CBMC e reporte direto à comunidade \textit{open-source} é a abordagem proposta
 para firmware de autopiloto de VANTs, endereçando uma lacuna observada no
 levantamento. O levantamento incluiu também a análise estática que o próprio PX4 já
 executa (clang-tidy), estudos de defeitos em autopilotos e o uso do CBMC em firmware
-embarcado na indústria; nenhum deles aplica BMC com contraexemplo concreto a
-\textit{drivers} de um autopiloto de produção a partir de fora do projeto.
+embarcado na indústria. Nesse levantamento, que é exploratório, não foi identificado
+trabalho que aplique BMC com contraexemplo concreto a \textit{drivers} de um autopiloto
+de produção a partir de fora do projeto.
 
 %% LC (resolvido): incluidos clang-tidy do PX4 (PX4_ClangTidy), estudo de defeitos de autopilotos (Wang2021) e BMC em firmware embarcado (Chong2020). A comparacao direta com um analisador estatico (baseline) depende do experimento do Cap. de resultados.
