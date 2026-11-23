@@ -1,11 +1,11 @@
 /**
- * @file teste_gps_driver_real_esbmc.cpp
- * @author Dissertação Mestrado - Verificação Formal PX4 v1.16
+ * @file test_gps_driver.cpp
+ * @author Dissertação de Mestrado - Verificação Formal do PX4 (commit 8be2590c15)
  * 
- * OBJETIVO: Teste de código REAL extraído do PX4 GPS Driver
- * FUNÇÃO TESTADA: GPS::dumpGpsData() - linha ~643 de src/drivers/gps/gps.cpp
+ * OBJETIVO: Teste de trecho transcrito e adaptado do driver GPS do PX4
+ * FUNÇÃO TESTADA: GPS::dumpGpsData() - src/drivers/gps/gps.cpp (linha 727 no commit 8be2590c15)
  * MÉTODO: Bounded Model Checking com ESBMC
- * ESTRUTURAS: Baseadas no USO real no código gps.cpp
+ * ESTRUTURAS: Adaptadas a partir do uso em gps.cpp (capacidade 200 aqui; 79 em GpsDump.msg)
  */
 
 #include <assert.h>
@@ -19,9 +19,9 @@ extern size_t nondet_size_t();
 extern bool nondet_bool();
 extern void __ESBMC_assume(int condition);
 
-// ================== ESTRUTURAS REAIS EXTRAÍDAS DO PX4 ==================
+// ================== ESTRUTURAS ADAPTADAS DO PX4 ==================
 /**
- * ESTRUTURA REAL baseada no USO no gps.cpp:
+ * ESTRUTURA adaptada a partir do uso no gps.cpp:
  * - dump_data->data + dump_data->len
  * - dump_data->len += write_len  
  * - sizeof(dump_data->data)
@@ -30,7 +30,7 @@ extern void __ESBMC_assume(int condition);
  * - dump_data->instance = (uint8_t)_instance
  */
 
-// Tamanho realista que funciona com uint8_t len
+// Capacidade do harness (no PX4, GpsDump.msg declara 79 bytes)
 #define GPS_DUMP_DATA_SIZE 200
 
 struct gps_dump_s {
@@ -46,11 +46,11 @@ enum class gps_dump_comm_mode_t : int32_t {
     RTCM = 2
 };
 
-// ================== FUNÇÃO REAL EXTRAÍDA DO PX4 ==================
+// ================== FUNÇÃO ADAPTADA DO PX4 ==================
 
 /**
- * FUNÇÃO ORIGINAL dumpGpsData() extraída EXATAMENTE do gps.cpp linha ~643
- * Lógica preservada: while loop, memcpy, aritmética de ponteiros, bit operations
+ * Adaptação de dumpGpsData() (gps.cpp, linha 727 no commit 8be2590c15)
+ * Lógica preservada em parte: while loop, memcpy, aritmética de ponteiros, bit operations
  */
 void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_to_gps_device, 
                  gps_dump_s *dump_data, gps_dump_comm_mode_t active_mode)
@@ -62,7 +62,7 @@ void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_
 
     dump_data->instance = 0; // Simular: dump_data->instance = (uint8_t)_instance;
 
-    // LOOP CRÍTICO REAL DO PX4
+    // LOOP CRÍTICO (adaptado do PX4)
     while (len > 0) {
         size_t write_len = len;
 
@@ -71,17 +71,17 @@ void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_
             write_len = GPS_DUMP_DATA_SIZE - dump_data->len;
         }
 
-        // OPERAÇÃO CRÍTICA: memcpy com aritmética de ponteiros (do código real)
+        // OPERAÇÃO CRÍTICA: memcpy com aritmética de ponteiros (adaptado do código do PX4)
         memcpy(dump_data->data + dump_data->len, data, write_len);
         
-        // ATUALIZAÇÕES (exatamente como no gps.cpp)
+        // ATUALIZAÇÕES (como no gps.cpp, com a capacidade do harness)
         data += write_len;
         dump_data->len += write_len;
         len -= write_len;
 
         // LÓGICA DE PUBLICAÇÃO (do código original)
         if (dump_data->len >= GPS_DUMP_DATA_SIZE) {
-            // BIT OPERATION do código real
+            // BIT OPERATION adaptada do código do PX4
             if (msg_to_gps_device) {
                 dump_data->len |= 1 << 7;  // Set bit 7
             }
@@ -90,7 +90,7 @@ void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_
             dump_data->timestamp = 12345;
             
             // Simular: _dump_communication_pub.publish(*dump_data);
-            // Reset para próxima iteração (do código real)
+            // Reset para próxima iteração (adaptado do código do PX4)
             dump_data->len = 0;
         }
     }
@@ -99,14 +99,14 @@ void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_
 // ================== TESTES DE VERIFICAÇÃO FORMAL ==================
 
 /**
- * TESTE 1: Verificar buffer bounds na operação memcpy real
+ * TESTE 1: Verificar buffer bounds na operação memcpy adaptada
  * PROPRIEDADE: memcpy nunca deve escrever além do buffer data[]
  */
 void test_gps_real_buffer_bounds() {
     size_t input_len = nondet_size_t();
     bool msg_to_device = nondet_bool();
     
-    // Entrada realista mas potencialmente perigosa
+    // Entrada próxima da fronteira
     __ESBMC_assume(input_len > 0 && input_len <= 300);
     
     uint8_t input_data[300];
@@ -116,7 +116,7 @@ void test_gps_real_buffer_bounds() {
     
     uint8_t initial_len = dump_buffer.len;
     
-    // Chamar função REAL do PX4
+    // Chamar função adaptada do PX4
     dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, msg_to_device, 
                 &dump_buffer, gps_dump_comm_mode_t::Full);
     
@@ -141,7 +141,7 @@ void test_gps_real_underflow_protection() {
     dump_buffer.len = nondet_uint8();
     __ESBMC_assume(dump_buffer.len >= GPS_DUMP_DATA_SIZE - 10);
     
-    // Chamar função REAL
+    // Chamar função adaptada
     dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
                 &dump_buffer, gps_dump_comm_mode_t::Full);
     
@@ -150,7 +150,7 @@ void test_gps_real_underflow_protection() {
 }
 
 /**
- * TESTE 3: Verificar terminação do loop while(len > 0) real
+ * TESTE 3: Verificar terminação do loop while(len > 0) adaptado
  * PROPRIEDADE: Loop deve sempre terminar, mesmo com inputs extremos
  */
 void test_gps_real_loop_termination() {
@@ -163,7 +163,7 @@ void test_gps_real_loop_termination() {
     dump_buffer.len = nondet_uint8();
     __ESBMC_assume(dump_buffer.len < GPS_DUMP_DATA_SIZE);
     
-    // Chamar função REAL
+    // Chamar função adaptada
     dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
                 &dump_buffer, gps_dump_comm_mode_t::Full);
     
@@ -172,7 +172,7 @@ void test_gps_real_loop_termination() {
 }
 
 /**
- * TESTE 4: Verificar bit operation real do código
+ * TESTE 4: Verificar bit operation adaptada do código
  * PROPRIEDADE: dump_data->len |= 1 << 7 deve ser segura
  */
 void test_gps_real_bit_operation() {
@@ -187,7 +187,7 @@ void test_gps_real_bit_operation() {
     
     uint8_t initial_len = dump_buffer.len;
     
-    // Chamar função REAL que pode executar bit operation
+    // Chamar função adaptada que pode executar bit operation
     dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, true, 
                 &dump_buffer, gps_dump_comm_mode_t::Full);
     
@@ -211,7 +211,7 @@ void test_gps_real_full_buffer_edge_case() {
     // Buffer exatamente cheio
     dump_buffer.len = GPS_DUMP_DATA_SIZE;
     
-    // Chamar função REAL
+    // Chamar função adaptada
     dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full, false, 
                 &dump_buffer, gps_dump_comm_mode_t::Full);
     
@@ -252,12 +252,12 @@ int main() {
  * 
  * METODOLOGIA DEMONSTRADA:
  * 
- * 1. EXTRAÇÃO DE CÓDIGO 100% REAL:
- *    - Função dumpGpsData() copiada exatamente de src/drivers/gps/gps.cpp
- *    - Estrutura gps_dump_s baseada no USO real observado no código
- *    - Lógica preservada: while loop, memcpy, bit operations, reset
+ * 1. TRANSCRIÇÃO ADAPTADA DO CÓDIGO DO PX4:
+ *    - Função dumpGpsData() adaptada de src/drivers/gps/gps.cpp (não é extração literal)
+ *    - Estrutura gps_dump_s baseada no uso observado no código
+ *    - Lógica preservada em parte: while loop, memcpy, bit operations, reset
  * 
- * 2. ESTRUTURA DERIVADA DO CÓDIGO REAL:
+ * 2. ESTRUTURA DERIVADA DO CÓDIGO DO PX4:
  *    - data[]: deduzido de sizeof(dump_data->data) 
  *    - len: deduzido de dump_data->len += write_len e operações bit
  *    - instance: observado em dump_data->instance = (uint8_t)_instance
@@ -276,8 +276,8 @@ int main() {
  *    - Assertions para propriedades de memory safety
  * 
  * COMANDOS DE EXECUÇÃO:
- * esbmc teste_gps_driver_real_esbmc.cpp --unwind 8 --timeout 300s
- * esbmc teste_gps_driver_real_esbmc.cpp --overflow-check --unwind 5
+ * esbmc test_gps_driver.cpp --unwind 10 --no-unwinding-assertions --overflow-check
+ * esbmc test_gps_driver.cpp --unwind 10 --overflow-check
  * 
  * VULNERABILIDADES ALVO:
  * - Buffer overflow se dump_data->len corrompido
@@ -286,10 +286,10 @@ int main() {
  * - Loop infinito se write_len == 0
  * 
  * DIFERENCIAL DESTA VERSÃO:
- * - Estruturas baseadas em USO real, não especulação
- * - Função extraída palavra por palavra do gps.cpp
- * - Tamanhos realistas compatíveis com uint8_t
- * - Testes focados em padrões observados no código real
+ * - Estruturas baseadas no uso observado no código
+ * - Função adaptada do gps.cpp (capacidade 200 em vez de 79)
+ * - Tamanho compatível com uint8_t
+ * - Testes focados em padrões observados no código
  * 
  * ================================================================
- */
+ */
