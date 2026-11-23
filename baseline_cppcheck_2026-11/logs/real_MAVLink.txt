@@ -1,0 +1,5 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  modules/mavlink
+modules/mavlink/mavlink_main.h:635:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/mavlink/mavlink_ulog.cpp:51:warning:uninitMemberVarPrivate:Member variable 'MavlinkULog::_wait_for_ack_sequence' is not initialized in the constructor.
+modules/mavlink/mavlink_ulog.cpp:242:warning:thisUseAfterFree:Calling method 'unlock()' when 'this' might be invalid
+# exit: 0 tempo: 1s

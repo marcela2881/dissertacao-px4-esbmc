@@ -1,0 +1,12 @@
+GPS           achados=0    (erro=0) | # exit: 0 tempo: 0s
+IMU_BMI088    achados=0    (erro=0) | # exit: 0 tempo: 0s
+MAVLink       achados=3    (erro=1) | # exit: 0 tempo: 1s
+Expo_RC       achados=1    (erro=0) | # exit: 0 tempo: 0s
+Battery       achados=0    (erro=0) | # exit: 0 tempo: 0s
+PWM_Output    achados=2    (erro=0) | # exit: 0 tempo: 0s
+RC_Update     achados=15   (erro=0) | # exit: 0 tempo: 2s
+Navigator     achados=4    (erro=4) | # exit: 0 tempo: 1s
+EKF2          achados=9    (erro=0) | # exit: 0 tempo: 2s
+Magnetometer  achados=0    (erro=0) | # exit: 0 tempo: 0s
+Barometer     achados=0    (erro=0) | # exit: 0 tempo: 0s
+VTOL          achados=1    (erro=0) | # exit: 0 tempo: 0s

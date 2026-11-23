@@ -1,0 +1,18 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  lib/rc modules/rc_update
+lib/rc/spektrum_rssi.h:75:portability:shiftTooManyBitsSigned:Shifting signed 32-bit value by 31 bits is implementation-defined behaviour
+lib/rc/dsm.cpp:402:warning:invalidPrintfArgType_sint:%li in format string (no. 1) requires 'long' but the argument type is 'unsigned short'.
+lib/rc/dsm.cpp:402:warning:invalidPrintfArgType_sint:%li in format string (no. 3) requires 'long' but the argument type is 'unsigned int'.
+lib/rc/dsm.cpp:404:warning:invalidPrintfArgType_sint:%li in format string (no. 1) requires 'long' but the argument type is 'unsigned short'.
+lib/rc/dsm.cpp:404:warning:invalidPrintfArgType_sint:%li in format string (no. 3) requires 'long' but the argument type is 'unsigned int'.
+lib/rc/rc_tests/RCTest.cpp:93:warning:invalidScanfArgType_int:%x in format string (no. 1) requires 'unsigned int *' but the argument type is 'signed int *'.
+lib/rc/rc_tests/RCTest.cpp:120:warning:invalidScanfArgType_int:%x in format string (no. 1) requires 'unsigned int *' but the argument type is 'signed int *'.
+lib/rc/rc_tests/RCTest.cpp:181:warning:invalidScanfArgType_int:%x in format string (no. 1) requires 'unsigned int *' but the argument type is 'signed int *'.
+lib/rc/rc_tests/RCTest.cpp:208:warning:invalidScanfArgType_int:%x in format string (no. 1) requires 'unsigned int *' but the argument type is 'signed int *'.
+lib/rc/sumd.cpp:340:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+modules/rc_update/RCUpdateTest.cpp:42:warning:duplInheritedMember:The class 'TestRCUpdate' defines member function with name 'UpdateManualSwitches' also defined in its parent class 'RCUpdate'.
+modules/rc_update/rc_update.h:115:style:virtualCallInConstructor:Virtual function 'updateParams' is called from constructor 'RCUpdate()' at line 103. Dynamic binding is not used.
+modules/rc_update/rc_update.cpp:78:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+modules/rc_update/rc_update.cpp:82:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+modules/rc_update/rc_update.cpp:86:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+modules/rc_update/rc_update.cpp:90:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+# exit: 0 tempo: 2s

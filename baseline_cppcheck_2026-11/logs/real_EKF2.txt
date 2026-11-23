@@ -1,0 +1,13 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  modules/ekf2/EKF
+modules/ekf2/EKF/aid_sources/ZeroGyroUpdate.hpp:45:style:virtualCallInConstructor:Virtual function 'reset' is called from constructor 'ZeroGyroUpdate()' at line 40. Dynamic binding is not used.
+modules/ekf2/EKF/ekf.h:691:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/aid_sources/ZeroVelocityUpdate.hpp:45:style:virtualCallInConstructor:Virtual function 'reset' is called from constructor 'ZeroVelocityUpdate()' at line 40. Dynamic binding is not used.
+modules/ekf2/EKF/covariance.cpp:64:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/covariance.cpp:92:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/covariance.cpp:349:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/covariance.cpp:356:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/covariance.cpp:368:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/ekf.cpp:522:warning:invalidPrintfArgType_sint:%d in format string (no. 1) requires 'int' but the argument type is 'unsigned int'.
+modules/ekf2/EKF/terrain_control.cpp:49:warning:constStatement:Found suspicious operator '>', result is not used.
+modules/ekf2/EKF/wind.cpp:84:warning:constStatement:Found suspicious operator '>', result is not used.
+# exit: 0 tempo: 2s

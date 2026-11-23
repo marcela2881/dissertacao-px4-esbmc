@@ -1,0 +1,2 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} resultados/EKF2_Covariance/test_ekf2_covariance.cpp
+# exit: 0

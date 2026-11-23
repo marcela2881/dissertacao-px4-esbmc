@@ -1,0 +1,2 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  modules/sensors/vehicle_air_data
+# exit: 0 tempo: 0s

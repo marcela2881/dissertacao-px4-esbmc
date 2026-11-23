@@ -1,0 +1,6 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  modules/navigator
+modules/navigator/precland.h:169:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/navigator/mission_base.h:599:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS_CUSTOM_PARENT is a macro then please configure it.
+modules/navigator/rtl_direct.h:174:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+modules/navigator/vtol_takeoff.h:79:error:unknownMacro:There is an unknown macro here somewhere. Configuration is required. If DEFINE_PARAMETERS is a macro then please configure it.
+# exit: 0 tempo: 1s

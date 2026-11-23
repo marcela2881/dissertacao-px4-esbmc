@@ -1,0 +1,2 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} resultados/IMU_BMI088/test_bmi088_imu.cpp
+# exit: 0

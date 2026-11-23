@@ -1,0 +1,4 @@
+# cppcheck --enable=warning,performance,portability --inconclusive --inline-suppr --suppress=missingInclude --suppress=missingIncludeSystem --suppress=unmatchedSuppression -q --max-configs=2 -j2 --template={file}:{line}:{severity}:{id}:{message} -i '*[Tt]est*'  drivers/pwm_out
+drivers/pwm_out/PWMOut.cpp:73:warning:invalidPrintfArgType_uint:%u in format string (no. 2) requires 'unsigned int' but the argument type is 'signed int'.
+drivers/pwm_out/PWMOut.cpp:247:warning:invalidPrintfArgType_uint:%u in format string (no. 2) requires 'unsigned int' but the argument type is 'signed int'.
+# exit: 0 tempo: 0s
