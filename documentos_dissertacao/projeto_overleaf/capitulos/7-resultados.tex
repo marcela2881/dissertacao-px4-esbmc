@@ -1004,7 +1004,10 @@ estão nas linhas 747--757, e os ponteiros para os buffers são membros privados
 da classe.}
 \end{itemize}
 
-\lc{Justificar o limite $\texttt{len} \leq 4096$ do passo indutivo. Explicar também o invariante $\texttt{len} < 79$ diante do \texttt{len = 207} (sinalizador mais 79) observado em bancada.}
+%% LC (resolvido 23/11/2026): limite 4096 justificado (escolha de modelagem, suficiente por argumento sobre o laco); 207 explicado (valor transitorio da mensagem publicada).
+\corr{\textbf{Sobre o limite $\texttt{len} \leq 4096$.} O valor é uma escolha de modelagem para o tamanho do buffer do chamador, e não um limite derivado do \textit{driver}; não se determinou o maior comprimento que o código real passa a \texttt{dumpGpsData()}. Ele é suficiente por uma razão que se lê no corpo do laço: em uma iteração, \texttt{write\_len} depende de \texttt{len} apenas por \texttt{write\_len = min(len, 79 - dump\_data->len)}. Para qualquer \texttt{len}~$\geq 79$, \texttt{write\_len} é o mesmo, no máximo $79$, e o \texttt{memcpy} e a atualização de \texttt{dump\_data->len} se comportam do mesmo modo; qualquer limite maior ou igual a $79$ cobre, portanto, todos os comportamentos distintos, e $4096$ está bem acima disso. Trata-se de um argumento por leitura do código, e não de uma verificação adicional: não se reexecutou o passo com outros limites.}
+
+\corr{\textbf{Sobre o invariante $\texttt{len} < 79$ e o valor $207$ em bancada.} O invariante $I$ vale para o estado \emph{guardado} em \texttt{dump\_data->len} entre iterações e entre chamadas, e é isso que o passo verifica ao final de uma iteração completa. Quando o buffer enche, o código faz \texttt{len |= 1 << 7}, publica o registro e só então zera \texttt{len}. O valor $207 = 128 + 79$ visto nas mensagens capturadas em bancada é o campo \texttt{len} \emph{da mensagem publicada}, copiado no instante em que o buffer está cheio e o sinalizador, ligado; o estado guardado volta a $0$ logo em seguida. Os dois fatos são compatíveis: $207$ aparece em toda mensagem publicada, e nenhum valor guardado chega a $79$ entre iterações. O $207$ do contraexemplo do \textit{harness} tem outro significado, como se explicou na Seção~\ref{subsec:gps-limites-harness}: lá, é um nível de preenchimento acima da capacidade de $200$ bytes.}
 
 
 \artigo{Como controle negativo, o mesmo corpo sem a hipótese $I$ é refutado
