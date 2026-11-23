@@ -39,7 +39,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \cel\corr{(iii) Propriedades} & \cel\corr{\textit{assertions} no \textit{harness}} & \cel\corr{---} & \cel\corr{tradução de documento (\textit{datasheet}, manual, código) em predicado sobre variável de programa} \tabularnewline
 \hline
-\cel\corr{(iv) ESBMC} & \cel\corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ESBMC 8.1.0--8.5.0, Boolector/Z3, máquina da autora, Ubuntu 24.04} & \cel\corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \cel\corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \tabularnewline
+\cel\corr{(iv) ESBMC} & \cel\corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ver Tabela~\ref{tab:versoes-segunda}} & \cel\corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \cel\corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \tabularnewline
 \hline
 \cel\corr{(v) Contraexemplos} & \cel\corr{1.ª: leitura do código. 2.ª: \textit{replay} com g++~13.3.0 e ASan/UBSan} & \cel\corr{\texttt{-std=c++17 -O0} \texttt{-fsanitize=address,undefined}} & \cel\corr{E/S simulada de forma determinística} \tabularnewline
 \hline
@@ -51,6 +51,30 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \end{tabular}
 \end{table}
+
+\corr{Na segunda campanha, as versões das ferramentas, o \textit{solver} e o ambiente variaram conforme a execução. A Tabela~\ref{tab:versoes-segunda} registra, para cada veredito, o que consta nos cabeçalhos dos logs.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Ferramentas, \textit{solver} e ambiente de execução da segunda campanha}}
+\label{tab:versoes-segunda}
+\footnotesize
+\begin{tabular}{|>{\raggedright\arraybackslash}p{3.7cm}|>{\raggedright\arraybackslash}p{3.3cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}p{3.1cm}|}
+\hline
+\textbf{Módulo(s)} & \textbf{Ferramentas} & \textbf{\textit{Solver}} & \textbf{Ambiente e data} \\
+\hline
+\corr{Oito candidatos adicionais (Frente~A)} & \corr{ESBMC~8.1.0; CBMC~5.95.1} & \corr{Boolector~3.2.4 (padrão)} & \corr{máquina virtual em nuvem, Ubuntu 24.04; 12/10/2026} \\
+\hline
+\corr{\texttt{batmon}, execução em nuvem} & \corr{ESBMC~8.1.0 e 8.5.0; CBMC~5.95.1} & \corr{Boolector~3.2.4} & \corr{máquina virtual em nuvem; 13/10/2026} \\
+\hline
+\corr{\texttt{batmon}, execução na máquina da autora} & \corr{ESBMC~8.2.0; CBMC~5.95.1} & \corr{Z3~v4.8.12 (padrão do ESBMC~8.2.0)} & \corr{WSL2, Ubuntu 24.04; 28/10/2026} \\
+\hline
+\corr{RoboClaw (Frente~B)} & \corr{ESBMC~8.2.0; CBMC~5.95.1} & \corr{não registrado no log} & \corr{máquina da autora; 28/10/2026} \\
+\hline
+\end{tabular}
+\end{table}
+
+\corr{CPU e RAM da máquina da autora: \falta{a informar}.}
 
 \lc{Segunda campanha: informar CPU e RAM da ``máquina da autora'' e qual versão (8.1, 8.2 ou 8.5) e qual solver produziram cada veredito. O texto cita o ESBMC 8.2.0, ausente desta tabela.}
 
@@ -352,17 +376,17 @@ aritmética de ponto flutuante.}
 A configuração é iterativa: parte-se de parâmetros padrão e ajusta-se conforme
 os resultados. Uma violação de asserção de desenrolamento (\textit{unwinding
 assertion}) indica que o limite atual é insuficiente para cobrir os laços do
-módulo, exigindo aumento do parâmetro \texttt{--unwind}, como ocorreu
-no MAVLink ($k = 10 \rightarrow 300$). Quando as funções da biblioteca matemática
+módulo, exigindo aumento do parâmetro \texttt{--unwind}, como mostra o teste de 12/10/2026 com o MAVLink: com as asserções
+ligadas e $k = 10$, falha a asserção de desenrolamento do laço do \texttt{memcpy}; com
+$k = 300$, o mesmo \textit{harness} é verificado com sucesso. A fase exploratória em que
+o valor 300 foi adotado não foi registrada, e esse teste é a evidência documentada. Quando as funções da biblioteca matemática
 tornam o modelo intratável, a opção \texttt{--no-library} desativa a biblioteca C
 abstrata do ESBMC: funções como \texttt{sinf} e \texttt{sqrtf} passam a
 retornar valores não determinísticos, uma sobreaproximação que não deixa escapar
 violações das demais verificações, mas deixa de verificar as propriedades
 internas à biblioteca --- caso do VTOL~\cite{Menezes2024}.
 
-\lc{Com \texttt{--no-unwinding-assertions} (Tabela~\ref{tab:etapas-ferramentas}), nenhuma asserção de desenrolamento dispara. Explicar como a insuficiência de $k$ no MAVLink foi detectada na fase exploratória; o mesmo vale para o Capítulo~\ref{cap:fundamentacao}.}
-
-
+%% LC (resolvido): insuficiencia de k no MAVLink explicada pelo teste de 12/10/2026 (k=10 falha a unwinding assertion do memcpy; k=300 verifica); a fase exploratoria nao foi registrada e isso e declarado.
 \subsection{Etapa~(v) --- Análise de Contraexemplos e Conferência contra o Código de Produção}
 
 Quando o ESBMC reporta uma violação, o contraexemplo gerado
@@ -1260,8 +1284,8 @@ três ferramentas, cada log com cabeçalho (data, máquina, pasta, comando e
 versões) e código de saída diferente de zero se algum resultado divergir do
 esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 
-\lc{Como os oito candidatos foram escolhidos? Três já tinham correção \textit{upstream} em setembro de 2026. Declarar critério e data de cada execução; se o histórico de correções guiou a escolha, tratar o viés nas ameaças à validade.}
-
+%% LC (resolvido): candidatos indicados pelo SAGRES, sem criterio proprio da autora; data da execucao declarada; vies tratado nas ameacas a validade.
+\corr{Os oito candidatos foram indicados pelo projeto SAGRES; a autora não aplicou critério próprio de seleção, e não há registro de que o histórico de correções do PX4 tenha orientado a indicação. Como três deles já tinham correção \textit{upstream} em setembro de 2026, essa origem da escolha é tratada como ameaça à validade (Seção~\ref{sec:ameacas-validade}). A execução de referência dos candidatos é de 12/10/2026 (Tabela~\ref{tab:versoes-segunda}).}
 
 \begin{table}[!htb]
 \centering

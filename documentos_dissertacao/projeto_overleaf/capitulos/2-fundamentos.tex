@@ -175,8 +175,8 @@ até $k$.
 Aplicar BMC a programas exige desenrolar (\textit{unwinding}) os laços até $k$.
 Uma \textit{assertion} ao fim de cada laço verifica se ele poderia executar além
 de $k$; quando ela falha, a análise daquele laço deixa de ser conclusiva, e é
-preciso elevar $k$ ou recorrer à $k$-indução --- foi o que ocorreu com o MAVLink,
-verificado com $k = 300$ (Capítulo~\ref{cap:experimentos}). Com a opção
+preciso elevar $k$ ou recorrer à $k$-indução --- foi o que mostrou o teste com o MAVLink: com as asserções
+ligadas, $k = 10$ falha e $k = 300$ verifica (Capítulo~\ref{cap:experimentos}). Com a opção
 \texttt{--no-unwinding-assertions}, laços acima de $k$ são truncados
 silenciosamente~\cite{Gadelha2017}.
 %% LC (resolvido): Biere1999 nao sustenta o comportamento da flag do ESBMC;
