@@ -55,7 +55,7 @@ enum class gps_dump_comm_mode_t : int32_t {
 void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_to_gps_device, 
                  gps_dump_s *dump_data, gps_dump_comm_mode_t active_mode)
 {
-    // Verificação de modo (do código original)
+    // Verificação de modo (adaptado do código original)
     if (active_mode != mode || !dump_data) {
         return;
     }
@@ -79,7 +79,7 @@ void dumpGpsData(uint8_t *data, size_t len, gps_dump_comm_mode_t mode, bool msg_
         dump_data->len += write_len;
         len -= write_len;
 
-        // LÓGICA DE PUBLICAÇÃO (do código original)
+        // LÓGICA DE PUBLICAÇÃO (adaptada do código original)
         if (dump_data->len >= GPS_DUMP_DATA_SIZE) {
             // BIT OPERATION adaptada do código do PX4
             if (msg_to_gps_device) {
@@ -263,7 +263,7 @@ int main() {
  *    - instance: observado em dump_data->instance = (uint8_t)_instance
  *    - timestamp: observado em dump_data->timestamp = hrt_absolute_time()
  * 
- * 3. PROPRIEDADES BASEADAS EM VULNERABILIDADES REAIS:
+ * 3. PROPRIEDADES BASEADAS EM CLASSES DE VULNERABILIDADE:
  *    - Buffer overflow em memcpy + aritmética de ponteiros
  *    - Integer underflow em GPS_DUMP_DATA_SIZE - dump_data->len
  *    - Loop infinito se write_len não decrementar len corretamente
