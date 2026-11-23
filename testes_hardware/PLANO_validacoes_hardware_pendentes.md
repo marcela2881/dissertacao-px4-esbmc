@@ -92,3 +92,16 @@ A conferir no código refatorado antes de escrever o passo a passo:
 
 Se o driver novo não aceitar 257, o resultado a registrar passa a ser "o valor
 inválido não pode mais ser configurado".
+
+## FT7 — situação em 2026-11-22/23 (adiado de novo)
+
+O orientador aprovou o ensaio do FT7 antes e depois da correção. O guia passo a
+passo está em `ft7/GUIA_ft7_passo_a_passo_2026-11.md`. O programa do emulador
+(`ft7/ft7_emulador_esp32/ft7_emulador_esp32.ino`) compila no Arduino IDE (placa
+ESP32 Dev Module, porta COM7 em outro dia). Primeira versão tinha um `*/` dentro
+do comentário do cabeçalho; corrigida.
+
+Parado em: gravar o programa no ESP32. A porta do ESP32 não apareceu no
+computador (cabo USB de dados não encontrado). Retomar com um cabo de dados.
+Falta ainda: ligar os três fios na TELEM2, o ensaio "antes" (firmware de 11/11,
+driver original) e o "depois" (patch do PR 28600, recompilar e gravar).
