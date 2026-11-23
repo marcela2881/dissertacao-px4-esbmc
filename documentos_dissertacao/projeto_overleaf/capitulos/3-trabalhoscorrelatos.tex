@@ -260,7 +260,7 @@ Han (2024)          & Fuzzing         & \textbf{Controle de voo}& Empírico   & 
 Khatiri (2024)      & Simulação       & \textbf{PX4 VANTs}      & Ferramenta & Simulação             & Aerialist \\ \hline
 Wang (2021)         & Estudo de defeitos & \textbf{PX4, ArduPilot} & Empírico & 569 defeitos        & --        \\ \hline
 Di Sorbo (2022)     & Análise SW      & \textbf{UAV software}   & Empírico   & Relatos de defeito    & --        \\ \hline
-\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 1 VAM$^\dagger$; 7 defeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
+\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 1 VAM$^\dagger$; 7 módulos com efeito reproduzido$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
 \end{tabular}
 
 \scriptsize
@@ -270,8 +270,12 @@ Capítulo~\ref{cap:introducao}. Não se reivindica defeito confirmado: a anális
 driver de produção mostrou o estado violador inalcançável
 (Seção~\ref{subsec:gps-inducao}). Ver Tabela~\ref{tab:resultados}.\\
 $^\ddagger$Segunda campanha: dez módulos, sete com o efeito previsto reproduzido no código
-real (dois reportados à comunidade, RoboClaw e batmon; três já corrigidos por terceiros).
-Ver Tabela~\ref{tab:desfechos-segunda}.
+real. Desses sete, dois foram reportados à comunidade (RoboClaw e batmon), três já haviam
+sido corrigidos por terceiros, um (\texttt{sumd}) já fora relatado por terceiro e segue
+sem correção, e um (\texttt{MicroStrain}), de impacto desprezível, não foi reportado. Dos
+três restantes, um é falso positivo de modelagem (\texttt{bst}) e dois não apresentaram
+defeito de memória (\texttt{logger} e \texttt{Common}). Ver
+Tabela~\ref{tab:desfechos-segunda}.
 \end{flushleft}
 \end{table}
 
@@ -298,12 +302,17 @@ inalcançável no driver de produção, e dois candidatos triados, respectivamen
 como especificação disputada (temperatura do BMI088) e falso positivo (FIFO do
 BMI088), com o procedimento de triagem documentado. Na segunda campanha, o mesmo
 método, estendido com a execução do código original sob sanitizadores (\textit{replay}),
-reproduziu o efeito previsto em sete de dez módulos. Dois desses defeitos foram reportados
-pela autora à comunidade PX4: o byte de velocidade acima de 127 no driver RoboClaw
+reproduziu o efeito previsto em sete de dez módulos, o que não equivale a sete defeitos
+distintos: um mesmo módulo pode reunir mais de um ponto. Dois desses módulos foram
+reportados pela autora à comunidade PX4: o byte de velocidade acima de 127 no driver RoboClaw
 (\textit{Issue}~\#29785), também observado em bancada numa Pixhawk~6X~RT, e a escrita fora
 do arranjo de tensões de célula no driver \texttt{batmon} (\textit{Issue}~\#29787). Três
 haviam sido corrigidos por terceiros no ramo \textit{main}, o que corrobora, de forma
-independente, que os achados eram defeitos reais. A aplicação ao SAGRES e ao
+independente, que os achados eram defeitos reais. Dos outros dois, o \texttt{sumd} já havia
+sido relatado por terceiro e continua sem correção, e o \texttt{MicroStrain}, de impacto
+desprezível, não foi reportado. Os três módulos restantes não renderam defeito: um
+falso positivo de modelagem (\texttt{bst}) e dois sem defeito de memória (\texttt{logger}
+e \texttt{Common}). A aplicação ao SAGRES e ao
 monitoramento ambiental na Amazônia é a motivação do estudo de caso, e não um
 fator que altere o método.
 
