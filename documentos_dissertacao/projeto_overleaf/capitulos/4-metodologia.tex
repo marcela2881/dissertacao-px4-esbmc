@@ -687,10 +687,10 @@ temperatura do BMI088.
 \caption{Procedimento de seleção de módulos críticos do PX4}
 \label{alg:selecao}
 \begin{algorithmic}[1]
-\Require Repositório PX4-Autopilot (ramo main, commit 8be2590c15), datasheets dos componentes, indicações do coordenador SAGRES
-\Ensure Conjunto $M$ de módulos selecionados para verificação
+\Require Repositório PX4-Autopilot (ramo main, commit 8be2590c15), datasheets dos componentes e conjunto de candidatos indicado pela equipe SAGRES com base na criticidade operacional
+\Ensure Conjunto $M$ de módulos que atendem aos critérios técnicos de verificação
 \State $M \gets \emptyset$
-\State $\text{candidatos} \gets$ módulos indicados pelo coordenador SAGRES
+\State $\text{candidatos} \gets$ módulos previamente indicados pela equipe SAGRES
 \ForAll{$m \in \text{candidatos}$}
     \State ler código-fonte de $m$ \Comment{análise da lógica interna}
     \State $\text{superficie}(m) \gets$ pontos de entrada de dado não confiável em $m$
