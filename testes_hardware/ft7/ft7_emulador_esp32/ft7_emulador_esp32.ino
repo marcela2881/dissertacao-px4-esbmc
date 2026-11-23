@@ -1,24 +1,22 @@
-/*
- * ft7_emulador_esp32.ino  (v1)
- *
- * O ESP32 faz o papel do sensor de vento FT Technologies FT7 para o driver
- * ft7_technologies do PX4 (commit 8be2590c15).
- *
- * Protocolo (ft7_technologies.cpp):
- *   placa  -> sensor : "$//,WV?*//\r\n"            (consulta, 12 bytes, ate 10 Hz)
- *   sensor -> placa  : "$WI,WVP=<vel>,<ang>,<st>*<XX>\r\n"
- *   XX = XOR, em hexadecimal, dos bytes entre '$' e '*'.
- *
- * Ligacao (a mesma do ensaio do RoboClaw, ESP32 em 3,3 V, sem conversor):
- *   TX da TELEM2 (amarelo) -> GPIO16 (RX2)
- *   RX da TELEM2 (azul)    -> GPIO17 (TX2)
- *   GND (preto)            -> GND
- *
- * Uso pelo Monitor serial (115200), digitando uma letra e Enter:
- *   n  -> responde cada consulta com uma mensagem normal (padrao ao ligar)
- *   l  -> envia UMA linha longa (46 virgulas + \r\n) e continua em modo normal
- *   p  -> para de responder
- */
+// ft7_emulador_esp32.ino  (v1)
+//
+// O ESP32 faz o papel do sensor de vento FT Technologies FT7 para o driver
+// ft7_technologies do PX4 (commit 8be2590c15).
+//
+// Protocolo (ft7_technologies.cpp):
+//   placa  -> sensor : "$//,WV?*//\r\n"            (consulta, 12 bytes, ate 10 Hz)
+//   sensor -> placa  : "$WI,WVP=<vel>,<ang>,<st>*<XX>\r\n"
+//   XX = XOR, em hexadecimal, dos bytes entre '$' e '*'.
+//
+// Ligacao (a mesma do ensaio do RoboClaw, ESP32 em 3,3 V, sem conversor):
+//   TX da TELEM2 (amarelo) -> GPIO16 (RX2)
+//   RX da TELEM2 (azul)    -> GPIO17 (TX2)
+//   GND (preto)            -> GND
+//
+// Uso pelo Monitor serial (115200), digitando uma letra e Enter:
+//   n  -> responde cada consulta com uma mensagem normal (padrao ao ligar)
+//   l  -> envia UMA linha longa (46 virgulas + \r\n) e continua em modo normal
+//   p  -> para de responder
 
 const long BAUD_FT7 = 9600;   // o driver fixa B9600
 const int  PINO_RX  = 16;
