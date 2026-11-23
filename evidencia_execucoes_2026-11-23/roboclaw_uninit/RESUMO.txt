@@ -1,0 +1,5 @@
+Valgrind, original                 | exit=9 | linhas com 'uninitialised'=3
+Valgrind, corrigido                | exit=0 | linhas com 'uninitialised'=0
+Valgrind memoria suja, original    | exit=124 (124 = ficou bloqueado ate o limite de 15 s)
+Valgrind memoria suja, corrigido   | exit=0 (124 = ficou bloqueado ate o limite de 15 s)
+MSan, original                     | exit=0 | 0 ocorrencia(s) de use-of-uninitialized-value

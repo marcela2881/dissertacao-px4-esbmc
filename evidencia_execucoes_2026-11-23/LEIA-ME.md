@@ -28,4 +28,16 @@ Boolector); tempos daqui não são comparáveis com os da Tabela de resultados.
   tentativa do GPS com k = 211, cortada por uma reinicialização do Windows; termina na mesma linha
   do desenrolamento (iteração 211 do laço do `memcpy`), sem veredito e sem linha de saída.
 
-Ainda não arquivada aqui: a repetição do CBMC no Battery e no EKF2 com 7.200 s.
+- `cbmc_longo_7200s/`: CBMC 5.95.1 repetido no Battery e no EKF2, com e sem asserções de
+  desenrolamento, limite de 7.200 s. As quatro execuções terminam sem veredito (saída 124). O
+  `RESUMO.txt` registra as quatro; o log individual do Battery sem asserções foi regravado por
+  uma segunda execução do script (iniciada por engano) e, por isso, é só o cabeçalho de uma
+  rodada interrompida, sem linha de saída. O resultado dele é o do `RESUMO.txt`. O solver
+  (MiniSAT 2.2.1) recebeu 36.030 variáveis e 154.528 cláusulas no Battery e 40.904 variáveis e
+  178.083 cláusulas no EKF2.
+- `roboclaw_uninit/`: reprodução do padrão de memória não inicializada do RoboClaw (Valgrind 3.22.0
+  e MSan com clang 18.1.3), executada pela autora em 23/11/2026 (05:07 UTC). Valgrind no original:
+  saída 9 e três avisos de valor não inicializado; no corrigido: saída 0 e nenhum aviso. Com
+  memória suja, o original ficou bloqueado até o limite de 15 s; o corrigido terminou. O MSan não
+  detectou o problema (0 ocorrências) e não é usado como evidência. Os executáveis não foram
+  arquivados.

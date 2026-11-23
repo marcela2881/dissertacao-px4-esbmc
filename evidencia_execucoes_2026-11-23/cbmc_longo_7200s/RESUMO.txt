@@ -1,0 +1,4 @@
+Battery       k=10  sem  unwinding | SEM VEREDITO             |  | exit: 124  tempo_de_parede: 7200s
+Battery       k=10  com  unwinding | SEM VEREDITO             |  | exit: 124  tempo_de_parede: 7200s
+EKF2          k=10  sem  unwinding | SEM VEREDITO             |  | exit: 124  tempo_de_parede: 7200s
+EKF2          k=10  com  unwinding | SEM VEREDITO             |  | exit: 124  tempo_de_parede: 7200s
