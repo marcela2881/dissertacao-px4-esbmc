@@ -594,62 +594,7 @@ subtração sem sinal pode dar a volta. Trata-se de decisão de modelagem que
 restringe a busca: violações que exigissem estados iniciais distantes da
 fronteira não seriam alcançadas por este \textit{harness}.}
 
-%% LC 15 (resolvido 19/10/2026): tautologia declarada; propriedade de memoria do
-%% memcpy e a verificada.
-\corr{A \textit{assertion} final da Listagem~\ref{lst:exemplo-harness-gps} é,
-na prática, uma tautologia: o terceiro termo, \texttt{(dump\_buffer.len \& 0x7F)
-<= GPS\_DUMP\_DATA\_SIZE}, é sempre verdadeiro, pois o valor mascarado com
-\texttt{0x7F} nunca passa de $127$, que é menor que $200$. A \textit{assertion}
-não detecta, portanto, nenhuma violação. A violação reportada pelo ESBMC vem da
-verificação automática de limites dentro do \texttt{memcpy}
-(\textit{dereference failure}: acesso fora dos limites do objeto), que é a
-propriedade efetivamente verificada neste teste. Uma propriedade de saída
-significativa seria \texttt{dump\_buffer.len <= GPS\_DUMP\_DATA\_SIZE} após a
-chamada, sem os termos disjuntivos.}
-
-\corr{Para separar o que é defeito do que é artefato dessa modelagem, o
-\textit{harness} foi reexecutado com a propriedade de saída na forma não
-tautológica (\texttt{dump\_buffer.len <= GPS\_DUMP\_DATA\_SIZE}) e partindo de um
-estado inicial válido (\texttt{dump\_buffer.len < GPS\_DUMP\_DATA\_SIZE}). Nessas
-condições o ESBMC~8.2.0 (solver Z3) verifica \textsc{verification successful} em
-cerca de $389$~s: a lógica transcrita do \texttt{dumpGpsData} respeita o limite a
-partir de qualquer estado válido. A violação observada na versão exploratória
-decorre, portanto, exclusivamente do estado inicial acima da capacidade admitido
-pela pré-condição --- estado inalcançável no driver de produção, como confirma a
-prova indutiva da Seção~\ref{subsec:gps-inducao}. Os dois resultados são
-consistentes: o modelo só viola a propriedade quando parte de um estado que o
-código de produção nunca alcança, o que sustenta a classificação do achado como
-falso positivo de modelagem, e não como defeito. O mecanismo é o da pré-condição ampla demais, apontada na etapa~(ii) como fonte de falso positivo: a violação só aparece porque o \textit{harness} admite um estado inicial acima da capacidade.}
-
-%% LC (resolvido): GPS reclassificado como falso positivo de modelagem por pre-condicao ampla (mesmo mecanismo da etapa ii).
-%% LC 16 (resolvido 19/10/2026): violacao e admitida pela pre-condicao.
-\corr{A segunda pré-condição merece uma ressalva adicional. Como ela admite
-\texttt{dump\_buffer.len} entre $195$ e $255$, o \textit{harness} já parte de
-estados em que o preenchimento está \emph{acima} da capacidade de $200$ bytes ---
-o contraexemplo usa $207$. A violação, portanto, não é derivada a partir de um
-estado inicial válido: ela é admitida pela pré-condição. O que o contraexemplo
-mostra é que, \emph{se} o preenchimento passar da capacidade, a guarda do trecho
-transcrito falha; não mostra que esse estado é alcançável. Foi exatamente essa
-pergunta que a revisão do mantenedor e a prova indutiva da
-Seção~\ref{subsec:gps-inducao} responderam negativamente para o driver de
-produção.}
-
-%% LC 17 (resolvido 19/10/2026): retirado "fiel"; duas diferencas declaradas.
-\corr{O \textit{harness} também difere do driver em dois pontos, que impedem
-chamá-lo de transcrição fiel. Primeiro, a capacidade: $200$ bytes no
-\textit{harness} (\texttt{GPS\_DUMP\_DATA\_SIZE}) e $79$ no PX4
-(\texttt{sizeof(dump\_data->data)}, em \texttt{msg/GpsDump.msg}). Segundo, os
-tipos dos operandos: no \textit{harness}, a subtração é feita em \texttt{int}
-(macro \texttt{int} menos \texttt{uint8\_t} promovido), e o resultado negativo é
-convertido para \texttt{size\_t}; no PX4, a subtração já é em \texttt{size\_t}.
-O mecanismo do \textit{underflow} é análogo nos dois, mas os valores e o
-caminho não são idênticos; por isso, o resultado vale para o modelo, e a
-conclusão sobre o driver depende da conferência da etapa~(v). Essa limitação,
-comum a toda a primeira campanha, motivou a segunda campanha, em que o código
-verificado é o original (Seção~\ref{sec:segunda-campanha}).}
-
-%% LC (resolvido): terceira diferenca (bit 7 como sinalizador; capacidade 79 < 128) discutida no paragrafo abaixo.
-\corr{Há uma terceira diferença, que torna o modelo incoerente com a codificação real. No PX4, o bit~7 de \texttt{len} é um sinalizador: indica que o dado foi enviado ao dispositivo, e a contagem ocupa os sete bits restantes, o que só funciona porque a capacidade é $79$, menor que $128$. No \textit{harness}, a capacidade é $200$ e \texttt{len} varia livremente entre $195$ e $255$; para valores acima de $127$, o bit~7 já está ligado, e o sinalizador e a contagem deixam de se distinguir (por exemplo, $200 \mathbin{|} \texttt{0x80} = 200$). A segunda pré-condição, portanto, admite estados iniciais que a codificação real não consegue representar como contagem. Isso reforça que o estado violador é artefato do modelo: na placa, as $175$ mensagens coletadas trazem \texttt{len}~$= 207 = 128 + 79$, isto é, o sinalizador mais o buffer exatamente cheio, e nenhuma excede a capacidade (Seção~\ref{subsec:validacao-bancada}).}
+\corr{Os limites desse \textit{harness} --- a \textit{assertion} final, que é uma tautologia, as diferenças em relação ao driver de produção e o reexame com propriedade não tautológica --- são discutidos na Seção~\ref{subsec:gps-limites-harness}, junto ao estudo de caso.}
 
 Para concretizar a aplicação da metodologia, esta seção percorre
 \revisao{as oito etapas} tendo o driver GPS uBlox como objeto de verificação. O driver,
