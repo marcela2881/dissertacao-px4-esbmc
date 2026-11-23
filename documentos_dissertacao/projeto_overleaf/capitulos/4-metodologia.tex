@@ -8,14 +8,13 @@ Este capítulo apresenta a metodologia empregada na verificação formal de mód
 
 \corr{A metodologia foi aplicada em duas campanhas, que totalizam 22 módulos distintos. A \textbf{primeira campanha}, apresentada no artigo derivado, abrangeu doze módulos relacionados a sensoriamento, estimação, navegação e comunicação. Nessa etapa, os \textit{harnesses} foram construídos a partir da transcrição de trechos do código do PX4. A \textbf{segunda campanha}, desenvolvida no âmbito desta dissertação, acrescentou dez módulos em três frentes: oito candidatos adicionais em módulos de entrada e de sistema, o driver de saída RoboClaw e o driver de bateria batmon. Nessa segunda etapa, a verificação e a conferência foram realizadas sobre o código-fonte \emph{original} do PX4, com \textit{replay} sob sanitizadores (Seção~\ref{sec:segunda-campanha}). As duas campanhas utilizaram o commit \texttt{8be2590c15}, exceto o batmon, cuja análise foi conferida contra o \texttt{main} de 13/10/2026 (commit \texttt{c9b9e4e25e}).}
 
-As etapas~(i) e~(iv)--(vi) seguem o fluxo de Sousa et
-al.~\cite{Sousa2026}; as etapas~(ii) e~(iii) são específicas de \textit{firmware},
-e as etapas~(vii) e~(viii) são acréscimos deste trabalho. Dentro da etapa~(v), a
+Dentro da etapa~(v), a
 conferência contra o código de produção é a que separa violação alcançável no
 modelo de falso positivo: foi ela que reclassificou o candidato do contador de
 FIFO do BMI088 (Seção~\ref{subsec:imu-fifo}), que já havia sido proposto
 \textit{upstream}, como falso positivo.
 
+%% LC (resolvido): a descricao de quais etapas seguem Sousa et al. ficou so na Secao de visao geral; aqui resta a distincao feita na etapa (v).
 %% LC 02 (resolvido 19/10/2026): ordem real da primeira campanha.
 \corr{Embora as etapas sejam apresentadas em ordem lógica, sua execução não seguiu essa sequência em todos os casos da primeira campanha. Nos casos do GPS e do contador de FIFO do BMI088, o reporte (vi) ocorreu imediatamente após a execução do ESBMC (iv), pois as \textit{issues} foram abertas para solicitar a triagem da comunidade. A conferência com o código de produção (v) foi realizada posteriormente, a partir da análise do código e das manifestações dos mantenedores. Assim, nesses casos, a sequência efetiva foi (i)--(iv), (vi), (v) e (vii). Essa inversão é considerada na discussão das ameaças à validade (Seção~\ref{sec:ameacas-validade}). Na segunda campanha, adotou-se a ordem prevista: nenhum candidato foi reportado antes da conferência com o código de produção e da execução do \textit{replay} (Seção~\ref{sec:segunda-campanha}).}
 
@@ -52,6 +51,9 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \end{tabular}
 \end{table}
+
+\lc{Segunda campanha: informar CPU e RAM da ``máquina da autora'' e qual versão (8.1, 8.2 ou 8.5) e qual solver produziram cada veredito. O texto cita o ESBMC 8.2.0, ausente desta tabela.}
+
 
 \section{Visão Geral da Abordagem}
 \label{sec:visao-geral}
@@ -278,6 +280,9 @@ contra o código de produção da etapa~(v).}
 \end{tabular}
 \end{table}
 
+\lc{Battery Monitor limitado a 1--12 células exclui 15S e 16S, exatamente o caso do defeito do batmon. Justificar a origem do limite ou relaxá-lo ao máximo aceito pelo parâmetro e reexecutar.}
+
+
 %% LC 08 (resolvido 19/10/2026): citacao Godefroid2005 removida.
 \corr{Para cada módulo, um arquivo de \textit{harness} centraliza as entradas
 não determinísticas, as pré-condições, as funções de teste e a função de
@@ -304,6 +309,36 @@ o manual da RoboClaw, Rev.~6.0, pp.~48--49).}
 \subsection{Etapa~(iv) --- Configuração e Execução do ESBMC}
 
 A configuração do ESBMC depende, entre outros fatores, do limite de desenrolamento e do \textit{solver} SMT selecionado. O parâmetro \texttt{--unwind} determina quantas iterações de cada laço serão exploradas. Limites menores reduzem o custo da análise, mas podem deixar de alcançar defeitos que ocorram em iterações posteriores. Já a opção \texttt{--default-solver} seleciona o \textit{solver} utilizado e pode afetar tanto o tempo de execução quanto a obtenção de um resultado dentro do tempo-limite. Nesta pesquisa, o Z3 não produziu um veredito dentro do \textit{timeout} nos testes indicados para GPS, MAVLink e EKF2 com \texttt{--unwind 10}; por esse motivo, o Boolector foi adotado nas execuções correspondentes da primeira campanha (Seção~\ref{sec:ameacas-validade}).
+
+%% LC (resolvido): limite de cada experimento reunido na Tabela tab:timeouts, a partir dos scripts e cabecalhos dos logs.
+\corr{O tempo-limite variou conforme o experimento. A Tabela~\ref{tab:timeouts} reúne o limite de cada um, tal como consta nos \textit{scripts} e nos cabeçalhos dos logs.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Tempo-limite de cada experimento}}
+\label{tab:timeouts}
+\footnotesize
+\begin{tabular}{|>{\raggedright\arraybackslash}p{5.0cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{5.6cm}|}
+\hline
+\textbf{Experimento} & \textbf{Ferramenta} & \textbf{Tempo-limite} \\
+\hline
+\corr{Primeira campanha (Tabela~\ref{tab:resultados}, medianas de três execuções)} & \corr{ESBMC~8.1.0} & \corr{\texttt{--timeout 120s}} \\
+\hline
+\corr{Comparação de versões do ESBMC (8.1.0 e 8.5.0)} & \corr{ESBMC} & \corr{\texttt{--timeout 120s}; o GPS foi refeito com \texttt{600s}} \\
+\hline
+\corr{Z3 \textit{versus} Boolector (GPS, MAVLink, EKF2)} & \corr{ESBMC~8.1.0} & \corr{300~s} \\
+\hline
+\corr{Reexecução com asserções de desenrolamento ligadas} & \corr{ESBMC~8.1.0} & \corr{\texttt{--timeout 600s}, com limite externo de 30~min por módulo} \\
+\hline
+\corr{Validação cruzada do GPS (\texttt{--unwind 10})} & \corr{CBMC~5.95.1} & \corr{30~min (não terminou)} \\
+\hline
+\corr{Segunda campanha: candidatos adicionais} & \corr{ESBMC~8.1.0, CBMC~5.95.1} & \corr{120~s (\texttt{externalChecks}, \texttt{ft7}, \texttt{IridiumSBD}, \texttt{bst}); 300~s (\texttt{MicroStrain}); 600~s (\texttt{logger}); nas demais, sem \texttt{--timeout} próprio, sob o limite externo de 60~min do roteiro} \\
+\hline
+\corr{Segunda campanha: RoboClaw e \texttt{batmon}} & \corr{ESBMC, CBMC} & \corr{limite de tempo não registrado nos logs} \\
+\hline
+\end{tabular}
+\end{table}
+
 %% LC 10 (resolvido 19/10/2026): bit-blasting de ponto flutuante do ESBMC.
 \corr{Como o Boolector não suporta a teoria de ponto flutuante do padrão
 SMT-LIB, o ESBMC codifica as operações IEEE-754 de precisão simples e dupla como
@@ -324,6 +359,9 @@ abstrata do ESBMC: funções como \texttt{sinf} e \texttt{sqrtf} passam a
 retornar valores não determinísticos, uma sobreaproximação que não deixa escapar
 violações das demais verificações, mas deixa de verificar as propriedades
 internas à biblioteca --- caso do VTOL~\cite{Menezes2024}.
+
+\lc{Com \texttt{--no-unwinding-assertions} (Tabela~\ref{tab:etapas-ferramentas}), nenhuma asserção de desenrolamento dispara. Explicar como a insuficiência de $k$ no MAVLink foi detectada na fase exploratória; o mesmo vale para o Capítulo~\ref{cap:fundamentacao}.}
+
 
 \subsection{Etapa~(v) --- Análise de Contraexemplos e Conferência contra o Código de Produção}
 
@@ -375,6 +413,9 @@ termina antes, no código de preparação; e confirmar que o cenário crítico �
 derivado da entrada injetada, e não fixado por atribuição direta no programa de
 \textit{replay} --- caso em que se estaria demonstrando aritmética, e não
 alcançabilidade.}
+
+\lc{Critério conflita com o Capítulo~\ref{cap:introducao}: reproduzir no código de produção define ``defeito reproduzido'', não VAM. E não é binário, pois há três desfechos. Alinhar com a caixa de classificação.}
+
 
 Nos três contraexemplos da primeira campanha, a conferência foi
 feita por leitura do código de produção: o candidato do contador de FIFO foi
@@ -515,7 +556,8 @@ gps_dump_s dump_buffer;
 dump_buffer.len = nondet_uint8();
 __ESBMC_assume(dump_buffer.len >= GPS_DUMP_DATA_SIZE - 5);
 
-// Execucao da funcao real do PX4 sobre a entrada simbolica
+// Execucao da transcricao adaptada de dumpGpsData() sobre a entrada
+// simbolica (capacidade 200 no harness; 79 no PX4)
 dumpGpsData(input_data, input_len, gps_dump_comm_mode_t::Full,
             /* msg_to_gps_device = */ true,
             &dump_buffer, gps_dump_comm_mode_t::Full);
@@ -527,6 +569,7 @@ assert(dump_buffer.len == 0 ||
        (dump_buffer.len & 0x7F) <= GPS_DUMP_DATA_SIZE);
 \end{lstlisting}
 
+%% LC (resolvido): comentario da listagem corrigido; trata-se de transcricao adaptada, com capacidade 200 (harness) e 79 (PX4).
 \revisao{As duas pré-condições delimitam o espaço de entradas e, com ele, o alcance
 do veredito. A primeira restringe \texttt{input\_len} ao tamanho do vetor de
 entrada declarado no próprio \textit{harness}, $210$ bytes, evitando que o
@@ -564,6 +607,9 @@ consistentes: o modelo só viola a propriedade quando parte de um estado que o
 código de produção nunca alcança, o que sustenta a classificação do achado como
 violação alcançável no modelo, e não como defeito.}
 
+\lc{Se a violação vem só de estado inicial que a produção nunca alcança, o mecanismo é o da pré-condição larga demais, apontada na Etapa~(ii) como fonte de falso positivo. Justificar por que o GPS é VAM e não falso positivo.}
+
+
 %% LC 16 (resolvido 19/10/2026): violacao e admitida pela pre-condicao.
 \corr{A segunda pré-condição merece uma ressalva adicional. Como ela admite
 \texttt{dump\_buffer.len} entre $195$ e $255$, o \textit{harness} já parte de
@@ -589,6 +635,9 @@ caminho não são idênticos; por isso, o resultado vale para o modelo, e a
 conclusão sobre o driver depende da conferência da etapa~(v). Essa limitação,
 comum a toda a primeira campanha, motivou a segunda campanha, em que o código
 verificado é o original (Seção~\ref{sec:segunda-campanha}).}
+
+%% LC (resolvido): terceira diferenca (bit 7 como sinalizador; capacidade 79 < 128) discutida no paragrafo abaixo.
+\corr{Há uma terceira diferença, que torna o modelo incoerente com a codificação real. No PX4, o bit~7 de \texttt{len} é um sinalizador: indica que o dado foi enviado ao dispositivo, e a contagem ocupa os sete bits restantes, o que só funciona porque a capacidade é $79$, menor que $128$. No \textit{harness}, a capacidade é $200$ e \texttt{len} varia livremente entre $195$ e $255$; para valores acima de $127$, o bit~7 já está ligado, e o sinalizador e a contagem deixam de se distinguir (por exemplo, $200 \mathbin{|} \texttt{0x80} = 200$). A segunda pré-condição, portanto, admite estados iniciais que a codificação real não consegue representar como contagem. Isso reforça que o estado violador é artefato do modelo: na placa, as $175$ mensagens coletadas trazem \texttt{len}~$= 207 = 128 + 79$, isto é, o sinalizador mais o buffer exatamente cheio, e nenhuma excede a capacidade (Seção~\ref{subsec:validacao-bancada}).}
 
 Para concretizar a aplicação da metodologia, esta seção percorre
 \revisao{as oito etapas} tendo o driver GPS uBlox como objeto de verificação. O driver,
@@ -1056,8 +1105,12 @@ no próprio \textit{harness} (\texttt{test\_vehicle\_magnetometer.cpp}) para
 modelar o cálculo do ganho feito em
 \texttt{src/modules/sensors/vehicle\_magnetometer/VehicleMagnetometer.cpp}.
 O veredito desta propriedade vale, portanto, para o modelo escrito no
-\textit{harness}, e não diretamente para o código do PX4.}
+\textit{harness}, e não diretamente para o código do PX4. Além disso, com
+$P, R \geq 0$ e soma positiva, $K = P/(P+R) \in [0,1]$ vale por construção, e a
+propriedade não pode falhar. Ela é apresentada como verificação de sanidade do
+modelo, e não como evidência sobre o PX4.}
 
+%% LC (resolvido): propriedade do ganho de Kalman reapresentada como verificacao de sanidade do modelo, nao como evidencia sobre o PX4.
 No MAVLink, verificou-se que o preenchimento do buffer de transmissão
 nunca excede sua capacidade, de 280 bytes, o tamanho máximo de pacote do
 protocolo, mesmo com pacotes de entrada maiores que ela e após envios
@@ -1186,6 +1239,9 @@ orientador: o do RoboClaw (\textit{Issue}~\#29785) e o do batmon
 (\textit{Issue}~\#29787). Ambos aguardavam triagem na data de fechamento deste
 texto.}
 
+\lc{Esta seção traz resultados (tabelas por frente, ensaio em bancada). Deixar aqui só o protocolo e mover os desfechos para o capítulo de resultados, que hoje apenas remete para cá.}
+
+
 \corr{A campanha reúne dez módulos complementares aos doze da primeira, em três
 frentes: (A)~oito candidatos adicionais em módulos de entrada e de sistema;
 (B)~o driver de saída \textbf{RoboClaw}; e (C)~o driver de bateria
@@ -1203,6 +1259,9 @@ endereço (ASan) e de comportamento indefinido (UBSan). Um único script
 três ferramentas, cada log com cabeçalho (data, máquina, pasta, comando e
 versões) e código de saída diferente de zero se algum resultado divergir do
 esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
+
+\lc{Como os oito candidatos foram escolhidos? Três já tinham correção \textit{upstream} em setembro de 2026. Declarar critério e data de cada execução; se o histórico de correções guiou a escolha, tratar o viés nas ameaças à validade.}
+
 
 \begin{table}[!htb]
 \centering
@@ -1235,6 +1294,9 @@ esperado. A Tabela~\ref{tab:candidatos-extras} resume os desfechos.}
 \end{tabular}
 \end{table}
 
+\lc{Common.cpp está ``retirado'' aqui e ``sem defeito de memória'' no capítulo de resultados. Pela descrição (índice barrado por guarda de produção), é falso positivo de modelagem, como o bst. Uniformizar.}
+
+
 \corr{Dois pontos merecem registro. Primeiro, três candidatos
 (\texttt{externalChecks}, \texttt{ft7} e \texttt{IridiumSBD}) eram violações reais
 no commit testado e foram \emph{corrigidos pelo próprio PX4}, por outras pessoas,
@@ -1249,6 +1311,9 @@ assertions} e \textit{bounds} que cobrem os laços (por exemplo, 260 no
 acusam as mesmas violações. O caso do \texttt{sumd} precisou de
 \texttt{--unwind 70}; como o modo \texttt{--multi-property} do ESBMC ultrapassa
 quinze minutos nesse limite, a contagem de propriedades foi tomada do CBMC.}
+
+%% LC (resolvido): explicado por que o sumd nao foi reportado de novo (ja relatado por terceiro, PR fechado sem merge) e o efeito observado.
+\corr{O \texttt{sumd} merece uma explicação à parte, porque o defeito é reproduzido, persiste no \texttt{main} e continua sem correção. Ele não foi reportado de novo porque já havia sido relatado por outra pessoa, com a mesma análise, em 08/10/2026 (PR~\#29031, refeito como \#29117); o mantenedor fechou o PR sem \textit{merge} e sem comentário em 13/10/2026. Abrir outra \textit{issue} duplicaria o relato sem acrescentar informação ao projeto. O efeito observado é a escrita de um byte além de \texttt{sumd\_data[64]}, sobre a variável vizinha \texttt{crc16\_high}, com um quadro legítimo de $32$ canais.}
 
 \subsection{\corr{Frente B --- Driver de saída RoboClaw}}
 \label{subsec:2c-roboclaw}
@@ -1355,6 +1420,9 @@ Quarto, só o Bug~1 foi exercitado em hardware; a evidência do Bug~2 continua
 sendo a formal e o \textit{replay} com UART emulada. As capturas, os
 \textit{diffs} dos firmwares e o código do emulador estão em
 \texttt{testes\_hardware/roboclaw/hardware\_pixhawk6xrt/}.}
+
+\lc{Membros não inicializados que paralisam a fila \texttt{hp\_default} merecem investigação própria: reproduzir com Valgrind ou MSan e, se confirmado, acrescentar à \textit{Issue}~\#29785.}
+
 
 \subsection{\corr{Frente C --- Driver de bateria batmon}}
 \label{subsec:2c-batmon}
