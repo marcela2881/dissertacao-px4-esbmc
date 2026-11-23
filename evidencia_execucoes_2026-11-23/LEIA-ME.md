@@ -21,5 +21,11 @@ Boolector); tempos daqui não são comparáveis com os da Tabela de resultados.
 - `guarda_memoria.log`: registros do monitor de memória (encerra o GPS k = 211 se a memória
   disponível cair abaixo de 1,2 GiB).
 
-Ainda não arquivados aqui: os logs dos testes repetidos com 900 s (`logs_inconclusivos`) e a
-repetição do CBMC no Battery e no EKF2 com 7.200 s.
+- `inconclusivos_900s/`: os testes que ficaram sem veredito com 120 s, repetidos com limite de 900 s
+  (Battery 16 células, EKF2 teste 1, GPS testes 0 a 3, VTOL testes 0 e 1; o teste 4 do GPS não foi
+  repetido). Os logs de cada teste estão nesta pasta; o `RESUMO.txt` traz os vereditos.
+- `pendencias_A_B_C/C_gps_k211_original_cortado_pela_reinicializacao_do_windows.log`: primeira
+  tentativa do GPS com k = 211, cortada por uma reinicialização do Windows; termina na mesma linha
+  do desenrolamento (iteração 211 do laço do `memcpy`), sem veredito e sem linha de saída.
+
+Ainda não arquivada aqui: a repetição do CBMC no Battery e no EKF2 com 7.200 s.

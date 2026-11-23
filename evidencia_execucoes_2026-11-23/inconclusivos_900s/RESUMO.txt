@@ -1,0 +1,8 @@
+battery16 | VERIFICATION SUCCESSFUL |  | exit: 0   tempo_de_parede: 278s
+EKF2 teste 1 | SEM VEREDITO |  | exit: 1   tempo_de_parede: 900s
+GPS teste 3 | SEM VEREDITO |  | exit: 1   tempo_de_parede: 901s
+GPS teste 0 | SEM VEREDITO |  | exit: 1   tempo_de_parede: 901s
+GPS teste 1 | SEM VEREDITO |  | exit: 1   tempo_de_parede: 900s
+GPS teste 2 | VERIFICATION SUCCESSFUL |  | exit: 0   tempo_de_parede: 289s
+VTOL teste 0 | VERIFICATION SUCCESSFUL |  | exit: 0   tempo_de_parede: 154s
+VTOL teste 1 | VERIFICATION SUCCESSFUL |  | exit: 0   tempo_de_parede: 496s

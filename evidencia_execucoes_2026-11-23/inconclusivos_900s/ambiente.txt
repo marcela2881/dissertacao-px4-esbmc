@@ -1,0 +1,9 @@
+data: 2026-11-23T10:36:35Z
+host: bruno-pc
+CPU(s):                                  16
+Model name:                              AMD Ryzen 7 5700U with Radeon Graphics
+               total        used        free      shared  buff/cache   available
+Mem:            11Gi       1.8Gi       9.5Gi       3.6Mi       592Mi       9.9Gi
+ESBMC version 8.2.0 64-bit x86_64 linux
+limite por execucao: 900s
+solver usado: z3
