@@ -29,7 +29,8 @@
 #ifdef USE_CBMC
 #define ASSUME(c) __CPROVER_assume(c)
 #else
-extern void __ESBMC_assume(int);
+/* __ESBMC_assume ja e declarada pelo proprio ESBMC (esbmc_intrinsics.h, argumento _Bool):
+   nao declarar de novo, senao ha 'conflicting types' em arquivo .c */
 #define ASSUME(c) __ESBMC_assume(c)
 #endif
 extern unsigned int nondet_uint(void);
