@@ -850,8 +850,9 @@ void test_temperature_calculation() {
 A função da Listagem~\ref{lst:stub_i2c} é uma transcrição do trecho
 correspondente do driver BMI088 do PX4, copiada para dentro do
 \textit{harness}, e não a função compilada a partir do código de produção. É assim
-em todos os \textit{harnesses} \corr{da primeira campanha}: cada um extrai trechos do código-fonte do PX4,
-que não foi modificado. Isso tem uma consequência que se registra aqui e nas
+em todos os \textit{harnesses} \corr{da primeira campanha}: cada um reescreve, como modelo, a lógica do trecho
+correspondente do PX4, que não foi modificado. A proporção de linhas idênticas ao código do PX4 é
+baixa (Seção~\ref{sec:modulos-verificados}). Isso tem uma consequência que se registra aqui e nas
 ameaças à validade (Seção~\ref{sec:ameacas-validade}): o que se verifica é a
 cópia da lógica, e uma guarda presente no driver e omitida no trecho transcrito
 produz um falso positivo --- exatamente o mecanismo do candidato do contador de

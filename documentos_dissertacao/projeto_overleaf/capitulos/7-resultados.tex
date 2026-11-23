@@ -273,10 +273,45 @@ VTOL              & \texttt{modules/vtol\_att\_control} & \artigo{591} & 146 & A
 \end{tabular}
 
 \footnotesize
-Alvo = LoC \artigo{do(s) arquivo(s)-fonte do PX4 que o harness extrai (\textit{commit} fixado)}; Harness = LoC do harness (ambos por \texttt{wc -l}).
+Alvo = LoC \artigo{do(s) arquivo(s)-fonte do PX4 que o harness representa (\textit{commit} fixado)}; Harness = LoC do harness (ambos por \texttt{wc -l}).
 \end{table}
 
-\lc{Acrescentar coluna: linhas do PX4 efetivamente extraídas por harness, separadas do código de modelo.}
+%% LC (resolvido 23/11/2026): medicao feita pela autora em 23/11/2026, no PX4 8be2590c15 (logs: contagem_linhas_extraidas_2026-11/logs/).
+\corr{Para separar o código do PX4 do código de modelo, contaram-se, em cada \textit{harness}, as linhas de código (sem comentários nem linhas em branco) que são idênticas, descontados os espaços, a alguma linha do código-fonte do PX4 em \texttt{src/} (Tabela~\ref{tab:linhas-extraidas}). Linhas triviais, com menos de 12 caracteres (como \texttt{\{}, \texttt{\}} e \texttt{return;}), ficam fora da contagem, e só contam arquivos do PX4 com pelo menos cinco linhas coincidentes. O número é um \emph{limite inferior}: uma linha adaptada, com tipo, nome ou constante alterados, conta como modelo. A medição foi feita pela autora em 23/11/2026, no \textit{commit} \texttt{8be2590c15}.}
+
+\begin{table}[!htb]
+\centering
+\caption{\corr{Linhas de código dos \textit{harnesses} idênticas ao PX4 e linhas de modelo}}
+\label{tab:linhas-extraidas}
+\footnotesize
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+\textbf{Módulo} & \textbf{Código} & \textbf{Não triviais} & \textbf{Idênticas ao PX4} & \textbf{Modelo} \\
+\hline
+GPS uBlox & 125 & 92 & 12 & 80 \\
+IMU BMI088 & 146 & 105 & 5 & 100 \\
+MAVLink & 47 & 33 & 0 & 33 \\
+Expo RC & 74 & 61 & 6 & 55 \\
+Battery Monitor & 151 & 119 & 0 & 119 \\
+PWM Output & 106 & 84 & 0 & 84 \\
+RC Update & 137 & 107 & 0 & 107 \\
+Navigator & 169 & 118 & 5$^{*}$ & 113 \\
+EKF2 Covariance & 154 & 129 & 0 & 129 \\
+Magnetômetro & 114 & 93 & 0 & 93 \\
+Barômetro & 158 & 120 & 0 & 120 \\
+VTOL & 131 & 112 & 0 & 112 \\
+\hline
+\textbf{Total} & \textbf{1\,512} & \textbf{1\,173} & \textbf{28} & \textbf{1\,145} \\
+\hline
+\end{tabular}
+
+\scriptsize
+\begin{flushleft}
+\corr{Código = linhas sem comentários e sem linhas em branco. Não triviais = Código menos as linhas com menos de 12 caracteres (339 no total). $^{*}$As cinco coincidências do Navigator estão em uma biblioteca alheia ao módulo (\texttt{lib/heatshrink}) e são casuais; o valor efetivo é zero.}
+\end{flushleft}
+\end{table}
+
+\corr{Apenas 28 das 1\,173 linhas não triviais ($2{,}4\,\%$) coincidem com o PX4, e oito dos doze \textit{harnesses} não têm nenhuma. Os que mais copiam são o GPS ($12$, sobretudo de \texttt{drivers/gps/gps.cpp}), o Expo RC ($6$, de \texttt{lib/mathlib/math/Functions.hpp}) e o BMI088 ($5$). Em consequência, os \textit{harnesses} da primeira campanha são, em sua quase totalidade, código de modelo escrito para a verificação, e não trechos do PX4. O veredito vale para o modelo, e a conclusão sobre o driver depende da conferência contra o código de produção (etapa~(v)); isso reforça a motivação da segunda campanha.}
 \corr{Os arquivos-alvo somam $10.405$ linhas, cerca de $1{,}5\,\%$ das $710.259$
 linhas de C/C++ em \texttt{src/} no \textit{commit} analisado ($2.710$ arquivos,
 contados com \texttt{wc -l}). Os alvos do Magnetômetro e do Barômetro estão em

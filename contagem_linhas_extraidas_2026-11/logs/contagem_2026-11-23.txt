@@ -1,0 +1,17 @@
+# Saida do terminal da autora (WSL bruno-pc), colada na conversa em 2026-11-23, versao final do script (commit 96b618e).
+commit do PX4: 8be2590c15
+PX4: /home/bruno/PX4-Autopilot | arquivos indexados: 4768
+harness                       codigo  triviais    do PX4    modelo  arquivos que mais casam
+test_barometer.cpp               158        38         0       120
+test_battery.cpp                 151        32         0       119
+test_ekf2_covariance.cpp         154        25         0       129
+test_expo_mathlib.cpp             74        13         6        55  lib/mathlib/math/Functions.hpp(6)
+test_gps_driver.cpp              125        33        12        80  drivers/gps/gps.cpp(11), drivers/gnss/septentrio/septentrio.cpp(9)
+test_bmi088_imu.cpp              146        41         5       100  drivers/imu/bosch/bmi088_i2c/BMI088_Accelerometer.cpp(5), drivers/imu/bosch/bmi088/BMI088_Accelerometer.cpp(5), drivers/imu/bosch/bmi085/BMI085_Accelerometer.cpp(5)
+test_mavlink_parser.cpp           47        14         0        33
+test_vehicle_magnetometer.cpp     114        21         0        93
+test_navigator_mission.cpp       169        51         5       113  lib/heatshrink/heatshrink/test_heatshrink_dynamic_theft.c(5), lib/heatshrink/heatshrink/heatshrink.c(5), lib/heatshrink/heatshrink/test_heatshrink_dynamic.c(5)
+test_pwm_out.cpp                 106        22         0        84
+test_rc_update.cpp               137        30         0       107
+test_vtol_type.cpp               131        19         0       112
+TOTAL                           1512       339        28      1145
