@@ -346,7 +346,7 @@ Write})~\cite{MITRE_CWE}. A nomenclatura da CWE-191 usa ``\textit{underflow}'' n
 sentido específico de segurança --- uma subtração sem sinal que dá a volta para um
 valor grande ---, distinto do uso em análise numérica (resultado pequeno demais
 para ser representado); essa distinção é retomada no
-Capítulo~\ref{cap:resultados} ao classificar o achado no GPS uBlox. Nesse achado, a CWE-191 e a CWE-195 descrevem etapas diferentes da mesma cadeia: a subtração que fica abaixo do valor esperado (CWE-191), a conversão do resultado negativo para um tipo sem sinal na comparação (CWE-195) e a escrita fora do buffer que a guarda, assim anulada, deixa passar (CWE-119). Essa é a cadeia adotada em todo o texto.
+Capítulo~\ref{cap:resultados} ao classificar o achado no GPS uBlox. No contraexemplo do GPS uBlox, tal como modelado no \textit{harness}, a CWE-191 e a CWE-195 descrevem etapas diferentes da mesma cadeia: a subtração feita com sinal, cujo resultado fica abaixo do valor esperado (a macro inteira menos \texttt{len}, promovido a \texttt{int}), é a CWE-191; a conversão do resultado negativo para \texttt{size\_t} na comparação com \texttt{write\_len} é a CWE-195; e a escrita fora dos limites do \textit{buffer} no \texttt{memcpy}, que a guarda assim anulada deixa passar, é a CWE-119. No driver de produção, em que a subtração já é feita em \texttt{size\_t}, não existe a etapa de conversão, e o estado que dispararia o problema não é alcançável (Seção~\ref{subsec:gps-inducao}). Essa é a cadeia adotada em todo o texto; os tipos e as operações são detalhados na Seção~\ref{sec:caso-gps}.
 
 \subsection{Extensões Recentes}
 
