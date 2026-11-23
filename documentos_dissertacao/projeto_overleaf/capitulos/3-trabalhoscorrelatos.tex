@@ -146,9 +146,9 @@ do BMC convencional, cuja análise está condicionada à profundidade de
 desenrolamento; em contrapartida, exige anotar o código com pré-condições,
 pós-condições e invariantes. Na base inteira do PX4 (cerca de 710 mil linhas, escritas
 por centenas de colaboradores e sem anotações), esse custo é proibitivo. Mas a
-comparação justa não é com a base inteira: o BMC desta pesquisa cobriu apenas o
-recorte de doze módulos, cerca de 10.400 linhas de código-alvo, aproximadamente 1,5\%
-da base. Sobre esse mesmo recorte, anotar deixa de ser proibitivo em escala, mas
+comparação justa não é com a base inteira: o BMC desta pesquisa tratou apenas o
+recorte de doze módulos, cujos arquivos-alvo somam cerca de 10.400 linhas, aproximadamente 1,5\%
+da base, representados por modelos e não pelo código compilado. Sobre esse mesmo recorte, anotar deixa de ser proibitivo em escala, mas
 continua exigindo contratos e invariantes de laço que o código não traz e que
 precisariam ser escritos e mantidos função a função; esse esforço não foi medido
 neste trabalho. O BMC exigiu, para o mesmo recorte, cerca de 2.800 linhas de

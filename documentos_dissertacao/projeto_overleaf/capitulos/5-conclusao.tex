@@ -32,7 +32,10 @@ experimentais.
 %% LC (resolvido 12/11/2026): síntese condensada em um parágrafo por achado.
 \textbf{Dez módulos sem violação.} Na primeira campanha, os
 \textit{harnesses} de dez dos doze módulos foram verificados sem violação das
-propriedades de segurança de memória e de \textit{overflow} habilitadas. A
+propriedades de segurança de memória e de \textit{overflow} habilitadas. Esses
+vereditos valem para os modelos: apenas $2{,}4\,\%$ das linhas de código dos
+\textit{harnesses} coincidem com o código do PX4 (Tabela~\ref{tab:linhas-extraidas}), e a
+conclusão sobre cada driver depende da conferência contra o código de produção. A
 reexecução com as asserções de desenrolamento ligadas mostrou que nenhum laço
 desses \textit{harnesses} excede o limite usado, de modo que o resultado não
 depende de truncamento silencioso.
@@ -105,7 +108,8 @@ testes de integração.
 \label{sec:conclusao-limitacoes}
 
 \textbf{Cobertura.} Os arquivos-alvo da primeira campanha somam cerca de
-$1{,}5\,\%$ das $710$~mil linhas de C/C++ de \texttt{src/}. Ficaram de fora os
+$1{,}5\,\%$ das $710$~mil linhas de C/C++ de \texttt{src/}, mas são representados por
+modelos, e não verificados diretamente (Seção~\ref{sec:modulos-verificados}). Ficaram de fora os
 mecanismos de \textit{failsafe} do Commander, a lógica de \textit{geofence}, os
 barramentos CAN/UAVCAN, a ponte RTPS/uXRCE-DDS e os drivers de fluxo óptico e
 telêmetro, as mesmas exclusões da Seção~\ref{sec:ameacas-validade}.
