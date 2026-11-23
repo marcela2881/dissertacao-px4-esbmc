@@ -220,7 +220,9 @@ resultados são evidência técnica independente, não conformidade normativa.
 
 A Tabela~\ref{tab:trabalhos-relacionados} sintetiza os principais trabalhos
 relacionados quanto à técnica, ao sistema-alvo, ao tipo de estudo, ao objeto
-avaliado e à ferramenta.
+avaliado e à ferramenta. No caso desta pesquisa, os contraexemplos são obtidos
+nos modelos de verificação e, em seguida, triados por comparação com o código
+original.
 
 \begin{table}[p]
 \centering
@@ -261,7 +263,7 @@ Han (2024)          & Fuzzing         & \textbf{Controle de voo}& Empírico   & 
 Khatiri (2024)      & Simulação       & \textbf{PX4 VANTs}      & Ferramenta & Simulação             & Aerialist \\ \hline
 Wang (2021)         & Estudo de defeitos & \textbf{PX4, ArduPilot} & Empírico & 569 defeitos        & --        \\ \hline
 Di Sorbo (2022)     & Análise SW      & \textbf{UAV software}   & Empírico   & Relatos de defeito    & --        \\ \hline
-\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Código-fonte: 3 contraex.\ triados$^\dagger$; 7 de 10 módulos com efeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
+\textbf{Este trabalho} & \textbf{BMC + \textit{replay}} & \textbf{PX4 firmware}   & \textbf{Empírico (2 campanhas)} & \textbf{Modelos de verificação e código original: 3 contraex.\ triados$^\dagger$; 7 de 10 módulos com efeitos reproduzidos$^\ddagger$} & \textbf{ESBMC (+ CBMC)} \\ \hline
 \end{tabular}
 
 \scriptsize
@@ -272,24 +274,24 @@ real; desfechos de cada um na Tabela~\ref{tab:desfechos-segunda}.
 \end{flushleft}
 \end{table}
 
-Este trabalho diferencia-se por aplicar BMC diretamente ao código-fonte de
-\textit{drivers} de um sistema de produção real e amplamente utilizado (PX4
-Autopilot, ramo \textit{main}, \textit{commit} \texttt{8be2590c15}). Enquanto
-Taylor et al.~\cite{Taylor2021} verificam o comportamento em execução e
-Bernardeschi et al.~\cite{Bernardeschi2023} focam a lógica de controle
-cooperativo, este estudo verifica \textit{drivers} críticos no nível do
-código-fonte, identificando candidatos a defeito de memória e aritmética em
-caminhos representados no modelo de verificação, cuja exploração não é garantida
-pelos testes convencionais do projeto. Em relação ao
-fluxo de BMC de Sousa et al.~\cite{Sousa2026}, do qual herda as etapas gerais, a
-contribuição metodológica está em dois passos próprios de firmware: a abstração
-da E/S de hardware por \textit{stubs} e a especificação de \textit{assertions}
-derivadas de \textit{datasheets} e do código-fonte.
+Este trabalho diferencia-se por aplicar BMC a modelos de verificação construídos
+a partir da análise do código-fonte de \textit{drivers} de um sistema de produção
+real e amplamente utilizado (PX4 Autopilot, ramo \textit{main},
+\textit{commit} \texttt{8be2590c15}). Enquanto Taylor et al.~\cite{Taylor2021}
+verificam o comportamento em execução e Bernardeschi et
+al.~\cite{Bernardeschi2023} focam a lógica de controle cooperativo, este estudo
+analisa caminhos dos \textit{drivers} representados nos \textit{harnesses},
+identificando candidatos a defeitos de memória e aritmética que não são
+necessariamente exercitados pelos testes convencionais do projeto. Em relação ao fluxo de BMC de Sousa et al.~\cite{Sousa2026}, do qual herda as
+etapas gerais, a contribuição metodológica está em dois passos voltados a
+firmware: abstrair a E/S de hardware por \textit{stubs} e especificar
+\textit{assertions} com base em \textit{datasheets} e no código-fonte.
 
 Diferentemente dos \textit{surveys} sobre segurança de
-UAVs~\cite{Wanner2024, Siddiqi2022, Mekdad2023}, este trabalho oferece evidência
-empírica da \textbf{aplicabilidade} da verificação formal a firmware de drones em
-produção: um contraexemplo no GPS uBlox, reportado à comunidade
+UAVs~\cite{Wanner2024, Siddiqi2022, Mekdad2023}, este trabalho apresenta
+evidência empírica da \textbf{aplicabilidade} da verificação formal a modelos de
+\textit{drivers} de firmware de drones em produção, com triagem dos resultados
+contra o código original: um contraexemplo no GPS uBlox, reportado à comunidade
 PX4 (Issue~\#26866), proposto como endurecimento defensivo (PR~\#27576) e mostrado
 inalcançável no driver de produção (falso positivo por pré-condição ampla), e dois
 candidatos no BMI088, triados como especificação disputada (temperatura) e falso
@@ -340,5 +342,3 @@ embarcado na indústria. Nesse levantamento exploratório, não foi identificado
 com geração de contraexemplos e triagem no código original, a modelos de
 \textit{drivers} de um autopiloto de produção, em uma avaliação conduzida de
 forma independente do projeto.
-
-%% LC: incluidos clang-tidy do PX4 (PX4_ClangTidy), estudo de defeitos de autopilotos (Wang2021) e BMC em firmware embarcado (Chong2020). A comparacao direta com um analisador estatico (baseline) depende do experimento do Cap. de resultados.

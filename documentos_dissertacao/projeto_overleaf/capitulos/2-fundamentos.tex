@@ -6,6 +6,9 @@ trabalho: o funcionamento do \textit{Bounded Model Checking}, as razões para o
 uso do ESBMC em firmware embarcado e a arquitetura do PX4 Autopilot, alvo da
 verificação.
 
+%% LC: afirmacao sobre liveness recalibrada ao escopo real do ESBMC
+%% (terminacao/lacos nao terminantes, nao LTL geral); citacao Clarke1986 -> Menezes2024.
+%% LC: Menezes2024 (competicao, 5 paginas) substituido pelo artigo da ferramenta (Cordeiro2012) e pela documentacao oficial (ESBMC_GitHub).
 \section{Verificação Formal de Software}
 
 A verificação formal emprega métodos matemáticos para avaliar se um modelo do
@@ -27,19 +30,11 @@ memória quanto comportamentos próprios de cada módulo. Propriedades de
 \textit{liveness} --- que garantem que algo desejável acabe ocorrendo --- ficaram
 fora do escopo: o suporte do ESBMC a elas limita-se à terminação e à detecção de
 laços não terminantes, sem verificação geral de LTL~\cite{ESBMC_GitHub}.
-
-%% LC: afirmacao sobre liveness recalibrada ao escopo real do ESBMC
 %% (terminacao/lacos nao terminantes, nao LTL geral); citacao Clarke1986 -> Menezes2024.
-%% LC: Menezes2024 (competicao, 5 paginas) substituido pelo artigo da ferramenta (Cordeiro2012) e pela documentacao oficial (ESBMC_GitHub).
-
+%% a citar o artigo original, King1976.
 %% LC: DART (Godefroid2005) e teste concolico; execucao simbolica passou
 %% a citar o artigo original, King1976.
-Entre as técnicas de verificação formal destacam-se o \textit{Model
-Checking}~\cite{Clarke1981}, que explora automaticamente o espaço de estados; o
-\textit{Theorem Proving}~\cite{Huth2004}, que constrói provas com auxílio de
-assistentes de prova; a \textit{Abstract Interpretation}~\cite{Cousot1977}, que
-aproxima o comportamento por domínios abstratos; e a \textit{Symbolic
-Execution}~\cite{King1976}, que executa o programa com valores simbólicos. Adota-se aqui o Model Checking, em particular o \textit{Bounded Model Checking}, por dois critérios. O primeiro é a natureza da saída: quando uma propriedade é violada, o verificador devolve um contraexemplo concreto, com valores de entrada e um caminho de execução que podem ser conferidos no código real. O segundo é o custo da triagem: a interpretação abstrata, embora também automática e consolidada em aviônica, como mostra o Astrée~\cite{Cousot2005Astree}, prova a ausência de erros por sobre-aproximação e, por isso, pode emitir alarmes falsos, cuja análise exige esforço. As abordagens que não se baseiam em \textit{model checking} são comparadas na Seção~\ref{subsec:rel-nao-bmc}.
+Entre as técnicas de verificação formal estão o \textit{Model Checking}~\cite{Clarke1981}, que explora o espaço de estados; o \textit{Theorem Proving}~\cite{Huth2004}, que constrói provas formais; a \textit{Abstract Interpretation}~\cite{Cousot1977}, que aproxima o comportamento por domínios abstratos; e a \textit{Symbolic Execution}~\cite{King1976}, que analisa o programa com valores simbólicos. Este trabalho adota o Model Checking, em particular o \textit{Bounded Model Checking}, por produzir contraexemplos com entradas e caminhos de execução que podem ser confrontados com o código de produção. A interpretação abstrata também é utilizada em sistemas aviônicos, como no Astrée~\cite{Cousot2005Astree}, mas sua sobre-aproximação pode gerar alarmes que exigem triagem. As abordagens não baseadas em Model Checking são comparadas na Seção~\ref{subsec:rel-nao-bmc}.
 
 \section{Model Checking}
 
@@ -63,7 +58,8 @@ Por fim, o verificador percorre os estados e, se algum violar a propriedade,
 retorna um contraexemplo --- a sequência de transições que leva à
 violação~\cite{Clarke1986}. Essa geração automática de contraexemplos é o que
 torna o Model Checking atraente para sistemas complexos.
-
+%% ressalva de que propriedades temporais gerais exigem rotulacao CTL ou automato
+%% de Buchi (Clarke1986). LC: acrescentado o mapa de predecessores.
 %% LC: algoritmo restrito a invariantes/safety -- renomeado e com
 %% ressalva de que propriedades temporais gerais exigem rotulacao CTL ou automato
 %% de Buchi (Clarke1986). LC: acrescentado o mapa de predecessores.
@@ -96,27 +92,12 @@ ciclo aceitante em um autômato de Büchi~\cite{Clarke1986}. O caso aqui ilustra
 \end{algorithmic}
 \end{algorithm}
 
-O conjunto $estados$ representa os estados ainda não explorados; a estrutura usada
-para selecionar o próximo elemento determina a estratégia de busca --- uma fila
-leva à busca em largura, uma pilha à busca em profundidade ---, e ambas preservam
-a corretude para invariantes, desde que todos os estados alcançáveis sejam
-explorados. Na prática, mantém-se um mapa de predecessores durante a busca: ao
-encontrar um estado violador, o contraexemplo é reconstruído seguindo esse mapa,
-do estado inicial até ele.
+A estrutura usada para selecionar o próximo estado define a estratégia de busca: uma fila implementa busca em largura e uma pilha, busca em profundidade. Para invariantes, ambas preservam a corretude se todos os estados alcançáveis forem explorados. Um mapa de predecessores permite reconstruir o contraexemplo do estado inicial até o estado violador.
 
 \subsection{Explosão de Estados}
 
-O principal obstáculo do Model Checking é a explosão combinatória: o número de
-estados cresce exponencialmente com o número de variáveis ($2^n$ para $n$
-variáveis booleanas). O driver do IMU BMI088, por exemplo, manipula leituras
-brutas do sensor e valores convertidos em ponto flutuante de 32 bits; um modelo que
-tratasse como simbólicas apenas dez dessas variáveis de 32 bits já ultrapassaria
-$2^{320}$ configurações, inviabilizando a exploração exaustiva.
-%% LC: hipotese do 2^320 declarada (dez variaveis de 32 bits).
-Diversas técnicas atacam esse problema ---
-BDDs (\textit{Binary Decision Diagrams}), abstração, redução de ordem parcial e o
-\textit{Bounded Model Checking}, que limita a profundidade de
-exploração~\cite{Biere1999}.
+O principal obstáculo do Model Checking é a explosão combinatória: o número de estados cresce exponencialmente com o número de variáveis ($2^n$ para $n$ variáveis booleanas). No driver da IMU BMI088, por exemplo, dez variáveis simbólicas de 32 bits poderiam representar até $2^{320}$ combinações. %% LC: hipotese do 2^320 declarada (dez variaveis de 32 bits).
+Esse valor ilustra o espaço potencial de combinações, não o número de estados alcançáveis do driver. Técnicas como BDDs (\textit{Binary Decision Diagrams}), abstração, redução de ordem parcial e \textit{Bounded Model Checking} ajudam a enfrentar esse problema; esta última limita a profundidade da exploração~\cite{Biere1999}.
 
 \section{Bounded Model Checking}
 
@@ -141,7 +122,8 @@ O termo $I(s_0)$ fixa as condições iniciais; a conjunção central codifica $k
 transições válidas; e a disjunção final verifica se algum estado $s_i$ viola
 $\phi$. Se a fórmula for satisfatível, o solver devolve uma atribuição que
 constitui um contraexemplo concreto~\cite{Biere1999}.
-
+%% VCC -> consulta SMT). LC: relacionar a formula do BMC a codificacao
+%% do ESBMC para programas C -- ambos atendidos pelo exemplo abaixo.
 %% LC: incluir exemplo completo (laco C -> desenrolamento -> SSA ->
 %% VCC -> consulta SMT). LC: relacionar a formula do BMC a codificacao
 %% do ESBMC para programas C -- ambos atendidos pelo exemplo abaixo.
@@ -155,31 +137,13 @@ for (int i = 0; i < n; i++)
     soma += v[i];      // acesso a v[i]: vale 0 <= i < N ?
 \end{lstlisting}
 
-O vetor \texttt{v} tem \texttt{N} posições, e o laço acessa \texttt{v[i]} para
-\texttt{i} de $0$ a \texttt{n}$-1$. Considerando \texttt{n} não negativo, a
-condição de segurança é que o número de iterações não ultrapasse o tamanho do
-vetor, isto é, $0 \leq n \leq N$; para que a análise seja conclusiva, o limite de
-desenrolamento também deve ser suficiente para representar todas as iterações
-possíveis. O ESBMC desenrola o laço $k$ vezes, substituindo cada iteração por uma
-cópia condicionada a \texttt{i < n}; converte o resultado à forma SSA
-(\textit{Static Single Assignment}), em que cada atribuição gera uma nova versão da
-variável ($soma_1, soma_2, \dots$); e, para cada acesso \texttt{v[i]}, gera uma
-condição de verificação (VCC) de limite ($0 \leq i < N$). As VCCs são submetidas ao
-solver SMT: se \texttt{n} puder exceder \texttt{N}, a negação da condição de
-segurança pode ser satisfatível, permitindo ao solver produzir uma atribuição que
-representa o acesso fora dos limites do vetor; caso contrário, o resultado é UNSAT
-até $k$.
+O vetor \texttt{v} tem \texttt{N} posições, e o laço acessa \texttt{v[i]} para valores de \texttt{i} entre $0$ e \texttt{n}$-1$. Para \texttt{n} não negativo, o acesso é seguro se $n \leq N$. O limite de desenrolamento também deve ser suficiente para representar as iterações analisadas. O ESBMC desenrola o laço até $k$ vezes, cria versões sucessivas das variáveis na forma SSA (\textit{Static Single Assignment}) e gera, para cada acesso a \texttt{v[i]}, uma condição de verificação (VCC) que exige $0 \leq i < N$. Essas condições são submetidas ao solver SMT: se houver uma execução representada até $k$ que permita $n>N$, a fórmula pode ser satisfatível e produzir um contraexemplo de acesso fora dos limites; caso contrário, a propriedade é válida dentro do limite analisado.
 
 \subsection{Tratamento de Laços, Completude e $k$-Indução}
 
-Aplicar BMC a programas exige desenrolar (\textit{unwinding}) os laços até $k$.
-Uma \textit{assertion} ao fim de cada laço verifica se ele poderia executar além
-de $k$; quando ela falha, a análise daquele laço deixa de ser conclusiva, e é
-preciso elevar $k$ ou recorrer à $k$-indução --- foi o que mostrou o teste com o MAVLink: com as asserções
-ligadas, $k = 10$ falha e $k = 300$ verifica (Capítulo~\ref{cap:experimentos}). Com a opção
-\texttt{--no-unwinding-assertions}, laços acima de $k$ são truncados
-silenciosamente~\cite{Gadelha2017}.
-%% LC: Biere1999 nao sustenta o comportamento da flag do ESBMC;
+Aplicar BMC a programas exige desenrolar (\textit{unwinding}) os laços até $k$. Uma \textit{assertion} ao fim de cada laço verifica se ele poderia executar além desse limite. Se a asserção falhar, a análise daquele laço não é conclusiva: é necessário elevar $k$ ou utilizar outra técnica, como a $k$-indução. %% LC: Biere1999 nao sustenta o comportamento da flag do ESBMC;
+%% citacao trocada para Gadelha2017.
+Com a opção \texttt{--no-unwinding-assertions}, laços que ultrapassam $k$ podem ser truncados sem que essa insuficiência seja sinalizada~\cite{Gadelha2017}.
 %% citacao trocada para Gadelha2017.
 
 Sob uma codificação fiel do modelo e com o limite de desenrolamento adequadamente
@@ -196,16 +160,20 @@ combina um caso base (a propriedade vale nos primeiros $k$ estados) com um passo
 indutivo (se vale em $k$ estados consecutivos quaisquer, vale no seguinte); o
 ESBMC a implementa automaticamente~\cite{Gadelha2017}. A propriedade só é
 considerada comprovada quando o caso base e o passo indutivo são ambos verificados
-com sucesso. Distinta dessa $k$-indução automática, a prova de inalcançabilidade do GPS uBlox apresentada nesta
+com sucesso. %% LC: k-inducao e de Sheeran2000 (nao Biere1999), implementada no
+%% ESBMC por Gadelha2017; distincao entre inducao manual de um passo e a k-inducao
+%% automatica da ferramenta acrescentada.
+Distinta dessa $k$-indução automática, a prova de inalcançabilidade do GPS uBlox apresentada nesta
 dissertação (Seção~\ref{subsec:gps-inducao}) é uma indução manual de um único
 passo sobre um invariante do laço.
-%% LC: k-inducao e de Sheeran2000 (nao Biere1999), implementada no
 %% ESBMC por Gadelha2017; distincao entre inducao manual de um passo e a k-inducao
 %% automatica da ferramenta acrescentada.
 
 \section{Satisfiability Modulo Theories}
 \label{sec:smt}
 
+%% LC: definicao de SMT estava sem citacao -- acrescentada a
+%% referencia padrao Barrett2018 (Handbook of Model Checking, 2018).
 O \textit{Satisfiability Modulo Theories} (SMT) generaliza a satisfatibilidade
 booleana (SAT) ao raciocinar sobre teorias matemáticas
 específicas~\cite{Barrett2018}. Os solvers SMT combinam procedimentos de decisão
@@ -216,7 +184,6 @@ Bitwuzla~\cite{Niemetz2023} e o cvc5~\cite{Barbosa2022}; o
 Boolector~\cite{Brummayer2009}, especializado em \textit{bit-vectors} e
 \textit{arrays}, é o solver usado na primeira campanha (versão~3.2.4); na segunda,
 o solver variou conforme a execução, com o Z3 em parte delas (Seção~\ref{sec:segunda-campanha}).
-%% LC: definicao de SMT estava sem citacao -- acrescentada a
 %% referencia padrao Barrett2018 (Handbook of Model Checking, 2018).
 
 \subsection{Teorias Relevantes e Vantagens sobre SAT}
@@ -232,9 +199,10 @@ flutuante: o ESBMC contorna isso codificando cada operação IEEE-754 em operaç
 de \textit{bit-vector} (\textit{bit-blasting}), de modo que solvers restritos a
 \textit{bit-vectors}, como o Boolector, verifiquem programas com ponto
 flutuante~\cite{Gadelha2020}.
-%% LC: Boolector nao tem teoria nativa de ponto flutuante --
 %% explicada a codificacao por bit-blasting do ESBMC (Gadelha2020).
 
+%% LC: Boolector nao tem teoria nativa de ponto flutuante --
+%% explicada a codificacao por bit-blasting do ESBMC (Gadelha2020).
 Frente à codificação direta em SAT, os solvers SMT são mais expressivos ---
 representam restrições como $x + y > 10$ sem codificação bit a bit --- e exploram
 a estrutura matemática das teorias, ganhando eficiência~\cite{deMoura2008}. No
@@ -246,28 +214,14 @@ precisão (o ponto flutuante, no caso do Boolector, pela codificação em
 
 \section{ESBMC}
 
-O ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker}) verifica
-programas em C e C++, com \textit{front-ends} adicionais para
-Python~\cite{Farias2024}, Kotlin~\cite{Menezes2022} e
-Solidity~\cite{ESBMC_GitHub}. Mantido por uma colaboração internacional que inclui
-pesquisadores da Universidade Federal do Amazonas, adota uma abordagem baseada em
-SMT, combinando a eficiência dos procedimentos SAT com o raciocínio sobre teorias
-matemáticas --- aritmética, \textit{bit-vectors} e \textit{arrays} ---, o que dá
-suporte mais preciso à verificação de aritmética e estruturas de dados
-complexas~\cite{Cordeiro2012}.
-%% LC: sigla ESBMC uniformizada para "Efficient SMT-Based
+O ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker}) verifica programas em C e C++, além de oferecer suporte a outras linguagens, incluindo Python~\cite{Farias2024}, Kotlin~\cite{Menezes2022} e Solidity~\cite{ESBMC_GitHub}. Mantido por uma colaboração internacional que inclui pesquisadores da Universidade Federal do Amazonas, utiliza solvers SMT para analisar operações aritméticas e estruturas de dados, como \textit{bit-vectors} e \textit{arrays}~\cite{Cordeiro2012}.
 %% Context-Bounded Model Checker" nos quatro lugares do documento.
 
+%% LC: sigla ESBMC uniformizada para "Efficient SMT-Based
+%% Context-Bounded Model Checker" nos quatro lugares do documento.
 \subsection{Pipeline de Verificação}
 
-O fluxo do ESBMC tem quatro estágios (Figura~\ref{fig:esbmc_pipeline}). O
-código-fonte passa pelo \textit{front-end} da linguagem --- Clang para C/C++,
-Soot para Kotlin, CPython para Python ---, gerando uma representação intermediária
-(programa GOTO). A execução simbólica converte o GOTO em fórmulas que representam
-as execuções até a profundidade $k$, das quais se geram as condições de
-verificação (VCCs). As VCCs, após simplificação, vão ao solver SMT (na primeira campanha, o
-Boolector~3.2.4; na segunda, Boolector ou Z3): SAT indica um contraexemplo; UNSAT, que a propriedade vale até
-$k$~\cite{Cordeiro2012}.
+O fluxo do ESBMC é resumido na Figura~\ref{fig:esbmc_pipeline}. O código passa pelo \textit{front-end} correspondente --- Clang para C/C++, Soot para Kotlin e CPython para Python, conforme as linguagens ilustradas ---, que gera a representação intermediária (programa GOTO). A execução simbólica transforma essa representação em fórmulas limitadas à profundidade $k$, das quais são derivadas as condições de verificação (VCCs). Após simplificação, as VCCs são enviadas ao solver SMT (na primeira campanha, o Boolector~3.2.4; na segunda, Boolector ou Z3). SAT indica a existência de um contraexemplo no modelo, enquanto UNSAT indica que a propriedade é satisfeita até $k$~\cite{Cordeiro2012}.
 
 \begin{figure}[ht]
   \centering
@@ -281,7 +235,7 @@ $k$~\cite{Cordeiro2012}.
     sat/.style={draw=palEdgeDark, line width=0.8pt, fill=palStrong, rounded corners=2pt, align=center, text width=2.6cm, inner sep=3pt},
     unsat/.style={draw=palEdge, fill=palPaper, rounded corners=2pt, align=center, text width=2.6cm, inner sep=3pt}]
     \node[fe] (c) {\textbf{C/C++}\\Clang (AST)};
-    \node[fe, below=1.5mm of c] (k) {\textbf{Java/Kotlin}\\Soot (Jimple)};
+    \node[fe, below=1.5mm of c] (k) {\textbf{Kotlin}\\Soot (Jimple)};
     \node[fe, below=1.5mm of k] (s) {\textbf{Solidity}\\gramática};
     \node[fe, below=1.5mm of s] (p) {\textbf{Python}\\AST do CPython};
     \node[above=1mm of c, font=\small\bfseries] (fet) {\textit{Front-ends}};
@@ -309,19 +263,17 @@ $k$~\cite{Cordeiro2012}.
 
 \subsection{Classes de Propriedades Verificadas}
 
-O ESBMC é capaz de detectar \textit{buffer overflows}, desreferência de ponteiros
-nulos, \textit{use-after-free} e vazamentos de memória; \textit{overflow} e
-\textit{underflow} de inteiros; operações de ponto flutuante que produzem NaN ou
-infinito; e, em programas concorrentes, \textit{data races} e
-\textit{deadlocks}~\cite{Cordeiro2012,ESBMC_GitHub}. Cada classe é ativada por opções próprias
-da ferramenta; nesta pesquisa foram habilitadas as verificações de segurança de
-memória (limites de \textit{arrays} e validade de ponteiros) e de \textit{overflow}
-aritmético, conforme a configuração detalhada no Capítulo~\ref{cap:experimentos}.
-O usuário pode ainda inserir \textit{assertions} próprias no código.
-
+Entre as propriedades que o ESBMC pode verificar estão acessos fora dos limites de \textit{arrays}, desreferência de ponteiros nulos, \textit{use-after-free}, vazamentos de memória, \textit{overflow} e \textit{underflow} de inteiros e, em programas concorrentes, \textit{data races} e \textit{deadlocks}~\cite{Cordeiro2012,ESBMC_GitHub}. A disponibilidade de cada verificação depende das opções utilizadas. Nesta pesquisa, foram habilitadas as verificações de segurança de memória (limites de \textit{arrays} e validade de ponteiros) e de \textit{overflow} aritmético, além das propriedades específicas inseridas por meio de \textit{assertions}, conforme a configuração descrita no Capítulo~\ref{cap:experimentos}.
+%% (relacao com CVE, hierarquia, e as entradas usadas no Cap. de resultados).
 %% LC: lacuna de fundamentacao -- acrescentada subsecao sobre a CWE
 %% (relacao com CVE, hierarquia, e as entradas usadas no Cap. de resultados).
 %% LC: CWE-195 incluida na lista; cadeia CWE-191 -> CWE-195 -> CWE-119 definida aqui.
+%% LC: lacuna de fundamentacao -- acrescentada subsecao sobre a CWE
+%% (relacao com CVE, hierarquia, e as entradas usadas no Cap. de resultados).
+%% LC: CWE-195 incluida na lista; cadeia CWE-191 -> CWE-195 -> CWE-119 definida aqui.
+%% LC: cadeia explicitamente delimitada ao contraexemplo do harness; no driver de
+%% producao, a subtracao em size_t nao apresenta a etapa CWE-195; prova indutiva
+%% de inalcançabilidade descrita em Resultados.
 \subsection{Classificação de Vulnerabilidades: a CWE}
 
 A \textit{Common Weakness Enumeration} (CWE) é uma taxonomia mantida pelo MITRE
@@ -335,27 +287,10 @@ qual uma fraqueza mais específica é filha de uma mais abstrata; por exemplo,
 CWE-787 (\textit{Out-of-bounds Write}) é filha de CWE-119 (\textit{Improper
 Restriction of Operations within the Bounds of a Memory Buffer})~\cite{MITRE_CWE}.
 
-Esta pesquisa emprega sete entradas da CWE para classificar os achados do
-Capítulo~\ref{cap:resultados}: CWE-20 (\textit{Improper Input Validation}),
-CWE-1284 (\textit{Improper Validation of Specified Quantity in Input}), subclasse
-de CWE-20, CWE-119 (\textit{Improper Restriction of Operations within the Bounds of
-a Memory Buffer}), CWE-190 (\textit{Integer Overflow or Wraparound}), CWE-191
-(\textit{Integer Underflow (Wrap or Wraparound)}), CWE-195 (\textit{Signed to
-Unsigned Conversion Error}) e CWE-787 (\textit{Out-of-bounds
-Write})~\cite{MITRE_CWE}. A nomenclatura da CWE-191 usa ``\textit{underflow}'' num
-sentido específico de segurança --- uma subtração sem sinal que dá a volta para um
-valor grande ---, distinto do uso em análise numérica (resultado pequeno demais
-para ser representado); essa distinção é retomada no
-Capítulo~\ref{cap:resultados} ao classificar o achado no GPS uBlox. No contraexemplo do GPS uBlox, tal como modelado no \textit{harness}, a CWE-191 e a CWE-195 descrevem etapas diferentes da mesma cadeia: a subtração feita com sinal, cujo resultado fica abaixo do valor esperado (a macro inteira menos \texttt{len}, promovido a \texttt{int}), é a CWE-191; a conversão do resultado negativo para \texttt{size\_t} na comparação com \texttt{write\_len} é a CWE-195; e a escrita fora dos limites do \textit{buffer} no \texttt{memcpy}, que a guarda assim anulada deixa passar, é a CWE-119. No driver de produção, em que a subtração já é feita em \texttt{size\_t}, não existe a etapa de conversão, e o estado que dispararia o problema não é alcançável (Seção~\ref{subsec:gps-inducao}). Essa é a cadeia adotada em todo o texto; os tipos e as operações são detalhados na Seção~\ref{sec:caso-gps}.
-
-\subsection{Extensões Recentes}
-
-As extensões recentes do ESBMC, como o suporte a C++, e suas aplicações em outros
-domínios são discutidas na Seção~\ref{sec:rel-praticas}, no capítulo de trabalhos
-relacionados.
+Esta pesquisa emprega sete entradas da CWE para classificar os achados do Capítulo~\ref{cap:resultados}: CWE-20 (\textit{Improper Input Validation}), CWE-1284 (\textit{Improper Validation of Specified Quantity in Input}), CWE-119 (\textit{Improper Restriction of Operations within the Bounds of a Memory Buffer}), CWE-190 (\textit{Integer Overflow or Wraparound}), CWE-191 (\textit{Integer Underflow (Wrap or Wraparound)}), CWE-195 (\textit{Signed to Unsigned Conversion Error}) e CWE-787 (\textit{Out-of-bounds Write})~\cite{MITRE_CWE}. A nomenclatura da CWE-191 utiliza \textit{underflow} em um sentido específico de segurança, associado ao retorno cíclico (\textit{wraparound}) de uma operação aritmética; sob a perspectiva da análise numérica, esse comportamento corresponde a um overflow por wraparound, e não ao underflow entendido como resultado pequeno demais para ser representado. No GPS uBlox, a cadeia CWE-191 $\rightarrow$ CWE-195 $\rightarrow$ CWE-119 descreve o contraexemplo do \textit{harness}: a subtração de \texttt{len} de \texttt{GPS\_DUMP\_DATA\_SIZE} pode produzir um valor negativo; sua comparação com \texttt{write\_len}, do tipo \texttt{size\_t}, provoca a conversão para um valor sem sinal muito grande; e a guarda resultante permite que o \texttt{memcpy} ultrapasse os limites do buffer. Essa cadeia não descreve o driver de produção: nele, a subtração é realizada em \texttt{size\_t}, não ocorre a etapa de conversão CWE-195 e, conforme a prova indutiva apresentada no Capítulo~\ref{cap:resultados}, o estado que dispara o contraexemplo do \textit{harness} é inalcançável.
+%% LC: cadeia CWE-191 -> CWE-195 -> CWE-119 mantida como classificacao; conferir a sequencia exata com os tipos e operacoes no codigo do GPS.
 
 %% LC: o paragrafo de Extensoes Recentes ficou so no Cap. 3 (Secao de aplicacoes praticas); aqui resta a referencia cruzada.
-
 \section{PX4 Autopilot}
 
 O PX4 Autopilot é uma plataforma de software \textit{open-source} para controle de
@@ -437,28 +372,14 @@ que consta do Capítulo~\ref{cap:metodologia}.
 \section{Ambiente de Execução}
 \label{sec:ambiente-execucao}
 
-O PX4 roda sobre o NuttX, sistema operacional de tempo real compatível com POSIX
-e voltado a microcontroladores de recursos limitados~\cite{NuttX}, com
-escalonamento preemptivo e primitivas de sincronização. Os alvos considerados
-neste trabalho, baseados em microcontroladores STM32, dispõem de uma unidade de
-proteção de memória (MPU), mas essa proteção só é ativada nos modos
-\textit{protected} ou \textit{kernel} do NuttX; como foram compilados no modo
-\textit{flat}, não há isolamento entre os módulos --- todos compartilham o mesmo
-espaço de endereçamento, de modo que um defeito de memória em qualquer módulo pode
-comprometer o estado global~\cite{NuttX}.
-%% LC: STM32 possui MPU -- esclarecido que ela so e usada nos modos
+O PX4 utiliza o NuttX, sistema operacional de tempo real compatível com POSIX e voltado a microcontroladores de recursos limitados~\cite{NuttX}. Nos alvos baseados em STM32 considerados neste trabalho, a unidade de proteção de memória (MPU) não fornece isolamento entre módulos quando o NuttX é compilado no modo \textit{flat}: nesse modo, os módulos compartilham o mesmo espaço de endereçamento, de modo que um defeito de memória pode comprometer o estado global~\cite{NuttX}.
 %% protected/kernel; nos alvos deste trabalho (modo flat) nao ha isolamento.
 
+%% LC: STM32 possui MPU -- esclarecido que ela so e usada nos modos
+%% protected/kernel; nos alvos deste trabalho (modo flat) nao ha isolamento.
 \subsection{Desafios para Verificação Formal}
 
-O PX4 reúne características que tornam sua verificação ao mesmo tempo desafiadora e
-necessária. O uso extensivo de ponto flutuante em navegação e controle exige
-modelagem precisa da semântica IEEE-754, sob risco de não detectar defeitos
-ligados a NaN ou a imprecisões numéricas; os laços de controle executam a taxas da
-ordem de centenas de hertz, impondo restrições temporais rigorosas; e a interação
-com hardware sujeito a falhas --- sensores que retornam dados corrompidos,
-\textit{timeouts} de comunicação --- exige robustez adicional do
-software~\cite{Wanner2024}.
+A verificação do PX4 é desafiadora pelo uso de ponto flutuante em navegação e controle, pela execução de laços em frequências elevadas e pela interação com hardware sujeito a falhas, como sensores que retornam dados corrompidos e comunicação com \textit{timeouts}. Esses fatores exigem atenção à semântica IEEE-754 e à robustez do software~\cite{Wanner2024}.
 
 Defeitos em sistemas de controle de voo podem resultar na perda do equipamento
 ou, em cenários graves, em danos a terceiros~\cite{Siddiqi2022, Mekdad2023}. A
@@ -472,23 +393,12 @@ anteriores em sistemas embarcados \textit{safety-critical} estabeleceram
 metodologias aplicáveis a VANTs~\cite{Mzid2024}, e a combinação de Model Checking
 com análise de código embarcado tem se mostrado eficaz na detecção de defeitos que
 escapam a abordagens baseadas apenas em testes~\cite{Khairullah2022, Sousa2026}.
-%% LC: alegacao de certificacao reformulada com o suplemento de
 %% metodos formais DO-333 (nao substitui testes automaticamente). LC:
 %% Chatterjee2022 nao sustentava a frase -- trocado por Sousa2026.
 
+%% LC: alegacao de certificacao reformulada com o suplemento de
+%% metodos formais DO-333 (nao substitui testes automaticamente). LC:
+%% Chatterjee2022 nao sustentava a frase -- trocado por Sousa2026.
 \section{Resumo}
 
-Este capítulo reuniu os fundamentos do trabalho. A verificação formal foi
-apresentada como complemento aos testes, com foco em propriedades de
-\textit{safety}, cuja violação, no domínio de voo, pode ser catastrófica. Entre as
-técnicas, adotou-se o Model Checking, pela automação e pela geração de
-contraexemplos; o \textit{Bounded Model Checking}, por limitar a busca a $k$
-passos, é \textit{sound} e completo apenas até esse limite --- restrição que, no GPS uBlox, é tratada por
-uma prova indutiva manual de um passo (Seção~\ref{subsec:gps-inducao}), distinta da
-$k$-indução automática da ferramenta. A expressividade dos solvers SMT
-(\textit{bit-vectors}, \textit{arrays} e IEEE-754) é o que viabiliza verificar
-firmware embarcado com precisão, e o ESBMC consolida essas capacidades. Por fim, a
-arquitetura modular do PX4, articulada pelo \textit{middleware} uORB, é o que
-torna viável a verificação isolada de cada módulo --- premissa central da
-metodologia desenvolvida nos próximos capítulos.
-
+Este capítulo apresentou os fundamentos da abordagem adotada. O trabalho concentra-se em propriedades de \textit{safety} e utiliza BMC para procurar violações até um limite de exploração definido. A combinação do ESBMC com solvers SMT permite analisar operações sobre inteiros de largura fixa, \textit{arrays} e dados de ponto flutuante. Por fim, a arquitetura modular do PX4 e a comunicação pelo uORB fundamentam a verificação dos módulos de forma isolada, conforme a metodologia apresentada no próximo capítulo.
