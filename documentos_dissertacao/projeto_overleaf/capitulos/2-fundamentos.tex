@@ -26,19 +26,20 @@ pesquisadora especifique propriedades adicionais por meio de instruções
 memória quanto comportamentos próprios de cada módulo. Propriedades de
 \textit{liveness} --- que garantem que algo desejável acabe ocorrendo --- ficaram
 fora do escopo: o suporte do ESBMC a elas limita-se à terminação e à detecção de
-laços não terminantes, sem verificação geral de LTL~\cite{Menezes2024}.
+laços não terminantes, sem verificação geral de LTL~\cite{ESBMC_GitHub}.
+
 %% LC (resolvido): afirmacao sobre liveness recalibrada ao escopo real do ESBMC
 %% (terminacao/lacos nao terminantes, nao LTL geral); citacao Clarke1986 -> Menezes2024.
+%% LC (resolvido): Menezes2024 (competicao, 5 paginas) substituido pelo artigo da ferramenta (Cordeiro2012) e pela documentacao oficial (ESBMC_GitHub).
 
 %% LC (resolvido): DART (Godefroid2005) e teste concolico; execucao simbolica passou
 %% a citar o artigo original, King1976.
 Entre as técnicas de verificação formal destacam-se o \textit{Model
 Checking}~\cite{Clarke1981}, que explora automaticamente o espaço de estados; o
-\textit{Theorem Proving}~\cite{Huth2004,Tang2025}, que constrói provas com auxílio de
+\textit{Theorem Proving}~\cite{Huth2004}, que constrói provas com auxílio de
 assistentes de prova; a \textit{Abstract Interpretation}~\cite{Cousot1977}, que
 aproxima o comportamento por domínios abstratos; e a \textit{Symbolic
-Execution}~\cite{King1976}, que executa o programa com valores simbólicos. Pela
-automação e pela adequação a software embarcado, adota-se aqui o Model Checking.
+Execution}~\cite{King1976}, que executa o programa com valores simbólicos. Adota-se aqui o Model Checking, em particular o \textit{Bounded Model Checking}, por dois critérios. O primeiro é a natureza da saída: quando uma propriedade é violada, o verificador devolve um contraexemplo concreto, com valores de entrada e um caminho de execução que podem ser conferidos no código real. O segundo é o custo da triagem: a interpretação abstrata, embora também automática e consolidada em aviônica, como mostra o Astrée~\cite{Cousot2005Astree}, prova a ausência de erros por sobre-aproximação e, por isso, pode emitir alarmes falsos, cuja análise exige esforço. As abordagens que não se baseiam em \textit{model checking} são comparadas na Seção~\ref{subsec:rel-nao-bmc}.
 
 \section{Model Checking}
 
@@ -248,7 +249,7 @@ precisão (o ponto flutuante, no caso do Boolector, pela codificação em
 O ESBMC (\textit{Efficient SMT-Based Context-Bounded Model Checker}) verifica
 programas em C e C++, com \textit{front-ends} adicionais para
 Python~\cite{Farias2024}, Kotlin~\cite{Menezes2022} e
-Solidity~\cite{Menezes2024}. Mantido por uma colaboração internacional que inclui
+Solidity~\cite{ESBMC_GitHub}. Mantido por uma colaboração internacional que inclui
 pesquisadores da Universidade Federal do Amazonas, adota uma abordagem baseada em
 SMT, combinando a eficiência dos procedimentos SAT com o raciocínio sobre teorias
 matemáticas --- aritmética, \textit{bit-vectors} e \textit{arrays} ---, o que dá
@@ -266,7 +267,7 @@ Soot para Kotlin, CPython para Python ---, gerando uma representação intermedi
 as execuções até a profundidade $k$, das quais se geram as condições de
 verificação (VCCs). As VCCs, após simplificação, vão ao solver SMT (aqui, o
 Boolector~3.2.4): SAT indica um contraexemplo; UNSAT, que a propriedade vale até
-$k$~\cite{Menezes2024}.
+$k$~\cite{Cordeiro2012}.
 
 \begin{figure}[ht]
   \centering
@@ -312,7 +313,7 @@ O ESBMC é capaz de detectar \textit{buffer overflows}, desreferência de pontei
 nulos, \textit{use-after-free} e vazamentos de memória; \textit{overflow} e
 \textit{underflow} de inteiros; operações de ponto flutuante que produzem NaN ou
 infinito; e, em programas concorrentes, \textit{data races} e
-\textit{deadlocks}~\cite{Menezes2024}. Cada classe é ativada por opções próprias
+\textit{deadlocks}~\cite{Cordeiro2012,ESBMC_GitHub}. Cada classe é ativada por opções próprias
 da ferramenta; nesta pesquisa foram habilitadas as verificações de segurança de
 memória (limites de \textit{arrays} e validade de ponteiros) e de \textit{overflow}
 aritmético, conforme a configuração detalhada no Capítulo~\ref{cap:experimentos}.
@@ -320,6 +321,7 @@ O usuário pode ainda inserir \textit{assertions} próprias no código.
 
 %% LC (resolvido): lacuna de fundamentacao -- acrescentada subsecao sobre a CWE
 %% (relacao com CVE, hierarquia, e as entradas usadas no Cap. de resultados).
+%% LC (resolvido): CWE-195 incluida na lista; cadeia CWE-191 -> CWE-195 -> CWE-119 definida aqui.
 \subsection{Classificação de Vulnerabilidades: a CWE}
 
 A \textit{Common Weakness Enumeration} (CWE) é uma taxonomia mantida pelo MITRE
@@ -333,30 +335,26 @@ qual uma fraqueza mais específica é filha de uma mais abstrata; por exemplo,
 CWE-787 (\textit{Out-of-bounds Write}) é filha de CWE-119 (\textit{Improper
 Restriction of Operations within the Bounds of a Memory Buffer})~\cite{MITRE_CWE}.
 
-Esta pesquisa emprega seis entradas da CWE para classificar os achados do
+Esta pesquisa emprega sete entradas da CWE para classificar os achados do
 Capítulo~\ref{cap:resultados}: CWE-20 (\textit{Improper Input Validation}),
 CWE-1284 (\textit{Improper Validation of Specified Quantity in Input}), subclasse
 de CWE-20, CWE-119 (\textit{Improper Restriction of Operations within the Bounds of
 a Memory Buffer}), CWE-190 (\textit{Integer Overflow or Wraparound}), CWE-191
-(\textit{Integer Underflow (Wrap or Wraparound)}) e CWE-787 (\textit{Out-of-bounds
+(\textit{Integer Underflow (Wrap or Wraparound)}), CWE-195 (\textit{Signed to
+Unsigned Conversion Error}) e CWE-787 (\textit{Out-of-bounds
 Write})~\cite{MITRE_CWE}. A nomenclatura da CWE-191 usa ``\textit{underflow}'' num
 sentido específico de segurança --- uma subtração sem sinal que dá a volta para um
 valor grande ---, distinto do uso em análise numérica (resultado pequeno demais
 para ser representado); essa distinção é retomada no
-Capítulo~\ref{cap:resultados} ao classificar o achado no GPS uBlox.
+Capítulo~\ref{cap:resultados} ao classificar o achado no GPS uBlox. Nesse achado, a CWE-191 e a CWE-195 descrevem etapas diferentes da mesma cadeia: a subtração que fica abaixo do valor esperado (CWE-191), a conversão do resultado negativo para um tipo sem sinal na comparação (CWE-195) e a escrita fora do buffer que a guarda, assim anulada, deixa passar (CWE-119). Essa é a cadeia adotada em todo o texto.
 
 \subsection{Extensões Recentes}
 
-Trabalhos recentes ampliaram o ESBMC ou o empregaram em novos domínios. Entre as
-extensões da própria ferramenta, Monteiro et al. ampliaram o suporte a C++, com
-\textit{templates} e herança virtual~\cite{Monteiro2022} --- pertinente ao PX4,
-escrito em C++17. Entre os desenvolvimentos e aplicações relacionados, o FuSeBMC
-combina verificação formal e geração de testes por \textit{fuzzing}, usando o ESBMC
-como um de seus motores~\cite{Alshmrany2022}, e Wu et al. aplicaram o ESBMC a
-componentes do Arm Confidential Computing~\cite{Wu2024}.
+As extensões recentes do ESBMC, como o suporte a C++, e suas aplicações em outros
+domínios são discutidas na Seção~\ref{sec:rel-praticas}, no capítulo de trabalhos
+relacionados.
 
-%% LC (pendente -- resolver ao editar o Cap. 3): o paragrafo de Extensoes Recentes
-%% se repete no Cap. 3; manter uma ocorrencia e usar referencia cruzada.
+%% LC (resolvido): o paragrafo de Extensoes Recentes ficou so no Cap. 3 (Secao de aplicacoes praticas); aqui resta a referencia cruzada.
 
 \section{PX4 Autopilot}
 
@@ -485,10 +483,12 @@ apresentada como complemento aos testes, com foco em propriedades de
 \textit{safety}, cuja violação, no domínio de voo, pode ser catastrófica. Entre as
 técnicas, adotou-se o Model Checking, pela automação e pela geração de
 contraexemplos; o \textit{Bounded Model Checking}, por limitar a busca a $k$
-passos, é \textit{sound} e completo apenas até esse limite --- restrição atenuada
-pela $k$-indução, aplicada adiante ao GPS uBlox. A expressividade dos solvers SMT
+passos, é \textit{sound} e completo apenas até esse limite --- restrição que, no GPS uBlox, é tratada por
+uma prova indutiva manual de um passo (Seção~\ref{subsec:gps-inducao}), distinta da
+$k$-indução automática da ferramenta. A expressividade dos solvers SMT
 (\textit{bit-vectors}, \textit{arrays} e IEEE-754) é o que viabiliza verificar
 firmware embarcado com precisão, e o ESBMC consolida essas capacidades. Por fim, a
 arquitetura modular do PX4, articulada pelo \textit{middleware} uORB, é o que
 torna viável a verificação isolada de cada módulo --- premissa central da
 metodologia desenvolvida nos próximos capítulos.
+

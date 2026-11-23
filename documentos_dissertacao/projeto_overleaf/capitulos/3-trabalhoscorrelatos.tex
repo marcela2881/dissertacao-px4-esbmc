@@ -1,6 +1,7 @@
 \chapter{Trabalhos Relacionados}
 \label{cap:relacionados}
 
+%% LC (resolvido): barra invertida de \chapter restaurada; o capitulo volta a ser o Capitulo 3 e as secoes voltam a ser numeradas 3.1 a 3.x.
 Este capítulo apresenta trabalhos que aplicaram verificação formal a sistemas
 embarcados e a software de veículos autônomos, posicionando esta pesquisa em
 relação ao estado da arte.
@@ -39,6 +40,9 @@ ferramentas na identificação de defeitos em projetos de código aberto de gran
 escala~\cite{Sousa2026}. As duas são usadas nesta pesquisa, a segunda na
 validação cruzada.
 
+\lc{``A segunda'' designa o ESBMC, mas é o CBMC que faz a validação cruzada. Além disso, deMoura2008 (Z3) não sustenta a abordagem do ESBMC; citar Cordeiro2012.}
+
+
 \textit{Surveys} recentes~\cite{Beyer2022, Beyer2024} indicam que boa parte dos
 trabalhos de verificação ainda se concentra em programas sintéticos ou
 \textit{benchmarks} padronizados, e não em sistemas reais de produção --- lacuna
@@ -76,6 +80,9 @@ nesta pesquisa, mas é relevante para módulos de firmware com estruturas
 repetitivas como as do PX4. Na fronteira entre verificação e teste, Alshmrany et
 al.~\cite{Alshmrany2022} propuseram o FuSeBMC, que combina BMC e \textit{fuzzing}
 para ampliar a cobertura na geração automática de casos de teste.
+
+\lc{A nota de revisão diz que o FuSeBMC saiu deste parágrafo, mas ele permanece. O parágrafo inteiro repete ``Extensões Recentes'' do capítulo anterior.}
+
 %% LC (resolvido): informado que a otimizacao VO-GCSE nao foi usada neste
 %% trabalho. LC (resolvido): FuSeBMC retirado deste paragrafo (discutido na
 %% subsecao de abordagens nao-BMC, como desenvolvimento relacionado).
@@ -145,6 +152,9 @@ subconjunto de Ada, permite provar estaticamente a ausência de erros de execuç
 na compilação~\cite{McCormick2015}. As três compartilham o custo estrutural que
 motiva a escolha do BMC: exigem disciplina de anotação ou de linguagem que uma
 base pré-existente e não anotada, como a do PX4, não satisfaz.
+
+\lc{Comparação desigual: o custo de anotação é medido sobre 710 mil linhas, mas o BMC cobriu 1,5\% delas com \textit{harness} manual. Comparar o esforço sobre o mesmo recorte de doze módulos.}
+
 
 \textbf{Síntese de código verificado.} Em vez de verificar código existente, o
 programa HACMS da DARPA construiu o firmware de VANTs a partir de componentes
@@ -259,6 +269,9 @@ como especificação disputada (temperatura do BMI088) e falso positivo (FIFO do
 BMI088), com o procedimento de triagem documentado. A aplicação ao SAGRES e ao
 monitoramento ambiental na Amazônia é a motivação do estudo de caso, e não um
 fator que altere o método.
+
+\lc{Tabela e posicionamento ignoram a segunda campanha (RoboClaw, batmon, sumd), o resultado mais forte do trabalho. Atualizar a linha ``Este trabalho'' e este parágrafo.}
+
 %% LC (resolvido): retirada a sugestao de que o monitoramento ambiental influencia
 %% o metodo -- apresentado como motivacao, nao como fator metodologico.
 
@@ -284,3 +297,6 @@ automatizada, conferência contra o código de produção, validação cruzada c
 CBMC e reporte direto à comunidade \textit{open-source} é a abordagem proposta
 para firmware de autopiloto de VANTs, endereçando uma lacuna observada no
 levantamento.
+
+\lc{A lacuna apoia-se num levantamento exploratório. Incluir análise estática aplicada a autopilotos (por exemplo, o clang-tidy que o PX4 já configura) e outros estudos de BMC em firmware embarcado; serviriam também de \textit{baseline}.}
+
