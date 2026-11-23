@@ -214,8 +214,8 @@ algoritmos SAT eficientes, resolvendo fórmulas impraticáveis em lógica
 proposicional pura. Entre os solvers atuais estão o Z3~\cite{deMoura2008}, o
 Bitwuzla~\cite{Niemetz2023} e o cvc5~\cite{Barbosa2022}; o
 Boolector~\cite{Brummayer2009}, especializado em \textit{bit-vectors} e
-\textit{arrays}, é o solver usado em todas as verificações deste trabalho
-(versão~3.2.4).
+\textit{arrays}, é o solver usado na primeira campanha (versão~3.2.4); na segunda,
+o solver variou conforme a execução, com o Z3 em parte delas (Seção~\ref{sec:segunda-campanha}).
 %% LC: definicao de SMT estava sem citacao -- acrescentada a
 %% referencia padrao Barrett2018 (Handbook of Model Checking, 2018).
 
@@ -265,8 +265,8 @@ código-fonte passa pelo \textit{front-end} da linguagem --- Clang para C/C++,
 Soot para Kotlin, CPython para Python ---, gerando uma representação intermediária
 (programa GOTO). A execução simbólica converte o GOTO em fórmulas que representam
 as execuções até a profundidade $k$, das quais se geram as condições de
-verificação (VCCs). As VCCs, após simplificação, vão ao solver SMT (aqui, o
-Boolector~3.2.4): SAT indica um contraexemplo; UNSAT, que a propriedade vale até
+verificação (VCCs). As VCCs, após simplificação, vão ao solver SMT (na primeira campanha, o
+Boolector~3.2.4; na segunda, Boolector ou Z3): SAT indica um contraexemplo; UNSAT, que a propriedade vale até
 $k$~\cite{Cordeiro2012}.
 
 \begin{figure}[ht]
