@@ -10,7 +10,7 @@
 # e uma segunda rodada COM unwinding assertions.
 set -u
 cd "$(dirname "$0")/.."
-OUT=cbmc_dez_harnesses_2026-11/logs; mkdir -p "$OUT"; TMP=$(mktemp -d)
+OUT=${OUT:-cbmc_dez_harnesses_2026-11/logs}; LIMITE=${LIMITE:-900}; mkdir -p "$OUT"; TMP=$(mktemp -d)
 FL="--bounds-check --pointer-check --signed-overflow-check --unsigned-overflow-check"
 { date -u +%FT%TZ; uname -a; cbmc --version; } > "$OUT/ambiente.txt" 2>&1
 LISTA='Barometer|resultados/Barometer/test_barometer.cpp|10|c
@@ -36,7 +36,7 @@ echo "$LISTA" | while IFS='|' read -r nome arq k ext; do
     if [ $modo = sem ]; then UA="--no-unwinding-assertions"; else UA="--unwinding-assertions"; fi
     lg="$OUT/${nome}_${modo}_unwinding.log"
     { echo "# data: $(date -u +%FT%TZ)"; echo "# comando: cbmc $nome.$ext $STD --unwind $k $UA $FL   (harness derivado de $arq; leitura como $ext)"; } > "$lg"
-    t0=$(date +%s); timeout 900 cbmc "$f" $STD --unwind "$k" $UA $FL >> "$lg" 2>&1; echo "# exit: $?  tempo_de_parede: $(( $(date +%s)-t0 ))s" >> "$lg"
+    t0=$(date +%s); timeout "$LIMITE" cbmc "$f" $STD --unwind "$k" $UA $FL >> "$lg" 2>&1; echo "# exit: $?  tempo_de_parede: $(( $(date +%s)-t0 ))s" >> "$lg"
     v=$(grep -aoE 'VERIFICATION (SUCCESSFUL|FAILED)' "$lg" | tail -1)
     n=$(grep -ac '^\[.*FAILURE' "$lg"); pf=$(grep -aE '^\*\* [0-9]+ of [0-9]+ failed' "$lg" | tail -1)
     printf '%-13s k=%-3s %-4s unwinding | %-24s | %s | %s\n' "$nome" "$k" "$modo" "${v:-SEM VEREDITO}" "${pf:-}" "$(grep -a '^# exit' "$lg" | sed 's/# //')" | tee -a "$OUT/RESUMO.txt"
