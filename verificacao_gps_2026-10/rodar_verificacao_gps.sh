@@ -3,7 +3,7 @@
 # driver de producao com o buffer real de 79 bytes.
 #
 # Uso:  ./rodar_verificacao_gps.sh <maquina> [esbmc] [cbmc] [timeout_s] [execucoes]
-#   no iartes:  ./rodar_verificacao_gps.sh iartes ~/esbmc-v8.1/bin/esbmc cbmc 1800 3
+#   no servidor:  ./rodar_verificacao_gps.sh servidor ~/esbmc-v8.1/bin/esbmc cbmc 1800 3
 #
 # Gera logs/<maquina>/<grupo>_<harness>_<ferramenta>[_uN]_rK.log, cada um com
 # cabecalho (data, maquina, CPU, versao, comando) e tempo de parede no fim.

@@ -1,6 +1,6 @@
 # Reexecução dos candidatos extras (pacote v4): 12/10/2026
 
-Executado no **ambiente da nuvem (Claude)**, não no `iartes`, com estas ferramentas:
+Executado no **ambiente da nuvem (Claude)**, não no `servidor`, com estas ferramentas:
 
 - ESBMC 8.1.0 + Boolector 3.2.4
 - CBMC 5.95.1

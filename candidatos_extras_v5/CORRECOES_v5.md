@@ -6,7 +6,7 @@ Desde o parecer, três fatos novos mudam o alcance de vários itens:
 
 1. **Três candidatos já foram corrigidos no PX4 por outras pessoas.** São o 2 (externalChecks, ca1d36476a), o 3 (ft7, 3acf7935a0) e o 6 (IridiumSBD, 0c903d47d6), todos em setembro de 2026. Nenhuma issue deve ser aberta para eles. Os itens do parecer sobre o texto das issues 2, 3 e 6 deixam de ter objeto.
 2. **O candidato 7 (bst) é falso positivo.** O commit testado (8be2590c15) já tinha as duas guardas que o harness omitia; elas vieram do commit e8e86a2e0f, de março de 2026. A issue do bst não deve ser aberta.
-3. **Os logs não dependem mais do iartes.** O `rodar_tudo.sh` gera todos eles em qualquer máquina com ESBMC, CBMC e um compilador C++. Cada log registra a máquina, o comando e as versões.
+3. **Os logs não dependem mais do servidor.** O `rodar_tudo.sh` gera todos eles em qualquer máquina com ESBMC, CBMC e um compilador C++. Cada log registra a máquina, o comando e as versões.
 
 Restam dois candidatos para reportar ao PX4: o **4 (sumd)** e o **8 (MicroStrain)**. Os dois continuam iguais no `main`.
 
@@ -18,7 +18,7 @@ Restam dois candidatos para reportar ao PX4: o **4 (sumd)** e o **8 (MicroStrain
 | A2 | logs do MicroStrain v3 | gera `8_MicroStrain/esbmc.txt`, `esbmc_multi.txt`, `cbmc.txt` e `asan.txt` |
 | A3 | log do CBMC do IridiumSBD | gera `6_IridiumSBD/cbmc.txt` |
 | A4 | logs do sumd (ESBMC `--unwind 70` e UBSan) | gera `4_sumd/esbmc.txt` e `ubsan_32.txt` |
-| A5 | `COPIAR_DO_IARTES.sh` | substituído pelo `rodar_tudo.sh`, que gera os logs em vez de copiá-los, e sai com código ≠ 0 se algo divergir; o antigo foi para `_superado_nao_usar/` |
+| A5 | o script de cópia da v4 (arquivado) | substituído pelo `rodar_tudo.sh`, que gera os logs em vez de copiá-los, e sai com código ≠ 0 se algo divergir; o antigo foi para `_superado_nao_usar/` |
 | A6 | logger: retirar "não é limitada ao bound" | cabeçalho do harness e LEIA-ME reescritos: o k = 300 é o laço concreto; o resultado vale para "nenhuma violação de memória para qualquer `key_len`" |
 | A7 | logger: o modelo de `snprintf` não exercita o truncamento | ver detalhe abaixo da tabela |
 | A8 | tabela "O que esperar" (candidato 8) | o `guia_reproducao.md` foi substituído pelo `RESUMO.md` gerado, com esperado × obtido de cada comando |

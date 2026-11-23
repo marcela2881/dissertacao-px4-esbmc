@@ -6,7 +6,7 @@ Professor, muito obrigada pelo parecer e por ter reproduzido os oito candidatos.
 
 ## 1. Os logs agora saem de um único script
 
-Como não tenho mais acesso ao iartes, troquei o `COPIAR_DO_IARTES.sh` por um `rodar_tudo.sh`. Ele gera todos os logs em qualquer máquina com ESBMC, CBMC e um compilador. Cada log traz no cabeçalho a máquina, a pasta, o comando exato e o código de saída. No fim, um `RESUMO.md` compara o esperado com o obtido em cada comando. Os resultados que envio junto foram gerados por esse script, na máquina e com as versões registradas no `ambiente.txt`.
+Como não tenho mais acesso ao servidor, troquei o o script de cópia da v4 (arquivado) por um `rodar_tudo.sh`. Ele gera todos os logs em qualquer máquina com ESBMC, CBMC e um compilador. Cada log traz no cabeçalho a máquina, a pasta, o comando exato e o código de saída. No fim, um `RESUMO.md` compara o esperado com o obtido em cada comando. Os resultados que envio junto foram gerados por esse script, na máquina e com as versões registradas no `ambiente.txt`.
 
 ## 2. Conferi os candidatos contra o código do PX4
 

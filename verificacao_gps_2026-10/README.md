@@ -3,9 +3,9 @@
 Pasta criada em 11/10/2026. Itens 4.1 e 4.2 do plano da dissertação.
 
 **Os tempos registrados em `logs/nuvem/` não são comparáveis** aos da Tabela II
-(medida no iartes). A máquina da nuvem tem 4 núcleos, e a compilação do ESBMC
+(medida no servidor). A máquina da nuvem tem 4 núcleos, e a compilação do ESBMC
 rodou em paralelo. Desses logs, use só o **veredito**. Tempos válidos virão de
-`logs/iartes/`.
+`logs/servidor/`.
 
 ## Por que esta pasta existe
 
@@ -85,8 +85,8 @@ escritor único, o invariante `len < 79` vale em toda execução do driver real.
 Logo, o estado que viola o harness da Tabela II (`len = 207`) é inalcançável na
 produção. É o argumento do mantenedor, agora verificado.
 
-## Como rodar no iartes
+## Como rodar no servidor
 
 ```
-./rodar_verificacao_gps.sh iartes ~/esbmc-v8.1/bin/esbmc cbmc 1800 3
+./rodar_verificacao_gps.sh servidor ~/esbmc-v8.1/bin/esbmc cbmc 1800 3
 ```

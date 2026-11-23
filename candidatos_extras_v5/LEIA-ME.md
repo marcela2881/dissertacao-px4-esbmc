@@ -48,7 +48,7 @@ ESBMC=/caminho/esbmc CBMC=/caminho/cbmc ./rodar_tudo.sh
 
 Versões usadas até aqui e o que muda entre elas:
 
-| | v4 (iartes, nuvem) | revisão do Prof. Lucas |
+| | v4 (servidor, nuvem) | revisão do Prof. Lucas |
 |---|---|---|
 | ESBMC | 8.1.0 | 8.4.0 |
 | CBMC | 5.95.1 | 6.8.0 |

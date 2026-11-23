@@ -22,11 +22,8 @@ Caixas amarelas do professor abertas: 6, todas em Resultados.
 ## 3. Respostas da autora
 - Significado de SAGRES por extenso (lista de siglas)
 - Número correto do datasheet BMI088 (ler na capa do PDF da Bosch; provável BST-BMI088-DS001-<rev>, hoje o texto usa DS000-19)
-- Sumário com 2 ou 3 níveis (recomendado 2)
-- O que é a máquina "iartes"
+- (decidido: sumário com 2 níveis)
 - Confirmar a banca com o PPGEE
-- Confirmar 3 pontos da Declaração de IA (classificou os achados; harnesses 1a campanha montados com IA; execuções de novembro foram dela)
-- Status atual das issues #29785 e #29787
 
 ## 4. Assistente (sem depender de terceiros)
 - Trocar as citações de Menezes2024 que restam na Metodologia (nondet, --no-library/VTOL, propriedades automáticas) por Cordeiro2012 / documentação do ESBMC

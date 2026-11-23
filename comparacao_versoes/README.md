@@ -5,7 +5,7 @@ Data: 11/10/2026. Os dois binários da nuvem foram compilados das tags oficiais
 os da Tabela II do artigo (`comparar_versoes.sh`). Só o veredito, as VCCs e o
 contraexemplo são comparáveis; **os tempos da nuvem não são**.
 
-| Módulo | Julho 8.1.0 (iartes) | 8.1.0 nuvem | 8.5.0 nuvem |
+| Módulo | Julho 8.1.0 (servidor) | 8.1.0 nuvem | 8.5.0 nuvem |
 |---|---|---|---|
 | Barometer | SUCCESSFUL, 93 | SUCCESSFUL, 93 | SUCCESSFUL, 93 |
 | Battery | SUCCESSFUL, 49 | SUCCESSFUL, 49 | SUCCESSFUL, 49 |
@@ -21,7 +21,7 @@ contraexemplo são comparáveis; **os tempos da nuvem não são**.
 | VTOL (`--no-library`) | SUCCESSFUL, 110 | SUCCESSFUL, 110 | SUCCESSFUL, 110 |
 
 (*) Com o `--timeout 120s` do artigo, o GPS fica sem veredito na nuvem (o
-iartes leva 65 s; a nuvem leva 137 s). Com `--timeout 600s`: FAILED, 4463 VCCs,
+servidor leva 65 s; a nuvem leva 137 s). Com `--timeout 600s`: FAILED, 4463 VCCs,
 10/207 (`logs/v8.1_nuvem/GPS_timeout600.log`).
 
 (**) O front-end C++ da 8.5 não declara `isfinite` no escopo global

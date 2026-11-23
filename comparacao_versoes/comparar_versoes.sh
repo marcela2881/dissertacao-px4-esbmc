@@ -13,8 +13,8 @@
 # os tempos nao.
 set -u
 ROT="${1:?rotulo}"; E="${2:?binario do esbmc}"; TO="${3:-1800}"
-# Timeout interno do ESBMC: 120s no artigo (iartes). Numa maquina mais lenta o
-# GPS (65 s no iartes) pode estourar; passe p.ex. 600s como 4o argumento.
+# Timeout interno do ESBMC: 120s no artigo (servidor). Numa maquina mais lenta o
+# GPS (65 s no servidor) pode estourar; passe p.ex. 600s como 4o argumento.
 # Timeout = SEM VEREDITO, nunca "passou".
 ETO="${4:-120s}"
 cd "$(dirname "$0")/.."
