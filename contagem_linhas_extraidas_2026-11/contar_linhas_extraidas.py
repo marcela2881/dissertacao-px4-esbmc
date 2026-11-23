@@ -8,6 +8,9 @@ Criterio (declarado no texto da dissertacao):
     "break;") ficam FORA do numerador e do denominador, e sao contadas a parte.
   - Uma linha do harness e "extraida do PX4" se, normalizada (espacos removidos),
     for identica a alguma linha nao trivial de algum arquivo de src/.
+  - Para evitar coincidencias (linhas genericas que existem em qualquer codigo C),
+    so contam arquivos de src/ com pelo menos 5 linhas coincidentes com o harness,
+    e bibliotecas de terceiros (submodulos) ficam fora do indice.
   - O numero e um LIMITE INFERIOR: linhas adaptadas (tipo, nome ou constante
     alterados) contam como modelo.
 Uso:  python3 contar_linhas_extraidas.py CAMINHO_DO_PX4 [CAMINHO_DOS_HARNESSES]
@@ -18,6 +21,8 @@ px4 = sys.argv[1]
 hdir = sys.argv[2] if len(sys.argv) > 2 else os.path.join(
     os.path.dirname(os.path.abspath(__file__)), '..', 'resultados')
 MIN = 12
+MIN_ARQ = 5
+TERCEIROS = ('lib/cdrstream', 'zenoh', 'libtommath', 'monocypher', 'rl_tools', 'cyclonedds', 'lib/crypto', 'cyphal', 'iq-module', 'public_regulated', 'legacy_data')
 
 def strip_comments(txt):
     txt = re.sub(r'/\*.*?\*/', lambda m: '\n' * m.group(0).count('\n'), txt, flags=re.S)
@@ -41,6 +46,8 @@ for root, _, files in os.walk(src):
                 continue
             nfiles += 1
             rel = os.path.relpath(p, src)
+            if any(t in rel for t in TERCEIROS):
+                continue
             for l in strip_comments(txt):
                 n = norm(l)
                 if len(n) >= MIN:
@@ -57,12 +64,13 @@ for h in sorted(glob.glob(os.path.join(hdir, '*', 'test_*.cpp'))):
     lines = [l for l in lines if l]
     triv = [l for l in lines if len(l) < MIN]
     nt = [l for l in lines if len(l) >= MIN]
-    hit = [l for l in nt if l in index]
     cnt = collections.Counter()
-    for l in hit:
-        for f in index[l]:
+    for l in nt:
+        for f in index.get(l, ()):
             cnt[f] += 1
-    top = ', '.join('%s(%d)' % (f, c) for f, c in cnt.most_common(3))
+    apoio = {f for f, c in cnt.items() if c >= MIN_ARQ}
+    hit = [l for l in nt if index.get(l, set()) & apoio]
+    top = ', '.join('%s(%d)' % (f, c) for f, c in cnt.most_common(3) if c >= MIN_ARQ)
     print('%-28s %7d %9d %9d %9d  %s' % (name, len(lines), len(triv), len(hit), len(nt) - len(hit), top))
     for i, v in enumerate((len(lines), len(triv), len(hit), len(nt) - len(hit))):
         tot[i] += v
