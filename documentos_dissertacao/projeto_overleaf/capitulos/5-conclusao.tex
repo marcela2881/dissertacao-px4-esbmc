@@ -38,7 +38,7 @@ vereditos valem para os modelos: apenas $2{,}4\,\%$ das linhas de código dos
 conclusão sobre cada driver depende da conferência contra o código de produção. A
 reexecução com as asserções de desenrolamento ligadas mostrou que nenhum laço
 desses \textit{harnesses} excede o limite usado, de modo que o resultado não
-depende de truncamento silencioso.
+depende de truncamento silencioso. O Battery Monitor, cujo \textit{harness} limitava a 12 células, foi reexecutado com o limite elevado para 16 e também foi verificado sem violação (Seção~\ref{sec:modulos-verificados}), o que não se estende ao driver \texttt{batmon}, que é outro módulo.
 
 \textbf{Temperatura do BMI088.} O verificador produziu uma leitura de
 $86{,}25\,^{\circ}$C, acima do limite operacional de $85\,^{\circ}$C do
@@ -181,7 +181,8 @@ A validação em bancada pode ser estendida aos demais achados da segunda
 campanha. O sensor de vento FT7 e o batmon são os candidatos imediatos: o
 primeiro usa a mesma interface serial do ensaio do RoboClaw, e o segundo
 exigiria emular uma bateria SMBus. Para o RoboClaw, falta observar a reação de
-um controlador real ao byte fora da faixa, que o manual não especifica. Para o
+um controlador real ao byte fora da faixa, que o manual não especifica, e repetir o ensaio
+com o \textit{driver} refatorado na \textit{main} (PR~\#29473), a pedido de um mantenedor, já que o relato vale para a \textit{release}/1.18. Para o
 GPS, falta o sentido do receptor para a placa.
 
 Os ensaios feitos injetam a condição de disparo diretamente, por parâmetro e
@@ -253,6 +254,6 @@ para \textit{firmware} de sistemas críticos, aplicada ao PX4 como estudo de
 caso. Os achados são produto da aplicação do método, e não a sua medida:
 aplicado a outro \textit{firmware}, ele poderia não revelar violação alguma e
 ainda assim produzir evidência da mesma natureza, limitada, reproduzível e
-auditável. A lição que atravessa as duas campanhas é que um contraexemplo é o
+auditável. Três situações foram mantidas distintas ao longo do texto: o verificador encontrar uma violação no modelo, o problema ser reproduzido no código de produção e os mantenedores o reconhecerem como defeito. Só a última dá a um achado a condição de defeito confirmado, e nenhum achado deste trabalho a alcançou até o fechamento do texto. A lição que atravessa as duas campanhas é que um contraexemplo é o
 início da triagem, e que a conferência contra o código de produção é a etapa
 que separa um achado de um artefato do modelo.
