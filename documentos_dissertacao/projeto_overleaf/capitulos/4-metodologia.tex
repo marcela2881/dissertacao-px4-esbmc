@@ -243,7 +243,7 @@ verificação em módulos auxiliares.
 
 %% LC 23: etapa reescrita distinguindo as duas campanhas.
 %% LC 22: explicacao de nao determinismo mantida so aqui.
-\corr{A instrumentação tem por finalidade abstrair as entradas e saídas de \textit{hardware}, as chamadas ao sistema operacional NuttX e as dependências de outros módulos. Para isso, utiliza-se a primitiva \texttt{nondet\_T()}, em que \texttt{T} representa o tipo do dado. Essa primitiva permite ao verificador considerar qualquer valor representável por esse tipo, incluindo condições extremas, dados inválidos e respostas inesperadas do \textit{hardware}, sem exigir a enumeração manual de casos de teste~\cite{Menezes2024}. Por exemplo, \texttt{nondet\_uint8()} representa qualquer valor entre $0$ e $255$.}
+\corr{A instrumentação tem por finalidade abstrair as entradas e saídas de \textit{hardware}, as chamadas ao sistema operacional NuttX e as dependências de outros módulos. Para isso, utiliza-se a primitiva \texttt{nondet\_T()}, em que \texttt{T} representa o tipo do dado. Essa primitiva permite ao verificador considerar qualquer valor representável por esse tipo, incluindo condições extremas, dados inválidos e respostas inesperadas do \textit{hardware}, sem exigir a enumeração manual de casos de teste~\cite{Cordeiro2012,ESBMC_GitHub}. Por exemplo, \texttt{nondet\_uint8()} representa qualquer valor entre $0$ e $255$.}
 
 \corr{As duas campanhas aplicam essa abstração de formas diferentes. Na
 \textbf{primeira}, os \textit{harnesses} não contêm funções de \textit{stub}: os
@@ -387,7 +387,7 @@ tornam o modelo intratável, a opção \texttt{--no-library} desativa a bibliote
 abstrata do ESBMC: funções como \texttt{sinf} e \texttt{sqrtf} passam a
 retornar valores não determinísticos, uma sobreaproximação que não deixa escapar
 violações das demais verificações, mas deixa de verificar as propriedades
-internas à biblioteca --- caso do VTOL~\cite{Menezes2024}.
+internas à biblioteca --- caso do VTOL~\cite{ESBMC_GitHub}.
 
 %% LC: insuficiencia de k no MAVLink explicada pelo teste de 12/10/2026 (k=10 falha a unwinding assertion do memcpy; k=300 verifica); a fase exploratoria nao foi registrada e isso e declarado.
 \subsection{Etapa~(v) --- Análise de Contraexemplos e Conferência contra o Código de Produção}
@@ -876,9 +876,9 @@ expressas por assertions inseridas no código.
 \subsection{Propriedades Automáticas}
 
 O ESBMC verifica automaticamente diversas classes de defeitos quando habilitado
-pelas flags de configuração. Seguindo a formalização de Cordeiro et al.~\cite{Cordeiro2012}, uma propriedade de safety $\phi$ é violada quando existe um estado alcançável $s_i$ tal que $s_i \not\models \phi$. \revisao{Em segurança de memória, o verificador detecta acessos fora dos limites de arranjos e desreferências de ponteiros nulos. Em aritmética inteira, identifica \textit{overflows} e \textit{underflows} de inteiros com sinal. Verifica ainda divisões por zero}~\cite{Menezes2024}.
+pelas flags de configuração. Seguindo a formalização de Cordeiro et al.~\cite{Cordeiro2012}, uma propriedade de safety $\phi$ é violada quando existe um estado alcançável $s_i$ tal que $s_i \not\models \phi$. \revisao{Em segurança de memória, o verificador detecta acessos fora dos limites de arranjos e desreferências de ponteiros nulos. Em aritmética inteira, identifica \textit{overflows} e \textit{underflows} de inteiros com sinal. Verifica ainda divisões por zero}~\cite{Cordeiro2012,ESBMC_GitHub}.
 
-A Tabela~\ref{tab:propriedades-automaticas} detalha as principais classes de defeitos verificadas automaticamente pelo ESBMC nesta pesquisa, suas descrições e as \textit{flags} de linha de comando associadas, conforme a documentação da ferramenta~\cite{Menezes2024}.
+A Tabela~\ref{tab:propriedades-automaticas} detalha as principais classes de defeitos verificadas automaticamente pelo ESBMC nesta pesquisa, suas descrições e as \textit{flags} de linha de comando associadas, conforme a documentação da ferramenta~\cite{ESBMC_GitHub}.
 
 \begin{table}[!htb]
 \centering
