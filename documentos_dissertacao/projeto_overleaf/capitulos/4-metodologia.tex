@@ -39,7 +39,7 @@ ferramentas, versões, opções e hipóteses de modelagem empregadas.}
 \hline
 \cel\corr{(iii) Propriedades} & \cel\corr{\textit{assertions} no \textit{harness}} & \cel\corr{---} & \cel\corr{tradução de documento (\textit{datasheet}, manual, código) em predicado sobre variável de programa} \tabularnewline
 \hline
-\cel\corr{(iv) ESBMC} & \cel\corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ver Tabela~\ref{tab:versoes-segunda}} & \cel\corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste, com e sem \textit{unwinding assertions}, \texttt{--overflow-check --ub-shift-check}} & \cel\corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \tabularnewline
+\cel\corr{(iv) ESBMC} & \cel\corr{1.ª: ESBMC 8.1.0, Boolector 3.2.4, i7-13700K, Ubuntu 24.04. 2.ª: ver Tabela~\ref{tab:versoes-segunda}} & \cel\corr{1.ª: \texttt{--unwind 10 --no-unwinding-assertions --overflow-check}. 2.ª: \texttt{--unwind} por teste ou \texttt{--incremental-bmc}, \texttt{--overflow-check}} & \cel\corr{limite $k$; sem \textit{unwinding assertions}, laços maiores que $k$ são truncados} \tabularnewline
 \hline
 \cel\corr{(v) Contraexemplos} & \cel\corr{1.ª: leitura do código. 2.ª: \textit{replay} com g++~13.3.0 e ASan/UBSan} & \cel\corr{\texttt{-std=c++17 -O0} \texttt{-fsanitize=address,undefined}} & \cel\corr{E/S simulada de forma determinística} \tabularnewline
 \hline
@@ -85,9 +85,13 @@ etapas~(i) e~(iv)--(vi) seguem o fluxo de Sousa et al.~\cite{Sousa2026}; as
 etapas~(ii) e~(iii) são específicas de \textit{firmware}, e as etapas~(vii)
 e~(viii) são acréscimos deste trabalho. A conferência (etapa~v) é feita por
 leitura do código na primeira campanha e por \textit{replay} do código real sob
-sanitizadores na segunda. Apenas defeitos reproduzidos e violações alcançáveis
-no modelo seguem para o reporte~(vi); falsos positivos e resultados sem violação
-encerram o fluxo do módulo.}
+sanitizadores na segunda. No fluxo consolidado, o reporte~(vi) ocorre após a
+conferência e é reservado aos achados que permanecem relevantes após essa
+triagem. Essa ordem foi seguida na segunda campanha. Na primeira, porém, as
+\textit{issues} do GPS e do contador de FIFO foram abertas antes da conferência,
+para solicitar a triagem da comunidade; essa exceção histórica está descrita
+na abertura deste capítulo e na etapa~(vi). Falsos positivos e resultados sem
+violação não são reportados como defeitos.}
 
 %% LC 03: seta "sem violacao" -> reporte removida.
 \begin{figure}[!tb]
@@ -301,10 +305,12 @@ contra o código de produção da etapa~(v).}
 \end{tabular}
 \end{table}
 
-\lc{Battery Monitor limitado a 1--12 células exclui 15S e 16S, exatamente o caso do defeito do batmon. Justificar a origem do limite ou relaxá-lo ao máximo aceito pelo parâmetro e reexecutar.}
+%% LC: Battery Monitor limitado a 1--12 celulas; distinguido do batmon e reexecutado com 16 celulas (23/11/2026).
 
 
 %% LC 08: citacao Godefroid2005 removida.
+\corr{A restrição de 1 a 12 células refere-se exclusivamente ao \textit{harness} do módulo Battery Monitor da primeira campanha. Ela não representa uma restrição aplicada ao driver \texttt{batmon} da segunda campanha, que foi analisado separadamente e cujo achado envolve configurações de 16 células. Portanto, os resultados do Battery Monitor da primeira campanha não cobrem os cenários de 15S e 16S investigados na segunda. Para verificar se o limite alterava o veredito do módulo, o \textit{harness} foi reexecutado pela autora em 23/11/2026 com o limite superior elevado de 12 para 16 células (ESBMC~8.2.0, Z3, \texttt{--unwind 10 --overflow-check --no-unwinding-assertions}): resultado \textsc{verification successful}, em 190~s. Esse resultado diz respeito ao módulo Battery Monitor e não ao defeito do \texttt{batmon}, que é de outro módulo.}
+
 \corr{Para cada módulo, um arquivo de \textit{harness} centraliza as entradas
 não determinísticas, as pré-condições, as funções de teste e a função de
 entrada.}
@@ -709,6 +715,7 @@ módulos com forte acoplamento ao \textit{hardware} ou ao escalonador, de modo
 que a amostra não é estatisticamente representativa do PX4
 (Seção~\ref{sec:ameacas-validade}).
 
+\corr{Assim, a criticidade operacional foi utilizada na formação do conjunto candidato, por elicitação junto à equipe SAGRES; o Algoritmo~\ref{alg:selecao} formaliza apenas a filtragem técnica posterior. A criticidade não foi convertida em uma pontuação nem aplicada como limiar quantitativo.}
 A aplicação do procedimento ao PX4 Autopilot (ramo main, commit 8be2590c15) resultou em um conjunto de 12 módulos, organizados em três rodadas conforme descrito na Seção~\ref{sec:visao-geral}. Os quatro módulos da primeira rodada foram selecionados por sua criticidade direta para a segurança de voo: drivers de sensores (IMU BMI088 e GPS uBlox), \corr{comunicação (MAVLink, \textit{buffer} de transmissão)} e controle de entrada (Expo RC). As rodadas subsequentes ampliam a cobertura para monitoramento de sistema, navegação e estimação de estado.
 
 %% LC 19: citacao deSorbo2022 removida.
@@ -890,24 +897,19 @@ Overflow aritmético & Operações com inteiros com sinal que excedem a capacida
 \hline
 Divisão por zero & Operações de divisão ou módulo com divisor nulo & padrão (\texttt{--no-div-by-zero-check} desliga) \\
 \hline
-\corr{Deslocamento indefinido} & \corr{Deslocamento de bits com quantidade negativa ou maior que a largura do tipo (só na segunda campanha)} & \corr{\texttt{--ub-shift-check}} \\
-\hline
-\corr{Valores NaN} & \corr{Operação de ponto flutuante que produz NaN (só nos testes indicados da segunda campanha)} & \corr{\texttt{--nan-check}} \\
-\hline
 \end{tabular}
 
 \footnotesize
 \begin{flushleft}
 \revisao{Acesso fora dos limites, ponteiro nulo e divisão por zero são verificados por padrão pelo ESBMC~8.1, que só oferece opções para desligá-los; a
 verificação de \textit{overflow} aritmético é habilitada explicitamente na
-invocação (Listagem~\ref{lst:comando-esbmc}).} \corr{As duas últimas linhas
-valem apenas para a segunda campanha, com o ESBMC~8.5.}
+invocação (Listagem~\ref{lst:comando-esbmc}).}
 \end{flushleft}
 \end{table}
 
-As verificações de NaN (\texttt{--nan-check}) e de vazamento de memória
+As verificações de deslocamento indefinido (\texttt{--ub-shift-check}), de NaN (\texttt{--nan-check}) e de vazamento de memória
 (\texttt{--memory-leak-check}) não foram habilitadas na invocação da
-Listagem~\ref{lst:comando-esbmc}, como no artigo derivado. O enunciado de que
+Listagem~\ref{lst:comando-esbmc}, como no artigo derivado, e não constam dos \textit{scripts} nem dos registros da segunda campanha. O enunciado de que
 os \textit{harnesses} de dez módulos não apresentam violações vale, portanto, para
 as quatro classes da tabela e para as \textit{assertions} customizadas. NaN e
 infinito são verificados apenas onde o \textit{harness} tem \textit{assertion}
@@ -1250,9 +1252,9 @@ propriedades, e não de desacordo sobre a existência das violações.}
 \hline
 \textbf{ESBMC} & \textbf{CBMC} \\
 \hline
-\corr{checagens padrão (limites, ponteiros, divisão por zero)} & \corr{\texttt{--bounds-check --pointer-check --div-by-zero-check}} \\
+\corr{checagens padrão (limites, ponteiros, divisão por zero)} & \corr{\texttt{--bounds-check --pointer-check} (a divisão por zero não foi habilitada no CBMC)} \\
 \hline
-\corr{\texttt{--overflow-check}} & \corr{\texttt{--signed-overflow-check --float-overflow-check}} \\
+\corr{\texttt{--overflow-check}} & \corr{\texttt{--signed-overflow-check}; nos candidatos adicionais, também \texttt{--unsigned-overflow-check}, sem equivalente na invocação do ESBMC} \\
 \hline
 \corr{com \textit{unwinding assertions} (padrão) / \texttt{--no-unwinding-assertions}} & \corr{\texttt{--unwinding-assertions} / padrão} \\
 \hline
