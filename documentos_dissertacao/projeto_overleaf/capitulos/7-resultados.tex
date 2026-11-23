@@ -900,7 +900,7 @@ consta do Apêndice~\ref{apend:contraexemplos}.}
     \textcolor{ceCinza}{\rule{\linewidth}{0.3pt}}\\
     \textcolor{ceAmarelo}{harness: 200 - 207 = -7 (int) -> size\_t enorme na compara\c{c}\~ao; guarda sempre falsa}\\
     \textcolor{ceCinza}{ESBMC 8.1.0 + Boolector 3.2.4 -{}- log: medianas\_logs/GPS\_run1.log (igual em run2 e run3)}\\
-    \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26866 / PR \#27576}
+    \textcolor{ceCinza}{PX4 main, commit 8be2590c15 -{}- Issue \#26866 / PR \#27576 (fechado)}
     \end{tcolorbox}
     \caption[Contraexemplo do GPS uBlox (saída do ESBMC)]{\corr{Saída do ESBMC para o contraexemplo do GPS uBlox, montada a partir do log (ESBMC~v8.1.0, Boolector~3.2.4).}}
     \label{fig:ce-gps}
@@ -1004,6 +1004,8 @@ verificado é o original (Seção~\ref{sec:segunda-campanha}).}
 
 \subsection{Verificação do \textit{patch}}
 \label{subsec:patch-gps}
+
+\corr{Quanto ao destino do \textit{patch}: o PR~\#27576 \textbf{não foi mesclado}. O mantenedor solicitou alterações em 3 de julho de 2026, aceitando a guarda apenas como endurecimento defensivo (com a descrição reformulada, sem o enquadramento como vulnerabilidade) e sugerindo redefinir \texttt{dump\_data->len = 0} em vez de interromper o laço; o PR não foi atualizado e foi fechado automaticamente, no início de novembro de 2026, por 120 dias de inatividade. O estado foi conferido na página do PR em 23/11/2026.}
 
 \artigo{O artigo registra uma limitação da verificação do \textit{patch} então
 disponível: o CBMC~5.95.1 reportava $0$ de $7$ propriedades violadas no
