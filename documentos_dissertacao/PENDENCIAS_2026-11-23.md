@@ -1,33 +1,52 @@
-# Pendências da dissertação (atualizado em 23/11/2026)
+# Pendências da dissertação (atualizado em 23/11/2026, fim do dia)
 
-## Guardado para a fase final (acabamento)
-- **Portaria CNPq nº 2.664/2026**: acrescentar ao `referencias.bib` e citar na Declaração de Uso de IA.
-  Dados conferidos: Portaria CNPq nº 2.664, de 6 de março de 2026, que institui a Política de Integridade
-  na Atividade Científica do CNPq; publicada no DOU em 11/03/2026. Texto integral:
-  https://abmes.org.br/arquivos/legislacoes/Portaria-cnpq-2664-2026-03-06.pdf
-  Observação: o dispositivo exato sobre IA generativa ainda não foi conferido no texto integral.
-- **Sigla SAGRES**: acrescentar à Lista de Siglas quando a autora informar o significado por extenso.
+Estado: 8 capítulos compilam sem erro (151 páginas com as caixas visíveis; corpo = 104 páginas).
+Caixas amarelas do professor abertas: 6, todas em Resultados.
 
-## Depende só do assistente
-1. Método de inspeção (Resultados): ESBMC ou leitura; locais (statustext, RC Update).
-2. Quatro pedidos só de texto: nº do datasheet; arquivos em `figuras/`; "nove dos onze logs"; justificativa de `--unwind` 10/15/300.
-3. `Menezes2024` na Metodologia (frase do VTOL): trocar a citação (precisa da fonte da informação).
-4. Pôster: taxonomia nova; decidir sobre a frase das 710 mil linhas.
+## 1. Caixas abertas em Resultados
+| Caixa | Falta | Quem |
+|---|---|---|
+| Linha de base (analisador estático) | log de `rodar_baseline_cppcheck.sh` | autora roda; assistente escreve |
+| GPS com k = 211 | `inconclusivos.tgz` (GPS testes 0-3 ficaram sem veredito em 900 s) | autora anexa; assistente escreve |
+| Cada teste do main separadamente | `inconclusivos.tgz` (VTOL 0 e 1 verificados; EKF2 teste 1 sem veredito) | idem |
+| CBMC nos dez harnesses | `cbmc_dez.tgz` (script consertado: 8 como C, Expo e MAVLink como C++11) | autora roda de ~/repo_nuvem |
+| QE2: testes unitários em sumd, batmon, RoboClaw | conteúdo de `evidencia_teste_unitario_e_inspecao.txt` | autora cola |
+| Método de inspeção (statustext, RC Update) | mesmo arquivo de evidência | assistente escreve após receber |
 
-## Respostas da autora
-- Sumário com 2 ou 3 níveis (recomendado: 2).
-- O que é a máquina "iartes".
-- Confirmar a banca com o PPGEE.
+## 2. Logs a enviar
+- `inconclusivos.tgz` (já gerado: `tar czf inconclusivos.tgz verificacao_pendencias_2026-11/logs_inconclusivos`)
+- `cbmc_dez.tgz` (rodar de novo: `git pull` em ~/repo_nuvem e `nohup bash cbmc_dez_harnesses_2026-11/rodar_cbmc_dez.sh`)
+- log do cppcheck baseline; saída do `gerar_evidencia.sh`
+- `roboclaw_uninit.tgz`
 
-## Logs que a autora roda no notebook (a partir de ~/repo_nuvem)
-- `rodar_inconclusivos_wsl.sh` (Battery 16 células; GPS k=211; cada teste separado)
-- `rodar_cbmc_dez.sh` (CBMC nos dez harnesses)
-- `rodar_baseline_cppcheck.sh` e `gerar_evidencia.sh` (linha de base; QE2 em sumd/batmon/RoboClaw)
-- anexar `roboclaw_uninit.tgz`
+## 3. Respostas da autora
+- Significado de SAGRES por extenso (lista de siglas)
+- Número correto do datasheet BMI088 (ler na capa do PDF da Bosch; provável BST-BMI088-DS001-<rev>, hoje o texto usa DS000-19)
+- Sumário com 2 ou 3 níveis (recomendado 2)
+- O que é a máquina "iartes"
+- Confirmar a banca com o PPGEE
+- Confirmar 3 pontos da Declaração de IA (classificou os achados; harnesses 1a campanha montados com IA; execuções de novembro foram dela)
+- Status atual das issues #29785 e #29787
 
-## Terceiros / depois
-- Prof. Lucas: limite de páginas (corpo 104 ou total ~152); taxonomia; validação do GPS em outubro como uma das duas em hardware.
-- Autora publica: nova versão no Zenodo (atualizar o DOI em 3 lugares); respostas nas issues após revisão do professor.
-- Quando saírem: DOI do Wang2021; páginas/DOI do Rodrigues2026; ficha catalográfica.
-- Hardware: FT7 e GPS na bancada (falta cabo USB de dados); RoboClaw na `main`.
-- Limpeza final: remover os comentários `%% LC` do código-fonte (decisão do professor).
+## 4. Assistente (sem depender de terceiros)
+- Trocar as citações de Menezes2024 que restam na Metodologia (nondet, --no-library/VTOL, propriedades automáticas) por Cordeiro2012 / documentação do ESBMC
+- Corrigir número do datasheet (.bib, Metodologia, Resultados) quando a autora informar
+- Portaria CNPq nº 2.664/2026 no .bib e na Declaração de IA; sigla SAGRES na lista
+- Remover 11 entradas não citadas do .bib; limpeza final dos comentários `%% LC` (quando o professor fechar)
+- Reescrever Resultados/Conclusão com os logs novos (QE2, baseline, CBMC, testes separados)
+
+## 5. Professor
+- Limite de 100 a 120 páginas: corpo (104) ou total (151)?
+- Taxonomia aplicada está de acordo?
+- A validação do GPS em outubro conta como uma das duas em hardware?
+- Se o total conta: cortes (Visão Geral e Exemplo do GPS na Metodologia; Metodologia e Resultados têm repetições)
+
+## 6. Terceiros / tempo
+- Autora publica nova versão no Zenodo (depois do último commit do harness) e atualiza o DOI em 3 lugares
+- Autora posta respostas nas issues após revisão do professor (RoboClaw: comentário opcional)
+- DOI do Wang2021; páginas e DOI do Rodrigues2026; ficha catalográfica
+- figuras/: renomear imagematual.jpeg; remover bug1_temperatura.jpeg, bug_gps.png, bug2_fifo.jpeg (conferir no Overleaf)
+- Hardware: FT7 e GPS na bancada (falta cabo USB de dados); RoboClaw na main (PR 29473)
+
+## 7. Opcional
+- Reexecutar a primeira campanha no notebook; atualizar o pôster (taxonomia; frase das 710 mil linhas)
